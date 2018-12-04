@@ -22,7 +22,7 @@ UserWebApp.controller('ModalCustomerController', function ($scope, $rootScope, H
       "name": "" + $scope.params.name
     };
 
-    HttpService.postData('/customer/search', params).then(function (response) {
+    HttpService.postData('/mechanic/search', params).then(function (response) {
       $scope.lstData = response;
       common.spinner(false);
     }, function error(response) {
@@ -30,7 +30,7 @@ UserWebApp.controller('ModalCustomerController', function ($scope, $rootScope, H
       common.spinner(false);
     });
 
-    HttpService.postData('/customer/count', params).then(function (response) {
+    HttpService.postData('/mechanic/count', params).then(function (response) {
       $scope.totalElements = response;
       common.spinner(false);
     }, function error(response) {

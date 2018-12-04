@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!-- Modal delete -->
+<div th:fragment="modal-form" class="modal fade modalFrm" id="modalFrm" ng-controller="MechanicAddController">
+    <div class="modal-dialog modal-full">
+        <div class="modal-content text-center">
+            <form class="form-horizontal formValidate" name="mechanicFrm" id="mechanicFrm">
+                <div class="modal-body">
+                    <div class="panel-body">
+                        <input style="display: none" type="text" class="form-control" ng-model="params.roleId">
+
+                        <!--Row 1-->
+                        <div class="row">
+                            <!--Code-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label"><span
+                                            th:text="#{mechanic.deptId}"></span></label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="DeptId" ng-model="item.DeptId"
+                                               th:placeholder="#{mechanic.deptId}"
+                                               minlength="5" maxlength="20" required="required" name="DeptId">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End code-->
+
+                            <!--Name-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label"><span
+                                            th:text="#{mechanic.email}"></span></label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="Email" ng-model="item.Email"
+                                               th:placeholder="#{mechanic.email}" required="required" name="Email">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End Name-->
+                        </div>
+                        <!--End row 1-->
+
+
+                        <!--Row 2-->
+                        <div class="row">
+                            <!--name-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label"><span
+                                            th:text="#{mechanic.name}"></span></label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="Name" ng-model="item.Name"
+                                               th:placeholder="#{mechanic.name}" name="Name">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End name-->
+
+                            <!--phone-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label"><span
+                                            th:text="#{mechanic.phone}"></span></label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="Phone"
+                                               ng-model="item.Phone"
+                                               th:placeholder="#{mechanic.phone}"
+                                               minlength="5" maxlength="20" required="required" name="Phone">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End phone-->
+                        </div>
+                        <!--End row 2-->
+
+
+                        <!--Row 3-->
+                        <div class="row">
+                            <!--resType-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label"><span
+                                            th:text="#{mechanic.resType}"></span></label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="ResType" ng-model="item.ResType"
+                                               th:placeholder="#{mechanic.resType}" required="required" name="ResType">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End resType-->
+
+                            <!--shiftId-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label"><span
+                                            th:text="#{mechanic.shiftId}"></span></label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="ShiftId" ng-model="item.ShiftId"
+                                               th:placeholder="#{mechanic.shiftId}"
+                                               minlength="5" maxlength="20" required="required" name="ShiftId">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End shiftId-->
+                        </div>
+                        <!--End row 3-->
+
+
+                        <!--Row 4-->
+                        <div class="row">
+                            <!--shortName-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label"><span
+                                            th:text="#{mechanic.shortName}"></span></label>
+                                    <div class="col-md-8">
+                                        <input type="email" class="form-control" id="ShortName"
+                                               ng-model="item.ShortName"
+                                               th:placeholder="#{mechanic.shortName}" required="required"
+                                               name="ShortName">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End shortName-->
+
+                            <!--SiteId-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label"><span
+                                            th:text="#{mechanic.siteId}"></span></label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="SiteId" ng-model="item.SiteId"
+                                               th:placeholder="#{mechanic.siteId}" name="SiteId">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End siteId-->
+                        </div>
+                        <!--End row 4-->
+
+
+                        <!--Row 5-->
+                        <div class="row">
+                            <!--smanId-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label"><span
+                                            th:text="#{mechanic.smanId}"></span></label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="SmanId" ng-model="item.SmanId"
+                                               th:placeholder="#{mechanic.smanId}" name="SmanId">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End smanId-->
+
+                            <!--subSys-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label"><span
+                                            th:text="#{mechanic.subSys}"></span></label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="SubSys" ng-model="item.SubSys"
+                                               th:placeholder="#{mechanic.subSys}" name="SubSys">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End subSys-->
+                        </div>
+                        <!--End row 5-->
+
+                        <!--Row 6-->
+                        <div class="row">
+                            <!--typehead-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label"><span
+                                            th:text="#{mechanic.country}"></span></label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" autocomplete="off"
+                                               ng-model="asyncSelected" placeholder="Load city use $http"
+                                               uib-typeahead="address for address in getLocation($viewValue)"
+                                               typeahead-loading="loadingLocations" typeahead-no-results="noResults"
+                                               typeahead-select-on-exact="true">
+                                        <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
+                                        <div ng-show="noResults">
+                                            <i class="glyphicon glyphicon-remove"></i> No Results Found
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End typehead-->
+
+                            <!--typehead selected-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label"><span
+                                            th:text="#{mechanic.country}"></span></label>
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" id="asyncSelected" ng-model="asyncSelected"
+                                               th:placeholder="#{mechanic.country}" name="asyncSelected" ng-disabled="true">
+                                    </div>
+                                </div>
+                            </div>
+                            <!--End typehead selected-->
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <div class="modal-footer text-center">
+                    <button type="button" ng-disabled="mechanicFrm.$invalid" id="btnSubmit"
+                            ng-click="onSubmitFrm()" class="btn btn-primary"
+                            th:text="#{subscriber.header.title.subscriber.ok}"></button>
+                    <a class="btn btn-link" data-dismiss="modal" th:text="#{btn.cancel}"></a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+<!-- /modal delete -->
+
+</body>
+</html>

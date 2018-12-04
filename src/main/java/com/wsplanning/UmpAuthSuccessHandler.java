@@ -55,7 +55,7 @@ public class UmpAuthSuccessHandler extends SavedRequestAwareAuthenticationSucces
             }
         } else {
 
-            httpServletResponse.sendRedirect("/bill/");
+            httpServletResponse.sendRedirect("/mechanic/");
         }
     }
 }
