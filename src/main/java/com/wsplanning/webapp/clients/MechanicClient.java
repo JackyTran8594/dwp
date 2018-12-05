@@ -26,12 +26,12 @@ public class MechanicClient {
 
   @Autowired
   public MechanicClient(RestTemplate restTemplate,
-                        @Value("${apiEndpointUrl}") String identityServiceEndpointUrl) {
+                        @Value("${apiEndpointUrl}") String apiEndpointUrl) {
     this.restTemplate = restTemplate;
     this.restTemplate.getMessageConverters()
         .add(0, new StringHttpMessageConverter(Charset.forName("UTF-8")));
 //    this.endpointUrl = "http://automaster.alliedsoft.hu:9092/api/Employees?command=getMechanics&SiteId=S01";
-        this.endpointUrl = "http://automaster.alliedsoft.hu:9092/api/Employees";
+        this.endpointUrl = apiEndpointUrl + "/api/Employees";
   }
 
   public String delete(String userName) {

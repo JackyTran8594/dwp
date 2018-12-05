@@ -4,9 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
-import com.wsplanning.webapp.clients.UserClient;
-import com.wsplanning.webapp.models.User;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,9 +22,6 @@ public class UmpAuthSuccessHandler extends SavedRequestAwareAuthenticationSucces
     @Autowired
     private HttpSession session;
 
-    @Autowired
-    private UserClient userClient;
-
     public UmpAuthSuccessHandler(String defaultTargetUrl) {
         setDefaultTargetUrl(defaultTargetUrl);
     }
@@ -41,6 +35,7 @@ public class UmpAuthSuccessHandler extends SavedRequestAwareAuthenticationSucces
         session.setAttribute("roles", roles);
         System.out.println("----------getPrincipal: " + authentication.getPrincipal());
         session.setAttribute("username", authentication.getPrincipal());
+        System.out.println("----------getAttribute siteId: " + (String) session.getAttribute("siteId"));
 
         HttpSession session = httpServletRequest.getSession();
         if (session != null) {

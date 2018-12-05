@@ -40,7 +40,7 @@ public class MechanicController extends BaseController {
   public ResponseEntity test(@RequestBody Map<String, String> params) {
     try {
       logger.info("#USER_LOG {},{},{},{},{}", session.getId(), session.getAttribute("username"), "test mechanic on test mechanic page", "", "");
-      String rtn = mechanicClient.test(params);
+      String rtn = mechanicClient.test(addParamSiteId(params));
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);

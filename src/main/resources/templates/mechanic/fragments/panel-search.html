@@ -20,15 +20,16 @@
 
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label class="control-label col-md-4" th:text="#{customer.name}"></label>
+                            <label class="control-label col-md-4" th:text="#{mechanic.name}"></label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" ng-model="params.name" th:placeholder="#{placeholder.text}">
+                                <input type="text" class="form-control" ng-model="searchValue" th:placeholder="#{placeholder.text}"
+                                       code="13" dl-key-code="doSearch();">
                             </div>
                         </div>
                     </div>
 
                     <div class="col-md-3">
-                        <button type="button" ng-click="onSearch()" class="btn btn-icon btn-default"><i class="icon-search4"></i></button>
+                        <button type="button" ng-click="doSearch()" class="btn btn-icon btn-default"><i class="icon-search4"></i></button>
                     </div>
 
                 </form>

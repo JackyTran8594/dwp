@@ -4,7 +4,10 @@ UserWebApp.controller('MechanicAddController', function ($http, $scope, $rootSco
   function renderEdit() {
     $scope.id = $('.dataResponse').attr('data-id');
     if ($scope.id != null && $scope.id != '') {
+      $scope.title = $translate.instant('editMechanic');
       $scope.item.id = $('.dataResponse').attr('data-id');
+    }else{
+      $scope.title = $translate.instant('addMechanic');
     }
     $scope.item.code = $('.dataResponse').attr('data-code');
     $scope.item.name = $('.dataResponse').attr('data-name');
@@ -110,6 +113,11 @@ UserWebApp.controller('MechanicAddController', function ($http, $scope, $rootSco
   $rootScope.$on('modalFrm', function (event, obj) {
     console.log(obj); // 10
     $scope.item = obj.item;
+    if ($scope.item != null && $scope.item.Name != null && $scope.item.Name != '') {
+      $scope.title = $translate.instant('editMechanic');
+    }else{
+      $scope.title = $translate.instant('addMechanic');
+    }
   });
 
 

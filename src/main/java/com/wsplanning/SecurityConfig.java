@@ -19,12 +19,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-//    @Autowired
-//    private AuthenticationSuccessHandler authenticationSuccessHandler;
 
-    @Autowired
-    @Qualifier("userDetailsService")
-    private UmpUserDetailsService userDetailsService;
 
     @Autowired
     private CustomAuthenticationProvider customAuthenticationProvider;
@@ -44,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/assets/**", "/wsplanning/**", "/login",
                         "/users/get-existed-email", "/users/forgot-password-with-email",
                         "/changeForgotPassword", "/changeForgotPasswordConfirm",
-                        "/change-password", "/change-password-with-token").permitAll()
+                        "/change-password", "/change-password-with-token","/site/getAll").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -57,11 +52,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .permitAll();
 
-    }
-
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
     @Bean

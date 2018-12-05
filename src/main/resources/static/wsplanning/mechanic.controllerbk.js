@@ -1,42 +1,29 @@
-UserWebApp.controller('MechanicController', function ($scope, $rootScope, HttpService, $translate, $location, $filter) {
+UserWebApp.controller('MechanicControllerBK', function ($scope, $rootScope, HttpService, $translate, $location, $filter) {
 
-  $scope.lstAllData = [];
   $scope.lstData = [];
-  $scope.lstSearch = [];
   $scope.totalElements = 0;
 
   $scope.params = [];
-  $scope.searchValue = '';
-  $scope.limit = 20;
-  $scope.page = 1;
+  $scope.params.name = '';
+  $scope.params.limit = 20;
+  $scope.params.page = 1;
 
   $scope.checklistTable = {
     selected: [],
     checkAll: false
   };
 
-  function reset() {
-    $scope.params = [];
-    $scope.searchValue = '';
-    $scope.limit = 20;
-    $scope.page = 1;
-
-    $scope.checklistTable = {
-      selected: [],
-      checkAll: false
-    };
-  }
-
   function loadData() {
     common.spinner(true);
 
     var params = {
       "command": "getMechanics",
+      "SiteId": "S01",
     };
 
     HttpService.postData('/mechanic/test', params).then(function (response) {
-      $scope.lstAllData = response;
-      $scope.doSearch();
+      $scope.lstData = response;
+      $scope.totalElements = response.length;
       common.spinner(false);
     }, function error(response) {
       console.log(response);
@@ -75,60 +62,16 @@ UserWebApp.controller('MechanicController', function ($scope, $rootScope, HttpSe
 
   }
 
-  // Search data
-  function searchData() {
-    $scope.lstData = [];
-    $scope.totalElements = $scope.lstSearch.length;
-    if (!$scope.lstSearch || $scope.lstSearch.length <= 0) {
-      $scope.isNoData = true;
-    } else {
-      var begin = ($scope.page - 1) * $scope.limit;
-      var end = ($scope.page) * $scope.limit;
-
-      end = (end > $scope.lstSearch.length) ? $scope.lstSearch.length : end;
-
-      for (var i = begin; i < end; i++) {
-        $scope.lstData.push($scope.lstSearch[i]);
-      }
-
-      $scope.isNoData = (!$scope.lstData || $scope.lstData.length <= 0);
-    }
-  }
-
-  $scope.doSearch = function () {
-    common.spinner(true);
-    $scope.lstSearch = [];
-    if ($scope.searchValue) {
-      angular.forEach($scope.lstAllData, function (value) {
-        if (("" + value.DeptId).toLowerCase().includes($scope.searchValue)
-          || ("" + value.Email).toLowerCase().includes($scope.searchValue.toLowerCase())
-          || ("" + value.Name).toLowerCase().includes($scope.searchValue.toLowerCase())
-          || ("" + value.Phone).toLowerCase().includes($scope.searchValue.toLowerCase())
-          || ("" + value.ShiftId).toLowerCase().includes($scope.searchValue.toLowerCase())
-          || ("" + value.ShortName).toLowerCase().includes($scope.searchValue.toLowerCase())
-          || ("" + value.SiteId).toLowerCase().includes($scope.searchValue.toLowerCase())
-          || ("" + value.SmanId).toLowerCase().includes($scope.searchValue.toLowerCase())
-          || ("" + value.SubSys).toLowerCase().includes($scope.searchValue.toLowerCase())
-        ) {
-          $scope.lstSearch.push(value);
-        }
-      });
-    } else {
-      angular.forEach($scope.lstAllData, function (value) {
-        $scope.lstSearch.push(value);
-      });
-    }
-
-    $scope.page = 1;
-    $scope.pageGo = 1;
-    searchData();
-    common.spinner(false);
-  }
+  // Search role
+  $scope.onSearch = function () {
+    loadData();
+  };
 
   $scope.onRefresh = function () {
-    $scope.limit = '20';
-    $scope.page = '1';
-    $scope.name = '';
+    $scope.params = {};
+    $scope.params.limit = '20';
+    $scope.params.page = '1';
+    $scope.params.name = '';
 
     $scope.checklistTable = {
       selected: [],
@@ -143,14 +86,9 @@ UserWebApp.controller('MechanicController', function ($scope, $rootScope, HttpSe
     }, 1000);
   };
 
-  $scope.addItem  = function () {
-    $('#modalFrm').modal('show');
-    $rootScope.$broadcast("modalFrm",{"item": {}});
-  }
-
   $scope.editItem  = function (item) {
     $('#modalFrm').modal('show');
-    $rootScope.$broadcast("modalFrm",{"item": angular.copy(item, {})});
+    $rootScope.$broadcast("modalFrm",{"item": item});
   }
 
   $scope.multi = false;
