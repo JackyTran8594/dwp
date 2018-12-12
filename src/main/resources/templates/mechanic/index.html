@@ -117,13 +117,14 @@
                                     uib-pagination
                                     total-items="totalElements"
                                     items-per-page="limit"
-                                    max-size="4"
+                                    max-size="2"
                                     ng-model="page"
-                                    boundary-links="true" force-ellipses="true" rotate="true"
+                                    boundary-link-numbers="2"
+                                    force-ellipses="true" rotate="true"
                                     previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
                             </div>
                             <div class="form-group">
-                                <input type="number" name="page" th:placeholder="#{common.page}" class="form-control validatePositiveInteger"
+                                <input type="number" name="page"  ng-model="pageGo" th:placeholder="#{common.page}" class="form-control validatePositiveInteger"
                                        min="1" max="{{(totalElements / limit) | ceil}}"
                                        style="width: 55px">
                             </div>
@@ -131,7 +132,8 @@
                                 <button type="submit" class="btn btn-default" th:text="#{common.paging.btn.go}"></button>
                             </div>
                             <div class="form-group">
-                                <select class="form-control" ng-model="limit">
+                                <select class="form-control" ng-model="limit" ng-change="changeLimit()" convert-to-number>
+                                    <option value="1">1</option>
                                     <option value="5">5</option>
                                     <option value="10">10</option>
                                     <option value="15">15</option>

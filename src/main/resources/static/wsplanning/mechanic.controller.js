@@ -44,35 +44,33 @@ UserWebApp.controller('MechanicController', function ($scope, $rootScope, HttpSe
     });
   }
 
-  renderDefaultRequestParams();
+  loadData();
 
-  function renderDefaultRequestParams() {
 
-    var limit = common.getUrlRequestParam('limit');
-    if (limit != null) {
-      $scope.params.limit = limit;
+  //<editor-fold desc="Paging & Search Port">
+  $scope.$watch("page", function (newValue, oldValue) {
+    if (newValue != oldValue) {
+      $scope.page = newValue;
+      searchData();
+    }
+  });
+
+  $scope.go = function () {
+    $scope.page = $scope.pageGo;
+  }
+
+  $scope.changeLimit = function () {
+    console.log($scope.limit);
+    //Check limit vuot page thi reset ve page 1
+    if ($scope.lstSearch && $scope.lstSearch.length > 0) {
+      if ((($scope.page - 1) * $scope.limit) > $scope.lstSearch.length) {
+        $scope.doSearch();
+      } else {
+        searchData();
+      }
     } else {
-      $scope.params.limit = '20';
+      searchData();
     }
-
-    var page = common.getUrlRequestParam('page');
-    if (page != null) {
-      $scope.params.page = parseInt(page);
-    } else {
-      $scope.params.page = '1';
-    }
-
-    if (['20', '30', '50'].indexOf($scope.params.limit) < 0) {
-      setTimeout(function () {
-        $scope.$apply(function () {
-          $scope.params.limit = '20';
-          common.notifyWarning($translate.instant('requestParamError'));
-        });
-      }, 1);
-    }
-
-    loadData();
-
   }
 
   // Search data
@@ -92,6 +90,7 @@ UserWebApp.controller('MechanicController', function ($scope, $rootScope, HttpSe
       }
 
       $scope.isNoData = (!$scope.lstData || $scope.lstData.length <= 0);
+      $scope.pageGo = $scope.page;
     }
   }
 
@@ -124,6 +123,7 @@ UserWebApp.controller('MechanicController', function ($scope, $rootScope, HttpSe
     searchData();
     common.spinner(false);
   }
+  //</editor-fold>
 
   $scope.onRefresh = function () {
     $scope.limit = '20';

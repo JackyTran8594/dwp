@@ -12,7 +12,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String index(Model model) {
-        return "redirect:/users";
+        return "redirect:/mechanic";
     }
 
     @GetMapping("/403")

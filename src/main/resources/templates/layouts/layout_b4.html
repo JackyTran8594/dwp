@@ -19,10 +19,11 @@
     <link href="/assets/js/core/libraries/angularjs/ivh-treeview.css" rel="stylesheet" type="text/css">
     <link href="/assets/js/core/libraries/angularjs/ivh-treeview-theme-basic.css" rel="stylesheet" type="text/css">
 
-    <link href="/assets/css/limitless/Bootstrap_3/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="/assets/css/limitless/Bootstrap_3/core.min.css" rel="stylesheet" type="text/css">
-    <link href="/assets/css/limitless/Bootstrap_3/components.min.css" rel="stylesheet" type="text/css">
-    <link href="/assets/css/limitless/Bootstrap_3/colors.min.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/limitless/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/limitless/bootstrap_limitless.min.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/limitless/layout.min.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/limitless/components.min.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/limitless/colors.min.css" rel="stylesheet" type="text/css">
     <!-- /global stylesheets -->
 
     <!-- Theme stylesheets files -->
@@ -72,8 +73,8 @@
     <link href="/assets/js/multiselect/select.css" rel="stylesheet" type="text/css">
 
     <!--<script type="text/javascript" src="/assets/js/core/app.js"></script>-->
-    <script type="text/javascript" src="/assets/js/limitless/app.js"></script>
-    <!--<script type="text/javascript" src="/assets/js/dashboard.js"></script>-->
+    <script type="text/javascript" src="/assets/js/app.js"></script>
+    <script type="text/javascript" src="/assets/js/dashboard.js"></script>
     <script type="text/javascript" src="/wsplanning.js"></script>
     <script type="text/javascript" src="/wsplanning/constants.js"></script>
     <script type="text/javascript" src="/wsplanning/common.js"></script>
@@ -82,8 +83,33 @@
     <script type="text/javascript" src="/wsplanning/app.service.js"></script>
     <script type="text/javascript" src="/wsplanning/app.directive.js"></script>
     <script type="text/javascript" src="/wsplanning/app.translate.js"></script>
+    <style>
+        .abc {
+            margin-bottom: 20px;
+        }
+
+        .fancytree-icon {
+            display: none;
+        }
+
+        .fancytree-checkbox {
+            margin: 4px 0 0 2px
+        }
+
+        .right_btn {
+            margin-left: 10px;
+        }
+
+        .blue {
+            color: blue;
+        }
+
+        .red {
+            color: red;
+        }
+    </style>
 </head>
-<body class="navbar-bottom sidebar-xs">
+<body>
 <div class="preloader" id="preloader1">
     <hr/>
     <hr/>
@@ -99,30 +125,28 @@
 
 <div th:replace="layouts/fragments/navbar::navbar"></div>
 
-<!-- Page container -->
-<div class="page-container">
+<!-- Page content -->
+<div class="page-content">
 
-    <!-- Page content -->
-    <div class="page-content">
-
-        <div th:replace="layouts/fragments/sitebar::sitebar"></div>
+    <div th:replace="layouts/fragments/sitebar::sitebar"></div>
 
 
-        <!-- Main content -->
-        <div class="content-wrapper">
+    <!-- Main content -->
+    <div class="content-wrapper">
 
-            <div layout:fragment="content"></div>
-        </div>
-        <!-- /main content -->
+        <div layout:fragment="content"></div>
+
+
+        <!-- Footer -->
+        <div th:replace="layouts/fragments/footer::footer"></div>
+        <!-- /footer -->
 
     </div>
-    <!-- /page content -->
-</div>
-<!-- /page container -->
+    <!-- /main content -->
 
-<!-- Footer -->
-<div th:replace="layouts/fragments/footer::footer"></div>
-<!-- /footer -->
+</div>
+<!-- /page content -->
+
 
 <script type="text/javascript">
   $(document).ready(function () {
