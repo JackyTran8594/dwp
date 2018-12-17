@@ -3474,6 +3474,9 @@ input[type="button"].btn-block {
 .fade.in {
   opacity: 1;
 }
+.fade.show {
+  opacity: 1;
+}
 .collapse {
   display: none;
 }
@@ -5872,6 +5875,12 @@ button.close {
   -o-transition: -o-transform 0.3s ease-out;
   transition: transform 0.3s ease-out;
 }
+.modal.show .modal-dialog {
+  -webkit-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  -o-transform: translate(0, 0);
+  transform: translate(0, 0);
+}
 .modal.in .modal-dialog {
   -webkit-transform: translate(0, 0);
   -ms-transform: translate(0, 0);
@@ -5910,6 +5919,10 @@ button.close {
 .modal-backdrop.fade {
   opacity: 0;
   filter: alpha(opacity=0);
+}
+.modal-backdrop.show {
+  opacity: 0.5;
+  filter: alpha(opacity=50);
 }
 .modal-backdrop.in {
   opacity: 0.5;

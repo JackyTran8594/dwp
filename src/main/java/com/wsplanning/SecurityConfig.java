@@ -12,6 +12,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * Created by ThuyetLV
  */
@@ -20,6 +22,8 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private HttpSession session;
 
     @Autowired
     private CustomAuthenticationProvider customAuthenticationProvider;
@@ -62,6 +66,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public AuthenticationSuccessHandler successHandler() {
+        System.out.printf("AuthenticationSuccessHandler successHandler");
         UmpAuthSuccessHandler successHandler = new UmpAuthSuccessHandler("/mechanic/");
         return successHandler;
     }

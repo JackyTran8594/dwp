@@ -228,4 +228,8 @@ UserWebApp.controller('MechanicController', function ($scope, $rootScope, HttpSe
     }
   }, true);
 
+  $scope.testModal = function(){
+    $("#modal_default").modal("show");
+  }
+
 });
