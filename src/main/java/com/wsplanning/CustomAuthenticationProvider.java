@@ -58,9 +58,12 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
   @Override
   public Authentication authenticate(Authentication authentication) throws AuthenticationException {
     String siteId = (String) request.getParameter("siteId");
-    String language = hsmLang.get(siteId);
-    if(language == null || StringUtils.isBlank(language)){
-      language = "en";
+    String language = (String) request.getParameter("language");
+    if(language == null || StringUtils.isBlank(language)) {
+      language = hsmLang.get(siteId);
+      if(language == null || StringUtils.isBlank(language)){
+        language = "en";
+      }
     }
     session.setAttribute(SESSION_LANG, language);
     System.out.println("request siteId testing= " + siteId);

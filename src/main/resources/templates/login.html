@@ -23,6 +23,7 @@
     <script type="text/javascript" src="assets/js/plugins/loaders/blockui.min.js"></script>
     <script type="text/javascript" src="assets/js/plugins/ui/nicescroll.min.js"></script>
     <script type="text/javascript" src="assets/js/plugins/ui/drilldown.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap-select.js"></script>
     <!-- /core JS files -->
 
     <!-- Theme JS files -->
@@ -44,6 +45,18 @@
             color: blue;
             text-decoration: underline;
         }
+
+
+        .has-feedback-left .bootstrap-select {
+            padding-right: 0 !important;
+            padding-left: 32px;
+        }
+
+        .media-left img{
+            width: 15px !important;
+            height: 15px !important;
+        }
+
     </style>
 
 </head>
@@ -89,10 +102,20 @@
                     <div class="form-group has-feedback has-feedback-left">
                         <select class="form-control" placeholder="siteId" name="siteId" required="required" id="siteId"></select>
                         <div class="form-control-feedback">
-                            <i class="icon-lock2 text-muted"></i>
+                            <i class="icon-cog text-muted"></i>
                         </div>
                     </div>
 
+
+                    <div class="form-group has-feedback has-feedback-left">
+                        <select class="form-control selectpicker" placeholder="language" name="language" required="required" id="language">
+                            <option value="en" data-thumbnail="/assets/images/flags/us.png">English</option>
+                            <option value="vi" data-thumbnail="/assets/images/flags/vi.png">Việt nam</option>
+                        </select>
+                        <div class="form-control-feedback">
+                            <i class="icon-sphere text-muted"></i>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <a href="javascript:void(0)" class="forgotPasswordBtn">Forgot your account</a>
                     </div>
