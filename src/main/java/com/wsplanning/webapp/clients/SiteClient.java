@@ -27,11 +27,16 @@ public class SiteClient {
     this.restTemplate = restTemplate;
     this.restTemplate.getMessageConverters()
         .add(0, new StringHttpMessageConverter(Charset.forName("UTF-8")));
-        this.endpointUrl = apiEndpointUrl + "/api/ASMaster?command=getSites";
+        this.endpointUrl = apiEndpointUrl + "/api/ASMaster";
   }
 
   public String getSites() {
-    String url = String.format("%s", this.endpointUrl);
+    String url = String.format("%s?command=getSites", this.endpointUrl);
+    return restTemplate.getForObject(url, String.class);
+  }
+
+  public String getLanguages() {
+    String url = String.format("%s?command=getLanguages", this.endpointUrl);
     return restTemplate.getForObject(url, String.class);
   }
 }

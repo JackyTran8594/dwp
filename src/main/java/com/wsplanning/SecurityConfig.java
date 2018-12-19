@@ -1,5 +1,6 @@
 package com.wsplanning;
 
+import com.wsplanning.webapp.CustomizeLogoutSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -22,52 +23,55 @@ import javax.servlet.http.HttpSession;
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private HttpSession session;
+  @Autowired
+  private HttpSession session;
 
-    @Autowired
-    private CustomAuthenticationProvider customAuthenticationProvider;
+  @Autowired
+  private CustomAuthenticationProvider customAuthenticationProvider;
+  @Autowired
+  CustomizeLogoutSuccessHandler customizeLogoutSuccessHandler;
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-            .authenticationProvider(this.customAuthenticationProvider);
-    }
+  @Override
+  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    auth
+        .authenticationProvider(this.customAuthenticationProvider);
+  }
 
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable();//TODO review
+  @Override
+  protected void configure(HttpSecurity http) throws Exception {
+    http.csrf().disable();//TODO review
 
-        http.authorizeRequests()
-                .antMatchers("/assets/**", "/wsplanning/**", "/login",
-                        "/users/get-existed-email", "/users/forgot-password-with-email",
-                        "/changeForgotPassword", "/changeForgotPasswordConfirm",
-                        "/change-password", "/change-password-with-token","/site/getAll").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .successHandler(successHandler())
-                .permitAll()
-                .and()
-                .exceptionHandling().accessDeniedPage("/403")
-                .and()
-                .logout()
-                .permitAll();
+    http.authorizeRequests()
+        .antMatchers("/assets/**", "/wsplanning/**", "/login",
+            "/users/get-existed-email", "/users/forgot-password-with-email",
+            "/changeForgotPassword", "/changeForgotPasswordConfirm",
+            "/change-password", "/change-password-with-token", "/site/getAll", "/language/getAll").permitAll()
+        .anyRequest().authenticated()
+        .and()
+        .formLogin()
+        .loginPage("/login")
+        .successHandler(successHandler())
+        .permitAll()
+        .and()
+        .exceptionHandling().accessDeniedPage("/403")
+        .and()
+        .logout()
+//        .logoutSuccessHandler(customizeLogoutSuccessHandler)
+        .permitAll();
 
-    }
+  }
 
-    @Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        return bCryptPasswordEncoder;
-    }
+  @Bean
+  public BCryptPasswordEncoder passwordEncoder() {
+    BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+    return bCryptPasswordEncoder;
+  }
 
-    @Bean
-    public AuthenticationSuccessHandler successHandler() {
-        System.out.printf("AuthenticationSuccessHandler successHandler");
-        UmpAuthSuccessHandler successHandler = new UmpAuthSuccessHandler("/mechanic/");
-        return successHandler;
-    }
+  @Bean
+  public AuthenticationSuccessHandler successHandler() {
+    System.out.printf("AuthenticationSuccessHandler successHandler");
+    UmpAuthSuccessHandler successHandler = new UmpAuthSuccessHandler("/mechanic/");
+    return successHandler;
+  }
 }

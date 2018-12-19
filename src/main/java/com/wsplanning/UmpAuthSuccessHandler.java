@@ -49,7 +49,7 @@ public class UmpAuthSuccessHandler extends SavedRequestAwareAuthenticationSucces
         if (session != null) {
             String redirectUrl = (String) session.getAttribute("url_prior_login");
             System.out.printf("session != null: " + redirectUrl);
-            if (redirectUrl != null) {
+            if (redirectUrl != null && redirectUrl != "" && !redirectUrl.contains("logout")) {
                 Locale userLocale = Locale.forLanguageTag(lang);
                 localeResolver.setLocale(httpServletRequest, httpServletResponse, userLocale);
                 System.out.printf("redirectUrl != null: " + redirectUrl);

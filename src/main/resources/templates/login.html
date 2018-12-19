@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>WSPlanning System - Login</title>
+    <title>Digital Workshop Planner - Login</title>
 
     <!-- Global stylesheets -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet"
@@ -76,8 +76,9 @@
             <form th:action="@{/login}" class="formValidate" method="POST" id="frmLogin">
                 <div class="panel panel-body login-form">
                     <div class="text-center">
-                        <div class="icon-object border-primary-400 text-primary-400"><i class="icon-people"></i></div>
-                        <h5 class="content-group-lg"> WSPLANNING WEB APPLICATION
+                        <img src="/assets/images/Cael_logo.png" alt="Digital Workshop Planner" style="width: 50%;"/>
+                        <!--<div class="icon-object border-primary-400 text-primary-400"><i class="icon-people"></i></div>-->
+                        <h5 class="content-group-lg"> Digital Workshop Planner
                             <small class="display-block">Login to your account</small>
                         </h5>
                     </div>
@@ -116,9 +117,9 @@
                             <i class="icon-sphere text-muted"></i>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <a href="javascript:void(0)" class="forgotPasswordBtn">Forgot your account</a>
-                    </div>
+                    <!--<div class="form-group">-->
+                        <!--<a href="javascript:void(0)" class="forgotPasswordBtn">Forgot your account</a>-->
+                    <!--</div>-->
                     <!--<div class="form-group login-options">-->
                     <!--<div class="row">-->
                     <!--<div class="col-sm-6">-->
@@ -178,10 +179,29 @@
       error: function (responseData, textStatus, errorThrown) {
         console.log(responseData);
         console.log(errorThrown);
-        alert('POST failed.');
       }
     });
 
+    $.ajax({
+      type: 'GET',
+      url: '/language/getAll',
+      dataType: 'json',
+      success: function(responseData, textStatus, jqXHR) {
+        var option = "";
+        $('#language').html("");
+        $.each(responseData, function (i, item) {
+          var CultureInfo = item.CultureInfo;
+          var tmp = CultureInfo.split("-");
+          option = "";
+          option+= "<option value=\"" + tmp[0] + "\" data-thumbnail=\"/assets/images/flags/" + item.Flag.toLowerCase() + "\">" + item.Name + "</option>";
+          $('#language').append(option);
+        });
+      },
+      error: function (responseData, textStatus, errorThrown) {
+        console.log(responseData);
+        console.log(errorThrown);
+      }
+    });
   });
 
   function checkSubmit(e){

@@ -1,6 +1,8 @@
 package com.wsplanning;
 
+import com.wsplanning.webapp.clients.AuthClient;
 import org.apache.commons.lang3.StringUtils;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,24 +26,25 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
   public static final String SESSION_LANG = "SESSION_LANG";
   public static final String SESSION_SITEID = "SESSION_SITEID";
+  public static final String SESSION_TOKEN = "SESSION_TOKEN";
 
   public CustomAuthenticationProvider() {
     logger.info("*** CustomAuthenticationProvider created");
     hsmLang = new HashMap<>();
-    hsmLang.put("100","vi");
-    hsmLang.put("102","en");
-    hsmLang.put("103","en");
-    hsmLang.put("104","en");
-    hsmLang.put("105","en");
-    hsmLang.put("106","en");
+    hsmLang.put("100", "vi");
+    hsmLang.put("102", "en");
+    hsmLang.put("103", "en");
+    hsmLang.put("104", "en");
+    hsmLang.put("105", "en");
+    hsmLang.put("106", "en");
 
     hsmCountry = new HashMap<>();
-    hsmCountry.put("100","VN");
-    hsmCountry.put("102","en");
-    hsmCountry.put("103","en");
-    hsmCountry.put("104","en");
-    hsmCountry.put("105","en");
-    hsmCountry.put("106","en");
+    hsmCountry.put("100", "VN");
+    hsmCountry.put("102", "en");
+    hsmCountry.put("103", "en");
+    hsmCountry.put("104", "en");
+    hsmCountry.put("105", "en");
+    hsmCountry.put("106", "en");
 
     //http://localhost:8081/mechanic/?lang=vi
   }
@@ -52,23 +55,42 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
   @Autowired
   private HttpSession session;
 
-  public static HashMap<String,String> hsmLang = new HashMap<>();
-  public static HashMap<String,String> hsmCountry = new HashMap<>();
+  @Autowired
+  private AuthClient authClient;
+
+
+  public static HashMap<String, String> hsmLang = new HashMap<>();
+  public static HashMap<String, String> hsmCountry = new HashMap<>();
 
   @Override
   public Authentication authenticate(Authentication authentication) throws AuthenticationException {
     String siteId = (String) request.getParameter("siteId");
     String language = (String) request.getParameter("language");
-    if(language == null || StringUtils.isBlank(language)) {
+    if (language == null || StringUtils.isBlank(language)) {
       language = hsmLang.get(siteId);
-      if(language == null || StringUtils.isBlank(language)){
+      if (language == null || StringUtils.isBlank(language)) {
         language = "en";
       }
     }
     session.setAttribute(SESSION_LANG, language);
-    System.out.println("request siteId testing= " + siteId);
     session.setAttribute(SESSION_SITEID, siteId);
-    if (authentication.getName().equals("admin") && authentication.getCredentials().equals("admin")) {
+
+    boolean loginSuccess = false;
+    try {
+      String loginResponse = authClient.login(siteId, language, authentication.getName(), (String) authentication.getCredentials());
+      if (loginResponse != null && !StringUtils.isBlank(loginResponse)) {
+        JSONObject userInfo = new JSONObject(loginResponse);
+        String Token = userInfo.optString("Token","");
+        if (Token != null && !StringUtils.isBlank(Token)) {
+          loginSuccess = true;
+          session.setAttribute(SESSION_TOKEN, Token);
+        }
+      }
+    }catch (Exception ex){
+      logger.error("ERROR authenticate: ",ex);
+    }
+
+    if (loginSuccess) {
       List<GrantedAuthority> grantedAuths = new ArrayList<>();
       grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));
       grantedAuths.add(new SimpleGrantedAuthority("ROLE_ADMIN"));

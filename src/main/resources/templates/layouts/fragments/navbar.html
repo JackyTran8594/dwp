@@ -8,7 +8,8 @@
 <!-- Main navbar -->
 <div th:fragment="navbar" class="navbar navbar-default header-highlight">
     <div class="navbar-header">
-        <a class="navbar-brand" href="index.html"><img src="/assets/images/logo_light.png" alt=""></a>
+        <!--<a class="navbar-brand" href="/"><img src="/assets/images/cael_logo_idx.png" alt=""></a>-->
+        <a class="navbar-brand" href="/"><img src="/assets/images/logo_light.png" alt=""></a>
 
         <ul class="nav navbar-nav visible-xs-block">
             <li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
@@ -115,13 +116,14 @@
 
         <div class="navbar-right">
             <ul class="nav navbar-nav">
+                <li style="display: none"><span class="currentLang" id="currentLang" th:data-currentLang="${#locale}"></span></li>
                 <li class="dropdown language-switch hidden-sm">
                     <a class="dropdown-toggle legitRipple" data-toggle="dropdown" aria-expanded="false"><img
                             th:src="#{locale.current.flag}" th:alt="#{locale.current.name}" class="position-left"><span
                             th:text="#{locale.current.name}"></span> <i class="caret"></i></a>
 
-                    <ul class="dropdown-menu">
-                        <li style="display: none"><span class="currentLang" th:data-currentLang="${#locale}"></span></li>
+                    <ul class="dropdown-menu" id="dropDownLang">
+
                         <li th:class="${#strings.equals(#locale, 'en')} ? 'active' : ''"><a class="english" href="?lang=en"><img
                                 src="/assets/images/flags/us.png" alt=""> <span th:text="#{locale.name.en}"></span></a></li>
                         <li th:class="${#strings.equals(#locale, 'vi')} ? 'active' : ''"><a class="vietnam" href="?lang=vi"><img
@@ -242,6 +244,39 @@
             </ul>
         </div>
     </div>
+
+    <script type="text/javascript">
+      $(document).ready(function () {
+        console.log("------navbar ready------");
+        $.ajax({
+          type: 'GET',
+          url: '/language/getAll',
+          dataType: 'json',
+          success: function(responseData, textStatus, jqXHR) {
+            var currentLang = $("#currentLang").attr('data-currentLang');
+            var option = "";
+            $('#dropDownLang').html("");
+            var options = "";
+            $.each(responseData, function (i, item) {
+              var CultureInfo = item.CultureInfo;
+              var tmp = CultureInfo.split("-");
+              if(tmp[0] == currentLang){
+                options+= "<li class=\"active\"><a class=\"english\" href=\"?lang=" + tmp[0] + "\"><img src=\"/assets/images/flags/" + item.Flag.toLowerCase() + "\"><span>" + item.Name + "</span></a></li>";
+              }else{
+                options+= "<li><a class=\"english\" href=\"?lang=" + tmp[0] + "\"><img src=\"/assets/images/flags/" + item.Flag.toLowerCase() + "\"><span>" + item.Name + "</span></a></li>";
+              }
+
+            });
+            $('#dropDownLang').html(options);
+          },
+          error: function (responseData, textStatus, errorThrown) {
+            console.log(responseData);
+            console.log(errorThrown);
+          }
+        });
+      });
+    </script>
+
 </div>
 <!-- /main navbar -->
 </body>
