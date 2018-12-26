@@ -41,8 +41,8 @@
         <div class="sidebar-category sidebar-category-visible">
             <div class="category-content no-padding">
                 <ul class="navigation navigation-main navigation-accordion">
-                    <li><a href="/"><i class="icon-list-unordered"></i> <span th:text="#{menu.workorders}"></span> <span class="label bg-blue-400">2.0</span></span></a></li>
-                    <li><a href="/"><i class="icon icon-newspaper"></i> <span th:text="#{menu.todayWork}"></span></a></li>
+                    <li ui-sref-active="active"><a ui-sref="main.workorder"><i class="icon-list-unordered"></i> <span th:text="#{menu.workorders}"></span> <span class="label bg-blue-400">2.0</span></span></a></li>
+                    <li ui-sref-active="active"><a ui-sref="main.todaywork"><i class="icon icon-newspaper"></i> <span th:text="#{menu.todayWork}"></span></a></li>
                     <li><a href="/"><i class="icon icon-cart"></i> <span th:text="#{menu.allWork}"></span></a></li>
                     <li><a href="/"><i class="icon icon-hammer2"></i> <span th:text="#{menu.workMOT}"></span></a></li>
                     <li><a href="/"><i class="icon icon-user-check"></i> <span th:text="#{menu.workTires}"></span></a></li>

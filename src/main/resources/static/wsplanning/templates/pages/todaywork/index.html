@@ -1,0 +1,138 @@
+<div ng-include="'/wsplanning/templates/pages/todaywork/page-header.html'"></div>
+
+
+<!-- Page container -->
+<div class="page-container">
+
+    <!-- Page content -->
+    <div class="page-content">
+
+        <!-- Main content -->
+        <div class="content-wrapper">
+
+            <!-- Panel search -->
+            <div ng-include="'/wsplanning/templates/pages/todaywork/panel-search.html'"></div>
+            <!-- /panel search -->
+
+            <!-- Panel content -->
+            <div class="panel panel-flat">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover"
+                           style="margin-top: 20px">
+                        <!--HEADER-->
+                        <thead>
+                        <tr>
+                            <th nowrap style="padding-right: 0px; width: 80px">
+                                <input type="checkbox" class="checkAllTable" ng-change="onCheckbox()"
+                                       ng-model="checklistTable.checkAll">
+                            </th>
+                            <th>deptId</th>
+                            <th>email</th>
+                            <th>name</th>
+                            <th>phone</th>
+                            <th>resType</th>
+                            <th>shiftId</th>
+                            <th>shortName</th>
+                            <th>siteId</th>
+                            <th>smanId</th>
+                            <th>subSys</th>
+                            <th style="width: 100px;" class="text-right">{{ 'btnAction' | translate }}</th>
+                        </tr>
+                        </thead>
+
+                        <!--BODY-->
+                        <tbody>
+                        <tr ng-repeat="item in lstData">
+                            <td><input type="checkbox" checklist-model="checklistTable.selected"
+                                       checklist-value="item.id"></td>
+                            <td>{{item.DeptId}}</td>
+                            <td>{{item.Email}}</td>
+                            <td>{{item.Name}}</td>
+                            <td>{{item.Phone}}</td>
+                            <td>{{item.ResType}}</td>
+                            <td>{{item.ShiftId}}</td>
+                            <td>{{item.ShortName}}</td>
+                            <td>{{item.SiteId}}</td>
+                            <td>{{item.SmanId}}</td>
+                            <td>{{item.SubSys}}</td>
+                            <td class="text-right text-nowrap">
+                                <ul class="icons-list">
+                                    <li>
+                                        <a ng-click="editItem(item)" title="{{ 'btnEditItem' | translate }}">
+                                            <span class="icon-pencil7"></span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a ng-click="onDelete(item.id)" title="{{ 'btnDeleteItem' | translate }}">
+                                            <span class="icon-trash"></span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr ng-if="isNoData || !lstData || lstData.length <= 0" class="active">
+                            <td colspan="20" class="text-center">{{ 'commonNoResult' | translate }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="panel-footer text-right">
+
+                    <!-- Paging elements -->
+                    <form class="form-inline formPaging formValidate">
+                        <div class="form-group">
+                            {{totalElements | number}} <span class="text-lowercase">{{ 'item' | translate }}</span>
+                        </div>
+                        <div class="form-group" style="border-left: 1px solid #ddd">
+                            <ul class="pagination-flat pagination-rounded"
+                                uib-pagination
+                                total-items="totalElements"
+                                items-per-page="limit"
+                                max-size="2"
+                                ng-model="page"
+                                boundary-link="true"
+                                boundary-link-numbers="2"
+                                force-ellipses="true" rotate="true"
+                                previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
+                                last-text="&raquo;"></ul>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" name="page" ng-model="pageGo" placeholder="{{ 'page' | translate }}"
+                                   class="form-control validatePositiveInteger"
+                                   min="1" max="{{(totalElements / limit) | ceil}}"
+                                   style="width: 55px">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-default">{{ 'go' | translate }}</button>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" ng-model="limit" ng-change="changeLimit()" convert-to-number>
+                                <option value="1">1</option>
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                            </select>
+                            <span>{{ 'limit' | translate }}</span>
+                        </div>
+                    </form>
+                    <!-- /paging element -->
+
+                </div>
+            </div>
+            <!-- /panel content -->
+
+            <!-- Modal replace-->
+            <div ng-include="'/wsplanning/templates/pages/todaywork/modal-delete.html'"></div>
+            <!-- /modal replace-->
+
+        </div>
+        <!-- /main content -->
+
+    </div>
+    <!-- /page content -->
+
+</div>
+<!-- /page container -->

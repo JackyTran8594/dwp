@@ -54,6 +54,7 @@
 
     <!-- Angular JS files -->
     <script type="text/javascript" src="/assets/js/core/libraries/angularjs/angular.min.js"></script>
+    <script type="text/javascript" src="/assets/js/core/libraries/angularjs/angular-ui-router.js"></script>
     <script type="text/javascript" src="/assets/js/core/libraries/angularjs/angular-sanitize.min.js"></script>
     <script type="text/javascript" src="/assets/js/core/libraries/angularjs/ui-bootstrap-tpls-2.5.0.min.js"></script>
     <script type="text/javascript" src="/assets/js/core/libraries/angularjs/checklist-model.js"></script>
@@ -83,6 +84,11 @@
     <script type="text/javascript" src="/wsplanning/app.service.js"></script>
     <script type="text/javascript" src="/wsplanning/app.directive.js"></script>
     <script type="text/javascript" src="/wsplanning/app.translate.js"></script>
+    <script type="text/javascript" src="/wsplanning/app.route.js"></script>
+
+    <!--JS-->
+    <script type="text/javascript" src="/wsplanning/js/workorder.controller.js"></script>
+    <script type="text/javascript" src="/wsplanning/js/workorder.modal.controller.js"></script>
 </head>
 <body class="navbar-bottom sidebar-xs">
 <div class="preloader" id="preloader1">
@@ -112,7 +118,8 @@
         <!-- Main content -->
         <div class="content-wrapper">
 
-            <div layout:fragment="content"></div>
+            <div ui-view></div>
+            <!--<div layout:fragment="content"></div>-->
         </div>
         <!-- /main content -->
 
