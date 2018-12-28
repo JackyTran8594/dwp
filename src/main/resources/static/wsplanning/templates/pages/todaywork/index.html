@@ -26,16 +26,8 @@
                                 <input type="checkbox" class="checkAllTable" ng-change="onCheckbox()"
                                        ng-model="checklistTable.checkAll">
                             </th>
-                            <th>deptId</th>
-                            <th>email</th>
-                            <th>name</th>
-                            <th>phone</th>
-                            <th>resType</th>
-                            <th>shiftId</th>
-                            <th>shortName</th>
-                            <th>siteId</th>
-                            <th>smanId</th>
-                            <th>subSys</th>
+                            <th>Left</th>
+                            <th>Right</th>
                             <th style="width: 100px;" class="text-right">{{ 'btnAction' | translate }}</th>
                         </tr>
                         </thead>
@@ -45,16 +37,13 @@
                         <tr ng-repeat="item in lstData">
                             <td><input type="checkbox" checklist-model="checklistTable.selected"
                                        checklist-value="item.id"></td>
-                            <td>{{item.DeptId}}</td>
-                            <td>{{item.Email}}</td>
-                            <td>{{item.Name}}</td>
-                            <td>{{item.Phone}}</td>
-                            <td>{{item.ResType}}</td>
-                            <td>{{item.ShiftId}}</td>
-                            <td>{{item.ShortName}}</td>
-                            <td>{{item.SiteId}}</td>
-                            <td>{{item.SmanId}}</td>
-                            <td>{{item.SubSys}}</td>
+                            <td>
+                                {{item.ServiceDate | utcToLocal:'dd.MM.yy - hh.mm a'}}<br/>
+                                <span class="{{item.WorkOrderStatus| titleCase}}">{{item.WorkOrderStatus}}<br/></span>
+                                {{item.WorkOrderNo}}<br/>
+                            </td>
+                            <td ng-bind-html="showLeftCol(item)">
+                            </td>
                             <td class="text-right text-nowrap">
                                 <ul class="icons-list">
                                     <li>
@@ -91,10 +80,13 @@
                                 items-per-page="limit"
                                 max-size="2"
                                 ng-model="page"
-                                boundary-link="true"
-                                boundary-link-numbers="2"
-                                force-ellipses="true" rotate="true"
-                                previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
+                                boundary-links="true"
+                                boundary-link-numbers="true"
+                                force-ellipses="true"
+                                rotate="true"
+                                previous-text="&lsaquo;"
+                                next-text="&rsaquo;"
+                                first-text="&laquo;"
                                 last-text="&raquo;"></ul>
                         </div>
                         <div class="form-group">

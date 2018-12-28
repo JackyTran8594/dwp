@@ -2,6 +2,7 @@ package com.wsplanning.webapp.controllers;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.wsplanning.CustomAuthenticationProvider;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,11 +65,19 @@ public class BaseController {
   }
 
   public String getSiteId() {
-    return (String) session.getAttribute("siteId");
+    String site = (String) session.getAttribute(CustomAuthenticationProvider.SESSION_SITEID);
+    System.out.println("---site: " + site);
+    return site;
   }
 
-  public Map<String, String> addParamSiteId(Map<String, String> params){
-    params.put("SiteId",getSiteId());
-   return params;
+  public String getToken() {
+    String token = (String) session.getAttribute(CustomAuthenticationProvider.SESSION_TOKEN);
+    System.out.println("---token: " + token);
+    return token;
+  }
+
+  public Map<String, String> addParamSiteId(Map<String, String> params) {
+    params.put("SiteId", getSiteId());
+    return params;
   }
 }

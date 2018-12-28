@@ -1,9 +1,7 @@
 package com.wsplanning.webapp.controllers;
 
 import com.wsplanning.CustomAuthenticationProvider;
-import com.wsplanning.webapp.clients.AuthClient;
-import com.wsplanning.webapp.clients.MechanicClient;
-import com.wsplanning.webapp.clients.SiteClient;
+import com.wsplanning.webapp.clients.ASMasterClient;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +14,7 @@ import javax.servlet.http.HttpSession;
 public class LoginController {
 
     @Autowired
-    protected SiteClient siteClient;
+    protected ASMasterClient siteClient;
 
     @Autowired
     private HttpSession session;

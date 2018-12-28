@@ -21,7 +21,7 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
 
     .state('main.todaywork', {
       url: 'todaywork',
-      controller: "WorkOrderCtrl as $ctrl",
+      controller: "TodayWorkOrderCtrl as $ctrl",
       templateUrl: '/wsplanning/templates/pages/todaywork/index.html'
     })
 

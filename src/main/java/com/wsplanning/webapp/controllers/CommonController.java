@@ -1,6 +1,6 @@
 package com.wsplanning.webapp.controllers;
 
-import com.wsplanning.webapp.clients.SiteClient;
+import com.wsplanning.webapp.clients.ASMasterClient;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -18,7 +18,7 @@ public class CommonController extends BaseController {
   private Logger logger = LoggerFactory.getLogger(CommonController.class);
 
   @Autowired
-  protected SiteClient siteClient;
+  protected ASMasterClient siteClient;
 
   @Autowired
   protected HttpSession session;

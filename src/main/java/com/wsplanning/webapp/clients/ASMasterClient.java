@@ -16,14 +16,14 @@ import java.util.Map;
  * Created by ThuyetLV
  */
 @Component
-public class SiteClient {
+public class ASMasterClient {
 
   private RestTemplate restTemplate;
   private String endpointUrl;
 
   @Autowired
-  public SiteClient(RestTemplate restTemplate,
-                    @Value("${apiEndpointUrl}") String apiEndpointUrl) {
+  public ASMasterClient(RestTemplate restTemplate,
+                        @Value("${apiEndpointUrl}") String apiEndpointUrl) {
     this.restTemplate = restTemplate;
     this.restTemplate.getMessageConverters()
         .add(0, new StringHttpMessageConverter(Charset.forName("UTF-8")));

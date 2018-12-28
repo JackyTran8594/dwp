@@ -1,6 +1,6 @@
 package com.wsplanning.webapp.controllers;
 
-import com.wsplanning.webapp.clients.MechanicClient;
+import com.wsplanning.webapp.clients.EmployeesClient;
 import com.wsplanning.webapp.utils.Utils;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -21,7 +21,7 @@ public class MechanicController extends BaseController {
   private Logger logger = LoggerFactory.getLogger(MechanicController.class);
 
   @Autowired
-  protected MechanicClient mechanicClient;
+  protected EmployeesClient mechanicClient;
 
   @Autowired
   protected HttpSession session;

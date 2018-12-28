@@ -67,7 +67,7 @@ public class UmpAuthSuccessHandler extends SavedRequestAwareAuthenticationSucces
             }
         } else {
             System.out.printf("session == null: ");
-            httpServletResponse.sendRedirect("/mechanic/");
+            httpServletResponse.sendRedirect("/");
         }
     }
 }

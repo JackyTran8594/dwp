@@ -1,3 +1,12 @@
+.Late{
+  background-color: yellow;
+  color: black;
+}
+.Arrived{
+  background-color: yellow;
+  color: red;
+}
+
 .navigation li .active {
   background-color: rgba(0, 0, 0, .1);
   color: #fff;

@@ -17,6 +17,18 @@
                     <i class="icon-plus3 text-indigo-400"></i><span>{{ 'btnAdd' | translate }}</span>
                 </a>
 
+                <a class="btn btn-link btn-float has-text text-size-small" ng-click="$ctrl.open('full',{})">
+                    <i class="icon-plus3 text-indigo-400"></i><span>{{ 'btnAddWO' | translate }}</span>
+                </a>
+
+                <a class="btn btn-link btn-float has-text text-size-small" ng-click="$ctrl.open('full',{})">
+                    <i class="icon-plus3 text-indigo-400"></i><span>{{ 'btnAddOffer' | translate }}</span>
+                </a>
+
+                <a class="btn btn-link btn-float has-text text-size-small" ng-click="$ctrl.open('full',{})">
+                    <i class="icon-plus3 text-indigo-400"></i><span>{{ 'btnAddBook' | translate }}</span>
+                </a>
+
                 <a ng-disabled="checklistTable.selected.length == 0" ng-click="$ctrl.onDeletes()"
                    class="btn btn-link btn-float has-text text-size-small">
                     <i class="icon-cross2 text-indigo-400"></i><span>{{ 'btnDelete' | translate }}</span>

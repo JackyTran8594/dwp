@@ -82,6 +82,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         JSONObject userInfo = new JSONObject(loginResponse);
         String Token = userInfo.optString("Token","");
         if (Token != null && !StringUtils.isBlank(Token)) {
+          System.out.println("------Token: " + Token);
           loginSuccess = true;
           session.setAttribute(SESSION_TOKEN, Token);
         }

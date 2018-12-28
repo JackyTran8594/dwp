@@ -71,7 +71,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Bean
   public AuthenticationSuccessHandler successHandler() {
     System.out.printf("AuthenticationSuccessHandler successHandler");
-    UmpAuthSuccessHandler successHandler = new UmpAuthSuccessHandler("/mechanic/");
+    UmpAuthSuccessHandler successHandler = new UmpAuthSuccessHandler("/");
     return successHandler;
   }
 }

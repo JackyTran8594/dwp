@@ -8,6 +8,9 @@ var translationsEN = {
 
   //common
   btnAdd: "Add",
+  btnAddWO: "+WO",
+  btnAddOffer: "+Offer",
+  btnAddBook: "+Booking",
   btnDelete: "Delete",
   btnRefresh: "Refresh",
   btnMore: "More",
@@ -75,8 +78,40 @@ var translationsEN = {
 
 var translationsVI = {
   workOrderTitle: "WorkOrder Management",
+  todayWorkTitle: "Today Work Management",
+  //breadcrumb
   breadcrumbHome: "Home",
   breadcrumbWorkOrder: "WorkOrder",
+  breadcrumbTodayWork: "Today Work",
+
+  //common
+  btnAdd: "Thêm mới",
+  btnAddWO: "+WO",
+  btnAddOffer: "+Offer",
+  btnAddBook: "+Booking",
+  btnDelete: "Xóa",
+  btnRefresh: "Tải lại",
+  btnMore: "More",
+  btnEdit: "Edit",
+  btnAction: "Action",
+  commonNoResult: "No Results Found",
+  btnDeleteItem: "Delete this item",
+  btnEditItem: "Edit this item",
+  item: "item",
+  page: "page",
+  go: "Go",
+  limit: "Limit",
+  btnClose: "Close",
+  btnOk: "Ok",
+  btnSave: "Save",
+  btnCancel: "Cancel",
+
+  //Confirm delete
+  confirmDeleteWorkOder: "Are you want to delete this WorkOder?",
+  confirmDeletesWorkOder: "Are you want to delete selected WorkOder?",
+
+  //Form
+  mechanicDeptId: "DeptId",
 
   accessDenied: 'Access Denied',
   actionError: 'Action is error.',
@@ -129,6 +164,6 @@ UserWebApp.config(['$translateProvider', function ($translateProvider) {
   currentLang = currentLang && currentLang !== '' ? currentLang : 'en';
 
   // Set language
-  $translateProvider.fallbackLanguage(currentLang);
+  $translateProvider.fallbackLanguage("en");
   $translateProvider.preferredLanguage(currentLang);
 }]);

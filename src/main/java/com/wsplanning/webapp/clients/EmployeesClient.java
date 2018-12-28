@@ -18,15 +18,15 @@ import java.util.Map;
  * Created by ThuyetLV
  */
 @Component
-public class MechanicClient {
+public class EmployeesClient {
 
   private RestTemplate restTemplate;
   private String endpointUrl;
   private HttpSession session;
 
   @Autowired
-  public MechanicClient(RestTemplate restTemplate,
-                        @Value("${apiEndpointUrl}") String apiEndpointUrl) {
+  public EmployeesClient(RestTemplate restTemplate,
+                         @Value("${apiEndpointUrl}") String apiEndpointUrl) {
     this.restTemplate = restTemplate;
     this.restTemplate.getMessageConverters()
         .add(0, new StringHttpMessageConverter(Charset.forName("UTF-8")));
