@@ -118,16 +118,16 @@
             <ul class="nav navbar-nav">
                 <li style="display: none"><span class="currentLang" id="currentLang" th:data-currentLang="${#locale}"></span></li>
                 <li class="dropdown language-switch hidden-sm">
-                    <a class="dropdown-toggle legitRipple" data-toggle="dropdown" aria-expanded="false"><img
-                            th:src="#{locale.current.flag}" th:alt="#{locale.current.name}" class="position-left"><span
-                            th:text="#{locale.current.name}"></span> <i class="caret"></i></a>
+                    <a class="dropdown-toggle legitRipple" data-toggle="dropdown" aria-expanded="false">
+                        <img ng-src="{{currFlag}}" alt="{{currName}}" class="position-left">
+                        <span>{{currName}}</span> <i class="caret"></i>
+                    </a>
 
                     <ul class="dropdown-menu" id="dropDownLang">
-
-                        <li th:class="${#strings.equals(#locale, 'en')} ? 'active' : ''"><a class="english" href="?lang=en"><img
-                                src="/assets/images/flags/us.png" alt=""> <span th:text="#{locale.name.en}"></span></a></li>
-                        <li th:class="${#strings.equals(#locale, 'vi')} ? 'active' : ''"><a class="vietnam" href="?lang=vi"><img
-                                src="/assets/images/flags/vn.png" alt=""> <span th:text="#{locale.name.vi}"></span></a></li>
+                        <li ng-repeat="item in lstLang" class="{{item.class}}">
+                            <a ng-click="changeLang(item.lang)">
+                                <img ng-src="/assets/images/flags/{{item.Flag}}" alt="{{item.Name}}"> <span>{{item.Name}}</span></a>
+                        </li>
                     </ul>
                 </li>
 
@@ -135,12 +135,12 @@
                 <li class="dropdown dropdown-user">
                     <a class="dropdown-toggle" data-toggle="dropdown">
                         <img src="/assets/images/placeholder.jpg" alt="">
-                        <span th:text="${session.username}"></span>
+                        <span th:text="${session.userSmanID}"></span>
                         <i class="caret"></i>
                     </a>
 
                     <ul class="dropdown-menu dropdown-menu-right">
-                        <li><a th:href="${'/user-information/' + session.username}"><i class="icon-user"></i> <span
+                        <li><a th:href="${'/user-information/' + session.userSmanID}"><i class="icon-user"></i> <span
                                 th:text="#{layout.navbar.userInformation}"></span> </a></li>
                         <li><a href="/logout"><i class="icon-switch2"></i> <span th:text="#{layout.navbar.logout}"></span>
                         </a></li>
@@ -248,32 +248,35 @@
     <script type="text/javascript">
       $(document).ready(function () {
         console.log("------navbar ready------");
-        $.ajax({
-          type: 'GET',
-          url: '/language/getAll',
-          dataType: 'json',
-          success: function(responseData, textStatus, jqXHR) {
-            var currentLang = $("#currentLang").attr('data-currentLang');
-            var option = "";
-            $('#dropDownLang').html("");
-            var options = "";
-            $.each(responseData, function (i, item) {
-              var CultureInfo = item.CultureInfo;
-              var tmp = CultureInfo.split("-");
-              if(tmp[0] == currentLang){
-                options+= "<li class=\"active\"><a class=\"english\" href=\"?lang=" + tmp[0] + "\"><img src=\"/assets/images/flags/" + item.Flag.toLowerCase() + "\"><span>" + item.Name + "</span></a></li>";
-              }else{
-                options+= "<li><a class=\"english\" href=\"?lang=" + tmp[0] + "\"><img src=\"/assets/images/flags/" + item.Flag.toLowerCase() + "\"><span>" + item.Name + "</span></a></li>";
-              }
 
-            });
-            $('#dropDownLang').html(options);
-          },
-          error: function (responseData, textStatus, errorThrown) {
-            console.log(responseData);
-            console.log(errorThrown);
-          }
-        });
+//        $.ajax({
+//          type: 'GET',
+//          url: '/language/getAll',
+//          dataType: 'json',
+//          success: function(responseData, textStatus, jqXHR) {
+//            var currentLang = $("#currentLang").attr('data-currentLang');
+//            var option = "";
+//            $('#dropDownLang').html("");
+//            var options = "";
+//            $.each(responseData, function (i, item) {
+//              var CultureInfo = item.CultureInfo;
+//              var tmp = CultureInfo.split("-");
+//              if(tmp[0] == currentLang){
+//                $("#currentLang").html(item.Name);
+//                options+= "<li class=\"active\"><a class=\"english\"><img src=\"/assets/images/flags/" + item.Flag.toLowerCase() + "\"><span>" + item.Name + "</span></a></li>";
+//              }else{
+//                options+= "<li ng-click=\"changeLang('en')\"><a class=\"english\" ng-click=\"changeLang('" + tmp[0] + "')\"><img src=\"/assets/images/flags/" + item.Flag.toLowerCase() + "\"><span>" + item.Name + "</span></a></li>";
+//              }
+//
+//            });
+//            $('#dropDownLang').html(options);
+//          },
+//          error: function (responseData, textStatus, errorThrown) {
+//            console.log(responseData);
+//            console.log(errorThrown);
+//          }
+//        });
+
       });
     </script>
 

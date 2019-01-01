@@ -1,25 +1,35 @@
 UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
-  $urlRouterProvider.otherwise('/');
+  // $urlRouterProvider.otherwise('/');
+
+  $urlRouterProvider.otherwise(function ($rootScope, $injector, $location) {
+    var lang = $("#currentLang").attr('data-currentLang');
+    return "/" + lang + "/workorder";
+  });
 
   console.log("------$urlRouterProvider-----");
   $stateProvider
 
   // HOME STATES AND NESTED VIEWS ========================================
-    .state('main', {
+    .state('app', {
+      abstract: true,
+      url: '/{locale}'
+    })
+
+    .state('app.main', {
       url: '/',
       // templateUrl: '/pages/index.html'
       templateUrl: '/wsplanning/templates/index.html'
     })
 
     // nested list with custom controller
-    .state('main.workorder', {
+    .state('app.main.workorder', {
       url: 'workorder',
       controller: "WorkOrderCtrl as $ctrl",
       templateUrl: '/wsplanning/templates/pages/workOrder/index.html'
     })
 
-    .state('main.todaywork', {
+    .state('app.main.todaywork', {
       url: 'todaywork',
       controller: "TodayWorkOrderCtrl as $ctrl",
       templateUrl: '/wsplanning/templates/pages/todaywork/index.html'

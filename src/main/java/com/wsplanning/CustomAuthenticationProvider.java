@@ -1,5 +1,6 @@
 package com.wsplanning;
 
+import com.google.gson.JsonObject;
 import com.wsplanning.webapp.clients.AuthClient;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
@@ -27,6 +28,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
   public static final String SESSION_LANG = "SESSION_LANG";
   public static final String SESSION_SITEID = "SESSION_SITEID";
   public static final String SESSION_TOKEN = "SESSION_TOKEN";
+  public static final String SESSION_SMANID = "userSmanID";
 
   public CustomAuthenticationProvider() {
     logger.info("*** CustomAuthenticationProvider created");
@@ -80,15 +82,20 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
       String loginResponse = authClient.login(siteId, language, authentication.getName(), (String) authentication.getCredentials());
       if (loginResponse != null && !StringUtils.isBlank(loginResponse)) {
         JSONObject userInfo = new JSONObject(loginResponse);
-        String Token = userInfo.optString("Token","");
+        String Token = userInfo.optString("Token", "");
         if (Token != null && !StringUtils.isBlank(Token)) {
+          JSONObject EmployeeData = userInfo.optJSONObject("EmployeeData");
+
+          if (EmployeeData != null) {
+            session.setAttribute(SESSION_SMANID, EmployeeData.optString("SmanId", ""));
+          }
           System.out.println("------Token: " + Token);
           loginSuccess = true;
           session.setAttribute(SESSION_TOKEN, Token);
         }
       }
-    }catch (Exception ex){
-      logger.error("ERROR authenticate: ",ex);
+    } catch (Exception ex) {
+      logger.error("ERROR authenticate: ", ex);
     }
 
     if (loginSuccess) {

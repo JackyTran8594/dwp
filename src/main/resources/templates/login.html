@@ -33,6 +33,7 @@
 
     <script type="text/javascript" src="assets/js/core/app.js"></script>
     <script type="text/javascript" src="assets/js/pages/login.js"></script>
+    <script type="text/javascript" src="assets/js/pages/myLogin.js"></script>
 
 
     <script type="text/javascript" src="assets/js/plugins/ui/ripple.min.js"></script>
@@ -76,7 +77,8 @@
             <form th:action="@{/login}" class="formValidate" method="POST" id="frmLogin">
                 <div class="panel panel-body login-form">
                     <div class="text-center">
-                        <img src="/assets/images/Cael_logo.png" alt="Digital Workshop Planner" style="width: 50%;"/>
+                        <img src="/assets/images/flags/Switzerland.png" alt="Digital Workshop Planner" style="width: 50%;"/>
+                        <!--<img src="/assets/images/Cael_logo.png" alt="Digital Workshop Planner" style="width: 50%;"/>-->
                         <!--<div class="icon-object border-primary-400 text-primary-400"><i class="icon-people"></i></div>-->
                         <h5 class="content-group-lg"> Digital Workshop Planner
                             <small class="display-block">Login to your account</small>
@@ -164,58 +166,12 @@
 
 <script type="text/javascript">
   $(document).ready(function () {
-    $.ajax({
-      type: 'GET',
-      url: '/site/getAll',
-      dataType: 'json',
-      success: function(responseData, textStatus, jqXHR) {
-        $.each(responseData, function (i, item) {
-          $('#siteId').append($('<option>', {
-            value: item.Id,
-            text : item.Name
-          }));
-        });
-      },
-      error: function (responseData, textStatus, errorThrown) {
-        console.log(responseData);
-        console.log(errorThrown);
-      }
-    });
+    loadSite();
 
-    $.ajax({
-      type: 'GET',
-      url: '/language/getAll',
-      dataType: 'json',
-      success: function(responseData, textStatus, jqXHR) {
-        var option = "";
-        $('#language').html("");
-        $.each(responseData, function (i, item) {
-          var CultureInfo = item.CultureInfo;
-          var tmp = CultureInfo.split("-");
-          option = "";
-          option+= "<option value=\"" + tmp[0] + "\" data-thumbnail=\"/assets/images/flags/" + item.Flag.toLowerCase() + "\">" + item.Name + "</option>";
-          $('#language').append(option);
-        });
-      },
-      error: function (responseData, textStatus, errorThrown) {
-        console.log(responseData);
-        console.log(errorThrown);
-      }
-    });
+    loadLang();
   });
 
-  function checkSubmit(e){
-    if (e.keyCode == 13) {
-      onLogin();
-    }
-  }
 
-  function onLogin() {
-    if ($("#frmLogin").valid()) {
-      common.btnLoading($("#btnLogin"), true);
-      $("#frmLogin").submit();
-    }
-  }
 </script>
 </body>
 </html>

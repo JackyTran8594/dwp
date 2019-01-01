@@ -10,8 +10,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.LocaleResolver;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Locale;
+import java.util.Map;
 
 @Controller
 public class CommonController extends BaseController {
@@ -25,6 +30,9 @@ public class CommonController extends BaseController {
 
   @Autowired
   HttpSession httpSession;
+
+  @Autowired
+  private LocaleResolver localeResolver;
 
   @GetMapping("/site/getAll")
   public ResponseEntity getAll() {
@@ -50,7 +58,7 @@ public class CommonController extends BaseController {
       String CultureInfo = "";
       String Flag = "";
       String keyItem = "";
-      for (int i=0; i < jsonArray.length(); i++) {
+      for (int i = 0; i < jsonArray.length(); i++) {
         IsDefault = 0;
         CultureInfo = "";
         Flag = "";
@@ -59,14 +67,14 @@ public class CommonController extends BaseController {
         itemLang = new JSONObject();
         jsonObj = jsonArray.getJSONObject(i);
         Items = jsonObj.getJSONArray("Items");
-        for (int j=0; j < Items.length(); j++) {
+        for (int j = 0; j < Items.length(); j++) {
           itemObj = Items.getJSONObject(j);
           keyItem = itemObj.getString("Id");
-          if("IsDefault".equalsIgnoreCase(keyItem)){
+          if ("IsDefault".equalsIgnoreCase(keyItem)) {
             IsDefault = itemObj.getInt("Value");
-          }else if("CultureInfo".equalsIgnoreCase(keyItem)){
+          } else if ("CultureInfo".equalsIgnoreCase(keyItem)) {
             CultureInfo = itemObj.getString("Value");
-          }else if("Flag".equalsIgnoreCase(keyItem)){
+          } else if ("Flag".equalsIgnoreCase(keyItem)) {
             Flag = itemObj.getString("Value");
           }
         }
@@ -82,4 +90,20 @@ public class CommonController extends BaseController {
       return parseException(ex);
     }
   }
+
+
+  @PostMapping("/language")
+  @ResponseBody
+  public ResponseEntity getWO(@RequestBody Map<String, String> params, HttpServletRequest request,
+                              HttpServletResponse response) {
+    try {
+      String lang = params.get("lang");
+      Locale userLocale = Locale.forLanguageTag(lang);
+      localeResolver.setLocale(request, response, userLocale);
+      return new ResponseEntity<>(HttpStatus.OK);
+    } catch (Exception ex) {
+      return parseException(ex);
+    }
+  }
+
 }

@@ -55,6 +55,7 @@
     <!-- Angular JS files -->
     <script type="text/javascript" src="/assets/js/core/libraries/angularjs/angular.min.js"></script>
     <script type="text/javascript" src="/assets/js/core/libraries/angularjs/angular-ui-router.js"></script>
+    <script type="text/javascript" src="/assets/js/core/libraries/angularjs/angular-cookies.min.js"></script>
     <script type="text/javascript" src="/assets/js/core/libraries/angularjs/angular-sanitize.min.js"></script>
     <script type="text/javascript" src="/assets/js/core/libraries/angularjs/ui-bootstrap-tpls-2.5.0.min.js"></script>
     <script type="text/javascript" src="/assets/js/core/libraries/angularjs/checklist-model.js"></script>
@@ -87,12 +88,13 @@
     <script type="text/javascript" src="/wsplanning/app.route.js"></script>
 
     <!--JS-->
+    <script type="text/javascript" src="/wsplanning/js/app.controller.js"></script>
     <script type="text/javascript" src="/wsplanning/js/workorder.controller.js"></script>
     <script type="text/javascript" src="/wsplanning/js/workorder.modal.controller.js"></script>
     <script type="text/javascript" src="/wsplanning/js/todaywork/todaywork.controller.js"></script>
     <script type="text/javascript" src="/wsplanning/js/todaywork/todaywork.modal.controller.js"></script>
 </head>
-<body class="navbar-bottom sidebar-xs">
+<body class="navbar-bottom sidebar-xs" ng-controller="appCtrl">
 <div class="preloader" id="preloader1">
     <hr/>
     <hr/>

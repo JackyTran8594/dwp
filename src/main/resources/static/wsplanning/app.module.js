@@ -8,10 +8,25 @@ var UserWebApp = angular.module('UserWebApp', [
   'ivh.treeview',
   'ui.bootstrap.datetimepicker',
   'ui.select',
-  'ui.router'
+  'ui.router',
+  'ngCookies'
 ]);
 
-UserWebApp.run(['uiSelect2Config', '$translate', function (uiSelect2Config, $translate) {
+
+UserWebApp.run(['$rootScope', 'uiSelect2Config', '$translate', function ($rootScope, uiSelect2Config, $translate) {
+
+
+  $rootScope.$on('stateChangeStart', function (event, toState, toParams, fromState, fromParams, options) {
+    console.log("root change stateChangeStart");
+  });
+
+  $rootScope.$on('stateChangeSuccess', function (event, toState, toParams, fromState, fromParams, options) {
+    console.log("root change stateChangeSuccess");
+    if (toParams.lang && $translate.use() !== toParams.lang) {
+      $translate.use(toParams.lang);
+    }
+  });
+
   uiSelect2Config.placeholder = $translate.instant('placeholderSelect');
 
   $('.select2').select2({
@@ -42,4 +57,34 @@ UserWebApp.run(['uiSelect2Config', '$translate', function (uiSelect2Config, $tra
     max: jQuery.validator.format($translate.instant('validatorMax')),
     min: jQuery.validator.format($translate.instant('validatorMin')),
   });
-}]);
+}])
+  .run(function ($rootScope, $location, $state, $stateParams, $transitions, $translate, HttpService) {
+
+    $transitions.onStart({}, function (trans) {
+      console.log("statechange start " + trans._targetState._params.locale);
+    });
+
+    $transitions.onSuccess({}, function (trans) {
+      console.log("statechange onSuccess " + trans._targetState._params.locale);
+      var newLange = trans._targetState._params.locale;
+      //Set language
+      if ($translate.use() !== newLange) {
+
+        //Set Lang
+        HttpService.postData('/language', {"lang": newLange}).then(function (response) {
+          console.log(response);
+          $translate.use(newLange);
+
+          $rootScope.$broadcast("changeLanguage", {
+            lang: newLange
+          });
+          common.spinner(false);
+        }, function error(response) {
+          console.error(response);
+          common.spinner(false);
+        });
+      }
+    });
+
+  })
+;
