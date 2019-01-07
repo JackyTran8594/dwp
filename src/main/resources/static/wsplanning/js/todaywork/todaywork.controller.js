@@ -1,5 +1,4 @@
 UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope, HttpService, $translate, $location, $filter, $uibModal) {
-
   $scope.lstAllData = [];
   $scope.lstData = [];
   $scope.lstSearch = [];
@@ -10,21 +9,11 @@ UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope, HttpSe
   $scope.limit = 20;
   $scope.page = 1;
 
-  $scope.checklistTable = {
-    selected: [],
-    checkAll: false
-  };
-
   function reset() {
     $scope.params = [];
     $scope.searchValue = '';
     $scope.limit = 20;
     $scope.page = 1;
-
-    $scope.checklistTable = {
-      selected: [],
-      checkAll: false
-    };
   }
 
   function loadData() {
@@ -134,12 +123,6 @@ UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope, HttpSe
     $scope.page = '1';
     $scope.name = '';
 
-    $scope.checklistTable = {
-      selected: [],
-      checkAll: false
-    };
-
-
     loadData();
     common.btnLoading($('.btnRefresh'), true);
     setTimeout(function () {
@@ -156,62 +139,6 @@ UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope, HttpSe
     $('#modalFrm').modal('show');
     $rootScope.$broadcast("modalFrm", {"item": angular.copy(item, {})});
   }
-
-  $scope.multi = false;
-  $scope.onDeletes = function () {
-    $scope.multi = true;
-    $scope.deleteList = [];
-    $scope.deleteList = $scope.checklistTable.selected;
-    $('.modalDelete').modal('show');
-  };
-
-  $scope.onDelete = function (id) {
-    $scope.multi = false;
-    $scope.deleteList = [];
-    $scope.deleteList.push(id);
-    $('.modalDelete').modal('show');
-  };
-
-  $scope.onDeleteConfirm = function () {
-    common.spinner(true);
-    var param = {
-      "ids": $scope.deleteList.join(",")
-    };
-    console.log($scope.param1);
-    HttpService.postData('/mechanic/delete', param).then(function (data) {
-      $('.modalDelete').modal('hide');
-      $scope.checklistTable.selected = [];
-      loadData();
-      common.notifySuccess($translate.instant('deleteSuccessfully'));
-      common.spinner(false);
-    }, function error(response) {
-      console.log(response);
-      common.spinner(false);
-      common.notifyError($translate.instant('deleteError'));
-    });
-  };
-
-  $scope.onCheckbox = function () {
-    if ($scope.checklistTable.checkAll) {
-      $scope.checklistTable.selected = $scope.lstData.map(function (_item) {
-        return _item.id;
-      });
-    } else {
-      $scope.checklistTable.selected = [];
-    }
-  };
-
-  $scope.$watch('checklistTable.selected', function (_newValue, _oldValue) {
-    if (_newValue !== _oldValue) {
-      // Update check box all status
-      var element = $('.checkAllTable');
-      var listChecked = $scope.checklistTable.selected;
-      var list = $scope.lstData.map(function (_item) {
-        return _item.id;
-      });
-      $scope.checklistTable.checkAll = common.updateCheckBoxAllStatus(element, listChecked, list);
-    }
-  }, true);
 
   $scope.$watch('params.page', function (_newValue, _oldValue) {
     // console.log('_oldValue : '+_oldValue);
@@ -249,12 +176,14 @@ UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope, HttpSe
     }
 
     if (HolderCustomer) {
-      html += HolderCustomer.CustomerName + ", " + HolderCustomer.Tel1 + " " + HolderCustomer.Email + " <br />";
+      // html += HolderCustomer.CustomerName + ", " + HolderCustomer.Tel1 + " " + HolderCustomer.Email + " <br />";
+      html += HolderCustomer.LName + " " + HolderCustomer.FName + ", " + HolderCustomer.Tel1 + " " + HolderCustomer.Email + " <br />";
     } else {
-      html += WOCustomer.CustomerName + ", " + WOCustomer.Tel1 + " " + WOCustomer.Email + " <br />";
+      // html += WOCustomer.CustomerName + ", " + WOCustomer.Tel1 + " " + WOCustomer.Email + " <br />";
+      html += WOCustomer.LName + " " + WOCustomer.FName + ", " + WOCustomer.Tel1 + " " + WOCustomer.Email + " <br />";
     }
 
-    html += item.TimeBarText;
+    html += item.JobTitle;
     return html;
   }
 

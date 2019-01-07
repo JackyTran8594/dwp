@@ -8,40 +8,11 @@
 <!-- Main sidebar -->
 <div th:fragment="sitebar" class="sidebar sidebar-main">
     <div class="sidebar-content">
-
-        <!-- User menu -->
-        <div class="sidebar-user-material">
-            <div class="category-content">
-                <div class="sidebar-user-material-content">
-                    <a href="#"><img src="/assets/images/placeholders/placeholder.jpg" class="img-circle img-responsive" alt=""></a>
-                    <h6><span th:text="${session.username}"></span></h6>
-                    <!--<span class="text-size-small">Santa Ana, CA</span>-->
-                </div>
-
-                <div class="sidebar-user-material-menu">
-                    <a href="#user-nav" data-toggle="collapse"><span  th:text="#{menu.myaccount}"></span> <i class="caret"></i></a>
-                </div>
-            </div>
-
-            <div class="navigation-wrapper collapse" id="user-nav">
-                <ul class="navigation">
-                    <li><a href="#"><i class="icon-user-plus"></i> <span  th:text="#{menu.myprofile}"></span></a></li>
-                    <li><a href="#"><i class="icon-coins"></i> <span  th:text="#{menu.mybalance}"></span></a></li>
-                    <li><a href="#"><i class="icon-comment-discussion"></i> <span th:text="#{messages}"></span></a></li>
-                    <li class="divider"></li>
-                    <li><a href="#"><i class="icon-cog5"></i> <span  th:text="#{menu.mysetting}"></span></a></li>
-                    <li><a href="#"><i class="icon-switch2"></i> <span  th:text="#{logout}"></span></a></li>
-                </ul>
-            </div>
-        </div>
-        <!-- /user menu -->
-
-
         <!-- Main navigation -->
         <div class="sidebar-category sidebar-category-visible">
             <div class="category-content no-padding">
                 <ul class="navigation navigation-main navigation-accordion">
-                    <li ui-sref-active="active"><a ng-click="workorders()"><i class="icon-list-unordered"></i> <span th:text="#{menu.workorders}"></span> <span class="label bg-blue-400">2.0</span></span></a></li>
+                    <li ui-sref-active="active"><a ng-click="workorders()"><i class="icon-list-unordered"></i> <span th:text="#{menu.workorders}"></span></a></li>
                     <li ui-sref-active="active"><a ng-click="todayWork()" ><i class="icon icon-newspaper"></i> <span th:text="#{menu.todayWork}"></span></a></li>
                     <li><a href="/"><i class="icon icon-cart"></i> <span th:text="#{menu.allWork}"></span></a></li>
                     <li><a href="/"><i class="icon icon-hammer2"></i> <span th:text="#{menu.workMOT}"></span></a></li>

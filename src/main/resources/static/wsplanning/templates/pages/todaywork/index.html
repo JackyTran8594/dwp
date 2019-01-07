@@ -10,54 +10,43 @@
         <!-- Main content -->
         <div class="content-wrapper">
 
-            <!-- Panel search -->
-            <div ng-include="'/wsplanning/templates/pages/todaywork/panel-search.html'"></div>
-            <!-- /panel search -->
+            <!--SEARCH-->
+            <div class="well well-sm">
+                <form class="form-horizontal form-search row">
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label col-md-4">Name</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" ng-model="searchValue" placeholder="Search name"
+                                       code="13" dl-key-code="doSearch();">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <button type="button" ng-click="doSearch()" class="btn btn-icon btn-default"><i
+                                class="icon-search4"></i></button>
+                    </div>
+
+                </form>
+            </div>
+            <!--SEARCH-->
 
             <!-- Panel content -->
-            <div class="panel panel-flat">
+            <div class="panel panel-flat" style="margin-bottom: 0px;">
                 <div class="table-responsive">
-                    <table class="table table-striped table-hover"
-                           style="margin-top: 20px">
-                        <!--HEADER-->
-                        <thead>
-                        <tr>
-                            <th nowrap style="padding-right: 0px; width: 80px">
-                                <input type="checkbox" class="checkAllTable" ng-change="onCheckbox()"
-                                       ng-model="checklistTable.checkAll">
-                            </th>
-                            <th>Left</th>
-                            <th>Right</th>
-                            <th style="width: 100px;" class="text-right">{{ 'btnAction' | translate }}</th>
-                        </tr>
-                        </thead>
+                    <table class="table table-striped table-hover">
 
                         <!--BODY-->
                         <tbody>
                         <tr ng-repeat="item in lstData">
-                            <td><input type="checkbox" checklist-model="checklistTable.selected"
-                                       checklist-value="item.id"></td>
-                            <td>
+                            <td style="width: 20%;">
                                 {{item.ServiceDate | utcToLocal:'dd.MM.yy - hh.mm a'}}<br/>
                                 <span class="{{item.WorkOrderStatus| titleCase}}">{{item.WorkOrderStatus}}<br/></span>
                                 {{item.WorkOrderNo}}<br/>
                             </td>
-                            <td ng-bind-html="showLeftCol(item)">
-                            </td>
-                            <td class="text-right text-nowrap">
-                                <ul class="icons-list">
-                                    <li>
-                                        <a ng-click="editItem(item)" title="{{ 'btnEditItem' | translate }}">
-                                            <span class="icon-pencil7"></span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a ng-click="onDelete(item.id)" title="{{ 'btnDeleteItem' | translate }}">
-                                            <span class="icon-trash"></span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </td>
+                            <td ng-bind-html="showLeftCol(item)"></td>
                         </tr>
                         <tr ng-if="isNoData || !lstData || lstData.length <= 0" class="active">
                             <td colspan="20" class="text-center">{{ 'commonNoResult' | translate }}</td>
@@ -66,7 +55,7 @@
                     </table>
                 </div>
 
-                <div class="panel-footer text-right">
+                <div class="panel-footer text-right" style="padding-right: 25px;">
 
                     <!-- Paging elements -->
                     <form class="form-inline formPaging formValidate">

@@ -32,7 +32,7 @@ function loadLang() {
     dataType: 'json',
     success: function (responseData, textStatus, jqXHR) {
       var option = "";
-      $('#language').html("");
+      //$('#language').html("");
       $.each(responseData, function (i, item) {
         var CultureInfo = item.CultureInfo;
         var tmp = CultureInfo.split("-");

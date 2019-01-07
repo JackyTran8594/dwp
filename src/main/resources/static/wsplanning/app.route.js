@@ -4,7 +4,7 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
 
   $urlRouterProvider.otherwise(function ($rootScope, $injector, $location) {
     var lang = $("#currentLang").attr('data-currentLang');
-    return "/" + lang + "/workorder";
+    return "/" + lang + "/todaywork";
   });
 
   console.log("------$urlRouterProvider-----");
