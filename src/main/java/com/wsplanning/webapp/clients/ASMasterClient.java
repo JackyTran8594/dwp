@@ -39,4 +39,41 @@ public class ASMasterClient {
     String url = String.format("%s?command=getLanguages", this.endpointUrl);
     return restTemplate.getForObject(url, String.class);
   }
+
+  //getTransactionTypes&amp;param1=[site_id]
+
+  public String getTransactionTypes(String siteId) {
+    String url = String.format("%s?command=getTransactionTypes&param1=%s", this.endpointUrl,siteId);
+    return restTemplate.getForObject(url, String.class);
+  }
+
+  public String getDepartments(String siteId) {
+    String url = String.format("%s?command=getDepartments&param1=%s", this.endpointUrl,siteId);
+    return restTemplate.getForObject(url, String.class);
+  }
+
+  public String getJobTypes(String siteId) {
+    String url = String.format("%s?command=getJobTypes&param1=%s", this.endpointUrl,siteId);
+    return restTemplate.getForObject(url, String.class);
+  }
+
+  public String getJobCats(String siteId) {
+    String url = String.format("%s?command=getJobCats&param1=%s", this.endpointUrl,siteId);
+    return restTemplate.getForObject(url, String.class);
+  }
+
+  public String getPayers(String siteId) {
+    String url = String.format("%s?command=getPayers&param1=%s", this.endpointUrl,siteId);
+    return restTemplate.getForObject(url, String.class);
+  }
+
+  public String getShifts(String siteId) {
+    String url = String.format("%s?command=getShifts&param1=%s", this.endpointUrl,siteId);
+    return restTemplate.getForObject(url, String.class);
+  }
+
+  public String getVisitReasons(String siteId) {
+    String url = String.format("%s?command=getVisitReasons&param1=%s", this.endpointUrl,siteId);
+    return restTemplate.getForObject(url, String.class);
+  }
 }

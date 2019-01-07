@@ -8,10 +8,12 @@ UserWebApp.controller('appCtrl', function ($scope, $rootScope, HttpService, $tra
   console.log("--------appCtrl $rootScope.lang: " + $rootScope.lang);
 
   $scope.workorders = function () {
+    $(".toggleSitebar").click();
     $state.go('app.main.workorder', {locale: $rootScope.lang});
   }
 
   $scope.todayWork = function () {
+    $(".toggleSitebar").click();
     $state.go('app.main.todaywork', {locale: $rootScope.lang});
   }
 

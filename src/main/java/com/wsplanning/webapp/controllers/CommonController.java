@@ -1,6 +1,7 @@
 package com.wsplanning.webapp.controllers;
 
 import com.wsplanning.webapp.clients.ASMasterClient;
+import com.wsplanning.webapp.clients.StampingClient;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -24,6 +25,9 @@ public class CommonController extends BaseController {
 
   @Autowired
   protected ASMasterClient siteClient;
+
+  @Autowired
+  protected StampingClient stampingClient;
 
   @Autowired
   protected HttpSession session;
@@ -101,6 +105,86 @@ public class CommonController extends BaseController {
       Locale userLocale = Locale.forLanguageTag(lang);
       localeResolver.setLocale(request, response, userLocale);
       return new ResponseEntity<>(HttpStatus.OK);
+    } catch (Exception ex) {
+      return parseException(ex);
+    }
+  }
+
+  @GetMapping("/site/getTransactionTypes")
+  public ResponseEntity getTransactionTypes() {
+    try {
+      String rtn = siteClient.getTransactionTypes(getSiteId());
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception ex) {
+      return parseException(ex);
+    }
+  }
+
+  @GetMapping("/site/getDepartments")
+  public ResponseEntity getDepartments() {
+    try {
+      String rtn = siteClient.getDepartments(getSiteId());
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception ex) {
+      return parseException(ex);
+    }
+  }
+
+  @GetMapping("/site/getJobTypes")
+  public ResponseEntity getJobTypes() {
+    try {
+      String rtn = siteClient.getJobTypes(getSiteId());
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception ex) {
+      return parseException(ex);
+    }
+  }
+
+  @GetMapping("/site/getJobCats")
+  public ResponseEntity getJobCats() {
+    try {
+      String rtn = siteClient.getJobCats(getSiteId());
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception ex) {
+      return parseException(ex);
+    }
+  }
+
+  @GetMapping("/site/getPayers")
+  public ResponseEntity getPayers() {
+    try {
+      String rtn = siteClient.getPayers(getSiteId());
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception ex) {
+      return parseException(ex);
+    }
+  }
+
+  @GetMapping("/site/getShifts")
+  public ResponseEntity getShifts() {
+    try {
+      String rtn = siteClient.getShifts(getSiteId());
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception ex) {
+      return parseException(ex);
+    }
+  }
+
+  @GetMapping("/site/getVisitReasons")
+  public ResponseEntity getVisitReasons() {
+    try {
+      String rtn = siteClient.getVisitReasons(getSiteId());
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception ex) {
+      return parseException(ex);
+    }
+  }
+
+  @GetMapping("/site/getStamping")
+  public ResponseEntity getStamping() {
+    try {
+      String rtn = stampingClient.getStamping(getToken());
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);
     }

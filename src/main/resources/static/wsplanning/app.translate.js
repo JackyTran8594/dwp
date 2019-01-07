@@ -74,6 +74,11 @@ var translationsEN = {
   invalidNumberBetween: 'From value must less than to value',
   editMechanic: 'Edit mechanic',
   addMechanic: 'Add mechanic',
+  trans: 'Transaction Types',
+  department: 'Department',
+  serv: 'Serv. advisor',
+  visitReason: 'Visit reason',
+  searchWo: 'Search workorders',
 };
 
 var translationsVI = {
@@ -152,6 +157,11 @@ var translationsVI = {
   invalidNumberBetween: 'From value must less than to value',
   editMechanic: 'Edit mechanic',
   addMechanic: 'Add mechanic',
+  trans: 'Transaction Types',
+  department: 'Department',
+  serv: 'Serv. advisor',
+  visitReason: 'Visit reason',
+  searchWo: 'Search workorders',
 };
 
 UserWebApp.config(['$translateProvider', function ($translateProvider) {

@@ -14,17 +14,60 @@
             <div class="well well-sm">
                 <form class="form-horizontal form-search row">
 
-                    <div class="col-md-4">
+                    <div class="col-md-1">
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" ng-model="searchValue"
+                                   placeholder="{{ 'searchWo' | translate }}"
+                                   code="13" dl-key-code="doSearch();">
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-3">
                         <div class="form-group">
-                            <label class="control-label col-md-4">Name</label>
+                            <label class="control-label col-md-4">{{ 'trans' | translate }}</label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" ng-model="searchValue" placeholder="Search name"
-                                       code="13" dl-key-code="doSearch();">
+                                <select class="form-control" ng-model="params.trans"
+                                        ng-options="item.Id as item.Name for item in lstTrans">
+                                </select>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label col-md-4">{{ 'department' | translate }}</label>
+                            <div class="col-md-8">
+                                <select class="form-control" ng-model="params.department"
+                                        ng-options="item.Id as item.Name for item in lstDepartment">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label col-md-4">{{ 'visitReason' | translate }}</label>
+                            <div class="col-md-8">
+                                <select class="form-control" ng-model="params.visitReason"
+                                        ng-options="item.Id as item.Name for item in lstVisitReason">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label col-md-4">{{ 'serv' | translate }}</label>
+                            <div class="col-md-8">
+                                <select class="form-control" ng-model="params.serv"
+                                        ng-options="item.Id as item.Name for item in lstServ">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-1">
                         <button type="button" ng-click="doSearch()" class="btn btn-icon btn-default"><i
                                 class="icon-search4"></i></button>
                     </div>

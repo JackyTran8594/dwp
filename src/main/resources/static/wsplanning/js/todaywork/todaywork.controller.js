@@ -4,16 +4,74 @@ UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope, HttpSe
   $scope.lstSearch = [];
   $scope.totalElements = 0;
 
-  $scope.params = [];
+  $scope.params = {
+    "department": "300",
+    "trans": "W",
+    "visitReason": "03",
+    "serv":"",
+  };
   $scope.searchValue = '';
   $scope.limit = 20;
   $scope.page = 1;
 
   function reset() {
-    $scope.params = [];
+    $scope.params = {
+      "department": "300",
+      "trans": "W",
+      "visitReason": "03",
+      "serv":"",
+    };
     $scope.searchValue = '';
     $scope.limit = 20;
     $scope.page = 1;
+  }
+
+  loadCommon();
+  $scope.lstTrans = [];
+  $scope.lstDepartment = [];
+  $scope.lstServ = [];
+  $scope.lstVisitReason = [];
+  function loadCommon(){
+    $scope.lstTrans = [];
+    $scope.lstDepartment = [];
+    $scope.lstServ = [];
+    $scope.lstVisitReason = [];
+    common.spinner(true);
+
+    HttpService.getData('/site/getTransactionTypes', {}).then(function (response) {
+      console.log(response);
+      $scope.lstTrans = response;
+      common.spinner(false);
+    }, function error(response) {
+      console.log(response);
+      common.spinner(false);
+    });
+
+    HttpService.getData('/site/getDepartments', {}).then(function (response) {
+      console.log(response);
+      $scope.lstDepartment = response;
+      common.spinner(false);
+    }, function error(response) {
+      console.log(response);
+      common.spinner(false);
+    });
+
+    HttpService.getData('/site/getPayers', {}).then(function (response) {
+      console.log(response);
+      common.spinner(false);
+    }, function error(response) {
+      console.log(response);
+      common.spinner(false);
+    });
+
+    HttpService.getData('/site/getVisitReasons', {}).then(function (response) {
+      console.log(response);
+      $scope.lstVisitReason = response;
+      common.spinner(false);
+    }, function error(response) {
+      console.log(response);
+      common.spinner(false);
+    });
   }
 
   function loadData() {
