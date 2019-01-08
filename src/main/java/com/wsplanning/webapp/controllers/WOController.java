@@ -25,10 +25,11 @@ public class WOController extends BaseController {
   @Autowired
   HttpSession httpSession;
 
-  @GetMapping("/wo/test")
-  public ResponseEntity test() {
+  @PostMapping("/wo/countWO")
+  @ResponseBody
+  public ResponseEntity countWO(@RequestBody Map<String, String> params) {
     try {
-      String rtn = wokOrderClient.getWO(getToken(), getSiteId(), "unScheduledWO", "", "1","20");
+      String rtn = wokOrderClient.countWO(getToken(), getSiteId(), params);
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);
@@ -39,7 +40,7 @@ public class WOController extends BaseController {
   @ResponseBody
   public ResponseEntity getWO(@RequestBody Map<String, String> params) {
     try {
-      String rtn = wokOrderClient.getWO(getToken(), getSiteId(), params.get("ViewName"), params.get("skey"),params.get("page"),params.get("limit"));
+      String rtn = wokOrderClient.getWO(getToken(), getSiteId(), params);
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);
@@ -50,7 +51,7 @@ public class WOController extends BaseController {
   @ResponseBody
   public ResponseEntity unScheduledWO(@RequestBody Map<String, String> params) {
     try {
-      String rtn = wokOrderClient.getWO(getToken(), getSiteId(), "unScheduledWO", "","1","20");
+      String rtn = wokOrderClient.getWO(getToken(), getSiteId(), params);
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);
