@@ -88,6 +88,7 @@
                                 {{item.ServiceDate | utcToLocal:'dd.MM.yy - hh.mm a'}}<br/>
                                 <span class="{{item.WorkOrderStatus| titleCase}}">{{item.WorkOrderStatus}}<br/></span>
                                 {{item.WorkOrderNo}}<br/>
+								{{item.Mileage | number}}<br/>
                             </td>
                             <td ng-bind-html="showLeftCol(item)"></td>
                         </tr>
