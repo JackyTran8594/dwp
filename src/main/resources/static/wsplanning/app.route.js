@@ -7,7 +7,6 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
     return "/" + lang + "/todaywork";
   });
 
-  console.log("------$urlRouterProvider-----");
   $stateProvider
 
   // HOME STATES AND NESTED VIEWS ========================================
@@ -33,6 +32,13 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
       url: 'todaywork',
       controller: "TodayWorkOrderCtrl as $ctrl",
       templateUrl: '/wsplanning/templates/pages/todaywork/index.html'
+    })
+
+
+    .state('app.main.workdetail', {
+      url: 'workdetail/:type/:id/',
+      controller: "WorkDetailCtrl as $ctrl",
+      templateUrl: '/wsplanning/templates/pages/workdetail/index.html'
     })
 
   //$locationProvider.html5Mode(true);

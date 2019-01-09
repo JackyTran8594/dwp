@@ -60,15 +60,20 @@ UserWebApp.run(['$rootScope', 'uiSelect2Config', '$translate', function ($rootSc
 }])
   .run(function ($rootScope, $location, $state, $stateParams, $transitions, $translate, HttpService) {
 
-    $transitions.onStart({}, function (trans) {
-      console.log("statechange start " + trans._targetState._params.locale);
-    });
+    // $transitions.onStart({}, function (trans) {
+    //   console.log("statechange start " + trans._targetState._params.locale);
+    // });
 
     $transitions.onSuccess({}, function (trans) {
-      console.log("statechange onSuccess " + trans._targetState._params.locale);
+      var newToState = trans.$to();
+
+      $rootScope.currentState = newToState.name;
+      console.log($rootScope.currentState);
+
       var newLange = trans._targetState._params.locale;
       //Set language
-      if ($translate.use() !== newLange) {
+      if (newLange && $translate.use() !== newLange) {
+        console.log("statechange onSuccess " + newLange);
 
         //Set Lang
         HttpService.postData('/language', {"lang": newLange}).then(function (response) {

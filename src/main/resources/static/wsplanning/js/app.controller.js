@@ -1,11 +1,21 @@
-UserWebApp.controller('appCtrl', function ($scope, $rootScope, HttpService, $translate, $location, $filter, $state) {
-  console.log("--------appCtrl-------------");
+UserWebApp.controller('appCtrl', function ($scope, $rootScope, HttpService, $translate, $location, $filter, $state, CommonServices) {
+
+  CommonServices.loadData();
+
+  $rootScope.stamping = "";
+  CommonServices.getStamping().then(function(data){
+    if(data && data.StampText){
+      $rootScope.stamping = data.StampText;
+    }else{
+      $rootScope.stamping = "";
+    }
+  });
 
   $rootScope.lang = $("#currentLang").attr('data-currentLang');
   $rootScope.currLang = $rootScope.lang;
   $rootScope.currFlag = "/assets/images/flags/eng.png";
   $rootScope.currName = "English";
-  console.log("--------appCtrl $rootScope.lang: " + $rootScope.lang);
+
 
   $scope.workorders = function () {
     $(".toggleSitebar").click();
@@ -18,8 +28,6 @@ UserWebApp.controller('appCtrl', function ($scope, $rootScope, HttpService, $tra
   }
 
   $scope.changeLang = function (lang) {
-    console.log("---changeLang: " + lang);
-
     //$state.go($state.current, {locale: lang}, {reload: false});
 
     $state.transitionTo($state.current, {locale: lang}, {

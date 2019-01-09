@@ -1,0 +1,57 @@
+<div class="panel panel-flat">
+    <div class="panel-heading">
+        <h3 class="panel-title"><span style="font-weight: bold">title</span></h3>
+        <div class="heading-elements">
+            <ul class="icons-list">
+                <li><a data-action="collapse"></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <form class="form-horizontal formValidate">
+        <div class="panel-body">
+            <!--Row 1-->
+            <div class="row">
+                <!--manufacture-->
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label col-md-4">manufacturer:</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="manufacture"
+                                   ng-model="deviceInfo.manufacturer"
+                                   placeholder="manufacturer"
+                                   ng-readonly="true"/>
+                        </div>
+                    </div>
+                </div>
+
+                <!--IP Address-->
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label col-md-4"><span>ip</span>:</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="name" ng-model="deviceInfo.name"
+                                   placeholder="ip"
+                                   ng-readonly="true"/>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Slot-->
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label col-md-4"><span>slot</span>:</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="name" ng-model="deviceInfo.slot"
+                                   placeholder="slot"
+                                   ng-readonly="true"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End row 1-->
+
+            <!-- End -->
+        </div>
+    </form>
+</div>

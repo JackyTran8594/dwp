@@ -14,62 +14,103 @@
             <div class="well well-sm">
                 <form class="form-horizontal form-search row">
 
-                    <div class="col-md-2">
-                        <div class="col-md-12">
-                            <input type="text" class="form-control" ng-model="searchValue"
-                                   placeholder="{{ 'searchWo' | translate }}"
-                                   code="13" dl-key-code="doSearch();">
-                        </div>
-                    </div>
-
-
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label class="control-label col-md-4">{{ 'trans' | translate }}</label>
-                            <div class="col-md-8">
-                                <select class="form-control" ng-model="params.trans"
-                                        ng-options="item.Id as item.Name for item in lstTrans">
-                                </select>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="col-md-12">
+                                <input type="text" class="form-control" ng-model="searchValue"
+                                       placeholder="{{ 'searchWo' | translate }}"
+                                       code="13" dl-key-code="doSearch();">
                             </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label class="control-label col-md-4">{{ 'department' | translate }}</label>
-                            <div class="col-md-8">
-                                <select class="form-control" ng-model="params.department"
-                                        ng-options="item.Id as item.Name for item in lstDepartment">
-                                </select>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label col-md-4">{{ 'trans' | translate }}</label>
+                                <div class="col-md-8">
+                                    <select class="form-control" ng-model="params.trans"
+                                            ng-options="item.Id as item.Name for item in lstTrans">
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label class="control-label col-md-4">{{ 'visitReason' | translate }}</label>
-                            <div class="col-md-8">
-                                <select class="form-control" ng-model="params.visitReason"
-                                        ng-options="item.Id as item.Name for item in lstVisitReason">
-                                </select>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label col-md-4">{{ 'department' | translate }}</label>
+                                <div class="col-md-8">
+                                    <select class="form-control" ng-model="params.department"
+                                            ng-options="item.Id as item.Name for item in lstDepartment">
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label class="control-label col-md-4">{{ 'serv' | translate }}</label>
-                            <div class="col-md-8">
-                                <select class="form-control" ng-model="params.serv"
-                                        ng-options="item.Id as item.Name for item in lstServ">
-                                </select>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label col-md-4">{{ 'visitReason' | translate }}</label>
+                                <div class="col-md-8">
+                                    <select class="form-control" ng-model="params.visitReason"
+                                            ng-options="item.Id as item.Name for item in lstVisitReason">
+                                    </select>
+                                </div>
                             </div>
                         </div>
+
+
+
                     </div>
 
-                    <div class="col-md-1">
-                        <button type="button" ng-click="doSearch()" class="btn btn-icon btn-default"><i
-                                class="icon-search4"></i></button>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label col-md-4">{{ 'serv' | translate }}</label>
+                                <div class="col-md-8">
+                                    <select class="form-control" ng-model="params.serv"
+                                            ng-options="item.Id as item.Name for item in lstServ">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label col-md-4">{{ 'fromDate' | translate }}</label>
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control datepicker" id="startDate"
+                                               placeholder="Pick a date&hellip;" ng-model="params.from">
+                                        <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label col-md-4">{{ 'toDate' | translate }}</label>
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control datepicker" id="endDate"
+                                               placeholder="Pick a date&hellip;" ng-model="params.to">
+                                        <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label style="padding-top: 12px;padding-left: 10px;">
+                                    <input type="checkbox" ng-checked="params.myWo" ng-model="params.myWo">
+                                    {{ 'myWo' | translate }}
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-1">
+                            <button type="button" ng-click="doSearch()" class="btn btn-icon btn-default"><i
+                                    class="icon-search4"></i></button>
+                        </div>
                     </div>
 
                 </form>
@@ -83,12 +124,11 @@
 
                         <!--BODY-->
                         <tbody>
-                        <tr ng-repeat="item in lstData">
+                        <tr ng-repeat="item in lstData" ng-dblclick="viewDetail(item)">
                             <td style="width: 20%;">
                                 {{item.ServiceDate | utcToLocal:'dd.MM.yy - hh.mm a'}}<br/>
                                 <span class="{{item.WorkOrderStatus| titleCase}}">{{item.WorkOrderStatus}}<br/></span>
                                 {{item.WorkOrderNo}}<br/>
-								{{item.Mileage | number}}<br/>
                             </td>
                             <td ng-bind-html="showLeftCol(item)"></td>
                         </tr>
@@ -161,3 +201,20 @@
 
 </div>
 <!-- /page container -->
+
+<script type="text/javascript">
+  //              $(function () {
+  //                $('.inputDateTime').inputmask(constants.DATE_INPUT_MASK_FORMAT);
+  //              })
+
+  $(document).ready(function () {
+    $("#startDate").datepicker({
+      format: 'dd/mm/yyyy',
+      startDate: '-1d'
+    });
+    $("#endDate").datepicker({
+      format: 'dd/mm/yyyy',
+    });
+  });
+
+</script>

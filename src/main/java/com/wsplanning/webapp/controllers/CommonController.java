@@ -1,6 +1,7 @@
 package com.wsplanning.webapp.controllers;
 
 import com.wsplanning.webapp.clients.ASMasterClient;
+import com.wsplanning.webapp.clients.EmployeesClient;
 import com.wsplanning.webapp.clients.StampingClient;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -28,6 +29,9 @@ public class CommonController extends BaseController {
 
   @Autowired
   protected StampingClient stampingClient;
+
+  @Autowired
+  protected EmployeesClient employeesClient;
 
   @Autowired
   protected HttpSession session;
@@ -174,6 +178,16 @@ public class CommonController extends BaseController {
   public ResponseEntity getVisitReasons() {
     try {
       String rtn = siteClient.getVisitReasons(getSiteId());
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception ex) {
+      return parseException(ex);
+    }
+  }
+
+  @GetMapping("/site/getServiceAdvisors")
+  public ResponseEntity getServiceAdvisors() {
+    try {
+      String rtn = employeesClient.getServiceAdvisors(getSiteId());
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);

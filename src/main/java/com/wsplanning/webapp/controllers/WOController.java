@@ -57,4 +57,16 @@ public class WOController extends BaseController {
       return parseException(ex);
     }
   }
+
+  @PostMapping("/wo/detail")
+  @ResponseBody
+  public ResponseEntity detail(@RequestBody Map<String, String> params) {
+    try {
+      String rtn = wokOrderClient.detail(getToken(), getSiteId(), params);
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception ex) {
+      return parseException(ex);
+    }
+  }
+
 }

@@ -1,0 +1,62 @@
+<div class="page-header page-header-xs"  ng-controller="HeaderDetailCtrl" >
+    <div class="panel panel-flat" id="aclIpv6Extend">
+        <div class="panel-heading">
+            <h3 class="panel-title"><b>{{ 'WoHeader' | translate }}</b></h3>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li><a href="" class="btn btn-xs" ng-click="addItem()"><span class="icon-plus3"></span></a></li>
+                    <li><a href="" class="btn btn-xs" ng-click="confirmDelete()" ng-disabled="checklistTable.list.length == 0"><span class="icon-bin"></span></a></li>
+                    <li><a class="btn btn-xs" ><span class="icon-sync" ng-click="refresh()" ></span></a></li>
+                    <li><a ng-class="{'rotate-180': collapsed == true}" data-action="collapse" data-target="#pnAclIpv6Extend" ng-click="collapse()"></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="panel-body panel-collapse in" id="pnAclIpv6Extend" ng-hide="collapsed">
+            <form class="form-horizontal formValidate" name="aclIpv6ExtendFrm" id="aclIpv6ExtendFrm" >
+                <!--Row 1-->
+                <div class="row">
+
+                    <!--groupIndex-->
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label col-md-4">aclID:</label>
+
+                            <div class="col-md-8">
+                                <select class="form-control" name="groupIndex" ng-model="itemSelected.groupIndex" convert-to-number ng-required="true"
+                                        ng-options='group as group for group in lstGroup track by group'>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--ruleIndex-->
+                    <div class="col-md-4">
+                        <div class="form-group"  ng-class="{'has-error':aclIpv6ExtendFrm.ruleIndex.$invalid && (!aclIpv6ExtendFrm.ruleIndex.$pristine || aclIpv6ExtendFrm.ruleIndex.$touched)}">
+                            <label class="control-label col-md-4">ruleID:</label>
+
+                            <div class="col-md-8">
+                                <input type="number" class="form-control your_class novalidate" name="ruleIndex" ng-model="itemSelected.ruleIndex" ng-required="true"
+                                        min="1" max="128"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end row 1-->
+
+                <div class="row pull-right">
+                    <button type="button" ng-disabled="aclIpv6ExtendFrm.$invalid"
+                            id="btnSubmitFrm"
+                            class="btn btn-icon btn-primary btnSubmit"
+                            ng-click="onSubmitFrm()">
+                        <i class="icon-checkmark3"></i>{{ 'btnSave' | translate }}</span>
+                    </button>
+                    <button type="button" class="btn btn-link " data-ng-click="onCancel()">{{ 'btnCancel' | translate }}</button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+
+</div>

@@ -5,6 +5,7 @@ var translationsEN = {
   breadcrumbHome: "Home",
   breadcrumbWorkOrder: "WorkOrder",
   breadcrumbTodayWork: "Today Work",
+  breadcrumbWorkDetail: "Work Detail",
 
   //common
   btnAdd: "Add",
@@ -79,6 +80,12 @@ var translationsEN = {
   serv: 'Serv. advisor',
   visitReason: 'Visit reason',
   searchWo: 'Search workorders',
+  pleaseSelect: '--Please select--',
+  fromDate: 'From date',
+  toDate: 'To date',
+  myWo: 'Only my workorders',
+  WoHeader: 'Workorder Header',
+  WoJob: 'Workorder Job',
 };
 
 var translationsVI = {
@@ -88,6 +95,7 @@ var translationsVI = {
   breadcrumbHome: "Home",
   breadcrumbWorkOrder: "WorkOrder",
   breadcrumbTodayWork: "Today Work",
+  breadcrumbWorkDetail: "Work Detail",
 
   //common
   btnAdd: "Thêm mới",
@@ -162,6 +170,12 @@ var translationsVI = {
   serv: 'Serv. advisor',
   visitReason: 'Visit reason',
   searchWo: 'Search workorders',
+  pleaseSelect: '--Please select--',
+  fromDate: 'From date',
+  toDate: 'To date',
+  myWo: 'Only my workorders',
+  WoHeader: 'Workorder Header',
+  WoJob: 'Workorder Job',
 };
 
 UserWebApp.config(['$translateProvider', function ($translateProvider) {

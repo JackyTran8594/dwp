@@ -1,4 +1,4 @@
-UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope, HttpService, $translate, $location, $filter, $uibModal) {
+UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope, HttpService, $translate, $location, $state, $filter, $uibModal, CommonServices) {
   $scope.lstAllData = [];
   $scope.lstData = [];
   $scope.lstSearch = [];
@@ -16,6 +16,9 @@ UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope, HttpSe
     "trans": "",
     "visitReason": "",
     "serv": "",
+    "from": "",
+    "to": "",
+    "myWo": false,
   };
 
   $scope.searchValue = '';
@@ -28,6 +31,9 @@ UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope, HttpSe
       "trans": "",
       "visitReason": "",
       "serv": "",
+      "from": "",
+      "to": "",
+      "myWo": false,
     };
     $scope.searchValue = '';
     $scope.limit = 20;
@@ -41,51 +47,23 @@ UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope, HttpSe
   $scope.lstVisitReason = [];
 
   function loadCommon() {
-    $scope.lstTrans = [];
-    $scope.lstDepartment = [];
-    $scope.lstServ = [];
-    $scope.lstVisitReason = [];
-    common.spinner(true);
-
-    HttpService.getData('/site/getTransactionTypes', {}).then(function (response) {
-      console.log(response);
-      $scope.lstTrans = response;
-      common.spinner(false);
-    }, function error(response) {
-      console.log(response);
-      common.spinner(false);
+    CommonServices.getTransactionTypes().then(function (data) {
+      $scope.lstTrans = data;
+    });
+    CommonServices.getDepartments().then(function (data) {
+      $scope.lstDepartment = data;
+    });
+    CommonServices.getVisitReasons().then(function (data) {
+      $scope.lstVisitReason = data;
+    });
+    CommonServices.getServiceAdvisors().then(function (data) {
+      $scope.lstServ = data;
     });
 
-    HttpService.getData('/site/getDepartments', {}).then(function (response) {
-      console.log(response);
-      $scope.lstDepartment = response;
-      common.spinner(false);
-    }, function error(response) {
-      console.log(response);
-      common.spinner(false);
-    });
-
-    HttpService.getData('/site/getPayers', {}).then(function (response) {
-      console.log(response);
-      common.spinner(false);
-    }, function error(response) {
-      console.log(response);
-      common.spinner(false);
-    });
-
-    HttpService.getData('/site/getVisitReasons', {}).then(function (response) {
-      console.log(response);
-      $scope.lstVisitReason = response;
-      common.spinner(false);
-    }, function error(response) {
-      console.log(response);
-      common.spinner(false);
-    });
   }
 
   function loadData(count) {
     common.spinner(true);
-
     //unScheduledWO, withSubcontractor, todayWO, allWO, withMOT, withTire, withBO, postponedWO, offers
     var params = {
       // "ViewName": "todayWO",
@@ -97,9 +75,10 @@ UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope, HttpSe
       "TransactionType": $scope.params.trans,
       "VisitReasonCode": $scope.params.visitReason,
       "Receiver": $scope.params.serv,
+      "MyWO": $scope.params.myWo,
     };
 
-    if(count) {
+    if (count) {
       HttpService.postData('/wo/countWO', params).then(function (response) {
         $scope.totalElements = response;
         $scope.isNoData = ($scope.totalElements <= 0);
@@ -112,6 +91,7 @@ UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope, HttpSe
 
     HttpService.postData('/wo/getWO', params).then(function (response) {
       $scope.lstData = response;
+      $scope.pageGo = $scope.page;
       common.spinner(false);
     }, function error(response) {
       console.log(response);
@@ -170,6 +150,19 @@ UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope, HttpSe
     $("#modal_default").modal("show");
   }
 
+  function findAndReplace(string, target, replacement) {
+
+    var i = 0, length = string.length;
+
+    for (i; i < length; i++) {
+
+      string = string.replace(target, replacement);
+
+    }
+
+    return string;
+
+  }
 
   $scope.showLeftCol = function (item) {
     var html = "";
@@ -190,7 +183,7 @@ UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope, HttpSe
       html += WOCustomer.LName + " " + WOCustomer.FName + ", " + WOCustomer.Tel1 + " " + WOCustomer.Email + " <br />";
     }
 
-    html += item.JobTitle;
+    html += findAndReplace(item.JobTitle, "\r\n", "<br />");
     return html;
   }
 
@@ -219,5 +212,11 @@ UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope, HttpSe
       console.log('Modal dismissed at: ' + new Date());
     });
   };
+
+
+  //function viewDetail
+  $scope.viewDetail = function (item) {
+    $state.go('app.main.workdetail', {'id': item.WorkOrderId, 'type': "todayWO"});
+  }
 
 });
