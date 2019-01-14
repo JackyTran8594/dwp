@@ -83,12 +83,17 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
       if (loginResponse != null && !StringUtils.isBlank(loginResponse)) {
         JSONObject userInfo = new JSONObject(loginResponse);
         String Token = userInfo.optString("Token", "");
+        String siteName = userInfo.optString("SiteName", "");
         if (Token != null && !StringUtils.isBlank(Token)) {
           JSONObject EmployeeData = userInfo.optJSONObject("EmployeeData");
 //          JSONObject EmployeeData = userInfo.optJSONObject("Employee");
 
           if (EmployeeData != null) {
-            session.setAttribute(SESSION_SMANID, EmployeeData.optString("Name", ""));
+            if (siteName != null && !StringUtils.isBlank(siteName)) {
+              session.setAttribute(SESSION_SMANID, EmployeeData.optString("Name", "") + "@" + siteName);
+            }else{
+              session.setAttribute(SESSION_SMANID, EmployeeData.optString("Name", ""));
+            }
           }
           System.out.println("------Token: " + Token);
           loginSuccess = true;

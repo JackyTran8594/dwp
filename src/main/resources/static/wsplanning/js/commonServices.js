@@ -5,6 +5,11 @@ UserWebApp
     this.departments = [];
     this.visitReasons = [];
     this.serviceAdvisors = [];
+    this.jobTypes = [];
+    this.jobCats = [];
+    this.lstPayer = [];
+    this.lstShifts = [];
+    this.lstChargeCats = [];
     this.stamping = "";
 
 
@@ -15,6 +20,88 @@ UserWebApp
       }, function error(response) {
         d.reject();
       });
+      return d.promise;
+    };
+
+    //getJobTypes
+
+    this.getJobTypes = function () {
+      var d = $q.defer();
+      if(!this.jobTypes || this.jobTypes.length <= 0) {
+        HttpService.getData('/site/getJobTypes', {}).then(function (response) {
+          response.unshift({"Id": "","Name": $translate.instant('pleaseSelect')});
+          this.jobTypes = response;
+          d.resolve(response);
+        }, function error(response) {
+          d.reject();
+        });
+      }else{
+        d.resolve(this.jobTypes);
+      }
+      return d.promise;
+    };
+
+    this.getJobCats = function () {
+      var d = $q.defer();
+      if(!this.jobCats || this.jobCats.length <= 0) {
+        HttpService.getData('/site/getJobCats', {}).then(function (response) {
+          response.unshift({"Id": "","Name": $translate.instant('pleaseSelect')});
+          this.jobCats = response;
+          d.resolve(response);
+        }, function error(response) {
+          d.reject();
+        });
+      }else{
+        d.resolve(this.jobCats);
+      }
+      return d.promise;
+    };
+
+    this.getPayers = function () {
+      var d = $q.defer();
+      if(!this.lstPayer || this.lstPayer.length <= 0) {
+        HttpService.getData('/site/getPayers', {}).then(function (response) {
+          response.unshift({"Id": "","Name": $translate.instant('pleaseSelect')});
+          this.lstPayer = response;
+          d.resolve(response);
+        }, function error(response) {
+          d.reject();
+        });
+      }else{
+        d.resolve(this.lstPayer);
+      }
+      return d.promise;
+    };
+
+    this.getShifts = function () {
+      var d = $q.defer();
+      if(!this.lstShifts || this.lstShifts.length <= 0) {
+        HttpService.getData('/site/getShifts', {}).then(function (response) {
+          response.unshift({"Id": "","Name": $translate.instant('pleaseSelect')});
+          this.lstShifts = response;
+          d.resolve(response);
+        }, function error(response) {
+          d.reject();
+        });
+      }else{
+        d.resolve(this.lstShifts);
+      }
+      return d.promise;
+    };
+
+    this.getChargeCats = function () {
+      var d = $q.defer();
+      if(!this.lstChargeCats || this.lstChargeCats.length <= 0) {
+        HttpService.getData('/site/getChargeCats', {}).then(function (response) {
+          response.unshift({"Id": "","Name": $translate.instant('pleaseSelect')});
+          this.lstChargeCats = response;
+          d.resolve(response);
+        }, function error(response) {
+          d.reject();
+        });
+      }else{
+        d.resolve(this.lstChargeCats);
+      }
       return d.promise;
     };
 
@@ -110,6 +197,45 @@ UserWebApp
           this.serviceAdvisors = data;
         });
       }
+
+      //
+      if(!this.jobTypes || this.jobTypes.length <= 0){
+        resolve = false;
+        this.getJobTypes().then(function(data){
+          resolve = true;
+          this.jobTypes = data;
+        });
+      }
+      if(!this.jobCats || this.jobCats.length <= 0){
+        resolve = false;
+        this.getJobCats().then(function(data){
+          resolve = true;
+          this.jobCats = data;
+        });
+      }
+      if(!this.lstPayer || this.lstPayer.length <= 0){
+        resolve = false;
+        this.getPayers().then(function(data){
+          resolve = true;
+          this.lstPayer = data;
+        });
+      }
+      if(!this.lstShifts || this.lstShifts.length <= 0){
+        resolve = false;
+        this.getShifts().then(function(data){
+          resolve = true;
+          this.lstShifts = data;
+        });
+      }
+      if(!this.lstChargeCats || this.lstChargeCats.length <= 0){
+        resolve = false;
+        this.getChargeCats().then(function(data){
+          resolve = true;
+          this.lstChargeCats = data;
+        });
+      }
+
+
       if(resolve){
         d.resolve("");
       }

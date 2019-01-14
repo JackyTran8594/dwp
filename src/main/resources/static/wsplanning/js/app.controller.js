@@ -28,9 +28,9 @@ UserWebApp.controller('appCtrl', function ($scope, $rootScope, HttpService, $tra
   }
 
   $scope.changeLang = function (lang) {
-    //$state.go($state.current, {locale: lang}, {reload: false});
-
-    $state.transitionTo($state.current, {locale: lang}, {
+    var params = $state.params;
+    params.locale = lang;
+    $state.transitionTo($state.current, params, {
       reload: true, inherit: false, notify: true
     });
   }

@@ -1,0 +1,34 @@
+<!-- Basic panel controls -->
+<div class="panel panel-white" ng-controller="CustomerCtrl">
+    <span ng-show="!isShow">
+        <div class="panel-heading">
+            <h6 class="panel-title">
+                <a class="btn btn-link btn-float has-text text-size-small" ng-click="searchVehicle({})">
+                    <i class="icon-cog3 position-left"></i>
+                </a>
+                <small>{{WOCustomer.Address}}, {{WOCustomer.Tel1}}, {{WOCustomer.InvoiceGroup}}, {{WOCustomer.AccountGroup}}</small></h6>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li ng-click="toogleVehicle()"><a ng-class="{'rotate-180': isShow == true}" data-action="collapse" data-popup="tooltip" title="Collapse"></a></li>
+                </ul>
+            </div>
+        </div>
+    </span>
+
+    <span ng-show="isShow">
+        <div class="panel-heading">
+            <h6 class="panel-title">Basic controls</h6>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li ng-click="toogleVehicle()"><a ng-class="{'rotate-180': isShow == true}" data-action="collapse" data-popup="tooltip" title="Collapse"></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="panel-body">
+            Default panel controls - <code>collapse</code>, <code>update</code> and <code>close</code> buttons
+        </div>
+
+    </span>
+</div>
+<!-- /basic panel controls -->

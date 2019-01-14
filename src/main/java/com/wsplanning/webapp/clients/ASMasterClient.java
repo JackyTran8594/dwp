@@ -76,4 +76,9 @@ public class ASMasterClient {
     String url = String.format("%s?command=getVisitReasons&param1=%s", this.endpointUrl,siteId);
     return restTemplate.getForObject(url, String.class);
   }
+
+  public String getChargeCats(String siteId) {
+    String url = String.format("%s?command=getChargeCats&param1=%s", this.endpointUrl,siteId);
+    return restTemplate.getForObject(url, String.class);
+  }
 }

@@ -86,6 +86,15 @@ var translationsEN = {
   myWo: 'Only my workorders',
   WoHeader: 'Workorder Header',
   WoJob: 'Workorder Job',
+  ServiceDate: 'ServiceDate',
+  ExecutionDate: 'ExecutionDate',
+  ChargeCats: 'Job Charge Category',
+  JobCategory: 'Job Category',
+  Payer: 'Payer',
+  JobDepartment: 'Job Department',
+  JobType: 'Job Type',
+  JobTitle: 'Job Title',
+  CustomerComplaint: 'Customer complaint',
 };
 
 var translationsVI = {
@@ -176,12 +185,22 @@ var translationsVI = {
   myWo: 'Only my workorders',
   WoHeader: 'Workorder Header',
   WoJob: 'Workorder Job',
+  ServiceDate: 'Service Date',
+  ExecutionDate: 'Execution Date',
+  ChargeCats: 'Job Charge Category',
+  JobCategory: 'Job Category',
+  Payer: 'Payer',
+  JobDepartment: 'Job Department',
+  JobType: 'Job Type',
+  JobTitle: 'Job Title',
+  CustomerComplaint: 'Customer complaint',
 };
 
 UserWebApp.config(['$translateProvider', function ($translateProvider) {
   // Declare multi language
   $translateProvider.translations('en', translationsEN);
   $translateProvider.translations('vi', translationsVI);
+  $translateProvider.translations('de', translationsVI);
 
   // Get current language
   var currentLang = $('.currentLang').attr('data-currentLang');

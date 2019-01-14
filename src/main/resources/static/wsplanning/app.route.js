@@ -38,7 +38,12 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
     .state('app.main.workdetail', {
       url: 'workdetail/:type/:id/',
       controller: "WorkDetailCtrl as $ctrl",
-      templateUrl: '/wsplanning/templates/pages/workdetail/index.html'
+      templateUrl: '/wsplanning/templates/pages/workdetail/index.html',
+      resolve: {
+        WorkOrder: function (WorkOrderService, $stateParams) {
+          return WorkOrderService.detail($stateParams.id);
+        }
+      }
     })
 
   //$locationProvider.html5Mode(true);

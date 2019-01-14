@@ -1,21 +1,12 @@
-UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpService, $translate, $location, $filter, $uibModal, CommonServices, $stateParams, $state) {
+UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpService, $translate, $location, $filter, $uibModal, CommonServices, $stateParams, $state, WorkOrder,WorkOrderService) {
   $scope.WorkOrderId = $stateParams.id;
   $scope.type = $stateParams.type;
 
 
-  function loadData() {
-    common.spinner(true);
-    var params = {
-      "WorkOrderId": $scope.WorkOrderId,
-    };
+  console.log(WorkOrder);
+  $scope.WorkOrder = WorkOrder.data;
 
-    HttpService.postData('/wo/detail', params).then(function (response) {
-      console.log(response);
-      common.spinner(false);
-    }, function error(response) {
-      console.log(response);
-      common.spinner(false);
-    });
+  function loadData() {
   }
 
   loadData();
