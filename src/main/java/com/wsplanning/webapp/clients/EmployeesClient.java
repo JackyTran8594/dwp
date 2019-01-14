@@ -31,11 +31,11 @@ public class EmployeesClient {
     this.restTemplate.getMessageConverters()
         .add(0, new StringHttpMessageConverter(Charset.forName("UTF-8")));
 //    this.endpointUrl = "http://automaster.alliedsoft.hu:9092/api/Employees?command=getMechanics&SiteId=S01";
-        this.endpointUrl = apiEndpointUrl + "/api/Employees";
+    this.endpointUrl = apiEndpointUrl + "/api/Employees";
   }
 
   public String getServiceAdvisors(String siteId) {
-    String url = String.format("%s?command=getServiceAdvisors&SiteId=%s", this.endpointUrl,siteId);
+    String url = String.format("%s?command=getServiceAdvisors&SiteId=%s", this.endpointUrl, siteId);
     return restTemplate.getForObject(url, String.class);
   }
 

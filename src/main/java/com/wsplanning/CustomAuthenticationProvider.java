@@ -1,6 +1,7 @@
 package com.wsplanning;
 
 import com.google.gson.JsonObject;
+import com.wsplanning.webapp.clients.ASMasterClient;
 import com.wsplanning.webapp.clients.AuthClient;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONObject;
@@ -58,6 +59,9 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
   private HttpSession session;
 
   @Autowired
+  private ASMasterClient asMasterClient;
+
+  @Autowired
   private AuthClient authClient;
 
 
@@ -83,7 +87,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
       if (loginResponse != null && !StringUtils.isBlank(loginResponse)) {
         JSONObject userInfo = new JSONObject(loginResponse);
         String Token = userInfo.optString("Token", "");
-        String siteName = userInfo.optString("SiteName", "");
+        String siteName = asMasterClient.getSiteName(userInfo.optString("SiteId", ""));
         if (Token != null && !StringUtils.isBlank(Token)) {
           JSONObject EmployeeData = userInfo.optJSONObject("EmployeeData");
 //          JSONObject EmployeeData = userInfo.optJSONObject("Employee");
@@ -91,7 +95,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
           if (EmployeeData != null) {
             if (siteName != null && !StringUtils.isBlank(siteName)) {
               session.setAttribute(SESSION_SMANID, EmployeeData.optString("Name", "") + "@" + siteName);
-            }else{
+            } else {
               session.setAttribute(SESSION_SMANID, EmployeeData.optString("Name", ""));
             }
           }
