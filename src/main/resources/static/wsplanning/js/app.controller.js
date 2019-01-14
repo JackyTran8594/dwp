@@ -1,12 +1,12 @@
-UserWebApp.controller('appCtrl', function ($scope, $rootScope, HttpService, $translate, $location, $filter, $state, CommonServices) {
+UserWebApp.controller('appCtrl', function ($scope, $rootScope, HttpService, $translate, $location, $filter, $state, CommonServices, tmhDynamicLocale) {
 
   CommonServices.loadData();
 
   $rootScope.stamping = "";
-  CommonServices.getStamping().then(function(data){
-    if(data && data.StampText){
+  CommonServices.getStamping().then(function (data) {
+    if (data && data.StampText) {
       $rootScope.stamping = data.StampText;
-    }else{
+    } else {
       $rootScope.stamping = "";
     }
   });
@@ -19,22 +19,34 @@ UserWebApp.controller('appCtrl', function ($scope, $rootScope, HttpService, $tra
 
   $scope.workorders = function () {
     $(".toggleSitebar").click();
-    $state.go('app.main.workorder', {locale: $rootScope.lang});
+    $state.go('app.main.workorder', { locale: $rootScope.lang });
   }
 
   $scope.todayWork = function () {
     $(".toggleSitebar").click();
-    $state.go('app.main.todaywork', {locale: $rootScope.lang});
+    $state.go('app.main.todaywork', { locale: $rootScope.lang });
   }
 
   $scope.changeLang = function (lang) {
+
+    //vutt
+    var array = $rootScope.cultureInfoArray
+    var cultureInfo = '';
+    angular.forEach(array, function (value) {
+      var temp = value.CultureInfo.split("-");
+      if (temp[0] === lang) {
+        cultureInfo = value.CultureInfo;
+        tmhDynamicLocale.set(cultureInfo.toLowerCase());
+      }
+    });
+    //
+    
     var params = $state.params;
     params.locale = lang;
     $state.transitionTo($state.current, params, {
       reload: true, inherit: false, notify: true
     });
   }
-
 
   $scope.lstLang = [];
 

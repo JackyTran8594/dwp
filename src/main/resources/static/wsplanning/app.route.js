@@ -1,5 +1,6 @@
-UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
+UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvider, tmhDynamicLocaleProvider) {
 
+  tmhDynamicLocaleProvider.localeLocationPattern('/assets/js/core/libraries/angularjs/angular-locale/i18n/angular-locale_{{locale}}.js')
   // $urlRouterProvider.otherwise('/');
 
   $urlRouterProvider.otherwise(function ($rootScope, $injector, $location) {
@@ -9,7 +10,7 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
 
   $stateProvider
 
-  // HOME STATES AND NESTED VIEWS ========================================
+    // HOME STATES AND NESTED VIEWS ========================================
     .state('app', {
       abstract: true,
       url: '/{locale}'

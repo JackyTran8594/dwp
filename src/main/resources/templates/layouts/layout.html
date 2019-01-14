@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      ng-app="UserWebApp">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" ng-app="UserWebApp">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -71,6 +70,10 @@
     <script type="text/javascript" src="/assets/js/core/libraries/angularjs/fancytree_childcounter.js"></script>
     <!-- /angular JS files -->
 
+    <!-- angular-dynamic-locale -->
+    <script type="text/javascript" src="/assets/js/core/libraries/angularjs/angular-locale/angular-dynamic-locale/tmhDynamicLocale.js"></script>
+    <!-- end -->
+
     <script type="text/javascript" src="/assets/js/multiselect/select.js"></script>
     <link href="/assets/js/multiselect/select.css" rel="stylesheet" type="text/css">
 
@@ -106,53 +109,55 @@
     <script type="text/javascript" src="/wsplanning/js/workdetail/customer.controller.js"></script>
     <script type="text/javascript" src="/wsplanning/js/workdetail/contract.controller.js"></script>
 </head>
+
 <body class="sidebar-xs" ng-controller="appCtrl">
-<div class="preloader" id="preloader1">
-    <hr/>
-    <hr/>
-    <hr/>
-    <hr/>
-</div>
-<div class="preloader" id="preloader2">
-    <hr/>
-    <hr/>
-    <hr/>
-    <hr/>
-</div>
-
-<div th:replace="layouts/fragments/navbar::navbar"></div>
-
-<!-- Page container -->
-<div class="page-container">
-
-    <!-- Page content -->
-    <div class="page-content">
-
-        <div th:replace="layouts/fragments/sitebar::sitebar"></div>
-
-
-        <!-- Main content -->
-        <div class="content-wrapper">
-
-            <div ui-view></div>
-            <!--<div layout:fragment="content"></div>-->
-        </div>
-        <!-- /main content -->
-
+    <div class="preloader" id="preloader1">
+        <hr />
+        <hr />
+        <hr />
+        <hr />
     </div>
-    <!-- /page content -->
-</div>
-<!-- /page container -->
+    <div class="preloader" id="preloader2">
+        <hr />
+        <hr />
+        <hr />
+        <hr />
+    </div>
 
-<!-- Footer -->
-<!--<div th:replace="layouts/fragments/footer::footer"></div>-->
-<!-- /footer -->
+    <div th:replace="layouts/fragments/navbar::navbar"></div>
 
-<script type="text/javascript">
-  $(document).ready(function () {
-    console.log("ready!");
-    $(".formValidate").validate(common.formValidate);
-  });
-</script>
+    <!-- Page container -->
+    <div class="page-container">
+
+        <!-- Page content -->
+        <div class="page-content">
+
+            <div th:replace="layouts/fragments/sitebar::sitebar"></div>
+
+
+            <!-- Main content -->
+            <div class="content-wrapper">
+
+                <div ui-view></div>
+                <!--<div layout:fragment="content"></div>-->
+            </div>
+            <!-- /main content -->
+
+        </div>
+        <!-- /page content -->
+    </div>
+    <!-- /page container -->
+
+    <!-- Footer -->
+    <!--<div th:replace="layouts/fragments/footer::footer"></div>-->
+    <!-- /footer -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            console.log("ready!");
+            $(".formValidate").validate(common.formValidate);
+        });
+    </script>
 </body>
+
 </html>

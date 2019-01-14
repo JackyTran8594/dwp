@@ -17,9 +17,8 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="col-md-12">
-                                <input type="text" class="form-control" ng-model="searchValue"
-                                       placeholder="{{ 'searchWo' | translate }}"
-                                       code="13" dl-key-code="doSearch();">
+                                <input type="text" class="form-control" ng-model="searchValue" placeholder="{{ 'searchWo' | translate }}"
+                                    code="13" dl-key-code="doSearch();">
                             </div>
                         </div>
 
@@ -27,8 +26,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-4">{{ 'trans' | translate }}</label>
                                 <div class="col-md-8">
-                                    <select class="form-control" ng-model="params.trans"
-                                            ng-options="item.Id as item.Name for item in lstTrans">
+                                    <select class="form-control" ng-model="params.trans" ng-options="item.Id as item.Name for item in lstTrans">
                                     </select>
                                 </div>
                             </div>
@@ -38,8 +36,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-4">{{ 'department' | translate }}</label>
                                 <div class="col-md-8">
-                                    <select class="form-control" ng-model="params.department"
-                                            ng-options="item.Id as item.Name for item in lstDepartment">
+                                    <select class="form-control" ng-model="params.department" ng-options="item.Id as item.Name for item in lstDepartment">
                                     </select>
                                 </div>
                             </div>
@@ -49,8 +46,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-4">{{ 'visitReason' | translate }}</label>
                                 <div class="col-md-8">
-                                    <select class="form-control" ng-model="params.visitReason"
-                                            ng-options="item.Id as item.Name for item in lstVisitReason">
+                                    <select class="form-control" ng-model="params.visitReason" ng-options="item.Id as item.Name for item in lstVisitReason">
                                     </select>
                                 </div>
                             </div>
@@ -65,8 +61,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-4">{{ 'serv' | translate }}</label>
                                 <div class="col-md-8">
-                                    <select class="form-control" ng-model="params.serv"
-                                            ng-options="item.Id as item.Name for item in lstServ">
+                                    <select class="form-control" ng-model="params.serv" ng-options="item.Id as item.Name for item in lstServ">
                                     </select>
                                 </div>
                             </div>
@@ -78,8 +73,8 @@
                                 <label class="control-label col-md-4">{{ 'fromDate' | translate }}</label>
                                 <div class="col-md-8">
                                     <div class="input-group">
-                                        <input type="text" class="form-control datepicker" id="startDate"
-                                               placeholder="Pick a date&hellip;" ng-model="params.from">
+                                        <input type="text" class="form-control datepicker" id="startDate" placeholder="Pick a date&hellip;"
+                                            ng-model="params.from">
                                         <span class="input-group-addon"><i class="icon-calendar"></i></span>
                                     </div>
                                 </div>
@@ -90,8 +85,8 @@
                                 <label class="control-label col-md-4">{{ 'toDate' | translate }}</label>
                                 <div class="col-md-8">
                                     <div class="input-group">
-                                        <input type="text" class="form-control datepicker" id="endDate"
-                                               placeholder="Pick a date&hellip;" ng-model="params.to">
+                                        <input type="text" class="form-control datepicker" id="endDate" placeholder="Pick a date&hellip;"
+                                            ng-model="params.to">
                                         <span class="input-group-addon"><i class="icon-calendar"></i></span>
                                     </div>
                                 </div>
@@ -108,8 +103,7 @@
                         </div>
 
                         <div class="col-md-1">
-                            <button type="button" ng-click="doSearch()" class="btn btn-icon btn-default"><i
-                                    class="icon-search4"></i></button>
+                            <button type="button" ng-click="doSearch()" class="btn btn-icon btn-default"><i class="icon-search4"></i></button>
                         </div>
                     </div>
 
@@ -124,17 +118,17 @@
 
                         <!--BODY-->
                         <tbody>
-                        <tr ng-repeat="item in lstData" ng-dblclick="viewDetail(item)">
-                            <td style="width: 20%;">
-                                {{item.ServiceDate | utcToLocal:'dd.MM.yy - hh.mm a'}}<br/>
-                                <span class="{{item.WorkOrderStatus| titleCase}}">{{item.WorkOrderStatus}}<br/></span>
-                                {{item.WorkOrderNo}}<br/>
-                            </td>
-                            <td ng-bind-html="showLeftCol(item)"></td>
-                        </tr>
-                        <tr ng-if="isNoData || !lstData || lstData.length <= 0" class="active">
-                            <td colspan="20" class="text-center">{{ 'commonNoResult' | translate }}</td>
-                        </tr>
+                            <tr ng-repeat="item in lstData" ng-dblclick="viewDetail(item)">
+                                <td style="width: 20%;">
+                                    {{item.ServiceDate | date:'medium'}}<br />
+                                    <span class="{{item.WorkOrderStatus| titleCase}}">{{item.WorkOrderStatus}}<br /></span>
+                                    {{item.WorkOrderNo}}<br />
+                                </td>
+                                <td ng-bind-html="showLeftCol(item)"></td>
+                            </tr>
+                            <tr ng-if="isNoData || !lstData || lstData.length <= 0" class="active">
+                                <td colspan="20" class="text-center">{{ 'commonNoResult' | translate }}</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -147,26 +141,15 @@
                             {{totalElements | number}} <span class="text-lowercase">{{ 'item' | translate }}</span>
                         </div>
                         <div class="form-group" style="border-left: 1px solid #ddd">
-                            <ul class="pagination-flat pagination-rounded"
-                                uib-pagination
-                                total-items="totalElements"
-                                items-per-page="limit"
-                                max-size="2"
-                                ng-model="page"
-                                boundary-links="true"
-                                boundary-link-numbers="true"
-                                force-ellipses="true"
-                                rotate="true"
-                                previous-text="&lsaquo;"
-                                next-text="&rsaquo;"
-                                first-text="&laquo;"
-                                last-text="&raquo;"></ul>
+                            <ul class="pagination-flat pagination-rounded" uib-pagination total-items="totalElements"
+                                items-per-page="limit" max-size="2" ng-model="page" boundary-links="true"
+                                boundary-link-numbers="true" force-ellipses="true" rotate="true" previous-text="&lsaquo;"
+                                next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
                         </div>
                         <div class="form-group">
                             <input type="number" name="page" ng-model="pageGo" placeholder="{{ 'page' | translate }}"
-                                   class="form-control validatePositiveInteger"
-                                   min="1" max="{{(totalElements / limit) | ceil}}"
-                                   style="width: 55px">
+                                class="form-control validatePositiveInteger" min="1" max="{{(totalElements / limit) | ceil}}"
+                                style="width: 55px">
                         </div>
                         <div class="form-group">
                             <button type="submit" class="btn btn-default">{{ 'go' | translate }}</button>
@@ -203,18 +186,18 @@
 <!-- /page container -->
 
 <script type="text/javascript">
-  //              $(function () {
-  //                $('.inputDateTime').inputmask(constants.DATE_INPUT_MASK_FORMAT);
-  //              })
+    //              $(function () {
+    //                $('.inputDateTime').inputmask(constants.DATE_INPUT_MASK_FORMAT);
+    //              })
 
-  $(document).ready(function () {
-    $("#startDate").datepicker({
-      format: 'dd/mm/yyyy',
-      startDate: '-1d'
+    $(document).ready(function () {
+        $("#startDate").datepicker({
+            format: 'dd/mm/yyyy',
+            startDate: '-1d'
+        });
+        $("#endDate").datepicker({
+            format: 'dd/mm/yyyy',
+        });
     });
-    $("#endDate").datepicker({
-      format: 'dd/mm/yyyy',
-    });
-  });
 
 </script>

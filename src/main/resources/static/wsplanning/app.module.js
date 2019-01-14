@@ -9,11 +9,28 @@ var UserWebApp = angular.module('UserWebApp', [
   'ui.bootstrap.datetimepicker',
   'ui.select',
   'ui.router',
-  'ngCookies'
+  'ngCookies',
+  'tmh.dynamicLocale'
 ]);
 
 
-UserWebApp.run(['$rootScope', 'uiSelect2Config', '$translate', function ($rootScope, uiSelect2Config, $translate) {
+UserWebApp.run(['$rootScope', 'uiSelect2Config', '$translate', 'tmhDynamicLocale', '$cookies', function ($rootScope, uiSelect2Config, $translate, tmhDynamicLocale, $cookies) {
+
+
+  // var cookie = $cookies.get('cultureInfo');
+  // vutt
+  $rootScope.cultureInfoArray = JSON.parse(localStorage.getItem('cultureInfo'));
+  var langCookie = $cookies.get('language');
+  var cultureInfo = '';
+  angular.forEach($rootScope.cultureInfoArray, function (value) {
+    var temp = value.CultureInfo.split("-");
+    if (temp[0] === langCookie) {
+      cultureInfo = value.CultureInfo;
+      tmhDynamicLocale.set(cultureInfo);
+    }
+  });
+  //
+
 
 
   $rootScope.$on('stateChangeStart', function (event, toState, toParams, fromState, fromParams, options) {
@@ -76,7 +93,7 @@ UserWebApp.run(['$rootScope', 'uiSelect2Config', '$translate', function ($rootSc
         console.log("statechange onSuccess " + newLange);
 
         //Set Lang
-        HttpService.postData('/language', {"lang": newLange}).then(function (response) {
+        HttpService.postData('/language', { "lang": newLange }).then(function (response) {
           console.log(response);
           $translate.use(newLange);
 
@@ -92,4 +109,4 @@ UserWebApp.run(['$rootScope', 'uiSelect2Config', '$translate', function ($rootSc
     });
 
   })
-;
+  ;
