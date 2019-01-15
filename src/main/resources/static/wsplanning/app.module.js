@@ -25,7 +25,7 @@ UserWebApp.run(['$rootScope', 'uiSelect2Config', '$translate', 'tmhDynamicLocale
   angular.forEach($rootScope.cultureInfoArray, function (value) {
     var temp = value.CultureInfo.split("-");
     if (temp[0] === langCookie) {
-      cultureInfo = value.CultureInfo;
+      cultureInfo = value.CultureInfo.toLowerCase();
       tmhDynamicLocale.set(cultureInfo);
     }
   });
