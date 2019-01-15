@@ -81,7 +81,7 @@ public class Utils {
     return Boolean.parseBoolean(rtn);
   }
 
-  static DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("ddMMyyyy");
+  static DateTimeFormatter formatterInput = DateTimeFormatter.ofPattern("yyyy-MM-dd");
   static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd");
 
   public static String formateDateAPI(String input) {
@@ -89,6 +89,9 @@ public class Utils {
       return "";
     }
     try {
+      if (input.contains("T")) {
+        input = input.substring(0, input.indexOf("T"));
+      }
       LocalDate dateTime = LocalDate.parse(input, formatterInput);
       return dateTime.format(formatter);
     } catch (Exception ex) {
@@ -99,6 +102,6 @@ public class Utils {
   }
 
   public static void main(String[] args) {
-    System.out.println(formateDateAPI("15/02/2018"));
+    System.out.println(formateDateAPI("2018-01-17T17:00:00.000Z"));
   }
 }

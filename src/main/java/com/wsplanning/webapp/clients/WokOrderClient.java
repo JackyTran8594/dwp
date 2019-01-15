@@ -47,8 +47,8 @@ public class WokOrderClient {
     String MyWO = params.get("MyWO");
     String LoadAttachment = params.get("LoadAttachment");
     String LoadAttachmentData = params.get("LoadAttachmentData");
-    String ServDateFrom = params.get("ServDateFrom");
-    String ServDateTo = params.get("ServDateTo");
+    String ServDateFrom = params.get("FromDate");
+    String ServDateTo = params.get("ToDate");
 
     HttpHeaders headers = new HttpHeaders();
     headers.set("Token", token);
@@ -109,8 +109,8 @@ public class WokOrderClient {
     String MyWO = params.get("MyWO");
     String LoadAttachment = params.get("LoadAttachment");
     String LoadAttachmentData = params.get("LoadAttachmentData");
-    String ServDateFrom = params.get("ServDateFrom");
-    String ServDateTo = params.get("ServDateTo");
+    String ServDateFrom = params.get("FromDate");
+    String ServDateTo = params.get("ToDate");
 
     HttpHeaders headers = new HttpHeaders();
     headers.set("Token", token);
