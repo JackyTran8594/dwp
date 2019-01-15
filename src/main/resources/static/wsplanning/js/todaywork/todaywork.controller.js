@@ -1,4 +1,4 @@
-UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope, HttpService, $translate, $location, $state, $filter, $uibModal, CommonServices) {
+UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope,$locale ,HttpService, $translate, $location, $state, $filter, $uibModal, CommonServices) {
   $scope.lstAllData = [];
   $scope.lstData = [];
   $scope.lstSearch = [];
@@ -39,6 +39,39 @@ UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope, HttpSe
     $scope.limit = 20;
     $scope.page = 1;
   }
+  
+   // datepicker-vutt
+  
+  $rootScope.$locale = $locale;
+  console.log($rootScope.$locale);
+  
+  $scope.dateOptions = {
+    formatYear: 'yy',
+    maxDate: new Date(2020, 5, 22),
+    minDate: new Date(),
+    startingDay: 1
+  };
+  
+   $scope.openFromDate = function() {
+    $rootScope.popupFromDate.opened = true;
+  };
+  
+   $scope.openToDate = function() {
+    $rootScope.popupToDate.opened = true;
+  };
+  
+
+  $rootScope.popupFromDate = {
+    opened: false
+  };
+  
+  $rootScope.popupToDate = {
+    opened: false
+  };
+
+
+  //
+
 
   loadCommon();
   $scope.lstTrans = [];
@@ -76,6 +109,8 @@ UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope, HttpSe
       "VisitReasonCode": $scope.params.visitReason,
       "Receiver": $scope.params.serv,
       "MyWO": $scope.params.myWo,
+	  "FromDate": $scope.params.from,
+	  "ToDate": $scope.params.to,
     };
 
     if (count) {

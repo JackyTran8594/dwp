@@ -49,3 +49,26 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
 
   //$locationProvider.html5Mode(true);
 });
+
+// UserWebApp.config(function ($provide) {
+  // $provide.decorator('datepickerDirective', function($delegate) {
+    // angular.forEach($delegate, function (directive) {
+      // var originalCompile = directive.compile; 
+      // var originalLink = directive.link; 
+      // console.log($delegate);
+      // if (originalCompile) {
+        // directive.compile = function () {
+          // return function (scope) {
+            // scope.$on('$localeChangeSuccess', function () {
+              // scope.move(0);
+            // });
+            // originalLink.apply(this, arguments);
+          // };
+        // }
+      // }
+    // });
+    // return $delegate;
+  // });  
+// });
+  
+

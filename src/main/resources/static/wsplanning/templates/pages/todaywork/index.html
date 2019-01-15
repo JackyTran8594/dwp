@@ -73,9 +73,19 @@
                                 <label class="control-label col-md-4">{{ 'fromDate' | translate }}</label>
                                 <div class="col-md-8">
                                     <div class="input-group">
-                                        <input type="text" class="form-control datepicker" id="startDate" placeholder="Pick a date&hellip;"
-                                            ng-model="params.from">
-                                        <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                                        <!-- <input type="text" class="form-control datepicker" id="startDate" placeholder="Pick a date&hellip;" ng-model="params.from"> -->
+
+                                        <input type="text" class="form-control datepicker" uib-datepicker-popup="dd/MM/yyyy" placeholder="Pick a date"
+                                            is-open="popupFromDate.opened" datepicker-options="dateOptions"
+                                            ng-required="true" show-button-bar="false" ng-model="params.from"/>
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="openFromDate()">
+											
+											<i class="icon-calendar"></i>
+											</button>
+                                        </span>
+
+                                        <!-- <span class="input-group-addon"><i class="icon-calendar"></i></span> -->
                                     </div>
                                 </div>
                             </div>
@@ -85,9 +95,20 @@
                                 <label class="control-label col-md-4">{{ 'toDate' | translate }}</label>
                                 <div class="col-md-8">
                                     <div class="input-group">
-                                        <input type="text" class="form-control datepicker" id="endDate" placeholder="Pick a date&hellip;"
-                                            ng-model="params.to">
-                                        <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                                        <!-- <input type="text" class="form-control datepicker" id="endDate" placeholder="Pick a date&hellip;" -->
+                                            <!-- ng-model="params.to"> -->
+                                        <!-- <span class="input-group-addon"><i class="icon-calendar"></i></span> -->
+										
+                                        <input type="text" class="form-control datepicker" uib-datepicker-popup="dd/MM/yyyy" placeholder="Pick a date"
+                                            is-open="popupToDate.opened" datepicker-options="dateOptions"
+                                            ng-required="true" show-button-bar="false" ng-model="params.to"/>
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="openToDate()">
+					
+											<i class="icon-calendar"></i>
+											</button>
+                                        </span>
+
                                     </div>
                                 </div>
                             </div>
@@ -201,3 +222,4 @@
     });
 
 </script>
+<script src="http://code.angularjs.org/1.6.6/i18n/angular-locale_fr-fr.js"></script>

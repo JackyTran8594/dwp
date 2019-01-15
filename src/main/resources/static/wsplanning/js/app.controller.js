@@ -1,4 +1,4 @@
-UserWebApp.controller('appCtrl', function ($scope, $rootScope, HttpService, $translate, $location, $filter, $state, CommonServices, tmhDynamicLocale) {
+UserWebApp.controller('appCtrl', function ($scope, $rootScope, $locale ,HttpService, $translate, $location, $filter, $state, CommonServices, tmhDynamicLocale) {
 
   CommonServices.loadData();
 
@@ -17,6 +17,8 @@ UserWebApp.controller('appCtrl', function ($scope, $rootScope, HttpService, $tra
   $rootScope.currName = "English";
 
 
+  
+  
   $scope.workorders = function () {
     $(".toggleSitebar").click();
     $state.go('app.main.workorder', { locale: $rootScope.lang });
@@ -27,8 +29,18 @@ UserWebApp.controller('appCtrl', function ($scope, $rootScope, HttpService, $tra
     $state.go('app.main.todaywork', { locale: $rootScope.lang });
   }
 
-  $scope.changeLang = function (lang) {
 
+  
+  
+ 
+  $scope.changeLang = function (lang) {
+	
+	 $rootScope.popupFromDate.opened = false;
+   $rootScope.popupToDate.opened = false;
+  
+  // $rootScope.popupToDate = {
+    // opened: false
+  // };
     //vutt
     var array = $rootScope.cultureInfoArray
     var cultureInfo = '';

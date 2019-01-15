@@ -1,5 +1,6 @@
 var UserWebApp = angular.module('UserWebApp', [
   'ngSanitize',
+  'tmh.dynamicLocale',
   'ui.bootstrap',
   'checklist-model',
   'ui.select2',
@@ -9,22 +10,20 @@ var UserWebApp = angular.module('UserWebApp', [
   'ui.bootstrap.datetimepicker',
   'ui.select',
   'ui.router',
-  'ngCookies',
-  'tmh.dynamicLocale'
+  'ngCookies'
 ]);
 
 
 UserWebApp.run(['$rootScope', 'uiSelect2Config', '$translate', 'tmhDynamicLocale', '$cookies', function ($rootScope, uiSelect2Config, $translate, tmhDynamicLocale, $cookies) {
 
 
-  // var cookie = $cookies.get('cultureInfo');
   // vutt
+  var langId = $("#currentLang").attr('data-currentLang');
   $rootScope.cultureInfoArray = JSON.parse(localStorage.getItem('cultureInfo'));
-  var langCookie = $cookies.get('language');
   var cultureInfo = '';
   angular.forEach($rootScope.cultureInfoArray, function (value) {
     var temp = value.CultureInfo.split("-");
-    if (temp[0] === langCookie) {
+    if (temp[0] === langId) {
       cultureInfo = value.CultureInfo.toLowerCase();
       tmhDynamicLocale.set(cultureInfo);
     }
@@ -41,6 +40,7 @@ UserWebApp.run(['$rootScope', 'uiSelect2Config', '$translate', 'tmhDynamicLocale
     console.log("root change stateChangeSuccess");
     if (toParams.lang && $translate.use() !== toParams.lang) {
       $translate.use(toParams.lang);
+	  console.log(toParams.lang);
     }
   });
 
