@@ -1,4 +1,4 @@
-UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope,$locale ,HttpService, $translate, $location, $state, $filter, $uibModal, CommonServices) {
+UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $location, $state, $filter, $uibModal, CommonServices) {
   $scope.lstAllData = [];
   $scope.lstData = [];
   $scope.lstSearch = [];
@@ -39,32 +39,31 @@ UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope,$locale
     $scope.limit = 20;
     $scope.page = 1;
   }
-  
-   // datepicker-vutt
-  
+
+  // datepicker-vutt
+
   $rootScope.$locale = $locale;
   console.log($rootScope.$locale);
-  
+
   $scope.dateOptions = {
     formatYear: 'yy',
-    maxDate: new Date(2020, 5, 22),
-    minDate: new Date(),
     startingDay: 1
   };
-  
-   $scope.openFromDate = function() {
+
+
+  $scope.openFromDate = function () {
     $rootScope.popupFromDate.opened = true;
   };
-  
-   $scope.openToDate = function() {
+
+  $scope.openToDate = function () {
     $rootScope.popupToDate.opened = true;
   };
-  
+
 
   $rootScope.popupFromDate = {
     opened: false
   };
-  
+
   $rootScope.popupToDate = {
     opened: false
   };
@@ -109,8 +108,8 @@ UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope,$locale
       "VisitReasonCode": $scope.params.visitReason,
       "Receiver": $scope.params.serv,
       "MyWO": $scope.params.myWo,
-	  "FromDate": $scope.params.from,
-	  "ToDate": $scope.params.to,
+      "FromDate": $scope.params.from,
+      "ToDate": $scope.params.to,
     };
 
     if (count) {
@@ -173,12 +172,12 @@ UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope,$locale
 
   $scope.addItem = function () {
     $('#modalFrm').modal('show');
-    $rootScope.$broadcast("modalFrm", {"item": {}});
+    $rootScope.$broadcast("modalFrm", { "item": {} });
   }
 
   $scope.editItem = function (item) {
     $('#modalFrm').modal('show');
-    $rootScope.$broadcast("modalFrm", {"item": angular.copy(item, {})});
+    $rootScope.$broadcast("modalFrm", { "item": angular.copy(item, {}) });
   }
 
   $scope.testModal = function () {
@@ -251,7 +250,7 @@ UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope,$locale
 
   //function viewDetail
   $scope.viewDetail = function (item) {
-    $state.go('app.main.workdetail', {'id': item.WorkOrderId, 'type': "todayWO"});
+    $state.go('app.main.workdetail', { 'id': item.WorkOrderId, 'type': "todayWO" });
   }
 
 });
