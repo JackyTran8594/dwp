@@ -1,5 +1,6 @@
 package com.wsplanning.webapp.clients;
 
+import com.wsplanning.webapp.utils.Utils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -84,10 +85,10 @@ public class WokOrderClient {
 
     //yyyy.MM.dd
     if (StringUtils.isNotBlank(ServDateFrom)) {
-      headers.set("ServDateFrom", ServDateFrom);
+      headers.set("ServDateFrom", Utils.formateDateAPI(ServDateFrom));
     }
     if (StringUtils.isNotBlank(ServDateTo)) {
-      headers.set("ServDateTo", ServDateTo);
+      headers.set("ServDateTo", Utils.formateDateAPI(ServDateTo));
     }
 
     HttpEntity entity = new HttpEntity(headers);
@@ -143,10 +144,10 @@ public class WokOrderClient {
       headers.set("LoadAttachmentData", "true");
     }
     if (StringUtils.isNotBlank(ServDateFrom)) {
-      headers.set("ServDateFrom", ServDateFrom);
+      headers.set("ServDateFrom", Utils.formateDateAPI(ServDateFrom));
     }
     if (StringUtils.isNotBlank(ServDateTo)) {
-      headers.set("ServDateTo", ServDateTo);
+      headers.set("ServDateTo", Utils.formateDateAPI(ServDateTo));
     }
 
     HttpEntity entity = new HttpEntity(headers);
@@ -154,6 +155,7 @@ public class WokOrderClient {
     ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class, new HashMap<>());
     return response.getBody();
   }
+
 
   public String detail(String token, String siteId, Map<String, String> params) {
     String workOrderId = params.get("WorkOrderId");
