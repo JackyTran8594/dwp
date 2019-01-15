@@ -42,8 +42,7 @@ UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope, $local
 
   // datepicker-vutt
 
-  $rootScope.$locale = $locale;
-  console.log($rootScope.$locale);
+  console.log($locale);
 
   $scope.dateOptions = {
     formatYear: 'yy',

@@ -75,8 +75,8 @@
                                     <div class="input-group">
                                         <!-- <input type="text" class="form-control datepicker" id="startDate" placeholder="Pick a date&hellip;" ng-model="params.from"> -->
 
-                                        <input type="text" class="form-control datepicker" uib-datepicker-popup="dd/MM/yyyy" placeholder="Pick a date"
-                                            is-open="popupFromDate.opened" datepicker-options="dateOptions"
+                                        <input type="text" class="form-control datepicker" uib-datepicker-popup="dd-MMMM-yyyy" placeholder="Pick a date"
+                                            is-open="popupFromDate.opened" datepicker-options="dateOptions" 
                                             ng-required="true" show-button-bar="false" ng-model="params.from"/>
                                         <span class="input-group-btn">
                                             <button type="button" class="btn btn-default" ng-click="openFromDate()">
@@ -99,7 +99,7 @@
                                             <!-- ng-model="params.to"> -->
                                         <!-- <span class="input-group-addon"><i class="icon-calendar"></i></span> -->
 										
-                                        <input type="text" class="form-control datepicker" uib-datepicker-popup="dd/MM/yyyy" placeholder="Pick a date"
+                                        <input type="text" class="form-control datepicker" uib-datepicker-popup="dd-MMMM-yyyy" placeholder="Pick a date"
                                             is-open="popupToDate.opened" datepicker-options="dateOptions"
                                             ng-required="true" show-button-bar="false" ng-model="params.to"/>
                                         <span class="input-group-btn">
