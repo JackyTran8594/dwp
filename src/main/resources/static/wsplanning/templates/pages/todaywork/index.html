@@ -141,7 +141,7 @@
                         <tbody>
                             <tr ng-repeat="item in lstData" ng-dblclick="viewDetail(item)">
                                 <td style="width: 20%;">
-                                    {{item.ServiceDate | date:'medium'}}<br />
+                                    {{item.ServiceDate | date:'dd-MMMM-yyyy HH:mm:ss'}}<br />
                                     <span class="{{item.WorkOrderStatus| titleCase}}">{{item.WorkOrderStatus}}<br /></span>
                                     {{item.WorkOrderNo}}<br />
                                 </td>
