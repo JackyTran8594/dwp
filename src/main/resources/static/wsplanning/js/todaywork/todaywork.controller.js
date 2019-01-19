@@ -15,7 +15,7 @@ UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope, $local
     "department": "",
     "trans": "",
     "visitReason": "",
-    "serv": "",
+    "receiver": "",
     "from": "",
     "to": "",
     "myWo": false,
@@ -30,7 +30,7 @@ UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope, $local
       "department": "",
       "trans": "",
       "visitReason": "",
-      "serv": "",
+      "receiver": "",
       "from": "",
       "to": "",
       "myWo": false,
@@ -96,6 +96,9 @@ UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope, $local
   function loadData(count) {
     common.spinner(true);
     //unScheduledWO, withSubcontractor, todayWO, allWO, withMOT, withTire, withBO, postponedWO, offers
+
+
+    console.log($scope.params);
     var params = {
       // "ViewName": "todayWO",
       "ViewName": "allWO",
@@ -105,7 +108,7 @@ UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope, $local
       "DeptId": $scope.params.department,
       "TransactionType": $scope.params.trans,
       "VisitReasonCode": $scope.params.visitReason,
-      "Receiver": $scope.params.serv,
+      "Receiver": $scope.params.receiver,
       "MyWO": $scope.params.myWo,
       "FromDate": $scope.params.from,
       "ToDate": $scope.params.to,

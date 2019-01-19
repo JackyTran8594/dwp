@@ -67,6 +67,9 @@ public class WokOrderClient {
     if (StringUtils.isNotBlank(DeptId)) {
       headers.set("DeptId", DeptId);
     }
+    if (StringUtils.isNotBlank(Receiver)) {
+      headers.set("Receiver", Receiver);
+    }
     if (StringUtils.isNotBlank(TransactionType)) {
       headers.set("TransactionType", TransactionType);
     }
@@ -127,6 +130,10 @@ public class WokOrderClient {
 
     if (StringUtils.isNotBlank(DeptId)) {
       headers.set("DeptId", DeptId);
+    }
+
+    if (StringUtils.isNotBlank(Receiver)) {
+      headers.set("Receiver", Receiver);
     }
     if (StringUtils.isNotBlank(TransactionType)) {
       headers.set("TransactionType", TransactionType);

@@ -33,15 +33,25 @@ function loadLang() {
     success: function (responseData, textStatus, jqXHR) {
       var option = "";
       localStorage.setItem('cultureInfo',JSON.stringify(responseData));
-      //$('#language').html("");
+
+
       $.each(responseData, function (i, item) {
-		
         var CultureInfo = item.CultureInfo;
         var tmp = CultureInfo.split("-");
-        option = "";
-        option += "<option value=\"" + tmp[0] + "\" data-thumbnail=\"/assets/images/flags/" + item.Flag.toLowerCase() + "\">" + item.Name + "</option>";
-        $('#language').append(option);
+        $('#language').append($('<option>', {
+          value: tmp[0],
+          text: item.Name
+        }));
       });
+
+      // $.each(responseData, function (i, item) {
+      //
+      //   var CultureInfo = item.CultureInfo;
+      //   var tmp = CultureInfo.split("-");
+      //   option = "";
+      //   option += "<option value=\"" + tmp[0] + "\" data-thumbnail=\"/assets/images/flags/" + item.Flag.toLowerCase() + "\">" + item.Name + "</option>";
+      //   $('#language').append(option);
+      // });
 
       var selected = readCookie("language");
       if (selected != "") {

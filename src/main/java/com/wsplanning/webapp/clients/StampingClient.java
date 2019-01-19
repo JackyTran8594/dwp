@@ -30,7 +30,7 @@ public class StampingClient {
 
   public String getStamping(String token) {
     HttpHeaders headers = new HttpHeaders();
-    headers.set("Token", Base64.getEncoder().encodeToString(token.getBytes()));
+    headers.set("Token", token);
     HttpEntity entity = new HttpEntity(headers);
     String url = String.format("%s", this.endpointUrl);
     ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class, new HashMap<>());
