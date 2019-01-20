@@ -229,10 +229,6 @@ UserWebApp.controller('WorkOrderCtrl', function ($scope, $rootScope, HttpService
     }
   }, true);
 
-  $scope.testModal = function () {
-    $("#modal_default").modal("show");
-  }
-
 
   //Modal
   var $ctrl = this;

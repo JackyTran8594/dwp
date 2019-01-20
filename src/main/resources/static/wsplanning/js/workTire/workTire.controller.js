@@ -4,13 +4,6 @@ UserWebApp.controller('WorkTireCtrl', function ($scope, $rootScope, $locale, Htt
   $scope.lstSearch = [];
   $scope.totalElements = 0;
 
-  // $scope.params = {
-  //   "department": "300",
-  //   "trans": "W",
-  //   "visitReason": "03",
-  //   "serv": "",
-  // };
-
   $scope.params = {
     "department": "",
     "trans": "",
@@ -101,7 +94,7 @@ UserWebApp.controller('WorkTireCtrl', function ($scope, $rootScope, $locale, Htt
     console.log($scope.params);
     var params = {
       // "ViewName": "todayWO",
-      "ViewName": "allWO",
+      "ViewName": "withTire",
       "skey": $scope.searchValue,
       "page": $scope.page,
       "limit": $scope.limit,
@@ -182,9 +175,6 @@ UserWebApp.controller('WorkTireCtrl', function ($scope, $rootScope, $locale, Htt
     $rootScope.$broadcast("modalFrm", { "item": angular.copy(item, {}) });
   }
 
-  $scope.testModal = function () {
-    $("#modal_default").modal("show");
-  }
 
   function findAndReplace(string, target, replacement) {
 

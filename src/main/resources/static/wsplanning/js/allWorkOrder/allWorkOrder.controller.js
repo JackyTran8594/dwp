@@ -182,9 +182,6 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
     $rootScope.$broadcast("modalFrm", { "item": angular.copy(item, {}) });
   }
 
-  $scope.testModal = function () {
-    $("#modal_default").modal("show");
-  }
 
   function findAndReplace(string, target, replacement) {
 

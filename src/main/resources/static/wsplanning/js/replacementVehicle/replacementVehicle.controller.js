@@ -1,4 +1,4 @@
-UserWebApp.controller('CalendarViewCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $location, $state, $filter, $uibModal, CommonServices) {
+UserWebApp.controller('ReplacementVehicleCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $location, $state, $filter, $uibModal, CommonServices) {
   $scope.lstAllData = [];
   $scope.lstData = [];
   $scope.lstSearch = [];
@@ -228,8 +228,8 @@ UserWebApp.controller('CalendarViewCtrl', function ($scope, $rootScope, $locale,
     console.log("----open--------");
     var modalInstance = $uibModal.open({
       animation: $ctrl.animationsEnabled,
-      templateUrl: '/wsplanning/templates/pages/calendarView/modal-form.html',
-      controller: 'CalendarViewModalCtrl',
+      templateUrl: '/wsplanning/templates/pages/replacementVehicle/modal-form.html',
+      controller: 'ReplacementVehicleModalCtrl',
       controllerAs: '$ctrl',
       size: size,
       resolve: {
@@ -246,12 +246,13 @@ UserWebApp.controller('CalendarViewCtrl', function ($scope, $rootScope, $locale,
     });
   };
 
+
 });
 
 
 // Modal controller
 
-UserWebApp.controller('CalendarViewModalCtrl', function ($scope, $rootScope, HttpService, $translate, $location, $filter, $uibModal, $uibModalInstance, item) {
+UserWebApp.controller('ReplacementVehicleModalCtrl', function ($scope, $rootScope, HttpService, $translate, $location, $filter, $uibModal, $uibModalInstance, item) {
 
   var $ctrl = this;
   $ctrl.item = item;

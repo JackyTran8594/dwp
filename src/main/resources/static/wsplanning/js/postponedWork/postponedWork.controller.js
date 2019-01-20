@@ -101,7 +101,7 @@ UserWebApp.controller('PostponedWorkCtrl', function ($scope, $rootScope, $locale
     console.log($scope.params);
     var params = {
       // "ViewName": "todayWO",
-      "ViewName": "allWO",
+      "ViewName": "postponedWO",
       "skey": $scope.searchValue,
       "page": $scope.page,
       "limit": $scope.limit,
@@ -182,9 +182,6 @@ UserWebApp.controller('PostponedWorkCtrl', function ($scope, $rootScope, $locale
     $rootScope.$broadcast("modalFrm", { "item": angular.copy(item, {}) });
   }
 
-  $scope.testModal = function () {
-    $("#modal_default").modal("show");
-  }
 
   function findAndReplace(string, target, replacement) {
 

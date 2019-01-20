@@ -47,17 +47,6 @@ public class WOController extends BaseController {
     }
   }
 
-  @PostMapping("/wo/unScheduledWO")
-  @ResponseBody
-  public ResponseEntity unScheduledWO(@RequestBody Map<String, String> params) {
-    try {
-      String rtn = wokOrderClient.getWO(getToken(), getSiteId(), params);
-      return new ResponseEntity<>(rtn, HttpStatus.OK);
-    } catch (Exception ex) {
-      return parseException(ex);
-    }
-  }
-
   @PostMapping("/wo/detail")
   @ResponseBody
   public ResponseEntity detail(@RequestBody Map<String, String> params) {

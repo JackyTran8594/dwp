@@ -1,11 +1,36 @@
 var translationsEN = {
   workOrderTitle: "WorkOrder Management",
   todayWorkTitle: "Today Work Management",
+  allWorkTitle: "All Work Management",
+  unscheduledWorkTitle: "Unscheduled Work Management",
+  withSubcontractorTitle: "Workorders With Subcontractor Management",
+  withMOTTitle: "Workorder with MOT Management",
+  postponedWorkTitle: "Postponed Work Management",
+  withTireChangeTitle: "Workorder With Tire Changes Management",
+  withBOTitle: "Workorder With BO Parts Management",
+  calendarViewTitle: "Calendar View Management",
+  taskListTitle: "Task List Management",
+  offerTitle: "Offer Management",
+  replacementVehicleTitle: " Replacement Vehicle Planning Management",
+
+
   //breadcrumb
   breadcrumbHome: "Home",
   breadcrumbWorkOrder: "WorkOrder",
   breadcrumbTodayWork: "Today Work",
   breadcrumbWorkDetail: "Work Detail",
+  breadcrumbAllWork: "All Work",
+  breadcrumbUnscheduledWork: "Unscheduled Work",
+  breadcrumbWithSubcontractor: "Workorders With Subcontractor",
+  breadcrumbWithMOT: "Workorder with MOT",
+  breadcrumbPostponedWork: "Postponed Work",
+  breadcrumbWithTire: "Workorder With Tire Changes",
+  breadcrumbWithBO: "Workorder With BO parts",
+  breadcrumbCalendarView: "Calendar View",
+  breadcrumbTaskList: "Task List",
+  breadcrumbOffer: "Offer",
+  breadcrumbReplacementVehicle: "Replacement Vehicle Planning",
+
 
   //common
   btnAdd: "Add",

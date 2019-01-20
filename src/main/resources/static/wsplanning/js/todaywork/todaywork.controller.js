@@ -100,8 +100,8 @@ UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope, $local
 
     console.log($scope.params);
     var params = {
-      // "ViewName": "todayWO",
-      "ViewName": "allWO",
+      "ViewName": "todayWO",
+      // "ViewName": "allWO",
       "skey": $scope.searchValue,
       "page": $scope.page,
       "limit": $scope.limit,
@@ -180,10 +180,6 @@ UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope, $local
   $scope.editItem = function (item) {
     $('#modalFrm').modal('show');
     $rootScope.$broadcast("modalFrm", { "item": angular.copy(item, {}) });
-  }
-
-  $scope.testModal = function () {
-    $("#modal_default").modal("show");
   }
 
   function findAndReplace(string, target, replacement) {

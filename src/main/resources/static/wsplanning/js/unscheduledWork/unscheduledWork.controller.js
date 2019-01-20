@@ -1,4 +1,4 @@
-UserWebApp.controller('CalendarViewCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $location, $state, $filter, $uibModal, CommonServices) {
+UserWebApp.controller('UnscheduledWorkCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $location, $state, $filter, $uibModal, CommonServices) {
   $scope.lstAllData = [];
   $scope.lstData = [];
   $scope.lstSearch = [];
@@ -101,7 +101,7 @@ UserWebApp.controller('CalendarViewCtrl', function ($scope, $rootScope, $locale,
     console.log($scope.params);
     var params = {
       // "ViewName": "todayWO",
-      "ViewName": "allWO",
+      "ViewName": "unScheduledWO",
       "skey": $scope.searchValue,
       "page": $scope.page,
       "limit": $scope.limit,
@@ -181,8 +181,7 @@ UserWebApp.controller('CalendarViewCtrl', function ($scope, $rootScope, $locale,
     $('#modalFrm').modal('show');
     $rootScope.$broadcast("modalFrm", { "item": angular.copy(item, {}) });
   }
-
-
+  
   function findAndReplace(string, target, replacement) {
 
     var i = 0, length = string.length;
@@ -228,8 +227,8 @@ UserWebApp.controller('CalendarViewCtrl', function ($scope, $rootScope, $locale,
     console.log("----open--------");
     var modalInstance = $uibModal.open({
       animation: $ctrl.animationsEnabled,
-      templateUrl: '/wsplanning/templates/pages/calendarView/modal-form.html',
-      controller: 'CalendarViewModalCtrl',
+      templateUrl: '/wsplanning/templates/pages/unscheduledWork/modal-form.html',
+      controller: 'UnscheduledWorkModalCtrl',
       controllerAs: '$ctrl',
       size: size,
       resolve: {
@@ -246,12 +245,18 @@ UserWebApp.controller('CalendarViewCtrl', function ($scope, $rootScope, $locale,
     });
   };
 
+
+  //function viewDetail
+  $scope.viewDetail = function (item) {
+    $state.go('app.main.workdetail', { 'id': item.WorkOrderId, 'type': "todayWO" });
+  }
+
 });
 
 
 // Modal controller
 
-UserWebApp.controller('CalendarViewModalCtrl', function ($scope, $rootScope, HttpService, $translate, $location, $filter, $uibModal, $uibModalInstance, item) {
+UserWebApp.controller('UnscheduledWorkModalCtrl', function ($scope, $rootScope, HttpService, $translate, $location, $filter, $uibModal, $uibModalInstance, item) {
 
   var $ctrl = this;
   $ctrl.item = item;

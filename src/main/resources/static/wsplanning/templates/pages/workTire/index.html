@@ -1,4 +1,4 @@
-<div ng-include="'/wsplanning/templates/pages/todaywork/page-header.html'"></div>
+<div ng-include="'/wsplanning/templates/pages/workTire/page-header.html'"></div>
 
 
 <!-- Page container -->
@@ -191,7 +191,7 @@
             <!-- /panel content -->
 
             <!-- Modal replace-->
-            <div ng-include="'/wsplanning/templates/pages/todaywork/modal-delete.html'"></div>
+            <div ng-include="'/wsplanning/templates/pages/workTire/modal-delete.html'"></div>
             <!-- /modal replace-->
 
         </div>
@@ -202,20 +202,3 @@
 
 </div>
 <!-- /page container -->
-
-<script type="text/javascript">
-    //              $(function () {
-    //                $('.inputDateTime').inputmask(constants.DATE_INPUT_MASK_FORMAT);
-    //              })
-
-    $(document).ready(function () {
-        $("#startDate").datepicker({
-            format: 'dd/mm/yyyy',
-            startDate: '-1d'
-        });
-        $("#endDate").datepicker({
-            format: 'dd/mm/yyyy',
-        });
-    });
-
-</script>
