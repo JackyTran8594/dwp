@@ -47,28 +47,49 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
       }
     })
 
+    .state('app.main.allwork',{
+      url:'allwork',
+      controller: "AllWorkOrdersCtrl as $ctrl",
+      templateUrl: '/wsplanning/templates/pages/allWorkOrder/index.html',
+    })
+
+    .state('app.main.workmot',{
+      url:'workmot',
+      controller: "WorkMOTCtrl",
+      templateUrl: '/wsplanning/templates/pages/workMOT/index.html',
+    })
+
+    .state('app.main.worktire',{
+      url:'worktire',
+      controller: "WorkTireCtrl",
+      templateUrl: '/wsplanning/templates/pages/workTire/index.html',
+    })
+    .state('app.main.workbo',{
+      url:'workbo',
+      controller: "WorkBOCtrl",
+      templateUrl: '/wsplanning/templates/pages/workBO/index.html',
+    })
+
+    .state('app.main.postponedwork',{
+      url:'postponedwork',
+      controller: "PostponedWorkCtrl",
+      templateUrl: '/wsplanning/templates/pages/postponedWork/index.html',
+    })
+
+    .state('app.main.tasklist',{
+      url:'tasklist',
+      controller: "TaskListCtrl",
+      templateUrl: '/wsplanning/templates/pages/taskList/index.html',
+    })
+
+    .state('app.main.calendarview',{
+      url:'calendarview',
+      controller: "CalendarViewCtrl",
+      templateUrl: '/wsplanning/templates/pages/calendarView/index.html',
+    })
+
   //$locationProvider.html5Mode(true);
 });
 
-// UserWebApp.config(function ($provide) {
-  // $provide.decorator('datepickerDirective', function($delegate) {
-    // angular.forEach($delegate, function (directive) {
-      // var originalCompile = directive.compile; 
-      // var originalLink = directive.link; 
-      // console.log($delegate);
-      // if (originalCompile) {
-        // directive.compile = function () {
-          // return function (scope) {
-            // scope.$on('$localeChangeSuccess', function () {
-              // scope.move(0);
-            // });
-            // originalLink.apply(this, arguments);
-          // };
-        // }
-      // }
-    // });
-    // return $delegate;
-  // });  
-// });
   
 
