@@ -220,8 +220,8 @@ UserWebApp.controller('WorkMOTCtrl', function ($scope, $rootScope, $locale, Http
     console.log("----open--------");
     var modalInstance = $uibModal.open({
       animation: $ctrl.animationsEnabled,
-      templateUrl: '/wsplanning/templates/pages/workOrder/modal-form.html',
-      controller: 'TodayWorkModalCtrl',
+      templateUrl: '/wsplanning/templates/pages/workMOT/modal-form.html',
+      controller: 'WorkMOTModalCtrl',
       controllerAs: '$ctrl',
       size: size,
       resolve: {
@@ -243,5 +243,25 @@ UserWebApp.controller('WorkMOTCtrl', function ($scope, $rootScope, $locale, Http
   $scope.viewDetail = function (item) {
     $state.go('app.main.workdetail', { 'id': item.WorkOrderId, 'type': "todayWO" });
   }
+});
+
+
+// Modal controller
+
+UserWebApp.controller('WorkMOTModalCtrl', function ($scope, $rootScope, HttpService, $translate, $location, $filter, $uibModal, $uibModalInstance, item) {
+
+  var $ctrl = this;
+  $ctrl.item = item;
+  $ctrl.selected = item;
+
+  $ctrl.ok = function () {
+    $uibModalInstance.close($ctrl.selected);
+  };
+
+  $ctrl.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
 
 });
+
+//end

@@ -245,6 +245,7 @@ UserWebApp.controller('CalendarViewCtrl', function ($scope, $rootScope, $locale,
       console.log('Modal dismissed at: ' + new Date());
     });
   };
+ 
 
 });
 

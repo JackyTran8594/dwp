@@ -245,6 +245,12 @@ UserWebApp.controller('WorkBOCtrl', function ($scope, $rootScope, $locale, HttpS
       console.log('Modal dismissed at: ' + new Date());
     });
   };
+  
+   //function viewDetail
+  $scope.viewDetail = function (item) {
+    $state.go('app.main.workdetail', { 'id': item.WorkOrderId, 'type': "todayWO" });
+  }
+
 });
 
 

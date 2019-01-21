@@ -245,6 +245,12 @@ UserWebApp.controller('PostponedWorkCtrl', function ($scope, $rootScope, $locale
       console.log('Modal dismissed at: ' + new Date());
     });
   };
+  
+   //function viewDetail
+  $scope.viewDetail = function (item) {
+    $state.go('app.main.workdetail', { 'id': item.WorkOrderId, 'type': "todayWO" });
+  }
+
 
 });
 
