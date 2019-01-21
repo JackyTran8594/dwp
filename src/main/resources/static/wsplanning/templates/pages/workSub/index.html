@@ -1,0 +1,204 @@
+<div ng-include="'/wsplanning/templates/pages/workSub/page-header.html'"></div>
+
+
+<!-- Page container -->
+<div class="page-container">
+
+    <!-- Page content -->
+    <div class="page-content">
+
+        <!-- Main content -->
+        <div class="content-wrapper">
+
+            <!--SEARCH-->
+            <div class="well well-sm">
+                <form class="form-horizontal form-search row">
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="col-md-12">
+                                <input type="text" class="form-control" ng-model="searchValue" placeholder="{{ 'searchWo' | translate }}"
+                                    code="13" dl-key-code="doSearch();">
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label col-md-4">{{ 'trans' | translate }}</label>
+                                <div class="col-md-8">
+                                    <select class="form-control" ng-model="params.trans" ng-options="item.Id as item.Name for item in lstTrans">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label col-md-4">{{ 'department' | translate }}</label>
+                                <div class="col-md-8">
+                                    <select class="form-control" ng-model="params.department" ng-options="item.Id as item.Name for item in lstDepartment">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label col-md-4">{{ 'visitReason' | translate }}</label>
+                                <div class="col-md-8">
+                                    <select class="form-control" ng-model="params.visitReason" ng-options="item.Id as item.Name for item in lstVisitReason">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label col-md-4">{{ 'serv' | translate }}</label>
+                                <div class="col-md-8">
+                                    <select class="form-control" ng-model="params.receiver" ng-options="item.SmanId as item.Name for item in lstServ">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label col-md-4">{{ 'fromDate' | translate }}</label>
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                        <!-- <input type="text" class="form-control datepicker" id="startDate" placeholder="Pick a date&hellip;" ng-model="params.from"> -->
+
+                                        <input type="text" class="form-control datepicker" uib-datepicker-popup="dd-MMMM-yyyy" placeholder="Pick a date"
+                                            is-open="popupFromDate.opened" datepicker-options="dateOptions" 
+                                            ng-required="true" show-button-bar="false" ng-model="params.from"/>
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="openFromDate()">
+											
+											<i class="icon-calendar"></i>
+											</button>
+                                        </span>
+
+                                        <!-- <span class="input-group-addon"><i class="icon-calendar"></i></span> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label col-md-4">{{ 'toDate' | translate }}</label>
+                                <div class="col-md-8">
+                                    <div class="input-group">
+                                        <!-- <input type="text" class="form-control datepicker" id="endDate" placeholder="Pick a date&hellip;" -->
+                                            <!-- ng-model="params.to"> -->
+                                        <!-- <span class="input-group-addon"><i class="icon-calendar"></i></span> -->
+										
+                                        <input type="text" class="form-control datepicker" uib-datepicker-popup="dd-MMMM-yyyy" placeholder="Pick a date"
+                                            is-open="popupToDate.opened" datepicker-options="dateOptions"
+                                            ng-required="true" show-button-bar="false" ng-model="params.to"/>
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="openToDate()">
+					
+											<i class="icon-calendar"></i>
+											</button>
+                                        </span>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label style="padding-top: 12px;padding-left: 10px;">
+                                    <input type="checkbox" ng-checked="params.myWo" ng-model="params.myWo">
+                                    {{ 'myWo' | translate }}
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-1">
+                            <button type="button" ng-click="doSearch()" class="btn btn-icon btn-default"><i class="icon-search4"></i></button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <!--SEARCH-->
+
+            <!-- Panel content -->
+            <div class="panel panel-flat" style="margin-bottom: 0px;">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+
+                        <!--BODY-->
+                        <tbody>
+                            <tr ng-repeat="item in lstData" ng-dblclick="viewDetail(item)">
+                                <td style="width: 20%;">
+                                    {{item.ServiceDate | date:'dd-MMMM-yyyy HH:mm:ss'}}<br />
+                                    <span class="{{item.WorkOrderStatus| titleCase}}">{{item.WorkOrderStatus}}<br /></span>
+                                    {{item.WorkOrderNo}}<br />
+                                </td>
+                                <td ng-bind-html="showLeftCol(item)"></td>
+                            </tr>
+                            <tr ng-if="isNoData || !lstData || lstData.length <= 0" class="active">
+                                <td colspan="20" class="text-center">{{ 'commonNoResult' | translate }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="panel-footer text-right" style="padding-right: 25px;">
+
+                    <!-- Paging elements -->
+                    <form class="form-inline formPaging formValidate">
+                        <div class="form-group">
+                            {{totalElements | number}} <span class="text-lowercase">{{ 'item' | translate }}</span>
+                        </div>
+                        <div class="form-group" style="border-left: 1px solid #ddd">
+                            <ul class="pagination-flat pagination-rounded" uib-pagination total-items="totalElements"
+                                items-per-page="limit" max-size="2" ng-model="page" boundary-links="true"
+                                boundary-link-numbers="true" force-ellipses="true" rotate="true" previous-text="&lsaquo;"
+                                next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" name="page" ng-model="pageGo" placeholder="{{ 'page' | translate }}"
+                                class="form-control validatePositiveInteger" min="1" max="{{(totalElements / limit) | ceil}}"
+                                style="width: 55px">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-default">{{ 'go' | translate }}</button>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" ng-model="limit" ng-change="changeLimit()" convert-to-number>
+                                <option value="1">1</option>
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                            </select>
+                            <span>{{ 'limit' | translate }}</span>
+                        </div>
+                    </form>
+                    <!-- /paging element -->
+
+                </div>
+            </div>
+            <!-- /panel content -->
+
+            <!-- Modal replace-->
+            <div ng-include="'/wsplanning/templates/pages/workSub/modal-delete.html'"></div>
+            <!-- /modal replace-->
+
+        </div>
+        <!-- /main content -->
+
+    </div>
+    <!-- /page content -->
+
+</div>
+<!-- /page container -->

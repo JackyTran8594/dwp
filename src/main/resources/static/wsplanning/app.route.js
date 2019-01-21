@@ -66,6 +66,12 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
       templateUrl: '/wsplanning/templates/pages/workMOT/index.html',
     })
 
+    .state('app.main.worksub',{
+      url:'worksub',
+      controller: "WorkSubcontractorCtrl as $ctrl",
+      templateUrl: '/wsplanning/templates/pages/workSub/index.html',
+    })
+
     .state('app.main.worktire',{
       url:'worktire',
       controller: "WorkTireCtrl as $ctrl",
