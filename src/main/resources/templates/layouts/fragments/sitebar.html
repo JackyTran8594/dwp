@@ -12,22 +12,22 @@
         <div class="sidebar-category sidebar-category-visible">
             <div class="category-content no-padding">
                 <ul class="navigation navigation-main navigation-accordion">
-                    <li ng-class="{active: currentState == 'app.main.unscheduledwork'}" ui-sref-active="active"><a ui-sref="app.main.unscheduledwork"><i class="icon-list-unordered"></i> <span th:text="#{menu.unscheduledWork}"></span></a></li>
+                    <li ng-class="{active: currentState == 'app.main.unscheduledwork'}" ui-sref-active="active"><a ng-click="unscheduledwork()"><i class="icon-list-unordered"></i> <span th:text="#{menu.unscheduledWork}"></span></a></li>
                     <!--<li ng-class="{active: currentState == 'app.main.workorder'}" ui-sref-active="active"><a ng-click="workorders()" ><i class="icon-list-unordered"></i> <span th:text="#{menu.workorders}"></span></a></li>
                     <li ng-class="{active: currentState == 'app.main.todaywork'}" ui-sref-active="active"><a ng-click="todayWork()" ><i class="icon icon-newspaper"></i> <span th:text="#{menu.todayWork}"></span></a></li>
                     <li ng-class="{active: currentState == 'app.main.workorder'}" ui-sref-active="active"><a ui-sref="app.main.workorder"><i class="icon-list-unordered"></i> <span th:text="#{menu.workorders}"></span></a></li>-->
-                    <li ng-class="{active: currentState == 'app.main.worksub'}" ui-sref-active="active"><a ui-sref="app.main.worksub"><i class="icon-list-unordered"></i> <span th:text="#{menu.workSub}"></span></a></li>
-                    <li ng-class="{active: currentState == 'app.main.todaywork'}" ui-sref-active="active"><a ui-sref="app.main.todaywork" ><i class="icon icon-newspaper"></i> <span th:text="#{menu.todayWork}"></span></a></li>
-                    <li ng-class="{active: currentState == 'app.main.allwork'}" ui-sref-active="active"><a ui-sref="app.main.allwork"><i class="icon icon-cart"></i> <span th:text="#{menu.allWork}"></span></a></li>
-                    <li ng-class="{active: currentState == 'app.main.workmot'}" ui-sref-active="active"><a ui-sref="app.main.workmot"><i class="icon icon-hammer2"></i> <span th:text="#{menu.workMOT}"></span></a></li>
-                    <li ng-class="{active: currentState == 'app.main.worktire'}" ui-sref-active="active"><a ui-sref="app.main.worktire"><i class="icon icon-user-check"></i> <span th:text="#{menu.workTires}"></span></a></li>
-                    <li ng-class="{active: currentState == 'app.main.workbo'}" ui-sref-active="active"><a ui-sref="app.main.workbo"><i class="icon icon-cart"></i> <span th:text="#{menu.workBO}"></span></a></li>
-                    <li ng-class="{active: currentState == 'app.main.postponedwork'}" ui-sref-active="active"><a ui-sref="app.main.postponedwork"><i class="icon icon-paint-format"></i> <span th:text="#{menu.postWork}"></span></a></li>
-                    <li ng-class="{active: currentState == 'app.main.tasklist'}" ui-sref-active="active"><a ui-sref="app.main.tasklist"><i class="icon icon-list2"></i> <span th:text="#{menu.task}"></span></a></li>
-                    <li ng-class="{active: currentState == 'app.main.calendarview'}" ui-sref-active="active"><a ui-sref="app.main.calendarview"><i class="icon icon-calendar"></i> <span th:text="#{menu.calendar}"></span></a></li>
-                    <li><a href="/"><i class="icon icon-calendar"></i> <span th:text="#{menu.stramping}"></span></a></li>
-                    <li ng-class="{active: currentState == 'app.main.offer'}" ui-sref-active="active"><a ui-sref="app.main.offer"><i class="icon icon-calendar"></i> <span th:text="#{menu.offers}"></span></a></li>
-                    <li ng-class="{active: currentState == 'app.main.replacementvehicle'}" ui-sref-active="active"><a ui-sref="app.main.replacementvehicle"><i class="icon icon-joomla"></i> <span th:text="#{menu.replacement}"></span></a></li>
+                    <li ng-class="{active: currentState == 'app.main.worksub'}" ui-sref-active="active"><a ng-click="worksub()"><i class="icon-list-unordered"></i> <span th:text="#{menu.workSub}"></span></a></li>
+                    <li ng-class="{active: currentState == 'app.main.todaywork'}" ui-sref-active="active"><a ng-click="todayWork()" ><i class="icon icon-newspaper"></i> <span th:text="#{menu.todayWork}"></span></a></li>
+                    <li ng-class="{active: currentState == 'app.main.allwork'}" ui-sref-active="active"><a ng-click="allwork()"><i class="icon icon-cart"></i> <span th:text="#{menu.allWork}"></span></a></li>
+                    <li ng-class="{active: currentState == 'app.main.workmot'}" ui-sref-active="active"><a ng-click="workmot()"><i class="icon icon-hammer2"></i> <span th:text="#{menu.workMOT}"></span></a></li>
+                    <li ng-class="{active: currentState == 'app.main.worktire'}" ui-sref-active="active"><a ng-click="worktire()"><i class="icon icon-user-check"></i> <span th:text="#{menu.workTires}"></span></a></li>
+                    <li ng-class="{active: currentState == 'app.main.workbo'}" ui-sref-active="active"><a ng-click="workbo()"><i class="icon icon-cart"></i> <span th:text="#{menu.workBO}"></span></a></li>
+                    <li ng-class="{active: currentState == 'app.main.postponedwork'}" ui-sref-active="active"><a ng-click="postponedwork()"><i class="icon icon-paint-format"></i> <span th:text="#{menu.postWork}"></span></a></li>
+                    <li ng-class="{active: currentState == 'app.main.tasklist'}" ui-sref-active="active"><a ng-click="tasklist()"><i class="icon icon-list2"></i> <span th:text="#{menu.task}"></span></a></li>
+                    <li ng-class="{active: currentState == 'app.main.calendarview'}" ui-sref-active="active"><a ng-click="calendarview()"><i class="icon icon-calendar"></i> <span th:text="#{menu.calendar}"></span></a></li>
+                    <li><a ng-click="todayWork()" href="/"><i class="icon icon-calendar"></i> <span th:text="#{menu.stramping}"></span></a></li>
+                    <li ng-class="{active: currentState == 'app.main.offer'}" ui-sref-active="active"><a ng-click="offer()"><i class="icon icon-calendar"></i> <span th:text="#{menu.offers}"></span></a></li>
+                    <li ng-class="{active: currentState == 'app.main.replacementvehicle'}" ui-sref-active="active"><a ng-click="replacementvehicle()"><i class="icon icon-joomla"></i> <span th:text="#{menu.replacement}"></span></a></li>
                     <!-- /main -->
 
                 </ul>

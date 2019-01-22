@@ -23,11 +23,69 @@ UserWebApp.controller('appCtrl', function ($scope, $rootScope, $locale ,HttpServ
     $(".toggleSitebar").click();
     $state.go('app.main.workorder', { locale: $rootScope.lang });
   }
+  
+  $scope.unscheduledwork = function () {
+    $(".toggleSitebar").click();
+    $state.go('app.main.unscheduledwork', { locale: $rootScope.lang });
+  }
 
   $scope.todayWork = function () {
     $(".toggleSitebar").click();
     $state.go('app.main.todaywork', { locale: $rootScope.lang });
   }
+  
+  $scope.worksub = function () {
+    $(".toggleSitebar").click();
+    $state.go('app.main.worksub', { locale: $rootScope.lang });
+  }
+  
+  $scope.allwork = function () {
+    $(".toggleSitebar").click();
+    $state.go('app.main.allwork', { locale: $rootScope.lang });
+  }
+  
+  $scope.workmot = function () {
+    $(".toggleSitebar").click();
+    $state.go('app.main.workmot', { locale: $rootScope.lang });
+  }
+  
+  $scope.worktire = function () {
+    $(".toggleSitebar").click();
+    $state.go('app.main.worktire', { locale: $rootScope.lang });
+  }
+  
+  $scope.workbo = function () {
+    $(".toggleSitebar").click();
+    $state.go('app.main.workbo', { locale: $rootScope.lang });
+  }
+  
+  $scope.postponedwork = function () {
+    $(".toggleSitebar").click();
+    $state.go('app.main.postponedwork', { locale: $rootScope.lang });
+  }
+  
+  $scope.tasklist = function () {
+    $(".toggleSitebar").click();
+    $state.go('app.main.tasklist', { locale: $rootScope.lang });
+  }
+  
+    
+  $scope.calendarview = function () {
+    $(".toggleSitebar").click();
+    $state.go('app.main.calendarview', { locale: $rootScope.lang });
+  }
+
+ $scope.offer = function () {
+    $(".toggleSitebar").click();
+    $state.go('app.main.offer', { locale: $rootScope.lang });
+  }
+
+   $scope.replacementvehicle = function () {
+    $(".toggleSitebar").click();
+    $state.go('app.main.calendarview', { locale: $rootScope.lang });
+  }
+
+  
 
 
   
@@ -38,9 +96,6 @@ UserWebApp.controller('appCtrl', function ($scope, $rootScope, $locale ,HttpServ
 	 $rootScope.popupFromDate.opened = false;
    $rootScope.popupToDate.opened = false;
   
-  // $rootScope.popupToDate = {
-    // opened: false
-  // };
     //vutt
     var array = $rootScope.cultureInfoArray
     var cultureInfo = '';
