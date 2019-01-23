@@ -31,7 +31,6 @@ UserWebApp.run(['$rootScope', 'uiSelect2Config', '$translate', 'tmhDynamicLocale
   //
 
 
-
   $rootScope.$on('stateChangeStart', function (event, toState, toParams, fromState, fromParams, options) {
     console.log("root change stateChangeStart");
   });
@@ -40,7 +39,7 @@ UserWebApp.run(['$rootScope', 'uiSelect2Config', '$translate', 'tmhDynamicLocale
     console.log("root change stateChangeSuccess");
     if (toParams.lang && $translate.use() !== toParams.lang) {
       $translate.use(toParams.lang);
-	  console.log(toParams.lang);
+      console.log(toParams.lang);
     }
   });
 
@@ -93,7 +92,7 @@ UserWebApp.run(['$rootScope', 'uiSelect2Config', '$translate', 'tmhDynamicLocale
         console.log("statechange onSuccess " + newLange);
 
         //Set Lang
-        HttpService.postData('/language', { "lang": newLange }).then(function (response) {
+        HttpService.postData('/language', {"lang": newLange}).then(function (response) {
           console.log(response);
           $translate.use(newLange);
 
@@ -106,7 +105,12 @@ UserWebApp.run(['$rootScope', 'uiSelect2Config', '$translate', 'tmhDynamicLocale
           common.spinner(false);
         });
       }
+
+
+      //Add load
+      $rootScope.$broadcast('routestateChangeSuccess', {});
+
     });
 
   })
-  ;
+;
