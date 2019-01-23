@@ -95,13 +95,12 @@ UserWebApp.controller('OffersCtrl', function ($scope, $rootScope, $locale, HttpS
 
   function loadData(count) {
     common.spinner(true);
-    //unScheduledWO, withSubcontractor, todayWO, allWO, withMOT, withTire, withBO, postponedWO, offers
-
+    
 
     console.log($scope.params);
     var params = {
       // "ViewName": "todayWO",
-      "ViewName": "allWO",
+      "ViewName": "offers",
       "skey": $scope.searchValue,
       "page": $scope.page,
       "limit": $scope.limit,
