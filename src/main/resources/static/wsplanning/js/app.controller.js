@@ -10,6 +10,7 @@ UserWebApp.controller('appCtrl', function ($scope, $rootScope, $locale ,HttpServ
       $rootScope.stamping = "";
     }
   });
+    
 
   $rootScope.lang = $("#currentLang").attr('data-currentLang');
   $rootScope.currLang = $rootScope.lang;
@@ -22,67 +23,183 @@ UserWebApp.controller('appCtrl', function ($scope, $rootScope, $locale ,HttpServ
   $scope.workorders = function () {
     console.log("----workorders----");
     $(".toggleSitebar").click();
+	CommonServices.getStamping().then(function (data) {
+    if (data && data.StampText) {
+      $rootScope.stamping = data.StampText;
+    } else {
+      $rootScope.stamping = "";
+    }
+  });
+  
     $state.go('app.main.workorder', { locale: $rootScope.lang });
   }
   
   $scope.unscheduledwork = function () {
     $(".toggleSitebar").click();
+	
+	CommonServices.getStamping().then(function (data) {
+    if (data && data.StampText) {
+      $rootScope.stamping = data.StampText;
+    } else {
+      $rootScope.stamping = "";
+    }
+  });
+  
     $state.go('app.main.unscheduledwork', { locale: $rootScope.lang });
   }
 
   $scope.todayWork = function () {
     $(".toggleSitebar").click();
+	
+	CommonServices.getStamping().then(function (data) {
+    if (data && data.StampText) {
+      $rootScope.stamping = data.StampText;
+    } else {
+      $rootScope.stamping = "";
+    }
+  });
+  
     $state.go('app.main.todaywork', { locale: $rootScope.lang });
   }
   
   $scope.worksub = function () {
     $(".toggleSitebar").click();
+	
+	CommonServices.getStamping().then(function (data) {
+    if (data && data.StampText) {
+      $rootScope.stamping = data.StampText;
+    } else {
+      $rootScope.stamping = "";
+    }
+  });
+  
     $state.go('app.main.worksub', { locale: $rootScope.lang });
   }
   
   $scope.allwork = function () {
     $(".toggleSitebar").click();
+	
+	CommonServices.getStamping().then(function (data) {
+    if (data && data.StampText) {
+      $rootScope.stamping = data.StampText;
+    } else {
+      $rootScope.stamping = "";
+    }
+  });
+	
     $state.go('app.main.allwork', { locale: $rootScope.lang });
   }
   
   $scope.workmot = function () {
     $(".toggleSitebar").click();
+	
+	CommonServices.getStamping().then(function (data) {
+    if (data && data.StampText) {
+      $rootScope.stamping = data.StampText;
+    } else {
+      $rootScope.stamping = "";
+    }
+  });
+  
     $state.go('app.main.workmot', { locale: $rootScope.lang });
   }
   
   $scope.worktire = function () {
     $(".toggleSitebar").click();
+	
+	CommonServices.getStamping().then(function (data) {
+    if (data && data.StampText) {
+      $rootScope.stamping = data.StampText;
+    } else {
+      $rootScope.stamping = "";
+    }
+  });
+  
     $state.go('app.main.worktire', { locale: $rootScope.lang });
   }
   
   $scope.workbo = function () {
     $(".toggleSitebar").click();
+	
+	CommonServices.getStamping().then(function (data) {
+    if (data && data.StampText) {
+      $rootScope.stamping = data.StampText;
+    } else {
+      $rootScope.stamping = "";
+    }
+	});
+  
     $state.go('app.main.workbo', { locale: $rootScope.lang });
   }
   
   $scope.postponedwork = function () {
     $(".toggleSitebar").click();
+	
+	CommonServices.getStamping().then(function (data) {
+    if (data && data.StampText) {
+      $rootScope.stamping = data.StampText;
+    } else {
+      $rootScope.stamping = "";
+    }
+  });
+  
     $state.go('app.main.postponedwork', { locale: $rootScope.lang });
   }
   
   $scope.tasklist = function () {
     $(".toggleSitebar").click();
+	
+	CommonServices.getStamping().then(function (data) {
+    if (data && data.StampText) {
+      $rootScope.stamping = data.StampText;
+    } else {
+      $rootScope.stamping = "";
+    }
+  });
+  
     $state.go('app.main.tasklist', { locale: $rootScope.lang });
   }
   
     
   $scope.calendarview = function () {
     $(".toggleSitebar").click();
+	
+	CommonServices.getStamping().then(function (data) {
+    if (data && data.StampText) {
+      $rootScope.stamping = data.StampText;
+    } else {
+      $rootScope.stamping = "";
+    }
+  });
+  
     $state.go('app.main.calendarview', { locale: $rootScope.lang });
   }
 
  $scope.offer = function () {
     $(".toggleSitebar").click();
+	
+	CommonServices.getStamping().then(function (data) {
+    if (data && data.StampText) {
+      $rootScope.stamping = data.StampText;
+    } else {
+      $rootScope.stamping = "";
+    }
+  });
+  
     $state.go('app.main.offer', { locale: $rootScope.lang });
   }
 
    $scope.replacementvehicle = function () {
     $(".toggleSitebar").click();
+	
+	CommonServices.getStamping().then(function (data) {
+    if (data && data.StampText) {
+      $rootScope.stamping = data.StampText;
+    } else {
+      $rootScope.stamping = "";
+    }
+  });
+  
     $state.go('app.main.calendarview', { locale: $rootScope.lang });
   }
 
