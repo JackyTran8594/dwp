@@ -113,6 +113,12 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
       templateUrl: '/wsplanning/templates/pages/replacementVehicle/index.html',
     })
 
+    .state('app.main.newwo',{
+      url:'newwo',
+      controller: "newWOCtrl as $ctrl",
+      templateUrl: '/wsplanning/templates/pages/newWO/index.html',
+    })
+
   //$locationProvider.html5Mode(true);
 });
 

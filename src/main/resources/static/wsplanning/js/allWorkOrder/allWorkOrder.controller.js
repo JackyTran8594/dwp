@@ -252,6 +252,10 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
     $state.go('app.main.workdetail', { 'id': item.WorkOrderId, 'type': "todayWO" });
   }
 
+  $scope.newWorkorder = function () {
+    $state.go('app.main.newwo');
+  }
+
 });
 
 

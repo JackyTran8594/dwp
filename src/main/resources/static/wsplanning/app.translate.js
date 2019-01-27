@@ -12,7 +12,7 @@ var translationsEN = {
   taskListTitle: "Task List Management",
   offerTitle: "Offer Management",
   replacementVehicleTitle: " Replacement Vehicle Planning Management",
-
+  newWOTitile:" New Workorder",
 
   //breadcrumb
   breadcrumbHome: "Home",
@@ -30,6 +30,7 @@ var translationsEN = {
   breadcrumbTaskList: "Task List",
   breadcrumbOffer: "Offer",
   breadcrumbReplacementVehicle: "Replacement Vehicle Planning",
+  breadcrumbNewWO: "New Workorder",
 
 
   //common
