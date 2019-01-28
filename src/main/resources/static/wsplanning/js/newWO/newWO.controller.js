@@ -1,5 +1,13 @@
 UserWebApp.controller('newWOCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $location, $state, $filter, $uibModal, CommonServices) {
- 
+
+  $scope.lstDepartment = [];
+  $scope.lstVisitReason = [];
+  $scope.lstChargeCats = [];
+  $scope.lstJobCats = [];
+  $scope.lstPayers = [];
+  $scope.lstJobTypes = [];
+
+  $scope.target = {};
 
   // datepicker-vutt
 
@@ -28,6 +36,29 @@ UserWebApp.controller('newWOCtrl', function ($scope, $rootScope, $locale, HttpSe
     opened: false
   };
 
+  loadCombo();
+
+  function loadCombo() {
+    CommonServices.getDepartments().then(function (data) {
+      $scope.lstDepartment = data
+    });
+    CommonServices.getVisitReasons().then(function (data) {
+      $scope.lstVisitReason = data
+    });
+    CommonServices.getChargeCats().then(function (data) {
+      $scope.lstChargeCats = data
+    });
+    CommonServices.getPayers().then(function (data) {
+      $scope.lstPayers = data
+    });
+    CommonServices.getJobCats().then(function (data) {
+      $scope.lstJobCats = data
+    });
+    CommonServices.getJobTypes().then(function (data) {
+      $scope.lstJobTypes = data
+    });
+
+  }
 
   //
 
@@ -56,7 +87,7 @@ UserWebApp.controller('newWOCtrl', function ($scope, $rootScope, $locale, HttpSe
     });
   };
 
-  
+
   $ctrl.customer = function (size, item) {
     var modalInstance = $uibModal.open({
       animation: $ctrl.animationsEnabled,

@@ -22,12 +22,22 @@
                     <legend class="text-semibold"><i class="icon-reading position-left"></i> Personal details</legend>
 
                     <div class="form-group">
-                        <label>Enter your name:</label>
-                        <input type="text" class="form-control" placeholder="Eugene Kopyov">
+                        <label>Department:</label>
+                        <input type="text" class="form-control" ng-model = "target.department" placeholder="Eugene Kopyov">
                     </div>
 
                     <div class="form-group">
-                        <label>Enter your password:</label>
+                        <label>Service date:</label>
+                        <input type="text" class="form-control" placeholder="Your strong password">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Check-in time:</label>
+                        <input type="password" class="form-control" placeholder="Your strong password">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Current mileage:</label>
                         <input type="password" class="form-control" placeholder="Your strong password">
                     </div>
 
@@ -71,12 +81,23 @@
                     <legend class="text-semibold"><i class="icon-reading position-left"></i> Personal details</legend>
 
                     <div class="form-group">
-                        <label>Enter your name:</label>
+                        <label>Visit reason:</label>
                         <input type="text" class="form-control" placeholder="Eugene Kopyov">
                     </div>
 
                     <div class="form-group">
-                        <label>Enter your password:</label>
+                        <label>Expected delivery:</label>
+                        <input type="password" class="form-control" placeholder="Your strong password">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Execution time:</label>
+                        <input type="password" class="form-control" placeholder="Your strong password">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Next MOT:</label>
                         <input type="password" class="form-control" placeholder="Your strong password">
                     </div>
 
@@ -118,6 +139,227 @@
         </div>
 
         <div class="row">
+            <fieldset>
+                <div class="col-md-3">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue" checked>
+                            Book tire change lot
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue" checked>
+                            Book MOT lot
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue" checked>
+                            Cust. is waiting
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue" checked>
+                            Rework
+                        </label>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="row">
+            <fieldset>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="" id="date1" placeholder="">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="" id="date2" placeholder="">
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="row">
+            <fieldset>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Job charge category:</label>
+                        <select data-placeholder="Select your state" class="form-control">
+                            <option></option>
+                            <optgroup label="Alaskan/Hawaiian Time Zone">
+                                <option value="AK">Alaska</option>
+                                <option value="HI">Hawaii</option>
+                            </optgroup>
+                            <optgroup label="Pacific Time Zone">
+                                <option value="CA">California</option>
+                                <option value="NV">Nevada</option>
+                                <option value="WA">Washington</option>
+                            </optgroup>
+                            <optgroup label="Mountain Time Zone">
+                                <option value="AZ">Arizona</option>
+                                <option value="CO">Colorado</option>
+                                <option value="WY">Wyoming</option>
+                            </optgroup>
+                            <optgroup label="Central Time Zone">
+                                <option value="AL">Alabama</option>
+                                <option value="AR">Arkansas</option>
+                                <option value="KY">Kentucky</option>
+                            </optgroup>
+                            <optgroup label="Eastern Time Zone">
+                                <option value="CT">Connecticut</option>
+                                <option value="DE">Delaware</option>
+                                <option value="WV">West Virginia</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Payer:</label>
+                        <select data-placeholder="Select your state" class="form-control">
+                            <option></option>
+                            <optgroup label="Alaskan/Hawaiian Time Zone">
+                                <option value="AK">Alaska</option>
+                                <option value="HI">Hawaii</option>
+                            </optgroup>
+                            <optgroup label="Pacific Time Zone">
+                                <option value="CA">California</option>
+                                <option value="NV">Nevada</option>
+                                <option value="WA">Washington</option>
+                            </optgroup>
+                            <optgroup label="Mountain Time Zone">
+                                <option value="AZ">Arizona</option>
+                                <option value="CO">Colorado</option>
+                                <option value="WY">Wyoming</option>
+                            </optgroup>
+                            <optgroup label="Central Time Zone">
+                                <option value="AL">Alabama</option>
+                                <option value="AR">Arkansas</option>
+                                <option value="KY">Kentucky</option>
+                            </optgroup>
+                            <optgroup label="Eastern Time Zone">
+                                <option value="CT">Connecticut</option>
+                                <option value="DE">Delaware</option>
+                                <option value="WV">West Virginia</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Job category:</label>
+                        <select data-placeholder="Select your state" class="form-control">
+                            <option></option>
+                            <optgroup label="Alaskan/Hawaiian Time Zone">
+                                <option value="AK">Alaska</option>
+                                <option value="HI">Hawaii</option>
+                            </optgroup>
+                            <optgroup label="Pacific Time Zone">
+                                <option value="CA">California</option>
+                                <option value="NV">Nevada</option>
+                                <option value="WA">Washington</option>
+                            </optgroup>
+                            <optgroup label="Mountain Time Zone">
+                                <option value="AZ">Arizona</option>
+                                <option value="CO">Colorado</option>
+                                <option value="WY">Wyoming</option>
+                            </optgroup>
+                            <optgroup label="Central Time Zone">
+                                <option value="AL">Alabama</option>
+                                <option value="AR">Arkansas</option>
+                                <option value="KY">Kentucky</option>
+                            </optgroup>
+                            <optgroup label="Eastern Time Zone">
+                                <option value="CT">Connecticut</option>
+                                <option value="DE">Delaware</option>
+                                <option value="WV">West Virginia</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Job department:</label>
+                        <select data-placeholder="Select your state" class="form-control">
+                            <option></option>
+                            <optgroup label="Alaskan/Hawaiian Time Zone">
+                                <option value="AK">Alaska</option>
+                                <option value="HI">Hawaii</option>
+                            </optgroup>
+                            <optgroup label="Pacific Time Zone">
+                                <option value="CA">California</option>
+                                <option value="NV">Nevada</option>
+                                <option value="WA">Washington</option>
+                            </optgroup>
+                            <optgroup label="Mountain Time Zone">
+                                <option value="AZ">Arizona</option>
+                                <option value="CO">Colorado</option>
+                                <option value="WY">Wyoming</option>
+                            </optgroup>
+                            <optgroup label="Central Time Zone">
+                                <option value="AL">Alabama</option>
+                                <option value="AR">Arkansas</option>
+                                <option value="KY">Kentucky</option>
+                            </optgroup>
+                            <optgroup label="Eastern Time Zone">
+                                <option value="CT">Connecticut</option>
+                                <option value="DE">Delaware</option>
+                                <option value="WV">West Virginia</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Job type:</label>
+                        <select data-placeholder="Select your state" class="form-control">
+                            <option></option>
+                            <optgroup label="Alaskan/Hawaiian Time Zone">
+                                <option value="AK">Alaska</option>
+                                <option value="HI">Hawaii</option>
+                            </optgroup>
+                            <optgroup label="Pacific Time Zone">
+                                <option value="CA">California</option>
+                                <option value="NV">Nevada</option>
+                                <option value="WA">Washington</option>
+                            </optgroup>
+                            <optgroup label="Mountain Time Zone">
+                                <option value="AZ">Arizona</option>
+                                <option value="CO">Colorado</option>
+                                <option value="WY">Wyoming</option>
+                            </optgroup>
+                            <optgroup label="Central Time Zone">
+                                <option value="AL">Alabama</option>
+                                <option value="AR">Arkansas</option>
+                                <option value="KY">Kentucky</option>
+                            </optgroup>
+                            <optgroup label="Eastern Time Zone">
+                                <option value="CT">Connecticut</option>
+                                <option value="DE">Delaware</option>
+                                <option value="WV">West Virginia</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                </div>
+            </fieldset>
+        </div>
+
+
+        <div class="row">
             <div class="col-md-12">
                 <div class="form-group">
                     <label>Job title:</label>
@@ -135,7 +377,4 @@
             <button type="submit" class="btn btn-primary">Submit form <i class="icon-arrow-right14 position-right"></i></button>
         </div>
     </div>
-</div>
-</form>
-<!-- /2 columns form -->
 </div>
