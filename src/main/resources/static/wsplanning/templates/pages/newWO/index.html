@@ -23,54 +23,59 @@
 
                     <div class="form-group">
                         <label>Department:</label>
-                        <input type="text" class="form-control" ng-model = "target.department" placeholder="Eugene Kopyov">
+                        <select type="text" class="form-control" ng-model = "target.department" placeholder="..." ng-options="item.Id as item.Name for item in lstDepartment">
+						</select>
                     </div>
 
                     <div class="form-group">
                         <label>Service date:</label>
-                        <input type="text" class="form-control" placeholder="Your strong password">
+                        <!-- <input type="text" class="form-control" placeholder="Your strong password"> -->
+						
+						  <div class="input-group">
+                                      
+
+                                        <input type="text" class="form-control datepicker" uib-datepicker-popup="{{format}}" placeholder="Pick a date"
+                                            is-open="popupServiceDate.opened" datepicker-options="dateOptions" 
+                                            ng-required="true" show-button-bar="false" ng-model="target.serviceDate"/>
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="openServiceDate()">
+											
+											<i class="icon-calendar"></i>
+											</button>
+                                        </span>
+
+                                        
+                                    </div>
+						
                     </div>
 
                     <div class="form-group">
                         <label>Check-in time:</label>
-                        <input type="password" class="form-control" placeholder="Your strong password">
+                        <!-- <input type="password" class="form-control" placeholder="Your strong password"> -->
+						
+						  <div class="input-group">
+                                      
+
+                                        <input type="text" class="form-control datepicker" uib-datepicker-popup="{{format}}" placeholder="Pick a date"
+                                            is-open="popupCheckInTime.opened" datepicker-options="dateOptions" 
+                                            ng-required="true" show-button-bar="false" ng-model="target.checkintime"/>
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="openCheckInTime()">
+											
+											<i class="icon-calendar"></i>
+											</button>
+                                        </span>
+
+                                        
+                                    </div>
                     </div>
 
                     <div class="form-group">
                         <label>Current mileage:</label>
-                        <input type="password" class="form-control" placeholder="Your strong password">
+                        <input type="password" class="form-control" ng-model="target.mileage" placeholder="Your strong password">
                     </div>
 
-                    <div class="form-group">
-                        <label>Select your state:</label>
-                        <select data-placeholder="Select your state" class="form-control">
-                            <option></option>
-                            <optgroup label="Alaskan/Hawaiian Time Zone">
-                                <option value="AK">Alaska</option>
-                                <option value="HI">Hawaii</option>
-                            </optgroup>
-                            <optgroup label="Pacific Time Zone">
-                                <option value="CA">California</option>
-                                <option value="NV">Nevada</option>
-                                <option value="WA">Washington</option>
-                            </optgroup>
-                            <optgroup label="Mountain Time Zone">
-                                <option value="AZ">Arizona</option>
-                                <option value="CO">Colorado</option>
-                                <option value="WY">Wyoming</option>
-                            </optgroup>
-                            <optgroup label="Central Time Zone">
-                                <option value="AL">Alabama</option>
-                                <option value="AR">Arkansas</option>
-                                <option value="KY">Kentucky</option>
-                            </optgroup>
-                            <optgroup label="Eastern Time Zone">
-                                <option value="CT">Connecticut</option>
-                                <option value="DE">Delaware</option>
-                                <option value="WV">West Virginia</option>
-                            </optgroup>
-                        </select>
-                    </div>
+                   
 
 
                 </fieldset>
@@ -82,56 +87,56 @@
 
                     <div class="form-group">
                         <label>Visit reason:</label>
-                        <input type="text" class="form-control" placeholder="Eugene Kopyov">
+                        <select type="text" class="form-control" ng-model="target.visitreason" placeholder="..." ng-options="item.Id as item.Name for item in lstVisitReason"></select>
                     </div>
 
                     <div class="form-group">
                         <label>Expected delivery:</label>
-                        <input type="password" class="form-control" placeholder="Your strong password">
+                        <!-- <input type="password" class="form-control" placeholder="Your strong password"> -->
+						
+						  <div class="input-group">
+                                      
+
+                                        <input type="text" class="form-control datepicker" uib-datepicker-popup="{{format}}" placeholder="Pick a date"
+                                            is-open="popupExDeliveryDate.opened" datepicker-options="dateOptions" 
+                                            ng-required="true" show-button-bar="false" ng-model="target.expected"/>
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="openExDeliveryDate()">
+											
+											<i class="icon-calendar"></i>
+											</button>
+                                        </span>
+
+                                        
+                                    </div>
                     </div>
 
                     <div class="form-group">
                         <label>Execution time:</label>
-                        <input type="password" class="form-control" placeholder="Your strong password">
+                        <!-- <input type="password" class="form-control" placeholder="Your strong password"> -->
+						
+						  <div class="input-group">
+                                      
+
+                                        <input type="text" class="form-control datepicker" uib-datepicker-popup="{{format}}" placeholder="Pick a date"
+                                            is-open="popupExcutionTime.opened" datepicker-options="dateOptions" 
+                                            ng-required="true" show-button-bar="false" ng-model="target.excution"/>
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="openExcutionTime()">
+											
+											<i class="icon-calendar"></i>
+											</button>
+                                        </span>
+
+                                        
+                                    </div>
                     </div>
 
 
                     <div class="form-group">
                         <label>Next MOT:</label>
-                        <input type="password" class="form-control" placeholder="Your strong password">
+                        <input type="password" class="form-control" ng-model="target.nextMot"  placeholder="Your strong password">
                     </div>
-
-                    <div class="form-group">
-                        <label>Select your state:</label>
-                        <select data-placeholder="Select your state" class="form-control">
-                            <option></option>
-                            <optgroup label="Alaskan/Hawaiian Time Zone">
-                                <option value="AK">Alaska</option>
-                                <option value="HI">Hawaii</option>
-                            </optgroup>
-                            <optgroup label="Pacific Time Zone">
-                                <option value="CA">California</option>
-                                <option value="NV">Nevada</option>
-                                <option value="WA">Washington</option>
-                            </optgroup>
-                            <optgroup label="Mountain Time Zone">
-                                <option value="AZ">Arizona</option>
-                                <option value="CO">Colorado</option>
-                                <option value="WY">Wyoming</option>
-                            </optgroup>
-                            <optgroup label="Central Time Zone">
-                                <option value="AL">Alabama</option>
-                                <option value="AR">Arkansas</option>
-                                <option value="KY">Kentucky</option>
-                            </optgroup>
-                            <optgroup label="Eastern Time Zone">
-                                <option value="CT">Connecticut</option>
-                                <option value="DE">Delaware</option>
-                                <option value="WV">West Virginia</option>
-                            </optgroup>
-                        </select>
-                    </div>
-
 
                 </fieldset>
             </div>
@@ -143,7 +148,7 @@
                 <div class="col-md-3">
                     <div class="form-check">
                         <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue" checked>
+                            <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue" >
                             Book tire change lot
                         </label>
                     </div>
@@ -152,7 +157,7 @@
                 <div class="col-md-3">
                     <div class="form-check">
                         <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue" checked>
+                            <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue" >
                             Book MOT lot
                         </label>
                     </div>
@@ -161,7 +166,7 @@
                 <div class="col-md-3">
                     <div class="form-check">
                         <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue" checked>
+                            <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue" >
                             Cust. is waiting
                         </label>
                     </div>
@@ -170,7 +175,7 @@
                 <div class="col-md-3">
                     <div class="form-check">
                         <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue" checked>
+                            <input type="checkbox" class="form-check-input" name="" id="" value="checkedValue" >
                             Rework
                         </label>
                     </div>
@@ -198,63 +203,15 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Job charge category:</label>
-                        <select data-placeholder="Select your state" class="form-control">
-                            <option></option>
-                            <optgroup label="Alaskan/Hawaiian Time Zone">
-                                <option value="AK">Alaska</option>
-                                <option value="HI">Hawaii</option>
-                            </optgroup>
-                            <optgroup label="Pacific Time Zone">
-                                <option value="CA">California</option>
-                                <option value="NV">Nevada</option>
-                                <option value="WA">Washington</option>
-                            </optgroup>
-                            <optgroup label="Mountain Time Zone">
-                                <option value="AZ">Arizona</option>
-                                <option value="CO">Colorado</option>
-                                <option value="WY">Wyoming</option>
-                            </optgroup>
-                            <optgroup label="Central Time Zone">
-                                <option value="AL">Alabama</option>
-                                <option value="AR">Arkansas</option>
-                                <option value="KY">Kentucky</option>
-                            </optgroup>
-                            <optgroup label="Eastern Time Zone">
-                                <option value="CT">Connecticut</option>
-                                <option value="DE">Delaware</option>
-                                <option value="WV">West Virginia</option>
-                            </optgroup>
+                        <select class="form-control" ng-model="target.chargeCats" ng-options="item.Id as item.Name for item in lstChargeCats">
+                           
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Payer:</label>
-                        <select data-placeholder="Select your state" class="form-control">
-                            <option></option>
-                            <optgroup label="Alaskan/Hawaiian Time Zone">
-                                <option value="AK">Alaska</option>
-                                <option value="HI">Hawaii</option>
-                            </optgroup>
-                            <optgroup label="Pacific Time Zone">
-                                <option value="CA">California</option>
-                                <option value="NV">Nevada</option>
-                                <option value="WA">Washington</option>
-                            </optgroup>
-                            <optgroup label="Mountain Time Zone">
-                                <option value="AZ">Arizona</option>
-                                <option value="CO">Colorado</option>
-                                <option value="WY">Wyoming</option>
-                            </optgroup>
-                            <optgroup label="Central Time Zone">
-                                <option value="AL">Alabama</option>
-                                <option value="AR">Arkansas</option>
-                                <option value="KY">Kentucky</option>
-                            </optgroup>
-                            <optgroup label="Eastern Time Zone">
-                                <option value="CT">Connecticut</option>
-                                <option value="DE">Delaware</option>
-                                <option value="WV">West Virginia</option>
-                            </optgroup>
+                        <select class="form-control" ng-model="target.payer" ng-options="item.Id as item.Name for item in lstPayers">
+                            
                         </select>
                     </div>
 
@@ -263,94 +220,22 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Job category:</label>
-                        <select data-placeholder="Select your state" class="form-control">
-                            <option></option>
-                            <optgroup label="Alaskan/Hawaiian Time Zone">
-                                <option value="AK">Alaska</option>
-                                <option value="HI">Hawaii</option>
-                            </optgroup>
-                            <optgroup label="Pacific Time Zone">
-                                <option value="CA">California</option>
-                                <option value="NV">Nevada</option>
-                                <option value="WA">Washington</option>
-                            </optgroup>
-                            <optgroup label="Mountain Time Zone">
-                                <option value="AZ">Arizona</option>
-                                <option value="CO">Colorado</option>
-                                <option value="WY">Wyoming</option>
-                            </optgroup>
-                            <optgroup label="Central Time Zone">
-                                <option value="AL">Alabama</option>
-                                <option value="AR">Arkansas</option>
-                                <option value="KY">Kentucky</option>
-                            </optgroup>
-                            <optgroup label="Eastern Time Zone">
-                                <option value="CT">Connecticut</option>
-                                <option value="DE">Delaware</option>
-                                <option value="WV">West Virginia</option>
-                            </optgroup>
+                        <select class="form-control" ng-model="target.jobcats" ng-options="item.Id as item.Name for item in lstJobCats">
+                           
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Job department:</label>
-                        <select data-placeholder="Select your state" class="form-control">
-                            <option></option>
-                            <optgroup label="Alaskan/Hawaiian Time Zone">
-                                <option value="AK">Alaska</option>
-                                <option value="HI">Hawaii</option>
-                            </optgroup>
-                            <optgroup label="Pacific Time Zone">
-                                <option value="CA">California</option>
-                                <option value="NV">Nevada</option>
-                                <option value="WA">Washington</option>
-                            </optgroup>
-                            <optgroup label="Mountain Time Zone">
-                                <option value="AZ">Arizona</option>
-                                <option value="CO">Colorado</option>
-                                <option value="WY">Wyoming</option>
-                            </optgroup>
-                            <optgroup label="Central Time Zone">
-                                <option value="AL">Alabama</option>
-                                <option value="AR">Arkansas</option>
-                                <option value="KY">Kentucky</option>
-                            </optgroup>
-                            <optgroup label="Eastern Time Zone">
-                                <option value="CT">Connecticut</option>
-                                <option value="DE">Delaware</option>
-                                <option value="WV">West Virginia</option>
-                            </optgroup>
+                        <select  class="form-control" ng-model="target.department" ng-options="item.Id as item.Name for item in lstDepartment">
+                            
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Job type:</label>
-                        <select data-placeholder="Select your state" class="form-control">
-                            <option></option>
-                            <optgroup label="Alaskan/Hawaiian Time Zone">
-                                <option value="AK">Alaska</option>
-                                <option value="HI">Hawaii</option>
-                            </optgroup>
-                            <optgroup label="Pacific Time Zone">
-                                <option value="CA">California</option>
-                                <option value="NV">Nevada</option>
-                                <option value="WA">Washington</option>
-                            </optgroup>
-                            <optgroup label="Mountain Time Zone">
-                                <option value="AZ">Arizona</option>
-                                <option value="CO">Colorado</option>
-                                <option value="WY">Wyoming</option>
-                            </optgroup>
-                            <optgroup label="Central Time Zone">
-                                <option value="AL">Alabama</option>
-                                <option value="AR">Arkansas</option>
-                                <option value="KY">Kentucky</option>
-                            </optgroup>
-                            <optgroup label="Eastern Time Zone">
-                                <option value="CT">Connecticut</option>
-                                <option value="DE">Delaware</option>
-                                <option value="WV">West Virginia</option>
-                            </optgroup>
+                        <select class="form-control" ng-model="target.jobtype" ng-options="item.Id as item.Name for item in lstJobTypes">
+                          
                         </select>
                     </div>
 
@@ -374,7 +259,7 @@
         </div>
 
         <div class="text-right">
-            <button type="submit" class="btn btn-primary">Submit form <i class="icon-arrow-right14 position-right"></i></button>
+            <button type="submit" class="btn btn-primary">Submit New Workoreder <i class="icon-arrow-right14 position-right"></i></button>
         </div>
     </div>
 </div>

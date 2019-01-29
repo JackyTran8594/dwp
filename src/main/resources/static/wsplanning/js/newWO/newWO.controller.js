@@ -8,6 +8,7 @@ UserWebApp.controller('newWOCtrl', function ($scope, $rootScope, $locale, HttpSe
   $scope.lstJobTypes = [];
 
   $scope.target = {};
+  
 
   // datepicker-vutt
 
@@ -17,45 +18,73 @@ UserWebApp.controller('newWOCtrl', function ($scope, $rootScope, $locale, HttpSe
     formatYear: 'yy',
     startingDay: 1
   };
+  
+  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate', 'dd-MMMM-yyyy HH:mm:ss'];
+  $scope.format = $scope.formats[4];
+  console.log($scope.format);
 
-
-  $scope.openFromDate = function () {
-    $rootScope.popupFromDate.opened = true;
+  $scope.openServiceDate = function () {
+    $rootScope.popupServiceDate.opened = true;
   };
 
-  $scope.openToDate = function () {
-    $rootScope.popupToDate.opened = true;
+  $scope.openExDeliveryDate = function () {
+    $rootScope.popupExDeliveryDate.opened = true;
+  };
+  
+  $scope.openCheckInTime = function () {
+    $rootScope.popupCheckInTime.opened = true;
+  };
+  
+  $scope.openExcutionTime = function () {
+    $rootScope.popupExcutionTime.opened = true;
   };
 
-
-  $rootScope.popupFromDate = {
+  $rootScope.popupServiceDate = {
+    opened: false
+  };
+  
+   $rootScope.popupCheckInTime = {
+    opened: false
+  };
+  
+   $rootScope.popupExcutionTime = {
     opened: false
   };
 
-  $rootScope.popupToDate = {
+  $rootScope.popupExDeliveryDate = {
     opened: false
   };
 
   loadCombo();
+  
+ 
 
   function loadCombo() {
     CommonServices.getDepartments().then(function (data) {
+		console.log(data);
       $scope.lstDepartment = data
+	  $scope.target.department = data[0].Id;
+	  console.log($scope.target.department);
     });
     CommonServices.getVisitReasons().then(function (data) {
-      $scope.lstVisitReason = data
+      $scope.lstVisitReason = data;
+	   $scope.target.visitreason = data[0].Id;
     });
     CommonServices.getChargeCats().then(function (data) {
-      $scope.lstChargeCats = data
+      $scope.lstChargeCats = data;
+	   $scope.target.chargeCats = data[0].Id;
     });
     CommonServices.getPayers().then(function (data) {
-      $scope.lstPayers = data
+      $scope.lstPayers = data;
+	   $scope.target.payer = data[0].Id;
     });
     CommonServices.getJobCats().then(function (data) {
-      $scope.lstJobCats = data
+      $scope.lstJobCats = data;
+	   $scope.target.jobcats = data[0].Id;
     });
     CommonServices.getJobTypes().then(function (data) {
-      $scope.lstJobTypes = data
+      $scope.lstJobTypes = data;
+	   $scope.target.jobtype = data[0].Id;
     });
 
   }
