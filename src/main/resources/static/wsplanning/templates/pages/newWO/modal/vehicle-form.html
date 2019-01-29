@@ -1,222 +1,390 @@
-<!-- Modal delete -->
 <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal">
+    <button type="button" class="close" ng-click="$ctrl.cancel()">
         <span aria-hidden="true">&times;</span>
-        <span class="sr-only">Close</span>
+        <span class="sr-only" ng-click="$ctrl.cancel()">Close</span>
     </button>
     <h4>{{title}}</h4>
 </div>
 
-<form class="form-horizontal formValidate" name="mechanicFrm" id="mechanicFrm">
-    <div class="modal-body">
-        <div class="panel-body">
-            <input style="display: none" type="text" class="form-control" ng-model="params.roleId">
+<div class="modal-body">
 
-            <!--Row 1-->
+    <!--SEARCH-->
+    <div class="well well-sm">
+        <form class="form-horizontal form-search row">
+
             <div class="row">
-                <!--Code-->
                 <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="col-md-3 control-label"><span>{{ 'mechanicDeptId' | translate }}</span></label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="DeptId" ng-model="item.DeptId"
-                                   placeholder="{{ 'mechanicDeptId' | translate }}"
-                                   minlength="5" maxlength="20" required="required" name="DeptId">
-                        </div>
+                    <div class="col-md-12">
+                        <input type="text" class="form-control" ng-model="searchValue" placeholder="{{ 'searchWo' | translate }}"
+                            code="13">
                     </div>
                 </div>
-                <!--End code-->
 
-                <!--Name-->
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="col-md-3 control-label"><span>{{ 'mechanicDeptId' | translate }}</span></label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="Email" ng-model="item.Email"
-                                   placeholder="{{ 'mechanicDeptId' | translate }}" required="required" name="Email">
-                        </div>
-                    </div>
+                <div class="col-md-1">
+                    <button type="button" ng-click="doSearch()" class="btn btn-icon btn-default"><i class="icon-search4"></i></button>
                 </div>
-                <!--End Name-->
             </div>
-            <!--End row 1-->
+        </form>
+    </div>
+    <!--SEARCH-->
+    <div class="panel panel-flat">
+        <div class="panel-heading">
 
 
-            <!--Row 2-->
-            <div class="row">
-                <!--name-->
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="col-md-3 control-label"><span>{{ 'mechanicDeptId' | translate }}</span></label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="Name" ng-model="item.Name"
-                                   placeholder="{{ 'mechanicDeptId' | translate }}" name="Name">
-                        </div>
-                    </div>
-                </div>
-                <!--End name-->
-
-                <!--phone-->
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="col-md-3 control-label"><span>{{ 'mechanicDeptId' | translate }}</span></label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="Phone"
-                                   ng-model="item.Phone"
-                                   placeholder="{{ 'mechanicDeptId' | translate }}"
-                                   minlength="5" maxlength="20" required="required" name="Phone">
-                        </div>
-                    </div>
-                </div>
-                <!--End phone-->
-            </div>
-            <!--End row 2-->
-
-
-            <!--Row 3-->
-            <div class="row">
-                <!--resType-->
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="col-md-3 control-label"><span>{{ 'mechanicDeptId' | translate }}</span></label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="ResType" ng-model="item.ResType"
-                                   placeholder="{{ 'mechanicDeptId' | translate }}" required="required" name="ResType">
-                        </div>
-                    </div>
-                </div>
-                <!--End resType-->
-
-                <!--shiftId-->
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="col-md-3 control-label"><span>{{ 'mechanicDeptId' | translate }}</span></label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="ShiftId" ng-model="item.ShiftId"
-                                   placeholder="{{ 'mechanicDeptId' | translate }}"
-                                   minlength="5" maxlength="20" required="required" name="ShiftId">
-                        </div>
-                    </div>
-                </div>
-                <!--End shiftId-->
-            </div>
-            <!--End row 3-->
-
-
-            <!--Row 4-->
-            <div class="row">
-                <!--shortName-->
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="col-md-3 control-label"><span>{{ 'mechanicDeptId' | translate }}</span></label>
-                        <div class="col-md-8">
-                            <input type="email" class="form-control" id="ShortName"
-                                   ng-model="item.ShortName"
-                                   placeholder="{{ 'mechanicDeptId' | translate }}" required="required"
-                                   name="ShortName">
-                        </div>
-                    </div>
-                </div>
-                <!--End shortName-->
-
-                <!--SiteId-->
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="col-md-3 control-label"><span>{{ 'mechanicDeptId' | translate }}</span></label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="SiteId" ng-model="item.SiteId"
-                                   placeholder="{{ 'mechanicDeptId' | translate }}" name="SiteId">
-                        </div>
-                    </div>
-                </div>
-                <!--End siteId-->
-            </div>
-            <!--End row 4-->
-
-
-            <!--Row 5-->
-            <div class="row">
-                <!--smanId-->
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="col-md-3 control-label"><span>{{ 'mechanicDeptId' | translate }}</span></label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="SmanId" ng-model="item.SmanId"
-                                   placeholder="{{ 'mechanicDeptId' | translate }}" name="SmanId">
-                        </div>
-                    </div>
-                </div>
-                <!--End smanId-->
-
-                <!--subSys-->
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="col-md-3 control-label"><span>{{ 'mechanicDeptId' | translate }}</span></label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="SubSys" ng-model="item.SubSys"
-                                   placeholder="{{ 'mechanicDeptId' | translate }}" name="SubSys">
-                        </div>
-                    </div>
-                </div>
-                <!--End subSys-->
-            </div>
-            <!--End row 5-->
-
-            <!--Row 6-->
-            <div class="row">
-                <!--typehead-->
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="col-md-3 control-label"><span>{{ 'mechanicDeptId' | translate }}</span></label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" autocomplete="off"
-                                   ng-model="asyncSelected" placeholder="Load city use $http"
-                                   uib-typeahead="address for address in getLocation($viewValue)"
-                                   typeahead-loading="loadingLocations" typeahead-no-results="noResults"
-                                   typeahead-select-on-exact="true">
-                            <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
-                            <div ng-show="noResults">
-                                <i class="glyphicon glyphicon-remove"></i> {{ 'commonNoResult' | translate }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--End typehead-->
-
-                <!--typehead selected-->
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="col-md-3 control-label"><span>{{ 'mechanicDeptId' | translate }}</span></label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control" id="asyncSelected"
-                                   ng-model="asyncSelected"
-                                   placeholder="{{ 'mechanicDeptId' | translate }}" name="asyncSelected"
-                                   ng-disabled="true">
-                        </div>
-                    </div>
-                </div>
-                <!--End typehead selected-->
-
-            </div>
 
         </div>
 
 
+
+        <table class="table datatable-show-all">
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Job Title</th>
+                    <th>DOB</th>
+                    <th>Status</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Marth</td>
+                    <td><a href="#">Enright</a></td>
+                    <td>Traffic Court Referee</td>
+                    <td>22 Jun 1972</td>
+                    <td><span class="label label-success">Active</span></td>
+                    <td class="text-center">
+                        <ul class="icons-list">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="#"><i class="icon-file-pdf"></i> Export to .pdf</a></li>
+                                    <li><a href="#"><i class="icon-file-excel"></i> Export to .csv</a></li>
+                                    <li><a href="#"><i class="icon-file-word"></i> Export to .doc</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Jackelyn</td>
+                    <td>Weible</td>
+                    <td><a href="#">Airline Transport Pilot</a></td>
+                    <td>3 Oct 1981</td>
+                    <td><span class="label label-default">Inactive</span></td>
+                    <td class="text-center">
+                        <ul class="icons-list">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="#"><i class="icon-file-pdf"></i> Export to .pdf</a></li>
+                                    <li><a href="#"><i class="icon-file-excel"></i> Export to .csv</a></li>
+                                    <li><a href="#"><i class="icon-file-word"></i> Export to .doc</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Aura</td>
+                    <td>Hard</td>
+                    <td>Business Services Sales Representative</td>
+                    <td>19 Apr 1969</td>
+                    <td><span class="label label-danger">Suspended</span></td>
+                    <td class="text-center">
+                        <ul class="icons-list">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="#"><i class="icon-file-pdf"></i> Export to .pdf</a></li>
+                                    <li><a href="#"><i class="icon-file-excel"></i> Export to .csv</a></li>
+                                    <li><a href="#"><i class="icon-file-word"></i> Export to .doc</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Nathalie</td>
+                    <td><a href="#">Pretty</a></td>
+                    <td>Drywall Stripper</td>
+                    <td>13 Dec 1977</td>
+                    <td><span class="label label-info">Pending</span></td>
+                    <td class="text-center">
+                        <ul class="icons-list">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="#"><i class="icon-file-pdf"></i> Export to .pdf</a></li>
+                                    <li><a href="#"><i class="icon-file-excel"></i> Export to .csv</a></li>
+                                    <li><a href="#"><i class="icon-file-word"></i> Export to .doc</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Sharan</td>
+                    <td>Leland</td>
+                    <td>Aviation Tactical Readiness Officer</td>
+                    <td>30 Dec 1991</td>
+                    <td><span class="label label-default">Inactive</span></td>
+                    <td class="text-center">
+                        <ul class="icons-list">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="#"><i class="icon-file-pdf"></i> Export to .pdf</a></li>
+                                    <li><a href="#"><i class="icon-file-excel"></i> Export to .csv</a></li>
+                                    <li><a href="#"><i class="icon-file-word"></i> Export to .doc</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Maxine</td>
+                    <td><a href="#">Woldt</a></td>
+                    <td><a href="#">Business Services Sales Representative</a></td>
+                    <td>17 Oct 1987</td>
+                    <td><span class="label label-info">Pending</span></td>
+                    <td class="text-center">
+                        <ul class="icons-list">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="#"><i class="icon-file-pdf"></i> Export to .pdf</a></li>
+                                    <li><a href="#"><i class="icon-file-excel"></i> Export to .csv</a></li>
+                                    <li><a href="#"><i class="icon-file-word"></i> Export to .doc</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Sylvia</td>
+                    <td><a href="#">Mcgaughy</a></td>
+                    <td>Hemodialysis Technician</td>
+                    <td>11 Nov 1983</td>
+                    <td><span class="label label-danger">Suspended</span></td>
+                    <td class="text-center">
+                        <ul class="icons-list">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="#"><i class="icon-file-pdf"></i> Export to .pdf</a></li>
+                                    <li><a href="#"><i class="icon-file-excel"></i> Export to .csv</a></li>
+                                    <li><a href="#"><i class="icon-file-word"></i> Export to .doc</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Lizzee</td>
+                    <td><a href="#">Goodlow</a></td>
+                    <td>Technical Services Librarian</td>
+                    <td>1 Nov 1961</td>
+                    <td><span class="label label-danger">Suspended</span></td>
+                    <td class="text-center">
+                        <ul class="icons-list">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="#"><i class="icon-file-pdf"></i> Export to .pdf</a></li>
+                                    <li><a href="#"><i class="icon-file-excel"></i> Export to .csv</a></li>
+                                    <li><a href="#"><i class="icon-file-word"></i> Export to .doc</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Kennedy</td>
+                    <td>Haley</td>
+                    <td>Senior Marketing Designer</td>
+                    <td>18 Dec 1960</td>
+                    <td><span class="label label-success">Active</span></td>
+                    <td class="text-center">
+                        <ul class="icons-list">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="#"><i class="icon-file-pdf"></i> Export to .pdf</a></li>
+                                    <li><a href="#"><i class="icon-file-excel"></i> Export to .csv</a></li>
+                                    <li><a href="#"><i class="icon-file-word"></i> Export to .doc</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Chantal</td>
+                    <td><a href="#">Nailor</a></td>
+                    <td>Technical Services Librarian</td>
+                    <td>10 Jan 1980</td>
+                    <td><span class="label label-default">Inactive</span></td>
+                    <td class="text-center">
+                        <ul class="icons-list">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="#"><i class="icon-file-pdf"></i> Export to .pdf</a></li>
+                                    <li><a href="#"><i class="icon-file-excel"></i> Export to .csv</a></li>
+                                    <li><a href="#"><i class="icon-file-word"></i> Export to .doc</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Delma</td>
+                    <td>Bonds</td>
+                    <td>Lead Brand Manager</td>
+                    <td>21 Dec 1968</td>
+                    <td><span class="label label-info">Pending</span></td>
+                    <td class="text-center">
+                        <ul class="icons-list">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="#"><i class="icon-file-pdf"></i> Export to .pdf</a></li>
+                                    <li><a href="#"><i class="icon-file-excel"></i> Export to .csv</a></li>
+                                    <li><a href="#"><i class="icon-file-word"></i> Export to .doc</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Roland</td>
+                    <td>Salmos</td>
+                    <td><a href="#">Senior Program Developer</a></td>
+                    <td>5 Jun 1986</td>
+                    <td><span class="label label-default">Inactive</span></td>
+                    <td class="text-center">
+                        <ul class="icons-list">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="#"><i class="icon-file-pdf"></i> Export to .pdf</a></li>
+                                    <li><a href="#"><i class="icon-file-excel"></i> Export to .csv</a></li>
+                                    <li><a href="#"><i class="icon-file-word"></i> Export to .doc</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Coy</td>
+                    <td>Wollard</td>
+                    <td>Customer Service Operator</td>
+                    <td>12 Oct 1982</td>
+                    <td><span class="label label-success">Active</span></td>
+                    <td class="text-center">
+                        <ul class="icons-list">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="#"><i class="icon-file-pdf"></i> Export to .pdf</a></li>
+                                    <li><a href="#"><i class="icon-file-excel"></i> Export to .csv</a></li>
+                                    <li><a href="#"><i class="icon-file-word"></i> Export to .doc</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Maxwell</td>
+                    <td>Maben</td>
+                    <td>Regional Representative</td>
+                    <td>25 Feb 1988</td>
+                    <td><span class="label label-danger">Suspended</span></td>
+                    <td class="text-center">
+                        <ul class="icons-list">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="#"><i class="icon-file-pdf"></i> Export to .pdf</a></li>
+                                    <li><a href="#"><i class="icon-file-excel"></i> Export to .csv</a></li>
+                                    <li><a href="#"><i class="icon-file-word"></i> Export to .doc</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Cicely</td>
+                    <td>Sigler</td>
+                    <td><a href="#">Senior Research Officer</a></td>
+                    <td>15 Mar 1960</td>
+                    <td><span class="label label-info">Pending</span></td>
+                    <td class="text-center">
+                        <ul class="icons-list">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="icon-menu9"></i>
+                                </a>
+
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="#"><i class="icon-file-pdf"></i> Export to .pdf</a></li>
+                                    <li><a href="#"><i class="icon-file-excel"></i> Export to .csv</a></li>
+                                    <li><a href="#"><i class="icon-file-word"></i> Export to .doc</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
     </div>
 
-    <div class="modal-footer text-center">
-        <button type="button" ng-disabled="mechanicFrm.$invalid" id="btnSubmit"
-                ng-click="$ctrl.ok()" class="btn btn-primary">{{ 'btnSave' | translate }}
-        </button>
-        <a class="btn btn-link"  ng-click="$ctrl.cancel()">{{ 'btnCancel' | translate }}</a>
-    </div>
+</div>
 
-</form>
-<!-- /modal delete -->
-
-<script type="text/javascript">
-  $(document).ready(function () {
-    console.log("ready mechanicFrm!");
-    $("#mechanicFrm").validate(common.formValidate);
-  });
-</script>
+<div class="modal-footer position-right">
+    <a class="btn btn-primary" ng-click="$ctrl.cancel()">{{ 'btnCancel' | translate }}</a>
+</div>
