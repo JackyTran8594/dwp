@@ -177,6 +177,14 @@ UserWebApp.controller('VehicleModalCtrl', function ($scope, $rootScope, $locale,
     $uibModalInstance.dismiss('cancel');
   };
 
+  function loadData() {
+    CommonServices.getVehicles().then(function (data) {
+      console.log(data);
+      $scope.lstVehicles = data;
+    })
+  }
+
+  loadData();
 
 })
 
@@ -189,9 +197,19 @@ UserWebApp.controller('CustomerModalCtrl', function ($scope, $rootScope, $locale
 
   var $ctrl = this;
 
+  $scope.lstCustomers = []
+
   $ctrl.cancel = function () {
     $uibModalInstance.dismiss('cancel');
   };
+
+  function loadData() {
+    CommonServices.getCustomers().then(function (data) {
+      $scope.lstCustomers = data;
+    })
+  }
+
+  loadData();
 
 })
 

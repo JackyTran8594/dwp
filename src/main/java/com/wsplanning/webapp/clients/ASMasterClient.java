@@ -27,11 +27,9 @@ public class ASMasterClient {
   private static HashMap<String, String> hsmSite;
 
   @Autowired
-  public ASMasterClient(RestTemplate restTemplate,
-                        @Value("${apiEndpointUrl}") String apiEndpointUrl) {
+  public ASMasterClient(RestTemplate restTemplate, @Value("${apiEndpointUrl}") String apiEndpointUrl) {
     this.restTemplate = restTemplate;
-    this.restTemplate.getMessageConverters()
-        .add(0, new StringHttpMessageConverter(Charset.forName("UTF-8")));
+    this.restTemplate.getMessageConverters().add(0, new StringHttpMessageConverter(Charset.forName("UTF-8")));
     this.endpointUrl = apiEndpointUrl + "/api/ASMaster";
     hsmSite = new HashMap<>();
   }
@@ -66,7 +64,7 @@ public class ASMasterClient {
     return restTemplate.getForObject(url, String.class);
   }
 
-  //getTransactionTypes&amp;param1=[site_id]
+  // getTransactionTypes&amp;param1=[site_id]
 
   public String getTransactionTypes(String siteId) {
     String url = String.format("%s?command=getTransactionTypes&param1=%s", this.endpointUrl, siteId);
@@ -105,6 +103,17 @@ public class ASMasterClient {
 
   public String getChargeCats(String siteId) {
     String url = String.format("%s?command=getChargeCats&param1=%s", this.endpointUrl, siteId);
+    return restTemplate.getForObject(url, String.class);
+  }
+
+  public String getCustomers(String siteId) {
+    String url = String.format("%s/Customer?skey={skey}&CustNo={CustNo}%s", this.endpointUrl, siteId);
+    return restTemplate.getForObject(url, String.class);
+  }
+
+  public String getVehicles(String siteId)
+  {
+    String url = String.format("%s/Vehicles?skey={skey}%s", this.endpointUrl, siteId);
     return restTemplate.getForObject(url, String.class);
   }
 }

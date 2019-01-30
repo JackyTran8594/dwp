@@ -11,6 +11,8 @@ UserWebApp
     this.lstShifts = [];
     this.lstChargeCats = [];
     this.stamping = "";
+    this.customers = [];
+    this.vehicles = [];
 
 
     this.getStamping = function () {
@@ -166,6 +168,37 @@ UserWebApp
       return d.promise;
     };
 
+    this.getVehicles = function () {
+      var d = $q.defer();
+      if(!this.vehicles || this.vehicles.length <= 0) {
+        HttpService.getData('/site/getVehicles', {}).then(function (response) {
+          this.vehicles = response;
+          d.resolve(response);
+        }, function(error){
+          d.reject();
+        });
+      } else {
+        d.resolve(this.vehicles);
+      }
+      return d.promise;
+    }
+
+    this.getCustomers = function () {
+      var d = $q.defer();
+      if(!this.customers || this.vehicles.length <= 0) {
+        HttpService.getData('/site/getCustomers', {}).then(function (response) {
+          this.customers = response;
+          d.resolve(response);
+        }, function(error){
+          d.reject();
+        });
+      } else {
+        d.resolve(this.customers);
+      }
+      return d.promise;
+    }
+
+
     this.loadData = function () {
       var d = $q.defer();
       var resolve = true;
@@ -234,6 +267,7 @@ UserWebApp
           this.lstChargeCats = data;
         });
       }
+
 
 
       if(resolve){

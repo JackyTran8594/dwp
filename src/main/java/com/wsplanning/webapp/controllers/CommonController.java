@@ -99,11 +99,10 @@ public class CommonController extends BaseController {
     }
   }
 
-
   @PostMapping("/language")
   @ResponseBody
   public ResponseEntity getWO(@RequestBody Map<String, String> params, HttpServletRequest request,
-                              HttpServletResponse response) {
+      HttpServletResponse response) {
     try {
       String lang = params.get("lang");
       Locale userLocale = Locale.forLanguageTag(lang);
@@ -208,6 +207,26 @@ public class CommonController extends BaseController {
   public ResponseEntity getChargeCats() {
     try {
       String rtn = siteClient.getChargeCats(getToken());
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception ex) {
+      return parseException(ex);
+    }
+  }
+
+  @GetMapping("/site/getVehicles")
+  public ResponseEntity getVehicles() {
+    try {
+      String rtn = siteClient.getVehicles(getSiteId());
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception ex) {
+      return parseException(ex);
+    }
+  }
+
+  @GetMapping("/site/getCustomers")
+  public ResponseEntity getCustomers() {
+    try {
+      String rtn = siteClient.getCustomers(getSiteId());
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);
