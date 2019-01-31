@@ -1,4 +1,4 @@
-UserWebApp.controller('appCtrl', function ($scope, $rootScope, $locale ,HttpService, $translate, $location, $filter, $state, CommonServices, tmhDynamicLocale) {
+UserWebApp.controller('appCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $location, $filter, $state, CommonServices, tmhDynamicLocale) {
 
   CommonServices.loadData();
 
@@ -10,7 +10,7 @@ UserWebApp.controller('appCtrl', function ($scope, $rootScope, $locale ,HttpServ
       $rootScope.stamping = "";
     }
   });
-    
+
 
   $rootScope.lang = $("#currentLang").attr('data-currentLang');
   $rootScope.currLang = $rootScope.lang;
@@ -18,72 +18,61 @@ UserWebApp.controller('appCtrl', function ($scope, $rootScope, $locale ,HttpServ
   $rootScope.currName = "English";
 
 
-  
-  
   $scope.workorders = function () {
-    $state.go('app.main.workorder', { locale: $rootScope.lang });
+    $state.go('app.main.workorder', {locale: $rootScope.lang});
   }
-  
+
   $scope.unscheduledwork = function () {
-    $state.go('app.main.unscheduledwork', { locale: $rootScope.lang });
+    $state.go('app.main.unscheduledwork', {locale: $rootScope.lang});
   }
 
   $scope.todayWork = function () {
-    $state.go('app.main.todaywork', { locale: $rootScope.lang });
+    $state.go('app.main.todaywork', {locale: $rootScope.lang});
   }
-  
+
   $scope.worksub = function () {
-    $state.go('app.main.worksub', { locale: $rootScope.lang });
+    $state.go('app.main.worksub', {locale: $rootScope.lang});
   }
-  
+
   $scope.allwork = function () {
-    $state.go('app.main.allwork', { locale: $rootScope.lang });
+    $state.go('app.main.allwork', {locale: $rootScope.lang});
   }
-  
+
   $scope.workmot = function () {
-    $state.go('app.main.workmot', { locale: $rootScope.lang });
+    $state.go('app.main.workmot', {locale: $rootScope.lang});
   }
-  
+
   $scope.worktire = function () {
-    $state.go('app.main.worktire', { locale: $rootScope.lang });
+    $state.go('app.main.worktire', {locale: $rootScope.lang});
   }
-  
+
   $scope.workbo = function () {
-    $state.go('app.main.workbo', { locale: $rootScope.lang });
+    $state.go('app.main.workbo', {locale: $rootScope.lang});
   }
-  
+
   $scope.postponedwork = function () {
-    $state.go('app.main.postponedwork', { locale: $rootScope.lang });
+    $state.go('app.main.postponedwork', {locale: $rootScope.lang});
   }
-  
+
   $scope.tasklist = function () {
-    $state.go('app.main.tasklist', { locale: $rootScope.lang });
+    $state.go('app.main.tasklist', {locale: $rootScope.lang});
   }
-  
-    
+
+
   $scope.calendarview = function () {
-    $state.go('app.main.calendarview', { locale: $rootScope.lang });
+    $state.go('app.main.calendarview', {locale: $rootScope.lang});
   }
 
- $scope.offer = function () {
-    $state.go('app.main.offer', { locale: $rootScope.lang });
+  $scope.offer = function () {
+    $state.go('app.main.offer', {locale: $rootScope.lang});
   }
 
-   $scope.replacementvehicle = function () {
-    $state.go('app.main.calendarview', { locale: $rootScope.lang });
+  $scope.replacementvehicle = function () {
+    $state.go('app.main.calendarview', {locale: $rootScope.lang});
   }
 
-  
 
-
-  
-  
- 
   $scope.changeLang = function (lang) {
-	
-	 $rootScope.popupFromDate.opened = false;
-   $rootScope.popupToDate.opened = false;
-  
     //vutt
     var array = $rootScope.cultureInfoArray
     var cultureInfo = '';
@@ -95,12 +84,20 @@ UserWebApp.controller('appCtrl', function ($scope, $rootScope, $locale ,HttpServ
       }
     });
     //
-    
+
     var params = $state.params;
     params.locale = lang;
     $state.transitionTo($state.current, params, {
       reload: true, inherit: false, notify: true
     });
+
+    try {
+      $rootScope.popupFromDate.opened = false;
+      $rootScope.popupToDate.opened = false;
+    } catch (c) {
+      console.error(c);
+    }
+
   }
 
   $scope.lstLang = [];
