@@ -1,4 +1,4 @@
-UserWebApp.controller('newWOCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $location, $state, $filter, $uibModal, CommonServices) {
+UserWebApp.controller('newWOCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $location, $state, $filter, $uibModal, $window ,CommonServices) {
 
   $scope.lstDepartment = [];
   $scope.lstVisitReason = [];
@@ -8,7 +8,9 @@ UserWebApp.controller('newWOCtrl', function ($scope, $rootScope, $locale, HttpSe
   $scope.lstJobTypes = [];
 
   $scope.target = {};
-
+  $scope.vehicle = "";
+  $scope.customer = "";
+  $scope.contact = "";
 
   // datepicker-vutt
 
@@ -111,7 +113,8 @@ UserWebApp.controller('newWOCtrl', function ($scope, $rootScope, $locale, HttpSe
     });
 
     modalInstance.result.then(function (selectedItem) {
-      $ctrl.selected = selectedItem;
+      console.log(selectedItem);
+      $scope.vehicle = selectedItem;
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
     });
@@ -134,7 +137,8 @@ UserWebApp.controller('newWOCtrl', function ($scope, $rootScope, $locale, HttpSe
     });
 
     modalInstance.result.then(function (selectedItem) {
-      $ctrl.selected = selectedItem;
+      console.log(selectedItem);
+      $scope.vehicle = selectedItem;
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
     });
@@ -162,6 +166,10 @@ UserWebApp.controller('newWOCtrl', function ($scope, $rootScope, $locale, HttpSe
     });
   };
 
+  $scope.goBack = function(){
+    $window.history.back();
+  }
+
 });
 
 
@@ -174,11 +182,11 @@ UserWebApp.controller('VehicleModalCtrl', function ($scope, $rootScope, $locale,
     $uibModalInstance.dismiss('cancel');
   };
   
-  $scope.param = "a";
+  $scope.skey = "";
 
-  function loadData() {
-	  console.log($scope.param);
-    CommonServices.getVehicles($scope.param).then(function (data) {
+  function loadData(skey) {
+	  console.log(skey);
+    CommonServices.getVehicles(skey).then(function (data) {
       console.log(data);
       $scope.lstVehicles = data;
     }, function(error){
@@ -186,7 +194,16 @@ UserWebApp.controller('VehicleModalCtrl', function ($scope, $rootScope, $locale,
 	});
   }
 
-  loadData();
+  loadData($scope.skey);
+
+  $scope.doSearch = function () {
+    loadData($scope.skey)
+  }
+
+  $scope.doPick = function(item) {
+    console.log(item);
+    $uibModalInstance.close(item);
+  }
 
 })
 
