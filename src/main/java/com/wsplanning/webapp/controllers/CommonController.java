@@ -2,8 +2,11 @@ package com.wsplanning.webapp.controllers;
 
 import com.google.common.net.HttpHeaders;
 import com.wsplanning.webapp.clients.ASMasterClient;
+import com.wsplanning.webapp.clients.CustomerClient;
 import com.wsplanning.webapp.clients.EmployeesClient;
 import com.wsplanning.webapp.clients.StampingClient;
+import com.wsplanning.webapp.clients.VehiclesClient;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -33,6 +36,12 @@ public class CommonController extends BaseController {
 
   @Autowired
   protected EmployeesClient employeesClient;
+
+  @Autowired
+  protected CustomerClient customerClient;
+
+  @Autowired
+  protected VehiclesClient vehiclesClient;
 
   @Autowired
   protected HttpSession session;
@@ -217,8 +226,7 @@ public class CommonController extends BaseController {
   @GetMapping("/site/getVehicles")
   public ResponseEntity getVehicles(@RequestParam(name = "skey") String skey) {
     try {
-      String param = skey.toString();
-      String rtn = siteClient.getVehicles(skey);
+      String rtn = vehiclesClient.getVehicles(skey);
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);
@@ -226,9 +234,9 @@ public class CommonController extends BaseController {
   }
 
   @GetMapping("/site/getCustomers")
-  public ResponseEntity getCustomers() {
+  public ResponseEntity getCustomers(@RequestParam(name = "skey") String skey, @RequestParam(name = "custNo") String custNo) {
     try {
-      String rtn = siteClient.getCustomers(getSiteId(), "");
+      String rtn = customerClient.getCustomers(skey, custNo);
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);
