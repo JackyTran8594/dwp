@@ -106,6 +106,7 @@ var translationsEN = {
   serv: 'Serv. advisor',
   visitReason: 'Visit reason',
   searchWo: 'Search workorders',
+  search:'Search',
   pleaseSelect: '--Please select--',
   fromDate: 'From date',
   toDate: 'To date',

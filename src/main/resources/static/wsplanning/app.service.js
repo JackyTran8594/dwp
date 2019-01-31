@@ -2,6 +2,7 @@ UserWebApp
         .service('HttpService', function ($http, $q, $translate) {
             var self = {
                 'getData': function (url, param) {
+	
                     common.spinner(true);
                     var deferred = $q.defer();
 

@@ -168,10 +168,13 @@ UserWebApp
       return d.promise;
     };
 
-    this.getVehicles = function () {
+    this.getVehicles = function (skey) {
+		var param = {
+			skey: skey
+		};
       var d = $q.defer();
       if(!this.vehicles || this.vehicles.length <= 0) {
-        HttpService.getData('/site/getVehicles', {}).then(function (response) {
+        HttpService.getData('/site/getVehicles', param).then(function (response) {
           this.vehicles = response;
           d.resolve(response);
         }, function(error){
@@ -183,7 +186,7 @@ UserWebApp
       return d.promise;
     }
 
-    this.getCustomers = function () {
+    this.getCustomers = function (param) {
       var d = $q.defer();
       if(!this.customers || this.vehicles.length <= 0) {
         HttpService.getData('/site/getCustomers', {}).then(function (response) {

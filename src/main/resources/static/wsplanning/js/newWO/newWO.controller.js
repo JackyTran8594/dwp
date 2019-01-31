@@ -162,9 +162,6 @@ UserWebApp.controller('newWOCtrl', function ($scope, $rootScope, $locale, HttpSe
     });
   };
 
-
-
-
 });
 
 
@@ -176,12 +173,17 @@ UserWebApp.controller('VehicleModalCtrl', function ($scope, $rootScope, $locale,
   $ctrl.cancel = function () {
     $uibModalInstance.dismiss('cancel');
   };
+  
+  $scope.param = "a";
 
   function loadData() {
-    CommonServices.getVehicles().then(function (data) {
+	  console.log($scope.param);
+    CommonServices.getVehicles($scope.param).then(function (data) {
       console.log(data);
       $scope.lstVehicles = data;
-    })
+    }, function(error){
+		console.log(error);
+	});
   }
 
   loadData();

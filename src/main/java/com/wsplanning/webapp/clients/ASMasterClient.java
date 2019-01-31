@@ -106,14 +106,14 @@ public class ASMasterClient {
     return restTemplate.getForObject(url, String.class);
   }
 
-  public String getCustomers(String siteId) {
-    String url = String.format("%s/Customer?skey={skey}&CustNo={CustNo}%s", this.endpointUrl, siteId);
+  public String getCustomers(String skey, String custNo) {
+    String url = String.format("%s/Customer?skey=%s&CustNo=%s", this.endpointUrl, skey, custNo);
     return restTemplate.getForObject(url, String.class);
   }
 
-  public String getVehicles(String siteId)
+  public String getVehicles(String skey)
   {
-    String url = String.format("%s/Vehicles?skey={skey}%s", this.endpointUrl, siteId);
+    String url = String.format("%s/Vehicles?skey=%s", this.endpointUrl, skey);
     return restTemplate.getForObject(url, String.class);
   }
 }

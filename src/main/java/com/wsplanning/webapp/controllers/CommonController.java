@@ -1,5 +1,6 @@
 package com.wsplanning.webapp.controllers;
 
+import com.google.common.net.HttpHeaders;
 import com.wsplanning.webapp.clients.ASMasterClient;
 import com.wsplanning.webapp.clients.EmployeesClient;
 import com.wsplanning.webapp.clients.StampingClient;
@@ -214,9 +215,10 @@ public class CommonController extends BaseController {
   }
 
   @GetMapping("/site/getVehicles")
-  public ResponseEntity getVehicles() {
+  public ResponseEntity getVehicles(@RequestParam(name = "skey") String skey) {
     try {
-      String rtn = siteClient.getVehicles(getSiteId());
+      String param = skey.toString();
+      String rtn = siteClient.getVehicles(skey);
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);
@@ -226,7 +228,7 @@ public class CommonController extends BaseController {
   @GetMapping("/site/getCustomers")
   public ResponseEntity getCustomers() {
     try {
-      String rtn = siteClient.getCustomers(getSiteId());
+      String rtn = siteClient.getCustomers(getSiteId(), "");
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);
