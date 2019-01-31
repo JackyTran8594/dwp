@@ -1,5 +1,5 @@
 <div class="page-header page-header-xs" ng-controller="HeaderDetailCtrl">
-    <div class="panel panel-flat" id="aclIpv6Extend">
+    <div class="panel panel-flat" id="headerPanel">
         <div class="panel-heading">
             <h3 class="panel-title"><b>{{ 'WoHeader' | translate }}</b></h3>
             <div class="heading-elements">
@@ -9,13 +9,13 @@
                            ng-disabled="checklistTable.list.length == 0"><span class="icon-bin"></span></a></li>
                     <li><a class="btn btn-xs"><span class="icon-sync" ng-click="refresh()"></span></a></li>
                     <li><a ng-class="{'rotate-180': collapsed == true}" data-action="collapse"
-                           data-target="#pnAclIpv6Extend" ng-click="collapse()"></a></li>
+                           data-target="#pnHeaderFrm" ng-click="collapse()"></a></li>
                 </ul>
             </div>
         </div>
 
-        <div class="panel-body panel-collapse in" id="pnAclIpv6Extend" ng-hide="collapsed">
-            <form class="form-horizontal formValidate" name="aclIpv6ExtendFrm" id="aclIpv6ExtendFrm">
+        <div class="panel-body panel-collapse in" id="pnHeaderFrm" ng-hide="collapsed">
+            <form class="form-horizontal formValidate" name="headerFrm" id="headerFrm">
                 <!--Row 1-->
                 <div class="row">
 
@@ -54,9 +54,16 @@
                             <label class="control-label col-md-4">{{ 'ServiceDate' | translate }}</label>
                             <div class="col-md-8">
                                 <div class="input-group">
-                                    <input type="text" class="form-control datepicker" id="ServiceDate"
-                                           placeholder="Pick a date&hellip;" ng-model="WorkOrder.ServiceDate">
-                                    <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                                    <input type="text" class="form-control datepicker"
+                                           uib-datepicker-popup="dd-MMMM-yyyy" placeholder="Pick a date"
+                                           is-open="popupServiceDate.opened" datepicker-options="dateOptions"
+                                           ng-required="true" show-button-bar="false" ng-model="WorkOrder._ServiceDate"
+                                           id="ServiceDate"/>
+                                    <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="openServiceDate()">
+											<i class="icon-calendar"></i>
+											</button>
+                                        </span>
                                 </div>
                             </div>
                         </div>
@@ -65,12 +72,19 @@
                     <!--ExecutionDate-->
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label col-md-4">{{ 'ExecutionDate' | translate }}</label>
+                            <label class="control-label col-md-4">{{ 'ExpectedDelivery' | translate }}</label>
                             <div class="col-md-8">
                                 <div class="input-group">
-                                    <input type="text" class="form-control datepicker" id="ExecutionDate2"
-                                           placeholder="Pick a date&hellip;" ng-model="WorkOrder.ExecutionDate">
-                                    <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                                    <input type="text" class="form-control datepicker"
+                                           uib-datepicker-popup="dd-MMMM-yyyy" placeholder="Pick a date"
+                                           is-open="popupCheckOutDate.opened" datepicker-options="dateOptions"
+                                           ng-required="true" show-button-bar="false" ng-model="WorkOrder._CheckOutDate"
+                                           id="CheckOutDate"/>
+                                    <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="openCheckOutDate()">
+											<i class="icon-calendar"></i>
+											</button>
+                                        </span>
                                 </div>
                             </div>
                         </div>
@@ -86,9 +100,16 @@
                             <label class="control-label col-md-4">{{ 'CheckInDate' | translate }}</label>
                             <div class="col-md-8">
                                 <div class="input-group">
-                                    <input type="text" class="form-control datepicker" id="CheckInDate"
-                                           placeholder="Pick a date&hellip;" ng-model="WorkOrder.CheckInDate">
-                                    <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                                    <input type="text" class="form-control datepicker"
+                                           uib-datepicker-popup="dd-MMMM-yyyy" placeholder="Pick a date"
+                                           is-open="popupCheckInDate.opened" datepicker-options="dateOptions"
+                                           ng-required="true" show-button-bar="false" ng-model="WorkOrder._CheckInDate"
+                                           id="CheckInDate"/>
+                                    <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="openCheckInDate()">
+											<i class="icon-calendar"></i>
+											</button>
+                                        </span>
                                 </div>
                             </div>
                         </div>
@@ -100,9 +121,16 @@
                             <label class="control-label col-md-4">{{ 'ExecutionDate' | translate }}</label>
                             <div class="col-md-8">
                                 <div class="input-group">
-                                    <input type="text" class="form-control datepicker" id="ExecutionDate"
-                                           placeholder="Pick a date&hellip;" ng-model="WorkOrder.ExecutionDate">
-                                    <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                                    <input type="text" class="form-control datepicker"
+                                           uib-datepicker-popup="dd-MMMM-yyyy" placeholder="Pick a date"
+                                           is-open="popupExecutionDate.opened" datepicker-options="dateOptions"
+                                           ng-required="true" show-button-bar="false" ng-model="WorkOrder._ExecutionDate"
+                                           id="ExecutionDate"/>
+                                    <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="openExecutionDate()">
+											<i class="icon-calendar"></i>
+											</button>
+                                        </span>
                                 </div>
                             </div>
                         </div>
@@ -116,9 +144,9 @@
                     <!--Mileage-->
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label col-md-4">{{ 'CheckInDate' | translate }}</label>
+                            <label class="control-label col-md-4">{{ 'Mileage' | translate }}</label>
                             <div class="col-md-8">
-                                <input type="number" class="form-control" id="Mileage" ng-model="WorkOrder.Mileage">
+                                <input type="number"  class="form-control" id="Mileage" ng-model="WorkOrder.Mileage">
                             </div>
                         </div>
                     </div>
@@ -126,12 +154,19 @@
                     <!--BookMOTDate-->
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label col-md-4">{{ 'ExecutionDate' | translate }}</label>
+                            <label class="control-label col-md-4">{{ 'NextMOT' | translate }}</label>
                             <div class="col-md-8">
                                 <div class="input-group">
-                                    <input type="text" class="form-control datepicker" id="BookMOTDate"
-                                           placeholder="Pick a date&hellip;" ng-model="WorkOrder.BookMOTDate">
-                                    <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                                    <input type="text" class="form-control datepicker"
+                                           uib-datepicker-popup="dd-MMMM-yyyy" placeholder="Pick a date"
+                                           is-open="popupBookMOTDate.opened" datepicker-options="dateOptions"
+                                           ng-required="true" show-button-bar="false" ng-model="WorkOrder._BookMOTDate"
+                                           id="BookMOTDate"/>
+                                    <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="openBookMOTDate()">
+											<i class="icon-calendar"></i>
+											</button>
+                                        </span>
                                 </div>
                             </div>
                         </div>
@@ -140,67 +175,39 @@
                 <!--end row 4-->
 
 
-                <!--Row 5-->
-                <div class="row">
-                    <!--Mileage-->
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label class="checkbox-inline">
-                                <input type="checkbox" checked="checked">
-                                Checked default
-                            </label>
-                        </div>
-                    </div>
-
-                    <!--Mileage-->
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label class="checkbox-inline">
-                                <input type="checkbox" checked="checked">
-                                Checked default
-                            </label>
-                        </div>
-                    </div>
-
-                    <!--Mileage-->
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label class="checkbox-inline">
-                                <input type="checkbox" checked="checked">
-                                Checked default
-                            </label>
-                        </div>
-                    </div>
-
-                    <!--Mileage-->
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label class="checkbox-inline">
-                                <input type="checkbox" checked="checked">
-                                Checked default
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <!--end row 5-->
-
-
                 <!--Row 6-->
                 <div class="row">
                     <!--BookTireDate-->
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label col-md-4">{{ 'CheckInDate' | translate }}</label>
+                            <!--CustWaiting-->
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" ng-model="WorkOrder.IsCustomerWaiting"
+                                               ng-checked="WorkOrder.IsCustomerWaiting == 1">
+                                        {{ 'CustWaiting' | translate }}
+                                    </label>
+                                </div>
+                            </div>
+
                             <div class="col-md-8">
                                 <div class="input-group">
                                     <label class="checkbox-inline">
                                         <input type="checkbox" checked="checked">
-                                        Checked default
+                                        {{ 'BookTireChangeLot' | translate }}
                                     </label>
 
-                                    <input type="text" class="form-control datepicker" id="BookTireDate"
-                                           placeholder="Pick a date&hellip;" ng-model="WorkOrder.BookTireDate">
-                                    <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                                    <input type="text" class="form-control datepicker"
+                                           uib-datepicker-popup="dd-MMMM-yyyy" placeholder="Pick a date"
+                                           is-open="popupBookTireDate.opened" datepicker-options="dateOptions"
+                                           ng-required="true" show-button-bar="false" ng-model="WorkOrder.BookTireDate"
+                                           id="BookTireDate"/>
+                                    <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="openBookTireDate()">
+											<i class="icon-calendar"></i>
+											</button>
+                                        </span>
                                 </div>
                             </div>
                         </div>
@@ -209,9 +216,24 @@
                     <!--BookMOTDate-->
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label col-md-4">{{ 'ExecutionDate' | translate }}</label>
+                            <!--Rework-->
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" ng-model="WorkOrder.IsRework"
+                                               ng-checked="WorkOrder.IsRework == 1">
+                                        {{ 'Rework' | translate }}
+                                    </label>
+                                </div>
+                            </div>
+
                             <div class="col-md-8">
                                 <div class="input-group">
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" checked="checked">
+                                        {{ 'BookMOTlot' | translate }}
+                                    </label>
+
                                     <input type="text" class="form-control datepicker" id="BookMOTDate2"
                                            placeholder="Pick a date&hellip;" ng-model="WorkOrder.BookMOTDate">
                                     <span class="input-group-addon"><i class="icon-calendar"></i></span>
@@ -324,7 +346,7 @@
                 <!--end row 11-->
 
                 <div class="row pull-right">
-                    <button type="button" ng-disabled="aclIpv6ExtendFrm.$invalid"
+                    <button type="button" ng-disabled="headerFrm.$invalid"
                             id="btnSubmitFrm"
                             class="btn btn-icon btn-primary btnSubmit"
                             ng-click="onSubmitFrm()">
@@ -345,12 +367,6 @@
 
 <script type="text/javascript">
   $(document).ready(function () {
-    $("#ServiceDate").datepicker({
-      format: 'dd/mm/yyyy',
-    });
-    $("#ExecutionDate").datepicker({
-      format: 'dd/mm/yyyy',
-    });
   });
 
 </script>

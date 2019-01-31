@@ -114,7 +114,9 @@ var translationsEN = {
   WoHeader: 'Workorder Header',
   WoJob: 'Workorder Job',
   ServiceDate: 'ServiceDate',
-  ExecutionDate: 'ExecutionDate',
+  ExpectedDelivery: "Expected delivery",
+  CheckInDate: 'Check In Time',
+  ExecutionDate: 'Execution Time',
   ChargeCats: 'Job Charge Category',
   JobCategory: 'Job Category',
   Payer: 'Payer',
@@ -122,6 +124,22 @@ var translationsEN = {
   JobType: 'Job Type',
   JobTitle: 'Job Title',
   CustomerComplaint: 'Customer complaint',
+  BookTireChangeLot: "Book Tire Change Lot",
+  BookMOTlot: "Book MOT Lot",
+  CustWaiting: "Cust is Waiting",
+  Rework: "Rework",
+  Mileage: "Current mileage",
+  NextMOT: "Next MOT",
+
+  //Contract
+  FirstRegistrationDate: "First registration date",
+  EngineNumber: "Engine number",
+
+  //Customer
+  Address: "Address",
+  Phone: "Phone",
+  CustomerGroup: "Customer group",
+  AccountGroup: "Customer group",
 };
 
 var translationsVI = {
@@ -213,7 +231,9 @@ var translationsVI = {
   WoHeader: 'Workorder Header',
   WoJob: 'Workorder Job',
   ServiceDate: 'Service Date',
-  ExecutionDate: 'Execution Date',
+  ExpectedDelivery: "Expected delivery",
+  CheckInDate: 'Check In Time',
+  ExecutionDate: 'Execution Time',
   ChargeCats: 'Job Charge Category',
   JobCategory: 'Job Category',
   Payer: 'Payer',
@@ -221,6 +241,22 @@ var translationsVI = {
   JobType: 'Job Type',
   JobTitle: 'Job Title',
   CustomerComplaint: 'Customer complaint',
+  BookTireChangeLot: "Book Tire Change Lot",
+  BookMOTlot: "Book MOT Lot",
+  CustWaiting: "Cust is Waiting",
+  Rework: "Rework",
+  Mileage: "Current mileage",
+  NextMOT: "Next MOT",
+
+  //Contract
+  FirstRegistrationDate: "First registration date",
+  EngineNumber: "Engine number",
+
+  //Customer
+  Address: "Address",
+  Phone: "Phone",
+  CustomerGroup: "Customer group",
+  AccountGroup: "Customer group",
 };
 
 UserWebApp.config(['$translateProvider', function ($translateProvider) {
