@@ -1,4 +1,4 @@
-UserWebApp.controller('newWOCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $location, $state, $filter, $uibModal, $window ,CommonServices) {
+UserWebApp.controller('newWOCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $location, $state, $filter, $uibModal, $window, CommonServices) {
 
   $scope.lstDepartment = [];
   $scope.lstVisitReason = [];
@@ -107,7 +107,7 @@ UserWebApp.controller('newWOCtrl', function ($scope, $rootScope, $locale, HttpSe
       backdrop: 'static',
       resolve: {
         item: function () {
-          return item;
+          return $scope.vehicle;
         }
       }
     });
@@ -131,7 +131,7 @@ UserWebApp.controller('newWOCtrl', function ($scope, $rootScope, $locale, HttpSe
       backdrop: 'static',
       resolve: {
         item: function () {
-          return item;
+          return $scope.customer;
         }
       }
     });
@@ -154,7 +154,7 @@ UserWebApp.controller('newWOCtrl', function ($scope, $rootScope, $locale, HttpSe
       backdrop: 'static',
       resolve: {
         item: function () {
-          return item;
+          return $scope.contact;
         }
       }
     });
@@ -166,7 +166,7 @@ UserWebApp.controller('newWOCtrl', function ($scope, $rootScope, $locale, HttpSe
     });
   };
 
-  $scope.goBack = function(){
+  $scope.goBack = function () {
     $window.history.back();
   }
 
@@ -174,24 +174,24 @@ UserWebApp.controller('newWOCtrl', function ($scope, $rootScope, $locale, HttpSe
 
 
 UserWebApp.controller('VehicleModalCtrl', function ($scope, $rootScope, $locale, HttpService, $translate,
-  $location, $state, $filter, $uibModal, $uibModalInstance, CommonServices) {
+  $location, $state, $filter, $uibModal, $uibModalInstance, CommonServices, item) {
 
   var $ctrl = this;
 
   $ctrl.cancel = function () {
     $uibModalInstance.dismiss('cancel');
   };
-  
+
   $scope.skey = "";
 
   function loadData(skey) {
-	  console.log(skey);
+    console.log(skey);
     CommonServices.getVehicles(skey).then(function (data) {
       console.log(data);
       $scope.lstVehicles = data;
-    }, function(error){
-		console.log(error);
-	});
+    }, function (error) {
+      console.log(error);
+    });
   }
 
   loadData($scope.skey);
@@ -200,7 +200,8 @@ UserWebApp.controller('VehicleModalCtrl', function ($scope, $rootScope, $locale,
     loadData($scope.skey)
   }
 
-  $scope.doPick = function(item) {
+  $scope.doPick = function (selectedItem) {
+    item = selectedItem;
     console.log(item);
     $uibModalInstance.close(item);
   }
@@ -210,11 +211,14 @@ UserWebApp.controller('VehicleModalCtrl', function ($scope, $rootScope, $locale,
 
 
 UserWebApp.controller('CustomerModalCtrl', function ($scope, $rootScope, $locale, HttpService, $translate,
-  $location, $state, $filter, $uibModal, $uibModalInstance, CommonServices) {
+  $location, $state, $filter, $uibModal, $uibModalInstance, CommonServices, item) {
 
 
 
   var $ctrl = this;
+
+  $scope.skey = "";
+  $scope.custNo = "";
 
   $scope.lstCustomers = []
 
@@ -222,20 +226,32 @@ UserWebApp.controller('CustomerModalCtrl', function ($scope, $rootScope, $locale
     $uibModalInstance.dismiss('cancel');
   };
 
-  function loadData() {
-    CommonServices.getCustomers().then(function (data) {
+  function loadData(skey, custNo) {
+    CommonServices.getCustomers(skey, custNo).then(function (data) {
       $scope.lstCustomers = data;
     })
   }
 
-  loadData();
+  loadData($scope.skey);
+
+  $scope.doSearch = function () {
+    loadData($scope.skey, $scope.custNo)
+  }
+
+  loadData($scope.skey, $scope.custNo);
+
+  $scope.doPick = function (selectedItem) {
+    item = selectedItem;
+    console.log(item);
+    $uibModalInstance.close(item);
+  }
 
 })
 
 
 
 UserWebApp.controller('ContractModalCtrl', function ($scope, $rootScope, $locale, HttpService, $translate,
-  $location, $state, $filter, $uibModal, $uibModalInstance, CommonServices) {
+  $location, $state, $filter, $uibModal, $uibModalInstance, CommonServices, item) {
 
 
   var $ctrl = this;
@@ -244,4 +260,9 @@ UserWebApp.controller('ContractModalCtrl', function ($scope, $rootScope, $locale
     $uibModalInstance.dismiss('cancel');
   };
 
+  $scope.doPick = function (selectedItem) {
+    item = selectedItem;
+    console.log(item);
+    $uibModalInstance.close(item);
+  }
 })

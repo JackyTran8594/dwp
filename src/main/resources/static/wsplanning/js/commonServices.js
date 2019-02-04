@@ -186,10 +186,14 @@ UserWebApp
       return d.promise;
     }
 
-    this.getCustomers = function (param) {
+    this.getCustomers = function (skey, custNo) {
       var d = $q.defer();
+      var param = {
+        skey: skey,
+        custNo: custNo,
+      };
       if(!this.customers || this.vehicles.length <= 0) {
-        HttpService.getData('/site/getCustomers', {}).then(function (response) {
+        HttpService.getData('/site/getCustomers', param).then(function (response) {
           this.customers = response;
           d.resolve(response);
         }, function(error){

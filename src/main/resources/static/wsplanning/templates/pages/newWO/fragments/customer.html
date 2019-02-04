@@ -3,10 +3,10 @@
     <span ng-show="!isShow">
         <div class="panel-heading">
             <h6 class="panel-title">
-                <a class="btn btn-link btn-float has-text text-size-small" ng-click="cutomer()">
+                <a class="btn btn-link btn-float has-text text-size-small" ng-click="$ctrl.customer()">
                     <i class="icon-user position-left"></i>
                 </a>
-                <small>{{WOCustomer.Address}}, {{WOCustomer.Tel1}}, {{WOCustomer.InvoiceGroup}}, {{WOCustomer.AccountGroup}}</small></h6>
+                <small>{{customer.LName}}, {{customer.Tel1}}, {{customer.Email}}</small></h6>
             <div class="heading-elements">
                 <ul class="icons-list">
                     <li ng-click="toogleVehicle()"><a ng-class="{'rotate-180': isShow == true}" data-action="collapse" data-popup="tooltip" title="Collapse"></a></li>

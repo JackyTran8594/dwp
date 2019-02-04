@@ -1,5 +1,6 @@
 package com.wsplanning.webapp.clients;
 
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,14 @@ public class CustomerClient {
   }
 
   public String getCustomers(String skey, String custNo) {
-    String url = String.format("%s?skey=%s&CustNo=%s", this.endpointUrl, skey, custNo);
+    String url = "";
+    if (StringUtils.isBlank(custNo)) {
+      url = String.format("%s?skey=%s", this.endpointUrl, skey);
+    } else {
+      Integer number = Integer.parseInt(custNo);
+      url = String.format("%s?skey=%s&CustNo=%d", this.endpointUrl, skey, custNo);
+    }
+
     return restTemplate.getForObject(url, String.class);
   }
 
