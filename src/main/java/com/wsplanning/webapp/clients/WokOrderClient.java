@@ -49,6 +49,7 @@ public class WokOrderClient {
     String LoadAttachmentData = params.get("LoadAttachmentData");
     String ServDateFrom = params.get("FromDate");
     String ServDateTo = params.get("ToDate");
+    String shiftId = params.get("shiftId");
 
     HttpHeaders headers = new HttpHeaders();
     headers.set("Token", token);
@@ -64,6 +65,9 @@ public class WokOrderClient {
       headers.set("Page", page);
     }
 
+    if (StringUtils.isNotBlank(shiftId)) {
+      headers.set("ShiftId", shiftId);
+    }
     if (StringUtils.isNotBlank(DeptId)) {
       headers.set("DeptId", DeptId);
     }
@@ -114,6 +118,7 @@ public class WokOrderClient {
     String LoadAttachmentData = params.get("LoadAttachmentData");
     String ServDateFrom = params.get("FromDate");
     String ServDateTo = params.get("ToDate");
+    String shiftId = params.get("shiftId");
 
     HttpHeaders headers = new HttpHeaders();
     headers.set("Token", token);
@@ -126,6 +131,10 @@ public class WokOrderClient {
     }
     if (StringUtils.isNotBlank(page)) {
       headers.set("Page", page);
+    }
+
+    if (StringUtils.isNotBlank(shiftId)) {
+      headers.set("ShiftId", shiftId);
     }
 
     if (StringUtils.isNotBlank(DeptId)) {

@@ -12,6 +12,7 @@ UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope, $local
   // };
 
   $scope.params = {
+    "shiftId": "",
     "department": "",
     "trans": "",
     "visitReason": "",
@@ -27,6 +28,7 @@ UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope, $local
 
   function reset() {
     $scope.params = {
+      "shiftId": "",
       "department": "",
       "trans": "",
       "visitReason": "",
@@ -76,6 +78,7 @@ UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope, $local
   $scope.lstDepartment = [];
   $scope.lstServ = [];
   $scope.lstVisitReason = [];
+  $scope.lstShift = [];
 
   function loadCommon() {
     CommonServices.getTransactionTypes().then(function (data) {
@@ -89,6 +92,9 @@ UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope, $local
     });
     CommonServices.getServiceAdvisors().then(function (data) {
       $scope.lstServ = data;
+    });
+    CommonServices.getShifts().then(function (data) {
+      $scope.lstShift = data;
     });
 
   }
@@ -105,6 +111,7 @@ UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope, $local
       "skey": $scope.searchValue,
       "page": $scope.page,
       "limit": $scope.limit,
+      "shiftId": $scope.params.shiftId,
       "DeptId": $scope.params.department,
       "TransactionType": $scope.params.trans,
       "VisitReasonCode": $scope.params.visitReason,
@@ -250,5 +257,13 @@ UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope, $local
   $scope.viewDetail = function (item) {
     $state.go('app.main.workdetail', { 'id': item.WorkOrderId, 'type': "todayWO" });
   }
+
+
+
+  $scope.isShow = false;
+  $scope.toogleSearch = function () {
+    $scope.isShow = !$scope.isShow;
+  }
+
 
 });
