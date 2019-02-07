@@ -14,6 +14,81 @@ UserWebApp.controller('newWOCtrl', function ($scope, $rootScope, $locale, HttpSe
 
   // datepicker-vutt
 
+  var $ctrl = this;
+  $ctrl.animationsEnabled = true;
+
+  $ctrl.vehicle = function (size, item) {
+    var modalInstance = $uibModal.open({
+      animation:  $ctrl.animationsEnabled ,
+      templateUrl: '/wsplanning/templates/pages/newWO/modal/vehicle-form.html',
+      controller: 'VehicleModalCtrl',
+      controllerAs: '$ctrl',
+      size: size,
+      backdrop: 'static',
+      resolve: {
+        item: function () {
+          return $scope.vehicle;
+        }
+      }
+    });
+
+    modalInstance.result.then(function (selectedItem) {
+      console.log(selectedItem);
+      $scope.vehicle = selectedItem;
+    }, function () {
+      console.log('Modal dismissed at: ' + new Date());
+    });
+  };
+
+  $ctrl.customer = function (size, item) {
+    var modalInstance = $uibModal.open({
+      animation: $ctrl.animationsEnabled,
+      templateUrl: '/wsplanning/templates/pages/newWO/modal/customer-form.html',
+      controller: 'CustomerModalCtrl',
+      controllerAs: '$ctrl',
+      size: size,
+      backdrop: 'static',
+      resolve: {
+        item: function () {
+          return $scope.customer;
+        }
+      }
+    });
+
+    modalInstance.result.then(function (selectedItem) {
+      console.log(selectedItem);
+      $scope.customer = selectedItem;
+    }, function () {
+      console.log('Modal dismissed at: ' + new Date());
+    });
+  };
+
+  $ctrl.contact = function (size, item) {
+    var modalInstance = $uibModal.open({
+      animation: $ctrl.animationsEnabled,
+      templateUrl: '/wsplanning/templates/pages/newWO/modal/customer-form.html',
+      controller: 'ContactModalCtrl',
+      controllerAs: '$ctrl',
+      size: size,
+      backdrop: 'static',
+      resolve: {
+        item: function () {
+          return $scope.contact;
+        }
+      }
+    });
+
+    modalInstance.result.then(function (selectedItem) {
+      console.log(selectedItem);
+      $scope.contact = selectedItem;
+    }, function () {
+      console.log('Modal dismissed at: ' + new Date());
+    });
+  };
+
+
+
+ 
   console.log($locale);
 
   $scope.dateOptions = {
@@ -21,6 +96,21 @@ UserWebApp.controller('newWOCtrl', function ($scope, $rootScope, $locale, HttpSe
     startingDay: 1
   };
 
+  $scope.toggleVehicle = function () {
+    $scope.isShowVehicle = !$scope.isShowVehicle;
+  }
+
+
+  $scope.toggleCustomer = function () {
+    $scope.isShowCustomer = !$scope.isShowCustomer;
+  }
+
+  $scope.toggleContact = function () {
+    $scope.isShowContact = !$scope.isShowContact;
+  }
+
+
+  
   $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate', 'dd-MMMM-yyyy HH:mm:ss'];
   $scope.format = $scope.formats[4];
   console.log($scope.format);
@@ -91,81 +181,6 @@ UserWebApp.controller('newWOCtrl', function ($scope, $rootScope, $locale, HttpSe
 
   }
 
-  //
-
-  //Modal
-  var $ctrl = this;
-  $ctrl.animationsEnabled = true;
-
-  $ctrl.vehicle = function (size, item) {
-    var modalInstance = $uibModal.open({
-      animation: $ctrl.animationsEnabled,
-      templateUrl: '/wsplanning/templates/pages/newWO/modal/vehicle-form.html',
-      controller: 'VehicleModalCtrl',
-      controllerAs: '$ctrl',
-      size: size,
-      backdrop: 'static',
-      resolve: {
-        item: function () {
-          return $scope.vehicle;
-        }
-      }
-    });
-
-    modalInstance.result.then(function (selectedItem) {
-      console.log(selectedItem);
-      $scope.vehicle = selectedItem;
-    }, function () {
-      console.log('Modal dismissed at: ' + new Date());
-    });
-  };
-
-
-  $ctrl.customer = function (size, item) {
-    var modalInstance = $uibModal.open({
-      animation: $ctrl.animationsEnabled,
-      templateUrl: '/wsplanning/templates/pages/newWO/modal/customer-form.html',
-      controller: 'CustomerModalCtrl',
-      controllerAs: '$ctrl',
-      size: size,
-      backdrop: 'static',
-      resolve: {
-        item: function () {
-          return $scope.customer;
-        }
-      }
-    });
-
-    modalInstance.result.then(function (selectedItem) {
-      console.log(selectedItem);
-      $scope.vehicle = selectedItem;
-    }, function () {
-      console.log('Modal dismissed at: ' + new Date());
-    });
-  };
-
-  $ctrl.contact = function (size, item) {
-    var modalInstance = $uibModal.open({
-      animation: $ctrl.animationsEnabled,
-      templateUrl: '/wsplanning/templates/pages/newWO/modal/contact-form.html',
-      controller: 'ContractModalCtrl',
-      controllerAs: '$ctrl',
-      size: size,
-      backdrop: 'static',
-      resolve: {
-        item: function () {
-          return $scope.contact;
-        }
-      }
-    });
-
-    modalInstance.result.then(function (selectedItem) {
-      $ctrl.selected = selectedItem;
-    }, function () {
-      console.log('Modal dismissed at: ' + new Date());
-    });
-  };
-
   $scope.goBack = function () {
     $window.history.back();
   }
@@ -209,7 +224,6 @@ UserWebApp.controller('VehicleModalCtrl', function ($scope, $rootScope, $locale,
 })
 
 
-
 UserWebApp.controller('CustomerModalCtrl', function ($scope, $rootScope, $locale, HttpService, $translate,
   $location, $state, $filter, $uibModal, $uibModalInstance, CommonServices, item) {
 
@@ -232,7 +246,6 @@ UserWebApp.controller('CustomerModalCtrl', function ($scope, $rootScope, $locale
     })
   }
 
-  loadData($scope.skey);
 
   $scope.doSearch = function () {
     loadData($scope.skey, $scope.custNo)
@@ -249,20 +262,40 @@ UserWebApp.controller('CustomerModalCtrl', function ($scope, $rootScope, $locale
 })
 
 
-
-UserWebApp.controller('ContractModalCtrl', function ($scope, $rootScope, $locale, HttpService, $translate,
+UserWebApp.controller('ContactModalCtrl', function ($scope, $rootScope, $locale, HttpService, $translate,
   $location, $state, $filter, $uibModal, $uibModalInstance, CommonServices, item) {
+
 
 
   var $ctrl = this;
 
+  $scope.skey = "";
+  $scope.custNo = "";
+
+  $scope.lstCustomers = []
+
   $ctrl.cancel = function () {
     $uibModalInstance.dismiss('cancel');
   };
+
+  function loadData(skey, custNo) {
+    CommonServices.getCustomers(skey, custNo).then(function (data) {
+      $scope.lstCustomers = data;
+    })
+  }
+
+
+  $scope.doSearch = function () {
+    loadData($scope.skey, $scope.custNo)
+  }
+
+  loadData($scope.skey, $scope.custNo);
 
   $scope.doPick = function (selectedItem) {
     item = selectedItem;
     console.log(item);
     $uibModalInstance.close(item);
   }
+
 })
+

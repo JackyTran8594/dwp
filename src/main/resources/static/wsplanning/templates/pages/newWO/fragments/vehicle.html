@@ -1,26 +1,27 @@
 <!-- Basic panel controls -->
 <div class="panel panel-white">
-    <span ng-show="!isShow">
+    <span ng-show="!isShowVehicle">
         <div class="panel-heading">
             <h6 class="panel-title">
                 <a class="btn btn-link btn-float has-text text-size-small" ng-click="$ctrl.vehicle('lg','')">
                     <i class="icon-truck position-left"></i>
                 </a>
+            
                 <small>{{vehicle.LicenseNo}}, {{vehicle.VIN}}, {{vehicle.Make}}, {{vehicle.Model}}</small></h6>
             <div class="heading-elements">
                 <ul class="icons-list">
-                    <li ng-click="toogleVehicle()"><a ng-class="{'rotate-180': isShow == true}" data-action="collapse" data-popup="tooltip" title="Collapse"></a></li>
+                    <li ng-click="toggleVehicle()"><a ng-class="{'rotate-180': isShow == true}" data-action="collapse" data-popup="tooltip" title="Collapse"></a></li>
                 </ul>
             </div>
         </div>
     </span>
 
-    <span ng-show="isShow">
+    <span ng-show="isShowVehicle">
         <div class="panel-heading">
             <h6 class="panel-title">Basic controls</h6>
             <div class="heading-elements">
                 <ul class="icons-list">
-                    <li ng-click="toogleVehicle()"><a ng-class="{'rotate-180': isShow == true}" data-action="collapse" data-popup="tooltip" title="Collapse"></a></li>
+                    <li ng-click="toggleVehicle()"><a ng-class="{'rotate-180': isShow == true}" data-action="collapse" data-popup="tooltip" title="Collapse"></a></li>
                 </ul>
             </div>
         </div>

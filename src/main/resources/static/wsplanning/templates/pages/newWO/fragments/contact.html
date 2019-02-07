@@ -1,26 +1,29 @@
 <!-- Basic panel controls -->
-<div class="panel panel-white">
-    <span ng-show="!isShow">
+<div class="panel panel-white" ng-click="toggleContact()">
+    <span ng-show="!isShowContact">
         <div class="panel-heading">
             <h6 class="panel-title">
-                <a class="btn btn-link btn-float has-text text-size-small" ng-click="contact()">
+                <a class="btn btn-link btn-float has-text text-size-small" ng-click="$ctrl.contact('lg','')">
                     <i class="icon-address-book position-left"></i>
                 </a>
-                <small>{{WOVehicle.LicenseNo}}, {{WOVehicle.VIN}}, {{WOVehicle.Make}}, {{WOVehicle.Model}}</small></h6>
+                <small>{{contact.LName}}, {{contact.Tel1}}, {{contact.Email}}</small>
+            </h6>
             <div class="heading-elements">
                 <ul class="icons-list">
-                    <li ng-click="toogleVehicle()"><a ng-class="{'rotate-180': isShow == true}" data-action="collapse" data-popup="tooltip" title="Collapse"></a></li>
+                    <li ng-click="toggleContact()"><a ng-class="{'rotate-180': isShow == true}" data-action="collapse"
+                            data-popup="tooltip" title="Collapse"></a></li>
                 </ul>
             </div>
         </div>
     </span>
 
-    <span ng-show="isShow">
+    <span ng-show="isShowContact">
         <div class="panel-heading">
             <h6 class="panel-title">Basic controls</h6>
             <div class="heading-elements">
                 <ul class="icons-list">
-                    <li ng-click="toogleVehicle()"><a ng-class="{'rotate-180': isShow == true}" data-action="collapse" data-popup="tooltip" title="Collapse"></a></li>
+                    <li ng-click="toggleContact()"><a ng-class="{'rotate-180': isShow == true}" data-action="collapse"
+                            data-popup="tooltip" title="Collapse"></a></li>
                 </ul>
             </div>
         </div>
