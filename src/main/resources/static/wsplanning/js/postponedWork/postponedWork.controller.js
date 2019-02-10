@@ -19,6 +19,7 @@ UserWebApp.controller('PostponedWorkCtrl', function ($scope, $rootScope, $locale
     "from": "",
     "to": "",
     "myWo": false,
+    "shiftId": "",
   };
 
   $scope.searchValue = '';
@@ -34,6 +35,7 @@ UserWebApp.controller('PostponedWorkCtrl', function ($scope, $rootScope, $locale
       "from": "",
       "to": "",
       "myWo": false,
+      "shiftId": "",
     };
     $scope.searchValue = '';
     $scope.limit = 20;
@@ -76,6 +78,7 @@ UserWebApp.controller('PostponedWorkCtrl', function ($scope, $rootScope, $locale
   $scope.lstDepartment = [];
   $scope.lstServ = [];
   $scope.lstVisitReason = [];
+  $scope.lstShift = [];
 
   function loadCommon() {
     CommonServices.getTransactionTypes().then(function (data) {
@@ -90,6 +93,9 @@ UserWebApp.controller('PostponedWorkCtrl', function ($scope, $rootScope, $locale
     CommonServices.getServiceAdvisors().then(function (data) {
       $scope.lstServ = data;
     });
+    CommonServices.getShifts().then(function (data) {
+      $scope.lstShift = data;
+    });
 
   }
 
@@ -100,12 +106,12 @@ UserWebApp.controller('PostponedWorkCtrl', function ($scope, $rootScope, $locale
 
     console.log($scope.params);
     var params = {
-      // "ViewName": "todayWO",
       "ViewName": "postponedWO",
       "skey": $scope.searchValue,
       "page": $scope.page,
       "limit": $scope.limit,
       "DeptId": $scope.params.department,
+      "shiftId": $scope.params.shiftId,
       "TransactionType": $scope.params.trans,
       "VisitReasonCode": $scope.params.visitReason,
       "Receiver": $scope.params.receiver,
@@ -128,6 +134,7 @@ UserWebApp.controller('PostponedWorkCtrl', function ($scope, $rootScope, $locale
     HttpService.postData('/wo/getWO', params).then(function (response) {
       $scope.lstData = response;
       $scope.pageGo = $scope.page;
+      $scope.isShow = false;
       common.spinner(false);
     }, function error(response) {
       console.log(response);
@@ -248,7 +255,12 @@ UserWebApp.controller('PostponedWorkCtrl', function ($scope, $rootScope, $locale
   
    //function viewDetail
   $scope.viewDetail = function (item) {
-    $state.go('app.main.workdetail', { 'id': item.WorkOrderId, 'type': "todayWO" });
+    $state.go('app.main.workdetail', { 'id': item.WorkOrderId, 'type': "postponedWO" });
+  }
+
+  $scope.isShow = false;
+  $scope.toogleSearch = function () {
+    $scope.isShow = !$scope.isShow;
   }
 
 

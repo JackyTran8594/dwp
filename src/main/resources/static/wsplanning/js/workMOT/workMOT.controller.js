@@ -12,6 +12,7 @@ UserWebApp.controller('WorkMOTCtrl', function ($scope, $rootScope, $locale, Http
     "from": "",
     "to": "",
     "myWo": false,
+    "shiftId": "",
   };
 
   $scope.searchValue = '';
@@ -27,6 +28,7 @@ UserWebApp.controller('WorkMOTCtrl', function ($scope, $rootScope, $locale, Http
       "from": "",
       "to": "",
       "myWo": false,
+      "shiftId": "",
     };
     $scope.searchValue = '';
     $scope.limit = 20;
@@ -69,6 +71,7 @@ UserWebApp.controller('WorkMOTCtrl', function ($scope, $rootScope, $locale, Http
   $scope.lstDepartment = [];
   $scope.lstServ = [];
   $scope.lstVisitReason = [];
+  $scope.lstShift = [];
 
   function loadCommon() {
     CommonServices.getTransactionTypes().then(function (data) {
@@ -82,6 +85,9 @@ UserWebApp.controller('WorkMOTCtrl', function ($scope, $rootScope, $locale, Http
     });
     CommonServices.getServiceAdvisors().then(function (data) {
       $scope.lstServ = data;
+    });
+    CommonServices.getShifts().then(function (data) {
+      $scope.lstShift = data;
     });
 
   }
@@ -99,6 +105,7 @@ UserWebApp.controller('WorkMOTCtrl', function ($scope, $rootScope, $locale, Http
       "page": $scope.page,
       "limit": $scope.limit,
       "DeptId": $scope.params.department,
+      "shiftId": $scope.params.shiftId,
       "TransactionType": $scope.params.trans,
       "VisitReasonCode": $scope.params.visitReason,
       "Receiver": $scope.params.receiver,
@@ -121,6 +128,7 @@ UserWebApp.controller('WorkMOTCtrl', function ($scope, $rootScope, $locale, Http
     HttpService.postData('/wo/getWO', params).then(function (response) {
       $scope.lstData = response;
       $scope.pageGo = $scope.page;
+      $scope.isShow = false;
       common.spinner(false);
     }, function error(response) {
       console.log(response);
@@ -241,8 +249,14 @@ UserWebApp.controller('WorkMOTCtrl', function ($scope, $rootScope, $locale, Http
 
   //function viewDetail
   $scope.viewDetail = function (item) {
-    $state.go('app.main.workdetail', { 'id': item.WorkOrderId, 'type': "todayWO" });
+    $state.go('app.main.workdetail', { 'id': item.WorkOrderId, 'type': "withMOT" });
   }
+
+  $scope.isShow = false;
+  $scope.toogleSearch = function () {
+    $scope.isShow = !$scope.isShow;
+  }
+
 });
 
 

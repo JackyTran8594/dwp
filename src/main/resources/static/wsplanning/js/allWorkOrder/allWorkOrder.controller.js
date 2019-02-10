@@ -19,6 +19,7 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
     "from": "",
     "to": "",
     "myWo": false,
+    "shiftId": "",
   };
 
   $scope.searchValue = '';
@@ -34,6 +35,7 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
       "from": "",
       "to": "",
       "myWo": false,
+      "shiftId": ""
     };
     $scope.searchValue = '';
     $scope.limit = 20;
@@ -76,6 +78,7 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
   $scope.lstDepartment = [];
   $scope.lstServ = [];
   $scope.lstVisitReason = [];
+  $scope.lstShift = [];
 
   function loadCommon() {
     CommonServices.getTransactionTypes().then(function (data) {
@@ -90,6 +93,9 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
     CommonServices.getServiceAdvisors().then(function (data) {
       $scope.lstServ = data;
     });
+    CommonServices.getShifts().then(function (data) {
+      $scope.lstShift = data;
+    });
 
   }
 
@@ -100,7 +106,6 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
 
     console.log($scope.params);
     var params = {
-      // "ViewName": "todayWO",
       "ViewName": "allWO",
       "skey": $scope.searchValue,
       "page": $scope.page,
@@ -108,6 +113,7 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
       "DeptId": $scope.params.department,
       "TransactionType": $scope.params.trans,
       "VisitReasonCode": $scope.params.visitReason,
+      "shiftId": $scope.params.shiftId,
       "Receiver": $scope.params.receiver,
       "MyWO": $scope.params.myWo,
       "FromDate": $scope.params.from,
@@ -128,6 +134,7 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
     HttpService.postData('/wo/getWO', params).then(function (response) {
       $scope.lstData = response;
       $scope.pageGo = $scope.page;
+      $scope.isShow = false;
       common.spinner(false);
     }, function error(response) {
       console.log(response);
@@ -249,7 +256,7 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
 
   //function viewDetail
   $scope.viewDetail = function (item) {
-    $state.go('app.main.workdetail', { 'id': item.WorkOrderId, 'type': "todayWO" });
+    $state.go('app.main.workdetail', { 'id': item.WorkOrderId, 'type': "allWO" });
   }
 
   $scope.newWorkorder = function () {
@@ -262,6 +269,11 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
 
   $scope.newBooking = function () {
     $state.go('app.main.booking');
+  }
+
+  $scope.isShow = false;
+  $scope.toogleSearch = function () {
+    $scope.isShow = !$scope.isShow;
   }
 
 });

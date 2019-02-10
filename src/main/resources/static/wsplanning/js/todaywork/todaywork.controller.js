@@ -135,6 +135,7 @@ UserWebApp.controller('TodayWorkOrderCtrl', function ($scope, $rootScope, $local
     HttpService.postData('/wo/getWO', params).then(function (response) {
       $scope.lstData = response;
       $scope.pageGo = $scope.page;
+      $scope.isShow = false;
       common.spinner(false);
     }, function error(response) {
       console.log(response);

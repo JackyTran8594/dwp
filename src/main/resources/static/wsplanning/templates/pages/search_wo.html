@@ -1,0 +1,164 @@
+<!--SEARCH-->
+<div class="panel panel-white">
+    <div class="panel-heading" ng-click="toogleSearch()">
+        <h6 class="panel-title">
+            <i class="icon-search4 position-left" ng-click="toogleSearch()"></i>
+            <small>Search</small>
+        </h6>
+        <div class="heading-elements">
+            <ul class="icons-list">
+                <li ng-click="toogleSearch()"><a ng-class="{'rotate-180': isShow == true}" data-action="collapse"
+                                                 data-popup="tooltip" title="Collapse"></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel-body" ng-show="isShow">
+        <form class="form-horizontal form-search row">
+            <!--<div class="row">-->
+                <!--<div class="col-xs-6 col-md-3">-->
+                    <!--<input type="file" accept="image/*" capture="camera" />-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <div class="row">
+                <div class="col-xs-6 col-md-3">
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <input type="text" class="form-control" ng-model="searchValue"
+                                   placeholder="{{ 'searchWo' | translate }}"
+                                   code="13" dl-key-code="doSearch();">
+                            <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="openCamera()">
+											<i class="icon-camera"></i>
+											</button>
+                                        </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-6 col-md-3">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">{{ 'trans' | translate }}</label>
+                        <div class="col-xs-8">
+                            <select class="form-control" ng-model="params.trans"
+                                    ng-options="item.Id as item.Name for item in lstTrans">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-6 col-md-3">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">{{ 'department' | translate }}</label>
+                        <div class="col-xs-8">
+                            <select class="form-control" ng-model="params.department"
+                                    ng-options="item.Id as item.Name for item in lstDepartment">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-6 col-md-3">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">{{ 'visitReason' | translate }}</label>
+                        <div class="col-xs-8">
+                            <select class="form-control" ng-model="params.visitReason"
+                                    ng-options="item.Id as item.Name for item in lstVisitReason">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-6 col-md-3">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">{{ 'serv' | translate }}</label>
+                        <div class="col-xs-8">
+                            <select class="form-control" ng-model="params.receiver"
+                                    ng-options="item.SmanId as item.Name for item in lstServ">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-6 col-md-3">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">{{ 'shiftId' | translate }}</label>
+                        <div class="col-xs-8">
+                            <select class="form-control" ng-model="params.shiftId"
+                                    ng-options="item.Id as item.Name for item in lstShift">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-6 col-md-3">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">{{ 'fromDate' | translate }}</label>
+                        <div class="col-xs-8">
+                            <div class="input-group">
+                                <!-- <input type="text" class="form-control datepicker" id="startDate" placeholder="Pick a date&hellip;" ng-model="params.from"> -->
+
+                                <input type="text" class="form-control datepicker" uib-datepicker-popup="dd-MMMM-yyyy"
+                                       placeholder="Pick a date"
+                                       is-open="popupFromDate.opened" datepicker-options="dateOptions"
+                                       ng-required="true" show-button-bar="false" ng-model="params.from"/>
+                                <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="openFromDate()">
+
+											<i class="icon-calendar"></i>
+											</button>
+                                        </span>
+
+                                <!-- <span class="input-group-addon"><i class="icon-calendar"></i></span> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-3">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">{{ 'toDate' | translate }}</label>
+                        <div class="col-xs-8">
+                            <div class="input-group">
+                                <!-- <input type="text" class="form-control datepicker" id="endDate" placeholder="Pick a date&hellip;" -->
+                                <!-- ng-model="params.to"> -->
+                                <!-- <span class="input-group-addon"><i class="icon-calendar"></i></span> -->
+
+                                <input type="text" class="form-control datepicker" uib-datepicker-popup="dd-MMMM-yyyy"
+                                       placeholder="Pick a date"
+                                       is-open="popupToDate.opened" datepicker-options="dateOptions"
+                                       ng-required="true" show-button-bar="false" ng-model="params.to"/>
+                                <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="openToDate()">
+
+											<i class="icon-calendar"></i>
+											</button>
+                                        </span>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label style="padding-top: 12px;padding-left: 10px;">
+                            <input type="checkbox" ng-checked="params.myWo" ng-model="params.myWo">
+                            {{ 'myWo' | translate }}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-md-1">
+                    <button type="button" ng-click="doSearch()" class="btn btn-icon btn-default"><i
+                            class="icon-search4"></i></button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+<!--SEARCH-->

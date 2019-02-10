@@ -12,6 +12,7 @@ UserWebApp.controller('WorkTireCtrl', function ($scope, $rootScope, $locale, Htt
     "from": "",
     "to": "",
     "myWo": false,
+    "shiftId": "",
   };
 
   $scope.searchValue = '';
@@ -27,6 +28,7 @@ UserWebApp.controller('WorkTireCtrl', function ($scope, $rootScope, $locale, Htt
       "from": "",
       "to": "",
       "myWo": false,
+      "shiftId": "",
     };
     $scope.searchValue = '';
     $scope.limit = 20;
@@ -69,6 +71,7 @@ UserWebApp.controller('WorkTireCtrl', function ($scope, $rootScope, $locale, Htt
   $scope.lstDepartment = [];
   $scope.lstServ = [];
   $scope.lstVisitReason = [];
+  $scope.lstShift = [];
 
   function loadCommon() {
     CommonServices.getTransactionTypes().then(function (data) {
@@ -83,6 +86,9 @@ UserWebApp.controller('WorkTireCtrl', function ($scope, $rootScope, $locale, Htt
     CommonServices.getServiceAdvisors().then(function (data) {
       $scope.lstServ = data;
     });
+    CommonServices.getShifts().then(function (data) {
+      $scope.lstShift = data;
+    });
 
   }
 
@@ -93,12 +99,12 @@ UserWebApp.controller('WorkTireCtrl', function ($scope, $rootScope, $locale, Htt
 
     console.log($scope.params);
     var params = {
-      // "ViewName": "todayWO",
       "ViewName": "withTire",
       "skey": $scope.searchValue,
       "page": $scope.page,
       "limit": $scope.limit,
       "DeptId": $scope.params.department,
+      "shiftId": $scope.params.shiftId,
       "TransactionType": $scope.params.trans,
       "VisitReasonCode": $scope.params.visitReason,
       "Receiver": $scope.params.receiver,
@@ -241,7 +247,12 @@ UserWebApp.controller('WorkTireCtrl', function ($scope, $rootScope, $locale, Htt
   
    //function viewDetail
   $scope.viewDetail = function (item) {
-    $state.go('app.main.workdetail', { 'id': item.WorkOrderId, 'type': "todayWO" });
+    $state.go('app.main.workdetail', { 'id': item.WorkOrderId, 'type': "withTire" });
+  }
+
+  $scope.isShow = false;
+  $scope.toogleSearch = function () {
+    $scope.isShow = !$scope.isShow;
   }
 
 });

@@ -19,6 +19,7 @@ UserWebApp.controller('ReplacementVehicleCtrl', function ($scope, $rootScope, $l
     "from": "",
     "to": "",
     "myWo": false,
+    "shiftId": "",
   };
 
   $scope.searchValue = '';
@@ -34,6 +35,7 @@ UserWebApp.controller('ReplacementVehicleCtrl', function ($scope, $rootScope, $l
       "from": "",
       "to": "",
       "myWo": false,
+      "shiftId": "",
     };
     $scope.searchValue = '';
     $scope.limit = 20;
@@ -76,6 +78,7 @@ UserWebApp.controller('ReplacementVehicleCtrl', function ($scope, $rootScope, $l
   $scope.lstDepartment = [];
   $scope.lstServ = [];
   $scope.lstVisitReason = [];
+  $scope.lstShift = [];
 
   function loadCommon() {
     CommonServices.getTransactionTypes().then(function (data) {
@@ -91,6 +94,10 @@ UserWebApp.controller('ReplacementVehicleCtrl', function ($scope, $rootScope, $l
       $scope.lstServ = data;
     });
 
+    CommonServices.getShifts().then(function (data) {
+      $scope.lstShift = data;
+    });
+
   }
 
   function loadData(count) {
@@ -100,12 +107,12 @@ UserWebApp.controller('ReplacementVehicleCtrl', function ($scope, $rootScope, $l
 
     console.log($scope.params);
     var params = {
-      // "ViewName": "todayWO",
       "ViewName": "allWO",
       "skey": $scope.searchValue,
       "page": $scope.page,
       "limit": $scope.limit,
       "DeptId": $scope.params.department,
+      "shiftId": $scope.params.shiftId,
       "TransactionType": $scope.params.trans,
       "VisitReasonCode": $scope.params.visitReason,
       "Receiver": $scope.params.receiver,
@@ -128,6 +135,7 @@ UserWebApp.controller('ReplacementVehicleCtrl', function ($scope, $rootScope, $l
     HttpService.postData('/wo/getWO', params).then(function (response) {
       $scope.lstData = response;
       $scope.pageGo = $scope.page;
+      $scope.isShow = false;
       common.spinner(false);
     }, function error(response) {
       console.log(response);
@@ -245,6 +253,10 @@ UserWebApp.controller('ReplacementVehicleCtrl', function ($scope, $rootScope, $l
       console.log('Modal dismissed at: ' + new Date());
     });
   };
+  $scope.isShow = false;
+  $scope.toogleSearch = function () {
+    $scope.isShow = !$scope.isShow;
+  }
 
 
 });
