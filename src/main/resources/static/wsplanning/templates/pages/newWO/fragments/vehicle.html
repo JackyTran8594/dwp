@@ -6,11 +6,12 @@
                 <a class="btn btn-link btn-float has-text text-size-small" ng-click="$ctrl.vehicle('lg','')">
                     <i class="icon-truck position-left"></i>
                 </a>
-            
-                <small>{{vehicle.LicenseNo}}, {{vehicle.VIN}}, {{vehicle.Make}}, {{vehicle.Model}}</small></h6>
+
+                <small>{{vehicle.LicenseNo}}, &nbsp;&nbsp;{{vehicle.VIN}},&nbsp;&nbsp; {{vehicle.Make}},&nbsp;&nbsp; {{vehicle.Model}}</small></h6>
             <div class="heading-elements">
                 <ul class="icons-list">
-                    <li ng-click="toggleVehicle()"><a ng-class="{'rotate-180': isShow == true}" data-action="collapse" data-popup="tooltip" title="Collapse"></a></li>
+                    <li ng-click="toggleVehicle()"><a ng-class="{'rotate-180': isShow == true}" data-action="collapse"
+                            data-popup="tooltip" title="Collapse"></a></li>
                 </ul>
             </div>
         </div>
@@ -18,16 +19,44 @@
 
     <span ng-show="isShowVehicle">
         <div class="panel-heading">
-            <h6 class="panel-title">Basic controls</h6>
+            <h6 class="panel-title">Vehicle</h6>
             <div class="heading-elements">
                 <ul class="icons-list">
-                    <li ng-click="toggleVehicle()"><a ng-class="{'rotate-180': isShow == true}" data-action="collapse" data-popup="tooltip" title="Collapse"></a></li>
+                    <li ng-click="toggleVehicle()"><a ng-class="{'rotate-180': isShow == true}" data-action="collapse"
+                            data-popup="tooltip" title="Collapse"></a></li>
                 </ul>
             </div>
         </div>
 
         <div class="panel-body">
-            Default panel controls - <code>collapse</code>, <code>update</code> and <code>close</code> buttons
+
+            <small>{{vehicle.LicenseNo}},&nbsp;&nbsp; {{vehicle.VIN}},&nbsp;&nbsp; {{vehicle.Make}},&nbsp;&nbsp; {{vehicle.Model}}</small><br>
+
+            <small>{{vehicle.HolderCustomer}},&nbsp;&nbsp; {{vehicle.VIN}},&nbsp;&nbsp; {{vehicle.Make}},&nbsp;&nbsp; {{vehicle.Model}}</small><br>
+
+            <small>{{vehicle.DynamicDataFields}}</small>
+            <!-- <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td scope="row"></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td scope="row"></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table> -->
+            <!-- Default panel controls - <code>collapse</code>, <code>update</code> and <code>close</code> buttons -->
         </div>
 
     </span>

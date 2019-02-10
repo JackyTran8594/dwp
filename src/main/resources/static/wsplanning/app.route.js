@@ -119,6 +119,18 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
       templateUrl: '/wsplanning/templates/pages/newWO/index.html',
     })
 
+    .state('app.main.newoffer',{
+      url:'newoffer',
+      controller: "newOfferCtrl as $ctrl",
+      templateUrl: '/wsplanning/templates/pages/newWO/index.html',
+    })
+
+    .state('app.main.booking',{
+      url:'booking',
+      controller: "newBookingCtrl as $ctrl",
+      templateUrl: '/wsplanning/templates/pages/newWO/index.html',
+    })
+
   //$locationProvider.html5Mode(true);
 });
 

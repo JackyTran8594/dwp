@@ -256,6 +256,14 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
     $state.go('app.main.newwo');
   }
 
+  $scope.newOffer = function () {
+    $state.go('app.main.newoffer');
+  }
+
+  $scope.newBooking = function () {
+    $state.go('app.main.booking');
+  }
+
 });
 
 
