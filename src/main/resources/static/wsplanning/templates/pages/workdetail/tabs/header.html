@@ -1,4 +1,10 @@
 <div class="page-header page-header-xs" ng-controller="HeaderDetailCtrl">
+
+    <div ng-include="'/wsplanning/templates/pages/workdetail/fragments/vehicle.html'"></div>
+    <div ng-include="'/wsplanning/templates/pages/workdetail/fragments/customer.html'"></div>
+    <div ng-include="'/wsplanning/templates/pages/workdetail/fragments/contract.html'"></div>
+
+
     <div class="panel panel-flat" id="headerPanel">
         <div class="panel-heading">
             <h3 class="panel-title"><b>{{ 'WoHeader' | translate }}</b></h3>

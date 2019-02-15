@@ -5,6 +5,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 
   console.log(WorkOrder);
   $scope.WorkOrder = WorkOrder.data;
+  $scope.isNew = angular.equals($scope.WorkOrder, {});
 
   $scope.WorkOrder._ServiceDate = new Date($scope.WorkOrder.ServiceDate);
   if ($scope.WorkOrder.CheckOutDate == "" || $scope.WorkOrder.CheckOutDate == "0001-01-01T00:00:00") {
@@ -45,5 +46,81 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
   $scope.changeTab = function (tabActive, abc) {
     $scope.tabActive = tabActive;
   }
+
+
+  //Modal
+  var $ctrl = this;
+  $ctrl.animationsEnabled = true;
+
+  $ctrl.openSearchVehicle = function (size, item) {
+    var modalInstance = $uibModal.open({
+      animation:  $ctrl.animationsEnabled ,
+      templateUrl: '/wsplanning/templates/pages/common/vehicle-form.html',
+      controller: 'VehicleModalCtrl',
+      controllerAs: '$ctrl',
+      size: size,
+      backdrop: 'static',
+      resolve: {
+        item: function () {
+          return $scope.vehicle;
+        }
+      }
+    });
+
+    modalInstance.result.then(function (selectedItem) {
+      console.log(selectedItem);
+      $scope.vehicle = selectedItem;
+    }, function () {
+      console.log('Modal dismissed at: ' + new Date());
+    });
+  };
+
+  $ctrl.openSearchCustomer = function (size, item) {
+    var modalInstance = $uibModal.open({
+      animation: $ctrl.animationsEnabled,
+      templateUrl: '/wsplanning/templates/pages/common/customer-form.html',
+      controller: 'CustomerModalCtrl',
+      controllerAs: '$ctrl',
+      size: size,
+      backdrop: 'static',
+      resolve: {
+        item: function () {
+          return $scope.customer;
+        }
+      }
+    });
+
+    modalInstance.result.then(function (selectedItem) {
+      console.log(selectedItem);
+      $scope.customer = selectedItem;
+    }, function () {
+      console.log('Modal dismissed at: ' + new Date());
+    });
+  };
+
+  $ctrl.openSearchContact = function (size, item) {
+    console.log("------contact-----");
+    var modalInstance = $uibModal.open({
+      animation: $ctrl.animationsEnabled,
+      templateUrl: '/wsplanning/templates/pages/common/customer-form.html',
+      controller: 'ContactModalCtrl',
+      controllerAs: '$ctrl',
+      size: size,
+      backdrop: 'static',
+      resolve: {
+        item: function () {
+          return $scope.contact;
+        }
+      }
+    });
+
+    modalInstance.result.then(function (selectedItem) {
+      console.log(selectedItem);
+      $scope.contact = selectedItem;
+    }, function () {
+      console.log('Modal dismissed at: ' + new Date());
+    });
+  };
+
 
 });

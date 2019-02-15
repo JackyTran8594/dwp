@@ -407,3 +407,7 @@ form.form-label-right .control-label {
 .table-hover > tbody > tr:hover {
   background-color: #cec2c2 !important;
 }
+
+.tableModal{
+  max-height: 450px;
+}

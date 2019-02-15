@@ -26,8 +26,10 @@ var translationsEN = {
   breadcrumbWithSubcontractor: "With Subcontractor",
   breadcrumbWithTire: "With Tire",
   breadcrumbWorkDetail: "Work Detail",
+  breadcrumbWorkNew: "New WorkOrder",
   breadcrumbAllWork: "All Work",
   breadcrumbUnscheduledWork: "Unscheduled Work",
+  breadcrumbTodayWork: "Today Work",
   breadcrumbWithSubcontractor: "Workorders With Subcontractor",
   breadcrumbWithMOT: "Workorder with MOT",
   breadcrumbPostponedWork: "Postponed Work",
@@ -164,6 +166,7 @@ var translationsVI = {
   breadcrumbWorkOrder: "WorkOrder",
   breadcrumbTodayWork: "Today Work",
   breadcrumbWorkDetail: "Work Detail",
+  breadcrumbWorkNew: "New WorkOrder",
 
   //common
   btnAdd: "Thêm mới",

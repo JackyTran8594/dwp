@@ -3,8 +3,8 @@
     <span ng-show="!isShow">
         <div class="panel-heading">
             <h6 class="panel-title">
-                <a class="btn btn-link btn-float has-text text-size-small" ng-click="searchVehicle({})">
-                    <i class="icon-cog3 position-left myTitle"></i>
+                <a class="btn btn-link btn-float has-text text-size-small" ng-click="$ctrl.openSearchContact('lg','')">
+                    <i class="icon-address-book position-left myTitle"></i>
                 </a>
                 <small class="myTitle">{{WOContact.Address}}, {{WOContact.Tel1}}, {{WOContact.InvoiceGroup}}, {{WOContact.AccountGroup}}</small>
             </h6>
@@ -19,8 +19,8 @@
     <span ng-show="isShow">
         <div class="panel-heading">
             <h6 class="panel-title">
-                <a class="btn btn-link btn-float has-text text-size-small" ng-click="searchVehicle({})">
-                    <i class="icon-cog3 position-left myTitle"></i>
+                <a class="btn btn-link btn-float has-text text-size-small" ng-click="$ctrl.openSearchContact('lg','')">
+                    <i class="icon-address-book position-left myTitle"></i>
                 </a>
                 <small class="myTitle">{{WOContact.Address}}, {{WOContact.Tel1}}, {{WOContact.InvoiceGroup}}, {{WOContact.AccountGroup}}</small>
             </h6>

@@ -27,7 +27,7 @@
                                     <span class="{{item.WorkOrderStatus| titleCase}}">{{item.WorkOrderStatus}}<br /></span>
                                     {{item.WorkOrderNo}}<br />
                                 </td>
-                                <td ng-bind-html="showLeftCol(item)"></td>
+                                <td ng-bind-html="item.html"></td>
                             </tr>
                             <tr ng-if="isNoData || !lstData || lstData.length <= 0" class="active">
                                 <td colspan="20" class="text-center">{{ 'commonNoResult' | translate }}</td>

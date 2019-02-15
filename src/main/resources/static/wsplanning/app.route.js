@@ -31,18 +31,11 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
 
     .state('app.main.todaywork', {
       url: 'todaywork',
-      controller: "TodayWorkOrderCtrl as $ctrl",
-      templateUrl: '/wsplanning/templates/pages/todaywork/index.html'
-    })
-
-
-    .state('app.main.workdetail', {
-      url: 'workdetail/:type/:id/',
-      controller: "WorkDetailCtrl as $ctrl",
-      templateUrl: '/wsplanning/templates/pages/workdetail/index.html',
+      controller: "AllWorkOrdersCtrl as $ctrl",
+      templateUrl: '/wsplanning/templates/pages/allWorkOrder/index.html',
       resolve: {
-        WorkOrder: function (WorkOrderService, $stateParams) {
-          return WorkOrderService.detail($stateParams.id);
+        typeWO: function ($stateParams) {
+          return "todayWO";
         }
       }
     })
@@ -50,43 +43,77 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
     
     .state('app.main.unscheduledwork',{
       url:'unscheduledwork',
-      controller: "UnscheduledWorkCtrl as $ctrl",
-      templateUrl: '/wsplanning/templates/pages/unscheduledWork/index.html',
+      controller: "AllWorkOrdersCtrl as $ctrl",
+      templateUrl: '/wsplanning/templates/pages/allWorkOrder/index.html',
+      resolve: {
+        typeWO: function ($stateParams) {
+          return "unScheduledWO";
+        }
+      }
     })
 
     .state('app.main.allwork',{
       url:'allwork',
       controller: "AllWorkOrdersCtrl as $ctrl",
       templateUrl: '/wsplanning/templates/pages/allWorkOrder/index.html',
+      resolve: {
+        typeWO: function ($stateParams) {
+          return "allWO";
+        }
+      }
     })
 
     .state('app.main.workmot',{
       url:'workmot',
-      controller: "WorkMOTCtrl as $ctrl",
-      templateUrl: '/wsplanning/templates/pages/workMOT/index.html',
+      controller: "AllWorkOrdersCtrl as $ctrl",
+      templateUrl: '/wsplanning/templates/pages/allWorkOrder/index.html',
+      resolve: {
+        typeWO: function ($stateParams) {
+          return "withMOT";
+        }
+      }
     })
 
     .state('app.main.worksub',{
       url:'worksub',
-      controller: "WorkSubcontractorCtrl as $ctrl",
-      templateUrl: '/wsplanning/templates/pages/workSub/index.html',
+      controller: "AllWorkOrdersCtrl as $ctrl",
+      templateUrl: '/wsplanning/templates/pages/allWorkOrder/index.html',
+      resolve: {
+        typeWO: function ($stateParams) {
+          return "withSubcontractor";
+        }
+      }
     })
-
     .state('app.main.worktire',{
       url:'worktire',
-      controller: "WorkTireCtrl as $ctrl",
-      templateUrl: '/wsplanning/templates/pages/workTire/index.html',
+      controller: "AllWorkOrdersCtrl as $ctrl",
+      templateUrl: '/wsplanning/templates/pages/allWorkOrder/index.html',
+      resolve: {
+        typeWO: function ($stateParams) {
+          return "withTire";
+        }
+      }
     })
     .state('app.main.workbo',{
       url:'workbo',
-      controller: "WorkBOCtrl as $ctrl",
-      templateUrl: '/wsplanning/templates/pages/workBO/index.html',
+      controller: "AllWorkOrdersCtrl as $ctrl",
+      templateUrl: '/wsplanning/templates/pages/allWorkOrder/index.html',
+      resolve: {
+        typeWO: function ($stateParams) {
+          return "withBO";
+        }
+      }
     })
 
     .state('app.main.postponedwork',{
       url:'postponedwork',
-      controller: "PostponedWorkCtrl as $ctrl",
-      templateUrl: '/wsplanning/templates/pages/postponedWork/index.html',
+      controller: "AllWorkOrdersCtrl as $ctrl",
+      templateUrl: '/wsplanning/templates/pages/allWorkOrder/index.html',
+      resolve: {
+        typeWO: function ($stateParams) {
+          return "postponedWO";
+        }
+      }
     })
 
     .state('app.main.tasklist',{
@@ -103,8 +130,13 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
 
     .state('app.main.offer',{
       url:'offer',
-      controller: "OffersCtrl as $ctrl",
-      templateUrl: '/wsplanning/templates/pages/offer/index.html',
+      controller: "AllWorkOrdersCtrl as $ctrl",
+      templateUrl: '/wsplanning/templates/pages/allWorkOrder/index.html',
+      resolve: {
+        typeWO: function ($stateParams) {
+          return "offers";
+        }
+      }
     })
 
     .state('app.main.replacementvehicle',{
@@ -113,10 +145,26 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
       templateUrl: '/wsplanning/templates/pages/replacementVehicle/index.html',
     })
 
-    .state('app.main.newwo',{
-      url:'newwo',
-      controller: "newWOCtrl as $ctrl",
-      templateUrl: '/wsplanning/templates/pages/newWO/index.html',
+    .state('app.main.newwo', {
+      url: 'workdetail/:type',
+      controller: "WorkDetailCtrl as $ctrl",
+      templateUrl: '/wsplanning/templates/pages/workdetail/index.html',
+      resolve: {
+        WorkOrder: function (WorkOrderService, $stateParams) {
+          return {data: {}};
+        }
+      }
+    })
+
+    .state('app.main.workdetail', {
+      url: 'workdetail/:type/:id/',
+      controller: "WorkDetailCtrl as $ctrl",
+      templateUrl: '/wsplanning/templates/pages/workdetail/index.html',
+      resolve: {
+        WorkOrder: function (WorkOrderService, $stateParams) {
+          return WorkOrderService.detail($stateParams.id);
+        }
+      }
     })
 
     .state('app.main.newoffer',{

@@ -1,4 +1,6 @@
-UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $location, $state, $filter, $uibModal, CommonServices) {
+UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $location, $state, $filter, $uibModal, CommonServices,typeWO) {
+  $scope.typeWO = typeWO;
+
   $scope.lstAllData = [];
   $scope.lstData = [];
   $scope.lstSearch = [];
@@ -96,17 +98,15 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
     CommonServices.getShifts().then(function (data) {
       $scope.lstShift = data;
     });
-
   }
 
   function loadData(count) {
     common.spinner(true);
     //unScheduledWO, withSubcontractor, todayWO, allWO, withMOT, withTire, withBO, postponedWO, offers
 
-
     console.log($scope.params);
     var params = {
-      "ViewName": "allWO",
+      "ViewName": typeWO,
       "skey": $scope.searchValue,
       "page": $scope.page,
       "limit": $scope.limit,
@@ -189,50 +189,11 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
     $rootScope.$broadcast("modalFrm", { "item": angular.copy(item, {}) });
   }
 
-
-  function findAndReplace(string, target, replacement) {
-
-    var i = 0, length = string.length;
-
-    for (i; i < length; i++) {
-
-      string = string.replace(target, replacement);
-
-    }
-
-    return string;
-
-  }
-
-  $scope.showLeftCol = function (item) {
-    var html = "";
-    var WOVehicle = item.WOVehicle;
-    var HolderCustomer = null;
-    var WOCustomer = item.WOCustomer;
-    if (WOVehicle) {
-      html += WOVehicle.LicenseNo + ", " + WOVehicle.Make + " " + WOVehicle.Model + " " + WOVehicle.SubModel + " <br />";
-      //HolderCustomer
-      HolderCustomer = WOVehicle.HolderCustomer;
-    }
-
-    if (HolderCustomer) {
-      // html += HolderCustomer.CustomerName + ", " + HolderCustomer.Tel1 + " " + HolderCustomer.Email + " <br />";
-      html += HolderCustomer.LName + " " + HolderCustomer.FName + ", " + HolderCustomer.Tel1 + " " + HolderCustomer.Email + " <br />";
-    } else {
-      // html += WOCustomer.CustomerName + ", " + WOCustomer.Tel1 + " " + WOCustomer.Email + " <br />";
-      html += WOCustomer.LName + " " + WOCustomer.FName + ", " + WOCustomer.Tel1 + " " + WOCustomer.Email + " <br />";
-    }
-
-    html += findAndReplace(item.JobTitle, "\r\n", "<br />");
-    return html;
-  }
-
   //Modal
   var $ctrl = this;
   $ctrl.animationsEnabled = true;
 
   $ctrl.open = function (size, item) {
-    console.log("----open--------");
     var modalInstance = $uibModal.open({
       animation: $ctrl.animationsEnabled,
       templateUrl: '/wsplanning/templates/pages/allWorkOrder/modal-form.html',
@@ -256,11 +217,11 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
 
   //function viewDetail
   $scope.viewDetail = function (item) {
-    $state.go('app.main.workdetail', { 'id': item.WorkOrderId, 'type': "allWO" });
+    $state.go('app.main.workdetail', { 'id': item.WorkOrderId, 'type': typeWO });
   }
 
   $scope.newWorkorder = function () {
-    $state.go('app.main.newwo');
+    $state.go('app.main.newwo', { 'type': typeWO });
   }
 
   $scope.newOffer = function () {

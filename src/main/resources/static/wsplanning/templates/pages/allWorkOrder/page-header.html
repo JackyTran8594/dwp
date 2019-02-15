@@ -3,11 +3,32 @@
     <div class="page-header-content">
         <div class="page-title">
             <h4><a href="/" class="btn-link"><i class="icon-arrow-left52 position-left"></i></a>
-                <span class="text-semibold">{{ 'allWorkTitle' | translate }}</span></h4>
+                <span ng-switch="typeWO">
+                    <span ng-switch-when="unScheduledWO" class="text-semibold">{{ 'unscheduledWorkTitle' | translate }}</span>
+                    <span ng-switch-when="withSubcontractor" class="text-semibold">{{ 'withSubcontractorTitle' | translate }}</span>
+                    <span ng-switch-when="todayWO" class="text-semibold">{{ 'todayWorkTitle' | translate }}</span>
+                    <span ng-switch-when="allWO" class="text-semibold">{{ 'allWorkTitle' | translate }}</span>
+                    <span ng-switch-when="withMOT" class="text-semibold">{{ 'withMOTTitle' | translate }}</span>
+                    <span ng-switch-when="withTire" class="text-semibold">{{ 'withTireChangeTitle' | translate }}</span>
+                    <span ng-switch-when="withBO" class="text-semibold">{{ 'withBOTitle' | translate }}</span>
+                    <span ng-switch-when="postponedWO" class="text-semibold">{{ 'postponedWorkTitle' | translate }}</span>
+                </span>
+            </h4>
 
             <ul class="breadcrumb breadcrumb-caret position-right">
                 <li><a href="/">{{ 'breadcrumbHome' | translate }}</a></li>
-                <li class="active">{{ 'breadcrumbAllWork' | translate }}</li>
+                <li class="active">
+                    <span ng-switch="typeWO">
+                        <span ng-switch-when="unScheduledWO">{{ 'breadcrumbUnscheduledWork' | translate }}</span>
+                        <span ng-switch-when="withSubcontractor">{{ 'breadcrumbWithSubcontractor' | translate }}</span>
+                        <span ng-switch-when="todayWO">{{ 'breadcrumbTodayWork' | translate }}</span>
+                        <span ng-switch-when="allWO">{{ 'breadcrumbAllWork' | translate }}</span>
+                        <span ng-switch-when="withMOT">{{ 'breadcrumbWithMOT' | translate }}</span>
+                        <span ng-switch-when="withTire">{{ 'breadcrumbWithTire' | translate }}</span>
+                        <span ng-switch-when="withBO">{{ 'breadcrumbWithBO' | translate }}</span>
+                        <span ng-switch-when="postponedWO">{{ 'breadcrumbPostponedWork' | translate }}</span>
+                    </span>
+                </li>
             </ul>
         </div>
 
