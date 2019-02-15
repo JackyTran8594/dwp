@@ -8,9 +8,9 @@ UserWebApp.controller('newBookingCtrl', function ($scope, $rootScope, $locale, H
   $scope.lstJobTypes = [];
 
   $scope.target = {};
-  $scope.vehicle = "";
-  $scope.customer = "";
-  $scope.contact = "";
+  $scope.WOVehicle = "";
+  $scope.WOCustomer = "";
+  $scope.WOContact = "";
 
   // datepicker-vutt
 
@@ -27,14 +27,14 @@ UserWebApp.controller('newBookingCtrl', function ($scope, $rootScope, $locale, H
       backdrop: 'static',
       resolve: {
         item: function () {
-          return $scope.vehicle;
+          return $scope.WOVehicle;
         }
       }
     });
 
     modalInstance.result.then(function (selectedItem) {
       console.log(selectedItem);
-      $scope.vehicle = selectedItem;
+      $scope.WOVehicle = selectedItem;
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
     });
@@ -50,14 +50,14 @@ UserWebApp.controller('newBookingCtrl', function ($scope, $rootScope, $locale, H
       backdrop: 'static',
       resolve: {
         item: function () {
-          return $scope.customer;
+          return $scope.WOCustomer;
         }
       }
     });
 
     modalInstance.result.then(function (selectedItem) {
       console.log(selectedItem);
-      $scope.customer = selectedItem;
+      $scope.WOCustomer = selectedItem;
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
     });
@@ -73,14 +73,14 @@ UserWebApp.controller('newBookingCtrl', function ($scope, $rootScope, $locale, H
       backdrop: 'static',
       resolve: {
         item: function () {
-          return $scope.contact;
+          return $scope.WOContact;
         }
       }
     });
 
     modalInstance.result.then(function (selectedItem) {
       console.log(selectedItem);
-      $scope.contact = selectedItem;
+      $scope.WOContact = selectedItem;
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
     });
@@ -186,116 +186,4 @@ UserWebApp.controller('newBookingCtrl', function ($scope, $rootScope, $locale, H
   }
 
 });
-
-
-UserWebApp.controller('VehicleModalCtrl', function ($scope, $rootScope, $locale, HttpService, $translate,
-  $location, $state, $filter, $uibModal, $uibModalInstance, CommonServices, item) {
-
-  var $ctrl = this;
-
-  $ctrl.cancel = function () {
-    $uibModalInstance.dismiss('cancel');
-  };
-
-  $scope.skey = "";
-
-  function loadData(skey) {
-    console.log(skey);
-    CommonServices.getVehicles(skey).then(function (data) {
-      console.log(data);
-      $scope.lstVehicles = data;
-    }, function (error) {
-      console.log(error);
-    });
-  }
-
-  loadData($scope.skey);
-
-  $scope.doSearch = function () {
-    loadData($scope.skey)
-  }
-
-  $scope.doPick = function (selectedItem) {
-    item = selectedItem;
-    console.log(item);
-    $uibModalInstance.close(item);
-  }
-
-})
-
-
-UserWebApp.controller('CustomerModalCtrl', function ($scope, $rootScope, $locale, HttpService, $translate,
-  $location, $state, $filter, $uibModal, $uibModalInstance, CommonServices, item) {
-
-
-
-  var $ctrl = this;
-
-  $scope.skey = "";
-  $scope.custNo = "";
-
-  $scope.lstCustomers = []
-
-  $ctrl.cancel = function () {
-    $uibModalInstance.dismiss('cancel');
-  };
-
-  function loadData(skey, custNo) {
-    CommonServices.getCustomers(skey, custNo).then(function (data) {
-      $scope.lstCustomers = data;
-    })
-  }
-
-
-  $scope.doSearch = function () {
-    loadData($scope.skey, $scope.custNo)
-  }
-
-  loadData($scope.skey, $scope.custNo);
-
-  $scope.doPick = function (selectedItem) {
-    item = selectedItem;
-    console.log(item);
-    $uibModalInstance.close(item);
-  }
-
-})
-
-
-UserWebApp.controller('ContactModalCtrl', function ($scope, $rootScope, $locale, HttpService, $translate,
-  $location, $state, $filter, $uibModal, $uibModalInstance, CommonServices, item) {
-
-
-
-  var $ctrl = this;
-
-  $scope.skey = "";
-  $scope.custNo = "";
-
-  $scope.lstCustomers = []
-
-  $ctrl.cancel = function () {
-    $uibModalInstance.dismiss('cancel');
-  };
-
-  function loadData(skey, custNo) {
-    CommonServices.getCustomers(skey, custNo).then(function (data) {
-      $scope.lstCustomers = data;
-    })
-  }
-
-
-  $scope.doSearch = function () {
-    loadData($scope.skey, $scope.custNo)
-  }
-
-  loadData($scope.skey, $scope.custNo);
-
-  $scope.doPick = function (selectedItem) {
-    item = selectedItem;
-    console.log(item);
-    $uibModalInstance.close(item);
-  }
-
-})
 

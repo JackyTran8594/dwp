@@ -2,6 +2,9 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
   $scope.WorkOrderId = $stateParams.id;
   $scope.type = $stateParams.type;
 
+  $scope.WOVehicle = "";
+  $scope.WOCustomer = "";
+  $scope.WOContact = "";
 
   console.log(WorkOrder);
   $scope.WorkOrder = WorkOrder.data;
@@ -62,14 +65,14 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
       backdrop: 'static',
       resolve: {
         item: function () {
-          return $scope.vehicle;
+          return $scope.WOVehicle;
         }
       }
     });
 
     modalInstance.result.then(function (selectedItem) {
       console.log(selectedItem);
-      $scope.vehicle = selectedItem;
+      $scope.WOVehicle = selectedItem;
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
     });
@@ -85,14 +88,14 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
       backdrop: 'static',
       resolve: {
         item: function () {
-          return $scope.customer;
+          return $scope.WOCustomer;
         }
       }
     });
 
     modalInstance.result.then(function (selectedItem) {
       console.log(selectedItem);
-      $scope.customer = selectedItem;
+      $scope.WOCustomer = selectedItem;
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
     });
@@ -109,14 +112,14 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
       backdrop: 'static',
       resolve: {
         item: function () {
-          return $scope.contact;
+          return $scope.WOContact;
         }
       }
     });
 
     modalInstance.result.then(function (selectedItem) {
       console.log(selectedItem);
-      $scope.contact = selectedItem;
+      $scope.WOContact = selectedItem;
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
     });

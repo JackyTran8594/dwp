@@ -12,10 +12,10 @@
                 <ul class="icons-list">
                     <li><a href="" class="btn btn-xs" ng-click="addItem()"><span class="icon-plus3"></span></a></li>
                     <li><a href="" class="btn btn-xs" ng-click="confirmDelete()"
-                           ng-disabled="checklistTable.list.length == 0"><span class="icon-bin"></span></a></li>
+                            ng-disabled="checklistTable.list.length == 0"><span class="icon-bin"></span></a></li>
                     <li><a class="btn btn-xs"><span class="icon-sync" ng-click="refresh()"></span></a></li>
                     <li><a ng-class="{'rotate-180': collapsed == true}" data-action="collapse"
-                           data-target="#pnHeaderFrm" ng-click="collapse()"></a></li>
+                            data-target="#pnHeaderFrm" ng-click="collapse()"></a></li>
                 </ul>
             </div>
         </div>
@@ -31,7 +31,7 @@
                             <label class="control-label col-md-4">{{ 'department' | translate }}</label>
                             <div class="col-md-8">
                                 <select class="form-control" ng-model="WorkOrder.DeptId"
-                                        ng-options="item.Id as item.Name for item in lstDepartment">
+                                    ng-options="item.Id as item.Name for item in lstDepartment">
                                 </select>
                             </div>
                         </div>
@@ -43,7 +43,7 @@
                             <label class="control-label col-md-4">{{ 'visitReason' | translate }}</label>
                             <div class="col-md-8">
                                 <select class="form-control" ng-model="WorkOrder.VisitReasonCode"
-                                        ng-options="item.Id as item.Name for item in lstVisitReason">
+                                    ng-options="item.Id as item.Name for item in lstVisitReason">
                                 </select>
                             </div>
                         </div>
@@ -61,15 +61,15 @@
                             <div class="col-md-8">
                                 <div class="input-group">
                                     <input type="text" class="form-control datepicker"
-                                           uib-datepicker-popup="dd-MMMM-yyyy" placeholder="Pick a date"
-                                           is-open="popupServiceDate.opened" datepicker-options="dateOptions"
-                                           ng-required="true" show-button-bar="false" ng-model="WorkOrder._ServiceDate"
-                                           id="ServiceDate"/>
+                                        uib-datepicker-popup="dd-MMMM-yyyy" placeholder="Pick a date"
+                                        is-open="popupServiceDate.opened" datepicker-options="dateOptions"
+                                        ng-required="true" show-button-bar="false" ng-model="WorkOrder._ServiceDate"
+                                        id="ServiceDate" />
                                     <span class="input-group-btn">
-                                            <button type="button" class="btn btn-default" ng-click="openServiceDate()">
-											<i class="icon-calendar"></i>
-											</button>
-                                        </span>
+                                        <button type="button" class="btn btn-default" ng-click="openServiceDate()">
+                                            <i class="icon-calendar"></i>
+                                        </button>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -82,15 +82,15 @@
                             <div class="col-md-8">
                                 <div class="input-group">
                                     <input type="text" class="form-control datepicker"
-                                           uib-datepicker-popup="dd-MMMM-yyyy" placeholder="Pick a date"
-                                           is-open="popupCheckOutDate.opened" datepicker-options="dateOptions"
-                                           ng-required="true" show-button-bar="false" ng-model="WorkOrder._CheckOutDate"
-                                           id="CheckOutDate"/>
+                                        uib-datepicker-popup="dd-MMMM-yyyy" placeholder="Pick a date"
+                                        is-open="popupCheckOutDate.opened" datepicker-options="dateOptions"
+                                        ng-required="true" show-button-bar="false" ng-model="WorkOrder._CheckOutDate"
+                                        id="CheckOutDate" />
                                     <span class="input-group-btn">
-                                            <button type="button" class="btn btn-default" ng-click="openCheckOutDate()">
-											<i class="icon-calendar"></i>
-											</button>
-                                        </span>
+                                        <button type="button" class="btn btn-default" ng-click="openCheckOutDate()">
+                                            <i class="icon-calendar"></i>
+                                        </button>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -107,15 +107,15 @@
                             <div class="col-md-8">
                                 <div class="input-group">
                                     <input type="text" class="form-control datepicker"
-                                           uib-datepicker-popup="dd-MMMM-yyyy" placeholder="Pick a date"
-                                           is-open="popupCheckInDate.opened" datepicker-options="dateOptions"
-                                           ng-required="true" show-button-bar="false" ng-model="WorkOrder._CheckInDate"
-                                           id="CheckInDate"/>
+                                        uib-datepicker-popup="dd-MMMM-yyyy" placeholder="Pick a date"
+                                        is-open="popupCheckInDate.opened" datepicker-options="dateOptions"
+                                        ng-required="true" show-button-bar="false" ng-model="WorkOrder._CheckInDate"
+                                        id="CheckInDate" />
                                     <span class="input-group-btn">
-                                            <button type="button" class="btn btn-default" ng-click="openCheckInDate()">
-											<i class="icon-calendar"></i>
-											</button>
-                                        </span>
+                                        <button type="button" class="btn btn-default" ng-click="openCheckInDate()">
+                                            <i class="icon-calendar"></i>
+                                        </button>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -128,15 +128,15 @@
                             <div class="col-md-8">
                                 <div class="input-group">
                                     <input type="text" class="form-control datepicker"
-                                           uib-datepicker-popup="dd-MMMM-yyyy" placeholder="Pick a date"
-                                           is-open="popupExecutionDate.opened" datepicker-options="dateOptions"
-                                           ng-required="true" show-button-bar="false" ng-model="WorkOrder._ExecutionDate"
-                                           id="ExecutionDate"/>
+                                        uib-datepicker-popup="dd-MMMM-yyyy" placeholder="Pick a date"
+                                        is-open="popupExecutionDate.opened" datepicker-options="dateOptions"
+                                        ng-required="true" show-button-bar="false" ng-model="WorkOrder._ExecutionDate"
+                                        id="ExecutionDate" />
                                     <span class="input-group-btn">
-                                            <button type="button" class="btn btn-default" ng-click="openExecutionDate()">
-											<i class="icon-calendar"></i>
-											</button>
-                                        </span>
+                                        <button type="button" class="btn btn-default" ng-click="openExecutionDate()">
+                                            <i class="icon-calendar"></i>
+                                        </button>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -152,7 +152,7 @@
                         <div class="form-group">
                             <label class="control-label col-md-4">{{ 'Mileage' | translate }}</label>
                             <div class="col-md-8">
-                                <input type="number"  class="form-control" id="Mileage" ng-model="WorkOrder.Mileage">
+                                <input type="number" class="form-control" id="Mileage" ng-model="WorkOrder.Mileage">
                             </div>
                         </div>
                     </div>
@@ -164,15 +164,15 @@
                             <div class="col-md-8">
                                 <div class="input-group">
                                     <input type="text" class="form-control datepicker"
-                                           uib-datepicker-popup="dd-MMMM-yyyy" placeholder="Pick a date"
-                                           is-open="popupBookMOTDate.opened" datepicker-options="dateOptions"
-                                           ng-required="true" show-button-bar="false" ng-model="WorkOrder._BookMOTDate"
-                                           id="BookMOTDate"/>
+                                        uib-datepicker-popup="dd-MMMM-yyyy" placeholder="Pick a date"
+                                        is-open="popupBookMOTDate.opened" datepicker-options="dateOptions"
+                                        ng-required="true" show-button-bar="false" ng-model="WorkOrder._BookMOTDate"
+                                        id="BookMOTDate" />
                                     <span class="input-group-btn">
-                                            <button type="button" class="btn btn-default" ng-click="openBookMOTDate()">
-											<i class="icon-calendar"></i>
-											</button>
-                                        </span>
+                                        <button type="button" class="btn btn-default" ng-click="openBookMOTDate()">
+                                            <i class="icon-calendar"></i>
+                                        </button>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -191,7 +191,7 @@
                                 <div class="form-group">
                                     <label class="checkbox-inline">
                                         <input type="checkbox" ng-model="WorkOrder.IsCustomerWaiting"
-                                               ng-checked="WorkOrder.IsCustomerWaiting == 1">
+                                            ng-checked="WorkOrder.IsCustomerWaiting == 1">
                                         {{ 'CustWaiting' | translate }}
                                     </label>
                                 </div>
@@ -205,15 +205,15 @@
                                     </label>
 
                                     <input type="text" class="form-control datepicker"
-                                           uib-datepicker-popup="dd-MMMM-yyyy" placeholder="Pick a date"
-                                           is-open="popupBookTireDate.opened" datepicker-options="dateOptions"
-                                           ng-required="true" show-button-bar="false" ng-model="WorkOrder.BookTireDate"
-                                           id="BookTireDate"/>
+                                        uib-datepicker-popup="dd-MMMM-yyyy" placeholder="Pick a date"
+                                        is-open="popupBookTireDate.opened" datepicker-options="dateOptions"
+                                        ng-required="true" show-button-bar="false" ng-model="WorkOrder.BookTireDate"
+                                        id="BookTireDate" />
                                     <span class="input-group-btn">
-                                            <button type="button" class="btn btn-default" ng-click="openBookTireDate()">
-											<i class="icon-calendar"></i>
-											</button>
-                                        </span>
+                                        <button type="button" class="btn btn-default" ng-click="openBookTireDate()">
+                                            <i class="icon-calendar"></i>
+                                        </button>
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -227,7 +227,7 @@
                                 <div class="form-group">
                                     <label class="checkbox-inline">
                                         <input type="checkbox" ng-model="WorkOrder.IsRework"
-                                               ng-checked="WorkOrder.IsRework == 1">
+                                            ng-checked="WorkOrder.IsRework == 1">
                                         {{ 'Rework' | translate }}
                                     </label>
                                 </div>
@@ -241,7 +241,7 @@
                                     </label>
 
                                     <input type="text" class="form-control datepicker" id="BookMOTDate2"
-                                           placeholder="Pick a date&hellip;" ng-model="WorkOrder.BookMOTDate">
+                                        placeholder="Pick a date&hellip;" ng-model="WorkOrder.BookMOTDate">
                                     <span class="input-group-addon"><i class="icon-calendar"></i></span>
                                 </div>
                             </div>
@@ -259,7 +259,7 @@
                             <label class="control-label col-md-4">{{ 'ChargeCats' | translate }}</label>
                             <div class="col-md-8">
                                 <select class="form-control" ng-model="WorkOrder.DeptId"
-                                        ng-options="item.Id as item.Name for item in lstChargeCats">
+                                    ng-options="item.Id as item.Name for item in lstChargeCats">
                                 </select>
                             </div>
                         </div>
@@ -271,7 +271,7 @@
                             <label class="control-label col-md-4">{{ 'JobCategory' | translate }}</label>
                             <div class="col-md-8">
                                 <select class="form-control" ng-model="WorkOrder.jobCats"
-                                        ng-options="item.Id as item.Name for item in jobCats">
+                                    ng-options="item.Id as item.Name for item in jobCats">
                                 </select>
                             </div>
                         </div>
@@ -287,7 +287,7 @@
                             <label class="control-label col-md-4">{{ 'Payer' | translate }}</label>
                             <div class="col-md-8">
                                 <select class="form-control" ng-model="WorkOrder.Payer"
-                                        ng-options="item.Id as item.Name for item in lstPayer">
+                                    ng-options="item.Id as item.Name for item in lstPayer">
                                 </select>
                             </div>
                         </div>
@@ -299,7 +299,7 @@
                             <label class="control-label col-md-4">{{ 'JobDepartment' | translate }}</label>
                             <div class="col-md-8">
                                 <select class="form-control" ng-model="WorkOrder.JobDepartment"
-                                        ng-options="item.Id as item.Name for item in lstDepartment">
+                                    ng-options="item.Id as item.Name for item in lstDepartment">
                                 </select>
                             </div>
                         </div>
@@ -315,7 +315,7 @@
                             <label class="control-label col-md-4">{{ 'JobType' | translate }}</label>
                             <div class="col-md-8">
                                 <select class="form-control" ng-model="WorkOrder.JobType"
-                                        ng-options="item.Id as item.Name for item in jobTypes">
+                                    ng-options="item.Id as item.Name for item in jobTypes">
                                 </select>
                             </div>
                         </div>
@@ -352,10 +352,8 @@
                 <!--end row 11-->
 
                 <div class="row pull-right">
-                    <button type="button" ng-disabled="headerFrm.$invalid"
-                            id="btnSubmitFrm"
-                            class="btn btn-icon btn-primary btnSubmit"
-                            ng-click="onSubmitFrm()">
+                    <button type="button" ng-disabled="headerFrm.$invalid" id="btnSubmitFrm"
+                        class="btn btn-icon btn-primary btnSubmit" ng-click="onSubmitFrm()">
                         <i class="icon-checkmark3"></i>{{ 'btnSave' | translate }}</span>
                     </button>
                     <button type="button" class="btn btn-link " data-ng-click="onCancel()">{{ 'btnCancel' | translate
@@ -372,7 +370,7 @@
 
 
 <script type="text/javascript">
-  $(document).ready(function () {
-  });
+    $(document).ready(function () {
+    });
 
 </script>
