@@ -7,5 +7,14 @@ UserWebApp.service('WorkOrderService', function ($http) {
       data: {"WorkOrderId": WorkOrderId,}
     });
   }
+
+  WorkOrderService.jobTab = function (data) {
+    return $http({
+      method:'GET',
+      url:'/wo/jobTab',
+      data: data
+    });
+  }
+
   return WorkOrderService;
 });

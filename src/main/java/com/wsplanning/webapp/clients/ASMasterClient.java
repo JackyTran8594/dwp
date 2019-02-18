@@ -106,4 +106,8 @@ public class ASMasterClient {
     return restTemplate.getForObject(url, String.class);
   }
 
+  public String jobTab(String SiteId, String CustNo, String VehicleId) {
+    String url = String.format("%s?SiteId=%s&CustNo=%s&VehiId=%s", this.endpointUrl, SiteId, CustNo, VehicleId);
+    return restTemplate.getForObject(url, String.class);
+  }
 }

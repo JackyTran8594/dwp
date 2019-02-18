@@ -6,7 +6,6 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, HttpServ
   console.log($scope.WorkOrderId);
   console.log($scope.type);
 
-
   loadCommon();
   $scope.lstTrans = [];
   $scope.lstDepartment = [];
