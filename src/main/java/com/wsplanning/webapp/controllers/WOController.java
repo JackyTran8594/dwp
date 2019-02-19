@@ -3,6 +3,8 @@ package com.wsplanning.webapp.controllers;
 import com.google.gson.*;
 import com.wsplanning.webapp.clients.ASMasterClient;
 import com.wsplanning.webapp.clients.WokOrderClient;
+
+import org.apache.commons.collections4.MultiMap;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,9 +15,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -53,16 +58,16 @@ public class WOController extends BaseController {
     try {
       String rtn = wokOrderClient.getWO(getToken(), getSiteId(), params);
       if (rtn != null && StringUtils.isNotBlank(rtn)) {
-        //JsonParser
+        // JsonParser
         JsonParser parser = new JsonParser();
         JsonElement tradeElement = parser.parse(rtn);
         JsonArray listData = tradeElement.getAsJsonArray();
 
-        //Init list
+        // Init list
         JsonArray listRtn = new JsonArray();
         JsonObject itemRtn = null;
 
-        //Init variable
+        // Init variable
         JsonObject itemObj = null;
         JsonObject WOVehicle = null;
         JsonObject HolderCustomer = null;
@@ -80,9 +85,8 @@ public class WOController extends BaseController {
 
           if (itemObj.has("WOVehicle") && !itemObj.get("WOVehicle").isJsonNull()) {
             WOVehicle = itemObj.get("WOVehicle").getAsJsonObject();
-            sb.append(WOVehicle.get("LicenseNo").getAsString()).append(", ")
-                .append(WOVehicle.get("Make").getAsString()).append(" ")
-                .append(WOVehicle.get("Model").getAsString()).append(" ")
+            sb.append(WOVehicle.get("LicenseNo").getAsString()).append(", ").append(WOVehicle.get("Make").getAsString())
+                .append(" ").append(WOVehicle.get("Model").getAsString()).append(" ")
                 .append(WOVehicle.get("SubModel").getAsString()).append(" <br />");
             if (WOVehicle.has("HolderCustomer") && !WOVehicle.get("HolderCustomer").isJsonNull()) {
               HolderCustomer = WOVehicle.get("HolderCustomer").getAsJsonObject();
@@ -97,13 +101,11 @@ public class WOController extends BaseController {
                 .append(HolderCustomer.get("Tel1").getAsString()).append(" ")
                 .append(HolderCustomer.get("Email").getAsString()).append(" <br />");
           } else {
-            sb.append(WOCustomer.get("LName").getAsString()).append(" ")
-                .append(WOCustomer.get("FName").getAsString()).append(", ")
-                .append(WOCustomer.get("Tel1").getAsString()).append(" ")
+            sb.append(WOCustomer.get("LName").getAsString()).append(" ").append(WOCustomer.get("FName").getAsString())
+                .append(", ").append(WOCustomer.get("Tel1").getAsString()).append(" ")
                 .append(WOCustomer.get("Email").getAsString()).append(" <br />");
           }
           sb.append(jobTitle.replaceAll("\r\n", "<br />"));
-
 
           itemRtn = new JsonObject();
           itemRtn.addProperty("WorkOrderId", itemObj.get("WorkOrderId").getAsString());
@@ -133,23 +135,17 @@ public class WOController extends BaseController {
       return parseException(ex);
     }
   }
-  
+
   @GetMapping("/wo/jobTab")
   @ResponseBody
-  public ResponseEntity jobTab(@RequestBody Map<String, String> params)
-  {
-     try {
-       String SiteId = params.get("SiteId");
-       String CustNo = params.get("CustNo");
-       String VehicleId = params.get("VehiId");
-
-       String rtn = asMasterClient.jobTab(SiteId, CustNo, VehicleId);
-       return new ResponseEntity<>(rtn, HttpStatus.OK);
-     } catch (Exception ex) {
-       return parseException(ex);
-       //TODO: handle exception
-     }
+  public ResponseEntity jobTab(@RequestParam("SiteId") String SiteId, @RequestParam("CustNo") String CustNo, @RequestParam("VehiId") String VehiId ) {
+    try {
+      String rtn = asMasterClient.jobTab(SiteId, CustNo, VehiId);
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception ex) {
+      return parseException(ex);
+      // TODO: handle exception
+    }
   }
- 
 
 }

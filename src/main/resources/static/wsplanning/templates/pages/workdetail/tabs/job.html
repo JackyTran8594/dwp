@@ -15,17 +15,16 @@
 
                         <!--BODY-->
                         <tbody>
-                            <tr ng-repeat="item in lstData" ng-dblclick="viewDetail(item)">
-                                <td style="width: 20%;">
+                            <tr ng-repeat="item in jobTabList">
+                                <!-- <td style="width: 20%;">
                                     {{item.ServiceDate | date:'dd-MMMM-yyyy HH:mm:ss'}}<br />
                                     <span class="{{item.WorkOrderStatus| titleCase}}">{{item.WorkOrderStatus}}<br /></span>
                                     {{item.WorkOrderNo}}<br />
                                 </td>
-                                <td ng-bind-html="item.html"></td>
+                               -->
+                               <td>{{item}}</td>
                             </tr>
-                            <tr ng-if="isNoData || !lstData || lstData.length <= 0" class="active">
-                                <td colspan="20" class="text-center">{{ 'commonNoResult' | translate }}</td>
-                            </tr>
+                
                         </tbody>
                     </table>
                 </div>

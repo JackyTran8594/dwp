@@ -1,5 +1,5 @@
-UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderService ,HttpService, $translate, $location, $filter, $uibModal, CommonServices, $stateParams, $state) {
-  
+UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderService, HttpService, $translate, $location, $filter, $uibModal, CommonServices, $stateParams, $state) {
+
   var $ctrl = this;
 
   $ctrl.jobParams = $scope.$parent.jobObject;
@@ -11,10 +11,10 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   loadData($ctrl.jobParams);
 
   function loadData(params) {
-    WorkOrderService.jobTab(params).then(function(res){
-      $scope.jobTabList = res;
+    WorkOrderService.jobTab(params).then(function (res) {
+      $scope.jobTabList = res.data;
       console.log(res);
-    }, function(err){
+    }, function (err) {
       console.log(err);
     })
   }

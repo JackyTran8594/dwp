@@ -2,6 +2,7 @@ var UserWebApp = angular.module('UserWebApp', [
   'ngSanitize',
   'tmh.dynamicLocale',
   'ui.bootstrap',
+  'ui.bootstrap.datetimepicker',
   'checklist-model',
   'ui.select2',
   'pascalprecht.translate',

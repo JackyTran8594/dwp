@@ -12,7 +12,7 @@ UserWebApp.service('WorkOrderService', function ($http) {
     return $http({
       method:'GET',
       url:'/wo/jobTab',
-      data: data
+      params: data
     });
   }
 
