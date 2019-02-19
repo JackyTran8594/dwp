@@ -3,10 +3,16 @@
     <span ng-show="!isShow">
         <div class="panel-heading">
             <h6 class="panel-title">
-                <a class="btn btn-link btn-float has-text text-size-small" ng-click="$ctrl.openSearchContact('lg','')">
+                <a class="btn btn-link btn-float has-text text-size-small" ng-click="$ctrl.openSearchContact('lg','')"  style="float: left;">
                     <i class="icon-address-book position-left myTitle"></i>
                 </a>
-                <small class="myTitle">{{WOContact.Address}}, {{WOContact.Tel1}}, {{WOContact.InvoiceGroup}}, {{WOContact.AccountGroup}}</small>
+                <small class="myTitle" style="margin-left: 0px;" ng-if="WOContact != null">
+                    {{WOContact.CustNo}}, {{WOContact.LName}}, {{WOContact.FName}}, {{WOContact.Tel1}}, {{WOContact.Email}}<br/>
+                    {{WOContact.PostalCode}}, {{WOContact.City}}, {{WOContact.Address}}
+                </small>
+                <small class="myTitle" ng-if="WOContact == null">
+                    N/A
+                </small>
             </h6>
             <div class="heading-elements">
                 <ul class="icons-list">
@@ -19,10 +25,16 @@
     <span ng-show="isShow">
         <div class="panel-heading">
             <h6 class="panel-title">
-                <a class="btn btn-link btn-float has-text text-size-small" ng-click="$ctrl.openSearchContact('lg','')">
+                <a class="btn btn-link btn-float has-text text-size-small" ng-click="$ctrl.openSearchContact('lg','')"  style="float: left;">
                     <i class="icon-address-book position-left myTitle"></i>
                 </a>
-                <small class="myTitle">{{WOContact.Address}}, {{WOContact.Tel1}}, {{WOContact.InvoiceGroup}}, {{WOContact.AccountGroup}}</small>
+                <small class="myTitle" style="margin-left: 0px;" ng-if="WOContact != null">
+                    {{WOContact.CustNo}}, {{WOContact.LName}}, {{WOContact.FName}}, {{WOContact.Tel1}}, {{WOContact.Email}}<br/>
+                    {{WOContact.PostalCode}}, {{WOContact.City}}, {{WOContact.Address}}
+                </small>
+                <small class="myTitle" ng-if="WOContact == null">
+                    N/A
+                </small>
             </h6>
             <div class="heading-elements">
                 <ul class="icons-list">
@@ -33,53 +45,14 @@
 
         <div class="panel-body">
             <form class="form-horizontal formValidate" name="contractFrm">
-                <!--Row 1-->
-                <div class="row">
-                    <!--Address-->
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="control-label col-md-4">{{ 'Address' | translate }}</label>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" id="Address"  ng-model="WOContact.Address">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--Tel2-->
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="control-label col-md-4">{{ 'Phone' | translate }}</label>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" id="Tel2"  ng-model="WOContact.Tel2">
-                            </div>
+                <div ng-repeat="item in WOContact.DynamicDataFields" class="col-xs-6">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">{{ item.Label }}</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" id="label_contract_{{$index}}"  ng-model="item.Value" ng-disabled="true">
                         </div>
                     </div>
                 </div>
-                <!--end row 1-->
-
-                <!--Row 2-->
-                <div class="row">
-                    <!--InvoiceGroup-->
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="control-label col-md-4">{{ 'CustomerGroup' | translate }}</label>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" id="CustomerGroup"  ng-model="WOContact.InvoiceGroup">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--AccountGroup-->
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="control-label col-md-4">{{ 'AccountGroup' | translate }}</label>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" id="AccountGroup"  ng-model="WOContact.AccountGroup">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--end row 2-->
             </form>
         </div>
 

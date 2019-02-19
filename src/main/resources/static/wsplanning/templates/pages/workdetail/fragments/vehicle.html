@@ -3,10 +3,13 @@
     <span ng-show="!isShow">
         <div class="panel-heading">
             <h6 class="panel-title">
-                <a class="btn btn-link btn-float has-text text-size-small" ng-click="$ctrl.openSearchVehicle('lg','')">
+                <a class="btn btn-link btn-float has-text text-size-small" ng-click="$ctrl.openSearchVehicle('lg','')" style="float: left;">
                     <i class="icon-truck position-left myTitle"></i>
                 </a>
-                <small class="myTitle">{{WOVehicle.LicenseNo}}, {{WOVehicle.VIN}}, {{WOVehicle.Make}}, {{WOVehicle.Model}}</small>
+                <small class="myTitle" style="margin-left: 0px;">
+                    {{WOVehicle.LicenseNo}}, {{WOVehicle.VIN}}, {{WOVehicle.Make}}, {{WOVehicle.Model}}, {{WOVehicle.SubModel}}<br>
+                    {{WOVehicle.HolderCustomer.CustNo}}, {{WOVehicle.HolderCustomer.LName}} {{WOVehicle.HolderCustomer.FName}}
+                </small>
             </h6>
             <div class="heading-elements">
                 <ul class="icons-list">
@@ -19,10 +22,13 @@
     <span ng-show="isShow">
         <div class="panel-heading">
             <h6 class="panel-title">
-                <a class="btn btn-link btn-float has-text text-size-small" ng-click="$ctrl.openSearchVehicle('lg','')">
+                <a class="btn btn-link btn-float has-text text-size-small" ng-click="$ctrl.openSearchVehicle('lg','')" style="float: left;">
                     <i class="icon-truck position-left myTitle"></i>
                 </a>
-                <small class="myTitle">{{WOVehicle.LicenseNo}}, {{WOVehicle.VIN}}, {{WOVehicle.Make}}, {{WOVehicle.Model}}</small>
+                <small class="myTitle" style="margin-left: 0px;">
+                    {{WOVehicle.LicenseNo}}, {{WOVehicle.VIN}}, {{WOVehicle.Make}}, {{WOVehicle.Model}}, {{WOVehicle.SubModel}}<br>
+                    {{WOVehicle.HolderCustomer.CustNo}}, {{WOVehicle.HolderCustomer.LName}} {{WOVehicle.HolderCustomer.FName}}
+                </small>
             </h6>
             <div class="heading-elements">
                 <ul class="icons-list">
@@ -33,29 +39,14 @@
 
         <div class="panel-body">
             <form class="form-horizontal formValidate" name="contractFrm">
-                <!--Row 1-->
-                <div class="row">
-                    <!--NextMOTDate-->
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="control-label col-md-4">{{ 'FirstRegistrationDate' | translate }}</label>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" id="CheckOutDate"  ng-model="WOVehicle.NextMOTDate">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--VIN-->
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="control-label col-md-4">{{ 'EngineNumber' | translate }}</label>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" id="VIN"  ng-model="WOVehicle.VIN">
-                            </div>
+                <div ng-repeat="item in WOVehicle.DynamicDataFields" class="col-xs-6">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">{{ item.Label }}</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" id="label_vehicle_{{$index}}"  ng-model="item.Value" ng-disabled="true">
                         </div>
                     </div>
                 </div>
-                <!--end row 1-->
             </form>
         </div>
 

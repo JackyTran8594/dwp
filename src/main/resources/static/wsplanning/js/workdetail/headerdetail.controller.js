@@ -105,4 +105,23 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, HttpServ
     opened: false
   };
 
+  //DATETIME PICKER
+  var that = this;
+
+  $scope.isOpenServiceDate = false;
+  $scope.ServiceDate = new Date();
+
+  $scope.openServiceDate = function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    $scope.isOpenServiceDate = true;
+  };
+
+  $scope.onSubmitFrm = function () {
+    console.log($scope.WorkOrder);
+    console.log(formatDateToString($scope.WorkOrder._ServiceDate));
+    return;
+  }
+
+
 });

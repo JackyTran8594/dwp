@@ -389,3 +389,40 @@ $(function () {
     });
 
 });
+
+function formatDateToString(date){
+  var rtn = date.getFullYear();
+  var sdate = date.getDate();
+  var month = date.getMonth() + 1;
+  if (sdate < 10) {
+    rtn += "-0" + sdate;
+  } else {
+    rtn += "-" + sdate;
+  }
+  if (month < 10) {
+    rtn += "-0" + month;
+  } else {
+    rtn += "-" + month;
+  }
+  var hour = date.getHours();
+  var min = date.getMinutes();
+  var second = date.getSeconds();
+
+  if (hour < 10) {
+    rtn += "T0" + hour;
+  } else {
+    rtn += "T" + hour;
+  }
+  if (min < 10) {
+    rtn += ":0" + min;
+  } else {
+    rtn += ":" + min;
+  }
+  if (second < 10) {
+    rtn += ":0" + second;
+  } else {
+    rtn += ":" + second;
+  }
+
+  return rtn;
+}
