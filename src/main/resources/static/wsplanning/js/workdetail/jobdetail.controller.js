@@ -64,6 +64,32 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
 
   $scope.jobTabList = [];
 
+  function objTree() {
+    var id = '',
+    var label = '',
+    var children = []
+    
+    constructor
+
+  }
+
+  var objTree = {
+    id: '',
+    label: '',
+    children: []
+  }
+
+  var objSub = {
+    id: '',
+    label: '',
+    children: []
+  }
+
+  var objAdd = {
+    id: '',
+    label: '',
+  }
+
 
 
   loadData(item);
@@ -71,7 +97,31 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
   function loadData(params) {
     common.spinner(true);
     WorkOrderService.jobTab(params).then(function (res) {
-      $scope.jobTabList = res.data;
+      var data = res.data;
+      angular.forEach(data, function (value) {
+        var objTree = new objTree();
+        objTree.id = value.Id;
+        objTree.label = value.Name;
+        var items = value.SubGroups;
+        angular.forEach(items, function (item) {
+          var objSub =  new objSub();
+          objSub.id = item.Id;
+          objSub.label = item.Name;
+          var list = item.AdditionalData;
+          angular.forEach(list, function (obj) {
+             var objAdd = new objAdd();
+             objAdd.id = obj.Id;
+             objAdd.label = obj.Label;
+             objSub.children.push(objAdd);
+          });
+          
+          objTree.children.push(objSub);
+        });
+        $scope.jobTabList.push(objTree);
+      }
+      );
+
+      console.log($scope.jobTabList);
       common.spinner(false);
       console.log(res);
     }, function (err) {

@@ -1,7 +1,23 @@
-UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvider, tmhDynamicLocaleProvider) {
+UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvider, ivhTreeviewOptionsProvider ,tmhDynamicLocaleProvider) {
 
   tmhDynamicLocaleProvider.localeLocationPattern('/assets/js/core/libraries/angularjs/angular-locale/i18n/angular-locale_{{locale}}.js')
   // $urlRouterProvider.otherwise('/');
+
+  ivhTreeviewOptionsProvider.set({
+    idAttribute: 'id',
+    labelAttribute: 'label',
+    childrenAttribute: 'children',
+    selectedAttribute: 'selected',
+    useCheckboxes: true,
+    disableCheckboxSelectionPropagation: false,
+    indeterminateAttribute: '__ivhTreeviewIndeterminate',
+    expandedAttribute: '__ivhTreeviewExpanded',
+    defaultSelectedState: true,
+    twistieExpandedTpl: '(-)',
+    twistieCollapsedTpl: '(+)',
+    twistieLeafTpl: 'o',
+    nodeTpl: '...'
+  });
 
   $urlRouterProvider.otherwise(function ($rootScope, $injector, $location) {
     var lang = $("#currentLang").attr('data-currentLang');

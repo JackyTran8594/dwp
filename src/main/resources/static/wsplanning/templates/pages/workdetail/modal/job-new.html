@@ -8,56 +8,62 @@
 
 <div class="modal-body">
 
-    <!--SEARCH-->
-    <div class="well well-sm">
-        <form class="form-horizontal form-search row" ng-submit="doSearch()">
-
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="col-md-12">
-                        <input type="text" class="form-control" ng-model="skey" placeholder="{{ 'search' | translate }}"
-                               code="13">
-                    </div>
-                </div>
-
-                <div class="col-md-1">
-                    <button type="submit" ng-click="doSearch()" class="btn btn-icon btn-default"><i
-                            class="icon-search4"></i></button>
+    <div class="row">
+        <div class="panel panel-flat">
+            <div class="panel-heading">
+                <h6 class="panel-title">Hierarchical select</h6>
+                <div class="heading-elements">
+                    <!-- <ul class="icons-list">
+                        <li><a data-action="collapse"></a></li>
+                        <li><a data-action="reload"></a></li>
+                        <li><a data-action="close"></a></li>
+                    </ul> -->
                 </div>
             </div>
-        </form>
-    </div>
-    <!--SEARCH-->
-    <div class="panel panel-flat">
-        <div class="table-responsive tableModal">
-            <table class="table table-striped table-hover">
-                <thead>
-                <tr>
-                    <th>License No</th>
-                    <th>VIN</th>
-                    <th>Make</th>
-                    <th>Model</th>
-                    <th>SubModel</th>
-                    <th class="text-center">Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="item in lstVehicles">
-                    <td>{{item.LicenseNo}}</td>
-                    <td>{{item.VIN}}</td>
-                    <td>{{item.Make}}</td>
-                    <td>{{item.Model}}</td>
-                    <td>{{item.SubModel}}</td>
-                    <td class="text-center">
-                        <button type="button" ng-click="doPick(item)" class="btn btn-primary"></i> Pick</button>
-                    </td>
-                </tr>
 
-                </tbody>
-            </table>
+            <div class="panel-body">
+                <div class="well border-left-danger border-left-lg">
+                    <div ivh-treeview="fancy.bag" ivh-treeview-expand-to-depth="2">
+                    </div>
+                    <!-- <ul class="">
+                        <li class="folder expanded">Expanded folder with children
+                            <ul>
+                                <li class="expanded">Expanded sub-item
+                                    <ul></ul>
+                                        <li>Menu sub-item</li>
+                                        <li class="selected">This is a selected item</li>
+                                    </ul>
+                                </li>
+                                <li>Collapsed sub-item
+                                    <ul>
+                                        <li>Sub-item 2.2.1</li>
+                                        <li>Sub-item 2.2.2</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        
+                        <li class="popup" title="Look, a tool tip!">Menu item with key and tooltip</li>
+                        <li class="folder">Collapsed folder
+                            <ul>
+                                <li>Sub-item 1.1</li>
+                                <li>Sub-item 1.2</li>
+                            </ul>
+                        </li>
+                        <li>Basic <i>menu item</i> with <strong class="text-semibold">HTML support</strong></li>
+
+                        <li class="expanded">Document with some children (expanded on init)
+                            <ul>
+                                <li class="selected">Document sub-item</li>
+                                <li class="selected">Another document sub-item</li>
+                            </ul>
+                        </li>	
+                    </ul> -->
+                </div>
+            </div>
         </div>
-
     </div>
+</div>
 
 </div>
 

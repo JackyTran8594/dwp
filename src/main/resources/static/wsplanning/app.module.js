@@ -11,7 +11,8 @@ var UserWebApp = angular.module('UserWebApp', [
   'ui.bootstrap.datetimepicker',
   'ui.select',
   'ui.router',
-  'ngCookies'
+  'ngCookies',
+  'ivh.treeview'
 ]);
 
 
