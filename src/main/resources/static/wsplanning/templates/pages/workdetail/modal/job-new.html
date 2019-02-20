@@ -23,42 +23,36 @@
 
             <div class="panel-body">
                 <div class="well border-left-danger border-left-lg">
-                    <div ivh-treeview="fancy.bag" ivh-treeview-expand-to-depth="2">
+                    <!-- <div ivh-treeview="jobTabList"  ivh-treeview-expand-to-depth="-1">
+                         
+                    </div>   -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="tree-level" ng-repeat="item in jobTabList track by item.id">
+                                <li class="">
+                                    <span>{{item.label}}</span>
+                                    <ul ng-repeat="sub in item.children as listSub track by sub.id">
+                                        <li class="">
+                                            <span>{{sub.label}}</span>
+                                            <ul class="tree-level tree-end"
+                                                ng-repeat="add in sub.children as lisAdd track by add.id">
+                                                <li>
+                                                    <input class="tree-end" type="checkbox">
+                                                    <span>{{add.label}}</span>
+                                                </li>
+                                                <!-- <li class="selected">This is a selected item</li> -->
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            
+                        </div>
                     </div>
-                    <!-- <ul class="">
-                        <li class="folder expanded">Expanded folder with children
-                            <ul>
-                                <li class="expanded">Expanded sub-item
-                                    <ul></ul>
-                                        <li>Menu sub-item</li>
-                                        <li class="selected">This is a selected item</li>
-                                    </ul>
-                                </li>
-                                <li>Collapsed sub-item
-                                    <ul>
-                                        <li>Sub-item 2.2.1</li>
-                                        <li>Sub-item 2.2.2</li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        
-                        <li class="popup" title="Look, a tool tip!">Menu item with key and tooltip</li>
-                        <li class="folder">Collapsed folder
-                            <ul>
-                                <li>Sub-item 1.1</li>
-                                <li>Sub-item 1.2</li>
-                            </ul>
-                        </li>
-                        <li>Basic <i>menu item</i> with <strong class="text-semibold">HTML support</strong></li>
 
-                        <li class="expanded">Document with some children (expanded on init)
-                            <ul>
-                                <li class="selected">Document sub-item</li>
-                                <li class="selected">Another document sub-item</li>
-                            </ul>
-                        </li>	
-                    </ul> -->
+
                 </div>
             </div>
         </div>

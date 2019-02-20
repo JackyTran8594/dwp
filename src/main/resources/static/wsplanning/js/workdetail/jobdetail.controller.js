@@ -27,6 +27,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
       animation: $ctrl.animationsEnabled,
       templateUrl: '/wsplanning/templates/pages/workdetail/modal/job-new.html',
       controller: 'JobNewModalCtrl',
+      backdrop: 'static',
       controllerAs: '$ctrl',
       size: "lg",
       resolve: {
@@ -59,38 +60,48 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
   var $ctrl = this;
 
 
+  function name(params) {
+
+  }
+
 
   console.log(item);
 
   $scope.jobTabList = [];
 
-  function objTree() {
-    var id = '',
-    var label = '',
-    var children = []
-    
-    constructor
+  $scope.treeViewOptions = 
 
-  }
+  $scope.test = [{
+    label: 'Hats',
+    children: [
+      { label: 'Flat cap' },
+      { label: 'Fedora' },
+      { label: 'Baseball' },
+      { label: 'Top hat' },
+      { label: 'Gatsby' }
+    ]
+  }, {
+    label: 'Pens',
+    selected: true,
+    children: [
+      { label: 'Fountain' },
+      { label: 'Gel ink' },
+      { label: 'Roller ball' },
+      { label: 'Fiber tip' },
+      { label: 'Ballpoint' }
+    ]
+  }, {
+    label: 'Whiskey',
+    children: [
+      { label: 'Irish' },
+      { label: 'Scotch' },
+      { label: 'Rye' },
+      { label: 'Tennessee' },
+      { label: 'Bourbon' }
+    ]
+  }];
 
-  var objTree = {
-    id: '',
-    label: '',
-    children: []
-  }
-
-  var objSub = {
-    id: '',
-    label: '',
-    children: []
-  }
-
-  var objAdd = {
-    id: '',
-    label: '',
-  }
-
-
+  console.log($scope.test);
 
   loadData(item);
 
@@ -99,22 +110,24 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
     WorkOrderService.jobTab(params).then(function (res) {
       var data = res.data;
       angular.forEach(data, function (value) {
-        var objTree = new objTree();
+        var objTree = {};
         objTree.id = value.Id;
         objTree.label = value.Name;
+        objTree.children = [];
         var items = value.SubGroups;
         angular.forEach(items, function (item) {
-          var objSub =  new objSub();
+          var objSub = {};
           objSub.id = item.Id;
           objSub.label = item.Name;
+          objSub.children = [];
           var list = item.AdditionalData;
           angular.forEach(list, function (obj) {
-             var objAdd = new objAdd();
-             objAdd.id = obj.Id;
-             objAdd.label = obj.Label;
-             objSub.children.push(objAdd);
+            var objAdd = {};
+            objAdd.id = obj.Id;
+            objAdd.label = obj.Label;
+            objSub.children.push(objAdd);
           });
-          
+
           objTree.children.push(objSub);
         });
         $scope.jobTabList.push(objTree);

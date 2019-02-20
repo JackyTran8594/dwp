@@ -411,3 +411,28 @@ form.form-label-right .control-label {
 .tableModal{
   max-height: 450px;
 }
+
+.tree-level {
+  list-style: none;
+}
+
+.tree-level span {
+
+}
+
+.tree-level .checkbox {
+  /* width: 12px;
+  height: 22px;
+  border-top: 2px solid transparent;
+  border-left: 2px solid transparent;
+  -webkit-backface-visibility: hidden;
+  -webkit-transform-origin: 100% 100%;
+  -moz-transform-origin: 100% 100%;
+  -ms-transform-origin: 100% 100%;
+  -o-transform-origin: 100% 100%;
+  transform-origin: 100% 100%;  */
+}
+
+.tree-end {
+  cursor: pointer;
+}
