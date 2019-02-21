@@ -155,10 +155,11 @@ public class WOController extends BaseController {
 
   @GetMapping("/wo/serviceItem")
   @ResponseBody
-  public ResponseEntity searchServiceItem(@RequestParam("itemType") Integer itemType,
+  public ResponseEntity searchServiceItem(@RequestParam("itemType") String itemType,
       @RequestParam("skey") String skey) {
     try {
-      String rtn = searchServiceItemClient.getServiceItem(itemType, skey);
+      Integer itemId = Integer.parseInt(itemType);
+      String rtn = searchServiceItemClient.getServiceItem(itemId, skey);
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);

@@ -56,11 +56,11 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
 
   // call searchserviceitem
   $scope.recentSales = function (itemType, skey) {
-    var data = {
+    var params = {
       itemType: itemType,
       skey: skey
     };
-    WorkOrderService.serviceItem(data).then(function (res) {
+    WorkOrderService.serviceItem(params).then(function (res) {
       $scope.recentSalesList = res.data;
       console.log(res);
     }, function (err) {
@@ -118,6 +118,4 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
   $ctrl.cancel = function () {
     $uibModalInstance.dismiss('cancel');
   };
-
-
 })

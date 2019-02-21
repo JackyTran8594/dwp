@@ -21,7 +21,7 @@ public class SearchServiceItemClient {
     public SearchServiceItemClient(RestTemplate restTemplate, @Value("${apiEndpointUrl}") String apiEndpointUrl) {
         this.restTemplate = restTemplate;
         this.restTemplate.getMessageConverters().add(0, new StringHttpMessageConverter(Charset.forName("UTF-8")));
-        this.endpointUrl = apiEndpointUrl + "/api/SearchServiveItem";
+        this.endpointUrl = apiEndpointUrl + "/api/SearchServiceItems";
     }
 
     public String getServiceItem(Integer itemType, String skey) {
