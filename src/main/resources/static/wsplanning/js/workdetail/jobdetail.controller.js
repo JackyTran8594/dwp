@@ -6,18 +6,18 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
 
   console.log($ctrl.jobParams);
 
-  $scope.jobTabList = [];
+  $scope.jobTabList = $scope.$parent.WOJobs;
 
-  loadData($ctrl.jobParams);
+  // loadData($ctrl.jobParams);
 
-  function loadData(params) {
-    WorkOrderService.jobTab(params).then(function (res) {
-      $scope.jobTabList = res.data;
-      console.log(res);
-    }, function (err) {
-      console.log(err);
-    })
-  }
+  // function loadData(params) {
+  //   WorkOrderService.detail(params).then(function (res) {
+  //     $scope.jobTabList = res.data;
+  //     console.log(res);
+  //   }, function (err) {
+  //     console.log(err);
+  //   })
+  // }
 
   $ctrl.animationsEnabled = true;
   $scope.addItem = function () {
@@ -73,7 +73,7 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
 
   console.log(item);
 
-  $scope.jobTabList = [];
+  $scope.jobTreeList = [];
 
   loadData(item);
 
@@ -103,11 +103,11 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
 
           objTree.children.push(objSub);
         });
-        $scope.jobTabList.push(objTree);
+        $scope.jobTreeList.push(objTree);
       }
       );
 
-      console.log($scope.jobTabList);
+      console.log($scope.jobTreeList);
       common.spinner(false);
       console.log(res);
     }, function (err) {

@@ -16,6 +16,7 @@ import java.nio.charset.Charset;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * Created by ThuyetLV
@@ -173,10 +174,11 @@ public class WokOrderClient {
   }
 
 
-  public String detail(String token, String siteId, Map<String, String> params) {
+  public String detail(String token, String siteId, Map<String, String> params, String LoadRows) {
     String workOrderId = params.get("WorkOrderId");
     HttpHeaders headers = new HttpHeaders();
     headers.set("Token", token);
+    headers.set("LoadRows", LoadRows);
     HttpEntity entity = new HttpEntity(headers);
     String url = String.format("%s?SiteId=%s&WorkOrderId=%s", this.endpointUrl, siteId, workOrderId);
     ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class, new HashMap<>());

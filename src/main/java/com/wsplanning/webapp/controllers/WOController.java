@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -131,9 +132,10 @@ public class WOController extends BaseController {
 
   @PostMapping("/wo/detail")
   @ResponseBody
-  public ResponseEntity detail(@RequestBody Map<String, String> params) {
+  public ResponseEntity detail(@RequestBody Map<String, String> params, 
+    @RequestHeader("LoadRows") String LoadRows) {
     try {
-      String rtn = wokOrderClient.detail(getToken(), getSiteId(), params);
+      String rtn = wokOrderClient.detail(getToken(), getSiteId(), params, LoadRows);
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);

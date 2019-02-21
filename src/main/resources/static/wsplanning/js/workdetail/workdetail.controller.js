@@ -1,6 +1,7 @@
 UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpService, $translate, $location, $filter, $uibModal, CommonServices, $stateParams, $state, WorkOrder, WorkOrderService) {
   $scope.WorkOrderId = $stateParams.id;
   $scope.type = $stateParams.type;
+  $scope.WOJobs = WorkOrder.data.WOJobs;
   $scope.jobObject = {
     SiteId: WorkOrder.data.SiteId,
     CustNo: WorkOrder.data.WOCustomer.CustNo,
