@@ -60,13 +60,9 @@
                             <label class="control-label col-xs-4">{{ 'ServiceDate' | translate }}</label>
                             <div class="col-xs-8">
                                 <div class="input-group">
-                                    <input type="text" class="form-control datepicker"
-                                        uib-datepicker-popup="dd-MMMM-yyyy HH:mm:ss" placeholder="Pick a date"
-                                        is-open="popupServiceDate.opened" datepicker-options="dateOptions"
-                                        show-button-bar="false" ng-model="WorkOrder._ServiceDate"
-                                        id="ServiceDate" />
+                                    <input type="text" class="form-control" datetime-picker="dd-MMMM-yyyy HH:mm:ss" date-format="dd-MMMM-yyyy HH:mm:ss" ng-model="WorkOrder._ServiceDate" is-open="isOpenServiceDate"/>
                                     <span class="input-group-btn">
-                                        <button type="button" class="btn btn-default" ng-click="openServiceDate()">
+                                        <button type="button" class="btn btn-default" ng-click="openServiceDate($event, prop)">
                                             <i class="icon-calendar"></i>
                                         </button>
                                     </span>
@@ -75,19 +71,17 @@
                         </div>
                     </div>
 
+
                     <!--ExecutionDate-->
                     <div class="col-xs-6">
                         <div class="form-group">
                             <label class="control-label col-xs-4">{{ 'ExpectedDelivery' | translate }}</label>
                             <div class="col-xs-8">
                                 <div class="input-group">
-                                    <input type="text" class="form-control datepicker"
-                                        uib-datepicker-popup="dd-MMMM-yyyy HH:mm:ss" placeholder="Pick a date"
-                                        is-open="popupCheckOutDate.opened" datepicker-options="dateOptions"
-                                        show-button-bar="false" ng-model="WorkOrder._CheckOutDate"
-                                        id="CheckOutDate" />
+                                    <input type="text" class="form-control" datetime-picker="dd-MMMM-yyyy HH:mm:ss" date-format="dd-MMMM-yyyy HH:mm:ss"
+                                           ng-model="WorkOrder._CheckOutDate" is-open="isOpenExecutionDate"/>
                                     <span class="input-group-btn">
-                                        <button type="button" class="btn btn-default" ng-click="openCheckOutDate()">
+                                        <button type="button" class="btn btn-default" ng-click="openCheckOutDate($event, prop)">
                                             <i class="icon-calendar"></i>
                                         </button>
                                     </span>
@@ -106,13 +100,10 @@
                             <label class="control-label col-xs-4">{{ 'CheckInDate' | translate }}</label>
                             <div class="col-xs-8">
                                 <div class="input-group">
-                                    <input type="text" class="form-control datepicker"
-                                        uib-datepicker-popup="dd-MMMM-yyyy HH:mm:ss" placeholder="Pick a date"
-                                        is-open="popupCheckInDate.opened" datepicker-options="dateOptions"
-                                        show-button-bar="false" ng-model="WorkOrder._CheckInDate"
-                                        id="CheckInDate" />
+                                    <input type="text" class="form-control" datetime-picker="dd-MMMM-yyyy HH:mm:ss" date-format="dd-MMMM-yyyy HH:mm:ss"
+                                           ng-model="WorkOrder._CheckInDate" is-open="isOpenCheckInDate"/>
                                     <span class="input-group-btn">
-                                        <button type="button" class="btn btn-default" ng-click="openCheckInDate()">
+                                        <button type="button" class="btn btn-default" ng-click="openCheckInDate($event, prop)">
                                             <i class="icon-calendar"></i>
                                         </button>
                                     </span>
@@ -127,13 +118,10 @@
                             <label class="control-label col-xs-4">{{ 'ExecutionDate' | translate }}</label>
                             <div class="col-xs-8">
                                 <div class="input-group">
-                                    <input type="text" class="form-control datepicker"
-                                        uib-datepicker-popup="dd-MMMM-yyyy HH:mm:ss" placeholder="Pick a date"
-                                        is-open="popupExecutionDate.opened" datepicker-options="dateOptions"
-                                        show-button-bar="false" ng-model="WorkOrder._ExecutionDate"
-                                        id="ExecutionDate" />
+                                    <input type="text" class="form-control" datetime-picker="dd-MMMM-yyyy HH:mm:ss" date-format="dd-MMMM-yyyy HH:mm:ss"
+                                           ng-model="WorkOrder._ExecutionDate" is-open="isOpenExecutionDate"/>
                                     <span class="input-group-btn">
-                                        <button type="button" class="btn btn-default" ng-click="openExecutionDate()">
+                                        <button type="button" class="btn btn-default" ng-click="openExecutionDate($event, prop)">
                                             <i class="icon-calendar"></i>
                                         </button>
                                     </span>
@@ -194,29 +182,6 @@
                 </div>
                 <!--end row 5-->
 
-
-                <!--Row 2-->
-                <div class="row">
-
-                    <!--ServiceDate-->
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            <label class="control-label col-xs-4">{{ 'ServiceDate' | translate }}</label>
-                            <div class="col-xs-8">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" datetime-picker="dd-MMMM-yyyy HH:mm:ss" date-format="dd-MMMM-yyyy HH:mm:ss" ng-model="WorkOrder._ServiceDate" is-open="isOpenServiceDate"/>
-                                    <span class="input-group-btn">
-                                        <button type="button" class="btn btn-default" ng-click="openServiceDate($event, prop)">
-                                            <i class="icon-calendar"></i>
-                                        </button>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <!--end row 2-->
 
 
                 <div class="row pull-right">

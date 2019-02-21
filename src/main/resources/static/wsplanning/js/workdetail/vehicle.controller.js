@@ -47,4 +47,9 @@ UserWebApp.controller('VehicleCtrl', function ($scope, $rootScope, HttpService, 
   };
 
 
+  $rootScope.$on('chooseVehicle', function (event, obj) {
+    $scope.WOVehicle = obj.item;
+    $scope.WorkOrder.WOVehicle = $scope.WOVehicle;
+  });
+
 });

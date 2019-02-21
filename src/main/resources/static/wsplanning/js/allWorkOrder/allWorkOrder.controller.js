@@ -121,6 +121,17 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
     };
 
     if (count) {
+      HttpService.postData('/wo/getWO', params).then(function (response) {
+        $scope.lstData = response;
+        console.log(response);
+        $scope.pageGo = $scope.page;
+        $scope.isShow = false;
+        common.spinner(false);
+      }, function error(response) {
+        console.log(response);
+        common.spinner(false);
+      });
+
       HttpService.postData('/wo/countWO', params).then(function (response) {
         $scope.totalElements = response;
         $scope.isNoData = ($scope.totalElements <= 0);
@@ -130,17 +141,6 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
         common.spinner(false);
       });
     }
-
-    HttpService.postData('/wo/getWO', params).then(function (response) {
-      $scope.lstData = response;
-      console.log(response);
-      $scope.pageGo = $scope.page;
-      $scope.isShow = false;
-      common.spinner(false);
-    }, function error(response) {
-      console.log(response);
-      common.spinner(false);
-    });
   }
 
   loadData(true);

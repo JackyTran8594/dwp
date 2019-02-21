@@ -7,7 +7,7 @@
 
             <ul class="breadcrumb breadcrumb-caret position-right">
                 <li><a href="/">{{ 'breadcrumbHome' | translate }}</a></li>
-                <li ng-if="type == 'allWO'"><a ui-sref="app.main.workorder()">{{ 'breadcrumbWorkOrder' | translate }}</a></li>
+                <li ng-if="type == 'allWO'"><a ui-sref="app.main.allwork()">{{ 'breadcrumbWorkOrder' | translate }}</a></li>
                 <li ng-if="type == 'todayWO'"><a ui-sref="app.main.todaywork()">{{ 'breadcrumbTodayWork' | translate }}</a></li>
                 <li ng-if="type == 'offers'"><a ui-sref="app.main.offer()">{{ 'breadcrumbOffer' | translate }}</a></li>
                 <li ng-if="type == 'postponedWO'"><a ui-sref="app.main.postponedwork()">{{ 'breadcrumbPostponedWO' | translate }}</a></li>

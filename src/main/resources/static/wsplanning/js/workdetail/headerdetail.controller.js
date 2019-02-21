@@ -45,66 +45,6 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, HttpServ
     });
 
   }
-
-  //Date picker
-  $scope.dateOptions = {
-    formatYear: 'yy',
-    startingDay: 1
-  };
-
-
-  $scope.openServiceDate = function () {
-    $rootScope.popupServiceDate.opened = true;
-  };
-
-  $rootScope.popupServiceDate = {
-    opened: false
-  };
-
-  //CheckOutDate
-  $scope.openCheckOutDate = function () {
-    $rootScope.popupCheckOutDate.opened = true;
-  };
-
-  $rootScope.popupCheckOutDate = {
-    opened: false
-  };
-
-  //CheckInDate
-  $scope.openCheckInDate = function () {
-    $rootScope.popupCheckInDate.opened = true;
-  };
-
-  $rootScope.popupCheckInDate = {
-    opened: false
-  };
-
-  //ExecutionDate
-  $scope.openExecutionDate = function () {
-    $rootScope.popupExecutionDate.opened = true;
-  };
-
-  $rootScope.popupExecutionDate = {
-    opened: false
-  };
-  //BookMOTDate
-  $scope.openBookMOTDate = function () {
-    $rootScope.popupBookMOTDate.opened = true;
-  };
-
-  $rootScope.popupBookMOTDate = {
-    opened: false
-  };
-
-  //BookTireDate
-  $scope.openBookTireDate = function () {
-    $rootScope.popupBookTireDate.opened = true;
-  };
-
-  $rootScope.popupBookTireDate = {
-    opened: false
-  };
-
   //DATETIME PICKER
   var that = this;
 
@@ -115,6 +55,28 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, HttpServ
     e.preventDefault();
     e.stopPropagation();
     $scope.isOpenServiceDate = true;
+  };
+
+
+  $scope.isOpenExecutionDate = false;
+  $scope.openCheckOutDate = function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    $scope.isOpenExecutionDate = true;
+  };
+
+  $scope.isOpenCheckInDate = false;
+  $scope.openCheckInDate = function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    $scope.isOpenCheckInDate = true;
+  };
+
+  $scope.isOpenExecutionDate = false;
+  $scope.openExecutionDate = function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    $scope.isOpenExecutionDate = true;
   };
 
   $scope.onSubmitFrm = function () {

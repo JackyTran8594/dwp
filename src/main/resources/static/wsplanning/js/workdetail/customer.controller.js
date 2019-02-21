@@ -46,5 +46,9 @@ UserWebApp.controller('CustomerCtrl', function ($scope, $rootScope, HttpService,
     });
   };
 
+  $rootScope.$on('chooseCustomer', function (event, obj) {
+    $scope.WOCustomer = obj.item;
+    $scope.WorkOrder.WOCustomer = $scope.WOCustomer;
+  });
 
 });

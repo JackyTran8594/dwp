@@ -47,4 +47,10 @@ UserWebApp.controller('ContractCtrl', function ($scope, $rootScope, HttpService,
   };
 
 
+  $rootScope.$on('chooseContact', function (event, obj) {
+    $scope.WOContact = obj.item;
+    $scope.WorkOrder.WOContact = $scope.WOContact;
+  });
+
+
 });
