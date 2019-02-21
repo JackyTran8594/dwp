@@ -2,8 +2,6 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
 
   var $ctrl = this;
 
-
-
   $ctrl.jobParams = $scope.$parent.jobObject;
 
   console.log($ctrl.jobParams);
@@ -44,64 +42,38 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
     });
   };
 
-
-
-
-
 });
 
 
 UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrderService, HttpService, $translate, $location, $filter,
   $uibModal, CommonServices, $stateParams, $state, item, $uibModalInstance) {
 
-  $scope.title = "Job Quick Selection";
-
 
   var $ctrl = this;
+  $scope.title = "Job Quick Selection";
 
+  $scope.recentSalesList = [];
 
-  function name(params) {
-
+  // call searchserviceitem
+  $scope.recentSales = function (itemType, skey) {
+    var data = {
+      itemType: itemType,
+      skey: skey
+    };
+    WorkOrderService.serviceItem(data).then(function (res) {
+      $scope.recentSalesList = res.data;
+      console.log(res);
+    }, function (err) {
+      console.log(err);
+    });
   }
+
+
 
 
   console.log(item);
 
   $scope.jobTabList = [];
-
-  $scope.treeViewOptions = 
-
-  $scope.test = [{
-    label: 'Hats',
-    children: [
-      { label: 'Flat cap' },
-      { label: 'Fedora' },
-      { label: 'Baseball' },
-      { label: 'Top hat' },
-      { label: 'Gatsby' }
-    ]
-  }, {
-    label: 'Pens',
-    selected: true,
-    children: [
-      { label: 'Fountain' },
-      { label: 'Gel ink' },
-      { label: 'Roller ball' },
-      { label: 'Fiber tip' },
-      { label: 'Ballpoint' }
-    ]
-  }, {
-    label: 'Whiskey',
-    children: [
-      { label: 'Irish' },
-      { label: 'Scotch' },
-      { label: 'Rye' },
-      { label: 'Tennessee' },
-      { label: 'Bourbon' }
-    ]
-  }];
-
-  console.log($scope.test);
 
   loadData(item);
 
@@ -119,6 +91,7 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
           var objSub = {};
           objSub.id = item.Id;
           objSub.label = item.Name;
+          objSub.jobType = item.JobType;
           objSub.children = [];
           var list = item.AdditionalData;
           angular.forEach(list, function (obj) {

@@ -16,5 +16,13 @@ UserWebApp.service('WorkOrderService', function ($http) {
     });
   }
 
+  WorkOrderService.serviceItem = function (data) {
+    return $http({
+      method:'GET',
+      url:'/wo/serviceItem',
+      params: data
+    });
+  }
+
   return WorkOrderService;
 });

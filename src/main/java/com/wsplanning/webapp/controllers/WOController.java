@@ -2,6 +2,7 @@ package com.wsplanning.webapp.controllers;
 
 import com.google.gson.*;
 import com.wsplanning.webapp.clients.ASMasterClient;
+import com.wsplanning.webapp.clients.SearchServiceItemClient;
 import com.wsplanning.webapp.clients.WokOrderClient;
 
 import org.apache.commons.collections4.MultiMap;
@@ -32,6 +33,9 @@ public class WOController extends BaseController {
 
   @Autowired
   protected ASMasterClient asMasterClient;
+
+  @Autowired
+  protected SearchServiceItemClient searchServiceItemClient;
 
   @Autowired
   protected HttpSession session;
@@ -138,7 +142,8 @@ public class WOController extends BaseController {
 
   @GetMapping("/wo/jobTab")
   @ResponseBody
-  public ResponseEntity jobTab(@RequestParam("SiteId") String SiteId, @RequestParam("CustNo") String CustNo, @RequestParam("VehiId") String VehiId ) {
+  public ResponseEntity jobTab(@RequestParam("SiteId") String SiteId, @RequestParam("CustNo") String CustNo,
+      @RequestParam("VehiId") String VehiId) {
     try {
       String rtn = asMasterClient.jobTab(SiteId, CustNo, VehiId);
       return new ResponseEntity<>(rtn, HttpStatus.OK);
@@ -146,6 +151,20 @@ public class WOController extends BaseController {
       return parseException(ex);
       // TODO: handle exception
     }
+  }
+
+  @GetMapping("/wo/serviceItem")
+  @ResponseBody
+  public ResponseEntity searchServiceItem(@RequestParam("itemType") Integer itemType,
+      @RequestParam("skey") String skey) {
+    try {
+      String rtn = searchServiceItemClient.getServiceItem(itemType, skey);
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception ex) {
+      return parseException(ex);
+      // TODO: handle exception
+    }
+
   }
 
 }
