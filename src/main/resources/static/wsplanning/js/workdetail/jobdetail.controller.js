@@ -51,7 +51,7 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
 
   var $ctrl = this;
   $scope.title = "Job Quick Selection";
-
+  $scope.recentSaleTitle = "Recent sales from this job type";
   $scope.recentSalesList = [];
 
   // call searchserviceitem
