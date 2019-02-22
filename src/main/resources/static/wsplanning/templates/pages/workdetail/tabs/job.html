@@ -10,7 +10,7 @@
             <!-- Panel content -->
             <div class="panel panel-flat" style="margin-bottom: 0px;">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><b>{{ 'WoHeader' | translate }}</b></h3>
+                    <h3 class="panel-title"><b>{{ 'JobHeader' | translate }}</b></h3>
                     <div class="heading-elements">
                         <ul class="icons-list">
                             <li><a href="" class="btn btn-xs" ng-click="addItem()"><span class="icon-plus3"></span></a>
@@ -28,22 +28,153 @@
                 <div class="panel-body">
 
                     <div class="table-responsive">
-                        <table class="table table-striped table-hover">
+                        <div ng-repeat="item in jobTabList track by item.RowId">
+                            <span ng-show="!isShow">
+							
+							<div class="panel-heading">
+                                    <h6 class="panel-title">
+                                       
+                                        <small class="myTitle" style="margin-left: 0px;">
+                                            Job Header                                       
+                                        </small>
+                                    </h6>
+                                    <div class="heading-elements">
+                                        <ul class="icons-list">
+                                            <li ng-click="toggleJobRow()"><a ng-class="{'rotate-180': isShow == true}"
+                                                    data-action="collapse" data-popup="tooltip" title="Collapse"></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+								<div class="panel-body">
+									<div class="row">
+										<div class="col-md-8">
+											<p>{{item.JobNo}}, {{item.Note}}</p>
+										</div>
+										<div class="col-md-4">
+											<label>Estimated Time:</label> {{item.EstimatedTime}}
+				
+										</div>
+									</div>
+									
+										<div class="row">
+										<div class="col-md-8">
+											<p>{{item.Complaint}}</p>
+										</div>
+										<div class="col-md-4">
+											<label>Job Type:</label> {{item.JobType}}
+				
+										</div>
+									</div>
+								</div>
+                               
+                            </span>
 
-                            <!--BODY-->
-                            <tbody>
-                                <tr ng-repeat="item in jobTabList">
-                                    <!-- <td style="width: 20%;">
-                                        {{item.ServiceDate | date:'dd-MMMM-yyyy HH:mm:ss'}}<br />
-                                        <span class="{{item.WorkOrderStatus| titleCase}}">{{item.WorkOrderStatus}}<br /></span>
-                                        {{item.WorkOrderNo}}<br />
-                                    </td>
-                                   -->
-                                    <td>{{item}}</td>
-                                </tr>
+                            <span ng-show="isShow">
+                               <div class="panel-heading">
+                                    <h6 class="panel-title">
+                                        <a class="btn btn-link btn-float has-text text-size-small"
+                                            ng-click="$ctrl.openSearchVehicle('lg','')" style="float: left;">
+                                            <i class="icon-truck position-left myTitle"></i>
+                                        </a>
+                                        <small class="myTitle" style="margin-left: 0px;">
+                                            Job Header                                       
+                                        </small>
+                                    </h6>
+                                    <div class="heading-elements">
+                                        <ul class="icons-list">
+                                            <li ng-click="toggleJobRow()"><a ng-class="{'rotate-180': isShow == true}"
+                                                    data-action="collapse" data-popup="tooltip" title="Collapse"></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+								<div class="panel-body">
+									<div class="row">
+										<div class="col-md-8">
+											<p>{{item.JobNo}}, {{item.Note}}</p>
+										</div>
+										<div class="col-md-4">
+											<label>Estimated Time:</label> {{item.EstimatedTime}}
+				
+										</div>
+									</div>
+									
+										<div class="row">
+										<div class="col-md-8">
+											<p>{{item.Complaint}}</p>
+										</div>
+										<div class="col-md-4">
+											<label>Job Type:</label> {{item.JobType}}
+				
+										</div>
+									</div>
+									
+											<div class="row">
+										<div class="col-md-12">
+											<p>{{item.ChargeCategoryId}}</p>
+										</div>
+									</div>
+									
+											<div class="row">
+										<div class="col-md-12">
+											<p>{{item.DeptId}}</p>
+										</div>
+									</div>
+									
+											<div class="row">
+										<div class="col-md-12">
+											<p>{{item.JobCategory}}</p>
+										</div>
+									</div>
+									
+											<div class="row">
+										<div class="col-md-12">
+											<p>{{item.Payer}}</p>
+										</div>
+									</div>
+									
+									<div class="row">
+										 <form class="form-horizontal formValidate" name="contractFrm">
+										 <div class="table-responsive">
+											 <table class="table table-striped table-hover">
+										 <thead>
+														<tr>
+															
+															<th>Model Code</th>
+															<th>Name</th>
+															<th>Quantity</th>
+															<th class="text-center">Actions</th>
+														</tr>
+														</thead>
+                                            <!--BODY-->
+                                            <tbody>
+                                                <tr ng-repeat="obj in item.Items">
 
-                            </tbody>
-                        </table>
+                                                    <td>{{obj.ItemNo}}</td>
+													<td>{{obj.Name}}</td>
+													<td>{{obj.Quantity}}</td>
+													<td><input type="checkbox" name="" /></td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+										 </div>
+                                       
+                                        
+                                    </form>
+									</div>
+									
+									
+									
+								</div>
+                               
+
+                                <div class="panel-body">
+                                   
+                                </div>
+                            </span>
+                        </div>
                     </div>
                 </div>
 
