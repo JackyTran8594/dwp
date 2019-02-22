@@ -6,6 +6,25 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
 
   console.log($ctrl.jobParams);
 
+  $scope.getClass = function (param) {
+    switch (param) {
+      case 1:
+        return "icon-spare-part";
+      case 2:
+        return null;
+      case 4:
+        return null;
+      case 7:
+        return "icon-labour-operation";
+      case 8:
+        return "icon-text-rows";
+      default:
+        break;
+    }
+  }
+
+
+
   $scope.jobTabList = $scope.$parent.WOJobs;
   $scope.isShow = false;
   $scope.toggleJobRow = function () {
@@ -13,16 +32,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   }
 
   console.log($scope.jobTabList)
-  // loadData($ctrl.jobParams);
 
-  // function loadData(params) {
-  //   WorkOrderService.detail(params).then(function (res) {
-  //     $scope.jobTabList = res.data;
-  //     console.log(res);
-  //   }, function (err) {
-  //     console.log(err);
-  //   })
-  // }
 
   $ctrl.animationsEnabled = true;
   $scope.addItem = function () {

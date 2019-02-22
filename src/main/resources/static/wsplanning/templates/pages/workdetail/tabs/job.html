@@ -15,10 +15,6 @@
                         <ul class="icons-list">
                             <li><a href="" class="btn btn-xs" ng-click="addItem()"><span class="icon-plus3"></span></a>
                             </li>
-                            <li><a href="" class="btn btn-xs" ng-click="confirmDelete()"
-                                    ng-disabled="checklistTable.list.length == 0"><span class="icon-bin"></span></a>
-                            </li>
-                            <li><a class="btn btn-xs"><span class="icon-sync" ng-click="refresh()"></span></a></li>
                             <li><a ng-class="{'rotate-180': collapsed == true}" data-action="collapse"
                                     data-target="#pnHeaderFrm" ng-click="collapse()"></a></li>
                         </ul>
@@ -30,13 +26,9 @@
                     <div class="table-responsive">
                         <div ng-repeat="item in jobTabList track by item.RowId">
                             <span ng-show="!isShow">
-							
-							<div class="panel-heading">
+
+                                <div class="panel-heading">
                                     <h6 class="panel-title">
-                                       
-                                        <small class="myTitle" style="margin-left: 0px;">
-                                            Job Header                                       
-                                        </small>
                                     </h6>
                                     <div class="heading-elements">
                                         <ul class="icons-list">
@@ -46,39 +38,39 @@
                                         </ul>
                                     </div>
                                 </div>
-								<div class="panel-body">
-									<div class="row">
-										<div class="col-md-8">
-											<p>{{item.JobNo}}, {{item.Note}}</p>
-										</div>
-										<div class="col-md-4">
-											<label>Estimated Time:</label> {{item.EstimatedTime}}
-				
-										</div>
-									</div>
-									
-										<div class="row">
-										<div class="col-md-8">
-											<p>{{item.Complaint}}</p>
-										</div>
-										<div class="col-md-4">
-											<label>Job Type:</label> {{item.JobType}}
-				
-										</div>
-									</div>
-								</div>
-                               
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <p>{{item.JobNo}}, {{item.Note}}</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>Estimated Time:</label> {{item.EstimatedTime}}
+
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <p>{{item.Complaint}}</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>Job Type:</label> {{item.JobType}}
+
+                                        </div>
+                                    </div>
+                                </div>
+
                             </span>
 
                             <span ng-show="isShow">
-                               <div class="panel-heading">
+                                <div class="panel-heading">
                                     <h6 class="panel-title">
                                         <a class="btn btn-link btn-float has-text text-size-small"
                                             ng-click="$ctrl.openSearchVehicle('lg','')" style="float: left;">
                                             <i class="icon-truck position-left myTitle"></i>
                                         </a>
                                         <small class="myTitle" style="margin-left: 0px;">
-                                            Job Header                                       
+                                            Job Header
                                         </small>
                                     </h6>
                                     <div class="heading-elements">
@@ -89,89 +81,95 @@
                                         </ul>
                                     </div>
                                 </div>
-								<div class="panel-body">
-									<div class="row">
-										<div class="col-md-8">
-											<p>{{item.JobNo}}, {{item.Note}}</p>
-										</div>
-										<div class="col-md-4">
-											<label>Estimated Time:</label> {{item.EstimatedTime}}
-				
-										</div>
-									</div>
-									
-										<div class="row">
-										<div class="col-md-8">
-											<p>{{item.Complaint}}</p>
-										</div>
-										<div class="col-md-4">
-											<label>Job Type:</label> {{item.JobType}}
-				
-										</div>
-									</div>
-									
-											<div class="row">
-										<div class="col-md-12">
-											<p>{{item.ChargeCategoryId}}</p>
-										</div>
-									</div>
-									
-											<div class="row">
-										<div class="col-md-12">
-											<p>{{item.DeptId}}</p>
-										</div>
-									</div>
-									
-											<div class="row">
-										<div class="col-md-12">
-											<p>{{item.JobCategory}}</p>
-										</div>
-									</div>
-									
-											<div class="row">
-										<div class="col-md-12">
-											<p>{{item.Payer}}</p>
-										</div>
-									</div>
-									
-									<div class="row">
-										 <form class="form-horizontal formValidate" name="contractFrm">
-										 <div class="table-responsive">
-											 <table class="table table-striped table-hover">
-										 <thead>
-														<tr>
-															
-															<th>Model Code</th>
-															<th>Name</th>
-															<th>Quantity</th>
-															<th class="text-center">Actions</th>
-														</tr>
-														</thead>
-                                            <!--BODY-->
-                                            <tbody>
-                                                <tr ng-repeat="obj in item.Items">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <p>{{item.JobNo}}, {{item.Note}}</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>Estimated Time:</label> {{item.EstimatedTime}}
 
-                                                    <td>{{obj.ItemNo}}</td>
-													<td>{{obj.Name}}</td>
-													<td>{{obj.Quantity}}</td>
-													<td><input type="checkbox" name="" /></td>
-                                                </tr>
+                                        </div>
+                                    </div>
 
-                                            </tbody>
-                                        </table>
-										 </div>
-                                       
-                                        
-                                    </form>
-									</div>
-									
-									
-									
-								</div>
-                               
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <label for="">Complaint</label>
+                                            <p>{{item.Complaint}}</p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>Job Type:</label> {{item.JobType}}
+
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <!-- <label for="">Charge CategoryId</label> -->
+                                            <p>{{item.ChargeCategoryId}}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>{{item.DeptId}}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>{{item.JobCategory}}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>{{item.Payer}}</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <form class="form-horizontal formValidate" name="contractFrm">
+                                            <div class="table-responsive tableIndex">
+                                                <table class="table table-striped table-hover">
+                                                    <thead>
+                                                        <tr>
+
+                                                            <th>No.</th>
+                                                            <th></th>
+                                                            <th>Model Code</th>
+                                                            <th class="wrappable">Name</th>
+                                                            <th>Quantity</th>
+                                                            <th class="text-center">Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <!--BODY-->
+                                                    <tbody>
+                                                        <tr ng-repeat="obj in item.Items">
+                                                            <td>{{$index+1}}</td>
+                                                            <td><span ng-class="getClass(obj.ItemType)"></span></td>
+                                                            <td>{{obj.ItemNo}}</td>
+                                                            <td class="wrappable">{{obj.Name}}</td>
+                                                            <td>{{obj.Quantity}}</td>
+                                                            <td><input ng-hide="obj.ItemType !== 7" type="checkbox"
+                                                                    name="" /></td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+
+                                        </form>
+                                    </div>
+
+
+
+                                </div>
+
 
                                 <div class="panel-body">
-                                   
+
                                 </div>
                             </span>
                         </div>

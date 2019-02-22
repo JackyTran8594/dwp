@@ -410,10 +410,70 @@ form.form-label-right .control-label {
 
 .tableModal{
   max-height: 450px;
+ 
+}
+
+table td {
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+}
+
+table th {
+  text-align: center;
+}
+
+.tableIndex {
+  max-height: 300px;
+  overflow-y: scroll;
+}
+
+.wrappable {
+  max-width: 50% !important;
 }
 
 .tree-level {
   list-style: none;
+}
+
+/* icon for row */
+.icon-cog:before {
+  content: "\e994";
+}
+
+.icon-tools-2:before {
+  content: "\e901";
+}
+/* end */
+
+.icon-spare-part {
+    max-width: 12px;
+    max-height: 12px;
+    position: relative;
+}
+
+.icon-spare-part::before {
+    content: "\eb76";
+}
+
+.icon-text-rows {
+
+}
+
+.icon-text-rows::after {
+  content: "<input type="text" />"
+}
+
+.icon-labour-operation {
+  max-width: 12px;
+  max-height: 12px;
+  position: relative;
+}
+
+.icon-labour-operation::before {
+  content: "\eb7d";
 }
 
 .tree-level span {
