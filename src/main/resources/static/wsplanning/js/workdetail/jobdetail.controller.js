@@ -7,11 +7,11 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   console.log($ctrl.jobParams);
 
   $scope.jobTabList = $scope.$parent.WOJobs;
-	$scope.isShow = false;
-  $scope.toggleJobRow = function(){
-		$scope.isShow = !$scope.isShow;
+  $scope.isShow = false;
+  $scope.toggleJobRow = function () {
+    $scope.isShow = !$scope.isShow;
   }
-  
+
   console.log($scope.jobTabList)
   // loadData($ctrl.jobParams);
 
