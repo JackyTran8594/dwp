@@ -496,3 +496,14 @@ table th {
 .tree-end {
   cursor: pointer;
 }
+
+.div-tree {
+  overflow-y: scroll;
+  /* max-height: 50%; */
+  max-height: 300px;
+}
+
+.jobnew {
+  overflow-y: scroll;
+  max-height: 500px;
+}

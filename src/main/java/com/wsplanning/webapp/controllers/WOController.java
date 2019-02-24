@@ -132,8 +132,7 @@ public class WOController extends BaseController {
 
   @PostMapping("/wo/detail")
   @ResponseBody
-  public ResponseEntity detail(@RequestBody Map<String, String> params, 
-    @RequestHeader("LoadRows") String LoadRows) {
+  public ResponseEntity detail(@RequestBody Map<String, String> params, @RequestHeader("LoadRows") String LoadRows) {
     try {
       String rtn = wokOrderClient.detail(getToken(), getSiteId(), params, LoadRows);
       return new ResponseEntity<>(rtn, HttpStatus.OK);
@@ -161,7 +160,7 @@ public class WOController extends BaseController {
       @RequestParam("skey") String skey) {
     try {
       Integer itemId = Integer.parseInt(itemType);
-      String rtn = searchServiceItemClient.getServiceItem(itemId, skey);
+      String rtn = searchServiceItemClient.getServiceItem(getToken(), itemId, skey);
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);

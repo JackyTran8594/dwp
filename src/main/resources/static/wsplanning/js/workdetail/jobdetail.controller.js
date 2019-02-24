@@ -26,16 +26,18 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
 
 
   $scope.jobTabList = $scope.$parent.WOJobs;
-  $scope.isShow = false;
-  $scope.toggleJobRow = function () {
-    $scope.isShow = !$scope.isShow;
+
+  this.isShow = false;
+  $scope.toggleJobRow = function (param) {
+    console.log(param)
+    this.isShow = !this.isShow;
   }
 
   console.log($scope.jobTabList)
 
 
   $ctrl.animationsEnabled = true;
-  $scope.addItem = function () {
+  $scope.addJob = function () {
     var modalInstance = $uibModal.open({
       animation: $ctrl.animationsEnabled,
       templateUrl: '/wsplanning/templates/pages/workdetail/modal/job-new.html',
@@ -81,6 +83,11 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
     }, function (err) {
       console.log(err);
     });
+  }
+
+
+  $scope.addItem = function (params) {
+    
   }
 
 

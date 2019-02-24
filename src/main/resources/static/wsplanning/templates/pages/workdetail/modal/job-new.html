@@ -22,55 +22,123 @@
         </div>
 
         <div class="panel-body">
-            <div class="well border-left-danger border-left-lg">
+            <div class="well border-left-danger border-left-lg jobnew">
 
                 <div class="row">
                     <div class="col-md-6">
-                        <ul class="tree-level" ng-repeat="item in jobTabList track by item.id">
-                            <li class="">
-                                <span>{{item.label}}</span>
-                                <ul ng-repeat="sub in item.children as listSub track by sub.id">
-                                    <li class="">
-                                        <a ng-click="recentSales(sub.id, sub.jobType)"> <span>{{sub.label}}</span></a>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="div-tree">
+                                    <ul class="tree-level" ng-repeat="item in jobTreeList track by item.id">
+                                        <li class="">
+                                            <span>{{item.label}}</span>
+                                            <ul ng-repeat="sub in item.children as listSub track by sub.id">
+                                                <li class="">
+                                                    <a ng-click="recentSales(sub.id, sub.jobType)">
+                                                        <span>{{sub.label}}</span></a>
+                                                    <ul class="tree-level tree-end"
+                                                        ng-repeat="additonalData in sub.children as lisAdd track by additonalData.id">
+                                                        <li>
+                                                            <span>{{additonalData.label}}</span>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
 
-                                        <ul class="tree-level tree-end"
-                                            ng-repeat="add in sub.children as lisAdd track by add.id">
-                                            <li>
-                                                <input class="tree-end" type="checkbox">
-                                                <span>{{add.label}}</span>
-                                            </li>
+                        <div class="row">
 
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
+                            <p>The Selected Items</p>
+                            <div class="table-responsive ">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Code</th>
+                                            <th>Name</th>
+                                            <th>Quantity</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th>12</th>
+                                            <th>Name</th>
+                                            <th>12</th>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+                        </div>
                     </div>
                     <div class="col-md-6">
-                        <p>{{recentSaleTitle}}</p>
-                        <div class="table-responsive ">
-                            <table class="table table-striped table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Code</th>
-                                        <th>Name</th>
-                                        <th>Quantity</th>
-                                        <th class="text-center">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="item in recentSalesList">
-                                        <th>12</th>
-                                        <th>Name</th>
-                                        <th>12</th>
-                                        <td class="text-center">
-                                            <input type="checkbox" class="" name="checkRecentSale" id="">
-                                        </td>
-                                    </tr>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="div-tree">
+                                    <p>{{recentSaleTitle}}</p>
+                                    <div class="table-responsive ">
+                                        <table class="table table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Code</th>
+                                                    <th>Name</th>
+                                                    <th>Quantity</th>
+                                                    <th class="text-center">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="item in recentSalesList">
+                                                    <th>12</th>
+                                                    <th>Name</th>
+                                                    <th>12</th>
+                                                    <td class="text-center">
+                                                        <button type="button" class="btn btn-primary"
+                                                            ng-click="addItem()">Add</button>
+                                                    </td>
+                                                </tr>
 
-                                </tbody>
-                            </table>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
+
+                        <div class="row">
+                            <p>The Additional Data</p>
+                            <div class="table-responsive ">
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Code</th>
+                                            <th>Name</th>
+                                            <th>Quantity</th>
+                                            <th class="text-center">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in recentSalesList">
+                                            <th>12</th>
+                                            <th>Name</th>
+                                            <th>12</th>
+                                            <td class="text-center">
+                                                <input type="checkbox" class="" name="checkRecentSale" id="">
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
 

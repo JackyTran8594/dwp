@@ -13,10 +13,9 @@
                     <h3 class="panel-title"><b>{{ 'JobHeader' | translate }}</b></h3>
                     <div class="heading-elements">
                         <ul class="icons-list">
-                            <li><a href="" class="btn btn-xs" ng-click="addItem()"><span class="icon-plus3"></span></a>
+                            <li><a href="" class="btn btn-xs" ng-click="addJob()"><span class="icon-plus3"></span></a>
                             </li>
-                            <li><a ng-class="{'rotate-180': collapsed == true}" data-action="collapse"
-                                    data-target="#pnHeaderFrm" ng-click="collapse()"></a></li>
+
                         </ul>
                     </div>
                 </div>
@@ -32,16 +31,23 @@
                                     </h6>
                                     <div class="heading-elements">
                                         <ul class="icons-list">
-                                            <li ng-click="toggleJobRow()"><a ng-class="{'rotate-180': isShow == true}"
-                                                    data-action="collapse" data-popup="tooltip" title="Collapse"></a>
+                                            <li><a href="" class="btn btn-xs" ng-click="editItem()"><span
+                                                        class="icon-plus3"></span></a>
                                             </li>
+
+                                            <li ng-click="toggleJobRow(item.RowId)"><a
+                                                    ng-class="{'rotate-180': isShow == true}" data-action="collapse"
+                                                    data-popup="tooltip" title="Collapse"></a>
+                                            </li>
+
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-md-8">
-                                            <p>{{item.JobNo}}, {{item.Note}}</p>
+                                            <label>Job &nbsp;{{item.JobNo}}:</label> {{item.Note}}
+                                            <!-- <p>{{item.JobNo}}, {{item.Note}}</p> -->
                                         </div>
                                         <div class="col-md-4">
                                             <label>Estimated Time:</label> {{item.EstimatedTime}}
@@ -51,6 +57,7 @@
 
                                     <div class="row">
                                         <div class="col-md-8">
+                                            <label>Complaint:</label>
                                             <p>{{item.Complaint}}</p>
                                         </div>
                                         <div class="col-md-4">
@@ -65,13 +72,7 @@
                             <span ng-show="isShow">
                                 <div class="panel-heading">
                                     <h6 class="panel-title">
-                                        <a class="btn btn-link btn-float has-text text-size-small"
-                                            ng-click="$ctrl.openSearchVehicle('lg','')" style="float: left;">
-                                            <i class="icon-truck position-left myTitle"></i>
-                                        </a>
-                                        <small class="myTitle" style="margin-left: 0px;">
-                                            Job Header
-                                        </small>
+
                                     </h6>
                                     <div class="heading-elements">
                                         <ul class="icons-list">
@@ -84,7 +85,8 @@
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-md-8">
-                                            <p>{{item.JobNo}}, {{item.Note}}</p>
+                                            <label>Job &nbsp;{{item.JobNo}}:</label> {{item.Note}}
+                                            <!-- <p>{{item.JobNo}}, {{item.Note}}</p> -->
                                         </div>
                                         <div class="col-md-4">
                                             <label>Estimated Time:</label> {{item.EstimatedTime}}
@@ -105,25 +107,28 @@
 
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <!-- <label for="">Charge CategoryId</label> -->
+                                            <label for="">Charge Category</label>
                                             <p>{{item.ChargeCategoryId}}</p>
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-md-12">
+                                            <label for="">Department</label>
                                             <p>{{item.DeptId}}</p>
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-md-12">
+                                            <label for="">Job Category</label>
                                             <p>{{item.JobCategory}}</p>
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-md-12">
+                                            <label for="">Payer</label>
                                             <p>{{item.Payer}}</p>
                                         </div>
                                     </div>
@@ -151,8 +156,9 @@
                                                             <td>{{obj.ItemNo}}</td>
                                                             <td class="wrappable">{{obj.Name}}</td>
                                                             <td>{{obj.Quantity}}</td>
-                                                            <td><input ng-hide="obj.ItemType !== 7" type="checkbox"
-                                                                    name="" /></td>
+                                                            <td><input
+                                                                    ng-hide="obj.ItemType !== 7 && obj.ItemType !== 8"
+                                                                    type="checkbox" name="" /></td>
                                                         </tr>
 
                                                     </tbody>
