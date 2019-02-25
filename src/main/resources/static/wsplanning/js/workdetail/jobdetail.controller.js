@@ -37,6 +37,29 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
 
 
   $ctrl.animationsEnabled = true;
+
+  $scope.openServiceItem = function (item) {
+    var modalInstance = $uibModal.open({
+      animation: $ctrl.animationsEnabled,
+      templateUrl: '/wsplanning/templates/pages/common/serviceItem-form.html',
+      controller: 'ServiceItemModalCtrl',
+      backdrop: 'static',
+      controllerAs: '$ctrl',
+      size: "full",
+      resolve: {
+        item: function () {
+          return item;
+        }
+      }
+    });
+
+    modalInstance.result.then(function (selectedItem) {
+      $ctrl.selected = selectedItem;
+    }, function () {
+      console.log('Modal dismissed at: ' + new Date());
+    });
+  };
+
   $scope.addJob = function () {
     var modalInstance = $uibModal.open({
       animation: $ctrl.animationsEnabled,
@@ -71,26 +94,69 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
   $scope.recentSaleTitle = "Recent sales from this job type";
   $scope.recentSalesList = [];
 
+  $scope.totalElements = 0;
+
+  $scope.limit = 10;
+  $scope.page = 1;
+
+  //<editor-fold desc="Paging & Search Port">
+  $scope.$watch("page", function (newValue, oldValue) {
+    if (newValue != oldValue) {
+      $scope.page = newValue;
+      loadData();
+    }
+  });
+
+  $scope.go = function () {
+    $scope.page = $scope.pageGo;
+  }
+
+  $scope.changeLimit = function () {
+    loadData(false);
+  }
+
   // call searchserviceitem
   $scope.recentSales = function (itemType, skey) {
+
+    loadData(true, itemType, skey);
+
+  }
+
+
+  function loadData(count, itemType, skey) {
+    common.spinner(true);
+
     var params = {
-      itemType: itemType,
+      ItemType: itemType,
       skey: skey
-    };
+    }
+
     WorkOrderService.serviceItem(params).then(function (res) {
       $scope.recentSalesList = res.data;
       console.log(res);
+      $scope.pageGo = $scope.page;
+      $scope.isShow = false;
+      common.spinner(false);
+    }, function (err) {
+      common.spinner(false);
+      console.log(err);
+    });
+
+    WorkOrderService.countServiceItem(params).then(function (res) {
+      // $scope.recentSalesList = res.data;
+      $scope.totalElements = res;
+      $scope.isNoData = ($scope.totalElements <= 0);
+      common.spinner(false);
+      console.log(res);
     }, function (err) {
       console.log(err);
+      common.spinner(false);
     });
   }
 
-
   $scope.addItem = function (params) {
-    
+
   }
-
-
 
 
   console.log(item);

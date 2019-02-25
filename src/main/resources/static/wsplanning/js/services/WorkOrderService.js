@@ -5,7 +5,7 @@ UserWebApp.service('WorkOrderService', function ($http) {
       method: 'POST',
       url: '/wo/detail',
       data: {
-        "WorkOrderId": WorkOrderId,     
+        "WorkOrderId": WorkOrderId
       },
       headers: {
         "LoadRows": true,
@@ -15,17 +15,26 @@ UserWebApp.service('WorkOrderService', function ($http) {
 
   WorkOrderService.jobTab = function (data) {
     return $http({
-      method:'GET',
-      url:'/wo/jobTab',
+      method: 'GET',
+      url: '/wo/jobTab',
       params: data
     });
   }
 
   WorkOrderService.serviceItem = function (data) {
     return $http({
-      method:'GET',
-      url:'/wo/serviceItem',
-      params: data
+      method: 'POST',
+      url: '/wo/getServiceItem',
+      data: data
+    });
+  }
+
+
+  WorkOrderService.countServiceItem = function (data) {
+    return $http({
+      method: 'POST',
+      url: '/wo/getCountServiceItem',
+      data: data
     });
   }
 

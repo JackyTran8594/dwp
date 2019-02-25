@@ -13,11 +13,6 @@
         <div class="panel-heading">
             <h6 class="panel-title"></h6>
             <div class="heading-elements">
-                <!-- <ul class="icons-list">
-                        <li><a data-action="collapse"></a></li>
-                        <li><a data-action="reload"></a></li>
-                        <li><a data-action="close"></a></li>
-                    </ul> -->
             </div>
         </div>
 
@@ -81,30 +76,76 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="div-tree">
-                                    <p>{{recentSaleTitle}}</p>
-                                    <div class="table-responsive ">
-                                        <table class="table table-striped table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>Code</th>
-                                                    <th>Name</th>
-                                                    <th>Quantity</th>
-                                                    <th class="text-center">Actions</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr ng-repeat="item in recentSalesList">
-                                                    <th>12</th>
-                                                    <th>Name</th>
-                                                    <th>12</th>
-                                                    <td class="text-center">
-                                                        <button type="button" class="btn btn-primary"
-                                                            ng-click="addItem()">Add</button>
-                                                    </td>
-                                                </tr>
 
-                                            </tbody>
-                                        </table>
+                                    <div class="panel-body">
+                                        <p>{{recentSaleTitle}}</p>
+                                        <div class="table-responsive ">
+                                            <table class="table table-striped table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Code</th>
+                                                        <th>Name</th>
+                                                        <th>Quantity</th>
+                                                        <th class="text-center">Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="item in recentSalesList">
+                                                        <th>12</th>
+                                                        <th>Name</th>
+                                                        <th>12</th>
+                                                        <td class="text-center">
+                                                            <button type="button" class="btn btn-primary"
+                                                                ng-click="addItem()">Add</button>
+                                                        </td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <div class="panel-footer text-right" style="padding-right: 25px;">
+
+                                        <!-- Paging elements -->
+                                        <form class="form-inline formPaging formValidate">
+                                            <div class="form-group">
+                                                {{totalElements | number}} <span
+                                                    class="text-lowercase">{{ 'item' | translate }}</span>
+                                            </div>
+                                            <div class="form-group" style="border-left: 1px solid #ddd">
+                                                <ul class="pagination-flat pagination-rounded" uib-pagination
+                                                    total-items="totalElements" items-per-page="limit" max-size="2"
+                                                    ng-model="page" boundary-links="true" boundary-link-numbers="true"
+                                                    force-ellipses="true" rotate="true" previous-text="&lsaquo;"
+                                                    next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+                                                </ul>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="number" name="page" ng-model="pageGo"
+                                                    placeholder="{{ 'page' | translate }}"
+                                                    class="form-control validatePositiveInteger" min="1"
+                                                    max="{{(totalElements / limit) | ceil}}" style="width: 55px">
+                                            </div>
+                                            <div class="form-group">
+                                                <button type="submit"
+                                                    class="btn btn-default">{{ 'go' | translate }}</button>
+                                            </div>
+                                            <div class="form-group">
+                                                <select class="form-control" ng-model="limit" ng-change="changeLimit()"
+                                                    convert-to-number>
+                                                    <option value="1">1</option>
+                                                    <option value="5">5</option>
+                                                    <option value="10">10</option>
+                                                    <option value="15">15</option>
+                                                    <option value="20">20</option>
+                                                    <option value="30">30</option>
+                                                </select>
+                                                <span>{{ 'limit' | translate }}</span>
+                                            </div>
+                                        </form>
+                                        <!-- /paging element -->
+
                                     </div>
                                 </div>
                             </div>
@@ -117,10 +158,11 @@
                                 <table class="table table-striped table-hover">
                                     <thead>
                                         <tr>
-                                            <th>Code</th>
-                                            <th>Name</th>
-                                            <th>Quantity</th>
-                                            <th class="text-center">Actions</th>
+                                            <th>No</th>
+                                            <th>Id</th>
+                                            <th>Category</th>
+                                            <th>Label</th>
+                                            <th>Value</th>
                                         </tr>
                                     </thead>
                                     <tbody>

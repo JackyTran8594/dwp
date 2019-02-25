@@ -11,6 +11,8 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Map;
+
 @Component
 public class SearchServiceItemClient {
 
@@ -25,10 +27,23 @@ public class SearchServiceItemClient {
         this.endpointUrl = apiEndpointUrl + "/api/SearchServiceItems";
     }
 
-    public String getServiceItem(String token, Integer itemType, String skey) {
+    public String getServiceItem(String token, Map<String, String> params) {
+        String skey = params.get("skey");
+        String itemTypeStr = params.get("ItemType");
+        Integer ItemType = Integer.parseInt(itemTypeStr);
         HttpHeaders headers = new HttpHeaders();
         headers.set("Token", token);
-        String url = String.format("%s?itemType=%d&skey=%s", this.endpointUrl, itemType, skey);
+        String url = String.format("%s?itemType=%d&skey=%s", this.endpointUrl, ItemType, skey);
+        return restTemplate.getForObject(url, String.class);
+    }
+
+    public String getCountServiceItem(String token, Map<String, String> params) {
+        String skey = params.get("skey");
+        String itemTypeStr = params.get("ItemType");
+        Integer ItemType = Integer.parseInt(itemTypeStr);
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Token", token);
+        String url = String.format("%s?itemType=%d&skey=%s&getCountOnly=true", this.endpointUrl, ItemType, skey);
         return restTemplate.getForObject(url, String.class);
     }
 }

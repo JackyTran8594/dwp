@@ -31,10 +31,12 @@
                                     </h6>
                                     <div class="heading-elements">
                                         <ul class="icons-list">
-                                            <li><a href="" class="btn btn-xs" ng-click="editItem()"><span
-                                                        class="icon-plus3"></span></a>
+                                            <li><a class="btn btn-xs" ng-click="openServiceItem(7)"><span
+                                                        class="icon-hammer-wrench"></span></a>
                                             </li>
-
+                                            <li><a class="btn btn-xs" ng-click="openServiceItem(1)"><span
+                                                        class=" icon-cog3"></span></a>
+                                            </li>
                                             <li ng-click="toggleJobRow(item.RowId)"><a
                                                     ng-class="{'rotate-180': isShow == true}" data-action="collapse"
                                                     data-popup="tooltip" title="Collapse"></a>
@@ -47,21 +49,32 @@
                                     <div class="row">
                                         <div class="col-md-8">
                                             <label>Job &nbsp;{{item.JobNo}}:</label> {{item.Note}}
-                                            <!-- <p>{{item.JobNo}}, {{item.Note}}</p> -->
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label>Estimated Time:</label> {{item.EstimatedTime}}
 
                                         </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Estimated Time:</label>
+                                                <input type="text" class="form-control" ng-model="item.EstimatedTime">
+                                            </div>
+                                        </div>
+
                                     </div>
 
                                     <div class="row">
                                         <div class="col-md-8">
-                                            <label>Complaint:</label>
-                                            <p>{{item.Complaint}}</p>
+                                            <div class="form-group">
+                                                <label>Complaint:</label>
+                                                <input type="text" class="form-control" ng-model="item.Complaint">
+                                            </div>
+
+                                            <!-- <p>{{item.Complaint}}</p> -->
                                         </div>
                                         <div class="col-md-4">
-                                            <label>Job Type:</label> {{item.JobType}}
+                                            <div class="form-group">
+                                                <label>Job Type:</label>
+                                                <input type="text" class="form-control" ng-model="item.JobType">
+                                            </div>
+                                            <!-- {{item.JobType}} -->
 
                                         </div>
                                     </div>
@@ -89,47 +102,78 @@
                                             <!-- <p>{{item.JobNo}}, {{item.Note}}</p> -->
                                         </div>
                                         <div class="col-md-4">
-                                            <label>Estimated Time:</label> {{item.EstimatedTime}}
+
+                                            <div class="form-group">
+                                                <label>Estimated Time:</label>
+                                                <input type="text" class="form-control" ng-model="item.EstimatedTime">
+                                            </div>
+                                            <!-- {{item.EstimatedTime}} -->
 
                                         </div>
                                     </div>
+
 
                                     <div class="row">
                                         <div class="col-md-8">
-                                            <label for="">Complaint</label>
-                                            <p>{{item.Complaint}}</p>
+                                            <div class="form-group">
+                                                <label>Complaint:</label>
+                                                <input type="text" class="form-control" ng-model="item.Complaint">
+                                            </div>
+
+                                            <!-- <p>{{item.Complaint}}</p> -->
                                         </div>
                                         <div class="col-md-4">
-                                            <label>Job Type:</label> {{item.JobType}}
+                                            <div class="form-group">
+                                                <label>Job Type:</label>
+                                                <input type="text" class="form-control" ng-model="item.JobType">
+                                            </div>
+                                            <!-- {{item.JobType}} -->
 
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <label for="">Charge Category</label>
-                                            <p>{{item.ChargeCategoryId}}</p>
+                                            <!-- <label for="">Charge Category</label> -->
+                                            <div class="form-group">
+                                                <label for="">Charge Category</label>
+                                                <input type="text" class="form-control"
+                                                    ng-model="item.ChargeCategoryId">
+                                            </div>
+                                            <!-- <p>{{item.ChargeCategoryId}}</p> -->
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <label for="">Department</label>
-                                            <p>{{item.DeptId}}</p>
+                                            <!-- <label for="">Department</label> -->
+                                            <div class="form-group">
+                                                <label>Department:</label>
+                                                <input type="text" class="form-control" ng-model="item.DeptId">
+                                            </div>
+                                            <!-- <p>{{item.DeptId}}</p> -->
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <label for="">Job Category</label>
-                                            <p>{{item.JobCategory}}</p>
+                                            <!-- <label for="">Job Category</label> -->
+                                            <div class="form-group">
+                                                <label>Job Category:</label>
+                                                <input type="text" class="form-control" ng-model="item.JobCategory">
+                                            </div>
+                                            <!-- <p>{{item.JobCategory}}</p> -->
                                         </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <label for="">Payer</label>
-                                            <p>{{item.Payer}}</p>
+                                            <!-- <label for="">Payer</label> -->
+                                            <div class="form-group">
+                                                <label>Payer:</label>
+                                                <input type="text" class="form-control" ng-model="item.Payer">
+                                            </div>
+                                            <!-- <p>{{item.Payer}}</p> -->
                                         </div>
                                     </div>
 
@@ -152,10 +196,14 @@
                                                     <tbody>
                                                         <tr ng-repeat="obj in item.Items">
                                                             <td>{{$index+1}}</td>
-                                                            <td><span ng-class="getClass(obj.ItemType)"></span></td>
+                                                            <td><a>
+                                                                    <span ng-class="getClass(obj.ItemType)"></span>
+                                                                </a></td>
                                                             <td>{{obj.ItemNo}}</td>
                                                             <td class="wrappable">{{obj.Name}}</td>
-                                                            <td>{{obj.Quantity}}</td>
+                                                            <td><span
+                                                                    ng-hide="obj.ItemType === 8">{{obj.Quantity}}</span>
+                                                            </td>
                                                             <td><input
                                                                     ng-hide="obj.ItemType !== 7 && obj.ItemType !== 8"
                                                                     type="checkbox" name="" /></td>
@@ -168,14 +216,6 @@
 
                                         </form>
                                     </div>
-
-
-
-                                </div>
-
-
-                                <div class="panel-body">
-
                                 </div>
                             </span>
                         </div>
