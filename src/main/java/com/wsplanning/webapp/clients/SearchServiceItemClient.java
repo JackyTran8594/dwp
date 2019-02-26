@@ -37,10 +37,16 @@ public class SearchServiceItemClient {
         return restTemplate.getForObject(url, String.class);
     }
 
-    public String getCountServiceItem(String token, Map<String, String> params) {
+    public String getCountServiceItem(String token, Map<String, String> params) 
+    {    
         String skey = params.get("skey");
         String itemTypeStr = params.get("ItemType");
+    
         Integer ItemType = Integer.parseInt(itemTypeStr);
+        // if (StringUtils.isNotBlank(skey)) {
+        //     headers.set("skey", Base64.getEncoder().encodeToString(skey.getBytes()));
+        //   }
+
         HttpHeaders headers = new HttpHeaders();
         headers.set("Token", token);
         String url = String.format("%s?itemType=%d&skey=%s&getCountOnly=true", this.endpointUrl, ItemType, skey);

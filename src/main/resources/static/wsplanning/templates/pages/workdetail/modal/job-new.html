@@ -29,7 +29,7 @@
                                             <span>{{item.label}}</span>
                                             <ul ng-repeat="sub in item.children as listSub track by sub.id">
                                                 <li class="">
-                                                    <a ng-click="recentSales(sub.id, sub.jobType)">
+                                                    <a ng-click="recentSales(sub)">
                                                         <span>{{sub.label}}</span></a>
                                                     <ul class="tree-level tree-end"
                                                         ng-repeat="additonalData in sub.children as lisAdd track by additonalData.id">

@@ -67,7 +67,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
       controller: 'JobNewModalCtrl',
       backdrop: 'static',
       controllerAs: '$ctrl',
-      size: "lg",
+      size: "full",
       resolve: {
         item: function () {
           return $ctrl.jobParams;
@@ -116,9 +116,9 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
   }
 
   // call searchserviceitem
-  $scope.recentSales = function (itemType, skey) {
+  $scope.recentSales = function (sub) {
 
-    loadData(true, itemType, skey);
+    loadData(true, sub.id, sub.jobType);
 
   }
 

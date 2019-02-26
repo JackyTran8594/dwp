@@ -1,8 +1,12 @@
 UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, HttpService, item, $translate, $location, $filter, $uibModal, CommonServices, $stateParams, $state) {
   $scope.WorkOrderId = $stateParams.id;
   $scope.type = $stateParams.type;
+
   var $ctrl = this;
 
+  $ctrl.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
 
   $scope.skey = "";
 
@@ -26,7 +30,7 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Http
     }
 
     if (count) {
-      HttpService.postData('/wo/getServiceItem', { params }).then(function (response) {
+      HttpService.postData('/wo/serviceItem', { params }).then(function (response) {
         $scope.lstData = response;
         console.log(response);
         $scope.pageGo = $scope.page;
@@ -37,7 +41,7 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Http
         common.spinner(false);
       });
 
-      HttpService.postData('/wo/getCountServiceItem', { params }).then(function (response) {
+      HttpService.postData('/wo/countServiceItem', { params }).then(function (response) {
         $scope.totalElements = response;
         $scope.isNoData = ($scope.totalElements <= 0);
         common.spinner(false);

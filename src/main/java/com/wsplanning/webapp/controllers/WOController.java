@@ -155,22 +155,29 @@ public class WOController extends BaseController {
     }
   }
 
-  @GetMapping("/wo/serviceItem")
+  @PostMapping("/wo/serviceItem")
   @ResponseBody
-  public ResponseEntity searchServiceItem(@RequestParam("itemType") String itemType,
-      @RequestParam("skey") String skey) {
-    try {
-      Integer itemId = Integer.parseInt(itemType);
-      Map<String, String> map = new HashMap<>();
-      map.put("ItemType",itemType);
-      map.put("skey",skey);
-      String rtn = searchServiceItemClient.getServiceItem(getToken(), map);
+  public ResponseEntity serviceItem(@RequestBody Map<String, String> params) {
+    try {   
+      String rtn = searchServiceItemClient.getServiceItem(getToken(), params);
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);
       // TODO: handle exception
     }
 
+  }
+
+  @PostMapping("/wo/countServiceItem")
+  @ResponseBody
+  public ResponseEntity countServiceItem(@RequestBody Map<String, String> params) {
+    try {
+      String rtn = searchServiceItemClient.getCountServiceItem(getToken(), params);
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception ex) {
+      return parseException(ex);
+      // TODO: handle exception
+    }
   }
 
 }

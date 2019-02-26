@@ -24,7 +24,7 @@ UserWebApp.service('WorkOrderService', function ($http) {
   WorkOrderService.serviceItem = function (data) {
     return $http({
       method: 'POST',
-      url: '/wo/getServiceItem',
+      url: '/wo/serviceItem',
       data: data
     });
   }
@@ -33,7 +33,7 @@ UserWebApp.service('WorkOrderService', function ($http) {
   WorkOrderService.countServiceItem = function (data) {
     return $http({
       method: 'POST',
-      url: '/wo/getCountServiceItem',
+      url: '/wo/countServiceItem',
       data: data
     });
   }
