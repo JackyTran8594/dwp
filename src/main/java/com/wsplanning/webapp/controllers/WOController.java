@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -160,7 +161,10 @@ public class WOController extends BaseController {
       @RequestParam("skey") String skey) {
     try {
       Integer itemId = Integer.parseInt(itemType);
-      String rtn = searchServiceItemClient.getServiceItem(getToken(), itemId, skey);
+      Map<String, String> map = new HashMap<>();
+      map.put("ItemType",itemType);
+      map.put("skey",skey);
+      String rtn = searchServiceItemClient.getServiceItem(getToken(), map);
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);
