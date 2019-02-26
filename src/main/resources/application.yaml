@@ -1,5 +1,5 @@
 server:
-  port: 8083
+  port: 8081
   session:
     timeout: 2592000 # Session timeout in seconds.
 spring:
