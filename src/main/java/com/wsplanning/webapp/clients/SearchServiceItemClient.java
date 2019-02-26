@@ -3,6 +3,7 @@ package com.wsplanning.webapp.clients;
 import java.nio.charset.Charset;
 
 import javax.servlet.http.HttpSession;
+import org.apache.commons.lang3.StringUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Map;
+import java.util.Base64;
 
 @Component
 public class SearchServiceItemClient {
@@ -29,27 +31,73 @@ public class SearchServiceItemClient {
 
     public String getServiceItem(String token, Map<String, String> params) {
         String skey = params.get("skey");
-        String itemTypeStr = params.get("ItemType");
-        Integer ItemType = Integer.parseInt(itemTypeStr);
+        String itemTypeStr = params.get("itemType");
+        String VehiId = params.get("vehiId");
+        String CustNo = params.get("custNo");
+        String Page = params.get("page");
+        String PageCount = params.get("pageCount");
         HttpHeaders headers = new HttpHeaders();
         headers.set("Token", token);
-        String url = String.format("%s?itemType=%d&skey=%s", this.endpointUrl, ItemType, skey);
+
+        // if (StringUtils.isNotBlank(skey)) {
+        //     headers.set("skey", Base64.getEncoder().encodeToString(skey.getBytes()));
+        //     }
+
+        if (StringUtils.isNotBlank(VehiId)) {
+            headers.set("VehiId", VehiId);
+        }
+
+        if (StringUtils.isNotBlank(CustNo)) {
+            headers.set("CustNo", CustNo);
+        }
+
+        if (StringUtils.isNotBlank(Page)) {
+            headers.set("Page", Page);
+        }
+
+        if (StringUtils.isNotBlank(PageCount)) {
+            headers.set("PageCount", PageCount);
+        }
+        Integer itemType = Integer.parseInt(itemTypeStr);
+        System.out.println(token);
+        String url = String.format("%s?itemType=%d&skey=%s", this.endpointUrl, itemType, skey);
         return restTemplate.getForObject(url, String.class);
     }
 
-    public String getCountServiceItem(String token, Map<String, String> params) 
-    {    
-        String skey = params.get("skey");
-        String itemTypeStr = params.get("ItemType");
-    
-        Integer ItemType = Integer.parseInt(itemTypeStr);
-        // if (StringUtils.isNotBlank(skey)) {
-        //     headers.set("skey", Base64.getEncoder().encodeToString(skey.getBytes()));
-        //   }
+    public String getCountServiceItem(String token, Map<String, String> params) {
 
+        String skey = params.get("skey");
+        String itemTypeStr = params.get("itemType");
+        String VehiId = params.get("vehiId");
+        String CustNo = params.get("custNo");
+        String Page = params.get("page");
+        String PageCount = params.get("pageCount");
         HttpHeaders headers = new HttpHeaders();
         headers.set("Token", token);
-        String url = String.format("%s?itemType=%d&skey=%s&getCountOnly=true", this.endpointUrl, ItemType, skey);
+
+        // if (StringUtils.isNotBlank(skey)) {
+        //     headers.set("skey", Base64.getEncoder().encodeToString(skey.getBytes()));
+        //     }
+
+        if (StringUtils.isNotBlank(VehiId)) {
+            headers.set("VehiId", VehiId);
+        }
+
+        if (StringUtils.isNotBlank(CustNo)) {
+            headers.set("CustNo", CustNo);
+        }
+
+        if (StringUtils.isNotBlank(Page)) {
+            headers.set("Page", Page);
+        }
+
+        if (StringUtils.isNotBlank(PageCount)) {
+            headers.set("PageCount", PageCount);
+        }
+        Integer itemType = Integer.parseInt(itemTypeStr);
+      
+
+        String url = String.format("%s?itemType=%d&skey=%s&getCountOnly=true", this.endpointUrl, itemType, skey);
         return restTemplate.getForObject(url, String.class);
     }
 }

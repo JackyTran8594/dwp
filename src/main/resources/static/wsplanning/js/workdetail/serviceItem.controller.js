@@ -1,6 +1,6 @@
-UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, HttpService, item, $translate, $location, $filter, $uibModal, CommonServices, $stateParams, $state) {
-  $scope.WorkOrderId = $stateParams.id;
-  $scope.type = $stateParams.type;
+UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, WorkOrderService, $uibModalInstance, item, $translate, $location, $filter, $uibModal, CommonServices, $stateParams, $state) {
+  // $scope.WorkOrderId = $stateParams.id;
+  // $scope.type = $stateParams.type;
 
   var $ctrl = this;
 
@@ -18,19 +18,21 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Http
   $scope.limit = 10;
   $scope.page = 1;
 
-  console.log($scope.WorkOrderId);
-  console.log($scope.type);
 
   function loadData(count) {
     common.spinner(true);
 
     var params = {
-      ItemType: item,
-      skey: $scope.skey
+      itemType: item.itemType,
+      skey: $scope.skey,
+      vehiId: item.vehiId,
+      custNo: item.custNo,
+      page: $scope.page,
+      pageCount: $scope.limit
     }
 
     if (count) {
-      HttpService.postData('/wo/serviceItem', { params }).then(function (response) {
+      WorkOrderService.serviceItem(params).then(function (response) {
         $scope.lstData = response;
         console.log(response);
         $scope.pageGo = $scope.page;
@@ -41,8 +43,9 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Http
         common.spinner(false);
       });
 
-      HttpService.postData('/wo/countServiceItem', { params }).then(function (response) {
+      WorkOrderService.countServiceItem(params).then(function (response) {
         $scope.totalElements = response;
+        console.log(response);
         $scope.isNoData = ($scope.totalElements <= 0);
         common.spinner(false);
       }, function error(response) {
@@ -52,14 +55,14 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Http
     }
   }
 
-  loadData(true);
+  // loadData(true);
 
 
   //<editor-fold desc="Paging & Search Port">
   $scope.$watch("page", function (newValue, oldValue) {
     if (newValue != oldValue) {
       $scope.page = newValue;
-      loadData();
+      // loadData();
     }
   });
 
@@ -77,6 +80,7 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Http
   }
   //</editor-fold>
 
+  $scope.isShow = false;
 
 
 

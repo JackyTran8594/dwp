@@ -48,7 +48,11 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
       size: "full",
       resolve: {
         item: function () {
-          return item;
+          return {
+            custNo: $ctrl.jobParams.CustNo,
+            vehiId: $ctrl.jobParams.VehiId,
+            itemType: item
+          };
         }
       }
     });
@@ -93,6 +97,8 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
   $scope.title = "Job Quick Selection";
   $scope.recentSaleTitle = "Recent sales from this job type";
   $scope.recentSalesList = [];
+  $scope.additionalData = [];
+  $scope.historicalData = [];
 
   $scope.totalElements = 0;
 
@@ -103,7 +109,7 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
   $scope.$watch("page", function (newValue, oldValue) {
     if (newValue != oldValue) {
       $scope.page = newValue;
-      loadData();
+      // loadDataSales();
     }
   });
 
@@ -112,18 +118,18 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
   }
 
   $scope.changeLimit = function () {
-    loadData(false);
+    loadDataSales(false);
   }
 
   // call searchserviceitem
   $scope.recentSales = function (sub) {
-
-    loadData(true, sub.id, sub.jobType);
-
+    console.log(sub);
+    $scope.additionalData = sub.AdditionalData;
+    loadDataSales(true, sub.Id, sub.JobType);
   }
 
 
-  function loadData(count, itemType, skey) {
+  function loadDataSales(count, itemType, skey) {
     common.spinner(true);
 
     var params = {
@@ -154,7 +160,24 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
     });
   }
 
-  $scope.addItem = function (params) {
+  $scope.addItem = function (item) {
+    if ($scope.historicalData.length > 0) {
+      var i = 0;
+      angular.forEach($scope.historicalData, function (v, i) {
+        if (item.ModelCode === v.ModelCode) {
+          v.Quantity += item.Quantity;
+          break;
+        } else {
+          i++;
+        }
+      });
+
+      if (i === $scope.historicalData.length) {
+        $scope.historicalData.push(item);
+      }
+    } else {
+      $scope.historicalData.push(item);
+    }
 
   }
 
@@ -165,41 +188,56 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
 
   loadData(item);
 
+
+  // using ivh-tree angular
+  // function loadData(params) {
+  //   common.spinner(true);
+  //   WorkOrderService.jobTab(params).then(function (res) {
+  //     var data = res.data;
+  //     angular.forEach(data, function (value) {
+  //       var objTree = {};
+  //       objTree.id = value.Id;
+  //       objTree.label = value.Name;
+  //       objTree.children = [];
+  //       var items = value.SubGroups;
+  //       angular.forEach(items, function (item) {
+  //         var objSub = {};
+  //         objSub.id = item.Id;
+  //         objSub.label = item.Name;
+  //         objSub.jobType = item.JobType;
+  //         objSub.children = [];
+  //         var list = item.AdditionalData;
+  //         angular.forEach(list, function (obj) {
+  //           var objAdd = {};
+  //           objAdd.id = obj.Id;
+  //           objAdd.label = obj.Label;
+  //           objSub.children.push(objAdd);
+  //         });
+
+  //         objTree.children.push(objSub);
+  //       });
+  //       $scope.jobTreeList.push(objTree);
+  //     }
+  //     );
+
+  //     console.log($scope.jobTreeList);
+  //     common.spinner(false);
+  //     console.log(res);
+  //   }, function (err) {
+  //     console.log(err);
+  //   })
+  // }
+
+
   function loadData(params) {
     common.spinner(true);
     WorkOrderService.jobTab(params).then(function (res) {
-      var data = res.data;
-      angular.forEach(data, function (value) {
-        var objTree = {};
-        objTree.id = value.Id;
-        objTree.label = value.Name;
-        objTree.children = [];
-        var items = value.SubGroups;
-        angular.forEach(items, function (item) {
-          var objSub = {};
-          objSub.id = item.Id;
-          objSub.label = item.Name;
-          objSub.jobType = item.JobType;
-          objSub.children = [];
-          var list = item.AdditionalData;
-          angular.forEach(list, function (obj) {
-            var objAdd = {};
-            objAdd.id = obj.Id;
-            objAdd.label = obj.Label;
-            objSub.children.push(objAdd);
-          });
-
-          objTree.children.push(objSub);
-        });
-        $scope.jobTreeList.push(objTree);
-      }
-      );
-
-      console.log($scope.jobTreeList);
-      common.spinner(false);
+      $scope.jobTreeList = res.data;
       console.log(res);
-    }, function (err) {
-      console.log(err);
+      common.spinner(false);
+    }, function (error) {
+      console.log(error);
+      common.spinner(false);
     })
   }
 

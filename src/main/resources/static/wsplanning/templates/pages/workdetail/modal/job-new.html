@@ -24,6 +24,28 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="div-tree">
+                                    <ul class="tree-level" ng-repeat="item in jobTreeList track by $index">
+                                        <li class="">
+                                            <span>{{item.Name}}</span>
+                                            <ul ng-repeat="sub in item.SubGroups as listSub">
+                                                <li class="">
+                                                    <a ng-click="recentSales(sub)">
+                                                        <span>{{sub.Name}}</span></a>
+                                                    <ul class="tree-level tree-end"
+                                                        ng-repeat="obj in sub.AdditionalData as listAdd">
+                                                        <li>
+                                                            <span>{{obj.Label}}</span>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- <div class="col-md-12">
+                                <div class="div-tree">
                                     <ul class="tree-level" ng-repeat="item in jobTreeList track by item.id">
                                         <li class="">
                                             <span>{{item.label}}</span>
@@ -42,31 +64,33 @@
                                         </li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
 
                         <div class="row">
+                            <div class="col-md-12"ng-hide="historicalData.length === 0">
+                                <div class="table-responsive ">
+                                    <p>The Selected Items</p>
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Code</th>
+                                                <th>Name</th>
+                                                <th>Quantity</th>
 
-                            <p>The Selected Items</p>
-                            <div class="table-responsive ">
-                                <table class="table table-striped table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Code</th>
-                                            <th>Name</th>
-                                            <th>Quantity</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in ">
+                                                <th>12</th>
+                                                <th>Name</th>
+                                                <th>12</th>
+                                            </tr>
 
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th>12</th>
-                                            <th>Name</th>
-                                            <th>12</th>
-                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
 
-                                    </tbody>
-                                </table>
                             </div>
 
 
@@ -74,11 +98,11 @@
                     </div>
                     <div class="col-md-6">
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-12" ng-hide="recentSalesList.length === 0">
                                 <div class="div-tree">
-
+                                    <p>{{recentSaleTitle}}</p>
                                     <div class="panel-body">
-                                        <p>{{recentSaleTitle}}</p>
+
                                         <div class="table-responsive ">
                                             <table class="table table-striped table-hover">
                                                 <thead>
@@ -96,7 +120,7 @@
                                                         <th>12</th>
                                                         <td class="text-center">
                                                             <button type="button" class="btn btn-primary"
-                                                                ng-click="addItem()">Add</button>
+                                                                ng-click="addItem(item)">Add</button>
                                                         </td>
                                                     </tr>
 
@@ -153,31 +177,33 @@
                         </div>
 
                         <div class="row">
-                            <p>The Additional Data</p>
-                            <div class="table-responsive ">
-                                <table class="table table-striped table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Id</th>
-                                            <th>Category</th>
-                                            <th>Label</th>
-                                            <th>Value</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr ng-repeat="item in recentSalesList">
-                                            <th>12</th>
-                                            <th>Name</th>
-                                            <th>12</th>
-                                            <td class="text-center">
-                                                <input type="checkbox" class="" name="checkRecentSale" id="">
-                                            </td>
-                                        </tr>
+                            <div class="col-md-12" ng-hide="additionalData.length === 0">
+                                <p>The Additional Data</p>
+                                <div class="table-responsive ">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Id</th>
+                                                <th>Category</th>
+                                                <th>Label</th>
+                                                <th>Value</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in additionalData">
+                                                <th>{{$index + 1}}</th>
+                                                <th>{{item.Id}}</th>
+                                                <th>{{item.Category}}</th>
+                                                <th>{{item.Label}}</th>
+                                                <th>{{item.Value}}</th>
+                                            </tr>
 
-                                    </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
+
                         </div>
 
 
