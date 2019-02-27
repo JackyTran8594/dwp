@@ -22,9 +22,9 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
     "to": "",
     "myWo": false,
     "shiftId": "",
+    "skey": "",
   };
 
-  $scope.searchValue = '';
   $scope.limit = 20;
   $scope.page = 1;
 
@@ -37,9 +37,9 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
       "from": "",
       "to": "",
       "myWo": false,
-      "shiftId": ""
+      "shiftId": "",
+      "skey": "",
     };
-    $scope.searchValue = '';
     $scope.limit = 20;
     $scope.page = 1;
   }
@@ -107,7 +107,7 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
     console.log($scope.params);
     var params = {
       "ViewName": typeWO,
-      "skey": $scope.searchValue,
+      "skey": $scope.params.skey,
       "page": $scope.page,
       "limit": $scope.limit,
       "DeptId": $scope.params.department,
