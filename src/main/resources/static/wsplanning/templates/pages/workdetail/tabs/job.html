@@ -244,12 +244,12 @@
                             </ul>
                         </div>
                         <div class="form-group">
-                            <input type="number" name="page" ng-model="pageGo" placeholder="{{ 'page' | translate }}"
+                            <input type="number" name="page"  ng-model="pageGo"  placeholder="{{ 'page' | translate }}"
                                 class="form-control validatePositiveInteger" min="1"
                                 max="{{(totalElements / limit) | ceil}}" style="width: 55px">
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-default">{{ 'go' | translate }}</button>
+                            <button type="submit" ng-click="go()" class="btn btn-default">{{ 'go' | translate }}</button>
                         </div>
                         <div class="form-group">
                             <select class="form-control" ng-model="limit" ng-change="changeLimit()" convert-to-number>

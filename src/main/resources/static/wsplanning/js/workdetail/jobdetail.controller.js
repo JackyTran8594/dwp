@@ -24,9 +24,47 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   }
 
 
+  var data = $scope.$parent.WOJobs;
 
-  $scope.jobTabList = $scope.$parent.WOJobs;
+  // $scope.jobTabList = $scope.$parent.WOJobs;
 
+  // paging
+  $scope.totalElements = $scope.$parent.WOJobs.length;
+
+  $scope.limit = 5;
+  $scope.page = 1;
+
+  pagingData($scope.page);
+
+  function pagingData(currentPage) {
+    var begin = (currentPage - 1) * $scope.limit;
+    var end = begin + $scope.limit
+    $scope.jobTabList = data.slice(begin, end);
+    console.log($scope.jobTabList);
+  }
+
+  // $scope.pageSelected = 
+
+  $scope.go = function () {
+    $scope.page = $scope.pageGo;
+    pagingData($scope.page);
+  }
+
+  $scope.changeLimit = function () {
+    pagingData($scope.page);
+  }
+
+  //<editor-fold desc="Paging & Search Port">
+  $scope.$watch("page", function (newValue, oldValue) {
+    if (newValue != oldValue) {
+      $scope.page = newValue;
+      pagingData($scope.page)
+    }
+  });
+
+  // end
+
+  // toggle for single row
   this.isShow = false;
   $scope.toggleJobRow = function (param) {
     console.log(param)
@@ -36,6 +74,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   console.log($scope.jobTabList)
 
 
+  // modal
   $ctrl.animationsEnabled = true;
 
   $scope.openServiceItem = function (item, id) {
@@ -73,7 +112,6 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
     });
   };
 
- 
 
   $scope.addJob = function () {
     var modalInstance = $uibModal.open({
@@ -111,10 +149,11 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
   $scope.recentSalesList = [];
   $scope.additionalData = [];
   $scope.historicalData = [];
+  console.log(item);
 
   $scope.totalElements = 0;
 
-  $scope.limit = 20;
+  $scope.limit = 10;
   $scope.page = 1;
 
   //<editor-fold desc="Paging & Search Port">
@@ -137,17 +176,17 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
   $scope.recentSales = function (sub) {
     console.log(sub);
     $scope.additionalData = sub.AdditionalData;
-    loadDataSales(sub.Id);
+    loadDataSales(sub.JobType);
   }
 
 
-  function loadDataSales(itemType) {
+  function loadDataSales(jobType) {
     common.spinner(true);
 
     var params = {
-      itemType: itemType,
-      skey: "",
-      vehiId: "",
+      itemType: "502",
+      skey: jobType,
+      vehiId: item.VehiId,
       custNo: "",
       page: $scope.page,
       pageCount: $scope.limit
@@ -197,8 +236,6 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
 
   }
 
-
-  console.log(item);
 
   $scope.jobTreeList = [];
 
