@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 
+import java.awt.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,12 +63,19 @@ public class WOController extends BaseController {
   @ResponseBody
   public ResponseEntity getWO(@RequestBody Map<String, String> params) {
     try {
+      long startTime = System.currentTimeMillis();
       String rtn = wokOrderClient.getWO(getToken(), getSiteId(), params);
+      logger.info("-------wokOrderClient getWO: " + (System.currentTimeMillis() - startTime));
+      startTime = System.currentTimeMillis();
       if (rtn != null && StringUtils.isNotBlank(rtn)) {
         // JsonParser
+        logger.info("-------wokOrderClient JsonParser: " + (System.currentTimeMillis() - startTime));
+        startTime = System.currentTimeMillis();
         JsonParser parser = new JsonParser();
         JsonElement tradeElement = parser.parse(rtn);
         JsonArray listData = tradeElement.getAsJsonArray();
+        logger.info("-------wokOrderClient end JsonParser: " + (System.currentTimeMillis() - startTime));
+        startTime = System.currentTimeMillis();
 
         // Init list
         JsonArray listRtn = new JsonArray();
@@ -81,6 +89,8 @@ public class WOController extends BaseController {
         StringBuilder sb = new StringBuilder();
         String jobTitle = "";
 
+        logger.info("-------wokOrderClient start for: " + (System.currentTimeMillis() - startTime));
+        startTime = System.currentTimeMillis();
         for (JsonElement item : listData) {
           HolderCustomer = null;
           sb = new StringBuilder();
@@ -122,6 +132,10 @@ public class WOController extends BaseController {
 
           listRtn.add(itemRtn);
         }
+
+        logger.info("-------wokOrderClient end for: " + (System.currentTimeMillis() - startTime));
+        startTime = System.currentTimeMillis();
+
         return new ResponseEntity<>(listRtn.toString(), HttpStatus.OK);
       } else {
         return new ResponseEntity<>(rtn, HttpStatus.OK);

@@ -69,6 +69,7 @@ var translationsEN = {
   btnOk: "Ok",
   btnSave: "Save",
   btnCancel: "Cancel",
+  search: "Search",
 
   //Confirm delete
   confirmDeleteWorkOder: "Are you want to delete this WorkOder?",
@@ -189,7 +190,7 @@ var translationsVI = {
   btnOk: "Ok",
   btnSave: "Save",
   btnCancel: "Cancel",
-
+  search: "Tìm kiếm",
   //Confirm delete
   confirmDeleteWorkOder: "Are you want to delete this WorkOder?",
   confirmDeletesWorkOder: "Are you want to delete selected WorkOder?",
