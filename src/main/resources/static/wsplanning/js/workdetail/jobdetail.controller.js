@@ -38,7 +38,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
 
   $ctrl.animationsEnabled = true;
 
-  $scope.openServiceItem = function (item) {
+  $scope.openServiceItem = function (item, id) {
     var modalInstance = $uibModal.open({
       animation: $ctrl.animationsEnabled,
       templateUrl: '/wsplanning/templates/pages/common/serviceItem-form.html',
@@ -59,13 +59,21 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
 
     modalInstance.result.then(function (selectedItem) {
       console.log(selectedItem);
-      // $scope.jobTabList.
+      // angular.forEach($scope.jobTabList[id].Items, function (value, index) {
+      //     if(value.ModelCode === selectedItem.ModelCode)
+      //     {
+      //        value.q
+      //     }
+      // }) 
+      $scope.jobTabList[id].Items.push(selectedItem);
       $ctrl.selected = selectedItem;
 
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
     });
   };
+
+ 
 
   $scope.addJob = function () {
     var modalInstance = $uibModal.open({

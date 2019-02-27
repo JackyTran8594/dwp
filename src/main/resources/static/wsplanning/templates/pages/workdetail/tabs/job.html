@@ -23,7 +23,7 @@
                 <div class="panel-body">
 
                     <div class="table-responsive">
-                        <div ng-repeat="item in jobTabList track by item.RowId">
+                        <div ng-repeat="item in jobTabList track by $index">
                             <span ng-show="!isShow">
 
                                 <div class="panel-heading">
@@ -89,10 +89,10 @@
                                     </h6>
                                     <div class="heading-elements">
                                         <ul class="icons-list">
-                                            <li><a class="btn btn-xs" ng-click="openServiceItem(7)"><span
+                                            <li><a class="btn btn-xs" ng-click="openServiceItem(7, $index)"><span
                                                         class="icon-hammer-wrench"></span></a>
                                             </li>
-                                            <li><a class="btn btn-xs" ng-click="openServiceItem(1)"><span
+                                            <li><a class="btn btn-xs" ng-click="openServiceItem(1, $index)"><span
                                                         class=" icon-cog3"></span></a>
                                             </li>
                                             <li ng-click="toggleJobRow()"><a ng-class="{'rotate-180': isShow == true}"
