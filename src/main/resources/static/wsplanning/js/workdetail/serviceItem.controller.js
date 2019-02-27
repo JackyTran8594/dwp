@@ -15,7 +15,7 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
   $scope.lstSearch = [];
   $scope.totalElements = 0;
 
-  $scope.limit = 10;
+  $scope.limit = 20;
   $scope.page = 1;
 
 
@@ -33,7 +33,7 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
 
     if (count) {
       WorkOrderService.serviceItem(params).then(function (response) {
-        $scope.lstData = response;
+        $scope.lstData = response.data;
         console.log(response);
         $scope.pageGo = $scope.page;
         $scope.isShow = false;
@@ -44,7 +44,8 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
       });
 
       WorkOrderService.countServiceItem(params).then(function (response) {
-        $scope.totalElements = response;
+        $scope.totalElements = response.data;
+
         console.log(response);
         $scope.isNoData = ($scope.totalElements <= 0);
         common.spinner(false);
@@ -62,7 +63,7 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
   $scope.$watch("page", function (newValue, oldValue) {
     if (newValue != oldValue) {
       $scope.page = newValue;
-      // loadData();
+      loadData();
     }
   });
 
@@ -80,7 +81,9 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
   }
   //</editor-fold>
 
-  $scope.isShow = false;
+  $scope.doPick = function (data) {
+    $uibModalInstance.close(data);
+  }
 
 
 

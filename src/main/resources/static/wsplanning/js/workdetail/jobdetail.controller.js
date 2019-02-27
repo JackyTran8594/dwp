@@ -58,7 +58,10 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
     });
 
     modalInstance.result.then(function (selectedItem) {
+      console.log(selectedItem);
+      // $scope.jobTabList.
       $ctrl.selected = selectedItem;
+
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
     });
@@ -80,6 +83,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
     });
 
     modalInstance.result.then(function (selectedItem) {
+      console.log(selectedItem);
       $ctrl.selected = selectedItem;
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
@@ -102,7 +106,7 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
 
   $scope.totalElements = 0;
 
-  $scope.limit = 10;
+  $scope.limit = 20;
   $scope.page = 1;
 
   //<editor-fold desc="Paging & Search Port">
@@ -125,16 +129,20 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
   $scope.recentSales = function (sub) {
     console.log(sub);
     $scope.additionalData = sub.AdditionalData;
-    loadDataSales(true, sub.Id, sub.JobType);
+    loadDataSales(sub.Id);
   }
 
 
-  function loadDataSales(count, itemType, skey) {
+  function loadDataSales(itemType) {
     common.spinner(true);
 
     var params = {
-      ItemType: itemType,
-      skey: skey
+      itemType: itemType,
+      skey: "",
+      vehiId: "",
+      custNo: "",
+      page: $scope.page,
+      pageCount: $scope.limit
     }
 
     WorkOrderService.serviceItem(params).then(function (res) {
@@ -150,7 +158,7 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
 
     WorkOrderService.countServiceItem(params).then(function (res) {
       // $scope.recentSalesList = res.data;
-      $scope.totalElements = res;
+      $scope.totalElements = res.data;
       $scope.isNoData = ($scope.totalElements <= 0);
       common.spinner(false);
       console.log(res);
@@ -160,12 +168,12 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
     });
   }
 
-  $scope.addItem = function (item) {
+  $scope.addItem = function (value) {
     if ($scope.historicalData.length > 0) {
       var i = 0;
       angular.forEach($scope.historicalData, function (v, i) {
-        if (item.ModelCode === v.ModelCode) {
-          v.Quantity += item.Quantity;
+        if (value.ModelCode === v.ModelCode) {
+          v.Quantity += value.Quantity;
           break;
         } else {
           i++;
