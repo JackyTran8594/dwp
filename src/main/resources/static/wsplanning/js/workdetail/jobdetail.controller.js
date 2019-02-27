@@ -216,23 +216,25 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
   }
 
   $scope.addItem = function (value) {
-    if ($scope.historicalData.length > 0) {
-      var i = 0;
-      angular.forEach($scope.historicalData, function (v, i) {
-        if (value.ModelCode === v.ModelCode) {
-          v.Quantity += value.Quantity;
-          break;
-        } else {
-          i++;
-        }
-      });
+    // if ($scope.historicalData.length > 0) {
+    //   var i = 0;
+    //   angular.forEach($scope.historicalData, function (v, i) {
+    //     if (value.ModelCode === v.ModelCode) {
+    //       v.Quantity += value.Quantity;
+    //       break;
+    //     } else {
+    //       i++;
+    //     }
+    //   });
 
-      if (i === $scope.historicalData.length) {
-        $scope.historicalData.push(item);
-      }
-    } else {
-      $scope.historicalData.push(item);
-    }
+    //   if (i === $scope.historicalData.length) {
+    //     $scope.historicalData.push(item);
+    //   }
+    // } else {
+    //   $scope.historicalData.push(item);
+    // }
+
+    $scope.historicalData.push(value);
 
   }
 
