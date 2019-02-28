@@ -24,7 +24,9 @@
                         <th>{{item.Label}}</th>
                         <th>{{item.Value}}</th>
                     </tr>
-
+                    <tr ng-if="isNoData || !additionalData || additionalData.length <= 0" class="active">
+                        <td colspan="20" class="text-center">{{ 'commonNoResult' | translate }}</td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
