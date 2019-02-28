@@ -184,7 +184,7 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
     common.spinner(true);
 
     var params = {
-      itemType: "502",
+      itemType: 502,
       skey: jobType,
       vehiId: item.VehiId,
       custNo: "",
@@ -205,6 +205,7 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
 
     WorkOrderService.countServiceItem(params).then(function (res) {
       // $scope.recentSalesList = res.data;
+	  console.log(res)
       $scope.totalElements = res.data;
       $scope.isNoData = ($scope.totalElements <= 0);
       common.spinner(false);

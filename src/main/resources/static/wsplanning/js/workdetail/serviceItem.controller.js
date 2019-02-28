@@ -3,10 +3,20 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
   // $scope.type = $stateParams.type;
 
   var $ctrl = this;
+  
+  var listItem = [];
 
   $ctrl.cancel = function () {
     $uibModalInstance.dismiss('cancel');
   };
+  
+  $scope.checkItem = function (id, checked) {
+	 if(listItem.length > 0) {
+		 angular.forEach(listItem, function(v,i){
+			 
+		 })
+	 }
+  }
 
   $scope.skey = "";
 

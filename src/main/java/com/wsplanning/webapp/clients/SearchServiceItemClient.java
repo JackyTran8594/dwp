@@ -11,9 +11,13 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 
 import java.util.Map;
 import java.util.Base64;
+import java.util.HashMap;
 
 @Component
 public class SearchServiceItemClient {
@@ -59,9 +63,11 @@ public class SearchServiceItemClient {
             headers.set("PageCount", PageCount);
         }
         Integer itemType = Integer.parseInt(itemTypeStr);
+		HttpEntity entity = new HttpEntity(headers);
         System.out.println(token);
         String url = String.format("%s?itemType=%d&skey=%s", this.endpointUrl, itemType, skey);
-        return restTemplate.getForObject(url, String.class);
+		ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class, new HashMap<>());
+        return response.getBody();
     }
 
     public String getCountServiceItem(String token, Map<String, String> params) {
@@ -95,9 +101,9 @@ public class SearchServiceItemClient {
             headers.set("PageCount", PageCount);
         }
         Integer itemType = Integer.parseInt(itemTypeStr);
-      
-
+		HttpEntity entity = new HttpEntity(headers);
         String url = String.format("%s?itemType=%d&skey=%s&getCountOnly=true", this.endpointUrl, itemType, skey);
-        return restTemplate.getForObject(url, String.class);
+		ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class, new HashMap<>());
+        return response.getBody();
     }
 }
