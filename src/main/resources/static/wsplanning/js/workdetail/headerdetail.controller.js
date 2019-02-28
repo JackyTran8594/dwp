@@ -58,11 +58,11 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, HttpServ
   };
 
 
-  $scope.isOpenExecutionDate = false;
+  $scope.isOpenCheckOutDate = false;
   $scope.openCheckOutDate = function (e) {
     e.preventDefault();
     e.stopPropagation();
-    $scope.isOpenExecutionDate = true;
+    $scope.isOpenCheckOutDate = true;
   };
 
   $scope.isOpenCheckInDate = false;
