@@ -10,12 +10,31 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
     $uibModalInstance.dismiss('cancel');
   };
   
-  $scope.checkItem = function (id, checked) {
+  $scope.isChecked = function (item, checked) {
+	  console.log(checked);
+	  var index = 0;
 	 if(listItem.length > 0) {
 		 angular.forEach(listItem, function(v,i){
-			 
+			 if(item.ItemNo === v.ItemNo && checked === false) {
+				 listItem.splice(i,1);
+			 } else {
+				 index = index + 1;
+				 console.log(index);
+			 }
 		 })
+		 if(index > 0)
+		 {
+			 listItem.push(item);
+		 }		 
 	 }
+	 else {
+		 listItem.push(item);
+	 }
+	 console.log(listItem);
+  }
+  
+  $ctrl.save = function() {
+	  $uibModalInstance.close(listItem);
   }
 
   $scope.skey = "";
@@ -91,9 +110,9 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
   }
   //</editor-fold>
 
-  $scope.doPick = function (data) {
-    $uibModalInstance.close(data);
-  }
+  // $scope.doPick = function (data) {
+    // $uibModalInstance.close(data);
+  // }
 
 
 

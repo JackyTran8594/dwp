@@ -104,7 +104,11 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
       //        value.q
       //     }
       // }) 
-      $scope.jobTabList[id].Items.push(selectedItem);
+	  console.log($scope.jobTabList[id].Items);
+	angular.forEach(selectedItem, function(v) {
+		$scope.jobTabList[id].Items.push(v);
+	})
+      // $scope.jobTabList[id].Items.concat(selectedItem);
       $ctrl.selected = selectedItem;
 
     }, function () {
