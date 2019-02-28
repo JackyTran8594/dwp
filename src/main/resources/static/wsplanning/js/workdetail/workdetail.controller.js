@@ -17,6 +17,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
   console.log(WorkOrder);
   $scope.WorkOrder = WorkOrder.data;
   $scope.isNew = angular.equals($scope.WorkOrder, {});
+  $scope.workOrderNo = WorkOrder.data.WorkOrderNo
 
   $scope.WorkOrder._ServiceDate = new Date($scope.WorkOrder.ServiceDate);
   if ($scope.WorkOrder.CheckOutDate == "" || $scope.WorkOrder.CheckOutDate == "0001-01-01T00:00:00") {

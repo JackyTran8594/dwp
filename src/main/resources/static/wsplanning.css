@@ -507,3 +507,27 @@ table th {
   overflow-y: scroll;
   max-height: 600px;
 }
+
+@media screen and (min-width: 769px) {
+  .main-content {
+     max-height: 90%;
+     overflow-y: scroll;
+  }
+}
+
+@media screen and (max-width: 1025px) {
+  .main-content {
+     max-height: 90%;
+     overflow-y: scroll;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .main-content {
+     max-height: 90%;
+     overflow-y: scroll;
+  }
+}
+
+
+

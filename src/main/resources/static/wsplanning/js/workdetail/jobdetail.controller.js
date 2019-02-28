@@ -4,6 +4,36 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
 
   $ctrl.jobParams = $scope.$parent.jobObject;
 
+
+  loadCommon();
+  $scope.lstDepartment = [];
+  $scope.lstPayers = [];
+  $scope.lstChargeCats = [];
+  $scope.lstJobCats = [];
+
+  function loadCommon() {
+
+    CommonServices.getChargeCats().then(function (data) {
+      console.log(data);
+      $scope.lstChargeCats = data;
+    });
+    CommonServices.getPayers().then(function (data) {
+      $scope.lstPayers = data;
+      console.log(data);
+    })
+    
+    CommonServices.getDepartments().then(function (data) {
+      $scope.lstDepartment = data;
+      console.log(data);
+    });
+
+    CommonServices.getJobCats().then(function (data) {
+      $scope.lstJobCats = data;
+      console.log(data);
+    });
+  
+  }
+
   console.log($ctrl.jobParams);
 
   $scope.getClass = function (param) {
@@ -97,24 +127,18 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
     });
 
     modalInstance.result.then(function (selectedItem) {
-      console.log(selectedItem);
-      // angular.forEach($scope.jobTabList[id].Items, function (value, index) {
-      //     if(value.ModelCode === selectedItem.ModelCode)
-      //     {
-      //        value.q
-      //     }
-      // }) 
-	  console.log($scope.jobTabList[id].Items);
-	angular.forEach(selectedItem, function(v) {
-		$scope.jobTabList[id].Items.push(v);
-	})
-      // $scope.jobTabList[id].Items.concat(selectedItem);
+      angular.forEach(selectedItem, function (v) {
+        $scope.jobTabList[id].Items.push(v);
+      })
+  
       $ctrl.selected = selectedItem;
 
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
     });
   };
+
+  
 
 
   $scope.addJob = function () {
@@ -209,7 +233,7 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
 
     WorkOrderService.countServiceItem(params).then(function (res) {
       // $scope.recentSalesList = res.data;
-	  console.log(res)
+      console.log(res)
       $scope.totalElements = res.data;
       $scope.isNoData = ($scope.totalElements <= 0);
       common.spinner(false);

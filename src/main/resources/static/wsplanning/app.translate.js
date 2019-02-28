@@ -70,6 +70,7 @@ var translationsEN = {
   btnSave: "Save",
   btnCancel: "Cancel",
   search: "Search",
+  pleaseEnter:"Please enter here",
 
   //Confirm delete
   confirmDeleteWorkOder: "Are you want to delete this WorkOder?",

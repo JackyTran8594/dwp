@@ -5,7 +5,7 @@
     <div class="page-content">
 
         <!-- Main content -->
-        <div class="content-wrapper">
+        <div class="content-wrapper main-content">
 
             <!-- Panel content -->
             <div class="panel panel-flat" style="margin-bottom: 0px;">
@@ -15,7 +15,6 @@
                         <ul class="icons-list">
                             <li><a href="" class="btn btn-xs" ng-click="addJob()"><span class="icon-plus3"></span></a>
                             </li>
-
                         </ul>
                     </div>
                 </div>
@@ -37,6 +36,9 @@
                                             <li><a class="btn btn-xs" ng-click="openServiceItem(1)"><span
                                                         class=" icon-cog3"></span></a>
                                             </li>
+                                            <li><a class="btn btn-xs" ng-click="openServiceItem(8)"><span
+                                                        class="icon-file-text2"></span></a>
+                                            </li>
                                             <li ng-click="toggleJobRow(item.RowId)"><a
                                                     ng-class="{'rotate-180': isShow == true}" data-action="collapse"
                                                     data-popup="tooltip" title="Collapse"></a>
@@ -46,38 +48,73 @@
                                     </div>
                                 </div>
                                 <div class="panel-body">
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            <label>Job &nbsp;{{item.JobNo}}:</label> {{item.Note}}
+
+                                    <div class="form-horizontal">
+                                        <div class="row">
+                                            <!-- <div class="col-xs-10">
+                                                        <label>Job &nbsp;{{item.JobNo}}:</label> {{item.Note}}
+            
+                                                    </div> -->
+                                            <div class="col-xs-4">
+                                                <!-- <label>Job &nbsp;{{item.JobNo}}:</label> {{item.Note}} -->
+                                                <div class="form-group">
+                                                    <label class="control-label col-xs-4">Job No: </label>
+                                                    <div class="col-xs-8">
+                                                        <input type="text" class="form-control" ng-model="item.JobNo">
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <!-- <label>Job &nbsp;{{item.JobNo}}:</label> {{item.Note}} -->
+                                                <div class="form-group">
+                                                    <label class="control-label col-xs-4">Job Note: </label>
+                                                    <div class="col-xs-8">
+                                                        <input type="text" class="form-control" ng-model="item.Note">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <div class="form-group">
+                                                    <label class="control-label col-xs-4">Estimated Time:</label>
+                                                    <div class="col-xs-8">
+                                                        <input type="text" class="form-control"
+                                                            ng-model="item.EstimatedTime">
+                                                    </div>
+
+                                                </div>
+                                            </div>
 
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Estimated Time:</label>
-                                                <input type="text" class="form-control" ng-model="item.EstimatedTime">
+
+                                        <div class="row">
+                                            <div class="col-xs-8">
+                                                <div class="form-group">
+                                                    <label class="control-label col-xs-2">Complaint:</label>
+                                                    <div class="col-xs-10">
+                                                        <input type="text" class="form-control"
+                                                            ng-model="item.Complaint">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <div class="form-group">
+                                                    <label class="control-label col-xs-4">Job Type:</label>
+                                                    <div class="col-xs-8">
+                                                        <select ng-model="item.JobType" class="form-control"
+                                                            ng-options="o.Id as o.Name for o in lstJobCats"></select>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 
                                     </div>
 
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            <div class="form-group">
-                                                <label>Complaint:</label>
-                                                <input type="text" class="form-control" ng-model="item.Complaint">
-                                            </div>
 
-                                            <!-- <p>{{item.Complaint}}</p> -->
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Job Type:</label>
-                                                <input type="text" class="form-control" ng-model="item.JobType">
-                                            </div>
-                                            <!-- {{item.JobType}} -->
-
-                                        </div>
-                                    </div>
                                 </div>
 
                             </span>
@@ -102,177 +139,205 @@
                                     </div>
                                 </div>
                                 <div class="panel-body">
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            <label>Job &nbsp;{{item.JobNo}}:</label> {{item.Note}}
-                                            <!-- <p>{{item.JobNo}}, {{item.Note}}</p> -->
-                                        </div>
-                                        <div class="col-md-4">
+                                    <div class="form-horizontal">
+                                        <div class="row">
+                                            <div class="col-xs-4">
+                                                <div class="form-group">
+                                                    <label class="control-label col-xs-4">Job No: </label>
+                                                    <div class="col-xs-8">
+                                                        <input type="text" class="form-control" ng-model="item.JobNo">
+                                                    </div>
+                                                </div>
+                                                <!-- <label>Job &nbsp;{{item.JobNo}}:</label> {{item.Note}} -->
 
-                                            <div class="form-group">
-                                                <label>Estimated Time:</label>
-                                                <input type="text" class="form-control" ng-model="item.EstimatedTime">
                                             </div>
-                                            <!-- {{item.EstimatedTime}} -->
+                                            <div class="col-xs-4">
+                                                <!-- <label>Job &nbsp;{{item.JobNo}}:</label> {{item.Note}} -->
+                                                <div class="form-group">
+                                                    <label class="control-label col-xs-4">Job Note: </label>
+                                                    <div class="col-xs-8">
+                                                        <input type="text" class="form-control" ng-model="item.Note">
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-xs-4">
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-xs-4">Estimated Time:</label>
+                                                    <div class="col-xs-8">
+                                                        <input type="text" class="form-control"
+                                                            ng-model="item.EstimatedTime">
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-xs-8">
+                                                <div class="form-group">
+                                                    <label class="control-label col-xs-2">Complaint:</label>
+                                                    <div class="col-xs-10">
+                                                        <input type="text" class="form-control"
+                                                            ng-model="item.Complaint">
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <div class="form-group">
+                                                    <label class="control-label  col-xs-4">Job Type:</label>
+                                                    <div class="col-xs-8">
+                                                        <!-- <input type="text" class="form-control" ng-model="item.JobType"> -->
+                                                        <select class="form-control" ng-model="item.JobType"
+                                                            class="form-control"
+                                                            ng-options="o.Id as o.ChargeCategoryId for o in lstJobCats">
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-xs-3">
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-xs-4">Charge Category</label>
+                                                    <!-- <input type="text" class="form-control"
+                                                                        ng-model="item.ChargeCategoryId"> -->
+                                                    <div class="col-xs-8">
+                                                        <select class="form-control" ng-model="item.ChargeCategoryId"
+                                                            ng-options="o.Id as o.Name for o in lstChargeCats">
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-3">
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-xs-4">Departmenty:</label>
+                                                    <div class="col-xs-8">
+                                                        <!-- <input type="text" class="form-control" ng-model="item.DeptId"> -->
+
+                                                        <select class="form-control" ng-model="item.DeptId"
+                                                            ng-options="o.Id as o.Name for o in lstDepartment">
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-xs-3">
+
+                                                <div class="form-group">
+                                                    <label class="control-label  col-xs-4">Job Category:</label>
+                                                    <!-- <input type="text" class="form-control" ng-model="item.JobCategory"> -->
+                                                    <div class="col-xs-8">
+                                                        <select class="form-control" ng-model="item.JobCategory"
+                                                            ng-options="o.Id as o.Name for o in lstTrans">
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-xs-3">
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-xs-4">Payer:</label>
+                                                    <div class="col-xs-8">
+                                                        <!-- <input type="text" class="form-control" ng-model="item.Payer"> -->
+                                                        <select class="form-control" ng-model="item.Payer"
+                                                            ng-options="o.Id as o.Name for o in lstPayers">
+                                                        </select>
+                                                    </div>
+
+
+                                                </div>
+
+                                            </div>
 
                                         </div>
                                     </div>
+                                    <div class="form-horizontal">
+                                        <div class="row">
+                                            <form class="formValidate" name="contractFrm">
+                                                <div class="table-responsive tableIndex">
+                                                    <table class="table table-striped table-hover">
+                                                        <thead>
+                                                            <tr>
+
+                                                                <th>No.</th>
+                                                                <th></th>
+                                                                <th>Model Code</th>
+                                                                <th class="wrappable">Name</th>
+                                                                <th>Quantity</th>
+                                                                <th class="text-center">Actions</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <!--BODY-->
+                                                        <tbody>
+                                                            <tr ng-repeat="obj in item.Items">
+                                                                <td>{{$index+1}}</td>
+                                                                <td><a>
+                                                                        <span ng-class="getClass(obj.ItemType)"></span>
+                                                                    </a></td>
+                                                                <td>{{obj.ItemNo}}</td>
+                                                                <td class="wrappable">{{obj.Name}}</td>
+                                                                <td><span
+                                                                        ng-hide="obj.ItemType === 8">{{obj.Quantity}}</span>
+                                                                </td>
+                                                                <td><input
+                                                                        ng-hide="obj.ItemType !== 7 && obj.ItemType !== 8"
+                                                                        type="checkbox" name="" /></td>
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
 
 
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            <div class="form-group">
-                                                <label>Complaint:</label>
-                                                <input type="text" class="form-control" ng-model="item.Complaint">
-                                            </div>
-
-                                            <!-- <p>{{item.Complaint}}</p> -->
+                                            </form>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label>Job Type:</label>
-                                                <input type="text" class="form-control" ng-model="item.JobType">
-                                            </div>
-                                            <!-- {{item.JobType}} -->
 
-                                        </div>
                                     </div>
 
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <!-- <label for="">Charge Category</label> -->
-                                            <div class="form-group">
-                                                <label for="">Charge Category</label>
-                                                <input type="text" class="form-control"
-                                                    ng-model="item.ChargeCategoryId">
-                                            </div>
-                                            <!-- <p>{{item.ChargeCategoryId}}</p> -->
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <!-- <label for="">Department</label> -->
-                                            <div class="form-group">
-                                                <label>Department:</label>
-                                                <input type="text" class="form-control" ng-model="item.DeptId">
-                                            </div>
-                                            <!-- <p>{{item.DeptId}}</p> -->
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <!-- <label for="">Job Category</label> -->
-                                            <div class="form-group">
-                                                <label>Job Category:</label>
-                                                <input type="text" class="form-control" ng-model="item.JobCategory">
-                                            </div>
-                                            <!-- <p>{{item.JobCategory}}</p> -->
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <!-- <label for="">Payer</label> -->
-                                            <div class="form-group">
-                                                <label>Payer:</label>
-                                                <input type="text" class="form-control" ng-model="item.Payer">
-                                            </div>
-                                            <!-- <p>{{item.Payer}}</p> -->
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <form class="form-horizontal formValidate" name="contractFrm">
-                                            <div class="table-responsive tableIndex">
-                                                <table class="table table-striped table-hover">
-                                                    <thead>
-                                                        <tr>
-
-                                                            <th>No.</th>
-                                                            <th></th>
-                                                            <th>Model Code</th>
-                                                            <th class="wrappable">Name</th>
-                                                            <th>Quantity</th>
-                                                            <th class="text-center">Actions</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <!--BODY-->
-                                                    <tbody>
-                                                        <tr ng-repeat="obj in item.Items">
-                                                            <td>{{$index+1}}</td>
-                                                            <td><a>
-                                                                    <span ng-class="getClass(obj.ItemType)"></span>
-                                                                </a></td>
-                                                            <td>{{obj.ItemNo}}</td>
-                                                            <td class="wrappable">{{obj.Name}}</td>
-                                                            <td><span
-                                                                    ng-hide="obj.ItemType === 8">{{obj.Quantity}}</span>
-                                                            </td>
-                                                            <td><input
-                                                                    ng-hide="obj.ItemType !== 7 && obj.ItemType !== 8"
-                                                                    type="checkbox" name="" /></td>
-                                                        </tr>
-
-                                                    </tbody>
-                                                </table>
-                                            </div>
-
-
-                                        </form>
-                                    </div>
                                 </div>
                             </span>
+
+
                         </div>
+
+
                     </div>
-                </div>
-
-
-                <div class="panel-footer text-right" style="padding-right: 25px;">
-
-                    <!-- Paging elements -->
-                    <form class="form-inline formPaging formValidate">
-                        <div class="form-group">
-                            {{totalElements | number}} <span class="text-lowercase">{{ 'item' | translate }}</span>
-                        </div>
-                        <div class="form-group" style="border-left: 1px solid #ddd">
-                            <ul class="pagination-flat pagination-rounded" uib-pagination total-items="totalElements"
-                                items-per-page="limit" max-size="2" ng-model="page" boundary-links="true"
-                                boundary-link-numbers="true" force-ellipses="true" rotate="true"
-                                previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
-                            </ul>
-                        </div>
-                        <div class="form-group">
-                            <input type="number" name="page"  ng-model="pageGo"  placeholder="{{ 'page' | translate }}"
-                                class="form-control validatePositiveInteger" min="1"
-                                max="{{(totalElements / limit) | ceil}}" style="width: 55px">
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" ng-click="go()" class="btn btn-default">{{ 'go' | translate }}</button>
-                        </div>
-                        <div class="form-group">
-                            <select class="form-control" ng-model="limit" ng-change="changeLimit()" convert-to-number>
-                                <option value="1">1</option>
-                                <option value="5">5</option>
-                                <option value="10">10</option>
-                                <option value="15">15</option>
-                                <option value="20">20</option>
-                                <option value="30">30</option>
-                            </select>
-                            <span>{{ 'limit' | translate }}</span>
-                        </div>
-                    </form>
-                    <!-- /paging element -->
-
+                    </span>
                 </div>
             </div>
-            <!-- /panel content -->
         </div>
-        <!-- /main content -->
 
+
+        <div class="panel-footer text-right" style="padding-right: 25px;">
+
+            <!-- Paging elements -->
+            <!-- /paging element -->
+
+        </div>
     </div>
-    <!-- /page content -->
+    <!-- /panel content -->
+</div>
+<!-- /main content -->
+
+</div>
+<!-- /page content -->
 
 </div>
 <!-- /page container -->

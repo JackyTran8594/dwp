@@ -17,7 +17,8 @@
                 <li ng-if="type == 'withSubcontractor'"><a ui-sref="app.main.worksub()">{{ 'breadcrumbWithSubcontractor' | translate }}</a></li>
                 <li ng-if="type == 'withTire'"><a ui-sref="app.main.worktire()">{{ 'breadcrumbWithTire' | translate }}</a></li>
                 <li ng-if="isNew" class="active">{{ 'breadcrumbWorkNew' | translate }}</li>
-                <li ng-if="!isNew" class="active">{{ 'breadcrumbWorkDetail' | translate }}</li>
+                <!-- <li ng-if="!isNew" class="active">{{ 'breadcrumbWorkDetail' | translate }}</li> -->
+                <li ng-if="!isNew" class="active">{{workOrderNo}}</li>
             </ul>
         </div>
     </div>

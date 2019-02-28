@@ -3,8 +3,12 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
   // $scope.type = $stateParams.type;
 
   var $ctrl = this;
+
+  $scope.hide = item.itemType;
+
   
-  var listItem = [];
+  
+  $scope.listItem = [];
 
   $ctrl.cancel = function () {
     $uibModalInstance.dismiss('cancel');
@@ -13,10 +17,10 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
   $scope.isChecked = function (item, checked) {
 	  console.log(checked);
 	  var index = 0;
-	 if(listItem.length > 0) {
+	 if($scope.listItem.length > 0) {
 		 angular.forEach(listItem, function(v,i){
 			 if(item.ItemNo === v.ItemNo && checked === false) {
-				 listItem.splice(i,1);
+        $scope.listItem.splice(i,1);
 			 } else {
 				 index = index + 1;
 				 console.log(index);
@@ -24,17 +28,17 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
 		 })
 		 if(index > 0)
 		 {
-			 listItem.push(item);
+      $scope.listItem.push(item);
 		 }		 
 	 }
 	 else {
-		 listItem.push(item);
+    $scope.listItem.push(item);
 	 }
-	 console.log(listItem);
+	 console.log($scope.listItem);
   }
   
   $ctrl.save = function() {
-	  $uibModalInstance.close(listItem);
+	  $uibModalInstance.close($scope.listItem);
   }
 
   $scope.skey = "";

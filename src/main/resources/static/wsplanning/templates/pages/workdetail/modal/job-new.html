@@ -22,12 +22,7 @@
                                                 <li class="">
                                                     <a ng-click="recentSales(sub)">
                                                         <span>{{sub.Name}}</span></a>
-                                                    <ul class="tree-level tree-end"
-                                                        ng-repeat="obj in sub.AdditionalData as listAdd">
-                                                        <li>
-                                                            <span>{{obj.Label}}</span>
-                                                        </li>
-                                                    </ul>
+                                                
                                                 </li>
                                             </ul>
                                         </li>
@@ -35,27 +30,6 @@
                                 </div>
                             </div>
 
-                            <!-- <div class="col-xs-12">
-                                <div class="div-tree">
-                                    <ul class="tree-level" ng-repeat="item in jobTreeList track by item.id">
-                                        <li class="">
-                                            <span>{{item.label}}</span>
-                                            <ul ng-repeat="sub in item.children as listSub track by sub.id">
-                                                <li class="">
-                                                    <a ng-click="recentSales(sub)">
-                                                        <span>{{sub.label}}</span></a>
-                                                    <ul class="tree-level tree-end"
-                                                        ng-repeat="additonalData in sub.children as lisAdd track by additonalData.id">
-                                                        <li>
-                                                            <span>{{additonalData.label}}</span>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div> -->
                         </div>
 
                         <div class="row">
