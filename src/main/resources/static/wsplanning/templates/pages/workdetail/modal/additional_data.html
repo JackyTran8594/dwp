@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" ng-hide="additionalData == null || additionalData.length === 0">
     <div class="panel panel-flat">
         <div class="panel-heading">
             <h5 class="panel-title"><span>The Additional Data</span></h5>
@@ -8,25 +8,25 @@
             <div class="table-responsive ">
                 <table class="table table-striped table-hover">
                     <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Id</th>
-                        <th>Category</th>
-                        <th>Label</th>
-                        <th>Value</th>
-                    </tr>
+                        <tr>
+                            <th>No</th>
+                            <th>Id</th>
+                            <th>Category</th>
+                            <th>Label</th>
+                            <th>Value</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="item in additionalData">
-                        <th>{{$index + 1}}</th>
-                        <th>{{item.Id}}</th>
-                        <th>{{item.Category}}</th>
-                        <th>{{item.Label}}</th>
-                        <th>{{item.Value}}</th>
-                    </tr>
-                    <tr ng-if="isNoData || !additionalData || additionalData.length <= 0" class="active">
-                        <td colspan="20" class="text-center">{{ 'commonNoResult' | translate }}</td>
-                    </tr>
+                        <tr ng-repeat="item in additionalData">
+                            <th>{{$index + 1}}</th>
+                            <th>{{item.Id}}</th>
+                            <th>{{item.Category}}</th>
+                            <th>{{item.Label}}</th>
+                            <th>{{item.Value}}</th>
+                        </tr>
+                        <tr ng-if="isNoData || !additionalData || additionalData.length <= 0" class="active">
+                            <td colspan="20" class="text-center">{{ 'commonNoResult' | translate }}</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

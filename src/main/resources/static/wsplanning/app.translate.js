@@ -277,6 +277,13 @@ var translationsVI = {
   Phone: "Phone",
   CustomerGroup: "Customer group",
   AccountGroup: "Customer group",
+
+  // Title
+  Spare: "Spare Part",
+  Labour:"Labour Operation",
+  TextRows:" Text Rows",
+  SubContractors: "Sub Contractors"
+
 };
 
 UserWebApp.config(['$translateProvider', function ($translateProvider) {

@@ -476,6 +476,16 @@ table th {
   content: "\eb7d";
 }
 
+.icon-sub-contractors {
+  max-width: 12px;
+  max-height: 12px;
+  position: relative;
+} 
+
+.icon-sub-contractors::before {
+  content: "\ea36"
+}
+
 .tree-level span {
 
 }
@@ -511,21 +521,21 @@ table th {
 @media screen and (min-width: 769px) {
   .main-content {
      max-height: 600px;
-     overflow-y: scroll;
+     /* overflow-y: scroll; */
   }
 }
 
 @media screen and (max-width: 1025px) {
   .main-content {
      max-height: 600px;
-     overflow-y: scroll;
+     /* overflow-y: scroll; */
   }
 }
 
 @media screen and (max-width: 1200px) {
   .main-content {
      max-height: 600px;
-     overflow-y: scroll;
+     /* overflow-y: scroll; */
   }
 }
 

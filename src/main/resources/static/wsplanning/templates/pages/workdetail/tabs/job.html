@@ -39,6 +39,9 @@
                                             <li><a class="btn btn-xs" ng-click="openServiceItem(8, $index)"><span
                                                         class="icon-file-text2"></span></a>
                                             </li>
+                                            <li><a class="btn btn-xs" ng-click="openServiceItem(4, $index)"><span
+                                                        class="icon-paste"></span></a>
+                                            </li>
                                             <li ng-click="toggleJobRow(item.RowId)"><a
                                                     ng-class="{'rotate-180': isShow == true}" data-action="collapse"
                                                     data-popup="tooltip" title="Collapse"></a>
@@ -132,7 +135,7 @@
                                             <li><a class="btn btn-xs" ng-click="openServiceItem(1, $index)"><span
                                                         class=" icon-cog3"></span></a>
                                             </li>
-											 <li><a class="btn btn-xs" ng-click="openServiceItem(8, $index)"><span
+                                            <li><a class="btn btn-xs" ng-click="openServiceItem(8, $index)"><span
                                                         class="icon-file-text2"></span></a>
                                             </li>
                                             <li ng-click="toggleJobRow()"><a ng-class="{'rotate-180': isShow == true}"
@@ -301,7 +304,8 @@
                                                                 </td>
                                                                 <td><input
                                                                         ng-hide="obj.ItemType !== 7 && obj.ItemType !== 8"
-                                                                        type="checkbox" name="" ng-checked="item.MechanicId != null" /></td>
+                                                                        type="checkbox" name=""
+                                                                        ng-checked="item.MechanicId != null" /></td>
                                                             </tr>
 
                                                         </tbody>
@@ -316,13 +320,13 @@
 
                                 </div>
                             </span>
-						
+
 
                         </div>
 
 
                     </div>
-                    
+
                 </div>
             </div>
         </div>

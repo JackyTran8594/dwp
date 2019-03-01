@@ -43,7 +43,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
       case 2:
         return null;
       case 4:
-        return null;
+        return "icon-sub-contractors";
       case 7:
         return "icon-labour-operation";
       case 8:
@@ -126,6 +126,10 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
     });
 
     modalInstance.result.then(function (selectedItem) {
+      // if(typeof(selectedItem) === "string")
+      // {
+      //   $scope.jobTabList[id].Items.push
+      // }
       angular.forEach(selectedItem, function (v) {
         $scope.jobTabList[id].Items.push(v);
       })

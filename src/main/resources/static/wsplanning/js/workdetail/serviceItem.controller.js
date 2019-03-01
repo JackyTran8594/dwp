@@ -4,39 +4,81 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
 
   var $ctrl = this;
 
+  checkTitle(item.itemType);
+
+  function checkTitle(itemType) {
+    switch (itemType) {
+      case 1:
+        $translate('Spare').then(function (spare) {
+          $scope.title = spare;
+        }, function (translationId) {
+          $scope.title = translationId;
+        })
+        return $scope.title;
+      case 4:
+        $translate('SubContractors').then(function (subContractors) {
+          $scope.title = subContractors;
+        }, function (translationId) {
+          $scope.title = translationId;
+        })
+        return $scope.title;
+      case 7:
+        $translate('Labour').then(function (labour) {
+          $scope.title = labour;
+        }, function (translationId) {
+          $scope.title = translationId;
+        })
+        return $scope.title;
+
+      case 8:
+        $translate('TextRows').then(function (textRows) {
+          $scope.title = textRows;
+        }, function (translationId) {
+          $scope.title = translationId;
+        })
+        return $scope.title;
+
+    }
+  }
+
+
   $scope.hide = item.itemType;
- 
+
   $scope.listItem = [];
+  // $scope.textRows = "";
 
   $ctrl.cancel = function () {
     $uibModalInstance.dismiss('cancel');
   };
-  
+
   $scope.isChecked = function (item, checked) {
-	  console.log(checked);
-	  var index = 0;
-	 if($scope.listItem.length > 0) {
-		 angular.forEach(listItem, function(v,i){
-			 if(item.ItemNo === v.ItemNo && checked === false) {
-        $scope.listItem.splice(i,1);
-			 } else {
-				 index = index + 1;
-				 console.log(index);
-			 }
-		 })
-		 if(index > 0)
-		 {
+    console.log(checked);
+    var index = 0;
+    if ($scope.listItem.length > 0) {
+      angular.forEach(listItem, function (v, i) {
+        if (item.ItemNo === v.ItemNo && checked === false) {
+          $scope.listItem.splice(i, 1);
+        } else {
+          index = index + 1;
+          console.log(index);
+        }
+      })
+      if (index > 0) {
+        $scope.listItem.push(item);
+      }
+    }
+    else {
       $scope.listItem.push(item);
-		 }		 
-	 }
-	 else {
-    $scope.listItem.push(item);
-	 }
-	 console.log($scope.listItem);
+    }
+    console.log($scope.listItem);
   }
-  
-  $ctrl.save = function() {
-	  $uibModalInstance.close($scope.listItem);
+
+  $ctrl.save = function () {
+    if ($scope.hide === 8) {
+      $uibModalInstance.close($scope.listItem.toString());
+    } else {
+      $uibModalInstance.close($scope.listItem);
+    }
   }
 
   $scope.skey = "";
@@ -113,7 +155,7 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
   //</editor-fold>
 
   // $scope.doPick = function (data) {
-    // $uibModalInstance.close(data);
+  // $uibModalInstance.close(data);
   // }
 
 

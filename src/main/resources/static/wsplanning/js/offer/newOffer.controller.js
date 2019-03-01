@@ -216,16 +216,14 @@ UserWebApp.controller('VehicleModalCtrl', function ($scope, $rootScope, $locale,
   }
 
   $scope.doPick = function (selectedItem) {
-    item = selectedItem;
-    console.log(item);
-    $uibModalInstance.close(item);
+    $uibModalInstance.close(selectedItem);
   }
 
 })
 
 
 UserWebApp.controller('CustomerModalCtrl', function ($scope, $rootScope, $locale, HttpService, $translate,
-  $location, $state, $filter, $uibModal, $uibModalInstance, CommonServices, item) {
+  $location, $state, $filter, $uibModal, $uibModalInstance, CommonServices) {
 
 
 
@@ -242,6 +240,7 @@ UserWebApp.controller('CustomerModalCtrl', function ($scope, $rootScope, $locale
 
   function loadData(skey, custNo) {
     CommonServices.getCustomers(skey, custNo).then(function (data) {
+      console.log(data);
       $scope.lstCustomers = data;
     })
   }
@@ -254,16 +253,14 @@ UserWebApp.controller('CustomerModalCtrl', function ($scope, $rootScope, $locale
   loadData($scope.skey, $scope.custNo);
 
   $scope.doPick = function (selectedItem) {
-    item = selectedItem;
-    console.log(item);
-    $uibModalInstance.close(item);
+    $uibModalInstance.close(selectedItem);
   }
 
 })
 
 
 UserWebApp.controller('ContactModalCtrl', function ($scope, $rootScope, $locale, HttpService, $translate,
-  $location, $state, $filter, $uibModal, $uibModalInstance, CommonServices, item) {
+  $location, $state, $filter, $uibModal, $uibModalInstance, CommonServices) {
 
 
 
@@ -292,9 +289,7 @@ UserWebApp.controller('ContactModalCtrl', function ($scope, $rootScope, $locale,
   loadData($scope.skey, $scope.custNo);
 
   $scope.doPick = function (selectedItem) {
-    item = selectedItem;
-    console.log(item);
-    $uibModalInstance.close(item);
+    $uibModalInstance.close(selectedItem);
   }
 
 })

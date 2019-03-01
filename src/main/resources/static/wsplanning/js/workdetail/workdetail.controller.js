@@ -17,7 +17,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
   console.log(WorkOrder);
   $scope.WorkOrder = WorkOrder.data;
   $scope.isNew = angular.equals($scope.WorkOrder, {});
-  $scope.workOrderNo = WorkOrder.data.WorkOrderNo
+  $scope.workOrderNo = WorkOrder.data.WorkOrderNo;
 
   $scope.WorkOrder._ServiceDate = new Date($scope.WorkOrder.ServiceDate);
   if ($scope.WorkOrder.CheckOutDate == "" || $scope.WorkOrder.CheckOutDate == "0001-01-01T00:00:00") {
@@ -66,20 +66,17 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 
   $ctrl.openSearchVehicle = function (size, item) {
     var modalInstance = $uibModal.open({
-      animation:  $ctrl.animationsEnabled ,
+      animation: $ctrl.animationsEnabled,
       templateUrl: '/wsplanning/templates/pages/common/vehicle-form.html',
       controller: 'VehicleModalCtrl',
       controllerAs: '$ctrl',
       size: size,
       backdrop: 'static',
-      resolve: {
-        item: function () {
-          return $scope.WOVehicle;
-        }
-      }
+    
     });
 
     modalInstance.result.then(function (selectedItem) {
+      $scope.WOVehicle = selectedItem;
       console.log(selectedItem);
       $rootScope.$broadcast("chooseVehicle", { "item": selectedItem });
     }, function () {
@@ -95,15 +92,13 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
       controllerAs: '$ctrl',
       size: size,
       backdrop: 'static',
-      resolve: {
-        item: function () {
-          return $scope.WOCustomer;
-        }
-      }
+      
     });
 
     modalInstance.result.then(function (selectedItem) {
+  
       console.log(selectedItem);
+      $scope.WOCustomer = selectedItem;
       $rootScope.$broadcast("chooseCustomer", { "item": selectedItem });
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
@@ -119,16 +114,13 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
       controllerAs: '$ctrl',
       size: size,
       backdrop: 'static',
-      resolve: {
-        item: function () {
-          return $scope.WOContact;
-        }
-      }
+     
     });
 
     modalInstance.result.then(function (selectedItem) {
       console.log(selectedItem);
-      $scope.WorkOrder.WOContact = selectedItem;
+      
+      $scope.WOContact = selectedItem;
       $rootScope.$broadcast("chooseContact", { "item": selectedItem });
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
