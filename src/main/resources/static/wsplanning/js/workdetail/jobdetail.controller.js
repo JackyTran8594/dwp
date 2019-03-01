@@ -54,9 +54,9 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   }
 
 
-  var data = $scope.$parent.WOJobs;
+  // var data = $scope.$parent.WOJobs;
 
-  // $scope.jobTabList = $scope.$parent.WOJobs;
+  $scope.jobTabList = $scope.$parent.WOJobs;
 
   // paging
   $scope.totalElements = $scope.$parent.WOJobs.length;
@@ -64,25 +64,24 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   $scope.limit = 5;
   $scope.page = 1;
 
-  pagingData($scope.page);
+  // pagingData($scope.page);
 
-  function pagingData(currentPage) {
-    var begin = (currentPage - 1) * $scope.limit;
-    var end = begin + $scope.limit
-    $scope.jobTabList = data.slice(begin, end);
-    console.log($scope.jobTabList);
-  }
+  // function pagingData(currentPage) {
+    // var begin = (currentPage - 1) * $scope.limit;
+    // var end = begin + $scope.limit
+    // $scope.jobTabList = data.slice(begin, end);
+    // console.log($scope.jobTabList);
+  // }
 
-  // $scope.pageSelected = 
 
-  $scope.go = function () {
-    $scope.page = $scope.pageGo;
-    pagingData($scope.page);
-  }
+  // $scope.go = function () {
+    // $scope.page = $scope.pageGo;
+    // pagingData($scope.page);
+  // }
 
-  $scope.changeLimit = function () {
-    pagingData($scope.page);
-  }
+  // $scope.changeLimit = function () {
+    // pagingData($scope.page);
+  // }
 
   //<editor-fold desc="Paging & Search Port">
   $scope.$watch("page", function (newValue, oldValue) {

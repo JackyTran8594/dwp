@@ -454,7 +454,7 @@ table th {
     position: relative;
 }
 
-.icon-spare-part::before {
+.icon-spare-part:before {
     content: "\eb76";
 }
 
@@ -462,8 +462,8 @@ table th {
 
 }
 
-.icon-text-rows::after {
-  content: "<input type="text" />"
+.icon-text-rows:after {
+  content: "\ea1a"
 }
 
 .icon-labour-operation {
@@ -510,21 +510,21 @@ table th {
 
 @media screen and (min-width: 769px) {
   .main-content {
-     max-height: 90%;
+     max-height: 600px;
      overflow-y: scroll;
   }
 }
 
 @media screen and (max-width: 1025px) {
   .main-content {
-     max-height: 90%;
+     max-height: 600px;
      overflow-y: scroll;
   }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (max-width: 1200px) {
   .main-content {
-     max-height: 90%;
+     max-height: 600px;
      overflow-y: scroll;
   }
 }

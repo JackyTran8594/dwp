@@ -5,7 +5,7 @@
     <div class="page-content">
 
         <!-- Main content -->
-        <div class="content-wrapper main-content">
+        <div class="content-wrapper">
 
             <!-- Panel content -->
             <div class="panel panel-flat" style="margin-bottom: 0px;">
@@ -21,7 +21,7 @@
 
                 <div class="panel-body">
 
-                    <div class="table-responsive">
+                    <div class="table-responsive main-content">
                         <div ng-repeat="item in jobTabList track by $index">
                             <span ng-show="!isShow">
 
@@ -30,13 +30,13 @@
                                     </h6>
                                     <div class="heading-elements">
                                         <ul class="icons-list">
-                                            <li><a class="btn btn-xs" ng-click="openServiceItem(7)"><span
+                                            <li><a class="btn btn-xs" ng-click="openServiceItem(7, $index)"><span
                                                         class="icon-hammer-wrench"></span></a>
                                             </li>
-                                            <li><a class="btn btn-xs" ng-click="openServiceItem(1)"><span
+                                            <li><a class="btn btn-xs" ng-click="openServiceItem(1, $index)"><span
                                                         class=" icon-cog3"></span></a>
                                             </li>
-                                            <li><a class="btn btn-xs" ng-click="openServiceItem(8)"><span
+                                            <li><a class="btn btn-xs" ng-click="openServiceItem(8, $index)"><span
                                                         class="icon-file-text2"></span></a>
                                             </li>
                                             <li ng-click="toggleJobRow(item.RowId)"><a
@@ -131,6 +131,9 @@
                                             </li>
                                             <li><a class="btn btn-xs" ng-click="openServiceItem(1, $index)"><span
                                                         class=" icon-cog3"></span></a>
+                                            </li>
+											 <li><a class="btn btn-xs" ng-click="openServiceItem(8, $index)"><span
+                                                        class="icon-file-text2"></span></a>
                                             </li>
                                             <li ng-click="toggleJobRow()"><a ng-class="{'rotate-180': isShow == true}"
                                                     data-action="collapse" data-popup="tooltip" title="Collapse"></a>
@@ -298,7 +301,7 @@
                                                                 </td>
                                                                 <td><input
                                                                         ng-hide="obj.ItemType !== 7 && obj.ItemType !== 8"
-                                                                        type="checkbox" name="" /></td>
+                                                                        type="checkbox" name="" ng-checked="item.MechanicId != null" /></td>
                                                             </tr>
 
                                                         </tbody>
@@ -313,19 +316,19 @@
 
                                 </div>
                             </span>
-
+						
 
                         </div>
 
 
                     </div>
-                    </span>
+                    
                 </div>
             </div>
         </div>
 
 
-        <div class="panel-footer text-right" style="padding-right: 25px;">
+        <div class="panel-footer">
 
             <!-- Paging elements -->
             <!-- /paging element -->

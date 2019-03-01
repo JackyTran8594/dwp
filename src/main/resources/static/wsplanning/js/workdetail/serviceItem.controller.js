@@ -5,9 +5,7 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
   var $ctrl = this;
 
   $scope.hide = item.itemType;
-
-  
-  
+ 
   $scope.listItem = [];
 
   $ctrl.cancel = function () {
