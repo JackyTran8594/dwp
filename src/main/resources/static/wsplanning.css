@@ -427,11 +427,29 @@ table th {
 
 .tableIndex {
   max-height: 300px;
-  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
+.tableIndex td > span {
+  display: block;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+}
+
+.tableIndex td { 
+  /* text-align: center; */
+  padding: 0 0 !important;
+}
+
+
+/* .tableIndex table thead > tr > td {
+  
+  padding: 
+} */
+
 .wrappable {
-  max-width: 50% !important;
+  /* max-width: 50% !important; */
 }
 
 .tree-level {
@@ -459,10 +477,32 @@ table th {
 }
 
 .icon-text-rows {
-
+  max-width: 12px;
+  max-height: 12px;
+  position: relative;
 }
 
-.icon-text-rows:after {
+.icon-checked-rows {
+  max-width: 12px;
+  max-height: 12px;
+  position: relative;
+}
+
+.icon-checked-rows::before {
+  content:"\ee63"
+}
+
+.icon-unchecked-rows {
+  max-width: 12px;
+  max-height: 12px;
+  position: relative;
+}
+
+.icon-unchecked-rows::before {
+  content: "\ee64"
+}
+
+.icon-text-rows::before {
   content: "\ea1a"
 }
 
@@ -517,6 +557,7 @@ table th {
   overflow-y: scroll;
   max-height: 600px;
 }
+
 
 @media screen and (min-width: 769px) {
   .main-content {

@@ -138,6 +138,9 @@
                                             <li><a class="btn btn-xs" ng-click="openServiceItem(8, $index)"><span
                                                         class="icon-file-text2"></span></a>
                                             </li>
+                                            <li><a class="btn btn-xs" ng-click="openServiceItem(4, $index)"><span
+                                                        class="icon-paste"></span></a>
+                                            </li>
                                             <li ng-click="toggleJobRow()"><a ng-class="{'rotate-180': isShow == true}"
                                                     data-action="collapse" data-popup="tooltip" title="Collapse"></a>
                                             </li>
@@ -277,35 +280,51 @@
                                     <div class="form-horizontal">
                                         <div class="row">
                                             <form class="formValidate" name="contractFrm">
-                                                <div class="table-responsive tableIndex">
+                                                <div class="table-responsive-sm tableIndex">
                                                     <table class="table table-striped table-hover">
                                                         <thead>
                                                             <tr>
-
-                                                                <th>No.</th>
-                                                                <th></th>
-                                                                <th>Model Code</th>
-                                                                <th class="wrappable">Name</th>
-                                                                <th>Quantity</th>
-                                                                <th class="text-center">Actions</th>
+                                                                <th class="text-center" style="width: 5%">No.</th>
+                                                                <th class="text-center" style="width: 5%"></th>
+                                                                <th class="text-center" style="width: 10%">Model Code
+                                                                </th>
+                                                                <th class="text-center">Name</th>
+                                                                <th class="text-center" style="width: 5%">Quantity</th>
+                                                                <th class="text-center" style="width: 10%">Actions</th>
                                                             </tr>
                                                         </thead>
                                                         <!--BODY-->
                                                         <tbody>
-                                                            <tr ng-repeat="obj in item.Items">
-                                                                <td>{{$index+1}}</td>
-                                                                <td><a>
-                                                                        <span ng-class="getClass(obj.ItemType)"></span>
-                                                                    </a></td>
-                                                                <td>{{obj.ItemNo}}</td>
-                                                                <td class="wrappable">{{obj.Name}}</td>
-                                                                <td><span
-                                                                        ng-hide="obj.ItemType === 8">{{obj.Quantity}}</span>
+                                                            <tr ng-repeat="obj in item.Items track by $index">
+                                                                <td class="text-center" style="width: 5%">
+                                                                    <span>{{$index+1}}</span>
                                                                 </td>
-                                                                <td><input
-                                                                        ng-hide="obj.ItemType !== 7 && obj.ItemType !== 8"
-                                                                        type="checkbox" name=""
-                                                                        ng-checked="item.MechanicId != null" /></td>
+                                                                <td class="text-center" style="width: 5%">
+                                                                    <span ng-class="getClass(obj.ItemType)"></span>
+                                                                </td>
+                                                                <td class="text-center" style="width: 10%">
+                                                                    <span>{{obj.ItemNo}}</span>
+                                                                </td>
+                                                                <td class=""><span>{{obj.Name}}</span></td>
+                                                                <!-- <td class="text-center" style="width: 5%"><span
+                                                                        ng-hide="obj.ItemType === 8">{{obj.Quantity}}</span>
+                                                                </td> -->
+                                                                <td class="text-center" style="width: 5%">
+                                                                    <span ng-hide="obj.ItemType === 8">
+                                                                        {{obj.Quantity}}
+                                                                    </span>
+
+                                                                </td>
+                                                                <td class="text-center" style="width: 10%">
+                                                                    <span ng-class="getCheckRow(item.MechanicId)"
+                                                                        ng-hide="obj.ItemType !== 7 && obj.ItemType !== 8">
+                                                                        <!-- <input
+                                                                            ng-hide="obj.ItemType !== 7 && obj.ItemType !== 8"
+                                                                            type="checkbox" name="" class=""
+                                                                            ng-checked="item.MechanicId != null"
+                                                                            disabled /> -->
+                                                                    </span>
+                                                                </td>
                                                             </tr>
 
                                                         </tbody>

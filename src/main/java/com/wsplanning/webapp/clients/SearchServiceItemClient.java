@@ -66,6 +66,8 @@ public class SearchServiceItemClient {
     Integer itemType = Integer.parseInt(itemTypeStr);
     HttpEntity entity = new HttpEntity(headers);
     System.out.println(token);
+    System.out.println(entity);
+    System.out.println(itemType);
     String url = String.format("%s?itemType=%d&skey=%s", this.endpointUrl, itemType, skey);
     ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class, new HashMap<>());
     return response.getBody();

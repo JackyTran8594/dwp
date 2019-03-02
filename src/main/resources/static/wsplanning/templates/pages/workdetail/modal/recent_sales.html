@@ -5,23 +5,23 @@
         </div>
 
         <div class="panel-body">
-            <div class="table-responsive ">
-                <table class="table table-striped table-hover">
+            <div class="table-responsive tableIndex">
+                <table class="table table-striped table-hover ">
                     <thead>
                     <tr>
-                        <th>Code</th>
-                        <th>Name</th>
-                        <th>Quantity</th>
+                        <th class="text-center">Code</th>
+                        <th class="text-center">Name</th>
+                        <th class="text-center">Quantity</th>
                         <th class="text-center">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr ng-repeat="item in recentSalesList">
-                        <th>12</th>
-                        <th>Name</th>
-                        <th>12</th>
-                        <td class="text-center">
-                            <button type="button" class="btn btn-primary"
+                        <td>{{item.ItemNo}}</td>
+                        <td>{{item.Name}}</td>
+                        <td>{{item.Quantity | number:2}}</td>
+                        <td>
+                            <button type="button" class="btn btn-primary center-block"
                                     ng-click="addItem(item)">Add
                             </button>
                         </td>

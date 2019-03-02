@@ -21,7 +21,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
       $scope.lstPayers = data;
       console.log(data);
     })
-    
+
     CommonServices.getDepartments().then(function (data) {
       $scope.lstDepartment = data;
       console.log(data);
@@ -31,16 +31,18 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
       $scope.lstJobCats = data;
       console.log(data);
     });
-  
+
   }
 
   console.log($ctrl.jobParams);
 
-  $scope.getClass = function (param) {
+  $scope.getClass = function (param, mechanicId) {
     switch (param) {
       case 1:
         return "icon-spare-part";
       case 2:
+        return null;
+      case 3:
         return null;
       case 4:
         return "icon-sub-contractors";
@@ -50,6 +52,14 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
         return "icon-text-rows";
       default:
         break;
+    }
+  }
+
+  $scope.getCheckRow = function (mechanicId) {
+    if (mechanicId != null) {
+      return "icon-checked-rows";
+    } else {
+      return "icon-unchecked-rows";
     }
   }
 
@@ -67,20 +77,20 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   // pagingData($scope.page);
 
   // function pagingData(currentPage) {
-    // var begin = (currentPage - 1) * $scope.limit;
-    // var end = begin + $scope.limit
-    // $scope.jobTabList = data.slice(begin, end);
-    // console.log($scope.jobTabList);
+  // var begin = (currentPage - 1) * $scope.limit;
+  // var end = begin + $scope.limit
+  // $scope.jobTabList = data.slice(begin, end);
+  // console.log($scope.jobTabList);
   // }
 
 
   // $scope.go = function () {
-    // $scope.page = $scope.pageGo;
-    // pagingData($scope.page);
+  // $scope.page = $scope.pageGo;
+  // pagingData($scope.page);
   // }
 
   // $scope.changeLimit = function () {
-    // pagingData($scope.page);
+  // pagingData($scope.page);
   // }
 
   //<editor-fold desc="Paging & Search Port">
@@ -101,6 +111,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   }
 
   console.log($scope.jobTabList)
+
 
 
   // modal
@@ -126,22 +137,37 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
     });
 
     modalInstance.result.then(function (selectedItem) {
-      // if(typeof(selectedItem) === "string")
-      // {
-      //   $scope.jobTabList[id].Items.push
-      // }
-      angular.forEach(selectedItem, function (v) {
-        $scope.jobTabList[id].Items.push(v);
-      })
-  
-      $ctrl.selected = selectedItem;
 
+      if (typeof (selectedItem) === "string") {
+        console.log(typeof (selectedItem))
+        var charactersObject = Object.assign($scope.jobTabList[id].Items[0], charactersObject);
+        var arrayObject = Object.keys(charactersObject);
+        angular.forEach(arrayObject, function (v, i) {
+            if(v === "Name") {
+              charactersObject[v]  = selectedItem;
+            } else if (v === "ItemType") {
+              charactersObject[v] = item
+            } else {
+              charactersObject[v]  = "";
+            }
+        })
+        console.log(charactersObject);
+        // objData.Note = selectedItem;
+        $scope.jobTabList[id].Items.push(charactersObject)
+        console.log($scope.jobTabList[id]);
+        // console.log(objData);
+        // $scope.jobTabList[id].Items.AdditionalData[0].
+      } else {
+        angular.forEach(selectedItem, function (v) {
+          $scope.jobTabList[id].Items.push(v);
+        })
+      }
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
     });
   };
 
-  
+
 
 
   $scope.addJob = function () {
@@ -267,6 +293,7 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
     // }
 
     $scope.historicalData.push(value);
+    console.log($scope.historicalData);
 
   }
 
