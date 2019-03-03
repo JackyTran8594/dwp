@@ -4,6 +4,8 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
 
   $ctrl.jobParams = $scope.$parent.jobObject;
 
+  $scope.jobTabList = $scope.$parent.WOJobs;
+  console.log($scope.jobTabList);
 
   loadCommon();
   $scope.lstDepartment = [];
@@ -11,25 +13,39 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   $scope.lstChargeCats = [];
   $scope.lstJobCats = [];
 
+  var jobObjectFirst = {
+    AdditionalData: null,
+    ChargeCategoryId: 0,
+    Complaint: null,
+    DeptId: "",
+    EstimatedTime: 0,
+    Items: [],
+    JobAttachments: null,
+    JobCategory: "",
+    JobNo: 1,
+    JobType: "",
+    MainGroupId: " ",
+    Note: "",
+    Payer: "",
+    RowId: 1,
+    SmanId: "",
+    SubGroupId: "",
+  }
+
   function loadCommon() {
 
     CommonServices.getChargeCats().then(function (data) {
-     
       $scope.lstChargeCats = data;
     });
     CommonServices.getPayers().then(function (data) {
       $scope.lstPayers = data;
-      
     })
-
     CommonServices.getDepartments().then(function (data) {
       $scope.lstDepartment = data;
-      
     });
-
     CommonServices.getJobCats().then(function (data) {
       $scope.lstJobCats = data;
-      
+
     });
 
   }
@@ -64,9 +80,6 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   }
 
 
-  // var data = $scope.$parent.WOJobs;
- 
-  $scope.jobTabList = $scope.$parent.WOJobs;
 
   // paging
   // $scope.totalElements = $scope.$parent.WOJobs.length;
@@ -115,9 +128,6 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
     this.isShow = !this.isShow;
   }
 
-  console.log($scope.jobTabList)
-
-
 
   // modal
   $ctrl.animationsEnabled = true;
@@ -148,17 +158,17 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
         var charactersObject = Object.assign($scope.jobTabList[id].Items[0], charactersObject);
         var arrayObject = Object.keys(charactersObject);
         angular.forEach(arrayObject, function (v, i) {
-            if(v === "Name") {
-              charactersObject[v]  = selectedItem;
-            } else if (v === "ItemType") {
-              charactersObject[v] = item
-            } else {
-              charactersObject[v]  = "";
-            }
+          if (v === "Name") {
+            charactersObject[v] = selectedItem;
+          } else if (v === "ItemType") {
+            charactersObject[v] = item
+          } else {
+            charactersObject[v] = "";
+          }
         })
         console.log(charactersObject);
         // objData.Note = selectedItem;
-        $scope.jobTabList[id].Items.push(charactersObject)
+        $scope.jobTabList[id].Items.push(charactersObject);
         console.log($scope.jobTabList[id]);
         // console.log(objData);
         // $scope.jobTabList[id].Items.AdditionalData[0].
@@ -192,8 +202,16 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
 
     modalInstance.result.then(function (selectedItem) {
       console.log(selectedItem);
-      $scope.jobTabList.push(selectedItem);
-      $ctrl.selected = selectedItem;
+      if ($scope.jobTabList === undefined) {
+        $scope.jobTabList = [];
+        $scope.jobTabList.push(jobObjectFirst);
+        $scope.jobTabList[0].AdditionalData = selectedItem.AdditionalData;
+        $scope.jobTabList[0].EstimatedTime = selectedItem.EstimatedTime;
+        $scope.jobTabList[0].JobType = selectedItem.AdditionalData;
+      } else {
+
+        $scope.jobTabList.push(selectedItem);
+      }
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
     });
@@ -226,9 +244,9 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
   });
 
   $scope.jobChecked = "";
-  $scope.disabledButton = true; 
+  $scope.disabledButton = true;
   $scope.newJobObject = {};
-  console.log( $scope.newJobObject);
+  console.log($scope.newJobObject);
 
   $scope.go = function () {
     $scope.page = $scope.pageGo;
@@ -291,8 +309,8 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
   }
 
   $scope.save = function () {
-      $uibModalInstance.close($scope.newJobObject);
-      $scope.newJobObject = {};
+    $uibModalInstance.close($scope.newJobObject);
+    $scope.newJobObject = {};
   }
 
 

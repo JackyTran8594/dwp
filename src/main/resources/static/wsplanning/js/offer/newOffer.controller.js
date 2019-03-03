@@ -189,7 +189,7 @@ UserWebApp.controller('newOfferCtrl', function ($scope, $rootScope, $locale, Htt
 
 
 UserWebApp.controller('VehicleModalCtrl', function ($scope, $rootScope, $locale, HttpService, $translate,
-  $location, $state, $filter, $uibModal, $uibModalInstance, CommonServices, item) {
+  $location, $state, $filter, $uibModal, $uibModalInstance, CommonServices) {
 
   var $ctrl = this;
 

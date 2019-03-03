@@ -158,10 +158,9 @@ public class WOController extends BaseController {
 
   @GetMapping("/wo/jobTab")
   @ResponseBody
-  public ResponseEntity jobTab(@RequestParam("SiteId") String SiteId, @RequestParam("CustNo") String CustNo,
-      @RequestParam("VehiId") String VehiId) {
+  public ResponseEntity jobTab(@RequestParam("CustNo") String CustNo, @RequestParam("VehiId") String VehiId) {
     try {
-      String rtn = asMasterClient.jobTab(SiteId, CustNo, VehiId);
+      String rtn = asMasterClient.jobTab(getSiteId(), CustNo, VehiId);
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);
@@ -172,7 +171,7 @@ public class WOController extends BaseController {
   @PostMapping("/wo/serviceItem")
   @ResponseBody
   public ResponseEntity serviceItem(@RequestBody Map<String, String> params) {
-    try {   
+    try {
       String rtn = searchServiceItemClient.getServiceItem(getToken(), params);
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception ex) {

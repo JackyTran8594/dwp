@@ -93,7 +93,8 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 
     modalInstance.result.then(function (selectedItem) {
       $scope.WOVehicle = selectedItem;
-      console.log(selectedItem);
+      $scope.jobObject.VehiId = selectedItem.VehiId
+      console.log($scope.jobObject.VehiId);
       $rootScope.$broadcast("chooseVehicle", { "item": selectedItem });
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
@@ -112,9 +113,10 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
     });
 
     modalInstance.result.then(function (selectedItem) {
-
-      console.log(selectedItem);
       $scope.WOCustomer = selectedItem;
+      $scope.jobObject.CustNo = selectedItem.CustNo
+      console.log( $scope.jobObject.CustNo);
+
       $rootScope.$broadcast("chooseCustomer", { "item": selectedItem });
     }, function () {
       console.log('Modal dismissed at: ' + new Date());

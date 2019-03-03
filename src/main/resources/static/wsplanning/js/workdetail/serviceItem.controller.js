@@ -55,7 +55,7 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
     console.log(checked);
     var index = 0;
     if ($scope.listItem.length > 0) {
-      angular.forEach(listItem, function (v, i) {
+      angular.forEach($scope.listItem, function (v, i) {
         if (item.ItemNo === v.ItemNo && checked === false) {
           $scope.listItem.splice(i, 1);
         } else {
