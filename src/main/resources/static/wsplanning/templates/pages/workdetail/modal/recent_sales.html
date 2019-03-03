@@ -17,15 +17,13 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="item in recentSalesList">
-                            <td class="text-center"><span>{{item.ItemNo}}</span></td>
-                            <td><span>{{item.Name}}</span></td>
-                            <td class="text-center"><span>{{item.Quantity | number}}</span></td>
-                            <td class="text-center"><span>
+                            <td class="text-center">{{item.ItemNo}}</td>
+                            <td>{{item.Name}}</td>
+                            <td class="text-center">{{item.Quantity | number}}</td>
+                            <td class="text-center">
                                     <button type="button" class="btn btn-primary center-block"
                                         ng-click="addItem(item)">{{'btnAdd' | translate}}
                                     </button>
-                                </span>
-
                             </td>
                         </tr>
                         <tr ng-if="isNoData || !recentSalesList || recentSalesList.length <= 0" class="active">

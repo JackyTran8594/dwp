@@ -171,7 +171,7 @@ var translationsVI = {
   breadcrumbWorkNew: "New WorkOrder",
 
   //common
-  btnAdd: "Thêm mới",
+  // btnAdd: "Thêm mới",
   btnAddWO: "+WO",
   btnAddOffer: "+Offer",
   btnAddBook: "+Booking",
