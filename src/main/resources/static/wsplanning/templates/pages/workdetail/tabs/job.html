@@ -286,15 +286,16 @@
                                                             <tr>
                                                                 <th class="text-center" style="width: 5%">No.</th>
                                                                 <th class="text-center" style="width: 5%"></th>
-                                                                <th class="text-center" style="width: 10%">Model Code
+                                                                <th class="" style="width: 10%">Model Code
                                                                 </th>
                                                                 <th class="text-center">Name</th>
                                                                 <th class="text-center" style="width: 5%">Quantity</th>
+                                                                <th class="text-center" style="width: 10%"></th>
                                                                 <th class="text-center" style="width: 10%">Actions</th>
                                                             </tr>
                                                         </thead>
                                                         <!--BODY-->
-                                                        <tbody>
+                                                        <tbody ng-hide="item.Items.length === 0">
                                                             <tr ng-repeat="obj in item.Items track by $index">
                                                                 <td class="text-center" style="width: 5%">
                                                                     <span>{{$index+1}}</span>
@@ -302,7 +303,7 @@
                                                                 <td class="text-center" style="width: 5%">
                                                                     <span ng-class="getClass(obj.ItemType)"></span>
                                                                 </td>
-                                                                <td class="text-center" style="width: 10%">
+                                                                <td class="" style="width: 10%">
                                                                     <span>{{obj.ItemNo}}</span>
                                                                 </td>
                                                                 <td class=""><span>{{obj.Name}}</span></td>
@@ -318,11 +319,12 @@
                                                                 <td class="text-center" style="width: 10%">
                                                                     <span ng-class="getCheckRow(item.MechanicId)"
                                                                         ng-hide="obj.ItemType !== 7 && obj.ItemType !== 8">
-                                                                        <!-- <input
-                                                                            ng-hide="obj.ItemType !== 7 && obj.ItemType !== 8"
-                                                                            type="checkbox" name="" class=""
-                                                                            ng-checked="item.MechanicId != null"
-                                                                            disabled /> -->
+                                                                    </span>
+                                                                </td>
+                                                                <td class="text-center" style="width: 10%">
+                                                                    <span>
+                                                                        <a class="btn btn-primary"
+                                                                            ng-click="removeItem($parent.$index, $index)">{{'btnDelete' | translate}}</a>
                                                                     </span>
                                                                 </td>
                                                             </tr>

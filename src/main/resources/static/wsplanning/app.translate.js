@@ -175,7 +175,7 @@ var translationsVI = {
   btnAddWO: "+WO",
   btnAddOffer: "+Offer",
   btnAddBook: "+Booking",
-  btnDelete: "Xóa",
+  // btnDelete: "Xóa",
   btnRefresh: "Tải lại",
   btnMore: "More",
   btnEdit: "Edit",
@@ -278,11 +278,15 @@ var translationsVI = {
   CustomerGroup: "Customer group",
   AccountGroup: "Customer group",
 
-  // Title
+  // Title in Job Tab
   Spare: "Spare Part",
   Labour:"Labour Operation",
   TextRows:" Text Rows",
-  SubContractors: "Sub Contractors"
+  SubContractors: "Sub Contractors",
+  recentSaleTitle: "Recent sales from this job type",
+  JobQuickSelection: "Job Quick Selection",
+  SelectedItem: "The Selected Item",
+  AdditionalData: "The Additional Data"
 
 };
 

@@ -2,10 +2,26 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
   $scope.WorkOrderId = $stateParams.id;
   $scope.type = $stateParams.type;
   $scope.WOJobs = WorkOrder.data.WOJobs;
-  $scope.jobObject = {
-    SiteId: WorkOrder.data.SiteId,
-    CustNo: WorkOrder.data.WOCustomer.CustNo,
-    VehiId: WorkOrder.data.WOVehicle.VehiId
+  $scope.jobObject = {};
+
+  checkWorkOrder(WorkOrder)
+
+  function checkWorkOrder(item) {
+    if (item.data.WOJobs === undefined) {
+      $scope.jobObject = {
+        SiteId: '',
+        CustNo: '',
+        VehiId: ''
+      }
+    }
+    else {
+      $scope.jobObject = {
+        SiteId: WorkOrder.data.SiteId,
+        CustNo: WorkOrder.data.WOCustomer.CustNo,
+        VehiId: WorkOrder.data.WOVehicle.VehiId
+      }
+    }
+    console.log(item);
   }
 
   console.log(WorkOrder.data);
@@ -72,7 +88,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
       controllerAs: '$ctrl',
       size: size,
       backdrop: 'static',
-    
+
     });
 
     modalInstance.result.then(function (selectedItem) {
@@ -92,11 +108,11 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
       controllerAs: '$ctrl',
       size: size,
       backdrop: 'static',
-      
+
     });
 
     modalInstance.result.then(function (selectedItem) {
-  
+
       console.log(selectedItem);
       $scope.WOCustomer = selectedItem;
       $rootScope.$broadcast("chooseCustomer", { "item": selectedItem });
@@ -114,12 +130,12 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
       controllerAs: '$ctrl',
       size: size,
       backdrop: 'static',
-     
+
     });
 
     modalInstance.result.then(function (selectedItem) {
       console.log(selectedItem);
-      
+
       $scope.WOContact = selectedItem;
       $rootScope.$broadcast("chooseContact", { "item": selectedItem });
     }, function () {

@@ -14,22 +14,22 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   function loadCommon() {
 
     CommonServices.getChargeCats().then(function (data) {
-      console.log(data);
+     
       $scope.lstChargeCats = data;
     });
     CommonServices.getPayers().then(function (data) {
       $scope.lstPayers = data;
-      console.log(data);
+      
     })
 
     CommonServices.getDepartments().then(function (data) {
       $scope.lstDepartment = data;
-      console.log(data);
+      
     });
 
     CommonServices.getJobCats().then(function (data) {
       $scope.lstJobCats = data;
-      console.log(data);
+      
     });
 
   }
@@ -65,14 +65,19 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
 
 
   // var data = $scope.$parent.WOJobs;
-
+ 
   $scope.jobTabList = $scope.$parent.WOJobs;
 
   // paging
-  $scope.totalElements = $scope.$parent.WOJobs.length;
+  // $scope.totalElements = $scope.$parent.WOJobs.length;
 
   $scope.limit = 5;
   $scope.page = 1;
+
+  $scope.removeItem = function (parentId, childrenId) {
+    $scope.jobTabList[parentId].Items.splice(childrenId, 1);
+    console.log($scope.jobTabList[parentId].Items);
+  }
 
   // pagingData($scope.page);
 
@@ -187,6 +192,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
 
     modalInstance.result.then(function (selectedItem) {
       console.log(selectedItem);
+      $scope.jobTabList.push(selectedItem);
       $ctrl.selected = selectedItem;
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
@@ -201,8 +207,6 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
 
 
   var $ctrl = this;
-  $scope.title = "Job Quick Selection";
-  $scope.recentSaleTitle = "Recent sales from this job type";
   $scope.recentSalesList = [];
   $scope.additionalData = [];
   $scope.historicalData = [];
@@ -221,6 +225,11 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
     }
   });
 
+  $scope.jobChecked = "";
+  $scope.disabledButton = true; 
+  $scope.newJobObject = {};
+  console.log( $scope.newJobObject);
+
   $scope.go = function () {
     $scope.page = $scope.pageGo;
   }
@@ -229,11 +238,15 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
     loadDataSales(false);
   }
 
+
   // call searchserviceitem
   $scope.recentSales = function (sub) {
     console.log(sub);
     $scope.additionalData = sub.AdditionalData;
     loadDataSales(sub.JobType);
+    $scope.jobChecked = sub.Name;
+    $scope.newJobObject = sub;
+    $scope.disabledButton = false;
   }
 
 
@@ -262,7 +275,7 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
 
     WorkOrderService.countServiceItem(params).then(function (res) {
       // $scope.recentSalesList = res.data;
-      console.log(res)
+      // console.log(res)
       $scope.totalElements = res.data;
       $scope.isNoData = ($scope.totalElements <= 0);
       common.spinner(false);
@@ -274,27 +287,12 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
   }
 
   $scope.addItem = function (value) {
-    // if ($scope.historicalData.length > 0) {
-    //   var i = 0;
-    //   angular.forEach($scope.historicalData, function (v, i) {
-    //     if (value.ModelCode === v.ModelCode) {
-    //       v.Quantity += value.Quantity;
-    //       break;
-    //     } else {
-    //       i++;
-    //     }
-    //   });
-
-    //   if (i === $scope.historicalData.length) {
-    //     $scope.historicalData.push(item);
-    //   }
-    // } else {
-    //   $scope.historicalData.push(item);
-    // }
-
     $scope.historicalData.push(value);
-    console.log($scope.historicalData);
+  }
 
+  $scope.save = function () {
+      $uibModalInstance.close($scope.newJobObject);
+      $scope.newJobObject = {};
   }
 
 
