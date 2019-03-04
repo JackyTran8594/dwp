@@ -449,7 +449,7 @@ table th {
 } */
 
 .wrappable {
-  /* max-width: 50% !important; */
+  padding: 0 0 !important;
 }
 
 .tree-level {

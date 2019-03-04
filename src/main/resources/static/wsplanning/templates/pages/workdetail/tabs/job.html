@@ -203,7 +203,7 @@
                                                         <!-- <input type="text" class="form-control" ng-model="item.JobType"> -->
                                                         <select class="form-control" ng-model="item.JobType"
                                                             class="form-control"
-                                                            ng-options="o.Id as o.ChargeCategoryId for o in lstJobCats">
+                                                            ng-options="o.Id as o.Name for o in lstJobCats">
                                                         </select>
                                                     </div>
 
@@ -280,7 +280,8 @@
                                     <div class="form-horizontal">
                                         <div class="row">
                                             <form class="formValidate" name="contractFrm">
-                                                <div class="table-responsive tableIndex">
+                                                <div class="table-responsive tableIndex"
+                                                    ng-hide="item.Items.length === 0">
                                                     <table class="table table-bordered table-hover">
                                                         <thead>
                                                             <tr>
@@ -295,7 +296,7 @@
                                                             </tr>
                                                         </thead>
                                                         <!--BODY-->
-                                                        <tbody ng-hide="item.Items.length === 0">
+                                                        <tbody>
                                                             <tr ng-repeat="obj in item.Items track by $index">
                                                                 <td class="text-center" style="width: 5%">
                                                                     <span>{{$index+1}}</span>
@@ -306,7 +307,9 @@
                                                                 <td class="text-center" style="width: 10%">
                                                                     <span>{{obj.ItemNo}}</span>
                                                                 </td>
-                                                                <td class="text-center text-wrap" span>{{obj.Name}}</span></td>
+                                                                <td class="text-left">
+                                                                    <span class="">{{obj.Name}}</span>
+                                                                </td>
                                                                 <!-- <td class="text-center" style="width: 5%"><span
                                                                         ng-hide="obj.ItemType === 8">{{obj.Quantity}}</span>
                                                                 </td> -->
