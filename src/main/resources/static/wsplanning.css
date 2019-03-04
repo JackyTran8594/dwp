@@ -431,15 +431,15 @@ table th {
 }
 
 .tableIndex td > span {
-  /* display: block;
-  height: 100%;
+ display: block;
+  /* height: 100%;
   width: 100%;
   padding: 0; */
 }
 
 .tableIndex td { 
   /* text-align: center; */
-  padding: 0 0 !important;
+  /* padding: 0 0 !important; */
 }
 
 
