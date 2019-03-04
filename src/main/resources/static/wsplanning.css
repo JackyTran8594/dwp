@@ -413,9 +413,14 @@ form.form-label-right .control-label {
  
 }
 
-table td {
-  white-space: -o-pre-wrap;
+.nowhitespace table td {
   word-wrap: break-word;
+  white-space: normal !important;
+}
+
+table td {
+  word-wrap: break-word;
+  white-space: -o-pre-wrap;
   white-space: pre-wrap;
   white-space: -moz-pre-wrap;
   white-space: -pre-wrap;
