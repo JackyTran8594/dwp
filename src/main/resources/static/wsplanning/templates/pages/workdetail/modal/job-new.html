@@ -49,21 +49,21 @@
 
                                     <div class="panel-body">
                                         <div class="table-responsive ">
-                                            <table class="table table-striped table-hover">
+                                            <table class="table table-bordered table-hover">
                                                 <thead>
                                                     <tr>
-                                                        <th>No.</th>
-                                                        <th>Code</th>
-                                                        <th>Name</th>
-                                                        <th>Quantity</th>
+                                                        <th class="text-center">No.</th>
+                                                        <th class="text-center">Code</th>
+                                                        <th class="text-center">Name</th>
+                                                        <th class="text-center">Quantity</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr ng-repeat="item in historicalData track by $index">
-                                                        <th>{{$index + 1}}</th>
-                                                        <th>{{item.ItemNo}}</th>
-                                                        <th>{{item.Name}}</th>
-                                                        <th>{{item.Quantity}}</th>
+                                                        <th class="text-center">{{$index + 1}}</th>
+                                                        <th class="text-center">{{item.ItemNo}}</th>
+                                                        <th class="text-center">{{item.Name}}</th>
+                                                        <th class="text-center">{{item.Quantity}}</th>
                                                     </tr>
 
                                                 </tbody>

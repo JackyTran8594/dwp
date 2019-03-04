@@ -6,7 +6,7 @@
 
         <div class="panel-body">
             <div class="table-responsive tableIndex">
-                <table class="table table-striped table-hover ">
+                <table class="table table-bordered table-hover ">
                     <thead>
                         <tr>
                             <th class="text-center">Code</th>
@@ -18,7 +18,7 @@
                     <tbody>
                         <tr ng-repeat="item in recentSalesList">
                             <td class="text-center">{{item.ItemNo}}</td>
-                            <td>{{item.Name}}</td>
+                            <td class="text-center text-wrap">{{item.Name}}</td>
                             <td class="text-center">{{item.Quantity | number}}</td>
                             <td class="text-center">
                                     <button type="button" class="btn btn-primary center-block"
