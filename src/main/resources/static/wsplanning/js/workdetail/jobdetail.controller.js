@@ -23,7 +23,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
     Items: [],
     JobAttachments: null,
     JobCategory: "",
-    JobNo: 1,
+    JobNo: "",
     JobType: "",
     MainGroupId: " ",
     Note: "",
@@ -52,7 +52,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
       console.log(data);
 
     });
-    
+
     CommonServices.getJobTypes().then(function (data) {
       $scope.lstJobTypes = data;
       console.log(data);
@@ -168,7 +168,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
         var charactersObject = Object.assign($scope.jobTabList[id].Items[0], charactersObject);
         var arrayObject = Object.keys(charactersObject);
         angular.forEach(arrayObject, function (v, i) {
-          if (v === "Name") {
+          if (v === "Note") {
             charactersObject[v] = selectedItem;
           } else if (v === "ItemType") {
             charactersObject[v] = item
@@ -180,7 +180,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
         // objData.Note = selectedItem;
         $scope.jobTabList[id].Items = [];
         $scope.jobTabList[id].Items.push(charactersObject);
-        
+
         console.log($scope.jobTabList[id]);
         // console.log(objData);
         // $scope.jobTabList[id].Items.AdditionalData[0].
@@ -188,6 +188,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
         angular.forEach(selectedItem, function (v) {
           $scope.jobTabList[id].Items.push(v);
         })
+        console.log($scope.jobTabList[id].Items);
       }
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
@@ -214,15 +215,29 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
 
     modalInstance.result.then(function (selectedItem) {
       console.log(selectedItem);
+      //add in new WO
       if ($scope.jobTabList === undefined) {
         $scope.jobTabList = [];
         $scope.jobTabList.push(jobObjectFirst);
         $scope.jobTabList[0].AdditionalData = selectedItem.AdditionalData;
         $scope.jobTabList[0].EstimatedTime = selectedItem.EstimatedTime;
-        $scope.jobTabList[0].JobType = selectedItem.AdditionalData;
-      } else {
+        $scope.jobTabList[0].JobType = selectedItem.JobType;
+        $scope.jobTabList[0].Note = selectedItem.JobTitle;
+        $scope.jobTabList[0].Name = selectedItem.Name;
+        // $scope.jobTabList[0].Id = selectedItem.Id;
 
-        $scope.jobTabList.push(selectedItem);
+      } else {
+        // add in detail WO
+        jobObjectFirst.Note = selectedItem.JobTitle;
+        // jobObjectFirst.ItemType = item;
+        jobObjectFirst.JobType = selectedItem.JobType;
+        jobObjectFirst.Name = selectedItem.Name;
+        jobObjectFirst.EstimatedTime = selectedItem.EstimatedTime;
+        jobObjectFirst.AdditionalData = selectedItem.AdditionalData;
+
+        console.log(jobObjectFirst);
+        $scope.jobTabList.push(jobObjectFirst);
+        console.log($scope.jobTabList);
       }
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
