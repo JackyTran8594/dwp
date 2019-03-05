@@ -93,8 +93,8 @@
                                                 <div class="form-group">
                                                     <label class="control-label col-xs-8">Estimated Time:</label>
                                                     <div class="col-xs-4">
-                                                        <input type="text" class="form-control"
-                                                            ng-model="item.EstimatedTime | number:2">
+                                                        <input type="number" class="form-control"
+                                                            ng-model="item.EstimatedTime" step="0.01" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/">
                                                     </div>
 
                                                 </div>
@@ -153,13 +153,14 @@
                                             <li><a class="btn btn-xs" data-popup="tooltip" data-placement="top"
                                                     title="Sub Contractors" ng-click="openServiceItem(4, $index)"><span
                                                         class="icon-paste"></span></a>
-                                            <li ng-click="toggleJobRow()"><a ng-class="{'rotate-180': isShow == true}"
-                                                    data-action="collapse" data-popup="tooltip" title="Collapse"></a>
-                                            </li>
-											<li><a class="btn btn-xs" data-popup="tooltip" data-placement="top"
+														<li><a class="btn btn-xs" data-popup="tooltip" data-placement="top"
                                                     title="Non Stock Items" ng-click="openServiceItem(2, $index)"><span
                                                         class="icon-folder-remove"></span></a>
                                             </li>
+                                            <li ng-click="toggleJobRow()"><a ng-class="{'rotate-180': isShow == true}"
+                                                    data-action="collapse" data-popup="tooltip" title="Collapse"></a>
+                                            </li>
+											
                                         </ul>
                                     </div>
                                 </div>
@@ -197,8 +198,8 @@
                                                 <div class="form-group">
                                                     <label class="control-label col-xs-8">Estimated Time:</label>
                                                     <div class="col-xs-4">
-                                                        <input type="text" class="form-control"
-                                                            ng-model="item.EstimatedTime | number:2">
+                                                        <input type="number" class="form-control"
+                                                            ng-model="item.EstimatedTime" step="0.01" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/">
                                                     </div>
 
                                                 </div>
