@@ -177,13 +177,15 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
           }
         })
         console.log(charactersObject);
-        // objData.Note = selectedItem;
-        $scope.jobTabList[id].Items = [];
+
+        $scope.jobTabList[id].Items.filter(function (v, i) {
+            return (v.ItemType !== 8)
+        })
+        console.log($scope.jobTabList[id].Items);
+
         $scope.jobTabList[id].Items.push(charactersObject);
 
         console.log($scope.jobTabList[id]);
-        // console.log(objData);
-        // $scope.jobTabList[id].Items.AdditionalData[0].
       } else {
         angular.forEach(selectedItem, function (v) {
           $scope.jobTabList[id].Items.push(v);
