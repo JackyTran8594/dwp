@@ -158,6 +158,18 @@ var translationsEN = {
   Phone: "Phone",
   CustomerGroup: "Customer group",
   AccountGroup: "Customer group",
+
+  // Title in Job Tab
+  Spare: "Spare Part",
+  Labour:"Labour Operation",
+  TextRows:" Text Rows",
+  SubContractors: "Sub Contractors",
+  recentSaleTitle: "Recent sales from this job type",
+  JobQuickSelection: "Job Quick Selection",
+  SelectedItem: "The Selected Item",
+  AdditionalData: "The Additional Data",
+  NonStockItems :"Non Stock Items"
+
 };
 
 var translationsVI = {
@@ -286,7 +298,8 @@ var translationsVI = {
   recentSaleTitle: "Recent sales from this job type",
   JobQuickSelection: "Job Quick Selection",
   SelectedItem: "The Selected Item",
-  AdditionalData: "The Additional Data"
+  AdditionalData: "The Additional Data",
+  NonStockItems :"Non Stock Items"
 
 };
 

@@ -31,16 +31,24 @@
                                     <div class="heading-elements">
                                         <ul class="icons-list">
                                             <li><a class="btn btn-xs" ng-click="openServiceItem(7, $index)"><span
+                                                        data-popup="tooltip" data-placement="top" title="Labour"
                                                         class="icon-hammer-wrench"></span></a>
                                             </li>
-                                            <li><a class="btn btn-xs" ng-click="openServiceItem(1, $index)"><span
+                                            <li><a class="btn btn-xs" data-popup="tooltip" data-placement="top"
+                                                    title="Spare Part" ng-click="openServiceItem(1, $index)"><span
                                                         class=" icon-cog3"></span></a>
                                             </li>
-                                            <li><a class="btn btn-xs" ng-click="openServiceItem(8, $index)"><span
+                                            <li><a class="btn btn-xs" data-popup="tooltip" data-placement="top"
+                                                    title="Text Rows" ng-click="openServiceItem(8, $index)"><span
                                                         class="icon-file-text2"></span></a>
                                             </li>
-                                            <li><a class="btn btn-xs" ng-click="openServiceItem(4, $index)"><span
+                                            <li><a class="btn btn-xs" data-popup="tooltip" data-placement="top"
+                                                    title="Sub Contractors" ng-click="openServiceItem(4, $index)"><span
                                                         class="icon-paste"></span></a>
+                                            </li>
+                                            <li><a class="btn btn-xs" data-popup="tooltip" data-placement="top"
+                                                    title="Non Stock Items" ng-click="openServiceItem(2, $index)"><span
+                                                        class="icon-folder-remove"></span></a>
                                             </li>
                                             <li ng-click="toggleJobRow(item.RowId)"><a
                                                     ng-class="{'rotate-180': isShow == true}" data-action="collapse"
@@ -58,34 +66,35 @@
                                                         <label>Job &nbsp;{{item.JobNo}}:</label> {{item.Note}}
             
                                                     </div> -->
-                                            <div class="col-xs-4">
+                                            <div class="col-xs-1">
                                                 <!-- <label>Job &nbsp;{{item.JobNo}}:</label> {{item.Note}} -->
                                                 <div class="form-group">
-                                                    <label class="control-label col-xs-4">Job No: </label>
-                                                    <div class="col-xs-8">
-                                                        <input type="text" class="form-control" ng-model="item.JobNo">
+                                                    <label class="control-label col-xs-9">Job No: </label>
+                                                    <div class="col-xs-3">
+                                                        <input type="text" class="form-control" ng-model="item.JobNo"
+                                                            readonly>
                                                     </div>
                                                 </div>
 
 
                                             </div>
-                                            <div class="col-xs-4">
+                                            <div class="col-xs-9">
                                                 <!-- <label>Job &nbsp;{{item.JobNo}}:</label> {{item.Note}} -->
                                                 <div class="form-group">
-                                                    <label class="control-label col-xs-4">Job Note: </label>
-                                                    <div class="col-xs-8">
+                                                    <label class="control-label col-xs-2">Job Title: </label>
+                                                    <div class="col-xs-10">
                                                         <input type="text" class="form-control" ng-model="item.Note">
 
                                                     </div>
                                                 </div>
 
                                             </div>
-                                            <div class="col-xs-4">
+                                            <div class="col-xs-2">
                                                 <div class="form-group">
-                                                    <label class="control-label col-xs-4">Estimated Time:</label>
-                                                    <div class="col-xs-8">
+                                                    <label class="control-label col-xs-8">Estimated Time:</label>
+                                                    <div class="col-xs-4">
                                                         <input type="text" class="form-control"
-                                                            ng-model="item.EstimatedTime">
+                                                             ng-model="item.EstimatedTime | number:2" >
                                                     </div>
 
                                                 </div>
@@ -109,7 +118,7 @@
                                                     <label class="control-label col-xs-4">Job Type:</label>
                                                     <div class="col-xs-8">
                                                         <select ng-model="item.JobType" class="form-control"
-                                                            ng-options="o.Id as o.Name for o in lstJobCats"></select>
+                                                            ng-options="o.Id as o.Name for o in lstJobTypes"></select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -130,17 +139,20 @@
                                     <div class="heading-elements">
                                         <ul class="icons-list">
                                             <li><a class="btn btn-xs" ng-click="openServiceItem(7, $index)"><span
+                                                        data-popup="tooltip" data-placement="top" title="Labour"
                                                         class="icon-hammer-wrench"></span></a>
                                             </li>
-                                            <li><a class="btn btn-xs" ng-click="openServiceItem(1, $index)"><span
+                                            <li><a class="btn btn-xs" data-popup="tooltip" data-placement="top"
+                                                    title="Spare Part" ng-click="openServiceItem(1, $index)"><span
                                                         class=" icon-cog3"></span></a>
                                             </li>
-                                            <li><a class="btn btn-xs" ng-click="openServiceItem(8, $index)"><span
+                                            <li><a class="btn btn-xs" data-popup="tooltip" data-placement="top"
+                                                    title="Text Rows" ng-click="openServiceItem(8, $index)"><span
                                                         class="icon-file-text2"></span></a>
                                             </li>
-                                            <li><a class="btn btn-xs" ng-click="openServiceItem(4, $index)"><span
+                                            <li><a class="btn btn-xs" data-popup="tooltip" data-placement="top"
+                                                    title="Sub Contractors" ng-click="openServiceItem(4, $index)"><span
                                                         class="icon-paste"></span></a>
-                                            </li>
                                             <li ng-click="toggleJobRow()"><a ng-class="{'rotate-180': isShow == true}"
                                                     data-action="collapse" data-popup="tooltip" title="Collapse"></a>
                                             </li>
@@ -149,34 +161,40 @@
                                 </div>
                                 <div class="panel-body">
                                     <div class="form-horizontal">
-                                        <div class="row">
-                                            <div class="col-xs-4">
+                                        iv class="row">
+                                            <!-- <div class="col-xs-10">
+                                                        <label>Job &nbsp;{{item.JobNo}}:</label> {{item.Note}}
+            
+                                                    </div> -->
+                                            <div class="col-xs-1">
+                                                <!-- <label>Job &nbsp;{{item.JobNo}}:</label> {{item.Note}} -->
                                                 <div class="form-group">
-                                                    <label class="control-label col-xs-4">Job No: </label>
-                                                    <div class="col-xs-8">
-                                                        <input type="text" class="form-control" ng-model="item.JobNo">
+                                                    <label class="control-label col-xs-9">Job No: </label>
+                                                    <div class="col-xs-3">
+                                                        <input type="text" class="form-control" ng-model="item.JobNo"
+                                                            readonly>
                                                     </div>
                                                 </div>
-                                                <!-- <label>Job &nbsp;{{item.JobNo}}:</label> {{item.Note}} -->
+
 
                                             </div>
-                                            <div class="col-xs-4">
+                                            <div class="col-xs-9">
                                                 <!-- <label>Job &nbsp;{{item.JobNo}}:</label> {{item.Note}} -->
                                                 <div class="form-group">
-                                                    <label class="control-label col-xs-4">Job Note: </label>
-                                                    <div class="col-xs-8">
+                                                    <label class="control-label col-xs-2">Job Title: </label>
+                                                    <div class="col-xs-10">
                                                         <input type="text" class="form-control" ng-model="item.Note">
+
                                                     </div>
                                                 </div>
 
                                             </div>
-                                            <div class="col-xs-4">
-
+                                            <div class="col-xs-2">
                                                 <div class="form-group">
-                                                    <label class="control-label col-xs-4">Estimated Time:</label>
-                                                    <div class="col-xs-8">
+                                                    <label class="control-label col-xs-8">Estimated Time:</label>
+                                                    <div class="col-xs-4">
                                                         <input type="text" class="form-control"
-                                                            ng-model="item.EstimatedTime">
+                                                            ng-model="item.EstimatedTime | number:2" >
                                                     </div>
 
                                                 </div>
@@ -203,7 +221,7 @@
                                                         <!-- <input type="text" class="form-control" ng-model="item.JobType"> -->
                                                         <select class="form-control" ng-model="item.JobType"
                                                             class="form-control"
-                                                            ng-options="o.Id as o.Name for o in lstJobCats">
+                                                            ng-options="o.Id as o.Name for o in lstJobTypes">
                                                         </select>
                                                     </div>
 
@@ -251,7 +269,7 @@
                                                     <!-- <input type="text" class="form-control" ng-model="item.JobCategory"> -->
                                                     <div class="col-xs-8">
                                                         <select class="form-control" ng-model="item.JobCategory"
-                                                            ng-options="o.Id as o.Name for o in lstTrans">
+                                                            ng-options="o.Id as o.Name for o in lstJobCats">
                                                         </select>
                                                     </div>
 
@@ -287,7 +305,7 @@
                                                             <tr>
                                                                 <th class="text-center" style="width: 5%">No.</th>
                                                                 <th class="text-center" style="width: 5%"></th>
-                                                                <th class="text-center" style="width: 10%">Model Code
+                                                                <th class="text-center" style="width: 10%">Code
                                                                 </th>
                                                                 <th class="text-center">Name</th>
                                                                 <th class="text-center" style="width: 5%">Quantity</th>

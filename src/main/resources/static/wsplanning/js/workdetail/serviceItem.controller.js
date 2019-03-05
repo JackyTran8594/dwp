@@ -15,6 +15,13 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
           $scope.title = translationId;
         })
         return $scope.title;
+        case 2:
+        $translate('NonStockItems').then(function (nonStockItems) {
+          $scope.title = nonStockItems;
+        }, function (translationId) {
+          $scope.title = translationId;
+        })
+        return $scope.title;
       case 4:
         $translate('SubContractors').then(function (subContractors) {
           $scope.title = subContractors;

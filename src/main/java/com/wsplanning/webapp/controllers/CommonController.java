@@ -216,7 +216,7 @@ public class CommonController extends BaseController {
   @GetMapping("/site/getChargeCats")
   public ResponseEntity getChargeCats() {
     try {
-      String rtn = siteClient.getChargeCats(getToken());
+      String rtn = siteClient.getChargeCats(getSiteId());
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);

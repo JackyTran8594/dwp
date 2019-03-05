@@ -12,6 +12,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   $scope.lstPayers = [];
   $scope.lstChargeCats = [];
   $scope.lstJobCats = [];
+  $scope.lstJobTypes = [];
 
   var jobObjectFirst = {
     AdditionalData: null,
@@ -36,16 +37,25 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
 
     CommonServices.getChargeCats().then(function (data) {
       $scope.lstChargeCats = data;
+      console.log(data);
     });
     CommonServices.getPayers().then(function (data) {
       $scope.lstPayers = data;
+      console.log(data);
     })
     CommonServices.getDepartments().then(function (data) {
       $scope.lstDepartment = data;
+      console.log(data);
     });
     CommonServices.getJobCats().then(function (data) {
       $scope.lstJobCats = data;
+      console.log(data);
 
+    });
+    
+    CommonServices.getJobTypes().then(function (data) {
+      $scope.lstJobTypes = data;
+      console.log(data);
     });
 
   }
@@ -57,7 +67,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
       case 1:
         return "icon-spare-part";
       case 2:
-        return null;
+        return "icon-non-stock-item";
       case 3:
         return null;
       case 4:
@@ -168,7 +178,9 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
         })
         console.log(charactersObject);
         // objData.Note = selectedItem;
+        $scope.jobTabList[id].Items = [];
         $scope.jobTabList[id].Items.push(charactersObject);
+        
         console.log($scope.jobTabList[id]);
         // console.log(objData);
         // $scope.jobTabList[id].Items.AdditionalData[0].

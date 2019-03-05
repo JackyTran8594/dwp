@@ -461,15 +461,16 @@ table th {
   list-style: none;
 }
 
-/* icon for row */
-.icon-cog:before {
-  content: "\e994";
+.icon-non-stock-item {
+  max-width: 12px;
+    max-height: 12px;
+    position: relative;
 }
 
-.icon-tools-2:before {
-  content: "\e901";
+.icon-non-stock-item::before {
+  content: "\ea47"
 }
-/* end */
+
 
 .icon-spare-part {
     max-width: 12px;
