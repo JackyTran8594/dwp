@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpSession;
 
@@ -172,7 +173,9 @@ public class WOController extends BaseController {
   @ResponseBody
   public ResponseEntity serviceItem(@RequestBody Map<String, String> params) {
     try {
+      long startTime = System.currentTimeMillis();
       String rtn = searchServiceItemClient.getServiceItem(getToken(), params);
+      logger.info("-------wokOrderClient end for: " + (System.currentTimeMillis() - startTime));
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);
@@ -185,6 +188,7 @@ public class WOController extends BaseController {
   public ResponseEntity countServiceItem(@RequestBody Map<String, String> params) {
     try {
       String rtn = searchServiceItemClient.getCountServiceItem(getToken(), params);
+     
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);

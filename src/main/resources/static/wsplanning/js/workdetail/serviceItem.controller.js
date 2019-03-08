@@ -15,7 +15,7 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
           $scope.title = translationId;
         })
         return $scope.title;
-        case 2:
+      case 2:
         $translate('NonStockItems').then(function (nonStockItems) {
           $scope.title = nonStockItems;
         }, function (translationId) {
@@ -128,6 +128,17 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
 
         console.log(response);
         $scope.isNoData = ($scope.totalElements <= 0);
+        common.spinner(false);
+      }, function error(response) {
+        console.log(response);
+        common.spinner(false);
+      });
+    } else {
+      WorkOrderService.serviceItem(params).then(function (response) {
+        $scope.lstData = response.data;
+        console.log(response);
+        $scope.pageGo = $scope.page;
+        $scope.isShow = false;
         common.spinner(false);
       }, function error(response) {
         console.log(response);

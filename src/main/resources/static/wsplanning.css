@@ -569,21 +569,57 @@ table th {
 }
 
 
-@media screen and (min-width: 769px) {
+/* .heading-elements-toggle {
+  cursor: pointer;
+  display: block;
+  line-height: 1;
+  position: absolute;
+  top: 50%;
+  right: 0;
+} */
+
+
+
+@media (min-width: 769px) {
+  .main-content {
+     max-height: 600px;
+     /* overflow-y: scroll; */
+  }
+
+  .heading-elements-toggle {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+
+  
+
+  .heading-elements {
+    float: right !important;
+  }
+
+  .heading-elements:not(.not-collapsible) {
+    display: inline;
+  }
+
+  .panel-title {
+    /* width: 80% !important; */
+  }
+
+  .heading-elements:not(.visible-elements) .icons-list {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 1025px) {
   .main-content {
      max-height: 600px;
      /* overflow-y: scroll; */
   }
 }
 
-@media screen and (max-width: 1025px) {
-  .main-content {
-     max-height: 600px;
-     /* overflow-y: scroll; */
-  }
-}
-
-@media screen and (max-width: 1200px) {
+@media (max-width: 1200px) {
   .main-content {
      max-height: 600px;
      /* overflow-y: scroll; */

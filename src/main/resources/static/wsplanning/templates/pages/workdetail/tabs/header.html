@@ -8,19 +8,7 @@
     <div class="panel panel-flat" id="headerPanel">
         <div class="panel-heading">
             <h3 class="panel-title"><b>{{ 'WoHeader' | translate }}</b></h3>
-            <div class="heading-elements">
-                <ul class="icons-list">
-                    <li><a href="" class="btn btn-xs" data-popup="tooltip" data-placement="top"
-                        title="Add" ng-click="addItem()"><span class="icon-plus3"></span></a></li>
-                    <li><a href="" data-popup="tooltip" data-placement="top"
-                        title="Delete" class="btn btn-xs" ng-click="confirmDelete()"
-                            ng-disabled="checklistTable.list.length == 0"><span class="icon-bin"></span></a></li>
-                    <li><a class="btn btn-xs" data-popup="tooltip" data-placement="top"
-                        title="Refresh"><span class="icon-sync" ng-click="refresh()"></span></a></li>
-                    <li><a ng-class="{'rotate-180': collapsed == true}" data-action="collapse"
-                            data-target="#pnHeaderFrm" ng-click="collapse()"></a></li>
-                </ul>
-            </div>
+
         </div>
 
         <div class="panel-body panel-collapse in" id="pnHeaderFrm" ng-hide="collapsed">
@@ -63,9 +51,12 @@
                             <label class="control-label col-xs-4">{{ 'ServiceDate' | translate }}</label>
                             <div class="col-xs-8">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" datetime-picker="dd-MMMM-yyyy HH:mm:ss" date-format="dd-MMMM-yyyy HH:mm:ss" ng-model="WorkOrder._ServiceDate" is-open="isOpenServiceDate"/>
+                                    <input type="text" class="form-control" datetime-picker="dd-MMMM-yyyy HH:mm:ss"
+                                        date-format="dd-MMMM-yyyy HH:mm:ss" ng-model="WorkOrder._ServiceDate"
+                                        is-open="isOpenServiceDate" />
                                     <span class="input-group-btn">
-                                        <button type="button" class="btn btn-default" ng-click="openServiceDate($event, prop)">
+                                        <button type="button" class="btn btn-default"
+                                            ng-click="openServiceDate($event, prop)">
                                             <i class="icon-calendar"></i>
                                         </button>
                                     </span>
@@ -81,10 +72,12 @@
                             <label class="control-label col-xs-4">{{ 'ExpectedDelivery' | translate }}</label>
                             <div class="col-xs-8">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" datetime-picker="dd-MMMM-yyyy HH:mm:ss" date-format="dd-MMMM-yyyy HH:mm:ss"
-                                           ng-model="WorkOrder._CheckOutDate" is-open="isOpenCheckOutDate"/>
+                                    <input type="text" class="form-control" datetime-picker="dd-MMMM-yyyy HH:mm:ss"
+                                        date-format="dd-MMMM-yyyy HH:mm:ss" ng-model="WorkOrder._CheckOutDate"
+                                        is-open="isOpenCheckOutDate" />
                                     <span class="input-group-btn">
-                                        <button type="button" class="btn btn-default" ng-click="openCheckOutDate($event, prop)">
+                                        <button type="button" class="btn btn-default"
+                                            ng-click="openCheckOutDate($event, prop)">
                                             <i class="icon-calendar"></i>
                                         </button>
                                     </span>
@@ -103,41 +96,15 @@
                             <label class="control-label col-xs-4">{{ 'CheckInDate' | translate }}</label>
                             <div class="col-xs-8">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" datetime-picker="dd-MMMM-yyyy HH:mm:ss" date-format="dd-MMMM-yyyy HH:mm:ss"
-                                           ng-model="WorkOrder._CheckInDate" is-open="isOpenCheckInDate"/>
-                                    <span class="input-group-btn">
-                                        <button type="button" class="btn btn-default" ng-click="openCheckInDate($event, prop)">
-                                            <i class="icon-calendar"></i>
-                                        </button>
-                                    </span>
+                                    <input type="text" class="form-control" datetime-picker="dd-MMMM-yyyy HH:mm:ss"
+                                        date-format="dd-MMMM-yyyy HH:mm:ss" ng-model="WorkOrder._CheckInDate"
+                                        is-open="isOpenCheckInDate" readonly/>
+                            
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!--ExecutionDate-->
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            <label class="control-label col-xs-4">{{ 'ExecutionDate' | translate }}</label>
-                            <div class="col-xs-8">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" datetime-picker="dd-MMMM-yyyy HH:mm:ss" date-format="dd-MMMM-yyyy HH:mm:ss"
-                                           ng-model="WorkOrder._ExecutionDate" is-open="isOpenExecutionDate"/>
-                                    <span class="input-group-btn">
-                                        <button type="button" class="btn btn-default" ng-click="openExecutionDate($event, prop)">
-                                            <i class="icon-calendar"></i>
-                                        </button>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--end row 3-->
-
-
-                <!--Row 4-->
-                <div class="row">
                     <!--Mileage-->
                     <div class="col-xs-6">
                         <div class="form-group">
@@ -147,7 +114,12 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <!--end row 3-->
 
+
+                <!--Row 4-->
+                <div class="row">                  
                     <div class="col-xs-6">
                         <div class="form-group">
                             <!--CustWaiting-->
@@ -155,37 +127,33 @@
                                 <div class="form-group">
                                     <label class="checkbox-inline">
                                         <input type="checkbox" ng-model="WorkOrder.IsCustomerWaiting"
-                                               ng-checked="WorkOrder.IsCustomerWaiting == 1">
+                                            ng-checked="WorkOrder.IsCustomerWaiting == 1">
                                         {{ 'CustWaiting' | translate }}
                                     </label>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!--end row 4-->
 
-                <!--Row 5-->
-                <div class="row">
-                    <!--IsRework-->
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            <!--Rework-->
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" ng-model="WorkOrder.IsRework"
-                                               ng-checked="WorkOrder.IsRework == 1">
-                                        {{ 'Rework' | translate }}
-                                    </label>
+                      <!--IsRework-->
+                      <div class="col-xs-6">
+                            <div class="form-group">
+                                <!--Rework-->
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" ng-model="WorkOrder.IsRework"
+                                                ng-checked="WorkOrder.IsRework == 1" readonly>
+                                            {{ 'Rework' | translate }}
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                 </div>
-                <!--end row 5-->
+                <!--end row 4-->
 
-
+       
 
                 <div class="row pull-right">
                     <button type="button" ng-disabled="headerFrm.$invalid" id="btnSubmitFrm"

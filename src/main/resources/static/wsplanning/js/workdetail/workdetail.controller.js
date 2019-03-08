@@ -11,14 +11,18 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
       $scope.jobObject = {
         SiteId: '',
         CustNo: '',
-        VehiId: ''
+        VehiId: '',
+        WarrantyInfo
       }
     }
     else {
       $scope.jobObject = {
         SiteId: WorkOrder.data.SiteId,
         CustNo: WorkOrder.data.WOCustomer.CustNo,
-        VehiId: WorkOrder.data.WOVehicle.VehiId
+        VehiId: WorkOrder.data.WOVehicle.VehiId,
+        WarrantyInfo: WorkOrder.data.WOVehicle.WarrantyInfo
+        // WarrantyInfo: "153135"
+
       }
     }
     console.log(item);
@@ -94,6 +98,12 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
     modalInstance.result.then(function (selectedItem) {
       $scope.WOVehicle = selectedItem;
       $scope.jobObject.VehiId = selectedItem.VehiId
+      if (selectedItem.PayerCustomer != null) {
+        CommonServices.getCustomers(selectedItem.PayerCustomer, "").then(function (data) {
+          // console.log(data);
+          $scope.WOCustomer = data;
+        })
+      }
       console.log($scope.jobObject.VehiId);
       $rootScope.$broadcast("chooseVehicle", { "item": selectedItem });
     }, function () {
@@ -115,7 +125,8 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
     modalInstance.result.then(function (selectedItem) {
       $scope.WOCustomer = selectedItem;
       $scope.jobObject.CustNo = selectedItem.CustNo
-      console.log( $scope.jobObject.CustNo);
+
+      console.log($scope.jobObject.CustNo);
 
       $rootScope.$broadcast("chooseCustomer", { "item": selectedItem });
     }, function () {
