@@ -12,7 +12,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
         SiteId: '',
         CustNo: '',
         VehiId: '',
-        WarrantyInfo
+        WarrantyInfo: ''
       }
     }
     else {
@@ -69,12 +69,19 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
   //   console.log($scope.WorkOrder.Mileage);
   // });
 
-  function loadData() {
+  $scope.tabActive = "";
+
+  loadTab($stateParams.id);
+
+  function loadTab(id) {
+    if (id == null) {
+      return $scope.tabActive = "header";
+    }
+    return $scope.tabActive = "job";
+
   }
 
-  loadData();
 
-  $scope.tabActive = "header";
   $scope.changeTab = function (tabActive, abc) {
     $scope.tabActive = tabActive;
   }
