@@ -2,7 +2,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
 
   var $ctrl = this;
 
-  $ctrl.jobParams = $scope.$parent.jobObject;
+  $scope.jobParams = $scope.$parent.jobObject;
 
   $scope.jobTabList = $scope.$parent.WOJobs;
   console.log($scope.jobTabList);
@@ -13,8 +13,10 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   $scope.lstChargeCats = [];
   $scope.lstJobCats = [];
   $scope.lstJobTypes = [];
-
-  var jobObjectFirst = {
+  
+  
+  function clearObject() {
+	var jobObjectFirst = {
     AdditionalData: null,
     ChargeCategoryId: 0,
     Complaint: null,
@@ -28,10 +30,41 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
     MainGroupId: " ",
     Note: "",
     Payer: "",
-    RowId: 1,
+    RowId: "",
     SmanId: "",
     SubGroupId: "",
+	}
+	return jobObjectFirst;
   }
+  
+  function createItem() {
+	  var item = {
+			  BUYPR: 0,
+			  ChargeCategoryId: 0,
+			  FactTime: 0,
+			IGROUPID: 0,
+			ItemNo: "",
+			ItemType: 0,
+			MechanicId: "",
+			ModelCode: "",
+			Name: "",
+			Quantity: 0,
+			RecmTime: 0,
+			RowId: 0,
+			SaleTime: 0,
+			StockId: "",
+			StockQty: 0,
+			SuplNo: "",
+			UNITPR: 0,
+			VATCD: null,
+			WorkGroupId: null,
+			WorkType: ""
+	  }
+	  return item;
+  }
+
+  
+  
 
   function loadCommon() {
 
@@ -60,7 +93,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
 
   }
 
-  console.log($ctrl.jobParams);
+  console.log($scope.jobParams);
 
   $scope.getClass = function (param, mechanicId) {
     switch (param) {
@@ -153,8 +186,8 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
       resolve: {
         item: function () {
           return {
-            custNo: $ctrl.jobParams.CustNo,
-            vehiId: $ctrl.jobParams.VehiId,
+            custNo: $scope.jobParams.CustNo,
+            vehiId: $scope.jobParams.VehiId,
             itemType: item
           };
         }
@@ -162,30 +195,42 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
     });
 
     modalInstance.result.then(function (selectedItem) {
-
+	
       if (typeof (selectedItem) === "string") {
         console.log(typeof (selectedItem))
-        var charactersObject = Object.assign($scope.jobTabList[id].Items[0], charactersObject);
-        var arrayObject = Object.keys(charactersObject);
-        angular.forEach(arrayObject, function (v, i) {
-          if (v === "Note") {
-            charactersObject[v] = selectedItem;
-          } else if (v === "ItemType") {
-            charactersObject[v] = item
-          } else {
-            charactersObject[v] = "";
-          }
-        })
-        console.log(charactersObject);
-
-        $scope.jobTabList[id].Items.filter(function (v, i) {
+		if($scope.jobTabList[id].Items.length === 0)
+		{
+			var charactersObject = createItem();
+			charactersObject.Name = selectedItem;
+			charactersObject.ItemType = item;
+		}
+		else {
+			 $scope.jobTabList[id].Items.filter(function (v, i) {
             return (v.ItemType !== 8)
-        })
+				})
         console.log($scope.jobTabList[id].Items);
+		var charactersObject = createItem();
+			charactersObject.Name = selectedItem;
+			charactersObject.ItemType = item;
 
         $scope.jobTabList[id].Items.push(charactersObject);
 
         console.log($scope.jobTabList[id]);
+		}
+        // var charactersObject = Object.assign($scope.jobTabList[id].Items[0], charactersObject);
+        // var arrayObject = Object.keys(charactersObject);
+        // angular.forEach(arrayObject, function (v, i) {
+          // if (v === "Name") {
+            // charactersObject[v] = selectedItem;
+          // } else if (v === "ItemType") {
+            // charactersObject[v] = item
+          // } else {
+            // charactersObject[v] = "";
+          // }
+        // })
+        // console.log(charactersObject);
+
+       
       } else {
         angular.forEach(selectedItem, function (v) {
           $scope.jobTabList[id].Items.push(v);
@@ -219,8 +264,9 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
       console.log(selectedItem);
       //add in new WO
       if ($scope.jobTabList === undefined) {
+		 var jobObj = clearObject();
         $scope.jobTabList = [];
-        $scope.jobTabList.push(jobObjectFirst);
+        $scope.jobTabList.push(jobObj);
         $scope.jobTabList[0].AdditionalData = selectedItem.AdditionalData;
         $scope.jobTabList[0].EstimatedTime = selectedItem.EstimatedTime;
         $scope.jobTabList[0].JobType = selectedItem.JobType;
@@ -229,16 +275,30 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
         // $scope.jobTabList[0].Id = selectedItem.Id;
 
       } else {
+		// var charactersObject = Object.assign($scope.jobTabList[0], charactersObject);
+		var jobObj = clearObject();
+        // var arrayObject = Object.keys(jobObjectFirst);
+		// angular.forEach(arrayObject, function (v, i) {
+          // if (v === "AdditionalData" || v === "Complaint" || v === "JobAttachments") {
+            // jobObjectFirst[v] = null;
+          // } else if (v === "Items") {
+            // jobObjectFirst[v] = [];
+          // } else if (v === "EstimatedTime" || v === "ChargeCategoryId") {
+            // jobObjectFirst[v] = 0;
+          // } else {
+			  // jobObjectFirst[v] = "";
+		  // }
+        // })
         // add in detail WO
-        jobObjectFirst.Note = selectedItem.JobTitle;
+        jobObj.Note = selectedItem.JobTitle;
         // jobObjectFirst.ItemType = item;
-        jobObjectFirst.JobType = selectedItem.JobType;
-        jobObjectFirst.Name = selectedItem.Name;
-        jobObjectFirst.EstimatedTime = selectedItem.EstimatedTime;
-        jobObjectFirst.AdditionalData = selectedItem.AdditionalData;
+        jobObj.JobType = selectedItem.JobType;
+        jobObj.Name = selectedItem.Name;
+        jobObj.EstimatedTime = selectedItem.EstimatedTime;
+        jobObj.AdditionalData = selectedItem.AdditionalData;
 
-        console.log(jobObjectFirst);
-        $scope.jobTabList.push(jobObjectFirst);
+        console.log(jobObj);
+        $scope.jobTabList.push(jobObj);
         console.log($scope.jobTabList);
       }
     }, function () {
