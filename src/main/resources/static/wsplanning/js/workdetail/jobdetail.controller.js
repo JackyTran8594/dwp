@@ -70,25 +70,20 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
 
     CommonServices.getChargeCats().then(function (data) {
       $scope.lstChargeCats = data;
-      console.log(data);
     });
     CommonServices.getPayers().then(function (data) {
       $scope.lstPayers = data;
-      console.log(data);
     })
     CommonServices.getDepartments().then(function (data) {
       $scope.lstDepartment = data;
-      console.log(data);
     });
     CommonServices.getJobCats().then(function (data) {
       $scope.lstJobCats = data;
-      console.log(data);
 
     });
 
     CommonServices.getJobTypes().then(function (data) {
       $scope.lstJobTypes = data;
-      console.log(data);
     });
 
   }
@@ -197,16 +192,19 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
     modalInstance.result.then(function (selectedItem) {
 
       if (typeof (selectedItem) === "string") {
-        console.log(typeof (selectedItem))
-        if ($scope.jobTabList[id].Items.length === 0) {
+        if ($scope.jobTabList[id].Items == null) {
           var charactersObject = createItem();
           charactersObject.Name = selectedItem;
           charactersObject.ItemType = item;
+          $scope.jobTabList[id].Items = [];
+          $scope.jobTabList[id].Items.push(charactersObject);
         }
         else {
-          $scope.jobTabList[id].Items.filter(function (v, i) {
-            return (v.ItemType !== 8)
+          var newArray = $scope.jobTabList[id].Items.filter(function (v, i) {
+            console.log(v.ItemType);
+            return (v.ItemType !== 8);
           })
+          $scope.jobTabList[id].Items = newArray;
           console.log($scope.jobTabList[id].Items);
           var charactersObject = createItem();
           charactersObject.Name = selectedItem;
@@ -216,24 +214,20 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
 
           console.log($scope.jobTabList[id]);
         }
-        // var charactersObject = Object.assign($scope.jobTabList[id].Items[0], charactersObject);
-        // var arrayObject = Object.keys(charactersObject);
-        // angular.forEach(arrayObject, function (v, i) {
-        // if (v === "Name") {
-        // charactersObject[v] = selectedItem;
-        // } else if (v === "ItemType") {
-        // charactersObject[v] = item
-        // } else {
-        // charactersObject[v] = "";
-        // }
-        // })
-        // console.log(charactersObject);
-
 
       } else {
-        angular.forEach(selectedItem, function (v) {
-          $scope.jobTabList[id].Items.push(v);
-        })
+        if ($scope.jobTabList[id].Items == null) {
+          $scope.jobTabList[id].Items = [];
+          angular.forEach(selectedItem, function (v) {
+            $scope.jobTabList[id].Items.push(v);
+          })
+        }
+        else {
+          angular.forEach(selectedItem, function (v) {
+            $scope.jobTabList[id].Items.push(v);
+          })
+        }
+
         console.log($scope.jobTabList[id].Items);
       }
     }, function () {
@@ -274,20 +268,8 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
         // $scope.jobTabList[0].Id = selectedItem.Id;
 
       } else {
-        // var charactersObject = Object.assign($scope.jobTabList[0], charactersObject);
+
         var jobObj = clearObject();
-        // var arrayObject = Object.keys(jobObjectFirst);
-        // angular.forEach(arrayObject, function (v, i) {
-        // if (v === "AdditionalData" || v === "Complaint" || v === "JobAttachments") {
-        // jobObjectFirst[v] = null;
-        // } else if (v === "Items") {
-        // jobObjectFirst[v] = [];
-        // } else if (v === "EstimatedTime" || v === "ChargeCategoryId") {
-        // jobObjectFirst[v] = 0;
-        // } else {
-        // jobObjectFirst[v] = "";
-        // }
-        // })
         // add in detail WO
         jobObj.Note = selectedItem.JobTitle;
         jobObj.JobType = selectedItem.JobType;

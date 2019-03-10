@@ -61,7 +61,10 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
   $scope.isChecked = function (item, checked) {
     console.log(checked);
     var index = 0;
+    var lengthList = $scope.listItem.length;
     if ($scope.listItem.length > 0) {
+
+
       angular.forEach($scope.listItem, function (v, i) {
         if (item.ItemNo === v.ItemNo && checked === false) {
           $scope.listItem.splice(i, 1);
@@ -70,7 +73,8 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
           console.log(index);
         }
       })
-      if (index > 0) {
+      
+      if (index === lengthList) {
         $scope.listItem.push(item);
       }
     }

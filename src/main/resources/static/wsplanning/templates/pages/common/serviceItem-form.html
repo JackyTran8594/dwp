@@ -119,6 +119,6 @@
 </div>
 
 <div class="modal-footer position-right">
-    <a class="btn btn-primary" ng-click="$ctrl.save()">{{ 'btnSave' | translate }}</a>
+    <a class="btn btn-primary" ng-disabled="listItem.length === 0" ng-click="$ctrl.save()">{{ 'btnSave' | translate }}</a>
     <a class="btn btn-primary" ng-click="$ctrl.cancel()">{{ 'btnCancel' | translate }}</a>
 </div>

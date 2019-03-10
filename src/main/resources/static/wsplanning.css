@@ -599,6 +599,7 @@ table th {
     float: right !important;
   }
 
+
   .heading-elements:not(.not-collapsible) {
     display: inline;
   }
@@ -610,12 +611,37 @@ table th {
   .heading-elements:not(.visible-elements) .icons-list {
     margin-top: 0;
   }
+
+  /* icon */
+  [class*="icon-"] {
+    font-size: 20px;
+  }
+/* end */
+
+  .form-inline .form-group {
+    display: inline-block;
+    margin-bottom: 0;
+    width: auto;
+    vertical-align: middle;
+  }
+
+  .form-inline .form-control {
+    display: inline-block;
+    width: auto;
+    vertical-align: middle;
+  }
+
 }
 
-@media (max-width: 1025px) {
+@media (max-width: 1024px) {
   .main-content {
      max-height: 600px;
      /* overflow-y: scroll; */
+  }
+
+   /* icon */
+   [class*="icon-"] {
+    font-size: 20px;
   }
 }
 
