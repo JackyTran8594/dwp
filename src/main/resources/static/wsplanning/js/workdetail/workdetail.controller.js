@@ -115,13 +115,13 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
   //   console.log($scope.WorkOrder.Mileage);
   // });
 
-  $scope.tabActive = "";
+  $scope.tabActive = "header";
 
   loadTab($stateParams.id);
 
   function loadTab(id) {
     if (id == null) {
-      return $scope.tabActive = "planning";
+      return $scope.tabActive = "header";
     }
     return id;
 
