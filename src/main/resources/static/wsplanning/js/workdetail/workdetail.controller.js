@@ -119,12 +119,12 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 
   loadTab($stateParams.id);
 
+  // load job tab with workorderId
   function loadTab(id) {
     if (id == null) {
       return $scope.tabActive = "header";
     }
-    return id;
-
+    return $scope.tabActive = "job";
   }
 
 

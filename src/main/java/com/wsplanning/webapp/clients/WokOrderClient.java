@@ -184,4 +184,16 @@ public class WokOrderClient {
     ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class, new HashMap<>());
     return response.getBody();
   }
+
+  public String postWO(String token, Map<String, String> params) {
+    String postAction = params.get("postAction");
+    String data = params.get("data");
+    HttpHeaders headers = new HttpHeaders();
+    headers.set("Token", token);
+    headers.set("PostAction", postAction);
+    HttpEntity entity = new HttpEntity(headers);
+    String url = String.format("%s", this.endpointUrl);
+    ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class, new HashMap<>());
+    return response.getBody();
+  }
 }

@@ -196,4 +196,16 @@ public class WOController extends BaseController {
     }
   }
 
+  @PostMapping("/wo/workOrder")
+  @ResponseBody
+  public ResponseEntity workOrder(@RequestBody Map<String, String> params) {
+    try {
+      String rtn = wokOrderClient.postWO(getToken(), params);    
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception ex) {
+      return parseException(ex);
+      // TODO: handle exception
+    }
+  }
+
 }

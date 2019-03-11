@@ -129,7 +129,6 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
 
       WorkOrderService.countServiceItem(params).then(function (response) {
         $scope.totalElements = response.data;
-
         console.log(response);
         $scope.isNoData = ($scope.totalElements <= 0);
         common.spinner(false);

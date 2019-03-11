@@ -201,18 +201,15 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
         }
         else {
           var newArray = $scope.jobTabList[id].Items.filter(function (v, i) {
-            console.log(v.ItemType);
             return (v.ItemType !== 8);
           })
           $scope.jobTabList[id].Items = newArray;
-          console.log($scope.jobTabList[id].Items);
           var charactersObject = createItem();
           charactersObject.Name = selectedItem;
           charactersObject.ItemType = item;
 
           $scope.jobTabList[id].Items.push(charactersObject);
 
-          console.log($scope.jobTabList[id]);
         }
 
       } else {
@@ -228,14 +225,11 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
           })
         }
 
-        console.log($scope.jobTabList[id].Items);
       }
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
     });
   };
-
-
 
 
   $scope.addJob = function () {
@@ -265,7 +259,6 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
         $scope.jobTabList[0].JobType = selectedItem.JobType;
         $scope.jobTabList[0].Note = selectedItem.JobTitle;
         $scope.jobTabList[0].Name = selectedItem.Name;
-        // $scope.jobTabList[0].Id = selectedItem.Id;
 
       } else {
 
@@ -285,6 +278,19 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
       console.log('Modal dismissed at: ' + new Date());
     });
   };
+
+
+  $scope.onSubmitForm = function () {
+    var Dto = {
+      postAction: "saveRows",
+      data: JSON.stringify($scope.jobTabList)
+    }
+    WorkOrderService.postWorkOrder(Dto), then(function (res) {
+      console.log(res);
+    }, function (err) {
+      console.log(err);
+    })
+  }
 
 });
 
@@ -361,7 +367,6 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
     });
 
     WorkOrderService.countServiceItem(params).then(function (res) {
-      // $scope.recentSalesList = res.data;
       // console.log(res)
       $scope.totalElements = res.data;
       $scope.isNoData = ($scope.totalElements <= 0);
@@ -386,46 +391,6 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
   $scope.jobTreeList = [];
 
   loadData(item);
-
-
-  // using ivh-tree angular
-  // function loadData(params) {
-  //   common.spinner(true);
-  //   WorkOrderService.jobTab(params).then(function (res) {
-  //     var data = res.data;
-  //     angular.forEach(data, function (value) {
-  //       var objTree = {};
-  //       objTree.id = value.Id;
-  //       objTree.label = value.Name;
-  //       objTree.children = [];
-  //       var items = value.SubGroups;
-  //       angular.forEach(items, function (item) {
-  //         var objSub = {};
-  //         objSub.id = item.Id;
-  //         objSub.label = item.Name;
-  //         objSub.jobType = item.JobType;
-  //         objSub.children = [];
-  //         var list = item.AdditionalData;
-  //         angular.forEach(list, function (obj) {
-  //           var objAdd = {};
-  //           objAdd.id = obj.Id;
-  //           objAdd.label = obj.Label;
-  //           objSub.children.push(objAdd);
-  //         });
-
-  //         objTree.children.push(objSub);
-  //       });
-  //       $scope.jobTreeList.push(objTree);
-  //     }
-  //     );
-
-  //     console.log($scope.jobTreeList);
-  //     common.spinner(false);
-  //     console.log(res);
-  //   }, function (err) {
-  //     console.log(err);
-  //   })
-  // }
 
 
   function loadData(params) {

@@ -2,6 +2,8 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, HttpServ
   $scope.WorkOrderId = $stateParams.id;
   $scope.type = $stateParams.type;
 
+  $scope.workOrderHeader = {}
+
 
   console.log($scope.WorkOrderId);
   console.log($scope.type);
@@ -41,11 +43,16 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, HttpServ
     $scope.isOpenExecutionDate = true;
   };
 
-  $scope.onSubmitFrm = function () {
-    console.log($scope.WorkOrder);
-    console.log(formatDateToString($scope.WorkOrder._ServiceDate));
-    return;
+  $scope.onSubmitForm = function () {
+    var Dto = {
+      postAction: "saveHeader",
+      data: JSON.stringify($scope.workOrderHeader)
+    }
+    WorkOrderService.postWorkOrder(Dto), then(function (res) {
+      console.log(res);
+    }, function (err) {
+      console.log(err);
+    })
   }
-
 
 });
