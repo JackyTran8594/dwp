@@ -4,6 +4,52 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
   $scope.WOJobs = WorkOrder.data.WOJobs;
   $scope.jobObject = {};
 
+
+  loadCommon();
+  $scope.lstTrans = [];
+  $scope.lstDepartment = [];
+  $scope.lstServ = [];
+  $scope.lstVisitReason = [];
+  $scope.jobTypes = [];
+  $scope.jobCats = [];
+  $scope.lstChargeCats = [];
+  $scope.lstPayer = [];
+  $scope.lstShifts = [];
+
+  function loadCommon() {
+    CommonServices.getTransactionTypes().then(function (data) {
+      $scope.lstTrans = data;
+    });
+    CommonServices.getDepartments().then(function (data) {
+      $scope.lstDepartment = data;
+    });
+    CommonServices.getVisitReasons().then(function (data) {
+      $scope.lstVisitReason = data;
+    });
+    CommonServices.getServiceAdvisors().then(function (data) {
+      $scope.lstServ = data;
+    });
+
+    CommonServices.getJobTypes().then(function (data) {
+      $scope.jobTypes = data;
+    });
+
+    CommonServices.getJobCats().then(function (data) {
+      $scope.jobCats = data;
+    });
+    CommonServices.getChargeCats().then(function (data) {
+      $scope.lstChargeCats = data;
+    });
+    CommonServices.getPayers().then(function (data) {
+      $scope.lstPayer = data;
+    });
+
+    CommonServices.getShifts().then(function (data) {
+      $scope.lstShifts = data;
+    });
+  }
+
+
   checkWorkOrder(WorkOrder)
 
   function checkWorkOrder(item) {
@@ -75,9 +121,9 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 
   function loadTab(id) {
     if (id == null) {
-      return $scope.tabActive = "header";
+      return $scope.tabActive = "planning";
     }
-    return $scope.tabActive = "job";
+    return id;
 
   }
 

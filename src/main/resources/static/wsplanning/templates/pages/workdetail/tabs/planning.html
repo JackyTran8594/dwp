@@ -1,0 +1,56 @@
+<!-- Page container -->
+<div class="page-container" ng-controller="PlanningJobCtrl">
+
+    <!-- Page content -->
+    <div class="page-content">
+
+        <!-- Main content -->
+        <div class="content-wrapper">
+
+            <!-- Panel content -->
+            <div class="panel panel-flat" style="margin-bottom: 0px;">
+                <div class="panel-body">
+
+                    <div class="row">
+                        <div class="col-xs-8">
+
+
+                            <div ng-include="'/wsplanning/templates/pages/workdetail/tabs/planning/job_header.html'"></div>
+
+
+                            <div ng-include="'/wsplanning/templates/pages/workdetail/tabs/planning/pool_booking.html'"></div>
+
+
+                            <br/><br/><br/><br/>
+                            <div ng-include="'/wsplanning/templates/pages/workdetail/tabs/planning/detail_booking.html'"></div>
+
+                        </div>
+                        <div class="col-xs-4">
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="panel-footer">
+                    <div class="pull-right">
+                        <button type="button" id="" class="btn btn-icon btn-primary btnSubmit" ng-click="onSubmitFrm()">
+                            <i class="icon-checkmark3"></i>{{ 'btnSave' | translate }}</span>
+                        </button>
+                        <button type="button" class="btn btn-link "
+                                data-ng-click="onCancel()">{{ 'btnCancel' | translate}}
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <!-- /main content -->
+
+
+    </div>
+    <!-- /page content -->
+
+</div>
+<!-- /page container -->

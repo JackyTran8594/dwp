@@ -1,0 +1,129 @@
+<script id="customMonthCell.html" type="text/ng-template">
+    <div
+            ng-click="vm.dayClicked(day, true, $event)"
+            mwl-droppable
+            on-drop="vm.handleEventDrop(dropData.event, day.date, dropData.draggedFromDate)"
+            mwl-drag-select="!!vm.onDateRangeSelect"
+            on-drag-select-start="vm.onDragSelectStart(day)"
+            on-drag-select-move="vm.onDragSelectMove(day)"
+            on-drag-select-end="vm.onDragSelectEnd(day)"
+            class="cal-month-day {{ day.cssClass }}"
+            ng-class="{
+    'cal-day-outmonth': !day.inMonth,
+    'cal-day-inmonth': day.inMonth,
+    'cal-day-weekend': day.isWeekend,
+    'cal-day-past': day.isPast,
+    'cal-day-today': day.isToday,
+    'cal-day-future': day.isFuture,
+    'cal-day-selected': vm.dateRangeSelect && vm.dateRangeSelect.startDate <= day.date && day.date <= vm.dateRangeSelect.endDate,
+    'cal-day-open': dayIndex === vm.openDayIndex
+  }">
+
+        <small
+                class="cal-events-num badge badge-important pull-left"
+                ng-show="day.badgeTotal > 0 && (vm.calendarConfig.displayAllMonthEvents || day.inMonth)"
+                ng-bind="day.badgeTotal">
+        </small>
+
+        <span
+                class="pull-right"
+                data-cal-date
+                ng-click="vm.calendarCtrl.dateClicked(day.date)"
+                ng-bind="day.label">
+        </span>
+
+        <div class="cal-day-tick"
+             ng-show="dayIndex === vm.openDayIndex && (vm.cellAutoOpenDisabled || vm.view[vm.openDayIndex].events.length > 0) && !vm.slideBoxDisabled">
+            <i class="glyphicon glyphicon-chevron-up"></i>
+            <i class="fa fa-chevron-up"></i>
+        </div>
+
+        <div class="events-list" ng-show="day.events.length > 0">
+            <a
+                    ng-repeat="event in day.events | orderBy:'startsAt' track by event.calendarEventId"
+                    href="javascript:;"
+                    ng-click="$event.stopPropagation(); vm.onEventClick({calendarEvent: event})"
+                    class="pull-left event"
+                    ng-class="event.cssClass"
+                    ng-style="{backgroundColor: event.color.primary}"
+                    ng-mousedown="$event.stopPropagation()"
+                    ng-mouseenter="vm.highlightEvent(event, true)"
+                    ng-mouseleave="vm.highlightEvent(event, false)"
+                    tooltip-append-to-body="true"
+                    uib-tooltip-html="vm.calendarEventTitle.monthViewTooltip(event) | calendarTrustAsHtml"
+                    mwl-draggable="event.draggable === true"
+                    drop-data="{event: event, draggedFromDate: day.date.toDate()}"
+                    auto-scroll="vm.draggableAutoScroll">
+            </a>
+        </div>
+
+
+        <div class="cal-week-box-cell" ng-if="$first && rowHovered">
+            <span ng-bind="vm.getWeekNumberLabel(day)"></span>
+        </div>
+
+    </div>
+
+</script>
+
+<style type="text/css">
+    .custom-template-cell {
+        color: purple;
+    }
+</style>
+
+
+<!--ROW3-->
+<div class="panel panel-flat">
+    <div class="panel-body">
+        <!--ROW2-->
+        <div class="row">
+            <!--DeptId-->
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label class="control-label col-xs-4">{{ 'department' | translate }}</label>
+                    <div class="col-xs-8">
+                        <select class="form-control" ng-model="DeptId"
+                                ng-options="item.Id as item.Name for item in lstDepartment">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="form-group">
+                    <label class="control-label col-xs-4">{{ 'shiftId' | translate }}</label>
+                    <div class="col-xs-8">
+                        <select class="form-control" ng-model="ShiftId"
+                                ng-options="item.Id as item.Name for item in lstShifts">
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br/>
+        <br/>
+        <div class="row">
+            <div class="col-xs-12">
+                <mwl-calendar
+                        events="events"
+                        view="calendarView"
+                        view-title="calendarTitle"
+                        view-date="viewDate"
+                        current-day="viewDate"
+                        on-event-click="eventClicked(calendarEvent)"
+                        on-event-times-changed="eventTimesChanged(calendarEvent); calendarEvent.startsAt = calendarNewEventStart; calendarEvent.endsAt = calendarNewEventEnd"
+                        cell-is-open="cellIsOpen"
+                        day-view-start="06:00"
+                        day-view-end="22:59"
+                        day-view-split="30"
+                        cell-modifier="modifyCell(calendarCell)"
+                        cell-auto-open-disabled="true"
+                        on-view-change-click="viewChangeClick()"
+                        custom-template-urls="{calendarMonthCell: 'customMonthCell.html'}"
+                        on-timespan-click="timespanClicked(calendarDate, calendarCell)">
+                </mwl-calendar>
+            </div>
+        </div>
+    </div>
+</div>
