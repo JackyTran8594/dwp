@@ -192,7 +192,7 @@ public class WOController extends BaseController {
   public ResponseEntity countServiceItem(@RequestBody Map<String, String> params) {
     try {
       String rtn = searchServiceItemClient.getCountServiceItem(getToken(), params);
-     
+
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);
@@ -204,26 +204,41 @@ public class WOController extends BaseController {
   public String test(Model model) {
     try {
       WODTO data = testData();
-      String rtn = wokOrderClient.postWO(getToken(),"createNew", data);
+      String rtn = wokOrderClient.postWO(getToken(), "createNew", data);
       logger.info("----------postWO: " + rtn);
     } catch (Exception ex) {
-      logger.error("ERROR test: ",ex);
+      logger.error("ERROR test: ", ex);
     }
     return "wo/index";
   }
+
+
+  @GetMapping("/wo/test2")
+  public String test2(Model model) {
+    try {
+      Map<String, String> params = new HashMap<>();
+      params.put("postAction", "createNew");
+      params.put("wodto", new Gson().toJson(testData()));
+      String rtn = wokOrderClient.postWO2(getToken(), params);
+      logger.info("----------postWO: " + rtn);
+    } catch (Exception ex) {
+      logger.error("ERROR test2: ", ex);
+    }
+    return "wo/index";
+  }
+
   @PostMapping("/wo/workOrder")
   @ResponseBody
-  public ResponseEntity workOrder(@RequestBody Map<String, String> params) {
+  public ResponseEntity workOrder(@RequestBody WODTO data) {
     try {
-      WODTO data = testData();
-      String rtn = wokOrderClient.postWO(getToken(),"createNew", data);
+      String rtn = wokOrderClient.postWO(getToken(), "createNew", data);
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);
     }
   }
 
-  private WODTO testData(){
+  private WODTO testData() {
     //init
     WOVehicleDTO WOVehicle = new WOVehicleDTO();
     WOVehicle.VehiId = 306422;
@@ -255,6 +270,9 @@ public class WOController extends BaseController {
     objWO.JobTitle = "Annual service";
     objWO.CustomerComplaint = "30 tkm service";
     objWO.WOJobs = WOJobs;
+
+    Gson gson = new Gson();
+    logger.info("--------" + gson.toJson(objWO));
     return objWO;
   }
 

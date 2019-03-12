@@ -184,6 +184,25 @@ public class WokOrderClient {
     return response.getBody();
   }
 
+  public String postWO2(String token, Map<String, String> params) {
+    String postAction = params.get("postAction");
+    String swodto = params.get("wodto");
+    Gson gson = new Gson();
+    WODTO wodto = gson.fromJson(swodto, WODTO.class);
+
+    HttpHeaders headers = new HttpHeaders();
+    if (StringUtils.isNotBlank(token)) {
+      headers.set("Token", token);
+    }
+    if (StringUtils.isNotBlank(postAction)) {
+      headers.set("PostAction", postAction);
+    }
+    HttpEntity<WODTO> entity = new HttpEntity<WODTO>(wodto, headers);
+    String url = String.format("%s", this.endpointUrl);
+    ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
+    return response.getBody();
+  }
+
   public String postWO(String token, String postAction, WODTO wodto) {
     HttpHeaders headers = new HttpHeaders();
     if (StringUtils.isNotBlank(token)) {
