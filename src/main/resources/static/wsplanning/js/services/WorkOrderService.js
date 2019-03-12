@@ -38,11 +38,14 @@ UserWebApp.service('WorkOrderService', function ($http) {
     });
   }
 
-  WorkOrderService.postWorkOrder = function (data) {
+  WorkOrderService.postWorkOrder = function (data, postAction) {
     return $http({
       method: 'POST',
-      url: '/wo/workOrder',
-      data: data
+      url: '/wo/workOrderTest',
+      data: data,
+      headers: {
+        "postAction": postAction
+      }
     });
   }
 

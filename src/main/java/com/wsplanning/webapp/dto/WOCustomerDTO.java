@@ -1,28 +1,29 @@
 package com.wsplanning.webapp.dto;
 
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 public class WOCustomerDTO {
 
     public Integer CustNo;
     public Integer CustId;
-    private String Skey;
-    private String Email;
-    private String LName;
-    private String FName;
-    private String Tel1;  
-    private String Tel2;
-    private String Tel3;
-    private String Tel4;
-    private String Address;
-    private String City;
-    private String PostalCode;
-    private String AccountGroup;
-    private String InvoiceGroup;
-    private String CreditHold;
-    private String CustomerName;
+    public String Skey;
+    public String Email;
+    public String LName;
+    public String FName;
+    public String Tel1;  
+    public String Tel2;
+    public String Tel3;
+    public String Tel4;
+    public String Address;
+    public String City;
+    public String PostalCode;
+    public String AccountGroup;
+    public String InvoiceGroup;
+    public String CreditHold;
+    public String CustomerName;
     //
-    private String DynamicDataFields;
+    public List<DynamicDataDTO> DynamicDataFields;
 
     public Integer getCustNo() {
         return this.CustNo;
@@ -161,11 +162,11 @@ public class WOCustomerDTO {
     }
 
     //
-    public String getDynamicDataFields() {
+    public List<DynamicDataDTO> getDynamicDataFields() {
         return this.DynamicDataFields;
     }
 
-    public void setDynamicDataFields(String DynamicDataFields) {
+    public void setDynamicDataFields(List<DynamicDataDTO> DynamicDataFields) {
         this.DynamicDataFields = DynamicDataFields;
     }
 

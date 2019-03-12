@@ -295,21 +295,21 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
         //     console.log(err);
         //   })
         // })
-        WorkOrderService.postWorkOrder(shareData).then(function (res) {
+        WorkOrderService.postWorkOrder(shareData.data, shareData.postAction).then(function (res) {
           console.log(res);
         }, function (err) {
           console.log(err);
           //
-          $rootScope.isSubmitJob = true;
-          var Dto = {
-            postAction: "saveRows",
-            data: JSON.stringify($scope.jobTabList)
-          }
-          WorkOrderService.postWorkOrder(Dto).then(function (res) {
-            console.log(res);
-          }, function (err) {
-            console.log(err);
-          })
+          // $rootScope.isSubmitJob = true;
+          // var Dto = {
+          //   postAction: "saveRows",
+          //   data: JSON.stringify($scope.jobTabList)
+          // }
+          // WorkOrderService.postWorkOrder(Dto).then(function (res) {
+          //   console.log(res);
+          // }, function (err) {
+          //   console.log(err);
+          // })
           //
         })
     }
@@ -317,11 +317,14 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
 
     //save job - after save header
     $rootScope.isSubmitJob = true;
-    var Dto = {
-      postAction: "saveRows",
-      data: JSON.stringify($scope.jobTabList)
-    }
-    WorkOrderService.postWorkOrder(Dto).then(function (res) {
+    $scope.WorkOrder.WOJobs = $scope.jobTabList;
+    var data = JSON.stringify($scope.WorkOrder)
+    var postAction = "saveRows"
+    // var Dto = {
+    //   postAction: "saveRows",
+    //   data: JSON.stringify($scope.jobTabList)
+    // }
+    WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
       console.log(res);
     }, function (err) {
       console.log(err);

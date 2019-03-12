@@ -6,26 +6,27 @@ import org.apache.poi.hpsf.Decimal;
 
 public class ServiceItemDTO {
     
-    private Integer RowId;
-    private String ItemNo;
-    private String SuplNo;
-    private String Name;
-    private Decimal Quantity;
-    private Decimal StockQty;
-    private Integer ItemType;
-    private String StockId;
-    private String ModelCode;
-    private Integer ChargeCategoryId;
-    private String MechanicId;
-    private String WorkType;
-    private Decimal UNITPR;
-    private Decimal BUYPR;
-    private Integer IGROUPID;
-    private String VATCD;
-    private String WorkGroupId;
-    private Decimal RecmTime;
-    private Decimal SaleTime;
-    private Decimal FactTime;
+    public Integer RowId;
+    public String ItemNo;
+    public String SuplNo;
+    public String Name;
+    public Number Quantity;
+    public Number StockQty;
+    public Integer ItemType;
+    public String StockId;
+    public String ModelCode;
+    public Integer ChargeCategoryId;
+    public String MechanicId;
+    public String WorkType;
+    public Number UNITPR;
+    public Number BUYPR;
+    public Integer IGROUPID;
+    public String VATCD;
+    public String WorkGroupId;
+    public Number RecmTime;
+    public Number SaleTime;
+    public Number FactTime;
+
 
     public Integer getRowId() {
         return this.RowId;
@@ -59,19 +60,19 @@ public class ServiceItemDTO {
         this.Name = Name;
     }
 
-    public Decimal getQuantity() {
+    public Number getQuantity() {
         return this.Quantity;
     }
 
-    public void setQuantity(Decimal Quantity) {
+    public void setQuantity(Number Quantity) {
         this.Quantity = Quantity;
     }
 
-    public Decimal getStockQty() {
+    public Number getStockQty() {
         return this.StockQty;
     }
 
-    public void setStockQty(Decimal StockQty) {
+    public void setStockQty(Number StockQty) {
         this.StockQty = StockQty;
     }
 
@@ -123,19 +124,19 @@ public class ServiceItemDTO {
         this.WorkType = WorkType;
     }
 
-    public Decimal getUNITPR() {
+    public Number getUNITPR() {
         return this.UNITPR;
     }
 
-    public void setUNITPR(Decimal UNITPR) {
+    public void setUNITPR(Number UNITPR) {
         this.UNITPR = UNITPR;
     }
 
-    public Decimal getBUYPR() {
+    public Number getBUYPR() {
         return this.BUYPR;
     }
 
-    public void setBUYPR(Decimal BUYPR) {
+    public void setBUYPR(Number BUYPR) {
         this.BUYPR = BUYPR;
     }
 
@@ -163,30 +164,29 @@ public class ServiceItemDTO {
         this.WorkGroupId = WorkGroupId;
     }
 
-    public Decimal getRecmTime() {
+    public Number getRecmTime() {
         return this.RecmTime;
     }
 
-    public void setRecmTime(Decimal RecmTime) {
+    public void setRecmTime(Number RecmTime) {
         this.RecmTime = RecmTime;
     }
 
-    public Decimal getSaleTime() {
+    public Number getSaleTime() {
         return this.SaleTime;
     }
 
-    public void setSaleTime(Decimal SaleTime) {
+    public void setSaleTime(Number SaleTime) {
         this.SaleTime = SaleTime;
     }
 
-    public Decimal getFactTime() {
+    public Number getFactTime() {
         return this.FactTime;
     }
 
-    public void setFactTime(Decimal FactTime) {
+    public void setFactTime(Number FactTime) {
         this.FactTime = FactTime;
     }
-   
-
+  
   
 }

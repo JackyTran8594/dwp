@@ -37,15 +37,35 @@ public class WODTO {
     public WOVehicleDTO WOVehicle;
     public WOCustomerDTO WOCustomer;
     public WOCustomerDTO WOContact;
-    public String WOAttachments;
-    public String BookedResources;
-    public String BookedResourcePools;
+    public List<WOAttachmentDTO> WOAttachments;
+    public List<WOResourceDTO> BookedResources;
+    public List<WOResourcePoolDTO> BookedResourcePools;
     public List<WOJobDTO> WOJobs;
-    public String Token;
+    public TokenDTO Token;
 
     public WOVehicleDTO getWOVehicle() {
         return WOVehicle;
     }
 
+    public WOCustomerDTO getWOCustomer() {
+        return WOCustomer;
+    }
+
+    public WOCustomerDTO getWOContact() {
+        return WOContact;
+    }
+
+    public List<WOAttachmentDTO> getWOAttachments() {
+        return WOAttachments;
+    }
+
+
+    public List<WOJobDTO> getWOJobs() {
+        return WOJobs;
+    }
+
+    public TokenDTO getToken() {
+        return Token;
+    }
 
 }

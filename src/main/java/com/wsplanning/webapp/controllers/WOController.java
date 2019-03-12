@@ -212,6 +212,29 @@ public class WOController extends BaseController {
     }
   }
 
+  @PostMapping("/wo/workOrderTest")
+  @ResponseBody
+  public ResponseEntity workOrderTest(@RequestBody WODTO data, @RequestHeader(name = "postAction") String postAction) {
+    try {
+      String rtn = wokOrderClient.postWO(getToken(), postAction, data);
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception ex) {
+      return parseException(ex);
+    }
+  }
+
+  
+  @PostMapping("/wo/workOrderTest2")
+  @ResponseBody
+  public ResponseEntity workOrderTest2(@RequestBody Map<String, String> params) {
+    try {
+      String rtn = wokOrderClient.postWO2(getToken(), params);
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception ex) {
+      return parseException(ex);
+    }
+  }
+
   //FOR TEST
   private WODTO testData() {
     //init
