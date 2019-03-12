@@ -279,8 +279,44 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
     });
   };
 
+  $rootScope.isSubmitJob = false;
 
   $scope.onSubmitForm = function () {
+    if($rootScope.isSubmitHeader === false)
+    {
+      var shareData = WorkOrderService.shareData;
+      console.log(shareData);
+        // $rootScope.$on('dataHeader', function ($event, obj) {
+        //   console.log(obj.dataBroadCast);
+        //   $rootScope.isSubmitHeader = true;
+        //   WorkOrderService.postWorkOrder(obj.dataBroadCast).then(function (res) {
+        //     console.log(res);
+        //   }, function (err) {
+        //     console.log(err);
+        //   })
+        // })
+        WorkOrderService.postWorkOrder(shareData).then(function (res) {
+          console.log(res);
+        }, function (err) {
+          console.log(err);
+          //
+          $rootScope.isSubmitJob = true;
+          var Dto = {
+            postAction: "saveRows",
+            data: JSON.stringify($scope.jobTabList)
+          }
+          WorkOrderService.postWorkOrder(Dto).then(function (res) {
+            console.log(res);
+          }, function (err) {
+            console.log(err);
+          })
+          //
+        })
+    }
+
+
+    //save job - after save header
+    $rootScope.isSubmitJob = true;
     var Dto = {
       postAction: "saveRows",
       data: JSON.stringify($scope.jobTabList)

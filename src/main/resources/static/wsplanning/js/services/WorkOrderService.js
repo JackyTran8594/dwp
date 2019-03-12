@@ -46,5 +46,12 @@ UserWebApp.service('WorkOrderService', function ($http) {
     });
   }
 
+  WorkOrderService.shareData = {
+    postAction: "",
+    data: ""
+  }
+
   return WorkOrderService;
 });
+
+

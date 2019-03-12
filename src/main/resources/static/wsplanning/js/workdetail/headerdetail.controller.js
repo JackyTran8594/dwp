@@ -1,9 +1,9 @@
-UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, HttpService, $translate, $location, $filter, $uibModal, CommonServices, $stateParams, $state) {
+UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrderService, HttpService, $translate, $location, $filter, $uibModal, CommonServices, $stateParams, $state) {
   $scope.WorkOrderId = $stateParams.id;
   $scope.type = $stateParams.type;
 
-  $scope.workOrderHeader = {}
-
+  // $scope.WorkOrder = $scope.$parent.WorkOrder
+  console.log($scope.WorkOrder);
 
   console.log($scope.WorkOrderId);
   console.log($scope.type);
@@ -43,10 +43,35 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, HttpServ
     $scope.isOpenExecutionDate = true;
   };
 
+
+  // var dataBroadCast = {
+  //   postAction: "saveHeader",
+  //   data: JSON.stringify($scope.workOrderHeader)
+  // }
+
+ 
+
+  // function loadData() {
+  //   //
+  //   $rootScope.$broadcast('dataHeader', dataBroadCast);
+
+  // }
+
+  // loadData();
+
+
+  // data for next tab
+  WorkOrderService.shareData.postAction = "saveHeader";
+  WorkOrderService.shareData.data = JSON.stringify($scope.WorkOrder);
+  //
+
+  $rootScope.isSubmitHeader = false;
+
   $scope.onSubmitForm = function () {
+    $rootScope.isSubmitHeader = true;
     var Dto = {
       postAction: "saveHeader",
-      data: JSON.stringify($scope.workOrderHeader)
+      data: JSON.stringify($scope.WorkOrder)
     }
     WorkOrderService.postWorkOrder(Dto), then(function (res) {
       console.log(res);
