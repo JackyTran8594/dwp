@@ -9,6 +9,7 @@ import com.wsplanning.webapp.dto.WOCustomerDTO;
 import com.wsplanning.webapp.dto.WODTO;
 import com.wsplanning.webapp.dto.WOJobDTO;
 import com.wsplanning.webapp.dto.WOVehicleDTO;
+import com.wsplanning.webapp.utils.Utils;
 import org.apache.commons.collections4.MultiMap;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -200,33 +201,6 @@ public class WOController extends BaseController {
     }
   }
 
-  @GetMapping("/wo/test")
-  public String test(Model model) {
-    try {
-      WODTO data = testData();
-      String rtn = wokOrderClient.postWO(getToken(), "createNew", data);
-      logger.info("----------postWO: " + rtn);
-    } catch (Exception ex) {
-      logger.error("ERROR test: ", ex);
-    }
-    return "wo/index";
-  }
-
-
-  @GetMapping("/wo/test2")
-  public String test2(Model model) {
-    try {
-      Map<String, String> params = new HashMap<>();
-      params.put("postAction", "createNew");
-      params.put("wodto", new Gson().toJson(testData()));
-      String rtn = wokOrderClient.postWO2(getToken(), params);
-      logger.info("----------postWO: " + rtn);
-    } catch (Exception ex) {
-      logger.error("ERROR test2: ", ex);
-    }
-    return "wo/index";
-  }
-
   @PostMapping("/wo/workOrder")
   @ResponseBody
   public ResponseEntity workOrder(@RequestBody WODTO data) {
@@ -238,6 +212,7 @@ public class WOController extends BaseController {
     }
   }
 
+  //FOR TEST
   private WODTO testData() {
     //init
     WOVehicleDTO WOVehicle = new WOVehicleDTO();
@@ -274,6 +249,44 @@ public class WOController extends BaseController {
     Gson gson = new Gson();
     logger.info("--------" + gson.toJson(objWO));
     return objWO;
+  }
+
+  @GetMapping("/wo/test")
+  public String test(Model model) {
+    try {
+      WODTO data = testData();
+      String rtn = wokOrderClient.postWO(getToken(), "createNew", data);
+      logger.info("----------postWO: " + rtn);
+    } catch (Exception ex) {
+      logger.error("ERROR test: ", ex);
+    }
+    return "wo/index";
+  }
+
+
+  @GetMapping("/wo/test2")
+  public String test2(Model model) {
+    try {
+      Map<String, String> params = new HashMap<>();
+      params.put("postAction", "createNew");
+      params.put("wodto", new Gson().toJson(testData()));
+      String rtn = wokOrderClient.postWO2(getToken(), params);
+      logger.info("----------postWO: " + rtn);
+    } catch (Exception ex) {
+      logger.error("ERROR test2: ", ex);
+    }
+    return "wo/index";
+  }
+
+  @GetMapping("/wo/encode")
+  public String encode(Model model) {
+    try {
+      String rtn = Utils.encodeFileToBase64Binary("E:\\3731152_passat-12.jpg");
+      logger.info("----------encode: " + rtn);
+    } catch (Exception ex) {
+      logger.error("ERROR encode: ", ex);
+    }
+    return "wo/index";
   }
 
 }

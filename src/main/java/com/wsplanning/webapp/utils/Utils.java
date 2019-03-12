@@ -3,10 +3,15 @@ package com.wsplanning.webapp.utils;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.wsplanning.webapp.controllers.CommonController;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
@@ -99,6 +104,12 @@ public class Utils {
       ex.printStackTrace();
       return "";
     }
+  }
+
+  public static String encodeFileToBase64Binary(String fileName) throws IOException {
+    File file = new File(fileName);
+    byte[] encoded = Base64.encodeBase64(FileUtils.readFileToByteArray(file));
+    return new String(encoded, StandardCharsets.UTF_8);
   }
 
   public static void main(String[] args) {
