@@ -1,5 +1,7 @@
 package com.wsplanning.webapp.clients;
 
+import com.google.gson.Gson;
+import com.wsplanning.webapp.dto.WODTO;
 import com.wsplanning.webapp.utils.Utils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,8 @@ import java.util.Optional;
 
 /**
  * Created by ThuyetLV
+ * 
+ * 
  */
 @Component
 public class WokOrderClient {
@@ -28,11 +32,9 @@ public class WokOrderClient {
   private String endpointUrl;
 
   @Autowired
-  public WokOrderClient(RestTemplate restTemplate,
-                        @Value("${apiEndpointUrl}") String apiEndpointUrl) {
+  public WokOrderClient(RestTemplate restTemplate, @Value("${apiEndpointUrl}") String apiEndpointUrl) {
     this.restTemplate = restTemplate;
-    this.restTemplate.getMessageConverters()
-        .add(0, new StringHttpMessageConverter(Charset.forName("UTF-8")));
+    this.restTemplate.getMessageConverters().add(0, new StringHttpMessageConverter(Charset.forName("UTF-8")));
     this.endpointUrl = apiEndpointUrl + "/api/WorkOrders";
   }
 
@@ -91,7 +93,7 @@ public class WokOrderClient {
       headers.set("LoadAttachmentData", "true");
     }
 
-    //yyyy.MM.dd
+    // yyyy.MM.dd
     if (StringUtils.isNotBlank(ServDateFrom)) {
       headers.set("ServDateFrom", Utils.formateDateAPI(ServDateFrom));
     }
@@ -173,7 +175,6 @@ public class WokOrderClient {
     return response.getBody();
   }
 
-
   public String detail(String token, String siteId, Map<String, String> params, String LoadRows) {
     String workOrderId = params.get("WorkOrderId");
     HttpHeaders headers = new HttpHeaders();
@@ -188,12 +189,16 @@ public class WokOrderClient {
   public String postWO(String token, Map<String, String> params) {
     String postAction = params.get("postAction");
     String data = params.get("data");
+    WODTO dto = new WODTO();
+    Gson gson = new Gson();
+    dto = gson.fromJson(data, WODTO.class);
     HttpHeaders headers = new HttpHeaders();
     headers.set("Token", token);
     headers.set("PostAction", postAction);
-    HttpEntity entity = new HttpEntity(headers);
+    HttpEntity<WODTO> entity = new HttpEntity<WODTO>(dto, headers);
     String url = String.format("%s", this.endpointUrl);
-    ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class, new HashMap<>());
+    ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class,
+        new HashMap<>());
     return response.getBody();
   }
 }

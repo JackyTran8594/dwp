@@ -285,7 +285,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
       postAction: "saveRows",
       data: JSON.stringify($scope.jobTabList)
     }
-    WorkOrderService.postWorkOrder(Dto), then(function (res) {
+    WorkOrderService.postWorkOrder(Dto).then(function (res) {
       console.log(res);
     }, function (err) {
       console.log(err);
