@@ -22,8 +22,6 @@ import java.util.Optional;
 
 /**
  * Created by ThuyetLV
- * 
- * 
  */
 @Component
 public class WokOrderClient {
@@ -186,35 +184,17 @@ public class WokOrderClient {
     return response.getBody();
   }
 
-  public String postWO(String token, Map<String, String> params) {
-    String postAction = params.get("postAction");
-    String data = params.get("data");
-    // Gson gson = new Gson();
-    
-    // WODTO dto = new WODTO();
-    // if (postAction == "checkIn") {
-    //   dto = gson.fromJson(data, WODTO.class);
-    // }
-    // if (postAction == "saveHeader") {
-    //   dto = gson.fromJson(data, WODTO.class);
-    // }
-    // if (postAction == "saveRows") {
-    //   dto = gson.fromJson(data, WODTO.class);
-    // }
-    // if (postAction == "createNew") {
-    //   dto = gson.fromJson(data, WODTO.class);
-    // }
-    // if (postAction == "saveResource") {
-    //   dto = gson.fromJson(data, WODTO.class);
-    // }
-
+  public String postWO(String token, String postAction, WODTO wodto) {
     HttpHeaders headers = new HttpHeaders();
-    headers.set("Token", token);
-    headers.set("PostAction", postAction);
-    HttpEntity<String> entity = new HttpEntity<String>(data, headers);
+    if (StringUtils.isNotBlank(token)) {
+      headers.set("Token", token);
+    }
+    if (StringUtils.isNotBlank(postAction)) {
+      headers.set("PostAction", postAction);
+    }
+    HttpEntity<WODTO> entity = new HttpEntity<WODTO>(wodto, headers);
     String url = String.format("%s", this.endpointUrl);
-    ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class,
-        new HashMap<>());
+    ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
     return response.getBody();
   }
 }

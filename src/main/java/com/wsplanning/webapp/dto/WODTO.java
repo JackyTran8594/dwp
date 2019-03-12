@@ -1,42 +1,71 @@
 package com.wsplanning.webapp.dto;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 public class WODTO {
+
+    public String WorkOrderNo;
+    public String WorkOrderId;
+    public Date ServiceDate;
+    public String ExecutionDate;
+    public String CheckInDate;
+    public String CheckOutDate;
+    public String BookMOTDate;
+    public String BookTireDate;
+    public String ServiceAdvisorId;
+    public String DeliveredBy;
+    public String TransactionType;
+    public String DeptId;
+    public String StampStatus;
+    public String WorkReadyDate;
+    public String WorkReadyForInvoiceDate;
+    public String IsCustomerWaiting;
+    public String IsRework;
+    public String TimeBarText;
+    public String SiteId;
+    public int IsTimeReservation;
+    public int Mileage;
+    public String StampId;
+    public String VisitReasonCode;
+    public String BookingId;
+    public String JobTitle;
+    public String CustomerComplaint;
     
-    private String WorkOrderNo;
-    private String WorkOrderId;
-    private String ServiceDate;
-    private String ExecutionDate;
-    private String CheckInDate;
-    private String CheckOutDate;
-    private String BookMOTDate;
-    private String BookTireDate;
-    private String ServiceAdvisorId;
-    private String DeliveredBy;
-    private String TransactionType;
-    private String DeptId;
-    private String StampStatus;
-    private String WorkReadyDate;
-    private String WorkReadyForInvoiceDate;
-    private String IsCustomerWaiting;
-    private String IsRework;
-    private String TimeBarText;
-    private String SiteId;
-    private String IsTimeReservation;
-    private String Mileage;
-    private String StampId;
-    private String VisitReasonCode;
-    private String BookingId;
-    private String JobTitle;
-    private String CustomerComplaint;
-    
-    private String Vehicle;
-    private String WOAttachments;
-    private String BookedResources;
-    private String BookedResourcePools;
-    private String WOJobs;
-    private String Token;
+    public String Vehicle;
+    public WOVehicleDTO WOVehicle;
+    public WOCustomerDTO WOCustomer;
+    public WOCustomerDTO WOContact;
+    public String WOAttachments;
+    public String BookedResources;
+    public String BookedResourcePools;
+    public List<WOJobDTO> WOJobs;
+    public String Token;
+
+    public WOVehicleDTO getWOVehicle() {
+        return WOVehicle;
+    }
+
+    public void setWOVehicle(WOVehicleDTO WOVehicle) {
+        this.WOVehicle = WOVehicle;
+    }
+
+    public WOCustomerDTO getWOContact() {
+        return WOContact;
+    }
+
+    public void setWOContact(WOCustomerDTO WOContact) {
+        this.WOContact = WOContact;
+    }
+
+    public WOCustomerDTO getWOCustomer() {
+        return WOCustomer;
+    }
+
+    public void setWOCustomer(WOCustomerDTO WOCustomer) {
+        this.WOCustomer = WOCustomer;
+    }
 
     public String getWorkOrderNo() {
         return this.WorkOrderNo;
@@ -54,11 +83,11 @@ public class WODTO {
         this.WorkOrderId = WorkOrderId;
     }
 
-    public String getServiceDate() {
+    public Date getServiceDate() {
         return this.ServiceDate;
     }
 
-    public void setServiceDate(String ServiceDate) {
+    public void setServiceDate(Date ServiceDate) {
         this.ServiceDate = ServiceDate;
     }
 
@@ -190,19 +219,19 @@ public class WODTO {
         this.SiteId = SiteId;
     }
 
-    public String getIsTimeReservation() {
+    public int getIsTimeReservation() {
         return this.IsTimeReservation;
     }
 
-    public void setIsTimeReservation(String IsTimeReservation) {
+    public void setIsTimeReservation(int IsTimeReservation) {
         this.IsTimeReservation = IsTimeReservation;
     }
 
-    public String getMileage() {
+    public int getMileage() {
         return this.Mileage;
     }
 
-    public void setMileage(String Mileage) {
+    public void setMileage(int Mileage) {
         this.Mileage = Mileage;
     }
 
@@ -278,11 +307,11 @@ public class WODTO {
         this.BookedResourcePools = BookedResourcePools;
     }
 
-    public String getWOJobs() {
-        return this.WOJobs;
+    public List<WOJobDTO> getWOJobs() {
+        return WOJobs;
     }
 
-    public void setWOJobs(String WOJobs) {
+    public void setWOJobs(List<WOJobDTO> WOJobs) {
         this.WOJobs = WOJobs;
     }
 

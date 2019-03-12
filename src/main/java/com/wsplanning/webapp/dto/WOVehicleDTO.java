@@ -3,8 +3,8 @@ package com.wsplanning.webapp.dto;
 import java.text.SimpleDateFormat;
 
 public class WOVehicleDTO {
-    
-    private Integer VehiId;
+
+    public Integer VehiId;
     private String LicenseNo;
     private String VIN;
     private String Make;

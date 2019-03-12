@@ -4,8 +4,8 @@ import java.text.SimpleDateFormat;
 
 public class WOCustomerDTO {
 
-    private Integer CustNo;
-    private Integer CustId;
+    public Integer CustNo;
+    public Integer CustId;
     private String Skey;
     private String Email;
     private String LName;

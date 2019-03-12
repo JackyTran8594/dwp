@@ -5,6 +5,10 @@ import com.wsplanning.webapp.clients.ASMasterClient;
 import com.wsplanning.webapp.clients.SearchServiceItemClient;
 import com.wsplanning.webapp.clients.WokOrderClient;
 
+import com.wsplanning.webapp.dto.WOCustomerDTO;
+import com.wsplanning.webapp.dto.WODTO;
+import com.wsplanning.webapp.dto.WOJobDTO;
+import com.wsplanning.webapp.dto.WOVehicleDTO;
 import org.apache.commons.collections4.MultiMap;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -13,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,9 +29,8 @@ import org.springframework.web.client.RestTemplate;
 import javax.servlet.http.HttpSession;
 
 import java.awt.*;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class WOController extends BaseController {
@@ -196,16 +200,62 @@ public class WOController extends BaseController {
     }
   }
 
+  @GetMapping("/wo/test")
+  public String test(Model model) {
+    try {
+      WODTO data = testData();
+      String rtn = wokOrderClient.postWO(getToken(),"createNew", data);
+      logger.info("----------postWO: " + rtn);
+    } catch (Exception ex) {
+      logger.error("ERROR test: ",ex);
+    }
+    return "wo/index";
+  }
   @PostMapping("/wo/workOrder")
   @ResponseBody
   public ResponseEntity workOrder(@RequestBody Map<String, String> params) {
     try {
-      String rtn = wokOrderClient.postWO(getToken(), params);    
+      WODTO data = testData();
+      String rtn = wokOrderClient.postWO(getToken(),"createNew", data);
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);
-      // TODO: handle exception
     }
+  }
+
+  private WODTO testData(){
+    //init
+    WOVehicleDTO WOVehicle = new WOVehicleDTO();
+    WOVehicle.VehiId = 306422;
+    WOCustomerDTO WOCustomer = new WOCustomerDTO();
+    WOCustomer.CustNo = 116206;
+    WOCustomerDTO WOContact = new WOCustomerDTO();
+    WOContact.CustNo = 116206;
+
+    List<WOJobDTO> WOJobs = new ArrayList<>();
+    WOJobDTO job = new WOJobDTO();
+    job.ChargeCategoryId = 10;
+    job.JobType = "1";
+    job.JobCategory = "BODY";
+    job.DeptId = "A4";
+    job.Payer = "DC_ISP";
+    WOJobs.add(job);
+
+    //WODTO
+    WODTO objWO = new WODTO();
+    objWO.SiteId = "102";
+    objWO.DeptId = "A4";
+    objWO.WOVehicle = WOVehicle;
+    objWO.WOCustomer = WOCustomer;
+    objWO.WOContact = WOContact;
+    objWO.Mileage = 0;
+    objWO.ServiceDate = new Date();
+    objWO.IsTimeReservation = 1;
+    objWO.VisitReasonCode = "01";
+    objWO.JobTitle = "Annual service";
+    objWO.CustomerComplaint = "30 tkm service";
+    objWO.WOJobs = WOJobs;
+    return objWO;
   }
 
 }
