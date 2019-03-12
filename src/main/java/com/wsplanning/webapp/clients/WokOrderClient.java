@@ -189,9 +189,8 @@ public class WokOrderClient {
   public String postWO(String token, Map<String, String> params) {
     String postAction = params.get("postAction");
     String data = params.get("data");
-    WODTO dto = new WODTO();
     Gson gson = new Gson();
-    dto = gson.fromJson(data, WODTO.class);
+    WODTO dto =  gson.fromJson(data, WODTO.class);
     HttpHeaders headers = new HttpHeaders();
     headers.set("Token", token);
     headers.set("PostAction", postAction);
