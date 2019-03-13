@@ -154,7 +154,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
       if (selectedItem.PayerCustomer != null) {
         CommonServices.getCustomers(selectedItem.PayerCustomer, "").then(function (data) {
           // console.log(data);
-          $scope.WOCustomer = data;
+          $scope.WorkOrder.WOCustomer = data;
         })
       }
       console.log($scope.jobObject.VehiId);

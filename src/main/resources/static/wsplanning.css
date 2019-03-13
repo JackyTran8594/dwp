@@ -589,6 +589,18 @@ table th {
   .heading-elements-toggle {
     display: none;
   }
+
+  /* icon */
+  [class*="icon-"] {
+    font-size: 20px;
+  }
+
+  /* collapse icon */
+.icons-list a[data-action]:after {
+  font-size: 30px;
+}
+
+/* end */
 }
 
 @media (max-width: 768px) {
@@ -616,6 +628,12 @@ table th {
   [class*="icon-"] {
     font-size: 20px;
   }
+
+/* collapse icon */
+.icons-list a[data-action]:after {
+  font-size: 30px;
+}
+
 /* end */
 
   .form-inline .form-group {

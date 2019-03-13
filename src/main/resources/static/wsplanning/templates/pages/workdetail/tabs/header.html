@@ -98,15 +98,15 @@
                                 <div class="input-group">
                                     <input type="text" class="form-control" datetime-picker="dd-MMMM-yyyy HH:mm:ss"
                                         date-format="dd-MMMM-yyyy HH:mm:ss" ng-model="WorkOrder._CheckInDate"
-                                        is-open="isOpenCheckInDate" readonly/>
-                            
+                                        is-open="isOpenCheckInDate" readonly />
+
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!--Mileage-->
-                    <div class="col-xs-6">
+                    <div class="col-xs-3">
                         <div class="form-group">
                             <label class="control-label col-xs-4">{{ 'Mileage' | translate }}</label>
                             <div class="col-xs-8">
@@ -114,54 +114,33 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <!--end row 3-->
 
-
-                <!--Row 4-->
-                <div class="row">                  
-                    <div class="col-xs-6">
+                    <!--IsRework-->
+                    <div class="col-xs-3">
                         <div class="form-group">
-                            <!--CustWaiting-->
-                            <div class="col-xs-4">
+                            <!--Rework-->
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label class="checkbox-inline">
-                                        <input type="checkbox" ng-model="WorkOrder.IsCustomerWaiting"
-                                            ng-checked="WorkOrder.IsCustomerWaiting == 1">
-                                        {{ 'CustWaiting' | translate }}
+                                        <input type="checkbox" ng-model="WorkOrder.IsRework"
+                                            ng-checked="WorkOrder.IsRework == 1" disabled>
+                                        {{ 'Rework' | translate }}
                                     </label>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                      <!--IsRework-->
-                      <div class="col-xs-6">
-                            <div class="form-group">
-                                <!--Rework-->
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" ng-model="WorkOrder.IsRework"
-                                                ng-checked="WorkOrder.IsRework == 1" readonly>
-                                            {{ 'Rework' | translate }}
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                 </div>
-                <!--end row 4-->
+                <!--end row 3-->
 
-       
 
                 <div class="row pull-right">
                     <!-- <button type="button" ng-disabled="headerFrm.$invalid" id="btnSubmitFrm" -->
-                        <!-- class="btn btn-icon btn-primary btnSubmit" ng-click="onSubmitForm()"> -->
-                        <!-- <i class="icon-checkmark3"></i>{{ 'btnSave' | translate }}</span> -->
+                    <!-- class="btn btn-icon btn-primary btnSubmit" ng-click="onSubmitForm()"> -->
+                    <!-- <i class="icon-checkmark3"></i>{{ 'btnSave' | translate }}</span> -->
                     <!-- </button> -->
-					  <button type="button" ng-disabled="WorkOrder.WOVehicle == null && WorkOrder.WOCustomer == null" id="btnSubmitFrm"
-                        class="btn btn-icon btn-primary btnSubmit" ng-click="onSubmitForm()">
+                    <button type="button" ng-disabled="WorkOrder.WOVehicle == null && WorkOrder.WOCustomer == null"
+                        id="btnSubmitFrm" class="btn btn-icon btn-primary btnSubmit" ng-click="onSubmitForm()">
                         <i class="icon-checkmark3"></i>{{ 'btnSave' | translate }}</span>
                     </button>
                     <button type="button" class="btn btn-link " data-ng-click="onCancel()">{{ 'btnCancel' | translate
