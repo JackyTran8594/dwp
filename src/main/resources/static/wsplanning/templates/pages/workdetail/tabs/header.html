@@ -90,8 +90,8 @@
 
                 <!--Row 3-->
                 <div class="row">
-              
-                   
+
+
 
                     <!--Mileage-->
                     <div class="col-xs-6">
@@ -111,7 +111,7 @@
                                 <div class="form-group">
                                     <label class="checkbox-inline">
                                         <input type="checkbox" ng-model="WorkOrder.IsRework"
-                                            ng-checked="WorkOrder.IsRework == 1" disabled>
+                                            ng-checked="WorkOrder.IsRework == 1" ng-disabled="WOJobs != undefined">
                                         {{ 'Rework' | translate }}
                                     </label>
                                 </div>

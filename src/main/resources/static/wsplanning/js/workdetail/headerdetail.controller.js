@@ -49,7 +49,7 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
   //   data: JSON.stringify($scope.workOrderHeader)
   // }
 
- 
+
 
   // function loadData() {
   //   //
@@ -62,6 +62,7 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
 
   // data for next tab
   WorkOrderService.shareData.postAction = "saveHeader";
+  $scope.WorkOrder.WOJobs = [];
   WorkOrderService.shareData.data = JSON.stringify($scope.WorkOrder);
   //
 
@@ -69,8 +70,9 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
 
   $scope.onSubmitForm = function () {
     $rootScope.isSubmitHeader = true;
+    $scope.WorkOrder.WOJobs = [];
     var data = JSON.stringify($scope.WorkOrder);
-	console.log(data);
+    console.log(data);
     var postAction = "saveHeader"
     // var Dto = {
     //   postAction: "saveHeader",
@@ -78,10 +80,10 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
     // }
     WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
       console.log(res);
-	  common.notifySuccess("Successfully!!!");
+      common.notifySuccess("Successfully!!!");
     }, function (err) {
       console.log(err);
-	  common.notifyError("Error!!!", err.status);
+      common.notifyError("Error!!!", err.status);
     })
   }
 

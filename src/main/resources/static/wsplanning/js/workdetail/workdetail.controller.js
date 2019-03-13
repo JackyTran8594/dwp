@@ -82,6 +82,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 
   console.log(WorkOrder);
   $scope.WorkOrder = WorkOrder.data;
+
   $scope.isNew = angular.equals($scope.WorkOrder, {});
   $scope.workOrderNo = WorkOrder.data.WorkOrderNo;
 
@@ -149,16 +150,15 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
     });
 
     modalInstance.result.then(function (selectedItem) {
-      $scope.WOVehicle = selectedItem;
+      // $scope.WOVehicle = selectedItem;
       $scope.jobObject.VehiId = selectedItem.VehiId
       if (selectedItem.PayerCustomer != null) {
-        CommonServices.getCustomers(selectedItem.PayerCustomer, "").then(function (data) {
-          // console.log(data);
-          $scope.WorkOrder.WOCustomer = data;
-        })
+        $rootScope.$broadcast("choosePayerCustomer", { "item": selectedItem.PayerCustomer });
+        $scope.jobObject.CustNo = selectedItem.PayerCustomer.CustNo;
       }
       console.log($scope.jobObject.VehiId);
       $rootScope.$broadcast("chooseVehicle", { "item": selectedItem });
+      
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
     });

@@ -2,6 +2,7 @@ package com.wsplanning.webapp.clients;
 
 import com.google.gson.Gson;
 import com.wsplanning.webapp.dto.WODTO;
+import com.wsplanning.webapp.dto.WOJobDTO;
 import com.wsplanning.webapp.utils.Utils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -210,10 +213,18 @@ public class WokOrderClient {
     }
     if (StringUtils.isNotBlank(postAction)) {
       headers.set("PostAction", postAction);
+      if(postAction == "saveHeader") {
+        wodto.WOJobs = new  ArrayList<>();;
+      }
+      // if(postAction == "saveRows") {
+      //   wodto. = new  ArrayList<>();;
+      // }
     }
     HttpEntity<WODTO> entity = new HttpEntity<WODTO>(wodto, headers);
     String url = String.format("%s", this.endpointUrl);
     ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
     return response.getBody();
   }
+
+  
 }

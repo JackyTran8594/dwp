@@ -51,4 +51,14 @@ UserWebApp.controller('CustomerCtrl', function ($scope, $rootScope, HttpService,
     $scope.WorkOrder.WOCustomer = $scope.WOCustomer;
   });
 
+  
+  $rootScope.$on('choosePayerCustomer', function (event, obj) {
+    $scope.WOCustomer = obj.item;
+    // $scope.WOContract = obj.item;
+    $scope.WorkOrder.WOCustomer = $scope.WOCustomer;
+    // $scope.WorkOrder.WOContract = $scope.WOCustomer;
+    
+    console.log(obj);
+  });
+
 });

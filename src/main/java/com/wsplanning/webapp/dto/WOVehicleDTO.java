@@ -12,7 +12,7 @@ public class WOVehicleDTO {
     private String SubModel;
     private String WarrantyInfo;
     private String NextMOTDate;
-    private String PayerCustomer;
+    private WOCustomerDTO PayerCustomer;
     private String HolderCustomer;
     private String UserCustomer;
     //
@@ -83,11 +83,11 @@ public class WOVehicleDTO {
         this.NextMOTDate = NextMOTDate;
     }
 
-    public String getPayerCustomer() {
+    public WOCustomerDTO getPayerCustomer() {
         return this.PayerCustomer;
     }
 
-    public void setPayerCustomer(String PayerCustomer) {
+    public void setPayerCustomer(WOCustomerDTO PayerCustomer) {
         this.PayerCustomer = PayerCustomer;
     }
 

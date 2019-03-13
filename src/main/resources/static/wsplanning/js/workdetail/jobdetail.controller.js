@@ -249,7 +249,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
 
     modalInstance.result.then(function (selectedItem) {
       console.log(selectedItem);
-	  	
+
       //add in new WO
       if ($scope.jobTabList === undefined) {
         var jobObj = clearObject();
@@ -283,49 +283,40 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   $rootScope.isSubmitJob = false;
 
   $scope.onSubmitForm = function () {
-    if($rootScope.isSubmitHeader === false)
-    {
+    if ($rootScope.isSubmitHeader === false) {
       var shareData = WorkOrderService.shareData;
+      
       console.log(shareData);
-        // $rootScope.$on('dataHeader', function ($event, obj) {
-        //   console.log(obj.dataBroadCast);
-        //   $rootScope.isSubmitHeader = true;
-        //   WorkOrderService.postWorkOrder(obj.dataBroadCast).then(function (res) {
-        //     console.log(res);
-        //   }, function (err) {
-        //     console.log(err);
-        //   })
-        // })
-        WorkOrderService.postWorkOrder(shareData.data, shareData.postAction).then(function (res) {
-          console.log(res);
-	
-        }, function (err) {
-          console.log(err);
-		    common.notifyError("Error!!!", err.status);
-          
-        })
+      WorkOrderService.postWorkOrder(shareData.data, shareData.postAction).then(function (res) {
+        console.log(res);
+
+      }, function (err) {
+        console.log(err);
+        common.notifyError("Error!!!", err.status);
+
+      })
     }
 
 
     //save job - after save header
     $rootScope.isSubmitJob = true;
-    $scope.$parent.WOJobs = $scope.jobTabList;
-	$scope.WorkOrder.WOJobs = $scope.jobTabList;
-	console.log($scope.WorkOrder);
-	console.log($scope.WorkOrder.WOJobs );
+    // $scope.$parent.WOJobs = $scope.jobTabList;
+    $scope.WorkOrder.WOJobs = $scope.jobTabList;
+    console.log($scope.WorkOrder);
+    console.log($scope.WorkOrder.WOJobs);
     var data = JSON.stringify($scope.WorkOrder)
-	console.log(data);
+    console.log(data);
     var postAction = "saveRows"
     // var Dto = {
     //   postAction: "saveRows",
     //   data: JSON.stringify($scope.jobTabList)
     // }
     WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
-      console.log(res);  	
-		common.notifySuccess("Successfully!!!");
+      console.log(res);
+      common.notifySuccess("Successfully!!!");
     }, function (err) {
       console.log(err);
-	  common.notifyError("Error!!!", err.status);
+      common.notifyError("Error!!!", err.status);
     })
   }
 
