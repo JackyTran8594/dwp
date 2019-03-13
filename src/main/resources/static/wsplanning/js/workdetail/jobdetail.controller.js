@@ -30,7 +30,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
       MainGroupId: " ",
       Note: "",
       Payer: "",
-      RowId: "",
+      RowId: 0,
       SmanId: "",
       SubGroupId: "",
     }
@@ -283,11 +283,12 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   $rootScope.isSubmitJob = false;
 
   $scope.onSubmitForm = function () {
-    if ($rootScope.isSubmitHeader === false) {
+    if ($rootScope.isSubmitHeader == false) {
       var shareData = WorkOrderService.shareData;
-      
+      $rootScope.isSubmitHeader == true;
       console.log(shareData);
       WorkOrderService.postWorkOrder(shareData.data, shareData.postAction).then(function (res) {
+       
         console.log(res);
 
       }, function (err) {
@@ -306,7 +307,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
     console.log($scope.WorkOrder.WOJobs);
     var data = JSON.stringify($scope.WorkOrder)
     console.log(data);
-    var postAction = "saveRows"
+    var postAction = "saveRows";
     // var Dto = {
     //   postAction: "saveRows",
     //   data: JSON.stringify($scope.jobTabList)
