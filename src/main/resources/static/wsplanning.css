@@ -568,6 +568,10 @@ table th {
   max-height: 600px;
 }
 
+.icons-list a[data-action=collapse]:after {
+	/* content: '\e9c1'; */
+    content: "\ede6";
+}
 
 /* .heading-elements-toggle {
   cursor: pointer;
@@ -597,7 +601,7 @@ table th {
 
   /* collapse icon */
 .icons-list a[data-action]:after {
-  font-size: 30px;
+  font-size: 20px;
 }
 
 /* end */
@@ -631,7 +635,7 @@ table th {
 
 /* collapse icon */
 .icons-list a[data-action]:after {
-  font-size: 30px;
+  font-size: 19px;
 }
 
 /* end */
@@ -661,6 +665,12 @@ table th {
    [class*="icon-"] {
     font-size: 20px;
   }
+  
+  /* collapse icon */
+.icons-list a[data-action]:after {
+  font-size: 19px;
+}
+
 }
 
 @media (max-width: 1200px) {
