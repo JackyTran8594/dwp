@@ -53,7 +53,7 @@ var common = {
         PNotify.removeAll();
 		PNotify.defaultStack = {
 			 dir1: 'down',
-			  dir2: 'right',
+			  dir2: 'left',
 			  firstpos1: 25,
 			  firstpos2: 25,
 			  spacing1: 36,
