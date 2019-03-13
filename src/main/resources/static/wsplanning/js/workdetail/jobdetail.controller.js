@@ -249,6 +249,9 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
 
     modalInstance.result.then(function (selectedItem) {
       console.log(selectedItem);
+	  	
+			  common.notifySuccess("Successfully!!!");
+		  
       //add in new WO
       if ($scope.jobTabList === undefined) {
         var jobObj = clearObject();
@@ -297,8 +300,10 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
         // })
         WorkOrderService.postWorkOrder(shareData.data, shareData.postAction).then(function (res) {
           console.log(res);
+	
         }, function (err) {
           console.log(err);
+		    common.notifyError("Error!!!", err.status);
           //
           // $rootScope.isSubmitJob = true;
           // var Dto = {
@@ -318,6 +323,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
     //save job - after save header
     $rootScope.isSubmitJob = true;
     $scope.WorkOrder.WOJobs = $scope.jobTabList;
+	console.log($scope.WorkOrder);
     var data = JSON.stringify($scope.WorkOrder)
     var postAction = "saveRows"
     // var Dto = {
@@ -325,7 +331,8 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
     //   data: JSON.stringify($scope.jobTabList)
     // }
     WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
-      console.log(res);
+      console.log(res);  	
+		common.notifySuccess("Successfully!!!");
     }, function (err) {
       console.log(err);
     })

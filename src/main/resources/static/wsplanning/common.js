@@ -39,11 +39,27 @@ var common = {
     },
     notifySuccess: function (_message) {
         PNotify.removeAll();
-        new PNotify({text: '<i class="icon-checkmark3"></i> ' + _message, addclass: 'bg-success'});
+		PNotify.defaultStack = {
+			 dir1: 'down',
+			  dir2: 'right',
+			  firstpos1: 25,
+			  firstpos2: 25,
+			  spacing1: 36,
+			  spacing2: 36,			
+		}
+        new PNotify({text: '<i class="icon-checkmark3"></i> ' + _message, addclass: 'bg-success', delay:3000, stack: PNotify.defaultStack });
     },
     notifyError: function (_message, _status) {
         PNotify.removeAll();
-        new PNotify({text: _message, title: _status, icon: 'icon-blocked', addclass: 'bg-danger'});
+		PNotify.defaultStack = {
+			 dir1: 'down',
+			  dir2: 'right',
+			  firstpos1: 25,
+			  firstpos2: 25,
+			  spacing1: 36,
+			  spacing2: 36,			
+		}
+        new PNotify({text: _message, title: _status, icon: 'icon-blocked', addclass: 'bg-danger', delay:3000, stack: PNotify.defaultStack });
     },
     notifyRemoveAll: function () {
         PNotify.removeAll();
