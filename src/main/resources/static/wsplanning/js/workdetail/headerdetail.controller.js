@@ -70,13 +70,15 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
   $scope.onSubmitForm = function () {
     $rootScope.isSubmitHeader = true;
     var data = JSON.stringify($scope.WorkOrder);
+	console.log(data);
     var postAction = "saveHeader"
     // var Dto = {
     //   postAction: "saveHeader",
     //   data: JSON.stringify($scope.WorkOrder)
     // }
-    WorkOrderService.postWorkOrder(data, postAction), then(function (res) {
+    WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
       console.log(res);
+	  common.notifySuccess("Successfully!!!");
     }, function (err) {
       console.log(err);
     })
