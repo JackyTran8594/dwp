@@ -111,19 +111,18 @@
                         <tbody>
                         <tr>
                             <td ng-repeat="item in lstPlanning" class="text-center">
-                                <div class="tablea" style="min-width: 130px;">
-                                    <div class="tr text-center">{{item.WorkDay | dateFormat}}</div>
-                                    <div class="tr text-center">
-                                        <div class="c100 p{{item.FreeCapacity}} center">
-                                            <span>{{item.FreeCapacity}}%</span>
-                                            <div class="slice">
-                                                <div class="bar"></div>
-                                                <div class="fill"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tr text-right">{{item.FreeHour}}</div>
-                                </div>
+                                <table style="min-width: 130px;">
+                                    <tr>
+                                        <td colspan="2" class="text-center">{{item.WorkDay | dateFormat}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">aaaa</td>
+                                        <td class="text-right">{{item.FreeCapacity}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" class="text-right">{{item.FreeHour}}</td>
+                                    </tr>
+                                </table>
                             </td>
                             <td>
                                 Workload
