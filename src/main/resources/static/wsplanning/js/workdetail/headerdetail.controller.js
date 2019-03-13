@@ -81,6 +81,7 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
 	  common.notifySuccess("Successfully!!!");
     }, function (err) {
       console.log(err);
+	  common.notifyError("Error!!!", err.status);
     })
   }
 

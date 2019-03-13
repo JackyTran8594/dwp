@@ -325,6 +325,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
 		common.notifySuccess("Successfully!!!");
     }, function (err) {
       console.log(err);
+	  common.notifyError("Error!!!", err.status);
     })
   }
 
