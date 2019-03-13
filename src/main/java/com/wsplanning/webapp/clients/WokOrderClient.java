@@ -216,6 +216,9 @@ public class WokOrderClient {
       if(postAction == "saveHeader") {
         wodto.WOJobs = new  ArrayList<>();;
       }
+      if(postAction == "createNew") {
+        
+      }
       // if(postAction == "saveRows") {
       //   wodto. = new  ArrayList<>();;
       // }
