@@ -1,146 +1,150 @@
 <div class="page-header page-header-xs" ng-controller="HeaderDetailCtrl">
 
+    <form name="headerForm">
 
-    <div ng-include="'/wsplanning/templates/pages/workdetail/fragments/vehicle.html'"></div>
-    <div ng-include="'/wsplanning/templates/pages/workdetail/fragments/customer.html'"></div>
-    <div ng-include="'/wsplanning/templates/pages/workdetail/fragments/contract.html'"></div>
+        <div ng-include="'/wsplanning/templates/pages/workdetail/fragments/vehicle.html'"></div>
+        <div ng-include="'/wsplanning/templates/pages/workdetail/fragments/customer.html'"></div>
+        <div ng-include="'/wsplanning/templates/pages/workdetail/fragments/contract.html'"></div>
 
-    <div class="panel panel-flat" id="headerPanel">
-        <div class="panel-heading">
-            <h3 class="panel-title"><b>{{ 'WoHeader' | translate }}</b></h3>
+        <div class="panel panel-flat" id="headerPanel">
+            <div class="panel-heading">
+                <h3 class="panel-title"><b>{{ 'WoHeader' | translate }}</b></h3>
 
-        </div>
+            </div>
 
-		<!-- {{headerFrm.modified ? 'Yes' : 'No' }} -->
-        <div class="panel-body panel-collapse in" id="pnHeaderFrm" ng-hide="collapsed">
-            <form class="form-horizontal formValidate" name="headerFrm" id="headerFrm">
-                <!--Row 1-->
-                <div class="row">
+            <div class="panel-body panel-collapse in" id="pnHeaderFrm" ng-hide="collapsed">
+                <form class="form-horizontal formValidate" name="headerFrm" id="headerFrm">
+                    <!--Row 1-->
+                    <div class="row">
 
-                    <!--DeptId-->
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            <label class="control-label col-xs-4">{{ 'department' | translate }}</label>
-                            <div class="col-xs-8">
-                                <select class="form-control" ng-model="WorkOrder.DeptId"
-                                    ng-options="item.Id as item.Name for item in lstDepartment">
-                                </select>
+                        <!--DeptId-->
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label class="control-label col-xs-4">{{ 'department' | translate }}</label>
+                                <div class="col-xs-8">
+                                    <select class="form-control" ng-model="WorkOrder.DeptId"
+                                        ng-options="item.Id as item.Name for item in lstDepartment">
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!--VisitReasonCode-->
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            <label class="control-label col-xs-4">{{ 'visitReason' | translate }}</label>
-                            <div class="col-xs-8">
-                                <select class="form-control" ng-model="WorkOrder.VisitReasonCode"
-                                    ng-options="item.Id as item.Name for item in lstVisitReason">
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--end row 1-->
-
-
-                <!--Row 2-->
-                <div class="row">
-                    <!--ServiceDate-->
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            <label class="control-label col-xs-4">{{ 'ServiceDate' | translate }}</label>
-                            <div class="col-xs-8">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" datetime-picker="dd-MMMM-yyyy HH:mm:ss"
-                                        date-format="dd-MMMM-yyyy HH:mm:ss" ng-model="WorkOrder._ServiceDate"
-                                        is-open="isOpenServiceDate" />
-                                    <span class="input-group-btn">
-                                        <button type="button" class="btn btn-default"
-                                            ng-click="openServiceDate($event, prop)">
-                                            <i class="icon-calendar"></i>
-                                        </button>
-                                    </span>
+                        <!--VisitReasonCode-->
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label class="control-label col-xs-4">{{ 'visitReason' | translate }}</label>
+                                <div class="col-xs-8">
+                                    <select class="form-control" ng-model="WorkOrder.VisitReasonCode"
+                                        ng-options="item.Id as item.Name for item in lstVisitReason">
+                                    </select>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!--end row 1-->
 
 
-                    <!--ExecutionDate-->
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            <label class="control-label col-xs-4">{{ 'ExpectedDelivery' | translate }}</label>
-                            <div class="col-xs-8">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" datetime-picker="dd-MMMM-yyyy HH:mm:ss"
-                                        date-format="dd-MMMM-yyyy HH:mm:ss" ng-model="WorkOrder._CheckOutDate"
-                                        is-open="isOpenCheckOutDate" />
-                                    <span class="input-group-btn">
-                                        <button type="button" class="btn btn-default"
-                                            ng-click="openCheckOutDate($event, prop)">
-                                            <i class="icon-calendar"></i>
-                                        </button>
-                                    </span>
+                    <!--Row 2-->
+                    <div class="row">
+                        <!--ServiceDate-->
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label class="control-label col-xs-4">{{ 'ServiceDate' | translate }}</label>
+                                <div class="col-xs-8">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" datetime-picker="dd-MMMM-yyyy HH:mm:ss"
+                                            date-format="dd-MMMM-yyyy HH:mm:ss" ng-model="WorkOrder._ServiceDate"
+                                            is-open="isOpenServiceDate" />
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default"
+                                                ng-click="openServiceDate($event, prop)">
+                                                <i class="icon-calendar"></i>
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!--ExecutionDate-->
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label class="control-label col-xs-4">{{ 'ExpectedDelivery' | translate }}</label>
+                                <div class="col-xs-8">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" datetime-picker="dd-MMMM-yyyy HH:mm:ss"
+                                            date-format="dd-MMMM-yyyy HH:mm:ss" ng-model="WorkOrder._CheckOutDate"
+                                            is-open="isOpenCheckOutDate" />
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default"
+                                                ng-click="openCheckOutDate($event, prop)">
+                                                <i class="icon-calendar"></i>
+                                            </button>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!--end row 2-->
+                    <!--end row 2-->
 
-                <!--Row 3-->
-                <div class="row">
-
+                    <!--Row 3-->
+                    <div class="row">
 
 
-                    <!--Mileage-->
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            <label class="control-label col-xs-4">{{ 'Mileage' | translate }}</label>
-                            <div class="col-xs-8">
-                                <input type="number" class="form-control" id="Mileage" ng-model="WorkOrder.Mileage">
+
+                        <!--Mileage-->
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label class="control-label col-xs-4">{{ 'Mileage' | translate }}</label>
+                                <div class="col-xs-8">
+                                    <input type="number" class="form-control" id="Mileage" ng-model="WorkOrder.Mileage">
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!--IsRework-->
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            <!--Rework-->
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label class="checkbox-inline">
-                                        <input type="checkbox" ng-model="WorkOrder.IsRework"
-                                            ng-checked="WorkOrder.IsRework == 1" ng-disabled="WOJobs != undefined">
-                                        {{ 'Rework' | translate }}
-                                    </label>
+                        <!--IsRework-->
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <!--Rework-->
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" ng-model="WorkOrder.IsRework"
+                                                ng-checked="WorkOrder.IsRework == 1" ng-disabled="WOJobs != undefined">
+                                            {{ 'Rework' | translate }}
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!--end row 3-->
+                    <!--end row 3-->
 
 
-                <div class="row pull-right">
-                    <!-- <button type="button" ng-disabled="headerFrm.$invalid" id="btnSubmitFrm" -->
-                    <!-- class="btn btn-icon btn-primary btnSubmit" ng-click="onSubmitForm()"> -->
-                    <!-- <i class="icon-checkmark3"></i>{{ 'btnSave' | translate }}</span> -->
-                    <!-- </button> -->
-                    <button type="button" ng-disabled="WorkOrder.WOVehicle == null && WorkOrder.WOCustomer == null"
-                        id="btnSubmitFrm" class="btn btn-icon btn-primary btnSubmit" ng-click="onSubmitForm()">
-                        <i class="icon-checkmark3"></i>{{ 'btnSave' | translate }}</span>
-                    </button>
-                    <button type="button" class="btn btn-link " data-ng-click="onCancel()">{{ 'btnCancel' | translate
+                    <div class="row pull-right">
+                        <!-- <button type="button" ng-disabled="headerFrm.$invalid" id="btnSubmitFrm" -->
+                        <!-- class="btn btn-icon btn-primary btnSubmit" ng-click="onSubmitForm()"> -->
+                        <!-- <i class="icon-checkmark3"></i>{{ 'btnSave' | translate }}</span> -->
+                        <!-- </button> -->
+                        <button type="button" ng-disabled="pristine == false && headerForm.modified == false"
+                            id="btnSubmitFrm" class="btn btn-icon btn-primary btnSubmit" ng-click="onSubmitForm()">
+                            <i class="icon-checkmark3"></i>{{ 'btnSave' | translate }}</span>
+                        </button>
+                        <button type="button" class="btn btn-link " data-ng-click="onCancel()">{{ 'btnCancel' | translate
                         }}
-                    </button>
-                </div>
+                        </button>
+                        <!-- <button type="button" class="btn btn-link " data-ng-click="reset()">reset
+                        </button> -->
+                    </div>
 
-            </form>
+                </form>
+            </div>
+
         </div>
 
-    </div>
+    </form>
 
 </div>
 

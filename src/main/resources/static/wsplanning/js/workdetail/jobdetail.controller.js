@@ -271,63 +271,58 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
         jobObj.EstimatedTime = selectedItem.EstimatedTime;
         jobObj.AdditionalData = selectedItem.AdditionalData;
 
-        console.log(jobObj);
+        // console.log(jobObj);
         $scope.jobTabList.push(jobObj);
-        console.log($scope.jobTabList);
+        // console.log($scope.jobTabList);
       }
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
     });
   };
 
-  $rootScope.isSubmitJob = false;
+
+  $rootScope.$on("headerData", function (evt, obj) {
+    console.log("ok")
+    console.log(obj);
+  });
+
+  // $rootScope.isSubmitJob = false;
 
   $scope.onSubmitForm = function () {
-    if ($rootScope.isSubmitHeader == false) {
+    if ($rootScope.isSubmitHeader == false || WorkOrderService.shareData.modified == true) {
       var shareData = WorkOrderService.shareData;
       $rootScope.isSubmitHeader == true;
-      console.log(shareData);
+      // console.log(shareData);
       WorkOrderService.postWorkOrder(shareData.data, shareData.postAction).then(function (res) {
-       
-        console.log(res);
-
       }, function (err) {
-        console.log(err);
         common.notifyError("Error!!!", err.status);
-
       })
     }
 
 
     //save job - after save header
-    $rootScope.isSubmitJob = true;
-    // $scope.$parent.WOJobs = $scope.jobTabList;
     $scope.WorkOrder.WOJobs = $scope.jobTabList;
-    console.log($scope.WorkOrder);
-    console.log($scope.WorkOrder.WOJobs);
+    // console.log($scope.WorkOrder);
+    // console.log($scope.WorkOrder.WOJobs);
     var data = JSON.stringify($scope.WorkOrder)
     console.log(data);
     var postAction = "saveRows";
-    // var Dto = {
-    //   postAction: "saveRows",
-    //   data: JSON.stringify($scope.jobTabList)
-    // }
     WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
       console.log(res);
-      common.notifySuccess("Successfully!!!");
+      common.notifySuccess("Success!!!");
     }, function (err) {
       console.log(err);
       common.notifyError("Error!!!", err.status);
     })
   }
-  
-  
-  
-$scope.$on('inputModified.formChanged', function (event, modified, formCtrl) {
-	console.log(formCtrl.$name);
-  // Process the modified event,
-  // use formCtrl.$name to get the form name.
-});
+
+
+
+  $scope.$on('inputModified.formChanged', function (event, modified, formCtrl) {
+    console.log(formCtrl.$name);
+    // Process the modified event,
+    // use formCtrl.$name to get the form name.
+  });
 
 
 });

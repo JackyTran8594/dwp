@@ -51,7 +51,8 @@ UserWebApp.service('WorkOrderService', function ($http) {
 
   WorkOrderService.shareData = {
     postAction: "",
-    data: ""
+    data: "",
+    modified: false
   }
 
   return WorkOrderService;
