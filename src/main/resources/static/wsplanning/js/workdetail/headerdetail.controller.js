@@ -49,9 +49,11 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
   //
 
 
-  $scope.checkSubmit = function (param) {
-    // if(param)
-  }
+$scope.$on('inputModified.formChanged', function (event, modified, formCtrl) {
+	console.log(formCtrl.$name);
+  // Process the modified event,
+  // use formCtrl.$name to get the form name.
+});
 
   $rootScope.isSubmitHeader = false;
 

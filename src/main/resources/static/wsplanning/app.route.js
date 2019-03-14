@@ -1,7 +1,14 @@
-UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvider, ivhTreeviewOptionsProvider ,tmhDynamicLocaleProvider) {
+UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvider, ivhTreeviewOptionsProvider ,tmhDynamicLocaleProvider, inputModifiedConfigProvider) {
 
   tmhDynamicLocaleProvider.localeLocationPattern('/assets/js/core/libraries/angularjs/angular-locale/i18n/angular-locale_{{locale}}.js')
   // $urlRouterProvider.otherwise('/');
+  
+  //input Modified 
+	 inputModifiedConfigProvider
+      .enableGlobally()
+      // // .setModifiedClassName('my-changed')
+      // // .setNotModifiedClassName('my-clear')
+     ;
 
   $urlRouterProvider.otherwise(function ($rootScope, $injector, $location) {
     var lang = $("#currentLang").attr('data-currentLang');

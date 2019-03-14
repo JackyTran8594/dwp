@@ -13,7 +13,8 @@ var UserWebApp = angular.module('UserWebApp', [
   'ui.select',
   'ui.router',
   'ngCookies',
-  'ivh.treeview'
+  'ivh.treeview',
+  'ngInputModified'
 ]);
 
 

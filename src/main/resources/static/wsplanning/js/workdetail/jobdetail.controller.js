@@ -320,6 +320,15 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
       common.notifyError("Error!!!", err.status);
     })
   }
+  
+  
+  
+$scope.$on('inputModified.formChanged', function (event, modified, formCtrl) {
+	console.log(formCtrl.$name);
+  // Process the modified event,
+  // use formCtrl.$name to get the form name.
+});
+
 
 });
 
