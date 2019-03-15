@@ -1,6 +1,5 @@
 <div class="page-header page-header-xs" ng-controller="HeaderDetailCtrl">
 
-    <form name="headerForm">
 
         <div ng-include="'/wsplanning/templates/pages/workdetail/fragments/vehicle.html'"></div>
         <div ng-include="'/wsplanning/templates/pages/workdetail/fragments/customer.html'"></div>
@@ -128,7 +127,7 @@
                         <!-- class="btn btn-icon btn-primary btnSubmit" ng-click="onSubmitForm()"> -->
                         <!-- <i class="icon-checkmark3"></i>{{ 'btnSave' | translate }}</span> -->
                         <!-- </button> -->
-                        <button type="button" ng-disabled="pristine == false && headerForm.modified == false"
+                        <button type="button" ng-disabled="pristine == false && headerFrm.modified == false"
                             id="btnSubmitFrm" class="btn btn-icon btn-primary btnSubmit" ng-click="onSubmitForm()">
                             <i class="icon-checkmark3"></i>{{ 'btnSave' | translate }}</span>
                         </button>
@@ -143,8 +142,6 @@
             </div>
 
         </div>
-
-    </form>
 
 </div>
 

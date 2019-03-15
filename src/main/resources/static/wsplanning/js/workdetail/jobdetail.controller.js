@@ -3,7 +3,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   var $ctrl = this;
 
   $scope.jobParams = $scope.$parent.jobObject;
-
+  $scope.actTypeJob = $scope.$parent.actionType;
   $scope.jobTabList = $scope.$parent.WOJobs;
   console.log($scope.jobTabList);
 
@@ -280,40 +280,81 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
     });
   };
 
+  var headerData = {};
 
   $rootScope.$on("headerData", function (evt, obj) {
-    console.log("ok")
+    headerData = obj;
     console.log(obj);
   });
 
   // $rootScope.isSubmitJob = false;
 
   $scope.onSubmitForm = function () {
-    if ($rootScope.isSubmitHeader == false || WorkOrderService.shareData.modified == true) {
-      var shareData = WorkOrderService.shareData;
-      $rootScope.isSubmitHeader == true;
-      // console.log(shareData);
-      WorkOrderService.postWorkOrder(shareData.data, shareData.postAction).then(function (res) {
+
+    if ($scope.actTypeJob === "new") {
+
+      var postAction = "createNew";
+
+      //save job - after save header
+      $scope.WorkOrder.WOJobs = $scope.jobTabList;
+
+      var data = JSON.stringify($scope.WorkOrder)
+      console.log(data);
+
+      WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
+        console.log(res);
+        common.notifySuccess("Success!!!");
       }, function (err) {
+        console.log(err);
         common.notifyError("Error!!!", err.status);
       })
+
+    } else {
+      var postAction = "saveRows";
+
+      if (headerData.modified == true) {
+        // var shareData = WorkOrderService.shareData;
+        // $rootScope.isSubmitHeader == true;
+        // console.log(shareData);
+        WorkOrderService.postWorkOrder(headerData.data, "saveHeader").then(function (res) {
+        }, function (err) {
+          common.notifyError("Error!!!", err.status);
+        })
+      }
+
+      // save job - after save header
+      $scope.WorkOrder.WOJobs = $scope.jobTabList;
+      // console.log($scope.WorkOrder);
+      // console.log($scope.WorkOrder.WOJobs);
+      var data = JSON.stringify($scope.WorkOrder)
+      console.log(data);
+      // var postAction = "saveRows";
+      WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
+        console.log(res);
+        common.notifySuccess("Success!!!");
+      }, function (err) {
+        console.log(err);
+        common.notifyError("Error!!!", err.status);
+      });
     }
 
 
+
+
     //save job - after save header
-    $scope.WorkOrder.WOJobs = $scope.jobTabList;
-    // console.log($scope.WorkOrder);
-    // console.log($scope.WorkOrder.WOJobs);
-    var data = JSON.stringify($scope.WorkOrder)
-    console.log(data);
-    var postAction = "saveRows";
-    WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
-      console.log(res);
-      common.notifySuccess("Success!!!");
-    }, function (err) {
-      console.log(err);
-      common.notifyError("Error!!!", err.status);
-    })
+    // $scope.WorkOrder.WOJobs = $scope.jobTabList;
+    // // console.log($scope.WorkOrder);
+    // // console.log($scope.WorkOrder.WOJobs);
+    // var data = JSON.stringify($scope.WorkOrder)
+    // console.log(data);
+    // var postAction = "saveRows";
+    // WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
+    // console.log(res);
+    // common.notifySuccess("Success!!!");
+    // }, function (err) {
+    // console.log(err);
+    // common.notifyError("Error!!!", err.status);
+    // })
   }
 
 

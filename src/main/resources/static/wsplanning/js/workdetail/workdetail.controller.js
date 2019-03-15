@@ -3,6 +3,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
   $scope.type = $stateParams.type;
   $scope.WOJobs = WorkOrder.data.WOJobs;
   $scope.jobObject = {};
+  $scope.actionType = "";
 
 
   loadCommon();
@@ -53,13 +54,27 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
   checkWorkOrder(WorkOrder)
 
   function checkWorkOrder(item) {
-    if (item.data.WOJobs === undefined) {
+    // if (item.data.WOJobs === undefined) {
+      // $scope.jobObject = {
+        // SiteId: '',
+        // CustNo: '',
+        // VehiId: '',
+        // WarrantyInfo: ''
+      // }
+	  
+	 
+    // }
+	 if (item.id === undefined) {
       $scope.jobObject = {
         SiteId: '',
         CustNo: '',
         VehiId: '',
         WarrantyInfo: ''
       }
+	  
+	  $scope.actionType = "new";
+	  // $scope.actionType.postAction = "createNew";
+	 
     }
     else {
       $scope.jobObject = {
@@ -70,6 +85,9 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
         // WarrantyInfo: "153135"
 
       }
+	  
+	   $scope.actionType = "update";
+	  // $scope.actionType.postAction = "saveHeader";
     }
     console.log(item);
   }
