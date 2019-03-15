@@ -7,18 +7,18 @@ import java.util.Date;
 public class WOVehicleDTO {
 
     public Integer VehiId;
-    private String LicenseNo;
-    private String VIN;
-    private String Make;
-    private String Model;
-    private String SubModel;
-    private String WarrantyInfo;
-    private Date NextMOTDate;
-    private WOCustomerDTO PayerCustomer;
-    private WOCustomerDTO HolderCustomer;
-    private WOCustomerDTO UserCustomer;
+    public String LicenseNo;
+    public String VIN;
+    public String Make;
+    public String Model;
+    public String SubModel;
+    public String WarrantyInfo;
+    public Date NextMOTDate;
+    public WOCustomerDTO PayerCustomer;
+    public WOCustomerDTO HolderCustomer;
+    public WOCustomerDTO UserCustomer;
     //
-    private List<DynamicDataDTO> DynamicDataFields;
+    public List<DynamicDataDTO> DynamicDataFields;
 
     public Integer getVehiId() {
         return this.VehiId;
