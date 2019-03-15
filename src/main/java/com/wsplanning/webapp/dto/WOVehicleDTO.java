@@ -1,6 +1,8 @@
 package com.wsplanning.webapp.dto;
 
 import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.Date;
 
 public class WOVehicleDTO {
 
@@ -11,14 +13,13 @@ public class WOVehicleDTO {
     private String Model;
     private String SubModel;
     private String WarrantyInfo;
-    private String NextMOTDate;
+    private Date NextMOTDate;
     private WOCustomerDTO PayerCustomer;
-    private String HolderCustomer;
-    private String UserCustomer;
+    private WOCustomerDTO HolderCustomer;
+    private WOCustomerDTO UserCustomer;
     //
-    private String DynamicDataFields;
+    private List<DynamicDataDTO> DynamicDataFields;
 
-    
     public Integer getVehiId() {
         return this.VehiId;
     }
@@ -75,11 +76,11 @@ public class WOVehicleDTO {
         this.WarrantyInfo = WarrantyInfo;
     }
 
-    public String getNextMOTDate() {
+    public Date getNextMOTDate() {
         return this.NextMOTDate;
     }
 
-    public void setNextMOTDate(String NextMOTDate) {
+    public void setNextMOTDate(Date NextMOTDate) {
         this.NextMOTDate = NextMOTDate;
     }
 
@@ -91,27 +92,27 @@ public class WOVehicleDTO {
         this.PayerCustomer = PayerCustomer;
     }
 
-    public String getHolderCustomer() {
+    public WOCustomerDTO getHolderCustomer() {
         return this.HolderCustomer;
     }
 
-    public void setHolderCustomer(String HolderCustomer) {
+    public void setHolderCustomer(WOCustomerDTO HolderCustomer) {
         this.HolderCustomer = HolderCustomer;
     }
 
-    public String getUserCustomer() {
+    public WOCustomerDTO getUserCustomer() {
         return this.UserCustomer;
     }
 
-    public void setUserCustomer(String UserCustomer) {
+    public void setUserCustomer(WOCustomerDTO UserCustomer) {
         this.UserCustomer = UserCustomer;
     }
 
-    public String getDynamicDataFields() {
+    public List<DynamicDataDTO> getDynamicDataFields() {
         return this.DynamicDataFields;
     }
 
-    public void setDynamicDataFields(String DynamicDataFields) {
+    public void setDynamicDataFields(List<DynamicDataDTO> DynamicDataFields) {
         this.DynamicDataFields = DynamicDataFields;
     }
 

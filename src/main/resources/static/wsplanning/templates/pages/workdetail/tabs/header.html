@@ -52,7 +52,7 @@
                                 <div class="col-xs-8">
                                     <div class="input-group">
                                         <input type="text" class="form-control" datetime-picker="dd-MMMM-yyyy HH:mm:ss"
-                                            date-format="dd-MMMM-yyyy HH:mm:ss" ng-model="WorkOrder._ServiceDate"
+                                            date-format="dd-MMMM-yyyy HH:mm:ss" ng-model="WorkOrder.ServiceDate"
                                             is-open="isOpenServiceDate" />
                                         <span class="input-group-btn">
                                             <button type="button" class="btn btn-default"
@@ -73,7 +73,7 @@
                                 <div class="col-xs-8">
                                     <div class="input-group">
                                         <input type="text" class="form-control" datetime-picker="dd-MMMM-yyyy HH:mm:ss"
-                                            date-format="dd-MMMM-yyyy HH:mm:ss" ng-model="WorkOrder._CheckOutDate"
+                                            date-format="dd-MMMM-yyyy HH:mm:ss" ng-model="WorkOrder.CheckOutDate"
                                             is-open="isOpenCheckOutDate" />
                                         <span class="input-group-btn">
                                             <button type="button" class="btn btn-default"
@@ -111,7 +111,7 @@
                                     <div class="form-group">
                                         <label class="checkbox-inline">
                                             <input type="checkbox" ng-model="WorkOrder.IsRework"
-                                                ng-checked="WorkOrder.IsRework == 1" ng-disabled="WOJobs != undefined">
+                                                ng-checked="WorkOrder.IsRework == 1" disabled>
                                             {{ 'Rework' | translate }}
                                         </label>
                                     </div>

@@ -10,7 +10,7 @@ public class EmployeeDTO {
     public String SubSys;
     public String SiteId;
     public String ShiftId;
-    public String ResType;
+    public Integer ResType;
     public String Picture;
 
     public String getSmanId() {
@@ -85,11 +85,11 @@ public class EmployeeDTO {
         this.ShiftId = ShiftId;
     }
 
-    public String getResType() {
+    public Integer getResType() {
         return this.ResType;
     }
 
-    public void setResType(String ResType) {
+    public void setResType(Integer ResType) {
         this.ResType = ResType;
     }
 

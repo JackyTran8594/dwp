@@ -51,7 +51,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
   }
 
 
-  checkWorkOrder(WorkOrder)
+  checkWorkOrder($stateParams)
 
   function checkWorkOrder(item) {
     // if (item.data.WOJobs === undefined) {
@@ -104,28 +104,28 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
   $scope.isNew = angular.equals($scope.WorkOrder, {});
   $scope.workOrderNo = WorkOrder.data.WorkOrderNo;
 
-  $scope.WorkOrder._ServiceDate = new Date($scope.WorkOrder.ServiceDate);
+  $scope.WorkOrder.ServiceDate = new Date($scope.WorkOrder.ServiceDate);
   if ($scope.WorkOrder.CheckOutDate == "" || $scope.WorkOrder.CheckOutDate == "0001-01-01T00:00:00") {
-    $scope.WorkOrder._CheckOutDate = "";
+    $scope.WorkOrder.CheckOutDate = "";
   } else {
-    $scope.WorkOrder._CheckOutDate = new Date($scope.WorkOrder.CheckOutDate);
+    $scope.WorkOrder.CheckOutDate = new Date($scope.WorkOrder.CheckOutDate);
   }
   if ($scope.WorkOrder.CheckInDate == "" || $scope.WorkOrder.CheckInDate == "0001-01-01T00:00:00") {
-    $scope.WorkOrder._CheckInDate = "";
+    $scope.WorkOrder.CheckInDate = "";
   } else {
-    $scope.WorkOrder._CheckInDate = new Date($scope.WorkOrder.CheckInDate);
+    $scope.WorkOrder.CheckInDate = new Date($scope.WorkOrder.CheckInDate);
   }
 
   if ($scope.WorkOrder.ExecutionDate == "" || $scope.WorkOrder.ExecutionDate == "0001-01-01T00:00:00") {
-    $scope.WorkOrder._ExecutionDate = "";
+    $scope.WorkOrder.ExecutionDate = "";
   } else {
-    $scope.WorkOrder._ExecutionDate = new Date($scope.WorkOrder.ExecutionDate);
+    $scope.WorkOrder.ExecutionDate = new Date($scope.WorkOrder.ExecutionDate);
   }
 
   if ($scope.WorkOrder.BookMOTDate == "" || $scope.WorkOrder.BookMOTDate == "0001-01-01T00:00:00") {
-    $scope.WorkOrder._BookMOTDate = "";
+    $scope.WorkOrder.BookMOTDate = "";
   } else {
-    $scope.WorkOrder._BookMOTDate = new Date($scope.WorkOrder.BookMOTDate);
+    $scope.WorkOrder.BookMOTDate = new Date($scope.WorkOrder.BookMOTDate);
   }
 
   // $scope.$watch('WorkOrder.Mileage',function(){

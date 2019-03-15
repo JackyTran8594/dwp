@@ -1,11 +1,12 @@
 package com.wsplanning.webapp.dto;
 
+import java.util.Date;
 import org.apache.poi.hpsf.Decimal;
 
 public class WOResourcePoolDTO {
     public Integer RowId;
     public Number Duration;
-    public String WorkDay;
+    public Date WorkDay;
     public String DeptId;
     public String ShiftId;
 
@@ -25,11 +26,11 @@ public class WOResourcePoolDTO {
         this.Duration = Duration;
     }
 
-    public String getWorkDay() {
+    public Date getWorkDay() {
         return this.WorkDay;
     }
 
-    public void setWorkDay(String WorkDay) {
+    public void setWorkDay(Date WorkDay) {
         this.WorkDay = WorkDay;
     }
 

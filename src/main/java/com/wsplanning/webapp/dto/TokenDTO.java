@@ -1,11 +1,14 @@
 package com.wsplanning.webapp.dto;
+
+import java.util.Date;
+
 import org.apache.poi.hpsf.Decimal;
 
 public class TokenDTO {
     
     public String Token;
     public String LangId;
-    public String Expired;
+    public Date Expired;
     public String DMSUserId;
     public String ProfileId;
     public String SiteId;
@@ -30,11 +33,11 @@ public class TokenDTO {
         this.LangId = LangId;
     }
 
-    public String getExpired() {
+    public Date getExpired() {
         return this.Expired;
     }
 
-    public void setExpired(String Expired) {
+    public void setExpired(Date Expired) {
         this.Expired = Expired;
     }
 
