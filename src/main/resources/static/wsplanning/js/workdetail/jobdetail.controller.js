@@ -260,6 +260,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
         $scope.jobTabList[0].JobType = selectedItem.JobType;
         $scope.jobTabList[0].Note = selectedItem.JobTitle;
         $scope.jobTabList[0].Name = selectedItem.Name;
+        $scope.jobTabList[0].Items = selectedItem.Items;
 
       } else {
 
@@ -270,7 +271,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
         jobObj.Name = selectedItem.Name;
         jobObj.EstimatedTime = selectedItem.EstimatedTime;
         jobObj.AdditionalData = selectedItem.AdditionalData;
-
+        jobObj.Items =  selectedItem.Items;
         // console.log(jobObj);
         $scope.jobTabList.push(jobObj);
         // console.log($scope.jobTabList);
@@ -457,6 +458,8 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
   }
 
   $scope.save = function () {
+    $scope.newJobObject.Items = [];
+    $scope.newJobObject.Items = $scope.historicalData
     $uibModalInstance.close($scope.newJobObject);
     $scope.newJobObject = {};
   }
