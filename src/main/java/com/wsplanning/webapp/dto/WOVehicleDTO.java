@@ -13,7 +13,8 @@ public class WOVehicleDTO {
     public String Model;
     public String SubModel;
     public String WarrantyInfo;
-    public Date NextMOTDate;
+    // public Date NextMOTDate;
+    public String NextMOTDate;
     public WOCustomerDTO PayerCustomer;
     public WOCustomerDTO HolderCustomer;
     public WOCustomerDTO UserCustomer;

@@ -8,19 +8,35 @@ public class WODTO {
 
     public Integer WorkOrderNo;
     public Integer WorkOrderId;
-    public Date ServiceDate;
-    public Date ExecutionDate;
-    public Date CheckInDate;
-    public Date CheckOutDate;
-    public Date BookMOTDate;
-    public Date BookTireDate;
+    // public Date ServiceDate;
+    public String ServiceDate;
+
+    // public Date ExecutionDate;
+    public String ExecutionDate;
+
+    // public Date CheckInDate;
+    public String CheckInDate;
+
+    // public Date CheckOutDate;
+    public String CheckOutDate;
+
+    // public Date BookMOTDate;
+    public String BookMOTDate;
+
+    // public Date BookTireDate;
+    public String BookTireDate;
+
     public String ServiceAdvisorId;
     public String DeliveredBy;
     public String TransactionType;
     public String DeptId;
     public String StampStatus;
-    public Date WorkReadyDate;
-    public Date WorkReadyForInvoiceDate;
+    public String WorkReadyDate;
+    // public Date WorkReadyDate;
+
+    public String WorkReadyForInvoiceDate;
+    // public Date WorkReadyForInvoiceDate;
+
     public Integer IsCustomerWaiting;
     // public Integer IsRework;
     public String TimeBarText;

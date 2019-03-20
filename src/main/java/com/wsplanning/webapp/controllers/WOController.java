@@ -262,7 +262,7 @@ public class WOController extends BaseController {
     objWO.WOCustomer = WOCustomer;
     objWO.WOContact = WOContact;
     objWO.Mileage = 0;
-    objWO.ServiceDate = new Date();
+    // objWO.ServiceDate = new Date();
     objWO.IsTimeReservation = 1;
     objWO.VisitReasonCode = "01";
     objWO.JobTitle = "Annual service";

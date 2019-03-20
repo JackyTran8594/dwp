@@ -8,7 +8,7 @@ public class TokenDTO {
     
     public String Token;
     public String LangId;
-    public Date Expired;
+    public String Expired;
     public String DMSUserId;
     public String ProfileId;
     public String SiteId;

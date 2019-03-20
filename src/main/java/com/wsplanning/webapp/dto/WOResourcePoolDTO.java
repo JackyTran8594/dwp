@@ -6,7 +6,7 @@ import org.apache.poi.hpsf.Decimal;
 public class WOResourcePoolDTO {
     public Integer RowId;
     public Number Duration;
-    public Date WorkDay;
+    public String WorkDay;
     public String DeptId;
     public String ShiftId;
 
