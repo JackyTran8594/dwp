@@ -3,8 +3,8 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
   var vm = this;
 
   //These variables MUST be set as a minimum for the calendar to work
-  // $scope.calendarView = 'month';
-  $scope.calendarView = 'week';
+  $scope.calendarView = 'month';
+  // $scope.calendarView = 'week';
   $scope.viewDate = new Date();
 
   var actions = [{
@@ -22,8 +22,8 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
   $scope.lstPlanning = [];
   $scope.loadData = function () {
     var params = {
-      "DayFrom": "2019.02.04",
-      "DayTo": "2019.02.10",
+      "DayFrom": "2019.03.18",
+      "DayTo": "2019.03.24",
       "DeptId": "201",
       "ShiftId": "",
     };
@@ -143,6 +143,11 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
 
   $scope.DeptId = {};
   $scope.ShiftId = {};
+
+  $scope.detailBooking = function (item) {
+    console.log(item);
+    $rootScope.$broadcast("bookingClick", {"date": item.WorkDay});
+  }
 
 
 });

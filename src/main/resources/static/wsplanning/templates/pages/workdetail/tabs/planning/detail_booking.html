@@ -1,22 +1,12 @@
 <!--ROW3-->
-<div class="panel panel-flat" ng-controller="PlanningDetailCtrl">
+<div class="panel panel-flat" ng-controller="PlanningDetailCtrl" ng-init="init()">
     <div class="panel-body">
-        <div class="row">
-            <div class="col-xs-12">
-                <mwl-calendar
-                        events="events"
-                        view="calendarView"
-                        view-title="calendarTitle"
-                        view-date="viewDate"
-                        current-day="viewDate"
-                        cell-is-open="cellIsOpen"
-                        day-view-start="06:00"
-                        day-view-end="22:59"
-                        day-view-split="30"
-                        cell-auto-open-disabled="true">
-                </mwl-calendar>
-            </div>
-        </div>
+        <div class="row"><div id='calendar'></div></div>
     </div>
 </div>
 
+<style type="text/css">
+    .fc-center{
+        margin: auto;
+    }
+</style>
