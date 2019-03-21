@@ -1,15 +1,8 @@
 UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrderService, HttpService, $translate, $location, $filter, $uibModal, CommonServices, $stateParams, $state) {
   $scope.WorkOrderId = $stateParams.id;
   $scope.type = $stateParams.type;
-  
+
   $scope.actTypeHeader = $scope.$parent.actionType;
-  
-
-  // $scope.WorkOrder = $scope.$parent.WorkOrder
-  console.log($scope.WorkOrder);
-
-  // console.log($scope.WorkOrderId);
-  // console.log($scope.type);
 
 
   //DATETIME PICKER
@@ -67,73 +60,64 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
   $scope.$watch('WorkOrder.WOVehicle', function (newValue, oldValue) {
     if (newValue.LicenseNo !== firstVehicle.LicenseNo) {
       $scope.pristine = true;
-      // console.log($scope.pristine);
-      // console.log(firstVehicle);
     } else {
       $scope.pristine = false;
-      console.log($scope.pristine);
     }
   });
- 
+
   $scope.$watch('WorkOrder.WOCustomer', function (newValue, oldValue) {
     if (newValue.CustNo !== firstCustomer.CustNo) {
       $scope.pristine = true;
     } else {
-	
-		if($scope.WorkOrder.WOVehicle.LicenseNo === firstVehicle.LicenseNo)
-		{
-				$scope.pristine = false;
-		} else {
-			$scope.pristine = true;
-		}
-		
-		 // console.log($scope.pristine);
-	}
+      if ($scope.WorkOrder.WOVehicle.LicenseNo === firstVehicle.LicenseNo) {
+        $scope.pristine = false;
+      } else {
+        $scope.pristine = true;
+      }
+    }
   });
 
   $scope.$watch('WorkOrder.WOContact', function (newValue, oldValue) {
     if (newValue.CustNo !== firstContact.CustNo) {
       $scope.pristine = true;
     } else {
-      if($scope.WorkOrder.WOVehicle.LicenseNo === firstVehicle.LicenseNo)
-		{
-				$scope.pristine = false;
-		} else {
-			$scope.pristine = true;
-		}
+      if ($scope.WorkOrder.WOVehicle.LicenseNo === firstVehicle.LicenseNo) {
+        $scope.pristine = false;
+      } else {
+        $scope.pristine = true;
+      }
     }
   });
 
-  
+
   // check type: new or update 
   // var type = "";
   // var postAction = "";
-  
+
   // checkAction($stateParams)
-  
+
   // function checkAction(params){
-	  	// if(params.id === undefined)
-		// {
-			// type = "new";
-			// postAction = "createNew";
-		// } else {
-			// type = "update";
-			// postAction = "saveHeader";
-		// }
+  // if(params.id === undefined)
+  // {
+  // type = "new";
+  // postAction = "createNew";
+  // } else {
+  // type = "update";
+  // postAction = "saveHeader";
   // }
-	//
-	
-	//if the form is modified => using $emit to send data 
+  // }
+  //
+
+  //if the form is modified => using $emit to send data
   $scope.$on('inputModified.formChanged', function (event, modified, formCtrl) {
     // WorkOrderService.shareData.modified = modified;
     $scope.$emit("headerData", {
-      data: $scope.WorkOrder,
-      modified: modified, 
-	  // type: type,
-	  // postAction: postAction
-    }
+        data: $scope.WorkOrder,
+        modified: modified,
+        // type: type,
+        // postAction: postAction
+      }
     );
-    console.log(formCtrl.$name);
   });
 
   // $rootScope.isSubmitHeader = false;
@@ -142,17 +126,14 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
     // $rootScope.isSubmitHeader = true;
 
     var data = JSON.stringify($scope.WorkOrder);
-	var postAction = "";
-    console.log(data);
-	if($scope.actTypeHeader === "new")
-	{
-		postAction = "createNew";
-	} else {
-		postAction = "saveHeader";
-	}
-    
+    var postAction = "";
+    if ($scope.actTypeHeader === "new") {
+      postAction = "createNew";
+    } else {
+      postAction = "saveHeader";
+    }
+
     WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
-      console.log(res);
       common.notifySuccess("Success!!!");
     }, function (err) {
       console.log(err);

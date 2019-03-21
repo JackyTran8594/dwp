@@ -168,7 +168,10 @@ var translationsEN = {
   JobQuickSelection: "Job Quick Selection",
   SelectedItem: "The Selected Item",
   AdditionalData: "The Additional Data",
-  NonStockItems :"Non Stock Items"
+  NonStockItems :"Non Stock Items",
+  totalTime :"Total Time",
+  mechanic :"Mechanic",
+  workload :"Workload"
 
 };
 
@@ -299,7 +302,10 @@ var translationsVI = {
   JobQuickSelection: "Job Quick Selection",
   SelectedItem: "The Selected Item",
   AdditionalData: "The Additional Data",
-  NonStockItems :"Non Stock Items"
+  NonStockItems :"Non Stock Items",
+  totalTime :"Tổng thời gian",
+  mechanic :"Thợ",
+  workload :"Workload"
 
 };
 

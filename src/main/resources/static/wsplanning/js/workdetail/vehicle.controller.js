@@ -2,11 +2,6 @@ UserWebApp.controller('VehicleCtrl', function ($scope, $rootScope, HttpService, 
   $scope.WorkOrderId = $stateParams.id;
   $scope.type = $stateParams.type;
 
-
-  console.log($scope.WorkOrderId);
-  console.log($scope.type);
-
-
   $scope.isShow = false;
 
   $scope.WOVehicle = {};

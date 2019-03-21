@@ -1,7 +1,8 @@
-UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpService, $translate, $location, $filter, $uibModal, CommonServices, $stateParams, $state, WorkOrder, WorkOrderService) {
+UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpService, $translate, $location, $filter, $uibModal, CommonServices, $stateParams, $state, WorkOrder, lstMonth,WorkOrderService) {
   $scope.WorkOrderId = $stateParams.id;
   $scope.type = $stateParams.type;
   $scope.WOJobs = WorkOrder.data.WOJobs;
+  $scope.lstMonth = lstMonth.data;
   $scope.jobObject = {};
   $scope.actionType = "";
 
@@ -89,19 +90,20 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 	   $scope.actionType = "update";
 	  // $scope.actionType.postAction = "saveHeader";
     }
-    console.log(item);
   }
-
-  console.log(WorkOrder.data);
 
   $scope.WOVehicle = "";
   $scope.WOCustomer = "";
   $scope.WOContact = "";
 
-  console.log(WorkOrder);
   $scope.WorkOrder = WorkOrder.data;
 
   $scope.isNew = angular.equals($scope.WorkOrder, {});
+
+  if($scope.isNew){
+    var EmployeeData = $("#EmployeeData").data( "employee");
+    $scope.WorkOrder.DeptId = EmployeeData.DeptId;
+  }
   $scope.workOrderNo = WorkOrder.data.WorkOrderNo;
 
   $scope.WorkOrder.ServiceDate = new Date($scope.WorkOrder.ServiceDate);
@@ -196,8 +198,6 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
     modalInstance.result.then(function (selectedItem) {
       $scope.WOCustomer = selectedItem;
       $scope.jobObject.CustNo = selectedItem.CustNo
-
-      console.log($scope.jobObject.CustNo);
 
       $rootScope.$broadcast("chooseCustomer", { "item": selectedItem });
     }, function () {

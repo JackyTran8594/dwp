@@ -153,10 +153,8 @@ UserWebApp.controller('newOfferCtrl', function ($scope, $rootScope, $locale, Htt
 
   function loadCombo() {
     CommonServices.getDepartments().then(function (data) {
-      console.log(data);
       $scope.lstDepartment = data
       $scope.target.department = data[0].Id;
-      console.log($scope.target.department);
     });
     CommonServices.getVisitReasons().then(function (data) {
       $scope.lstVisitReason = data;

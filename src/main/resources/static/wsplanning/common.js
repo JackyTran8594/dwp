@@ -442,3 +442,20 @@ function formatDateToString(date){
 
   return rtn;
 }
+
+function formatDateToApi(date){
+  var rtn = date.getFullYear();
+  var sdate = date.getDate();
+  var month = date.getMonth() + 1;
+  if (month < 10) {
+    rtn += ".0" + month;
+  } else {
+    rtn += "." + month;
+  }
+  if (sdate < 10) {
+    rtn += ".0" + sdate;
+  } else {
+    rtn += "." + sdate;
+  }
+  return rtn;
+}

@@ -30,6 +30,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
   public static final String SESSION_SITEID = "SESSION_SITEID";
   public static final String SESSION_TOKEN = "SESSION_TOKEN";
   public static final String SESSION_SMANID = "userSmanID";
+  public static final String SESSION_EMPLOYEEDATA = "EmployeeData";
 
   public CustomAuthenticationProvider() {
     logger.info("*** CustomAuthenticationProvider created");
@@ -93,6 +94,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 //          JSONObject EmployeeData = userInfo.optJSONObject("Employee");
 
           if (EmployeeData != null) {
+            session.setAttribute(SESSION_EMPLOYEEDATA, EmployeeData.toString());
             if (siteName != null && !StringUtils.isBlank(siteName)) {
               session.setAttribute(SESSION_SMANID, EmployeeData.optString("Name", "") + "@" + siteName);
             } else {

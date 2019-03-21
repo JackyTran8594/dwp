@@ -6,8 +6,6 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   $scope.actTypeJob = $scope.$parent.actionType;
   $scope.jobTabList = $scope.$parent.WOJobs;
 
-  console.log($scope.jobTabList);
-
   loadCommon();
   $scope.lstDepartment = [];
   $scope.lstPayers = [];
@@ -88,8 +86,6 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
     });
 
   }
-
-  console.log($scope.jobParams);
 
   $scope.getClass = function (param, mechanicId) {
     switch (param) {

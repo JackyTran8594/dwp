@@ -44,8 +44,6 @@ UserWebApp.controller('ReplacementVehicleCtrl', function ($scope, $rootScope, $l
 
   // datepicker-vutt
 
-  console.log($locale);
-
   $scope.dateOptions = {
     formatYear: 'yy',
     startingDay: 1
@@ -105,7 +103,6 @@ UserWebApp.controller('ReplacementVehicleCtrl', function ($scope, $rootScope, $l
     //unScheduledWO, withSubcontractor, todayWO, allWO, withMOT, withTire, withBO, postponedWO, offers
 
 
-    console.log($scope.params);
     var params = {
       "ViewName": "allWO",
       "skey": $scope.searchValue,
@@ -233,7 +230,6 @@ UserWebApp.controller('ReplacementVehicleCtrl', function ($scope, $rootScope, $l
   $ctrl.animationsEnabled = true;
 
   $ctrl.open = function (size, item) {
-    console.log("----open--------");
     var modalInstance = $uibModal.open({
       animation: $ctrl.animationsEnabled,
       templateUrl: '/wsplanning/templates/pages/replacementVehicle/modal-form.html',

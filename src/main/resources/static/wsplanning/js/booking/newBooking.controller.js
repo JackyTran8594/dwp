@@ -33,7 +33,6 @@ UserWebApp.controller('newBookingCtrl', function ($scope, $rootScope, $locale, H
     });
 
     modalInstance.result.then(function (selectedItem) {
-      console.log(selectedItem);
       $scope.WOVehicle = selectedItem;
     }, function () {
       console.log('Modal dismissed at: ' + new Date());

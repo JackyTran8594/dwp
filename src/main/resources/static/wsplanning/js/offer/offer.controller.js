@@ -44,8 +44,6 @@ UserWebApp.controller('OffersCtrl', function ($scope, $rootScope, $locale, HttpS
 
   // datepicker-vutt
 
-  console.log($locale);
-
   $scope.dateOptions = {
     formatYear: 'yy',
     startingDay: 1

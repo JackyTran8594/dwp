@@ -34,6 +34,11 @@ public class EmployeesClient {
     this.endpointUrl = apiEndpointUrl + "/api/Employees";
   }
 
+  public String getMechanics(String siteId) {
+    String url = String.format("%s?command=getMechanics&SiteId=%s", this.endpointUrl, siteId);
+    return restTemplate.getForObject(url, String.class);
+  }
+
   public String getServiceAdvisors(String siteId) {
     String url = String.format("%s?command=getServiceAdvisors&SiteId=%s", this.endpointUrl, siteId);
     return restTemplate.getForObject(url, String.class);

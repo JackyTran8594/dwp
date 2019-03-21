@@ -46,8 +46,6 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
 
   // datepicker-vutt
 
-  console.log($locale);
-
   $scope.dateOptions = {
     formatYear: 'yy',
     startingDay: 1
@@ -104,7 +102,6 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
     common.spinner(true);
     //unScheduledWO, withSubcontractor, todayWO, allWO, withMOT, withTire, withBO, postponedWO, offers
 
-    console.log($scope.params);
     var params = {
       "ViewName": typeWO,
       "skey": $scope.params.skey,

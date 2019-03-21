@@ -1,5 +1,5 @@
 <!-- Page container -->
-<div class="page-container" ng-controller="PlanningJobCtrl">
+<div class="page-container" ng-controller="PlanningJobCtrl" ng-init="loadData()">
 
     <!-- Page content -->
     <div class="page-content">
@@ -12,24 +12,21 @@
                 <div class="panel-body">
 
                     <div class="row">
-                        <div class="col-xs-8">
+                        <div ng-include="'/wsplanning/templates/pages/workdetail/tabs/planning/job_header.html'"></div>
+                    </div>
 
-
-                            <div ng-include="'/wsplanning/templates/pages/workdetail/tabs/planning/job_header.html'"></div>
-
-
+                    <div class="row">
+                        <div class="col-xs-12">
                             <div ng-include="'/wsplanning/templates/pages/workdetail/tabs/planning/pool_booking.html'"></div>
-
-
-                            <br/><br/><br/><br/>
-                            <div ng-include="'/wsplanning/templates/pages/workdetail/tabs/planning/detail_booking.html'"></div>
-
-                        </div>
-                        <div class="col-xs-4">
                         </div>
                     </div>
 
 
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div ng-include="'/wsplanning/templates/pages/workdetail/tabs/planning/detail_booking.html'"></div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="panel-footer">

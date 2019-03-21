@@ -2,11 +2,6 @@ UserWebApp.controller('ContractCtrl', function ($scope, $rootScope, HttpService,
   $scope.WorkOrderId = $stateParams.id;
   $scope.type = $stateParams.type;
 
-
-  console.log($scope.WorkOrderId);
-  console.log($scope.type);
-
-
   $scope.isShow = false;
 
   $scope.WOContact = {};
@@ -17,7 +12,6 @@ UserWebApp.controller('ContractCtrl', function ($scope, $rootScope, HttpService,
 
   $scope.toogleVehicle = function () {
     $scope.isShow = !$scope.isShow;
-    console.log($scope.WOContact);
   }
 
 

@@ -60,7 +60,6 @@ UserWebApp.controller('MechanicController', function ($scope, $rootScope, HttpSe
   }
 
   $scope.changeLimit = function () {
-    console.log($scope.limit);
     //Check limit vuot page thi reset ve page 1
     if ($scope.lstSearch && $scope.lstSearch.length > 0) {
       if ((($scope.page - 1) * $scope.limit) > $scope.lstSearch.length) {
@@ -173,7 +172,6 @@ UserWebApp.controller('MechanicController', function ($scope, $rootScope, HttpSe
     var param = {
       "ids": $scope.deleteList.join(",")
     };
-    console.log($scope.param1);
     HttpService.postData('/mechanic/delete', param).then(function (data) {
       $('.modalDelete').modal('hide');
       $scope.checklistTable.selected = [];

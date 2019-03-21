@@ -1,13 +1,136 @@
-<div class="panel panel-flat">
-    <div class="panel-body">
-        <!--ROW1-->
-        <div class="row">
-            <div class="col-xs-8">
-                Job header {{test}} {{viewDate}}
+<div class="col-xs-8">
+    <div class="panel panel-flat">
+        <div class="panel-body">
+            <!--ROW1-->
+            <div class="row">
+                <div class="col-xs-10">
+                    <div ng-repeat="item in jobTabList">
+                        <div>
+                            <div class="col-xs-10 pull-left">
+                                <h4>{{item.Note}}</h4>
+                            </div>
+                            <div class="col-xs-2 pull-right">
+                                <h4>{{item.EstimatedTime}}</h4>
+                            </div>
+                        </div>
+                        <br/>
+                        <ul>
+                            <li>{{item.Complaint}}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xs-2 text-center">
+                    <h4>{{ 'totalTime' | translate }}
+                        <br/>
+                        {{totalHours}}
+                    </h4>
+                </div>
             </div>
-            <div class="col-xs-4">
-                Total time {{vm.viewDate}}
+
+
+            <hr/>
+            <div class="row">
+                <!--DeptId-->
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">{{ 'department' | translate }}</label>
+                        <div class="col-xs-8">
+                            <select class="form-control" ng-model="DeptId" ng-change="changeDeptId()"
+                                    ng-options="item.Id as item.Name for item in lstDepartment">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">{{ 'shiftId' | translate }}</label>
+                        <div class="col-xs-8">
+                            <select class="form-control" ng-model="ShiftId" ng-change="changeShiftId()"
+                                    ng-options="item.Id as item.Name for item in lstShifts">
+                            </select>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<div class="col-xs-4">
+    <mwl-calendar
+            events="events"
+            view="calendarView"
+            view-title="calendarTitle"
+            view-date="viewDate"
+            current-day="viewDate"
+            cell-is-open="cellIsOpen"
+            day-view-start="06:00"
+            day-view-end="22:59"
+            day-view-split="30"
+            cell-modifier="cellModifier(calendarCell)"
+            custom-template-urls="{calendarMonthCell: 'customMonthCell.html'}"
+            on-timespan-click="timespanClicked(calendarDate, calendarCell)">
+    </mwl-calendar>
+</div>
+
+
+<script id="customMonthCell.html" type="text/ng-template">
+    <div
+            ng-click="vm.dayClicked(day, true, $event)"
+            mwl-droppable
+            on-drop="vm.handleEventDrop(dropData.event, day.date, dropData.draggedFromDate)"
+            mwl-drag-select="!!vm.onDateRangeSelect"
+            on-drag-select-start="vm.onDragSelectStart(day)"
+            on-drag-select-move="vm.onDragSelectMove(day)"
+            on-drag-select-end="vm.onDragSelectEnd(day)"
+            class="cal-month-day {{ day.cssClass }}"
+            ng-class="{
+    'cal-day-outmonth': !day.inMonth,
+    'cal-day-inmonth': day.inMonth,
+    'cal-day-weekend': day.isWeekend,
+    'cal-day-past': day.isPast,
+    'cal-day-today': day.isToday,
+    'cal-day-future': day.isFuture,
+    'cal-day-selected': vm.dateRangeSelect && vm.dateRangeSelect.startDate <= day.date && day.date <= vm.dateRangeSelect.endDate,
+    'cal-day-open': dayIndex === vm.openDayIndex
+  }">
+        <span
+                class="pull-right"
+                data-cal-date
+                ng-click="vm.calendarCtrl.dateClicked(day.date)"
+                ng-bind="day.label">
+        </span>
+
+        <div class="cal-week-box-cell" ng-if="$first && rowHovered">
+            <span ng-bind="vm.getWeekNumberLabel(day)"></span>
+        </div>
+
+    </div>
+
+</script>
+
+<style type="text/css">
+    .custom-template-cell {
+        color: purple;
+    }
+
+    .free {
+        color: black;
+    }
+
+    .booked {
+        color: gray;
+    }
+
+    .cap75 {
+        color: red;
+    }
+
+    .cap50 {
+        color: blue;
+    }
+
+    .cap25 {
+        color: green;
+    }
+</style>

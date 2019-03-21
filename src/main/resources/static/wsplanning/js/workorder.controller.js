@@ -60,7 +60,6 @@ UserWebApp.controller('WorkOrderCtrl', function ($scope, $rootScope, HttpService
   }
 
   $scope.changeLimit = function () {
-    console.log($scope.limit);
     //Check limit vuot page thi reset ve page 1
     if ($scope.lstSearch && $scope.lstSearch.length > 0) {
       if ((($scope.page - 1) * $scope.limit) > $scope.lstSearch.length) {
@@ -95,7 +94,6 @@ UserWebApp.controller('WorkOrderCtrl', function ($scope, $rootScope, HttpService
   }
 
   $scope.doSearch = function () {
-    console.log("---doSearch-----");
     common.spinner(true);
     $scope.lstSearch = [];
     if ($scope.searchValue) {
@@ -174,7 +172,6 @@ UserWebApp.controller('WorkOrderCtrl', function ($scope, $rootScope, HttpService
     var param = {
       "ids": $scope.deleteList.join(",")
     };
-    console.log($scope.param1);
     HttpService.postData('/mechanic/delete', param).then(function (data) {
       $('.modalDelete').modal('hide');
       $scope.checklistTable.selected = [];
@@ -235,7 +232,6 @@ UserWebApp.controller('WorkOrderCtrl', function ($scope, $rootScope, HttpService
   $ctrl.animationsEnabled = true;
 
   $ctrl.open = function (size, item) {
-    console.log("----open--------");
     var modalInstance = $uibModal.open({
       animation: $ctrl.animationsEnabled,
       templateUrl: '/wsplanning/templates/pages/workOrder/modal-form.html',

@@ -193,6 +193,16 @@ public class CommonController extends BaseController {
     }
   }
 
+  @GetMapping("/site/getMechanics")
+  public ResponseEntity getMechanics() {
+    try {
+      String rtn = employeesClient.getMechanics(getSiteId());
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception ex) {
+      return parseException(ex);
+    }
+  }
+
   @GetMapping("/site/getServiceAdvisors")
   public ResponseEntity getServiceAdvisors() {
     try {

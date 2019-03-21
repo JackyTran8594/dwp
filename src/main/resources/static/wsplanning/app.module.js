@@ -20,9 +20,6 @@ var UserWebApp = angular.module('UserWebApp', [
 
 UserWebApp.config(['calendarConfig', function(calendarConfig) {
 
-  // View all available config
-  console.log(calendarConfig);
-
   // Change the month view template globally to a custom template
   // calendarConfig.templates.calendarMonthView = 'path/to/custom/template.html';
 
@@ -116,7 +113,6 @@ UserWebApp.run(['$rootScope', 'uiSelect2Config', '$translate', 'tmhDynamicLocale
       var newToState = trans.$to();
 
       $rootScope.currentState = newToState.name;
-      console.log($rootScope.currentState);
 
       var newLange = trans._targetState._params.locale;
       //Set language

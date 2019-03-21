@@ -1,4 +1,4 @@
-UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpService, $translate, $location, $filter, $uibModal, CommonServices, $stateParams, $state,$timeout) {
+UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpService, $translate, $location, $filter, $uibModal, CommonServices, $stateParams, $state, $timeout) {
   var calendar = null;
 
   function createCalendar(gotoDate) {
@@ -10,15 +10,28 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
       defaultView: 'resourceTimelineDay',
       aspectRatio: 1.5,
       header: {
-        left:   false,
+        left: false,
         center: 'title',
         right: false
       },
       editable: true,
-      resourceLabelText: 'Rooms',
+      resourceLabelText: $translate.instant('mechanic'),
       refetchResourcesOnNavigate: true,
-      resources: 'https://fullcalendar.io/demo-resources.json?with-nesting&with-colors',
-      events: 'https://fullcalendar.io/demo-events.json?single-day&for-resource-timeline'
+      minTime: "05:00:00",
+      maxTime: "20:00:00",
+      // resources: 'https://fullcalendar.io/demo-resources.json?with-nesting&with-colors',
+      // events: 'https://fullcalendar.io/demo-events.json?single-day&for-resource-timeline'
+      resourceAreaWidth: "15%",
+      resources: {
+        url: '/resources'
+      },
+      events: {
+        url: '/events2',
+        method: 'GET',
+        headers: { "Content-type": "application/json" },
+        contentType: 'application/json',
+        dataType: "json"
+      }
     });
 
     calendar.render();
@@ -26,19 +39,19 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
     $(".fc-left").hide();
     $(".fc-right").hide();
 
-    if(gotoDate){
+    if (gotoDate) {
       calendar.gotoDate(new Date(gotoDate.getTime() + 24 * 60 * 60 * 1000));
     }
   }
 
-  $scope.init = function() {
+  $scope.init = function () {
   }
 
 
   $rootScope.$on('bookingClick', function (event, obj) {
-    if(calendar == null){
+    if (calendar == null) {
       createCalendar(new Date(obj.date));
-    }else{
+    } else {
       var startDate = new Date(obj.date);
       var endDate = new Date(startDate.getTime() + 24 * 60 * 60 * 1000);
       calendar.gotoDate(endDate);
@@ -62,6 +75,7 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
     }
 
   });
+
 
 
 });

@@ -158,7 +158,6 @@ UserWebApp.controller('appCtrl', function ($scope, $rootScope, $locale, HttpServ
 
   //Load Stamp
   $rootScope.$on('routestateChangeSuccess', function (event, data) {
-    console.log("---routestateChangeSuccess--");
     $("body").addClass("sidebar-xs");
     CommonServices.getStamping().then(function (data) {
       if (data && data.StampText) {

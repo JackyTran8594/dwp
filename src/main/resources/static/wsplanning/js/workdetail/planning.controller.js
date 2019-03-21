@@ -1,5 +1,19 @@
 UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrderService, HttpService, $translate, $location, $filter, $uibModal, CommonServices, $stateParams, $state) {
-  $scope.test = "abc";
+  //JOB
+  $scope.jobTabList = $scope.$parent.WOJobs;
+
+  $scope.totalHours = 0;
+
+  if($scope.jobTabList) {
+    for (var i = 0; i < $scope.jobTabList.length; i++) {
+      $scope.totalHours += $scope.jobTabList[i].EstimatedTime;
+    }
+  }
+
+  var EmployeeData = $("#EmployeeData").data( "employee");
+  $scope.DeptId = EmployeeData.DeptId;
+  $scope.ShiftId = EmployeeData.ShiftId;
+
   var vm = this;
 
   //These variables MUST be set as a minimum for the calendar to work
@@ -7,25 +21,20 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
   // $scope.calendarView = 'week';
   $scope.viewDate = new Date();
 
-  var actions = [{
-    label: '<i class=\'glyphicon glyphicon-pencil\'></i>',
-    onClick: function (args) {
-      console.log(args.calendarEvent);
-    }
-  }, {
-    label: '<i class=\'glyphicon glyphicon-remove\'></i>',
-    onClick: function (args) {
-      console.log(args.calendarEvent);
-    }
-  }];
 
   $scope.lstPlanning = [];
   $scope.loadData = function () {
+    getCalendarWeek($scope.viewDate);
+  }
+
+  // $scope.loadData();
+
+  function getCalendarWeek(date) {
     var params = {
-      "DayFrom": "2019.03.18",
-      "DayTo": "2019.03.24",
-      "DeptId": "201",
-      "ShiftId": "",
+      "DayFrom": formatDateToApi(moment(date).startOf('week').toDate()),
+      "DayTo": formatDateToApi(moment(date).endOf('week').toDate()),
+      "DeptId": $scope.DeptId,
+      "ShiftId": $scope.ShiftId,
     };
     HttpService.postData('/planning', params).then(function (response) {
       $scope.lstPlanning = response;
@@ -37,71 +46,9 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
     });
   }
 
-  $scope.loadData();
+  $scope.events = [];
 
-  $scope.events = [
-    {
-      title: 'An event',
-      color: '#fdf1ba',
-      startsAt: moment().startOf('week').subtract(2, 'days').add(8, 'hours').toDate(),
-      endsAt: moment().startOf('week').add(1, 'week').add(9, 'hours').toDate(),
-      draggable: true,
-      resizable: true,
-      actions: actions
-    }, {
-      title: '<i class="glyphicon glyphicon-asterisk"></i> <span class="text-primary">Another event</span>, with a <i>html</i> title',
-      color: '#fdf1ba',
-      startsAt: moment().subtract(1, 'day').toDate(),
-      endsAt: moment().add(5, 'days').toDate(),
-      draggable: true,
-      resizable: true,
-      actions: actions
-    }, {
-      title: 'This is a really long event title that occurs on every year',
-      color: '#fdf1ba',
-      startsAt: moment().startOf('day').add(7, 'hours').toDate(),
-      endsAt: moment().startOf('day').add(19, 'hours').toDate(),
-      recursOn: 'year',
-      draggable: true,
-      resizable: true,
-      actions: actions
-    }
-  ];
-
-  $scope.cellIsOpen = true;
-
-  $scope.addEvent = function () {
-    $scope.events.push({
-      title: 'New event',
-      startsAt: moment().startOf('day').toDate(),
-      endsAt: moment().endOf('day').toDate(),
-      color: '#fdf1ba',
-      draggable: true,
-      resizable: true
-    });
-  };
-
-  $scope.eventClicked = function (event) {
-    console.log("----eventClicked-----");
-    console.log(event);
-    $rootScope.$broadcast("bookingClick", {"item": event});
-  };
-
-  $scope.eventEdited = function (event) {
-    console.log(event);
-  };
-
-  $scope.eventDeleted = function (event) {
-    console.log(event);
-  };
-
-  $scope.eventTimesChanged = function (event) {
-    console.log(event);
-  };
-  $scope.viewChangeClick = function (event) {
-    console.log("----viewChangeClick----");
-    console.log(event);
-  };
+  $scope.cellIsOpen = false;
 
   $scope.toggle = function ($event, field, event) {
     $event.preventDefault();
@@ -110,24 +57,36 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
   };
 
   $scope.timespanClicked = function (date, cell) {
-    console.log("---timespanClicked---");
-    $rootScope.$broadcast("bookingClick", {"date": date});
-    if ($scope.calendarView === 'month') {
-      if (($scope.cellIsOpen && moment(date).startOf('day').isSame(moment($scope.viewDate).startOf('day'))) || cell.events.length === 0 || !cell.inMonth) {
-        $scope.cellIsOpen = false;
-      } else {
-        $scope.cellIsOpen = true;
-        $scope.viewDate = date;
-      }
-    } else if ($scope.calendarView === 'year') {
-      if (($scope.cellIsOpen && moment(date).startOf('month').isSame(moment($scope.viewDate).startOf('month'))) || cell.events.length === 0) {
-        $scope.cellIsOpen = false;
-      } else {
-        $scope.cellIsOpen = true;
-        $scope.viewDate = date;
+    console.log("---timespanClicked: " + date);
+    $scope.viewDate = date;
+    // $rootScope.$broadcast("bookingClick", {"date": date});
+    getCalendarWeek($scope.viewDate);
+    return;
+  };
+
+  $scope.cellModifier = function (cell) {
+    var length = $scope.lstMonth.length;
+    var WorkDay = null;
+    var date = new Date();
+    for (var i = 0; i < length; i++) {
+      WorkDay = $scope.lstMonth[i];
+      date = new Date(WorkDay.WorkDay);
+      if (date.getMonth() == cell.date._d.getMonth() && date.getDate() == cell.date._d.getDate()) {
+        if (WorkDay.FreeCapacity > 100) {
+          cell.cssClass = 'booked';
+        } else if (WorkDay.FreeCapacity == 100) {
+          cell.cssClass = 'free';
+        } else if (WorkDay.FreeCapacity >= 75) {
+          cell.cssClass = 'cap75';
+        } else if (WorkDay.FreeCapacity >= 50) {
+          cell.cssClass = 'cap50';
+        } else if (WorkDay.FreeCapacity >= 25) {
+          cell.cssClass = 'cap25';
+        }
+        // cell.label = '-' + cell.label + '-' + WorkDay.FreeCapacity;
+        return;
       }
     }
-
   };
 
 
@@ -141,12 +100,40 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
     console.log(item);
   }
 
-  $scope.DeptId = {};
-  $scope.ShiftId = {};
-
   $scope.detailBooking = function (item) {
     console.log(item);
     $rootScope.$broadcast("bookingClick", {"date": item.WorkDay});
+  }
+
+
+
+  $scope.changeDeptId = function () {
+
+  }
+  $scope.changeShiftId = function () {
+
+  }
+
+  function changeData() {
+    var startDate = new Date();
+    var endDate = moment(startDate).add(1, 'M');
+
+    var params = {
+      "DayFrom": formatDateToApi(moment(startDate).startOf('month').toDate()),
+      "DayTo": formatDateToApi(moment(endDate).endOf('month').toDate()),
+      "DeptId": $scope.DeptId,
+      "ShiftId": $scope.ShiftId,
+    };
+    HttpService.postData('/planning', params).then(function (response) {
+      $scope.lstMonth = response;
+      common.spinner(false);
+
+      getCalendarWeek($scope.viewDate);
+    }, function error(response) {
+      $scope.lstPlanning = [];
+      console.log(response);
+      common.spinner(false);
+    });
   }
 
 
