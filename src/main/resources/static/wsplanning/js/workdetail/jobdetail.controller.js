@@ -5,6 +5,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   $scope.jobParams = $scope.$parent.jobObject;
   $scope.actTypeJob = $scope.$parent.actionType;
   $scope.jobTabList = $scope.$parent.WOJobs;
+
   console.log($scope.jobTabList);
 
   loadCommon();
@@ -67,7 +68,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
 
 
   function loadCommon() {
-
+   
     CommonServices.getChargeCats().then(function (data) {
       $scope.lstChargeCats = data;
     });
@@ -271,7 +272,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
         jobObj.Name = selectedItem.Name;
         jobObj.EstimatedTime = selectedItem.EstimatedTime;
         jobObj.AdditionalData = selectedItem.AdditionalData;
-        jobObj.Items =  selectedItem.Items;
+        jobObj.Items = selectedItem.Items;
         // console.log(jobObj);
         $scope.jobTabList.push(jobObj);
         // console.log($scope.jobTabList);
