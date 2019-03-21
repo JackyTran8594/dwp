@@ -10,6 +10,17 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
       // // .setNotModifiedClassName('my-clear')
      ;
 
+  //ivhTree
+  ivhTreeviewOptionsProvider.set({
+    idAttribute: 'id',
+    labelAttribute: 'label',
+    childrenAttribute: 'children',
+    useCheckboxes: false,
+    expandToDepth: 0,
+    twistieExpandedTpl: '<i class="icon-folder-minus3"></i>',
+    twistieCollapsedTpl: '<i class="icon-folder-plus3"></i>',
+  });
+
   $urlRouterProvider.otherwise(function ($rootScope, $injector, $location) {
     var lang = $("#currentLang").attr('data-currentLang');
     return "/" + lang + "/todaywork";
