@@ -7,7 +7,8 @@
 
             <div class="panel-body">
                 <div class="div-tree">
-                    <div class="table-responsive nowhitespace" ng-class="{'div-table' : recentSalesList.length === 0, 'tableIndex': recentSalesList.length !== 0 }">
+                    <div class="table-responsive nowhitespace"
+                        ng-class="{'div-table' : recentSalesList.length === 0, 'tableIndex': recentSalesList.length !== 0 }">
                         <table class="table table-striped table-bordered table-hover">
                             <!-- <thead>
                                 <tr>
@@ -24,9 +25,20 @@
                                     <th class="text-center">{{item.Id}}</th>
                                     <th class="text-center">{{item.Category}}</th>
                                     <th class="text-center">{{item.Label}}</th>
-                                    <th class="text-center">{{item.Value}}</th>
+                                    <th class="">
+                                        <input type="text" ng-show="item.DataType === C" class="form-control"
+                                            ng-model="item.Value" />
+                                        <input type="number" ng-show="item.DataType === N" class="form-control"
+                                            ng-model="item.Value" />
+                                        <input type="text" ng-show="item.DataType === D" class="form-control"
+                                            datetime-picker="dd-MMMM-yyyy HH:mm:ss" date-format="dd-MMMM-yyyy HH:mm:ss"
+                                            ng-model="item.Value" is-open="isOpenDateInput" /><span
+                                            class="input-group-btn"><button type="button" class="btn btn-default"
+                                                ng-click="openDateInput($event, prop)"><i
+                                                    class="icon-calendar"></i></button></span>
+                                    </th>
                                 </tr>
-                      
+
                             </tbody>
                         </table>
                     </div>

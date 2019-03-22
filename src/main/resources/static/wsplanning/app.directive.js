@@ -48,6 +48,7 @@ function dlKeyCode() {
   };
 }
 
+
 function formatNumberDecimal($filter) {
   var FLOAT_REGEXP_1 = /^\$?\d+.(\d{3})*(\,\d*)$/; //Numbers like: 1.123,56
   var FLOAT_REGEXP_2 = /^\$?\d+,(\d{3})*(\.\d*)$/; //Numbers like: 1,123.56

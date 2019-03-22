@@ -189,6 +189,8 @@ ul.ivh-treeview .ivh-treeview-node-leaf .ivh-treeview-toggle {
   cursor: pointer !important;
 }
 
+
+
 /*</editor-fold>*/
 
 /*<editor-fold desc="RESTYLE SEARCH FORM">*/
@@ -461,9 +463,66 @@ table th {
   padding: 0 0 !important;
 }
 
+
+/* treeview-start */
 .tree-level {
   list-style: none;
 }
+
+.tree-level a {
+  font-size: 16px;
+}
+
+.collapse-plus {
+  position: relative;
+  max-width: 12px;
+  max-height: 12px;
+}
+
+.collapse-plus::before {
+  content:"\ea4c";
+  display: inline-block;
+}
+
+
+.collapse-minus {
+  position: relative;
+  max-width: 12px;
+  max-height: 12px;
+}
+
+.collapse-minus::before {
+  content:"\ea4d";
+  display: inline-block;
+}
+
+/* treeview end */
+
+/* datatype */
+.data-string {
+
+}
+
+.data-string::before{
+  content:"<input type="text" class='form-control' ng-model='item.Value'/>"
+}
+
+.data-date {
+
+}
+
+.data-date::before {
+  content:"<input type="text" class="form-control" datetime-picker='dd-MMMM-yyyy HH:mm:ss' date-format='dd-MMMM-yyyy HH:mm:ss' ng-model='item.Value' is-open="isOpenDateInput" /><span class="input-group-btn"><button type='button' class="btn btn-default" ng-click='openDateInput($event, prop)'><i class="icon-calendar"></i></button></span>";
+}
+
+.data-number {
+
+}
+
+.data-number::before {
+  content: "<input type="number" class="form-control" ng-model='item.Value'/>";
+}
+/* end */
 
 .icon-non-stock-item {
   max-width: 12px;

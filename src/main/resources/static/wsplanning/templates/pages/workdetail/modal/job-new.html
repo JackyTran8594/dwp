@@ -16,26 +16,29 @@
                             <div class="col-xs-12">
                                 <div class="panel panel-flat">
                                     <div class="panel-heading">
-                                        <h5 class="panel-title"><span
+                                        <h5 class="panel-title" ng-hide="jobChecked.MainGroup == ''"><span
                                                 style="color: red">{{jobChecked.MainGroup}}/{{jobChecked.SubGroup}}</span>
                                         </h5>
                                     </div>
                                     <div class="panel-body">
-                                        <div class="div-tree" ivh-treeview="jobTreeList"
+                                        <!-- <div class="div-tree" ivh-treeview="jobTreeList"
                                         ivh-treeview-on-toggle="awesomeCallback(ivhNode)"
-                                        ivh-treeview-on-cb-change="otherAwesomeCallback(ivhNode, ivhIsSelected, ivhTree)" >
-                                            <!-- <ul class="tree-level" ng-repeat="item in jobTreeList track by $index">
-                                                <li class="">
-                                                    <span>{{item.Name}}</span>
-                                                    <ul ng-repeat="sub in item.SubGroups as listSub">
+                                        ivh-treeview-on-cb-change="otherAwesomeCallback(ivhNode, ivhIsSelected, ivhTree)" > -->
+                                        <div class="div-tree">
+                                            <ul class="tree-level" ng-repeat="item in jobTreeList track by $index">
+                                                <!-- <li ng-class="{'collapse-plus': item.selected == false, 'collapse-minus': item.selected == true}" > -->
+                                                <li>
+                                                    <a ng-click="collapseMenu(item)"><span>{{item.label}}</span></a>
+                                                    <ul ng-show="item.selected == true" class=""
+                                                        ng-repeat="sub in item.SubGroups as listSub">
                                                         <li class="">
-                                                            <a ng-click="recentSales(sub, item.Name)">
+                                                            <a ng-click="recentSales(sub, item.label, item.id)">
                                                                 <span>{{sub.Name}}</span></a>
 
                                                         </li>
                                                     </ul>
                                                 </li>
-                                            </ul> -->
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
