@@ -258,7 +258,7 @@ UserWebApp.controller('CustomerModalCtrl', function ($scope, $rootScope, $locale
 
 
 UserWebApp.controller('ContactModalCtrl', function ($scope, $rootScope, $locale, HttpService, $translate,
-  $location, $state, $filter, $uibModal, $uibModalInstance, CommonServices) {
+  $location, $state, $filter, $uibModal, $uibModalInstance, CommonServices, WorkOrderService ,item) {
 
 
 
@@ -279,12 +279,20 @@ UserWebApp.controller('ContactModalCtrl', function ($scope, $rootScope, $locale,
     })
   }
 
+  function loadCustomer(item) {
+    common.spinner(true);
+    WorkOrderService.customer(item).then(function (res) {
+      $scope.lstCustomers = res.data;
+      common.spinner(false);
+    })
+  }
+
 
   $scope.doSearch = function () {
     loadData($scope.skey, $scope.custNo)
   }
 
-  loadData($scope.skey, $scope.custNo);
+  loadCustomer(item);
 
   $scope.doPick = function (selectedItem) {
     $uibModalInstance.close(selectedItem);

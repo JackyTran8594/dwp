@@ -1,4 +1,4 @@
-UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpService, $translate, $location, $filter, $uibModal, CommonServices, $stateParams, $state, WorkOrder, lstMonth,WorkOrderService) {
+UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpService, $translate, $location, $filter, $uibModal, CommonServices, $stateParams, $state, WorkOrder, lstMonth, WorkOrderService) {
   $scope.WorkOrderId = $stateParams.id;
   $scope.type = $stateParams.type;
   $scope.WOJobs = WorkOrder.data.WOJobs;
@@ -56,26 +56,26 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 
   function checkWorkOrder(item) {
     // if (item.data.WOJobs === undefined) {
-      // $scope.jobObject = {
-        // SiteId: '',
-        // CustNo: '',
-        // VehiId: '',
-        // WarrantyInfo: ''
-      // }
-	  
-	 
+    // $scope.jobObject = {
+    // SiteId: '',
+    // CustNo: '',
+    // VehiId: '',
+    // WarrantyInfo: ''
     // }
-	 if (item.id === undefined) {
+
+
+    // }
+    if (item.id === undefined) {
       $scope.jobObject = {
         SiteId: '',
         CustNo: '',
         VehiId: '',
         WarrantyInfo: ''
       }
-	  
-	  $scope.actionType = "new";
-	  // $scope.actionType.postAction = "createNew";
-	 
+
+      $scope.actionType = "new";
+      // $scope.actionType.postAction = "createNew";
+
     }
     else {
       $scope.jobObject = {
@@ -86,9 +86,9 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
         // WarrantyInfo: "153135"
 
       }
-	  
-	   $scope.actionType = "update";
-	  // $scope.actionType.postAction = "saveHeader";
+
+      $scope.actionType = "update";
+      // $scope.actionType.postAction = "saveHeader";
     }
   }
 
@@ -100,8 +100,8 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 
   $scope.isNew = angular.equals($scope.WorkOrder, {});
 
-  if($scope.isNew){
-    var EmployeeData = $("#EmployeeData").data( "employee");
+  if ($scope.isNew) {
+    var EmployeeData = $("#EmployeeData").data("employee");
     $scope.WorkOrder.DeptId = EmployeeData.DeptId;
   }
   $scope.workOrderNo = WorkOrder.data.WorkOrderNo;
@@ -178,7 +178,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
       }
       console.log($scope.jobObject.VehiId);
       $rootScope.$broadcast("chooseVehicle", { "item": selectedItem });
-      
+
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
     });
@@ -214,6 +214,11 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
       controllerAs: '$ctrl',
       size: size,
       backdrop: 'static',
+      resolve: {
+        item: function () {
+          return $scope.jobObject
+        }
+      }
 
     });
 

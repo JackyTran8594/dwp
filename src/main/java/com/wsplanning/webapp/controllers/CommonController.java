@@ -253,4 +253,17 @@ public class CommonController extends BaseController {
     }
   }
 
+  @PostMapping("/site/customer")
+  public ResponseEntity customer(@RequestBody Map<String, String> params)
+  {
+    try {
+      String rtn = customerClient.customer(params);
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception e) {
+      return parseException(e);
+      //TODO: handle exception
+    }
+  }
+
+
 }

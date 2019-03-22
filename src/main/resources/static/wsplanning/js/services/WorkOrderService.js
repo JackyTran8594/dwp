@@ -55,6 +55,14 @@ UserWebApp.service('WorkOrderService', function ($http) {
     modified: false
   }
 
+  WorkOrderService.customer = function (params) {
+    return $http({
+      method: 'POST',
+      url: '/site/customer',
+      data: params
+    })
+  }
+
   WorkOrderService.calendarMonth = function (data) {
     return $http({
       method: 'POST',

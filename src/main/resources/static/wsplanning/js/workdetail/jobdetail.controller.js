@@ -351,7 +351,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
 
 
 UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrderService, HttpService, $translate, $location, $filter,
-  $uibModal, CommonServices, $stateParams, $state, item, $uibModalInstance) {
+  $uibModal, CommonServices, $stateParams, $state, item, $uibModalInstance, ivhTreeviewMgr) {
 
 
   var $ctrl = this;

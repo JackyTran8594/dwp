@@ -47,4 +47,12 @@ public class CustomerClient {
     return restTemplate.getForObject(url, String.class);
   }
 
+  public String customer(Map<String, String> params)
+  {
+    String VehiId = params.get("VehiId");
+    String CustNo = params.get("CustNo");
+    String url = String.format("%s?VehiId=%s&CustNo=%s", this.endpointUrl, VehiId, CustNo);
+    return restTemplate.getForObject(url, String.class);
+  }
+
 }
