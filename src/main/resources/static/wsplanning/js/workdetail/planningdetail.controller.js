@@ -1,6 +1,10 @@
 UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpService, $translate, $location, $filter, $uibModal, CommonServices, $stateParams, $state, $timeout) {
   var calendar = null;
 
+  var EmployeeData = $("#EmployeeData").data( "employee");
+  $scope.DeptId = EmployeeData.DeptId;
+  $scope.ShiftId = EmployeeData.ShiftId;
+
   function createCalendar(gotoDate) {
     var calendarEl = document.getElementById('calendar');
 
@@ -30,7 +34,20 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
         method: 'GET',
         headers: { "Content-type": "application/json" },
         contentType: 'application/json',
-        dataType: "json"
+        dataType: "json",
+        extraParams: function() {
+          common.spinner(true);
+          return {
+            "DeptId": $scope.DeptId,
+            "ShiftId": $scope.ShiftId,
+          };
+        },
+        success: function () {
+          common.spinner(false);
+        },
+        failure: function() {
+          common.spinner(false);
+        }
       }
     });
 

@@ -4,13 +4,13 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
 
   $scope.totalHours = 0;
 
-  if($scope.jobTabList) {
+  if ($scope.jobTabList) {
     for (var i = 0; i < $scope.jobTabList.length; i++) {
       $scope.totalHours += $scope.jobTabList[i].EstimatedTime;
     }
   }
 
-  var EmployeeData = $("#EmployeeData").data( "employee");
+  var EmployeeData = $("#EmployeeData").data("employee");
   $scope.DeptId = EmployeeData.DeptId;
   $scope.ShiftId = EmployeeData.ShiftId;
 
@@ -20,6 +20,7 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
   $scope.calendarView = 'month';
   // $scope.calendarView = 'week';
   $scope.viewDate = new Date();
+  $scope.selectedDate = moment($scope.viewDate).add('days', 1).toDate();
 
 
   $scope.lstPlanning = [];
@@ -30,14 +31,39 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
   // $scope.loadData();
 
   function getCalendarWeek(date) {
+    common.spinner(true);
+    var startDate = moment(date).startOf('week').toDate();
+    var endDate = moment(date).endOf('week').toDate();
     var params = {
-      "DayFrom": formatDateToApi(moment(date).startOf('week').toDate()),
-      "DayTo": formatDateToApi(moment(date).endOf('week').toDate()),
+      "DayFrom": formatDateToApi(startDate),
+      "DayTo": formatDateToApi(endDate),
       "DeptId": $scope.DeptId,
       "ShiftId": $scope.ShiftId,
     };
     HttpService.postData('/planning', params).then(function (response) {
-      $scope.lstPlanning = response;
+      $scope.lstPlanning = [];
+      var date;
+      var found = false;
+      while (startDate < endDate) {
+        found = false;
+        for (var i = 0; i < response.length; i++) {
+          date = new Date(response[i].WorkDay);
+          if (date.getDate() == startDate.getDate()) {
+            $scope.lstPlanning.push(response[i]);
+            found = true;
+            break;
+          }
+        }
+        if (!found) {
+          $scope.lstPlanning.push({
+            "FreeCapacity": 0,
+            "FreeHour": 0,
+            "WorkDay": formatDateToYYYYMMDD(startDate),
+          });
+        }
+        startDate = moment(startDate).add('days', 1).toDate();
+      }
+      console.log($scope.lstPlanning);
       common.spinner(false);
     }, function error(response) {
       $scope.lstPlanning = [];
@@ -50,21 +76,32 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
 
   $scope.cellIsOpen = false;
 
-  $scope.toggle = function ($event, field, event) {
-    $event.preventDefault();
-    $event.stopPropagation();
-    event[field] = !event[field];
+  $scope.dayClicked = function ($event, field, event) {
+    console.log("------dayClicked-------------");
   };
 
   $scope.timespanClicked = function (date, cell) {
+    console.log(cell);
+    cell.cssClass = 'cal-day-selected';
     console.log("---timespanClicked: " + date);
     $scope.viewDate = date;
-    // $rootScope.$broadcast("bookingClick", {"date": date});
+    $rootScope.$broadcast("bookingClick", {"date": date});
     getCalendarWeek($scope.viewDate);
-    return;
   };
 
+  // $scope.$on('$destroy', function() {
+  //   console.log("-$destroy-----");
+  //   // calendarConfig.templates.calendarMonthCell = 'mwl/calendarMonthCell.html';
+  // });
+
+  //Gen CSS cho cell (day in month)
   $scope.cellModifier = function (cell) {
+    console.log("----cellModifier----------" + $scope.viewDate.getMonth() + " - " + $scope.viewDate.getDate());
+    if (cell.date._d.getMonth() == $scope.viewDate.getMonth() && cell.date._d.getDate() == $scope.viewDate.getDate()) {
+      cell.cssClass = 'cal-day-selected';
+      return;
+    }
+
     var length = $scope.lstMonth.length;
     var WorkDay = null;
     var date = new Date();
@@ -106,15 +143,15 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
   }
 
 
-
   $scope.changeDeptId = function () {
-
+    getCalendarMonth();
   }
   $scope.changeShiftId = function () {
-
+    getCalendarMonth();
   }
 
-  function changeData() {
+  function getCalendarMonth() {
+    common.spinner(true);
     var startDate = new Date();
     var endDate = moment(startDate).add(1, 'M');
 

@@ -8,7 +8,7 @@
                         <!--BODY-->
                         <tbody>
                         <tr>
-                            <td ng-repeat="item in lstPlanning" class="text-center" ng-dblclick="detailBooking(item)">
+                            <td ng-repeat="item in lstPlanning" class="text-center" ng-dblclick="detailBooking(item)" ng-click="detailBooking(item)">
                                 <div class="tablea" style="min-width: 130px;">
                                     <div class="tr text-center">{{item.WorkDay | dateFormat}}</div>
                                     <div class="tr text-center">
