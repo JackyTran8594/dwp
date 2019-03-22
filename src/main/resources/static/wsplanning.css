@@ -185,6 +185,10 @@ table.table-basic-info td {
   /*text-transform: lowercase;*/
 }
 
+ul.ivh-treeview .ivh-treeview-node-leaf .ivh-treeview-toggle {
+  cursor: pointer !important;
+}
+
 /*</editor-fold>*/
 
 /*<editor-fold desc="RESTYLE SEARCH FORM">*/

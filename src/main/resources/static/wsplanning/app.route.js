@@ -1,21 +1,25 @@
-UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvider, ivhTreeviewOptionsProvider ,tmhDynamicLocaleProvider, inputModifiedConfigProvider) {
+UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvider, ivhTreeviewOptionsProvider, tmhDynamicLocaleProvider, inputModifiedConfigProvider) {
 
   tmhDynamicLocaleProvider.localeLocationPattern('/assets/js/core/libraries/angularjs/angular-locale/i18n/angular-locale_{{locale}}.js')
   // $urlRouterProvider.otherwise('/');
-  
+
   //input Modified 
-	 inputModifiedConfigProvider
-      .enableGlobally()
-      // // .setModifiedClassName('my-changed')
-      // // .setNotModifiedClassName('my-clear')
-     ;
+  inputModifiedConfigProvider
+    .enableGlobally()
+    // // .setModifiedClassName('my-changed')
+    // // .setNotModifiedClassName('my-clear')
+    ;
 
   //ivhTree
   ivhTreeviewOptionsProvider.set({
     idAttribute: 'id',
     labelAttribute: 'label',
     childrenAttribute: 'children',
-    useCheckboxes: false,
+    selectedAttribute: 'selected',
+    useCheckboxes: true,
+    defaultSelectedState: false,
+    // disableCheckboxSelectionPropagation: false,
+    validate: false,
     expandToDepth: 0,
     twistieExpandedTpl: '<i class="icon-folder-minus3"></i>',
     twistieCollapsedTpl: '<i class="icon-folder-plus3"></i>',
@@ -58,9 +62,9 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
       }
     })
 
-    
-    .state('app.main.unscheduledwork',{
-      url:'unscheduledwork',
+
+    .state('app.main.unscheduledwork', {
+      url: 'unscheduledwork',
       controller: "AllWorkOrdersCtrl as $ctrl",
       templateUrl: '/wsplanning/templates/pages/allWorkOrder/index.html',
       resolve: {
@@ -70,8 +74,8 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
       }
     })
 
-    .state('app.main.allwork',{
-      url:'allwork',
+    .state('app.main.allwork', {
+      url: 'allwork',
       controller: "AllWorkOrdersCtrl as $ctrl",
       templateUrl: '/wsplanning/templates/pages/allWorkOrder/index.html',
       resolve: {
@@ -81,8 +85,8 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
       }
     })
 
-    .state('app.main.workmot',{
-      url:'workmot',
+    .state('app.main.workmot', {
+      url: 'workmot',
       controller: "AllWorkOrdersCtrl as $ctrl",
       templateUrl: '/wsplanning/templates/pages/allWorkOrder/index.html',
       resolve: {
@@ -92,8 +96,8 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
       }
     })
 
-    .state('app.main.worksub',{
-      url:'worksub',
+    .state('app.main.worksub', {
+      url: 'worksub',
       controller: "AllWorkOrdersCtrl as $ctrl",
       templateUrl: '/wsplanning/templates/pages/allWorkOrder/index.html',
       resolve: {
@@ -102,8 +106,8 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
         }
       }
     })
-    .state('app.main.worktire',{
-      url:'worktire',
+    .state('app.main.worktire', {
+      url: 'worktire',
       controller: "AllWorkOrdersCtrl as $ctrl",
       templateUrl: '/wsplanning/templates/pages/allWorkOrder/index.html',
       resolve: {
@@ -112,8 +116,8 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
         }
       }
     })
-    .state('app.main.workbo',{
-      url:'workbo',
+    .state('app.main.workbo', {
+      url: 'workbo',
       controller: "AllWorkOrdersCtrl as $ctrl",
       templateUrl: '/wsplanning/templates/pages/allWorkOrder/index.html',
       resolve: {
@@ -123,8 +127,8 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
       }
     })
 
-    .state('app.main.postponedwork',{
-      url:'postponedwork',
+    .state('app.main.postponedwork', {
+      url: 'postponedwork',
       controller: "AllWorkOrdersCtrl as $ctrl",
       templateUrl: '/wsplanning/templates/pages/allWorkOrder/index.html',
       resolve: {
@@ -134,20 +138,20 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
       }
     })
 
-    .state('app.main.tasklist',{
-      url:'tasklist',
+    .state('app.main.tasklist', {
+      url: 'tasklist',
       controller: "TaskListCtrl as $ctrl",
       templateUrl: '/wsplanning/templates/pages/taskList/index.html',
     })
 
-    .state('app.main.calendarview',{
-      url:'calendarview',
+    .state('app.main.calendarview', {
+      url: 'calendarview',
       controller: "CalendarViewCtrl as $ctrl",
       templateUrl: '/wsplanning/templates/pages/calendarView/index.html',
     })
 
-    .state('app.main.offer',{
-      url:'offer',
+    .state('app.main.offer', {
+      url: 'offer',
       controller: "AllWorkOrdersCtrl as $ctrl",
       templateUrl: '/wsplanning/templates/pages/allWorkOrder/index.html',
       resolve: {
@@ -157,8 +161,8 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
       }
     })
 
-    .state('app.main.replacementvehicle',{
-      url:'replacementvehicle',
+    .state('app.main.replacementvehicle', {
+      url: 'replacementvehicle',
       controller: "ReplacementVehicleCtrl as $ctrl",
       templateUrl: '/wsplanning/templates/pages/replacementVehicle/index.html',
     })
@@ -169,10 +173,10 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
       templateUrl: '/wsplanning/templates/pages/workdetail/index.html',
       resolve: {
         WorkOrder: function (WorkOrderService, $stateParams) {
-          return {data: {}};
+          return { data: {} };
         },
         lstMonth: function (WorkOrderService, $stateParams) {
-          var EmployeeData = $("#EmployeeData").data( "employee");
+          var EmployeeData = $("#EmployeeData").data("employee");
           var startDate = new Date();
           var endDate = moment(startDate).add(1, 'M');
           var params = {
@@ -206,14 +210,14 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
       }
     })
 
-    .state('app.main.newoffer',{
-      url:'newoffer',
+    .state('app.main.newoffer', {
+      url: 'newoffer',
       controller: "newOfferCtrl as $ctrl",
       templateUrl: '/wsplanning/templates/pages/newWO/index.html',
     })
 
-    .state('app.main.booking',{
-      url:'booking',
+    .state('app.main.booking', {
+      url: 'booking',
       controller: "newBookingCtrl as $ctrl",
       templateUrl: '/wsplanning/templates/pages/newWO/index.html',
     })
@@ -221,5 +225,5 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
   //$locationProvider.html5Mode(true);
 });
 
-  
+
 

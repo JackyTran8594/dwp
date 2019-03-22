@@ -164,6 +164,8 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   }
 
 
+
+
   // modal
   $ctrl.animationsEnabled = true;
 
@@ -361,6 +363,15 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
   console.log(item);
 
   $scope.totalElements = 0;
+
+  $scope.awesomeCallback = function(ivhNode) {
+      console.log(ivhNode);
+
+  }
+
+  $scope.otherAwesomeCallback = function(ivhNode, ivhIsSelected, ivhTree) {
+    console.log(ivhNode);
+  }
 
   $scope.limit = 10;
   $scope.page = 1;
