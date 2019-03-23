@@ -12,7 +12,8 @@ UserWebApp.directive('onFinishRender', function ($timeout) {
 })
   .directive('convertToNumber', convertToNumberDirective)
   .directive('dlKeyCode', dlKeyCode)
-  .directive('formatNumberDecimal', formatNumberDecimal);
+  .directive('formatNumberDecimal', formatNumberDecimal)
+  .directive('inputType', inputType);
 
 convertToNumberDirective.$inject = [];
 
@@ -48,17 +49,35 @@ function dlKeyCode() {
   };
 }
 
-function inputTypeDirective() {
+function inputType($compile) {
   return {
-    restrict: 'A',
-    // scope: { type: '=' },
+    restrict: 'AE',
+    scope: { 
+      type: '=',
+      ngModel: '=',
+     },
+    replace: true,
     link: function (scope, element, attr, ctrl) {
 
-        attr.$observe('inputType', function (value) {
-            if(value == "text") {
-              
-            }
-        })
+      var html_text = '<input type="text" class="form-control" ng-model="$parent.item.Value" />';
+      var html_number = '<input type="number" class="form-control" ng-model="$parent.item.Value" />';
+      var html_date = '<div class="input-group"><input type="text" class="form-control" datetime-picker="dd-MMMM-yyyy HH:mm:ss" date-format="dd-MMMM-yyyy HH:mm:ss" ng-model="$parent.item.Value" is-open="$parent.isOpenDateInput" /><span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="$parent.openDateInput($event, prop)"><i class="icon-calendar"></i></button></span></div>';
+
+
+     
+        if (scope.type == "C") {
+          var e = $compile(html_text)(scope);
+          element.replaceWith(e);
+        }
+        if (scope.type == "N") {
+          var e = $compile(html_number)(scope);
+          element.replaceWith(e);
+        }
+        if (scope.type == "D") {
+          var e = $compile(html_date)(scope);
+          element.replaceWith(e);
+        }
+
     }
   }
 }

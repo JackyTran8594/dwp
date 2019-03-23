@@ -498,31 +498,6 @@ table th {
 
 /* treeview end */
 
-/* datatype */
-.data-string {
-
-}
-
-.data-string::before{
-  content:"<input type="text" class='form-control' ng-model='item.Value'/>"
-}
-
-.data-date {
-
-}
-
-.data-date::before {
-  content:"<input type="text" class="form-control" datetime-picker='dd-MMMM-yyyy HH:mm:ss' date-format='dd-MMMM-yyyy HH:mm:ss' ng-model='item.Value' is-open="isOpenDateInput" /><span class="input-group-btn"><button type='button' class="btn btn-default" ng-click='openDateInput($event, prop)'><i class="icon-calendar"></i></button></span>";
-}
-
-.data-number {
-
-}
-
-.data-number::before {
-  content: "<input type="number" class="form-control" ng-model='item.Value'/>";
-}
-/* end */
 
 .icon-non-stock-item {
   max-width: 12px;
@@ -619,11 +594,12 @@ table th {
 .div-tree {
   overflow-y: scroll;
   /* max-height: 50%; */
-  max-height: 600px;
+  max-height: 300px;
+  overflow-x: auto;
 }
 
 .div-table {
-	height: 600px;
+	height: 300px;
 }
 
 .jobnew {

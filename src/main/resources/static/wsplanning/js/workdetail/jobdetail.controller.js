@@ -366,6 +366,7 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
   $scope.additionalData = [];
   $scope.historicalData = [];
   console.log(item);
+  
 
   $scope.isOpenDateInput = false;
   $scope.openDateInput = function (e) {
