@@ -21,21 +21,24 @@
                             </thead> -->
                             <tbody>
                                 <tr ng-repeat="item in additionalData">
-                                    <th class="text-center">{{$index + 1}}</th>
-                                    <th class="text-center">{{item.Id}}</th>
-                                    <th class="text-center">{{item.Category}}</th>
-                                    <th class="text-center">{{item.Label}}</th>
-                                    <th class="">
-                                        <input type="text" ng-show="item.DataType === C" class="form-control"
-                                            ng-model="item.Value" />
-                                        <input type="number" ng-show="item.DataType === N" class="form-control"
-                                            ng-model="item.Value" />
-                                        <input type="text" ng-show="item.DataType === D" class="form-control"
-                                            datetime-picker="dd-MMMM-yyyy HH:mm:ss" date-format="dd-MMMM-yyyy HH:mm:ss"
-                                            ng-model="item.Value" is-open="isOpenDateInput" /><span
-                                            class="input-group-btn"><button type="button" class="btn btn-default"
-                                                ng-click="openDateInput($event, prop)"><i
-                                                    class="icon-calendar"></i></button></span>
+                                    <th class="text-center" style="width:10%">{{$index + 1}}</th>
+                                    <th class="text-center" style="width:10%">{{item.Id}}</th>
+                                    <th class="text-center" style="width:20%">{{item.Category}}</th>
+                                    <th class="text-center" style="width:10%">{{item.Label}}</th>
+                                    <th class="" style="width:50%">
+                                        <div class="input-group">
+                                            <input type="text" ng-show="item.DataType === C" class="form-control"
+                                                ng-model="item.Value" />
+                                            <input type="number" ng-show="item.DataType === N" class="form-control"
+                                                ng-model="item.Value" />
+                                            <!-- <input type="text" ng-show="item.DataType === D" class="form-control"
+                                                datetime-picker="dd-MMMM-yyyy HH:mm:ss"
+                                                date-format="dd-MMMM-yyyy HH:mm:ss" ng-model="item.Value"
+                                                is-open="isOpenDateInput" /><span class="input-group-btn"><button
+                                                    type="button" class="btn btn-default"
+                                                    ng-click="openDateInput($event, prop)"><i
+                                                        class="icon-calendar"></i></button></span> -->
+                                        </div>
                                     </th>
                                 </tr>
 

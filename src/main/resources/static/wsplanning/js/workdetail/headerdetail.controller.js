@@ -90,23 +90,6 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
   });
 
 
-  // check type: new or update 
-  // var type = "";
-  // var postAction = "";
-
-  // checkAction($stateParams)
-
-  // function checkAction(params){
-  // if(params.id === undefined)
-  // {
-  // type = "new";
-  // postAction = "createNew";
-  // } else {
-  // type = "update";
-  // postAction = "saveHeader";
-  // }
-  // }
-  //
 
   //if the form is modified => using $emit to send data
   $scope.$on('inputModified.formChanged', function (event, modified, formCtrl) {

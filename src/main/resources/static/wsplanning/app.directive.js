@@ -39,13 +39,28 @@ function dlKeyCode() {
 
         if (keyCode == $attrs.code) {
           $scope.$apply(function () {
-            $scope.$eval($attrs.dlKeyCode, {$event: event});
+            $scope.$eval($attrs.dlKeyCode, { $event: event });
           });
 
         }
       });
     }
   };
+}
+
+function inputTypeDirective() {
+  return {
+    restrict: 'A',
+    // scope: { type: '=' },
+    link: function (scope, element, attr, ctrl) {
+
+        attr.$observe('inputType', function (value) {
+            if(value == "text") {
+              
+            }
+        })
+    }
+  }
 }
 
 
@@ -61,50 +76,50 @@ function formatNumberDecimal($filter) {
 
       ctrl.$parsers.unshift(function (value) {
 
-       
-        if(value) {
+
+        if (value) {
           var transformedInput = value.replace(/[A-Za-z]/g, '0');
 
           if (transformedInput !== value) {
             ctrl.$setViewValue(transformedInput);
             ctrl.$render();
           }
-          return transformedInput;      
-         
+          return transformedInput;
+
         }
 
-        if(FLOAT_REGEXP_1.test(transformedInput)) {
+        if (FLOAT_REGEXP_1.test(transformedInput)) {
           ctrl.$setValidity('float', true);
-             
-          return  parseFloat(transformedInput);
-        } else if(FLOAT_REGEXP_2.test(transformedInput)) {
-          ctrl.$setValidity('float', true);
-         
-          return parseFloat(transformedInput.replace(',','.').replace('.',','));
 
-        } 
+          return parseFloat(transformedInput);
+        } else if (FLOAT_REGEXP_2.test(transformedInput)) {
+          ctrl.$setValidity('float', true);
+
+          return parseFloat(transformedInput.replace(',', '.').replace('.', ','));
+
+        }
         else if (FLOAT_REGEXP_3.test(transformedInput)) {
           ctrl.$setValidity('float', true);
-        
-          return parseFloat(transformedInput.replace('.',','));
 
-        } else if(FLOAT_REGEXP_4.test(transformedInput)) {
+          return parseFloat(transformedInput.replace('.', ','));
+
+        } else if (FLOAT_REGEXP_4.test(transformedInput)) {
           ctrl.$setValidity('float', true);
           return parseFloat(transformedInput);
-        } 
+        }
         else {
           ctrl.$setValidity('float', false);
           return undefined;
-        }   
-       
-        
+        }
+
+
       });
 
-      
+
       ctrl.$formatters.unshift(function (model) {
         return $filter('number')(parseFloat(model), 2);
       });
-      
+
     }
   }
 }
