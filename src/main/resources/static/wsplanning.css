@@ -432,9 +432,9 @@ table td {
   white-space: -pre-wrap;
 }
 
-table th {
+/* table th {
   text-align: center;
-}
+} */
 
 .tableIndex {
   max-height: 200px;
@@ -648,7 +648,11 @@ table th {
 
 @media (max-width: 768px) {
 
-  
+  .tableIndex {
+    height: 300px;
+    overflow-x: scroll;
+    overflow-y: auto;
+  }
 
   .heading-elements {
     float: right !important;
@@ -695,6 +699,14 @@ table th {
 }
 
 @media (max-width: 1024px) {
+  
+  .tableIndex {
+    height: 300px;
+    overflow-x: scroll;
+    overflow-y: auto;
+  }
+
+  
   .main-content {
      max-height: 600px;
      /* overflow-y: scroll; */

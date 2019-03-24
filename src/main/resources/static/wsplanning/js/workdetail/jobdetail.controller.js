@@ -254,28 +254,28 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
         var jobObj = clearObject();
         $scope.jobTabList = [];
         $scope.jobTabList.push(jobObj);
-        $scope.jobTabList[0].AdditionalData = selectedItem.AdditionalData;
-        $scope.jobTabList[0].EstimatedTime = selectedItem.EstimatedTime;
-        $scope.jobTabList[0].JobType = selectedItem.JobType;
-        $scope.jobTabList[0].Note = selectedItem.JobTitle;
-        $scope.jobTabList[0].Name = selectedItem.Name;
+        $scope.jobTabList[0].AdditionalData = selectedItem.sub.AdditionalData;
+        $scope.jobTabList[0].EstimatedTime = selectedItem.sub.EstimatedTime;
+        $scope.jobTabList[0].JobType = selectedItem.sub.JobType;
+        $scope.jobTabList[0].Note = selectedItem.sub.JobTitle;
+        $scope.jobTabList[0].Name = selectedItem.sub.Name;
         $scope.jobTabList[0].Items = selectedItem.Items;
         $scope.jobTabList[0].MainGroupId = selectedItem.id;
         $scope.jobTabList[0].SubGroupId = selectedItem.sub.Id;
-        $scope.jobTabList[0].Complaint = selectedItem.JobComplaint
+        $scope.jobTabList[0].Complaint = selectedItem.sub.JobComplaint
       } else {
 
         var jobObj = clearObject();
         // add in detail WO
-        jobObj.Note = selectedItem.JobTitle;
-        jobObj.JobType = selectedItem.JobType;
-        jobObj.Name = selectedItem.Name;
-        jobObj.EstimatedTime = selectedItem.EstimatedTime;
-        jobObj.AdditionalData = selectedItem.AdditionalData;
+        jobObj.Note = selectedItem.sub.JobTitle;
+        jobObj.JobType = selectedItem.sub.JobType;
+        jobObj.Name = selectedItem.sub.Name;
+        jobObj.EstimatedTime = selectedItem.sub.EstimatedTime;
+        jobObj.AdditionalData = selectedItem.sub.AdditionalData;
         jobObj.Items = selectedItem.Items;
         jobObj.MainGroupId = selectedItem.id;
         jobObj.SubGroupId = selectedItem.sub.Id;
-        jobObj.Complaint = selectedItem.JobComplaint
+        jobObj.Complaint = selectedItem.sub.JobComplaint
         // console.log(jobObj);
         $scope.jobTabList.push(jobObj);
         // console.log($scope.jobTabList);

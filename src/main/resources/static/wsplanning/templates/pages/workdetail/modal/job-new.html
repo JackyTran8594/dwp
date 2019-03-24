@@ -11,7 +11,7 @@
         <div class="panel-body">
             <div class="well border-left-danger border-left-lg jobnew">
                 <div class="row">
-                    <div class="col-xs-6">
+                    <div class="col-xs-4 col-sm-4">
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="panel panel-flat">
@@ -41,62 +41,70 @@
                                 </div>
 
                             </div>
+                        </div>
+                    </div>
 
+                    <div class="col-xs-8 col-sm-8">
+                        <div ng-include="'/wsplanning/templates/pages/workdetail/modal/additional_data.html'">
                         </div>
 
-
-                        <div ng-include="'/wsplanning/templates/pages/workdetail/modal/recent_sales.html'"></div>
-
-
                     </div>
-                    <div class="col-xs-6">
 
-                        <!-- <div ng-include="'/wsplanning/templates/pages/workdetail/modal/recent_sales.html'"></div> -->
-                        <div ng-include="'/wsplanning/templates/pages/workdetail/modal/additional_data.html'"></div>
-                        <div class="row" ng-hide="historicalData == null || historicalData.length === 0">
+                </div>
+                <div class="row">
+                    <div class="col-xs-8 col-sm-8">
+                        <div class="row">
                             <div class="col-xs-12">
-                                <div class="panel panel-flat">
-                                    <div class="panel-heading">
-                                        <h5 class="panel-title"><span>{{'SelectedItem' | translate}}</span></h5>
-                                    </div>
+                                <div ng-include="'/wsplanning/templates/pages/workdetail/modal/recent_sales.html'">
+                                </div>
 
-                                    <div class="panel-body">
-                                        <div class="table-responsive nowhitespace" style="height: 200px;">
-                                            <table class="table table-bordered table-hover">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="text-center">No.</th>
-                                                        <th class="text-center">Code</th>
-                                                        <th class="text-center">Name</th>
-                                                        <th class="text-center">Quantity</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr ng-repeat="item in historicalData track by $index">
-                                                        <th class="text-center">{{$index + 1}}</th>
-                                                        <th class="text-center">{{item.ItemNo}}</th>
-                                                        <th class="text-left">{{item.Name}}</th>
-                                                        <th class="text-center">{{item.Quantity}}</th>
-                                                    </tr>
+                                <!-- <div ng-include="'/wsplanning/templates/pages/workdetail/modal/recent_sales.html'"></div> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 col-sm-4">
+                        <div class="row" ng-hide="historicalData == null || historicalData.length === 0">
+                            <div class="panel panel-flat">
+                                <div class="panel-heading">
+                                    <h5 class="panel-title"><span>{{'SelectedItem' | translate}}</span></h5>
+                                </div>
 
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
+                                <div class="panel-body">
+                                    <div class="table-responsive nowhitespace" style="height: 200px;">
+                                        <table class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center">No.</th>
+                                                    <th class="text-center">Code - Name</th>
+                                                    <!-- <th class="text-center">Name</th> -->
+                                                    <th class="text-center">Quantity</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr ng-repeat="item in historicalData track by $index">
+                                                    <th class="text-center">{{$index + 1}}</th>
+                                                    <th class="">{{item.ItemNo}} - {{item.Name}}</th>
+                                                    <!-- <th class="text-left">{{item.Name}}</th> -->
+                                                    <th class="text-center">{{item.Quantity}}</th>
+                                                </tr>
 
-                                    <div class="panel-footer text-right">
-
-
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
 
+                                <!-- <div class="panel-footer text-right">
+
+
+                                </div> -->
                             </div>
+
+
                         </div>
 
                     </div>
+
                 </div>
-
-
             </div>
         </div>
     </div>
