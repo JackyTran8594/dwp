@@ -176,6 +176,8 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
     modalInstance.result.then(function (selectedItem) {
       // $scope.WOVehicle = selectedItem;
       $scope.jobObject.VehiId = selectedItem.VehiId
+      $scope.jobObject.WarrantyInfo = selectedItem.WarrantyInfo
+      
       if (selectedItem.PayerCustomer != null) {
         $rootScope.$broadcast("choosePayerCustomer", { "item": selectedItem.PayerCustomer });
         $scope.jobObject.CustNo = selectedItem.PayerCustomer.CustNo;
