@@ -31,6 +31,9 @@ public class PlanningController extends BaseController {
   protected EmployeesClient employeesClient;
 
   @Autowired
+  protected WokOrderClient wokOrderClient;
+
+  @Autowired
   protected HttpSession session;
 
   @Autowired
@@ -69,7 +72,7 @@ public class PlanningController extends BaseController {
         for (JsonElement item : listData) {
           itemObj = item.getAsJsonObject();
           itemRtn = new JsonObject();
-          itemRtn.addProperty("id", itemObj.get("ShortName").getAsString());
+          itemRtn.addProperty("id", itemObj.get("SmanId").getAsString());
           itemRtn.addProperty("title", itemObj.get("ShortName").getAsString());
           itemRtn.addProperty("eventColor", colors[i % colors.length]);
           listRtn.add(itemRtn);
@@ -98,10 +101,52 @@ public class PlanningController extends BaseController {
   }
 
   @GetMapping("/events2")
-  public ResponseEntity events2(@RequestParam("start") String start) {
+  public ResponseEntity events2(@RequestParam("start") String start, @RequestParam("DeptId") String DeptId, @RequestParam("ShiftId") String ShiftId) {
     try {
       start = start.substring(0, start.indexOf("T")); ////2019-03-21T00:00:00Z
-      return new ResponseEntity<>(generateEvent(start).toString(), HttpStatus.OK);
+      JsonArray listRtn = new JsonArray();
+      String rtn = wokOrderClient.getResource(getSiteId(), start.replaceAll("-", "."), DeptId, ShiftId);
+      if (rtn != null && StringUtils.isNotBlank(rtn)) {
+        JsonParser parser = new JsonParser();
+        JsonElement tradeElement = parser.parse(rtn);
+        JsonArray listData = tradeElement.getAsJsonArray();
+
+        // Init list
+        JsonObject itemRtn = null;
+        JsonObject WorkOrder = null;
+        JsonObject WOResource = null;
+        JsonArray BookedResources = null;
+        String title = "";
+        for (JsonElement item : listData) {
+          WorkOrder = item.getAsJsonObject();
+
+          if (WorkOrder.has("TimeBarText")) {
+            title = WorkOrder.get("TimeBarText").getAsString();
+          } else {
+            title = "";
+          }
+          if (WorkOrder.has("BookedResources")) {
+            BookedResources = WorkOrder.get("BookedResources").getAsJsonArray();
+            for (JsonElement resource : BookedResources) {
+              WOResource = resource.getAsJsonObject();
+
+              itemRtn = new JsonObject();
+              itemRtn.addProperty("resourceId", WOResource.get("ResourceId").getAsString());
+              if (!title.isEmpty()) {
+                itemRtn.addProperty("title", title);
+              } else {
+                itemRtn.addProperty("title", WOResource.toString());
+              }
+              itemRtn.addProperty("start", WOResource.get("StartTime").getAsString());
+              itemRtn.addProperty("end", WOResource.get("EndTime").getAsString());
+              listRtn.add(itemRtn);
+
+            }
+          }
+        }
+      }
+
+      return new ResponseEntity<>(listRtn.toString(), HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);
     }

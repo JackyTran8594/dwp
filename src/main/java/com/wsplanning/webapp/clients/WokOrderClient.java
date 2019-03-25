@@ -213,11 +213,12 @@ public class WokOrderClient {
     }
     if (StringUtils.isNotBlank(postAction)) {
       headers.set("PostAction", postAction);
-      if(postAction == "saveHeader") {
-        wodto.WOJobs = new  ArrayList<>();;
+      if (postAction == "saveHeader") {
+        wodto.WOJobs = new ArrayList<>();
+        ;
       }
-      if(postAction == "createNew") {
-        
+      if (postAction == "createNew") {
+
       }
       // if(postAction == "saveRows") {
       //   wodto. = new  ArrayList<>();;
@@ -229,5 +230,10 @@ public class WokOrderClient {
     return response.getBody();
   }
 
-  
+
+  public String getResource(String siteId, String date, String DeptId, String ShiftId) {
+    String url = String.format("%s?SiteId=%s&Day=%s&DeptId=%s&ShiftId=%s", this.endpointUrl, siteId, date, DeptId, ShiftId);
+    return restTemplate.getForObject(url, String.class);
+  }
+
 }

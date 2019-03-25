@@ -1,6 +1,7 @@
 <!--ROW3-->
 <div class="panel panel-flat">
     <div class="panel-body">
+
         <div class="row">
             <div class="col-xs-12">
                 <div class="table-responsive nowhitespace">
@@ -8,7 +9,9 @@
                         <!--BODY-->
                         <tbody>
                         <tr>
-                            <td ng-repeat="item in lstPlanning" class="text-center" ng-dblclick="detailBooking(item)" ng-click="detailBooking(item)">
+                            <td ng-repeat="item in lstPlanning" class="tdBooking text-center"
+                                sh-context-menu menu-options="menuOptions" context-data="item"
+                                onclick="clickBooking(this)" ng-dblclick="detailBooking(item)" ng-click="detailBooking(item)">
                                 <div class="tablea" style="min-width: 130px;">
                                     <div class="tr text-center">{{item.WorkDay | dateFormat}}</div>
                                     <div class="tr text-center">
@@ -68,7 +71,10 @@
         padding: 5px;
     }
     .tablePlanning tbody tr td:not(:last-child):hover {
-        border-top: 2px solid red;
+        border-top: 2px solid orangered;
+    }
+    .bookingActive{
+        border-top: 2px solid red !important;
     }
 
     .nowhitespace tbody tr td {
@@ -88,5 +94,10 @@
 <script type="text/javascript">
   $(document).ready(function () {
   });
+
+  function clickBooking(item) {
+    $(".tdBooking").removeClass("bookingActive");
+    $(item).addClass("bookingActive");
+  }
 
 </script>

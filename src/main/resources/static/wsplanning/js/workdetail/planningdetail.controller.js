@@ -38,8 +38,8 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
         extraParams: function() {
           common.spinner(true);
           return {
-            "DeptId": $scope.DeptId,
-            "ShiftId": $scope.ShiftId,
+            "DeptId": "",
+            "ShiftId": "",
           };
         },
         success: function () {

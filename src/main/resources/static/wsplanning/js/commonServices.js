@@ -14,8 +14,6 @@ UserWebApp
     this.customers = [];
     this.vehicles = [];
 
-
-
     this.getStamping = function () {
       var d = $q.defer();
       HttpService.getData('/site/getStamping', {}).then(function (response) {

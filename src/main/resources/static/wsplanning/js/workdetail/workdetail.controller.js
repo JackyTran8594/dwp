@@ -80,9 +80,9 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
     else {
       $scope.jobObject = {
         SiteId: WorkOrder.data.SiteId,
-        CustNo: WorkOrder.data.WOCustomer.CustNo,
-        VehiId: WorkOrder.data.WOVehicle.VehiId,
-        WarrantyInfo: WorkOrder.data.WOVehicle.WarrantyInfo
+        CustNo: (WorkOrder.data.WOCustomer && WorkOrder.data.WOCustomer.CustNo) ? WorkOrder.data.WOCustomer.CustNo : "0",
+        VehiId: (WorkOrder.data.WOVehicle && WorkOrder.data.WOVehicle.VehiId) ? WorkOrder.data.WOVehicle.VehiId : "0",
+        WarrantyInfo: (WorkOrder.data.WOVehicle && WorkOrder.data.WOVehicle.WarrantyInfo) ? WorkOrder.data.WOVehicle.WarrantyInfo : "0",
         // WarrantyInfo: "153135"
 
       }
@@ -106,7 +106,11 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
   }
   $scope.workOrderNo = WorkOrder.data.WorkOrderNo;
 
-  $scope.WorkOrder.ServiceDate = new Date($scope.WorkOrder.ServiceDate);
+  if ($scope.WorkOrder.ServiceDate == "" || $scope.WorkOrder.ServiceDate == "0001-01-01T00:00:00") {
+    $scope.WorkOrder.ServiceDate = "";
+  } else {
+    $scope.WorkOrder.ServiceDate = new Date($scope.WorkOrder.ServiceDate);
+  }
   if ($scope.WorkOrder.CheckOutDate == "" || $scope.WorkOrder.CheckOutDate == "0001-01-01T00:00:00") {
     $scope.WorkOrder.CheckOutDate = "";
   } else {

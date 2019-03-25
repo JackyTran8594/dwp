@@ -170,8 +170,11 @@ var translationsEN = {
   AdditionalData: "The Additional Data",
   NonStockItems :"Non Stock Items",
   totalTime :"Total Time",
-  mechanic :"Mechanic",
-  workload :"Workload"
+  mechanic :"Resources",
+  workload :"Workload",
+  previous :"Previous",
+  today :"Today",
+  next :"Next"
 
 };
 
@@ -304,8 +307,11 @@ var translationsVI = {
   AdditionalData: "The Additional Data",
   NonStockItems :"Non Stock Items",
   totalTime :"Tổng thời gian",
-  mechanic :"Thợ",
-  workload :"Workload"
+  mechanic :"Resource",
+  workload :"Workload",
+  previous :"Previous",
+  today :"Today",
+  next :"Next"
 
 };
 

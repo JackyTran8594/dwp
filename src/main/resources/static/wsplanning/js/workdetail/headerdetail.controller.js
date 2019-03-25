@@ -58,37 +58,42 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
   firstContact = Object.assign(firstContact, $scope.WorkOrder.WOContact);
 
   $scope.$watch('WorkOrder.WOVehicle', function (newValue, oldValue) {
-    if (newValue.LicenseNo !== firstVehicle.LicenseNo) {
-      $scope.pristine = true;
-    } else {
-      $scope.pristine = false;
+    if (newValue && newValue.LicenseNo) {
+      if (newValue.LicenseNo !== firstVehicle.LicenseNo) {
+        $scope.pristine = true;
+      } else {
+        $scope.pristine = false;
+      }
     }
   });
 
   $scope.$watch('WorkOrder.WOCustomer', function (newValue, oldValue) {
-    if (newValue.CustNo !== firstCustomer.CustNo) {
-      $scope.pristine = true;
-    } else {
-      if ($scope.WorkOrder.WOVehicle.LicenseNo === firstVehicle.LicenseNo) {
-        $scope.pristine = false;
-      } else {
+    if (newValue && newValue.CustNo) {
+      if (newValue.CustNo !== firstCustomer.CustNo) {
         $scope.pristine = true;
+      } else {
+        if ($scope.WorkOrder.WOVehicle.LicenseNo === firstVehicle.LicenseNo) {
+          $scope.pristine = false;
+        } else {
+          $scope.pristine = true;
+        }
       }
     }
   });
 
   $scope.$watch('WorkOrder.WOContact', function (newValue, oldValue) {
-    if (newValue.CustNo !== firstContact.CustNo) {
-      $scope.pristine = true;
-    } else {
-      if ($scope.WorkOrder.WOVehicle.LicenseNo === firstVehicle.LicenseNo) {
-        $scope.pristine = false;
-      } else {
+    if (newValue && newValue.CustNo) {
+      if (newValue.CustNo !== firstContact.CustNo) {
         $scope.pristine = true;
+      } else {
+        if ($scope.WorkOrder.WOVehicle.LicenseNo === firstVehicle.LicenseNo) {
+          $scope.pristine = false;
+        } else {
+          $scope.pristine = true;
+        }
       }
     }
   });
-
 
 
   //if the form is modified => using $emit to send data
@@ -107,6 +112,9 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
 
   $scope.onSubmitForm = function () {
     // $rootScope.isSubmitHeader = true;
+
+    // $scope.WorkOrder.ServiceDate = dateToUTC($scope.WorkOrder.ServiceDate);
+    // $scope.WorkOrder.CheckOutDate = dateToUTC($scope.WorkOrder.CheckOutDate);
 
     var data = JSON.stringify($scope.WorkOrder);
     var postAction = "";

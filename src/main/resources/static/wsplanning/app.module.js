@@ -14,7 +14,8 @@ var UserWebApp = angular.module('UserWebApp', [
   'ui.router',
   'ngCookies',
   // 'ivh.treeview',
-  'ngInputModified'
+  'ngInputModified',
+  'shContextMenu'
 ]);
 
 

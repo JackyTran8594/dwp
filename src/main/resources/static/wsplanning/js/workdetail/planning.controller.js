@@ -1,4 +1,4 @@
-UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrderService, HttpService, $translate, $location, $filter, $uibModal, CommonServices, $stateParams, $state) {
+UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrderService, HttpService, $translate, $location, $filter, $uibModal, CommonServices, $stateParams, $timeout) {
   //JOB
   $scope.jobTabList = $scope.$parent.WOJobs;
 
@@ -18,22 +18,20 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
 
   //These variables MUST be set as a minimum for the calendar to work
   $scope.calendarView = 'month';
+  $scope.calendarViewNext = 'day';
   // $scope.calendarView = 'week';
   $scope.viewDate = new Date();
-  $scope.selectedDate = moment($scope.viewDate).add('days', 1).toDate();
-
 
   $scope.lstPlanning = [];
   $scope.loadData = function () {
     getCalendarWeek($scope.viewDate);
   }
 
-  // $scope.loadData();
-
   function getCalendarWeek(date) {
     common.spinner(true);
-    var startDate = moment(date).startOf('week').toDate();
-    var endDate = moment(date).endOf('week').toDate();
+    $rootScope.$broadcast("bookingClick", {"date": date});
+    var startDate = date;
+    var endDate = moment(startDate).add('days', 7).toDate();
     var params = {
       "DayFrom": formatDateToApi(startDate),
       "DayTo": formatDateToApi(endDate),
@@ -83,10 +81,14 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
   $scope.timespanClicked = function (date, cell) {
     console.log(cell);
     cell.cssClass = 'cal-day-selected';
-    console.log("---timespanClicked: " + date);
-    $scope.viewDate = date;
-    $rootScope.$broadcast("bookingClick", {"date": date});
-    getCalendarWeek($scope.viewDate);
+    console.log("---timespanClicked: " + date + " " + $scope.viewDate.getMonth() + " - " + date.getMonth());
+    if($scope.viewDate.getMonth() != date.getMonth()){
+      $scope.viewDate = date;
+      getCalendarMonth();
+    }else{
+      $scope.viewDate = date;
+      getCalendarWeek($scope.viewDate);
+    }
   };
 
   // $scope.$on('$destroy', function() {
@@ -152,26 +154,162 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
 
   function getCalendarMonth() {
     common.spinner(true);
-    var startDate = new Date();
+    var startDate = $scope.viewDate;
     var endDate = moment(startDate).add(1, 'M');
 
     var params = {
       "DayFrom": formatDateToApi(moment(startDate).startOf('month').toDate()),
-      "DayTo": formatDateToApi(moment(endDate).endOf('month').toDate()),
+      "DayTo": formatDateToApi(moment(endDate).startOf('month').toDate()),
       "DeptId": $scope.DeptId,
       "ShiftId": $scope.ShiftId,
     };
+    $scope.lstMonth = [];
     HttpService.postData('/planning', params).then(function (response) {
       $scope.lstMonth = response;
       common.spinner(false);
 
       getCalendarWeek($scope.viewDate);
     }, function error(response) {
-      $scope.lstPlanning = [];
+      $scope.lstMonth = [];
       console.log(response);
       common.spinner(false);
     });
   }
 
+  //Action
+  $scope.previous = function () {
+    if ($scope.viewDate.getDate() == 1) {
+      var preDate = moment($scope.viewDate).add('days', -1).toDate();
+      var lastDateOfMonth = moment(preDate).endOf('month').toDate().getDate();
+      $timeout(function () {
+        $(".day_" + lastDateOfMonth).first().click();
+      }, 1);
+    } else {
+      var preDate = moment($scope.viewDate).add('days', -1).toDate();
+      if (preDate.getDate() <= 8) {
+        $timeout(function () {
+          $(".day_" + preDate.getDate()).first().click();
+        }, 100);
+      } else {
+        $timeout(function () {
+          $(".day_" + preDate.getDate()).last().click();
+        }, 100);
+      }
+    }
+  }
 
+  $scope.today = function () {
+    var oldMonth = $scope.viewDate.getMonth();
+    $scope.viewDate = new Date();
+    getCalendarMonth();
+  }
+
+  $scope.next = function () {
+    // var oldMonth = $scope.viewDate.getMonth();
+    var lastDateOfMonth = moment($scope.viewDate).endOf('month').toDate().getDate();
+
+    if ($scope.viewDate.getDate() == lastDateOfMonth) {
+      $timeout(function () {
+        $(".day_1").last().click();
+      }, 1);
+    } else {
+      var nextDate = moment($scope.viewDate).add('days', 1).toDate();
+      if (nextDate.getDate() <= 8) {
+        $timeout(function () {
+          $(".day_" + nextDate.getDate()).first().click();
+        }, 100);
+      } else {
+        $timeout(function () {
+          $(".day_" + nextDate.getDate()).last().click();
+        }, 100);
+      }
+    }
+    // getCalendarMonth();
+    // if($scope.viewDate.getMonth() != oldMonth){
+    //   getCalendarMonth();
+    // }else{
+    //   getCalendarWeek($scope.viewDate);
+    // }
+  }
+
+  $scope.previousMonth = function () {
+    var preDate = moment($scope.viewDate).add('month', -1).toDate();
+    preDate.setDate(1);
+    $scope.viewDate = preDate;
+    $timeout(function () {
+      $(".day_1").first().click();
+    }, 100);
+  }
+
+  $scope.nextMonth = function () {
+    var nextDate = moment($scope.viewDate).add('month', 1).toDate();
+    nextDate.setDate(1);
+    $scope.viewDate = nextDate;
+    $timeout(function () {
+      $(".day_1").first().click();
+    }, 100);
+  }
+
+
+  // $timeout(function () {
+  //   $(".cal-day-today").click();
+  // }, 1000);
+
+
+  //Right click
+  $scope.items = [
+    {
+      name: 'item 1',
+      data: 'the data !'
+    },
+    {
+      name: 'item 2',
+      data: 'the data !'
+    },
+    {
+      name: 'item 3',
+      data: 'the data !'
+    },
+    {
+      name: 'item 4',
+      data: 'the data !'
+    },
+  ]
+
+  $scope.menuOptions =
+    [
+      {
+        label: 'Save',      // menu option label
+        onClick: menuSave   // on click handler
+      },
+      {
+        label: 'Edit',
+        onClick: menuEdit,
+        disabled: function (dataContext) {
+          return dataContext.name === "item 2";
+        }
+      },
+      {
+        label: 'Details',
+        onClick: menuEdit
+      },
+      {
+        divider: true       // will render a divider
+      },
+      {
+        label: 'Remove',
+        onClick: menuRemove
+      }
+    ]
+
+
+  function menuSave($event) {
+    console.log($event);
+  }
+  function menuRemove($event) {
+    console.log($event);
+  }
+  function menuEdit($event) {
+    console.log($event);
+  }
 });
