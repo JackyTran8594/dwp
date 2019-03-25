@@ -724,11 +724,27 @@ table td {
 
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 1199px) {
   .main-content {
      max-height: 600px;
      /* overflow-y: scroll; */
   }
+}
+
+
+@media (min-width: 1200px) {
+  .main-content {
+     max-height: 600px;
+     /* overflow-y: scroll; */
+  }
+
+   
+  .tableIndex {
+    height: 300px;
+    overflow-x: scroll;
+    overflow-y: auto;
+  }
+
 }
 
 
