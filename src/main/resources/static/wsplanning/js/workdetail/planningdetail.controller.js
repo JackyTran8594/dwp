@@ -29,6 +29,20 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
       resources: {
         url: '/resources'
       },
+      selectable: true,
+      select: function (selectionInfo ) {
+        console.log(selectionInfo );
+        var abc = prompt('Enter Title');
+        // var allDay = !start.hasTime && !end.hasTime;
+        var newEvent = new Object();
+        newEvent.title = abc;
+        newEvent.resourceId = selectionInfo.resource.id;
+        newEvent.start = moment(selectionInfo.start).format();
+        newEvent.end = moment(selectionInfo.end).format();
+        newEvent.allDay = false;
+        calendar.addEvent(newEvent);
+        // $('#calendar').fullCalendar('renderEvent', newEvent);
+      },
       events: {
         url: '/events2',
         method: 'GET',
