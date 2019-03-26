@@ -13,14 +13,14 @@
         <form class="form-horizontal form-search row" ng-submit="doSearch()">
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 col-sm-6 col-xs-6">
                     <div class="col-md-12">
                         <input type="text" class="form-control" ng-model="skey" placeholder="{{ 'search' | translate }}"
                             code="13">
                     </div>
                 </div>
 
-                <div class="col-md-1">
+                <div class="col-md-1 col-sm-1 col-xs-1">
                     <button type="submit" ng-click="doSearch()" class="btn btn-icon btn-default"><i
                             class="icon-search4"></i></button>
                 </div>
@@ -46,7 +46,7 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="item in lstVehicles">
-                        <td>{{item.LicenseNo}}</td>
+                        <td>{{item.LicenseNo}}</td> 
                         <td>{{item.VIN}}</td>
                         <td>{{item.Make}}</td>
                         <td>{{item.Model}}</td>

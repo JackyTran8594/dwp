@@ -194,7 +194,7 @@ var translationsVI = {
   btnAddOffer: "+Offer",
   btnAddBook: "+Booking",
   // btnDelete: "Xóa",
-  btnRefresh: "Tải lại",
+  // btnRefresh: "Tải lại",
   btnMore: "More",
   btnEdit: "Edit",
   btnAction: "Action",

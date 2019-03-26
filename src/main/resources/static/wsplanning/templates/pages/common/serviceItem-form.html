@@ -30,14 +30,14 @@
             <form class="form-horizontal form-search row" ng-submit="doSearch()">
 
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
                         <div class="col-md-12">
                             <input type="text" class="form-control" ng-model="skey"
                                 placeholder="{{ 'search' | translate }}" code="13">
                         </div>
                     </div>
 
-                    <div class="col-md-1">
+                    <div class="col-md-1 col-sm-1 col-xs-1">
                         <button type="submit" ng-click="doSearch()" class="btn btn-icon btn-default"><i
                                 class="icon-search4"></i></button>
                     </div>
@@ -51,21 +51,19 @@
                     <thead>
                         <tr>
                             <th class="text-center">Item No</th>
-                            <th class="text-center">Name</th>
+                            <th class="text-center" >Name</th>
                             <th class="text-center">Quantity</th>
-                            <!-- <th>Stock Quantity</th> -->
-                            <th class="text-center">Model</th>
+                        
                             <th class="text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-repeat="item in lstData track by $index">
                             <td class="text-center">{{item.ItemNo}}</td>
-                            <td class="text-left text-wrap">{{item.Name}}</td>
-                            <!-- <td>{{item.Quantity | number:2}}</td> -->
+                            <td class="text-left text-wrap" >{{item.Name}}</td>
+                           
                             <td ><input type="number" class="form-control text-center" ng-model="item.Quantity"></td>
-                            <!-- <td>{{item.StockQty | number:2}}</td> -->
-                            <td class="text-center">{{item.ModelCode}}</td>
+                           
                             <td class="text-center"><input type="checkbox" ng-click="isChecked(item, checked)" ng-model="checked" />
                         </tr>
 
