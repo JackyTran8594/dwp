@@ -46,6 +46,8 @@ var translationsEN = {
   breadcrumbWithTire: "With Tire",
   breadcrumbReplacementVehicle: "Replacement Vehicle Planning",
   breadcrumbNewWO: "New Workorder",
+  breadcrumbNewOffer:"New Offer",
+  breadcrumbNewBooking:"New Booking",
 
 
   //common
