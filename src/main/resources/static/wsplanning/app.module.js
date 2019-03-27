@@ -15,7 +15,8 @@ var UserWebApp = angular.module('UserWebApp', [
   'ngCookies',
   // 'ivh.treeview',
   'ngInputModified',
-  'shContextMenu'
+  'shContextMenu',
+  'iosDblclick'
 ]);
 
 
