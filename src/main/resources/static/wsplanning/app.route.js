@@ -11,19 +11,19 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
     ;
 
   //ivhTree
-  ivhTreeviewOptionsProvider.set({
-    idAttribute: 'id',
-    labelAttribute: 'label',
-    childrenAttribute: 'children',
-    selectedAttribute: 'selected',
-    useCheckboxes: true,
-    defaultSelectedState: false,
-    // disableCheckboxSelectionPropagation: false,
-    validate: false,
-    expandToDepth: 0,
-    twistieExpandedTpl: '<i class="icon-folder-minus3"></i>',
-    twistieCollapsedTpl: '<i class="icon-folder-plus3"></i>',
-  });
+  // ivhTreeviewOptionsProvider.set({
+    // idAttribute: 'id',
+    // labelAttribute: 'label',
+    // childrenAttribute: 'children',
+    // selectedAttribute: 'selected',
+    // useCheckboxes: true,
+    // defaultSelectedState: false,
+    // // disableCheckboxSelectionPropagation: false,
+    // validate: false,
+    // expandToDepth: 0,
+    // twistieExpandedTpl: '<i class="icon-folder-minus3"></i>',
+    // twistieCollapsedTpl: '<i class="icon-folder-plus3"></i>',
+  // });
 
   $urlRouterProvider.otherwise(function ($rootScope, $injector, $location) {
     var lang = $("#currentLang").attr('data-currentLang');
@@ -161,6 +161,7 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
       }
     })
 
+
     .state('app.main.replacementvehicle', {
       url: 'replacementvehicle',
       controller: "ReplacementVehicleCtrl as $ctrl",
@@ -168,7 +169,7 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
     })
 
     .state('app.main.newwo', {
-      url: 'workdetail/:type',
+      url: 'workdetail/:type/:action',
       controller: "WorkDetailCtrl as $ctrl",
       templateUrl: '/wsplanning/templates/pages/workdetail/index.html',
       resolve: {
@@ -211,15 +212,55 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
     })
 
     .state('app.main.newoffer', {
-      url: 'newoffer',
-      controller: "newOfferCtrl as $ctrl",
-      templateUrl: '/wsplanning/templates/pages/newWO/index.html',
+      url: 'workdetail/:type',
+      controller: "WorkDetailCtrl as $ctrl",
+      templateUrl: '/wsplanning/templates/pages/workdetail/index.html',
+	  resolve: {
+		   // typeWO: function ($stateParams) {
+           // return "newoffer";
+			// },
+		   WorkOrder: function (WorkOrderService, $stateParams) {
+          return { data: {} };
+        },
+		 lstMonth: function (WorkOrderService, $stateParams) {
+          var EmployeeData = $("#EmployeeData").data("employee");
+          var startDate = new Date();
+          var endDate = moment(startDate).add(1, 'M');
+          var params = {
+            "DayFrom": formatDateToApi(moment(startDate).startOf('month').toDate()),
+            "DayTo": formatDateToApi(moment(endDate).startOf('month').toDate()),
+            "DeptId": EmployeeData.DeptId,
+            "ShiftId": EmployeeData.ShiftId,
+          };
+          return WorkOrderService.calendarMonth(params);
+        }
+	  }
     })
 
     .state('app.main.booking', {
-      url: 'booking',
-      controller: "newBookingCtrl as $ctrl",
-      templateUrl: '/wsplanning/templates/pages/newWO/index.html',
+       url: 'workdetail/:type',
+      controller: "WorkDetailCtrl as $ctrl",
+      templateUrl: '/wsplanning/templates/pages/workdetail/index.html',
+	  resolve: {  
+		  // typeWO: function ($stateParams) {
+          // return "booking";
+			// },
+		   WorkOrder: function (WorkOrderService, $stateParams) {
+          return { data: {} };
+        },
+		 lstMonth: function (WorkOrderService, $stateParams) {
+          var EmployeeData = $("#EmployeeData").data("employee");
+          var startDate = new Date();
+          var endDate = moment(startDate).add(1, 'M');
+          var params = {
+            "DayFrom": formatDateToApi(moment(startDate).startOf('month').toDate()),
+            "DayTo": formatDateToApi(moment(endDate).startOf('month').toDate()),
+            "DeptId": EmployeeData.DeptId,
+            "ShiftId": EmployeeData.ShiftId,
+          };
+          return WorkOrderService.calendarMonth(params);
+        }
+	  }
     })
 
   //$locationProvider.html5Mode(true);

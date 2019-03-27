@@ -5,7 +5,12 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
   $scope.lstMonth = lstMonth.data;
   $scope.jobObject = {};
   $scope.actionType = "";
+  
+  $scope.WOVehicle = "";
+  $scope.WOCustomer = "";
+  $scope.WOContact = "";
 
+  $scope.WorkOrder = WorkOrder.data;
 
   loadCommon();
   $scope.lstTrans = [];
@@ -55,16 +60,17 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
   checkWorkOrder($stateParams)
 
   function checkWorkOrder(item) {
-    // if (item.data.WOJobs === undefined) {
-    // $scope.jobObject = {
-    // SiteId: '',
-    // CustNo: '',
-    // VehiId: '',
-    // WarrantyInfo: ''
-    // }
-
-
-    // }
+	if(item.action) {
+		if(item.action === "offer") {
+		$scope.WorkOrder.IsTimeReservation  = 2;
+		} else if (item.type === "booking"){
+			$scope.WorkOrder.IsTimeReservation  = 1;
+		} else {
+			$scope.WorkOrder.IsTimeReservation  = 0;
+		}
+	}
+	
+	  
     if (item.id === undefined) {
       $scope.jobObject = {
         SiteId: '',
@@ -72,10 +78,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
         VehiId: '',
         WarrantyInfo: ''
       }
-
       $scope.actionType = "new";
-      // $scope.actionType.postAction = "createNew";
-
     }
     else {
       $scope.jobObject = {
@@ -83,22 +86,18 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
         CustNo: (WorkOrder.data.WOCustomer && WorkOrder.data.WOCustomer.CustNo) ? WorkOrder.data.WOCustomer.CustNo : "",
         VehiId: (WorkOrder.data.WOVehicle && WorkOrder.data.WOVehicle.VehiId) ? WorkOrder.data.WOVehicle.VehiId : "",
         WarrantyInfo: (WorkOrder.data.WOVehicle && WorkOrder.data.WOVehicle.WarrantyInfo) ? WorkOrder.data.WOVehicle.WarrantyInfo : "",
-        // WarrantyInfo: "153135"
-
       }
 
       $scope.actionType = "update";
-      // $scope.actionType.postAction = "saveHeader";
     }
+	
   }
 
-  $scope.WOVehicle = "";
-  $scope.WOCustomer = "";
-  $scope.WOContact = "";
+  
 
-  $scope.WorkOrder = WorkOrder.data;
-
-  $scope.isNew = angular.equals($scope.WorkOrder, {});
+  // $scope.isNew = angular.equals($scope.WorkOrder, {});
+  $scope.isNew = $stateParams.action;
+  console.log($scope.WorkOrder);
 
   if ($scope.isNew) {
     var EmployeeData = $("#EmployeeData").data("employee");

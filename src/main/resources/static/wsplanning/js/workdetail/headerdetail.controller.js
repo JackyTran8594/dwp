@@ -39,12 +39,7 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
     $scope.isOpenExecutionDate = true;
   };
 
-  // data for next tab
-  // WorkOrderService.shareData.postAction = "saveHeader";
-  // WorkOrderService.shareData.data = JSON.stringify($scope.WorkOrder);
-  //
-
-  // $rootScope.$emit("headerData", { "headerData": $scope.WorkOrder });
+  
   $scope.pristine = false;
 
 
@@ -98,23 +93,16 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
 
   //if the form is modified => using $emit to send data
   $scope.$on('inputModified.formChanged', function (event, modified, formCtrl) {
-    // WorkOrderService.shareData.modified = modified;
+
     $scope.$emit("headerData", {
         data: $scope.WorkOrder,
         modified: modified,
-        // type: type,
-        // postAction: postAction
       }
     );
   });
 
-  // $rootScope.isSubmitHeader = false;
 
   $scope.onSubmitForm = function () {
-    // $rootScope.isSubmitHeader = true;
-
-    // $scope.WorkOrder.ServiceDate = dateToUTC($scope.WorkOrder.ServiceDate);
-    // $scope.WorkOrder.CheckOutDate = dateToUTC($scope.WorkOrder.CheckOutDate);
 
     var data = JSON.stringify($scope.WorkOrder);
     var postAction = "";
