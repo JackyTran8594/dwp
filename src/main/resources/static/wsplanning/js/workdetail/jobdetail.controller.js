@@ -286,13 +286,22 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   };
 
   var headerData = {};
-
+// get headerData
   $rootScope.$on("headerData", function (evt, obj) {
     headerData = obj;
     console.log(obj);
   });
 
-  // $rootScope.isSubmitJob = false;
+  //if the form is modified => using $emit to send data
+  $scope.$on('inputModified.formChanged', function (event, modified, formCtrl) {
+
+    $scope.$emit("jobData", {
+        data: $scope.WorkOrder,
+        modified: modified,
+      }
+    );
+  });
+
 
   $scope.onSubmitForm = function () {
 
@@ -314,13 +323,13 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
         common.notifyError("Error!!!", err.status);
       })
 
+      // $state.go('app.main.workdetail', {'type':});
+      
+
     } else {
       var postAction = "saveRows";
 
       if (headerData.modified == true) {
-        // var shareData = WorkOrderService.shareData;
-        // $rootScope.isSubmitHeader == true;
-        // console.log(shareData);
         WorkOrderService.postWorkOrder(headerData.data, "saveHeader").then(function (res) {
         }, function (err) {
           common.notifyError("Error!!!", err.status);

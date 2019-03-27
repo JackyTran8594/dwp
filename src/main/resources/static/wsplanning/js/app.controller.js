@@ -1,4 +1,4 @@
-UserWebApp.controller('appCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $location, $filter, $state, CommonServices, tmhDynamicLocale) {
+UserWebApp.controller('appCtrl', function ($scope, $rootScope, $locale, $uibModal ,HttpService, $translate, $location, $filter, $state, CommonServices, tmhDynamicLocale) {
 
   CommonServices.loadData();
 
@@ -19,56 +19,56 @@ UserWebApp.controller('appCtrl', function ($scope, $rootScope, $locale, HttpServ
 
 
   $scope.workorders = function () {
-    $state.go('app.main.workorder', {locale: $rootScope.lang});
+    $state.go('app.main.workorder', { locale: $rootScope.lang });
   }
 
   $scope.unscheduledwork = function () {
-    $state.go('app.main.unscheduledwork', {locale: $rootScope.lang});
+    $state.go('app.main.unscheduledwork', { locale: $rootScope.lang });
   }
 
   $scope.todayWork = function () {
-    $state.go('app.main.todaywork', {locale: $rootScope.lang});
+    $state.go('app.main.todaywork', { locale: $rootScope.lang });
   }
 
   $scope.worksub = function () {
-    $state.go('app.main.worksub', {locale: $rootScope.lang});
+    $state.go('app.main.worksub', { locale: $rootScope.lang });
   }
 
   $scope.allwork = function () {
-    $state.go('app.main.allwork', {locale: $rootScope.lang});
+    $state.go('app.main.allwork', { locale: $rootScope.lang });
   }
 
   $scope.workmot = function () {
-    $state.go('app.main.workmot', {locale: $rootScope.lang});
+    $state.go('app.main.workmot', { locale: $rootScope.lang });
   }
 
   $scope.worktire = function () {
-    $state.go('app.main.worktire', {locale: $rootScope.lang});
+    $state.go('app.main.worktire', { locale: $rootScope.lang });
   }
 
   $scope.workbo = function () {
-    $state.go('app.main.workbo', {locale: $rootScope.lang});
+    $state.go('app.main.workbo', { locale: $rootScope.lang });
   }
 
   $scope.postponedwork = function () {
-    $state.go('app.main.postponedwork', {locale: $rootScope.lang});
+    $state.go('app.main.postponedwork', { locale: $rootScope.lang });
   }
 
   $scope.tasklist = function () {
-    $state.go('app.main.tasklist', {locale: $rootScope.lang});
+    $state.go('app.main.tasklist', { locale: $rootScope.lang });
   }
 
 
   $scope.calendarview = function () {
-    $state.go('app.main.calendarview', {locale: $rootScope.lang});
+    $state.go('app.main.calendarview', { locale: $rootScope.lang });
   }
 
   $scope.offer = function () {
-    $state.go('app.main.offer', {locale: $rootScope.lang});
+    $state.go('app.main.offer', { locale: $rootScope.lang });
   }
 
   $scope.replacementvehicle = function () {
-    $state.go('app.main.calendarview', {locale: $rootScope.lang});
+    $state.go('app.main.calendarview', { locale: $rootScope.lang });
   }
 
 
@@ -155,6 +155,33 @@ UserWebApp.controller('appCtrl', function ($scope, $rootScope, $locale, HttpServ
 
   });
 
+  //info user
+  var $ctrl = this;
+  $ctrl.animationsEnabled = true;
+  var EmployeeData = $("#EmployeeData").data("employee");
+
+  $scope.openInfoUser = function (size, item) {
+    var modalInstance = $uibModal.open({
+      animation: $ctrl.animationsEnabled,
+      templateUrl: '/wsplanning/templates/pages/infoUser-form.html',
+      controller: 'InfoUserModalCtrl',
+      controllerAs: '$ctrl',
+      size: size,
+      backdrop: 'static',
+      resolve: {
+        item: EmployeeData
+      }
+    });
+
+    modalInstance.result.then(function (selectedItem) {
+    }, function () {
+      console.log('Modal dismissed at: ' + new Date());
+    });
+  };
+
+ 
+  //
+
 
   //Load Stamp
   $rootScope.$on('routestateChangeSuccess', function (event, data) {
@@ -167,6 +194,51 @@ UserWebApp.controller('appCtrl', function ($scope, $rootScope, $locale, HttpServ
       }
     });
   });
+
+
+});
+
+
+UserWebApp.controller('InfoUserModalCtrl', function ($scope, $rootScope, $uibModalInstance, item, HttpService, $translate, $location, $filter, $uibModal, CommonServices, $stateParams, $state) {
+
+  var $ctrl = this;
+
+  loadCommon();
+  $scope.lstDepartment = [];
+  $scope.lstShift = [];
+  $scope.lstSite = [];
+  $scope.lstServ = [];
+
+  function loadCommon() {
+   
+    CommonServices.getDepartments().then(function (data) {
+      // console.log(data);
+      $scope.lstDepartment = data;
+    });
+  
+    CommonServices.getServiceAdvisors().then(function (data) {
+      // console.log(data);
+      $scope.lstServ = data;
+    });
+  
+    CommonServices.getShifts().then(function (data) {
+      // console.log(data);
+
+      $scope.lstShift = data;
+    });
+
+    CommonServices.getSite().then(function (data) {
+      // console.log(data);
+      $scope.lstSite = data;
+    });
+  }
+
+  $scope.target = item;
+  console.log(item);
+
+  $ctrl.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
 
 
 });

@@ -5,7 +5,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
   $scope.lstMonth = lstMonth.data;
   $scope.jobObject = {};
   $scope.actionType = "";
-  
+
   $scope.WOVehicle = "";
   $scope.WOCustomer = "";
   $scope.WOContact = "";
@@ -60,17 +60,17 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
   checkWorkOrder($stateParams)
 
   function checkWorkOrder(item) {
-	if(item.action) {
-		if(item.action === "offer") {
-		$scope.WorkOrder.IsTimeReservation  = 2;
-		} else if (item.type === "booking"){
-			$scope.WorkOrder.IsTimeReservation  = 1;
-		} else {
-			$scope.WorkOrder.IsTimeReservation  = 0;
-		}
-	}
-	
-	  
+    if (item.action) {
+      if (item.action === "offer") {
+        $scope.WorkOrder.IsTimeReservation = 2;
+      } else if (item.action === "booking") {
+        $scope.WorkOrder.IsTimeReservation = 1;
+      } else {
+        $scope.WorkOrder.IsTimeReservation = 0;
+      }
+    }
+
+
     if (item.id === undefined) {
       $scope.jobObject = {
         SiteId: '',
@@ -90,10 +90,10 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 
       $scope.actionType = "update";
     }
-	
+
   }
 
-  
+
 
   // $scope.isNew = angular.equals($scope.WorkOrder, {});
   $scope.isNew = $stateParams.action;
@@ -176,7 +176,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
       // $scope.WOVehicle = selectedItem;
       $scope.jobObject.VehiId = selectedItem.VehiId
       $scope.jobObject.WarrantyInfo = selectedItem.WarrantyInfo
-      
+
       if (selectedItem.PayerCustomer != null) {
         $rootScope.$broadcast("choosePayerCustomer", { "item": selectedItem.PayerCustomer });
         $scope.jobObject.CustNo = selectedItem.PayerCustomer.CustNo;

@@ -12,7 +12,7 @@ var translationsEN = {
   taskListTitle: "Task List Management",
   offerTitle: "Offer Management",
   replacementVehicleTitle: " Replacement Vehicle Planning Management",
-  newWOTitle:" New Workorder",
+  newWOTitle: " New Workorder",
 
   //breadcrumb
   breadcrumbHome: "Home",
@@ -46,8 +46,8 @@ var translationsEN = {
   breadcrumbWithTire: "With Tire",
   breadcrumbReplacementVehicle: "Replacement Vehicle Planning",
   breadcrumbNewWO: "New Workorder",
-  breadcrumbNewOffer:"New Offer",
-  breadcrumbNewBooking:"New Booking",
+  breadcrumbNewOffer: "New Offer",
+  breadcrumbNewBooking: "New Booking",
 
 
   //common
@@ -72,7 +72,7 @@ var translationsEN = {
   btnSave: "Save",
   btnCancel: "Cancel",
   search: "Search",
-  pleaseEnter:"Please enter here",
+  pleaseEnter: "Please enter here",
 
   //Confirm delete
   confirmDeleteWorkOder: "Are you want to delete this WorkOder?",
@@ -126,7 +126,7 @@ var translationsEN = {
   shiftId: 'Shift ID',
   visitReason: 'Visit reason',
   searchWo: 'Search workorders',
-  search:'Search',
+  search: 'Search',
   pleaseSelect: '--Please select--',
   fromDate: 'From date',
   toDate: 'To date',
@@ -163,20 +163,33 @@ var translationsEN = {
 
   // Title in Job Tab
   Spare: "Spare Part",
-  Labour:"Labour Operation",
-  TextRows:" Text Rows",
+  Labour: "Labour Operation",
+  TextRows: " Text Rows",
   SubContractors: "Sub Contractors",
   recentSaleTitle: "Recent sales from this job type",
   JobQuickSelection: "Job Quick Selection",
   SelectedItem: "The Selected Item",
   AdditionalData: "The Additional Data",
-  NonStockItems :"Non Stock Items",
-  totalTime :"Total Time",
-  mechanic :"Resources",
-  workload :"Workload",
-  previous :"Previous",
-  today :"Today",
-  next :"Next"
+  NonStockItems: "Non Stock Items",
+  totalTime: "Total Time",
+  mechanic: "Resources",
+  workload: "Workload",
+  previous: "Previous",
+  today: "Today",
+  next: "Next",
+  //
+
+  // info user
+  infoUser: "The User Information",
+  email: "Email",
+  phone: "Phone",
+  restype: "ResType",
+  shift: "Shift",
+  shortname: "Short Name",
+  site: "Site",
+  sman: "SmanId",
+  subsys: "SubSys"
+
 
 };
 
@@ -300,20 +313,20 @@ var translationsVI = {
 
   // Title in Job Tab
   Spare: "Spare Part",
-  Labour:"Labour Operation",
-  TextRows:" Text Rows",
+  Labour: "Labour Operation",
+  TextRows: " Text Rows",
   SubContractors: "Sub Contractors",
   recentSaleTitle: "Recent sales from this job type",
   JobQuickSelection: "Job Quick Selection",
   SelectedItem: "The Selected Item",
   AdditionalData: "The Additional Data",
-  NonStockItems :"Non Stock Items",
-  totalTime :"Tổng thời gian",
-  mechanic :"Resource",
-  workload :"Workload",
-  previous :"Previous",
-  today :"Today",
-  next :"Next"
+  NonStockItems: "Non Stock Items",
+  totalTime: "Tổng thời gian",
+  mechanic: "Resource",
+  workload: "Workload",
+  previous: "Previous",
+  today: "Today",
+  next: "Next"
 
 };
 

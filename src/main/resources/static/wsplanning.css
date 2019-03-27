@@ -662,6 +662,10 @@ table td {
     overflow-x: auto;
   }
 
+  .table-responsive > .table > thead > tr > th[class*=item-hidden],
+  .table-responsive > .table > tbody > tr > td[class*=item-hidden] {
+    display: none;
+  }
 
   .tableIndex {
     height: 300px;
@@ -723,6 +727,11 @@ table td {
   .main-content {
      max-height: 600px;
      /* overflow-y: scroll; */
+  }
+
+  .table-responsive > .table > thead > tr > th[class*=ipad-pro],
+  .table-responsive > .table > tbody > tr > td[class*=ipad-pro] {
+    display: none;
   }
 
    /* icon */

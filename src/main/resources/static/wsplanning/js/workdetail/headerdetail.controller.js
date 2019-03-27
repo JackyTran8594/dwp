@@ -39,7 +39,7 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
     $scope.isOpenExecutionDate = true;
   };
 
-  
+
   $scope.pristine = false;
 
 
@@ -95,10 +95,17 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
   $scope.$on('inputModified.formChanged', function (event, modified, formCtrl) {
 
     $scope.$emit("headerData", {
-        data: $scope.WorkOrder,
-        modified: modified,
-      }
+      data: $scope.WorkOrder,
+      modified: modified,
+    }
     );
+  });
+
+  //get jobdata
+  var jobData = {}
+  $rootScope.$on("jobData", function (evt, obj) {
+    jobData = obj;
+    console.log(obj);
   });
 
 
@@ -108,16 +115,36 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
     var postAction = "";
     if ($scope.actTypeHeader === "new") {
       postAction = "createNew";
+
+      //save job - after save header
+      $scope.WorkOrder = jobData;
+
+      var data = JSON.stringify($scope.WorkOrder)
+      console.log(data);
+
+      WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
+        console.log(res);
+        common.notifySuccess("Success!!!");
+      }, function (err) {
+        console.log(err);
+        common.notifyError("Error!!!", err.status);
+      });
+
+      $state.go('app.main.detail');
+
     } else {
       postAction = "saveHeader";
+
+      WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
+        common.notifySuccess("Success!!!");
+      }, function (err) {
+        console.log(err);
+        common.notifyError("Error!!!", err.status);
+      })
+
     }
 
-    WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
-      common.notifySuccess("Success!!!");
-    }, function (err) {
-      console.log(err);
-      common.notifyError("Error!!!", err.status);
-    })
+
   }
 
 });

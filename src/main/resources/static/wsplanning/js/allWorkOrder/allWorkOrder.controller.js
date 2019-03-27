@@ -1,4 +1,4 @@
-UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $location, $state, $filter, $uibModal, CommonServices,typeWO) {
+UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $location, $state, $filter, $uibModal, CommonServices, typeWO) {
   $scope.typeWO = typeWO;
 
   $scope.lstAllData = [];
@@ -88,12 +88,15 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
       $scope.lstDepartment = data;
     });
     CommonServices.getVisitReasons().then(function (data) {
+      console.log(data);
       $scope.lstVisitReason = data;
     });
     CommonServices.getServiceAdvisors().then(function (data) {
+      console.log(data);
       $scope.lstServ = data;
     });
     CommonServices.getShifts().then(function (data) {
+      console.log(data);
       $scope.lstShift = data;
     });
   }
@@ -140,7 +143,6 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
   }
 
   loadData(true);
-
 
   //<editor-fold desc="Paging & Search Port">
   $scope.$watch("page", function (newValue, oldValue) {
@@ -218,15 +220,15 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
   }
 
   $scope.newWorkorder = function () {
-    $state.go('app.main.newwo', { 'type': typeWO, 'action':"wo"});
+    $state.go('app.main.newwo', { 'type': typeWO, 'action': "wo" });
   }
 
   $scope.newOffer = function () {
-    $state.go('app.main.newoffer',  { 'type': typeWO, 'action':"offer"});
+    $state.go('app.main.newoffer', { 'type': typeWO, 'action': "offer" });
   }
 
   $scope.newBooking = function () {
-    $state.go('app.main.booking',  { 'type': typeWO, 'action':"booking"});
+    $state.go('app.main.booking', { 'type': typeWO, 'action': "booking" });
   }
 
   $scope.isShow = false;

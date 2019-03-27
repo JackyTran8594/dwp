@@ -12,17 +12,17 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
 
   //ivhTree
   // ivhTreeviewOptionsProvider.set({
-    // idAttribute: 'id',
-    // labelAttribute: 'label',
-    // childrenAttribute: 'children',
-    // selectedAttribute: 'selected',
-    // useCheckboxes: true,
-    // defaultSelectedState: false,
-    // // disableCheckboxSelectionPropagation: false,
-    // validate: false,
-    // expandToDepth: 0,
-    // twistieExpandedTpl: '<i class="icon-folder-minus3"></i>',
-    // twistieCollapsedTpl: '<i class="icon-folder-plus3"></i>',
+  // idAttribute: 'id',
+  // labelAttribute: 'label',
+  // childrenAttribute: 'children',
+  // selectedAttribute: 'selected',
+  // useCheckboxes: true,
+  // defaultSelectedState: false,
+  // // disableCheckboxSelectionPropagation: false,
+  // validate: false,
+  // expandToDepth: 0,
+  // twistieExpandedTpl: '<i class="icon-folder-minus3"></i>',
+  // twistieCollapsedTpl: '<i class="icon-folder-plus3"></i>',
   // });
 
   $urlRouterProvider.otherwise(function ($rootScope, $injector, $location) {
@@ -169,7 +169,7 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
     })
 
     .state('app.main.newwo', {
-      url: 'workdetail/:type/:action',
+      url: 'workdetail/:type/:action/',
       controller: "WorkDetailCtrl as $ctrl",
       templateUrl: '/wsplanning/templates/pages/workdetail/index.html',
       resolve: {
@@ -212,17 +212,14 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
     })
 
     .state('app.main.newoffer', {
-      url: 'workdetail/:type',
+      url: 'workdetail/:type/:action/',
       controller: "WorkDetailCtrl as $ctrl",
       templateUrl: '/wsplanning/templates/pages/workdetail/index.html',
-	  resolve: {
-		   // typeWO: function ($stateParams) {
-           // return "newoffer";
-			// },
-		   WorkOrder: function (WorkOrderService, $stateParams) {
+      resolve: {      
+        WorkOrder: function (WorkOrderService, $stateParams) {
           return { data: {} };
         },
-		 lstMonth: function (WorkOrderService, $stateParams) {
+        lstMonth: function (WorkOrderService, $stateParams) {
           var EmployeeData = $("#EmployeeData").data("employee");
           var startDate = new Date();
           var endDate = moment(startDate).add(1, 'M');
@@ -234,21 +231,18 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
           };
           return WorkOrderService.calendarMonth(params);
         }
-	  }
+      }
     })
 
     .state('app.main.booking', {
-       url: 'workdetail/:type',
+      url: 'workdetail/:type/:action/',
       controller: "WorkDetailCtrl as $ctrl",
       templateUrl: '/wsplanning/templates/pages/workdetail/index.html',
-	  resolve: {  
-		  // typeWO: function ($stateParams) {
-          // return "booking";
-			// },
-		   WorkOrder: function (WorkOrderService, $stateParams) {
+      resolve: {
+        WorkOrder: function (WorkOrderService, $stateParams) {
           return { data: {} };
         },
-		 lstMonth: function (WorkOrderService, $stateParams) {
+        lstMonth: function (WorkOrderService, $stateParams) {
           var EmployeeData = $("#EmployeeData").data("employee");
           var startDate = new Date();
           var endDate = moment(startDate).add(1, 'M');
@@ -260,7 +254,7 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
           };
           return WorkOrderService.calendarMonth(params);
         }
-	  }
+      }
     })
 
   //$locationProvider.html5Mode(true);
