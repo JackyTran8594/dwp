@@ -141,7 +141,9 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
 
   $scope.detailBooking = function (item) {
     console.log(item);
-    $rootScope.$broadcast("bookingClick", {"date": item.WorkDay});
+    var preDate = moment(item.WorkDay).add('days', -1).toDate();
+    console.log(preDate);
+    $rootScope.$broadcast("bookingClick", {"date": preDate});
   }
 
 
@@ -199,14 +201,17 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
   }
 
   $scope.today = function () {
-    var oldMonth = $scope.viewDate.getMonth();
     $scope.viewDate = new Date();
+    $scope.viewDate.setHours(0,0,0,0);
     getCalendarMonth();
   }
 
   $scope.next = function () {
     // var oldMonth = $scope.viewDate.getMonth();
     var lastDateOfMonth = moment($scope.viewDate).endOf('month').toDate().getDate();
+
+    console.log("$scope.viewDate.getDate(): " + $scope.viewDate.getDate());
+    console.log("lastDateOfMonth: " + lastDateOfMonth);
 
     if ($scope.viewDate.getDate() == lastDateOfMonth) {
       $timeout(function () {
