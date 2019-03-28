@@ -323,7 +323,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
         common.notifyError("Error!!!", err.status);
       })
 
-      // $state.go('app.main.workdetail', {'type':});
+      $state.go('app.main.detail',{'type':$stateParams.type, 'id':res.WorkOrderId});
       
 
     } else {

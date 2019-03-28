@@ -130,7 +130,7 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
         common.notifyError("Error!!!", err.status);
       });
 
-      $state.go('app.main.detail');
+	$state.go('app.main.detail',{'type':$stateParams.type, 'id':res.WorkOrderId});
 
     } else {
       postAction = "saveHeader";
