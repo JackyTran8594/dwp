@@ -286,21 +286,78 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   };
 
   var headerData = {};
-// get headerData
+  // get headerData
   $rootScope.$on("headerData", function (evt, obj) {
     headerData = obj;
     console.log(obj);
   });
 
-  //if the form is modified => using $emit to send data
-  $scope.$on('inputModified.formChanged', function (event, modified, formCtrl) {
+  $scope.pristine = false;
 
+
+  function emitData(params) {
     $scope.$emit("jobData", {
-        data: $scope.WorkOrder,
-        modified: modified,
-      }
+      data: $scope.WorkOrder,
+      modified: params,
+    }
     );
+  }
+
+  $scope.$watch('jobTabList', function (newValue, oldValue) {
+    // if (!newValue) {
+    //   $scope.pristine = false;
+    // } else {
+      if ($scope.actTypeJob === "new") {
+        $scope.pristine = true;
+        $scope.jobTabList = newValue;
+        $scope.WorkOrder.WOJobs = $scope.jobTabList;
+        emitData($scope.pristine);
+
+        //if the form is modified => using $emit to send data
+        $scope.$on('inputModified.formChanged', function (event, modified, formCtrl) {
+          console.log(formCtrl.$name);
+          emitData(modified);
+        });
+      } else {
+        if (newValue.length > oldValue.length) {
+          $scope.pristine = true;
+          $scope.jobTabList = newValue;
+          $scope.WorkOrder.WOJobs = $scope.jobTabList;
+          emitData($scope.pristine);
+
+          //if the form is modified => using $emit to send data
+          $scope.$on('inputModified.formChanged', function (event, modified, formCtrl) {
+            console.log(formCtrl.$name);
+            emitData(modified);
+          });
+        } else {
+          $scope.pristine = false;
+        }
+
+      }
+      // if (newValue && oldValue && newValue.length > oldValue.length) {
+      //   $scope.pristine = true;
+      //   $scope.jobTabList = newValue;
+      //   $scope.WorkOrder.WOJobs = $scope.jobTabList;
+      //   emitData($scope.pristine);
+
+      //   //if the form is modified => using $emit to send data
+      //   $scope.$on('inputModified.formChanged', function (event, modified, formCtrl) {
+      //     console.log(formCtrl.$name);
+      //     emitData(modified);
+      //     // $scope.$emit("jobData", {
+      //     //   data: $scope.WorkOrder,
+      //     //   modified: modified,
+      //     // }
+      //     // );
+      //   });
+      // } else {
+      //   $scope.pristine = false;
+      // }
+
+    // }
   });
+
 
 
   $scope.onSubmitForm = function () {
@@ -318,13 +375,13 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
       WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
         console.log(res);
         common.notifySuccess("Success!!!");
+        $state.go('app.main.workdetail', { 'id': res.data.WorkOrderId , 'type': $stateParams.type });
       }, function (err) {
         console.log(err);
         common.notifyError("Error!!!", err.status);
       })
 
-      $state.go('app.main.detail',{'type':$stateParams.type, 'id':res.WorkOrderId});
-      
+
 
     } else {
       var postAction = "saveRows";
@@ -346,6 +403,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
       WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
         console.log(res);
         common.notifySuccess("Success!!!");
+        $state.go('app.main.workdetail', { 'id': res.data.WorkOrderId , 'type': $stateParams.type });
       }, function (err) {
         console.log(err);
         common.notifyError("Error!!!", err.status);
@@ -356,11 +414,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
 
 
 
-  $scope.$on('inputModified.formChanged', function (event, modified, formCtrl) {
-    console.log(formCtrl.$name);
-    // Process the modified event,
-    // use formCtrl.$name to get the form name.
-  });
+
 
 
 });
@@ -375,7 +429,7 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
   $scope.additionalData = [];
   $scope.historicalData = [];
   console.log(item);
-  
+
 
   $scope.isOpenDateInput = false;
   $scope.openDateInput = function (e) {
@@ -388,7 +442,7 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
 
   $scope.totalElements = 0;
 
- 
+
   $scope.limit = 10;
   $scope.page = 1;
 
@@ -427,7 +481,7 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
     $scope.jobChecked.MainGroup = mainGroup;
     $scope.newJobObject = {
       sub: sub,
-      id:id,
+      id: id,
       name: mainGroup
     };
     $scope.disabledButton = false;

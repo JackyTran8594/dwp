@@ -117,7 +117,7 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
       postAction = "createNew";
 
       //save job - after save header
-      $scope.WorkOrder = jobData;
+      $scope.WorkOrder = jobData.data;
 
       var data = JSON.stringify($scope.WorkOrder)
       console.log(data);
@@ -125,18 +125,22 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
       WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
         console.log(res);
         common.notifySuccess("Success!!!");
+        $state.go('app.main.workdetail', { 'id': res.data.WorkOrderId , 'type': $stateParams.type });
+        
       }, function (err) {
         console.log(err);
         common.notifyError("Error!!!", err.status);
       });
 
-	$state.go('app.main.detail',{'type':$stateParams.type, 'id':res.WorkOrderId});
+
 
     } else {
       postAction = "saveHeader";
 
       WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
         common.notifySuccess("Success!!!");
+        $state.go('app.main.workdetail', { 'id': res.data.WorkOrderId , 'type': $stateParams.type });
+        
       }, function (err) {
         console.log(err);
         common.notifyError("Error!!!", err.status);
