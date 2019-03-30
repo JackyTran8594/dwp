@@ -74,6 +74,8 @@ public class PlanningController extends BaseController {
           itemRtn = new JsonObject();
           itemRtn.addProperty("id", itemObj.get("SmanId").getAsString());
           itemRtn.addProperty("title", itemObj.get("ShortName").getAsString());
+          itemRtn.addProperty("deptId", itemObj.get("DeptId").getAsString());
+          itemRtn.addProperty("shiftId", itemObj.get("ShiftId").getAsString());
           itemRtn.addProperty("eventColor", colors[i % colors.length]);
           listRtn.add(itemRtn);
           i++;

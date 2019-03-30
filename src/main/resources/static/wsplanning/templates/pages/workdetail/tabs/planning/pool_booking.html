@@ -15,8 +15,9 @@
                                 <div class="tablea" style="min-width: 130px;">
                                     <div class="tr text-center">{{item.WorkDay | dateFormat}}</div>
                                     <div class="tr text-center">
-                                        <div class="c100 p{{item.FreeCapacity}} center">
-                                            <span>{{item.FreeCapacity}}%</span>
+                                        <div class="c100 p{{100 - item.FreeCapacity}} center">
+                                            <span ng-show="item.FreeHour !== 0">{{100 - item.FreeCapacity}}%</span>
+                                            <span ng-show="item.FreeHour === 0">100%</span>
                                             <div class="slice">
                                                 <div class="bar"></div>
                                                 <div class="fill"></div>

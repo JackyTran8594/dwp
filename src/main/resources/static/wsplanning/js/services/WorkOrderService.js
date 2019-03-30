@@ -71,6 +71,14 @@ UserWebApp.service('WorkOrderService', function ($http) {
     });
   }
 
+  
+  WorkOrderService.resources = function () {
+    return $http({
+      method: 'GET',
+      url: '/resources',
+    });
+  }
+
   return WorkOrderService;
 });
 

@@ -1,11 +1,11 @@
-UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpService, $translate, $location, $filter, $uibModal, CommonServices, $stateParams, $state, $timeout) {
+UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpService, $translate, $location, $filter, $uibModal, WorkOrderService, CommonServices, $stateParams, $state, $timeout) {
   var calendar = null;
 
-  var EmployeeData = $("#EmployeeData").data( "employee");
+  var EmployeeData = $("#EmployeeData").data("employee");
   $scope.DeptId = EmployeeData.DeptId;
   $scope.ShiftId = EmployeeData.ShiftId;
 
-  function createCalendar(gotoDate) {
+  function createCalendar(gotoDate, deptId) {
     var calendarEl = document.getElementById('calendar');
 
     calendar = new FullCalendar.Calendar(calendarEl, {
@@ -26,12 +26,13 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
       // resources: 'https://fullcalendar.io/demo-resources.json?with-nesting&with-colors',
       // events: 'https://fullcalendar.io/demo-events.json?single-day&for-resource-timeline'
       resourceAreaWidth: "15%",
-      resources: {
-        url: '/resources'
-      },
+      // resources: {
+      //   url: '/resources'
+      // },
+      resources: callResource(deptId),
       selectable: true,
-      select: function (selectionInfo ) {
-        console.log(selectionInfo );
+      select: function (selectionInfo) {
+        console.log(selectionInfo);
         var abc = prompt('Enter Title');
         // var allDay = !start.hasTime && !end.hasTime;
         var newEvent = new Object();
@@ -49,7 +50,7 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
         headers: { "Content-type": "application/json" },
         contentType: 'application/json',
         dataType: "json",
-        extraParams: function() {
+        extraParams: function () {
           common.spinner(true);
           return {
             "DeptId": "",
@@ -59,7 +60,7 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
         success: function () {
           common.spinner(false);
         },
-        failure: function() {
+        failure: function () {
           common.spinner(false);
         }
       }
@@ -75,13 +76,31 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
     }
   }
 
+  function callResource(param) {
+    WorkOrderService.resources().then(function (res) {
+      var lst = [];
+      console.log(res);
+      if (param.toLowerCase() === "all") {
+        lst = res.data;
+        return lst;
+      } else {
+        lst = res.data.filter((x) => { return x.deptId === param });
+        console.log(lst);
+        return lst;
+      }
+    }, function (error) {
+      console.log(error)
+    });
+
+  }
+
   $scope.init = function () {
   }
 
 
   $rootScope.$on('bookingClick', function (event, obj) {
     if (calendar == null) {
-      createCalendar(new Date(obj.date));
+      createCalendar(new Date(obj.date), $scope.DeptId);
     } else {
       var startDate = new Date(obj.date);
       var endDate = new Date(startDate.getTime() + 24 * 60 * 60 * 1000);
