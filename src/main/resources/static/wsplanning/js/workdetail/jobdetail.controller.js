@@ -6,6 +6,8 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   $scope.actTypeJob = $scope.$parent.actionType;
   $scope.jobTabList = $scope.$parent.WOJobs;
 
+  
+
   loadCommon();
   $scope.lstDepartment = [];
   $scope.lstPayers = [];
@@ -263,6 +265,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
         $scope.jobTabList[0].MainGroupId = selectedItem.id;
         $scope.jobTabList[0].SubGroupId = selectedItem.sub.Id;
         $scope.jobTabList[0].Complaint = selectedItem.sub.JobComplaint
+        $scope.jobTabList[0].DeptId = $scope.WorkOrder.DeptId;
       } else {
 
         var jobObj = clearObject();

@@ -254,8 +254,8 @@
                                                     <label class="control-label col-xs-4">Charge Category</label>
 
                                                     <div class="col-xs-8">
-                                                        <select class="form-control" ng-model="item.ChargeCategoryId"
-                                                                ng-options="o.Id as o.Name for o in lstChargeCats">
+                                                        <select class="form-control" ng-model="item.ChargeCategoryId" 
+                                                        ng-init="item.ChargeCategoryId = lstChargeCats[0].Id"  ng-options="o.Id as o.Name for o in lstChargeCats">
                                                         </select>
                                                     </div>
 
