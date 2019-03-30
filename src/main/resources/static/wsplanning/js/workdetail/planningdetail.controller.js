@@ -9,10 +9,11 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
     var calendarEl = document.getElementById('calendar');
 
     calendar = new FullCalendar.Calendar(calendarEl, {
-      plugins: ['interaction', 'resourceTimeline'],
+      plugins: ['dayGrid', 'timeGrid','interaction', 'resourceTimeline'],
       timeZone: 'UTC',
       defaultView: 'resourceTimelineDay',
       aspectRatio: 1.5,
+      scrollTime: '07:00',
       header: {
         left: false,
         center: 'title',
@@ -21,15 +22,48 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
       editable: true,
       resourceLabelText: $translate.instant('mechanic'),
       refetchResourcesOnNavigate: true,
-      minTime: "05:00:00",
-      maxTime: "20:00:00",
+      // minTime: "05:00:00",
+      // maxTime: "20:00:00",
       // resources: 'https://fullcalendar.io/demo-resources.json?with-nesting&with-colors',
       // events: 'https://fullcalendar.io/demo-events.json?single-day&for-resource-timeline'
       resourceAreaWidth: "15%",
-      // resources: {
-      //   url: '/resources'
-      // },
-      resources: callResource(deptId),
+      resources: {
+        url: '/resources',
+        method: 'GET',
+        extraParams: function () {
+          return {
+            "DeptId": $scope.DeptId,
+            "ShiftId": $scope.ShiftId,
+          };
+        },
+      },
+      resourceOrder: 'title,-id',
+      resourceRender: function (renderInfo) {
+        // console.log(renderInfo);
+        // renderInfo.el.style.display = 'none';
+        // var info = renderInfo.resource._resource;
+        // var display = true;
+        // if ($scope.DeptId != "" && $scope.DeptId > 0) {
+        //   if (info.extendedProps.deptId != $scope.DeptId) {
+        //     display = false;
+        //   }
+        // }
+        //
+        // if(display) {
+        //   if ($scope.ShiftId != "" && $scope.ShiftId > 0) {
+        //     if (info.extendedProps.shiftId != $scope.ShiftId) {
+        //       display = false;
+        //     }
+        //   }
+        // }
+        //
+        // if(display){
+        //   renderInfo.el.style.display = 'inherit';
+        // }else{
+        //   renderInfo.el.style.display = 'none';
+        // }
+      },
+      // resources: callResource(deptId),
       selectable: true,
       select: function (selectionInfo) {
         console.log(selectionInfo);
@@ -47,14 +81,14 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
       events: {
         url: '/events2',
         method: 'GET',
-        headers: { "Content-type": "application/json" },
+        headers: {"Content-type": "application/json"},
         contentType: 'application/json',
         dataType: "json",
         extraParams: function () {
           common.spinner(true);
           return {
-            "DeptId": "",
-            "ShiftId": "",
+            "DeptId": $scope.DeptId,
+            "ShiftId": $scope.ShiftId,
           };
         },
         success: function () {
@@ -76,34 +110,42 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
     }
   }
 
-  function callResource(param) {
-    WorkOrderService.resources().then(function (res) {
-      var lst = [];
-      console.log(res);
-      if (param.toLowerCase() === "all") {
-        lst = res.data;
-        return lst;
-      } else {
-        lst = res.data.filter((x) => { return x.deptId === param });
-        console.log(lst);
-        return lst;
-      }
-    }, function (error) {
-      console.log(error)
-    });
-
-  }
+  // function callResource(param) {
+  //   WorkOrderService.resources().then(function (res) {
+  //     var lst = [];
+  //     console.log(res);
+  //     if (param.toLowerCase() === "all") {
+  //       lst = res.data;
+  //       return lst;
+  //     } else {
+  //       lst = res.data.filter((x) = > {return x.deptId === param}
+  //     )
+  //       ;
+  //       console.log(lst);
+  //       return lst;
+  //     }
+  //   }, function (error) {
+  //     console.log(error)
+  //   });
+  //
+  // }
 
   $scope.init = function () {
   }
 
 
   $rootScope.$on('bookingClick', function (event, obj) {
+    console.log(obj);
+    $scope.DeptId = obj.DeptId;
+    $scope.ShiftId = obj.ShiftId;
+
     if (calendar == null) {
       createCalendar(new Date(obj.date), $scope.DeptId);
     } else {
       var startDate = new Date(obj.date);
       var endDate = new Date(startDate.getTime() + 24 * 60 * 60 * 1000);
+      calendar.refetchResources();
+      calendar.refetchEvents();
       calendar.gotoDate(endDate);
       // calendar.defaultDate = startDate;
 
@@ -125,7 +167,6 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
     }
 
   });
-
 
 
 });

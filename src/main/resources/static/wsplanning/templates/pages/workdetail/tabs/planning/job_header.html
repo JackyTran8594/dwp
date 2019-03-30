@@ -37,8 +37,8 @@
                         <div class="form-group">
                             <label class="control-label col-xs-4">{{ 'department' | translate }}</label>
                             <div class="col-xs-8">
-                                <select class="form-control" ng-model="DeptId" ng-change="changeDeptId()"
-                                        ng-options="item.Id as item.Name for item in lstDepartment">
+                                <select class="form-control" ng-model="DeptId" ng-change="changeDeptId(this)"
+                                        ng-options="item.Id as item.Name for item in lstDepartment" convert-to-number>
                                 </select>
                             </div>
                         </div>
@@ -47,8 +47,8 @@
                         <div class="form-group">
                             <label class="control-label col-xs-4">{{ 'shiftId' | translate }}</label>
                             <div class="col-xs-8">
-                                <select class="form-control" ng-model="ShiftId" ng-change="changeShiftId()"
-                                        ng-options="item.Id as item.Name for item in lstShifts">
+                                <select class="form-control" ng-model="ShiftId" ng-change="changeShiftId(this)"
+                                        ng-options="item.Id as item.Name for item in lstShifts" convert-to-number>
                                 </select>
                             </div>
                         </div>

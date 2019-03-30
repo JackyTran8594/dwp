@@ -14,8 +14,6 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
   $scope.DeptId = EmployeeData.DeptId;
   $scope.ShiftId = EmployeeData.ShiftId;
 
-  var vm = this;
-
   //These variables MUST be set as a minimum for the calendar to work
   $scope.calendarView = 'month';
   $scope.calendarViewNext = 'day';
@@ -29,7 +27,8 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
 
   function getCalendarWeek(date) {
     common.spinner(true);
-    $rootScope.$broadcast("bookingClick", {"date": date});
+    $rootScope.$broadcast("bookingClick", {"date": date,"DeptId": $scope.DeptId,"ShiftId":$scope.ShiftId});
+
     var startDate = date;
     var endDate = moment(startDate).add('days', 7).toDate();
     var params = {
@@ -62,6 +61,9 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
         startDate = moment(startDate).add('days', 1).toDate();
       }
       console.log($scope.lstPlanning);
+
+
+
       common.spinner(false);
     }, function error(response) {
       $scope.lstPlanning = [];
@@ -147,10 +149,20 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
   }
 
 
-  $scope.changeDeptId = function () {
+  $scope.changeDeptId = function (item) {
+    if(isNaN(item.DeptId)){
+      $scope.DeptId = "0";
+    }else{
+      $scope.DeptId = item.DeptId;
+    }
     getCalendarMonth();
   }
-  $scope.changeShiftId = function () {
+  $scope.changeShiftId = function (item) {
+    if(isNaN(item.ShiftId)){
+      $scope.ShiftId = "0";
+    }else{
+      $scope.ShiftId = item.ShiftId;
+    }
     getCalendarMonth();
   }
 

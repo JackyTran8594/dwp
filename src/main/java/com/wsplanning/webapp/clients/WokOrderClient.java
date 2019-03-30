@@ -232,6 +232,12 @@ public class WokOrderClient {
 
 
   public String getResource(String siteId, String date, String DeptId, String ShiftId) {
+    if(DeptId == null || DeptId.trim().length() == 0 || "0".equalsIgnoreCase(DeptId)){
+      DeptId = "";
+    }
+    if(ShiftId == null || ShiftId.trim().length() == 0 || "0".equalsIgnoreCase(ShiftId)){
+      ShiftId = "";
+    }
     String url = String.format("%s?SiteId=%s&Day=%s&DeptId=%s&ShiftId=%s", this.endpointUrl, siteId, date, DeptId, ShiftId);
     return restTemplate.getForObject(url, String.class);
   }
