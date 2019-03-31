@@ -29,6 +29,10 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
     });
     CommonServices.getDepartments().then(function (data) {
       $scope.lstDepartment = data;
+
+      $scope.lstDepartmentSearch = $scope.lstDepartment.slice();
+      $scope.lstDepartmentSearch.shift();
+      $scope.lstDepartmentSearch.unshift({"Id":"", "Name": $translate.instant('all')});
     });
     CommonServices.getVisitReasons().then(function (data) {
       $scope.lstVisitReason = data;
@@ -53,7 +57,12 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 
     CommonServices.getShifts().then(function (data) {
       $scope.lstShifts = data;
+
+      $scope.lstShiftSearch = $scope.lstShifts.slice();
+      $scope.lstShiftSearch.shift();
+      $scope.lstShiftSearch.unshift({"Id":"", "Name": $translate.instant('all')});
     });
+
   }
 
 
