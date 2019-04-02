@@ -144,6 +144,14 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
       templateUrl: '/wsplanning/templates/pages/taskList/index.html',
     })
 
+    
+    .state('app.main.stamping', {
+      url: 'stamping',
+      controller: "StampingCtrl as $ctrl",
+      templateUrl: '/wsplanning/templates/pages/stamping/index.html',
+    })
+
+
     .state('app.main.calendarview', {
       url: 'calendarview',
       controller: "CalendarViewCtrl as $ctrl",

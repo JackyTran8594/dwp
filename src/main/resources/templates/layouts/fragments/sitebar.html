@@ -25,7 +25,7 @@
                     <li ng-class="{active: currentState == 'app.main.postponedwork'}" ui-sref-active="active"><a ng-click="postponedwork()"><i class="icon icon-alarm"></i> <span th:text="#{menu.postWork}"></span></a></li>
                     <li ng-class="{active: currentState == 'app.main.tasklist'}" ui-sref-active="active"><a ng-click="tasklist()"><i class="icon icon-list2"></i> <span th:text="#{menu.task}"></span></a></li>
                     <li ng-class="{active: currentState == 'app.main.calendarview'}" ui-sref-active="active"><a ng-click="calendarview()"><i class="icon icon-calendar"></i> <span th:text="#{menu.calendar}"></span></a></li>
-                    <li><a ng-click="todayWork()" href="/"><i class="icon icon-barcode2"></i> <span th:text="#{menu.stamping}"></span></a></li>
+                    <li ng-class="{active: currentState == 'app.main.stamping'}" ui-sref-active="active"><a ng-click="stamping()"><i class="icon icon-barcode2"></i> <span th:text="#{menu.stamping}"></span></a></li>
                     <li ng-class="{active: currentState == 'app.main.offer'}" ui-sref-active="active"><a ng-click="offer()"><i class="icon icon-coin-dollar"></i> <span th:text="#{menu.offers}"></span></a></li>
                     <li ng-class="{active: currentState == 'app.main.replacementvehicle'}" ui-sref-active="active"><a ng-click="replacementvehicle()"><i class="icon icon-car2"></i> <span th:text="#{menu.replacement}"></span></a></li>
                     <!-- /main -->

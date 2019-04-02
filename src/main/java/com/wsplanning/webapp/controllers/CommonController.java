@@ -266,4 +266,18 @@ public class CommonController extends BaseController {
   }
 
 
+  @GetMapping("/site/stampingCode")
+  public ResponseEntity stampingCode()
+  {
+    try {
+      String rtn = siteClient.getStampingCode(getSiteId());
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception e) {
+      return parseException(e);
+      //TODO: handle exception
+    }
+  }
+
+
+
 }

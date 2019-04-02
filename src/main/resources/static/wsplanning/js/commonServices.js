@@ -29,6 +29,8 @@ UserWebApp
       return d.promise;
     };
 
+ 
+
     // getStamping
     this.getStamping = function () {
       var d = $q.defer();

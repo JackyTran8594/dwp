@@ -6,7 +6,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   $scope.actTypeJob = $scope.$parent.actionType;
   $scope.jobTabList = $scope.$parent.WOJobs;
 
-  
+
 
   loadCommon();
   $scope.lstDepartment = [];
@@ -288,6 +288,32 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
     });
   };
 
+
+  $scope.addStamping = function (id) {
+    var modalInstance = $uibModal.open({
+      animation: $ctrl.animationsEnabled,
+      templateUrl: '/wsplanning/templates/pages/common/confirm-form.html',
+      controller: 'StampingModalCtrl',
+      backdrop: 'static',
+      controllerAs: '$ctrl',
+      size: "full",
+      resolve: {
+        item: {
+          WorkOrderId: $scope.WorkOrder.WorkOrderId,
+          JobNo: id
+        }
+      }
+    });
+
+    modalInstance.result.then(function (selectedItem) {
+      console.log(selectedItem);
+      $state.go('app.main.workdetail', { 'id': $scope.WorkOrder.WorkOrderId, 'type': $stateParams.type });
+    }, function () {
+      console.log('Modal dismissed at: ' + new Date());
+    });
+  };
+
+
   var headerData = {};
   // get headerData
   $rootScope.$on("headerData", function (evt, obj) {
@@ -310,7 +336,19 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
     // if (!newValue) {
     //   $scope.pristine = false;
     // } else {
-      if ($scope.actTypeJob === "new") {
+    if ($scope.actTypeJob === "new") {
+      $scope.pristine = true;
+      $scope.jobTabList = newValue;
+      $scope.WorkOrder.WOJobs = $scope.jobTabList;
+      emitData($scope.pristine);
+
+      //if the form is modified => using $emit to send data
+      $scope.$on('inputModified.formChanged', function (event, modified, formCtrl) {
+        console.log(formCtrl.$name);
+        emitData(modified);
+      });
+    } else {
+      if (newValue.length > oldValue.length) {
         $scope.pristine = true;
         $scope.jobTabList = newValue;
         $scope.WorkOrder.WOJobs = $scope.jobTabList;
@@ -322,41 +360,29 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
           emitData(modified);
         });
       } else {
-        if (newValue.length > oldValue.length) {
-          $scope.pristine = true;
-          $scope.jobTabList = newValue;
-          $scope.WorkOrder.WOJobs = $scope.jobTabList;
-          emitData($scope.pristine);
-
-          //if the form is modified => using $emit to send data
-          $scope.$on('inputModified.formChanged', function (event, modified, formCtrl) {
-            console.log(formCtrl.$name);
-            emitData(modified);
-          });
-        } else {
-          $scope.pristine = false;
-        }
-
+        $scope.pristine = false;
       }
-      // if (newValue && oldValue && newValue.length > oldValue.length) {
-      //   $scope.pristine = true;
-      //   $scope.jobTabList = newValue;
-      //   $scope.WorkOrder.WOJobs = $scope.jobTabList;
-      //   emitData($scope.pristine);
 
-      //   //if the form is modified => using $emit to send data
-      //   $scope.$on('inputModified.formChanged', function (event, modified, formCtrl) {
-      //     console.log(formCtrl.$name);
-      //     emitData(modified);
-      //     // $scope.$emit("jobData", {
-      //     //   data: $scope.WorkOrder,
-      //     //   modified: modified,
-      //     // }
-      //     // );
-      //   });
-      // } else {
-      //   $scope.pristine = false;
-      // }
+    }
+    // if (newValue && oldValue && newValue.length > oldValue.length) {
+    //   $scope.pristine = true;
+    //   $scope.jobTabList = newValue;
+    //   $scope.WorkOrder.WOJobs = $scope.jobTabList;
+    //   emitData($scope.pristine);
+
+    //   //if the form is modified => using $emit to send data
+    //   $scope.$on('inputModified.formChanged', function (event, modified, formCtrl) {
+    //     console.log(formCtrl.$name);
+    //     emitData(modified);
+    //     // $scope.$emit("jobData", {
+    //     //   data: $scope.WorkOrder,
+    //     //   modified: modified,
+    //     // }
+    //     // );
+    //   });
+    // } else {
+    //   $scope.pristine = false;
+    // }
 
     // }
   });
@@ -378,7 +404,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
       WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
         console.log(res);
         common.notifySuccess("Success!!!");
-        $state.go('app.main.workdetail', { 'id': res.data.WorkOrderId , 'type': $stateParams.type });
+        $state.go('app.main.workdetail', { 'id': res.data.WorkOrderId, 'type': $stateParams.type });
       }, function (err) {
         console.log(err);
         common.notifyError("Error!!!", err.status);
@@ -406,7 +432,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
       WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
         console.log(res);
         common.notifySuccess("Success!!!");
-        $state.go('app.main.workdetail', { 'id': res.data.WorkOrderId , 'type': $stateParams.type });
+        $state.go('app.main.workdetail', { 'id': res.data.WorkOrderId, 'type': $stateParams.type });
       }, function (err) {
         console.log(err);
         common.notifyError("Error!!!", err.status);
