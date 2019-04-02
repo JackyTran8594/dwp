@@ -14,6 +14,7 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
       defaultView: 'resourceTimelineDay',
       aspectRatio: 1.5,
       scrollTime: '07:00',
+      slotDuration: "00:15:00",
       header: {
         left: false,
         center: 'title',
@@ -39,7 +40,11 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
       },
       resourceOrder: 'title,-id',
       resourceRender: function (renderInfo) {
-        // console.log(renderInfo);
+        console.log(renderInfo);
+        var info = renderInfo.resource._resource;
+        if(info.breakHours){
+          console.log(info);
+        }
         // renderInfo.el.style.display = 'none';
         // var info = renderInfo.resource._resource;
         // var display = true;
