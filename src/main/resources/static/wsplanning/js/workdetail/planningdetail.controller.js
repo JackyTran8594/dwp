@@ -13,6 +13,7 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
       timeZone: 'UTC',
       defaultView: 'resourceTimelineDay',
       aspectRatio: 1.5,
+      height: 600,
       scrollTime: '07:00',
       slotDuration: "00:15:00",
       header: {
@@ -23,10 +24,6 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
       editable: true,
       resourceLabelText: $translate.instant('mechanic'),
       refetchResourcesOnNavigate: true,
-      // minTime: "05:00:00",
-      // maxTime: "20:00:00",
-      // resources: 'https://fullcalendar.io/demo-resources.json?with-nesting&with-colors',
-      // events: 'https://fullcalendar.io/demo-events.json?single-day&for-resource-timeline'
       resourceAreaWidth: "15%",
       resources: {
         url: '/resources',
@@ -45,6 +42,7 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
         if(info.breakHours){
           console.log(info);
         }
+
         // renderInfo.el.style.display = 'none';
         // var info = renderInfo.resource._resource;
         // var display = true;

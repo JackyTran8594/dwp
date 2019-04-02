@@ -56,6 +56,104 @@ public class PlanningController extends BaseController {
   }
 
 
+  private JsonArray convertToResource(String rtn, String DeptId, String ShiftId, HashMap<String, String> hsm, HashMap<String, String> hsmBreak) {
+    // Init list
+    JsonArray listRtn = new JsonArray();
+
+    if (rtn != null && StringUtils.isNotBlank(rtn)) {
+      JsonParser parser = new JsonParser();
+      JsonElement tradeElement = parser.parse(rtn);
+      JsonArray listData = tradeElement.getAsJsonArray();
+
+      JsonObject itemRtn = null;
+
+      int i = 0;
+      JsonObject itemObj = null;
+
+      JsonObject objBusinessHours = null;
+
+
+      String businessHoursTmp = "";
+      String tmp[] = null;
+
+      if ((DeptId == null || DeptId.trim().length() == 0 || DeptId.equalsIgnoreCase("0"))
+          && (ShiftId == null || ShiftId.trim().length() == 0 || ShiftId.equalsIgnoreCase("0"))) {
+        for (JsonElement item : listData) {
+          itemObj = item.getAsJsonObject();
+          itemRtn = new JsonObject();
+          itemRtn.addProperty("id", itemObj.get("SmanId").getAsString());
+          itemRtn.addProperty("title", itemObj.get("ShortName").getAsString());
+          itemRtn.addProperty("deptId", itemObj.get("DeptId").getAsString());
+          itemRtn.addProperty("shiftId", itemObj.get("ShiftId").getAsString());
+//            itemRtn.addProperty("eventColor", colors[i % colors.length]);
+
+          businessHoursTmp = hsm.get(itemObj.get("SmanId").getAsString());
+          if (businessHoursTmp != null && businessHoursTmp.trim().length() > 0 && businessHoursTmp.contains("&")) {
+            tmp = businessHoursTmp.split("&");
+            objBusinessHours = new JsonObject();
+            objBusinessHours.addProperty("start", tmp[0]);
+            objBusinessHours.addProperty("startTime", tmp[0]);
+            objBusinessHours.addProperty("end", tmp[1]);
+            objBusinessHours.addProperty("endTime", tmp[1]);
+          } else {
+            objBusinessHours = new JsonObject();
+            objBusinessHours.addProperty("start", "07:00");
+            objBusinessHours.addProperty("startTime", "07:00");
+            objBusinessHours.addProperty("end", "19:00");
+            objBusinessHours.addProperty("endTime", "19:00");
+          }
+          itemRtn.add("businessHours", objBusinessHours);
+          itemRtn.addProperty("breakHours", hsmBreak.get(itemObj.get("SmanId").getAsString()));
+          listRtn.add(itemRtn);
+          i++;
+        }
+      } else {
+        for (JsonElement item : listData) {
+          itemObj = item.getAsJsonObject();
+          itemRtn = new JsonObject();
+          if (DeptId != null && DeptId.trim().length() > 0 && !DeptId.equalsIgnoreCase("0")) {
+            if (!itemObj.get("DeptId").getAsString().equalsIgnoreCase(DeptId)) {
+              continue;
+            }
+          }
+          if (ShiftId != null && ShiftId.trim().length() > 0 && !ShiftId.equalsIgnoreCase("0")) {
+            if (!itemObj.get("ShiftId").getAsString().equalsIgnoreCase(ShiftId)) {
+              continue;
+            }
+          }
+
+          itemRtn.addProperty("id", itemObj.get("SmanId").getAsString());
+          itemRtn.addProperty("title", itemObj.get("ShortName").getAsString());
+          itemRtn.addProperty("deptId", itemObj.get("DeptId").getAsString());
+          itemRtn.addProperty("shiftId", itemObj.get("ShiftId").getAsString());
+//            itemRtn.addProperty("eventColor", colors[i % colors.length]);
+
+          businessHoursTmp = hsm.get(itemObj.get("SmanId").getAsString());
+          if (businessHoursTmp != null && businessHoursTmp.trim().length() > 0 && businessHoursTmp.contains("&")) {
+            tmp = businessHoursTmp.split("&");
+            objBusinessHours = new JsonObject();
+            objBusinessHours.addProperty("start", tmp[0]);
+            objBusinessHours.addProperty("startTime", tmp[0]);
+            objBusinessHours.addProperty("end", tmp[1]);
+            objBusinessHours.addProperty("endTime", tmp[1]);
+          } else {
+            objBusinessHours = new JsonObject();
+            objBusinessHours.addProperty("start", "07:00");
+            objBusinessHours.addProperty("startTime", "07:00");
+            objBusinessHours.addProperty("end", "19:00");
+            objBusinessHours.addProperty("endTime", "19:00");
+          }
+
+          itemRtn.add("businessHours", objBusinessHours);
+          itemRtn.addProperty("breakHours", hsmBreak.get(itemObj.get("SmanId").getAsString()));
+          listRtn.add(itemRtn);
+          i++;
+        }
+      }
+    }
+    return listRtn;
+  }
+
   //2019-04-02T08:00:00
   private String formatBusinessHours(String s) {
     if (s == null || s.trim().length() <= 0 || !s.contains("T") || !s.contains(":")) {
@@ -68,8 +166,6 @@ public class PlanningController extends BaseController {
   @ResponseBody
   public ResponseEntity resources(@RequestParam String start, @RequestParam String DeptId, @RequestParam String ShiftId) {
     try {
-      String rtn = employeesClient.getMechanics(getSiteId());
-
       start = start.substring(0, start.indexOf("T"));
       String calendar = wsCalendarClient.getCalendar(getSiteId(), start.replaceAll("-", "."), DeptId, ShiftId);
 
@@ -88,134 +184,25 @@ public class PlanningController extends BaseController {
               hsm.put(itemObj.get("SmanId").getAsString(), formatBusinessHours(itemObj.get("Start").getAsString()) + "&" + formatBusinessHours(itemObj.get("End").getAsString()));
             } else if (itemObj.get("Type").getAsString().equalsIgnoreCase("T")) {
               //break
-              if(hsmBreak.get(itemObj.get("SmanId").getAsString()) == null){
+              if (hsmBreak.get(itemObj.get("SmanId").getAsString()) == null) {
                 hsmBreak.put(itemObj.get("SmanId").getAsString(), formatBusinessHours(itemObj.get("Start").getAsString()) + "&" + formatBusinessHours(itemObj.get("End").getAsString()));
-              }else{
+              } else {
                 hsmBreak.put(itemObj.get("SmanId").getAsString(), hsmBreak.get(itemObj.get("SmanId").getAsString()) + "@" + formatBusinessHours(itemObj.get("Start").getAsString()) + "&" + formatBusinessHours(itemObj.get("End").getAsString()));
               }
-
             }
           }
-
         }
       }
 
 
-      if (rtn != null && StringUtils.isNotBlank(rtn)) {
-        JsonParser parser = new JsonParser();
-        JsonElement tradeElement = parser.parse(rtn);
-        JsonArray listData = tradeElement.getAsJsonArray();
+      //getMechanics
+      String rtn = employeesClient.getMechanics(getSiteId());
+      JsonArray listRtn = convertToResource(rtn, DeptId, ShiftId, hsm, hsmBreak);
 
-        // Init list
-        JsonArray listRtn = new JsonArray();
-        JsonObject itemRtn = null;
-
-        int i = 0;
-        JsonObject itemObj = null;
-
-        JsonObject objBusinessHours = null;
-
-
-        String businessHoursTmp = "";
-        String tmp[] = null;
-
-        if ((DeptId == null || DeptId.trim().length() == 0 || DeptId.equalsIgnoreCase("0"))
-            && (ShiftId == null || ShiftId.trim().length() == 0 || ShiftId.equalsIgnoreCase("0"))) {
-          for (JsonElement item : listData) {
-            itemObj = item.getAsJsonObject();
-            itemRtn = new JsonObject();
-            itemRtn.addProperty("id", itemObj.get("SmanId").getAsString());
-            itemRtn.addProperty("title", itemObj.get("ShortName").getAsString());
-            itemRtn.addProperty("deptId", itemObj.get("DeptId").getAsString());
-            itemRtn.addProperty("shiftId", itemObj.get("ShiftId").getAsString());
-//            itemRtn.addProperty("eventColor", colors[i % colors.length]);
-
-            businessHoursTmp = hsm.get(itemObj.get("SmanId").getAsString());
-            if (businessHoursTmp != null && businessHoursTmp.trim().length() > 0 && businessHoursTmp.contains("&")) {
-              tmp = businessHoursTmp.split("&");
-              objBusinessHours = new JsonObject();
-              objBusinessHours.addProperty("start", tmp[0]);
-              objBusinessHours.addProperty("startTime", tmp[0]);
-              objBusinessHours.addProperty("end", tmp[1]);
-              objBusinessHours.addProperty("endTime", tmp[1]);
-            }else{
-              objBusinessHours = new JsonObject();
-              objBusinessHours.addProperty("start", "07:00");
-              objBusinessHours.addProperty("startTime", "07:00");
-              objBusinessHours.addProperty("end", "19:00");
-              objBusinessHours.addProperty("endTime", "19:00");
-            }
-            itemRtn.add("businessHours", objBusinessHours);
-            itemRtn.addProperty("breakHours", hsmBreak.get(itemObj.get("SmanId").getAsString()));
-            listRtn.add(itemRtn);
-            i++;
-          }
-        } else {
-          for (JsonElement item : listData) {
-            itemObj = item.getAsJsonObject();
-            itemRtn = new JsonObject();
-            if (DeptId != null && DeptId.trim().length() > 0 && !DeptId.equalsIgnoreCase("0")) {
-              if (!itemObj.get("DeptId").getAsString().equalsIgnoreCase(DeptId)) {
-                continue;
-              }
-            }
-            if (ShiftId != null && ShiftId.trim().length() > 0 && !ShiftId.equalsIgnoreCase("0")) {
-              if (!itemObj.get("ShiftId").getAsString().equalsIgnoreCase(ShiftId)) {
-                continue;
-              }
-            }
-
-            itemRtn.addProperty("id", itemObj.get("SmanId").getAsString());
-            itemRtn.addProperty("title", itemObj.get("ShortName").getAsString());
-            itemRtn.addProperty("deptId", itemObj.get("DeptId").getAsString());
-            itemRtn.addProperty("shiftId", itemObj.get("ShiftId").getAsString());
-//            itemRtn.addProperty("eventColor", colors[i % colors.length]);
-
-            businessHoursTmp = hsm.get(itemObj.get("SmanId").getAsString());
-            if (businessHoursTmp != null && businessHoursTmp.trim().length() > 0 && businessHoursTmp.contains("&")) {
-              tmp = businessHoursTmp.split("&");
-              objBusinessHours = new JsonObject();
-              objBusinessHours.addProperty("start", tmp[0]);
-              objBusinessHours.addProperty("startTime", tmp[0]);
-              objBusinessHours.addProperty("end", tmp[1]);
-              objBusinessHours.addProperty("endTime", tmp[1]);
-            }else{
-              objBusinessHours = new JsonObject();
-              objBusinessHours.addProperty("start", "07:00");
-              objBusinessHours.addProperty("startTime", "07:00");
-              objBusinessHours.addProperty("end", "19:00");
-              objBusinessHours.addProperty("endTime", "19:00");
-            }
-
-            itemRtn.add("businessHours", objBusinessHours);
-            itemRtn.addProperty("breakHours", hsmBreak.get(itemObj.get("SmanId").getAsString()));
-            listRtn.add(itemRtn);
-            i++;
-          }
-        }
-
-//        //Test
-//        itemRtn = new JsonObject();
-//        itemRtn.addProperty("id", "2252");
-//        itemRtn.addProperty("title", "ThuyetLV");
-//        itemRtn.addProperty("deptId", DeptId);
-//        itemRtn.addProperty("shiftId", ShiftId);
-//        businessHoursTmp = hsm.get(itemRtn.get("id").getAsString());
-//        if (businessHoursTmp != null && businessHoursTmp.trim().length() > 0 && businessHoursTmp.contains("&")) {
-//          tmp = businessHoursTmp.split("&");
-//          objBusinessHours = new JsonObject();
-//          objBusinessHours.addProperty("start", tmp[0]);
-//          objBusinessHours.addProperty("startTime", tmp[0]);
-//          objBusinessHours.addProperty("end", tmp[1]);
-//          objBusinessHours.addProperty("endTime", tmp[1]);
-//        }
-//        itemRtn.add("businessHours", objBusinessHours);
-//        itemRtn.addProperty("breakHours", hsmBreak.get(itemRtn.get("id").getAsString()));
-//        listRtn.add(itemRtn);
-
-        return new ResponseEntity<>(listRtn.toString(), HttpStatus.OK);
-      }
-      return new ResponseEntity<>(rtn, HttpStatus.OK);
+      //getServiceAdvisors
+      rtn = employeesClient.getServiceAdvisors(getSiteId());
+      listRtn.addAll(convertToResource(rtn, DeptId, ShiftId, hsm, hsmBreak));
+      return new ResponseEntity<>(listRtn.toString(), HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);
     }
@@ -231,15 +218,15 @@ public class PlanningController extends BaseController {
       String DeptId = params.get("DeptId");
       String ShiftId = params.get("ShiftId");
 
-      if(DeptId == null || DeptId.trim().length() == 0 || "0".equalsIgnoreCase(DeptId)){
+      if (DeptId == null || DeptId.trim().length() == 0 || "0".equalsIgnoreCase(DeptId)) {
         DeptId = "";
       }
-      if(ShiftId == null || ShiftId.trim().length() == 0 || "0".equalsIgnoreCase(ShiftId)){
+      if (ShiftId == null || ShiftId.trim().length() == 0 || "0".equalsIgnoreCase(ShiftId)) {
         ShiftId = "";
       }
 
       start = start.substring(0, start.indexOf("T"));
-      return new ResponseEntity<>(generateEvent(start,DeptId,ShiftId).toString(), HttpStatus.OK);
+      return new ResponseEntity<>(generateEvent(start, DeptId, ShiftId).toString(), HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);
     }
@@ -306,41 +293,28 @@ public class PlanningController extends BaseController {
           itemRtn.addProperty("resourceId", itemObj.get("SmanId").getAsString());
           itemRtn.addProperty("start", itemObj.get("Start").getAsString());
           itemRtn.addProperty("end", itemObj.get("End").getAsString());
+
+//          itemRtn.addProperty("start", itemObj.get("Start").getAsString().replaceAll("T00","T08"));
+//          itemRtn.addProperty("end", itemObj.get("End").getAsString().replaceAll("T00","T09"));
           if (itemObj.has("Type")) {
             if (itemObj.get("Type").getAsString().equalsIgnoreCase("P")) {
               itemRtn.addProperty("title", "P");
-              itemRtn.addProperty("backgroundColor", "red");
+              itemRtn.addProperty("rendering", "background");
+              itemRtn.addProperty("color", "#1cdac6");
+              listRtn.add(itemRtn);
             } else if (itemObj.get("Type").getAsString().equalsIgnoreCase("T")) {
               //break
               itemRtn.addProperty("title", "T");
-              itemRtn.addProperty("backgroundColor", "orange");
+              itemRtn.addProperty("color", "#bad0cd");
+              itemRtn.addProperty("overlap", false);
+              itemRtn.addProperty("editable", false);
+              itemRtn.addProperty("resourceEditable", false);
+              itemRtn.addProperty("droppable", false);
               listRtn.add(itemRtn);
             }
           }
-
         }
       }
-
-//      //Test
-//      itemRtn = new JsonObject();
-//      itemRtn.addProperty("resourceId", "2252");
-//      itemRtn.addProperty("title", "ThuyetLV");
-//      itemRtn.addProperty("start", "2019-04-02T08:00:00");
-//      itemRtn.addProperty("end", "2019-04-02T19:00:00");
-//      itemRtn.addProperty("backgroundColor", "red");
-//      itemRtn.addProperty("deptId", DeptId);
-//      itemRtn.addProperty("shiftId", ShiftId);
-//      listRtn.add(itemRtn);
-
-//      itemRtn = new JsonObject();
-//      itemRtn.addProperty("resourceId", "2252");
-//      itemRtn.addProperty("title", "ThuyetLV");
-//      itemRtn.addProperty("start", "2019-04-02T15:00:00");
-//      itemRtn.addProperty("end", "2019-04-02T18:00:00");
-//      itemRtn.addProperty("backgroundColor", "red");
-//      itemRtn.addProperty("deptId", DeptId);
-//      itemRtn.addProperty("shiftId", ShiftId);
-//      listRtn.add(itemRtn);
 
       return new ResponseEntity<>(listRtn.toString(), HttpStatus.OK);
     } catch (Exception ex) {
@@ -348,7 +322,7 @@ public class PlanningController extends BaseController {
     }
   }
 
-  private JsonArray generateEvent(String start,String DeptId,String ShiftId) {
+  private JsonArray generateEvent(String start, String DeptId, String ShiftId) {
     JsonArray listRtn = new JsonArray();
     String rtn = employeesClient.getMechanics(getSiteId());
     if (rtn != null && StringUtils.isNotBlank(rtn)) {

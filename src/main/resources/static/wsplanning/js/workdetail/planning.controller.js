@@ -27,7 +27,7 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
 
   function getCalendarWeek(date) {
     common.spinner(true);
-    $rootScope.$broadcast("bookingClick", {"date": date,"DeptId": $scope.DeptId,"ShiftId":$scope.ShiftId});
+    $rootScope.$broadcast("bookingClick", {"date": date, "DeptId": $scope.DeptId, "ShiftId": $scope.ShiftId});
 
     var startDate = date;
     var endDate = moment(startDate).add('days', 7).toDate();
@@ -63,7 +63,6 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
       console.log($scope.lstPlanning);
 
 
-
       common.spinner(false);
     }, function error(response) {
       $scope.lstPlanning = [];
@@ -84,10 +83,10 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
     console.log(cell);
     cell.cssClass = 'cal-day-selected';
     console.log("---timespanClicked: " + date + " " + $scope.viewDate.getMonth() + " - " + date.getMonth());
-    if($scope.viewDate.getMonth() != date.getMonth()){
+    if ($scope.viewDate.getMonth() != date.getMonth()) {
       $scope.viewDate = date;
       getCalendarMonth();
-    }else{
+    } else {
       $scope.viewDate = date;
       getCalendarWeek($scope.viewDate);
     }
@@ -142,25 +141,25 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
   }
 
   $scope.detailBooking = function (item) {
-    console.log(item);
-    var preDate = moment(item.WorkDay).add('days', -1).toDate();
-    console.log(preDate);
-    $rootScope.$broadcast("bookingClick", {"date": preDate});
+    // console.log(item);
+    // var preDate = moment(item.WorkDay).add('days', -1).toDate();
+    // console.log(preDate);
+    $rootScope.$broadcast("bookingClick", {"date": item.WorkDay, "DeptId": $scope.DeptId, "ShiftId": $scope.ShiftId});
   }
 
 
   $scope.changeDeptId = function (item) {
-    if(isNaN(item.DeptId)){
+    if (isNaN(item.DeptId)) {
       $scope.DeptId = "0";
-    }else{
+    } else {
       $scope.DeptId = item.DeptId;
     }
     getCalendarMonth();
   }
   $scope.changeShiftId = function (item) {
-    if(isNaN(item.ShiftId)){
+    if (isNaN(item.ShiftId)) {
       $scope.ShiftId = "0";
-    }else{
+    } else {
       $scope.ShiftId = item.ShiftId;
     }
     getCalendarMonth();
@@ -214,7 +213,7 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
 
   $scope.today = function () {
     $scope.viewDate = new Date();
-    $scope.viewDate.setHours(0,0,0,0);
+    $scope.viewDate.setHours(0, 0, 0, 0);
     getCalendarMonth();
   }
 
@@ -323,9 +322,11 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
   function menuSave($event) {
     console.log($event);
   }
+
   function menuRemove($event) {
     console.log($event);
   }
+
   function menuEdit($event) {
     console.log($event);
   }
