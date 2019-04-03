@@ -8,19 +8,26 @@
             <!-- Panel content -->
             <div class="panel panel-flat" style="margin-bottom: 0px;">
                 <div class="panel-heading">
-                    headding
                 </div>
 
                 <div class="panel-body">
                     <div class="row">
-                        <select class="form-control" ng-model="template" ng-change="changeTemplate()" convert-to-number>
-                            <option value="1">Template 1</option>
-                            <option value="2">Template 2</option>
-                        </select>
-                    </div>
+                        <div class="col-xs-6">
+                            <div class="form-group">
+                                <label class="control-label col-xs-4">{{ 'checkinTemplate' | translate }}</label>
+                                <div class="col-xs-8">
+                                    <select class="form-control" ng-model="template" ng-change="changeTemplate()" convert-to-number>
+                                        <option value="1">Template 1</option>
+                                        <option value="2">Template 2</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
 
-                    <div class="row">
-                        <canvas width="500" height="300" id="canvas" drawing base64="{{imgTemplate}}"></canvas>
+                        <div class="col-xs-6">
+                            <canvas width="700" height="500" id="canvas" drawing base64="{{imgTemplate}}" style="width: 100%;height: auto;"></canvas>
+                        </div>
+
                     </div>
 
                     <div class="row" ng-show="base64Encode != ''">
@@ -29,16 +36,19 @@
 
 
                     <div class="row">
-                        <div class="container" ng-style="{'max-width': boundingBox.width + 'px', 'max-height': boundingBox.height + 'px'}">
-                            <signature-pad accept="accept" clear="clear" height="220" width="568" dataurl="dataurl"></signature-pad>
+                        <div class="container"
+                             ng-style="{'max-width': boundingBox.width + 'px', 'max-height': boundingBox.height + 'px'}">
+                            <signature-pad accept="accept" clear="clear" height="220" width="568"
+                                           dataurl="dataurl"></signature-pad>
 
                             <div class="buttons">
                                 <button ng-click="clear()">Clear</button>
                                 <button ng-click="dataurl = signature.dataUrl" ng-disabled="!signature">Reset</button>
-                                <button ng-click="signature = accept()">Sign</button>
+                                <button ng-click="signature = accept()">{{ 'sign' | translate }}</button>
                             </div>
                             <div class="sizes">
-                                <input type="text" ng-model="boundingBox.width"> x <input type="text" ng-model="boundingBox.height">
+                                <input type="text" ng-model="boundingBox.width"> x <input type="text"
+                                                                                          ng-model="boundingBox.height">
                             </div>
                         </div>
 

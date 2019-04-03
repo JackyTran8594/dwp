@@ -41,10 +41,8 @@ public class CheckinController extends BaseController {
       if (type != null) {
         if ("1".equalsIgnoreCase(type)) {
           base64 = Utils.encodeFileToBase64AtResource2("image\\template\\taixuong.png");
-//          base64 = Utils.encodeFileToBase64Binary("C:\\Users\\thuyetlv\\Desktop\\tmp\\taixuong.png");
         } else if ("2".equalsIgnoreCase(type)) {
-          base64 = Utils.encodeFileToBase64AtResource("image\\template\\macbook.jpg");
-//          base64 = Utils.encodeFileToBase64Binary("C:\\Users\\thuyetlv\\Desktop\\tmp\\macbook.jpg");
+          base64 = Utils.encodeFileToBase64AtResource2("image\\template\\macbook.jpg");
         }
       }
       rtn.addProperty("base64", base64);

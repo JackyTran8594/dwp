@@ -192,7 +192,10 @@ var translationsEN = {
   shortname: "Short Name",
   site: "Site",
   sman: "SmanId",
-  subsys: "SubSys"
+  subsys: "SubSys",
+  checkin: "Check in",
+  checkinTemplate: "Template",
+  sign: "Signature"
 
 
 };
@@ -343,7 +346,10 @@ var translationsVI = {
   shortname: "Short Name",
   site: "Site",
   sman: "SmanId",
-  subsys: "SubSys"
+  subsys: "SubSys",
+  checkin: "Check in",
+  checkinTemplate: "Template",
+  sign: "Signature"
 
 };
 
