@@ -1,0 +1,120 @@
+{
+  "_from": "@blinkmobile/angular-signature-pad",
+  "_id": "@blinkmobile/angular-signature-pad@1.0.1",
+  "_inBundle": false,
+  "_integrity": "sha512-BKtga0XpSL6549ijeoWaltH82y2JsfxpsA4zi522Q1o9hrdnf0sfavUchlXMxVx+RufvhAV6apndFsHVbFbcmQ==",
+  "_location": "/@blinkmobile/angular-signature-pad",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "@blinkmobile/angular-signature-pad",
+    "name": "@blinkmobile/angular-signature-pad",
+    "escapedName": "@blinkmobile%2fangular-signature-pad",
+    "scope": "@blinkmobile",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@blinkmobile/angular-signature-pad/-/angular-signature-pad-1.0.1.tgz",
+  "_shasum": "fe823e53eda479dba74123109e63312b68f0d299",
+  "_spec": "@blinkmobile/angular-signature-pad",
+  "_where": "F:\\Project\\Java\\SpringBoot\\WSPlaner\\webapp",
+  "author": {
+    "name": "Matt Carroll",
+    "email": "matt@blinkmobile.com.au",
+    "url": "https://github.com/mymattcarroll"
+  },
+  "bugs": {
+    "url": "https://github.com/blinkmobile/angular-signature-pad/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {},
+  "deprecated": false,
+  "description": "AngularJS 1.x component for smooth canvas based signature drawing",
+  "devDependencies": {
+    "@blinkmobile/canvas-manipulation": "^1.0.1",
+    "angular": "^1.7.1",
+    "angular-mocks": "^1.7.1",
+    "babel-core": "^6.26.3",
+    "babel-plugin-transform-es2015-modules-umd": "^6.22.0",
+    "babel-preset-es2015": "^6.22.0",
+    "eslint": "^4.19.1",
+    "eslint-config-angular": "^0.5.0",
+    "eslint-config-standard": "^10.2.0",
+    "eslint-plugin-angular": "^3.0.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-promise": "^3.4.1",
+    "eslint-plugin-standard": "^3.0.1",
+    "fixpack": "^2.3.1",
+    "grunt": "^1.0.3",
+    "grunt-babel": "^7.0.0",
+    "grunt-contrib-uglify": "^3.0.0",
+    "http-server": "^0.11.0",
+    "jasmine-core": "^3.1.0",
+    "karma": "^2.0.2",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-detect-browsers": "^2.2.4",
+    "karma-edge-launcher": "^0.4.1",
+    "karma-firefox-launcher": "^1.0.0",
+    "karma-ie-launcher": "^1.0.0",
+    "karma-jasmine": "^1.1.0",
+    "karma-opera-launcher": "^1.0.0",
+    "karma-phantomjs-launcher": "^1.0.2",
+    "karma-safari-launcher": "^1.0.0",
+    "remark-cli": "^5.0.0",
+    "remark-lint": "^6.0.0",
+    "remark-preset-lint-recommended": "^3.0.0",
+    "signature_pad": "^2.3.2"
+  },
+  "directories": {
+    "docs": "docs",
+    "test": "test"
+  },
+  "engines": {
+    "node": ">=6",
+    "npm": ">=3"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "homepage": "https://github.com/blinkmobile/angular-signature-pad#readme",
+  "keywords": [
+    "angular",
+    "browser",
+    "canvas",
+    "signature"
+  ],
+  "license": "MIT",
+  "main": "dist/angular-signature-pad.js",
+  "name": "@blinkmobile/angular-signature-pad",
+  "peerDependencies": {
+    "@blinkmobile/canvas-manipulation": "^1.0.1",
+    "angular": "^1.7.1",
+    "signature_pad": "^2.3.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blinkmobile/angular-signature-pad.git"
+  },
+  "scripts": {
+    "build": "grunt",
+    "eslint": "eslint --fix --cache .",
+    "fixpack": "fixpack",
+    "posttest": "npm run eslint && npm run remark",
+    "pretest": "npm run build && npm run fixpack",
+    "remark": "remark . --use remark-preset-lint-recommended",
+    "start": "http-server -o",
+    "test": "karma start"
+  },
+  "version": "1.0.1"
+}

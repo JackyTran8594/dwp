@@ -19,6 +19,7 @@
     "jquery": "^3.1.1",
     "bootstrap": "^3.3.7",
     "angular-bootstrap-calendar": "^1.0.0",
-    "ios-dblclick": "^0.1.0"
+    "ios-dblclick": "^0.1.0",
+    "angular-signature": "^1.0.3"
   }
 }

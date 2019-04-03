@@ -17,6 +17,10 @@
                 ng-click="changeTab('planning', '')">
                 <a data-target="#planning" data-toggle="planning">Planning</a>
             </li>
+            <li ng-class="{active: tabActive == 'checkin'}"
+                ng-click="changeTab('checkin', '')">
+                <a data-target="#checkin" data-toggle="checkin">CheckIn</a>
+            </li>
         </ul>
 
         <div class="tab-content">
@@ -28,6 +32,9 @@
             </div>
             <div ng-class="{active: tabActive == 'planning'}" class="tab-pane" id="tab-planning">
                 <div ng-include="'/wsplanning/templates/pages/workdetail/tabs/planning.html'"></div>
+            </div>
+            <div ng-class="{active: tabActive == 'checkin'}" class="tab-pane" id="tab-checkin">
+                <div ng-include="'/wsplanning/templates/pages/workdetail/tabs/checkin.html'"></div>
             </div>
         </div>
 

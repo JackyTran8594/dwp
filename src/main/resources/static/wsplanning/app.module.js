@@ -16,7 +16,8 @@ var UserWebApp = angular.module('UserWebApp', [
   // 'ivh.treeview',
   'ngInputModified',
   'shContextMenu',
-  'iosDblclick'
+  'iosDblclick',
+  'bmSignaturePad'
 ]);
 
 

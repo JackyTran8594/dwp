@@ -1,0 +1,111 @@
+{
+  "_from": "@blinkmobile/canvas-manipulation@1.x",
+  "_id": "@blinkmobile/canvas-manipulation@1.0.1",
+  "_inBundle": false,
+  "_integrity": "sha1-uBdJhuaP832Nch90m39UqdtfzgM=",
+  "_location": "/@blinkmobile/canvas-manipulation",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "@blinkmobile/canvas-manipulation@1.x",
+    "name": "@blinkmobile/canvas-manipulation",
+    "escapedName": "@blinkmobile%2fcanvas-manipulation",
+    "scope": "@blinkmobile",
+    "rawSpec": "1.x",
+    "saveSpec": null,
+    "fetchSpec": "1.x"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@blinkmobile/canvas-manipulation/-/canvas-manipulation-1.0.1.tgz",
+  "_shasum": "b8174986e68ff37d8d721f749b7f54a9db5fce03",
+  "_spec": "@blinkmobile/canvas-manipulation@1.x",
+  "_where": "F:\\Project\\Java\\SpringBoot\\WSPlaner\\webapp",
+  "author": {
+    "name": "Matt Carroll",
+    "email": "matt@blinkmobile.com.au",
+    "url": "https://github.com/mymattcarroll"
+  },
+  "bugs": {
+    "url": "https://github.com/blinkmobile/canvas-manipulation/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "Helper functions for manipulating a HTMLCanvasElement",
+  "devDependencies": {
+    "babel-plugin-transform-es2015-modules-umd": "^6.22.0",
+    "babel-preset-es2015": "^6.22.0",
+    "del": "^2.2.2",
+    "eslint": "^3.15.0",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-node": "^4.0.0",
+    "eslint-plugin-promise": "^3.4.1",
+    "eslint-plugin-standard": "^2.0.1",
+    "fixpack": "^2.3.1",
+    "flow-bin": "^0.38.0",
+    "gulp": "^3.9.1",
+    "jasmine": "^2.5.3",
+    "jasmine-core": "^2.5.2",
+    "karma": "^1.3.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-detect-browsers": "^2.2.4",
+    "karma-edge-launcher": "^0.2.0",
+    "karma-firefox-launcher": "^1.0.0",
+    "karma-ie-launcher": "^1.0.0",
+    "karma-jasmine": "^1.1.0",
+    "karma-opera-launcher": "^1.0.0",
+    "karma-phantomjs-launcher": "^1.0.2",
+    "karma-safari-launcher": "^1.0.0",
+    "opn-cli": "^3.1.0",
+    "remark-cli": "^2.1.0",
+    "remark-lint": "^5.4.0",
+    "remark-preset-lint-recommended": "^1.0.0",
+    "rollup": "^0.41.4",
+    "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-uglify": "^1.0.1"
+  },
+  "directories": {
+    "example": "example",
+    "test": "test"
+  },
+  "engines": {
+    "node": ">=6",
+    "npm": ">=3"
+  },
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://github.com/blinkmobile/canvas-manipulation#readme",
+  "keywords": [
+    "HTML5",
+    "browser",
+    "canvas"
+  ],
+  "license": "MIT",
+  "main": "dist/canvas-manipulation.js",
+  "name": "@blinkmobile/canvas-manipulation",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blinkmobile/canvas-manipulation.git"
+  },
+  "scripts": {
+    "build": "gulp",
+    "eslint": "eslint --fix --cache .",
+    "fixpack": "fixpack",
+    "flow_check": "flow check",
+    "poststart": "npm run watch",
+    "posttest": "npm run eslint && npm run flow_check && npm run remark && npm run fixpack",
+    "pretest": "npm run build",
+    "remark": "remark . --preset lint-recommended",
+    "start": "opn ./example/index.html",
+    "test": "karma start",
+    "watch": "gulp watch"
+  },
+  "version": "1.0.1"
+}
