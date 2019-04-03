@@ -10,6 +10,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
   $scope.WOCustomer = "";
   $scope.WOContact = "";
 
+  $scope.WorkOrderData = WorkOrder.data;
   $scope.WorkOrder = WorkOrder.data;
 
   loadCommon();

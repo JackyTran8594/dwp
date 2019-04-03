@@ -88,15 +88,12 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
       $scope.lstDepartment = data;
     });
     CommonServices.getVisitReasons().then(function (data) {
-      console.log(data);
       $scope.lstVisitReason = data;
     });
     CommonServices.getServiceAdvisors().then(function (data) {
-      console.log(data);
       $scope.lstServ = data;
     });
     CommonServices.getShifts().then(function (data) {
-      console.log(data);
       $scope.lstShift = data;
     });
   }

@@ -14,6 +14,7 @@ import org.springframework.core.io.Resource;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -112,6 +113,15 @@ public class Utils {
 
   public static String encodeFileToBase64AtResource2(String fileName) throws IOException {
     ClassLoader classLoader = Utils.class.getClassLoader();
+    InputStream stream = classLoader.getResourceAsStream(fileName);
+    if (stream == null) {
+      logger.warn(String.format("File: %s not exits!", fileName));
+      stream = Utils.class.getResourceAsStream(fileName);
+    }
+    if (stream == null) {
+      logger.error(String.format("File: %s not exits!", fileName));
+      return "";
+    }
     byte[] encoded = Base64.encodeBase64(IOUtils.toByteArray(classLoader.getResourceAsStream(fileName)));
     return new String(encoded, StandardCharsets.UTF_8);
   }

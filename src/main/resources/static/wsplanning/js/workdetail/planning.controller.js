@@ -71,7 +71,35 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
     });
   }
 
+  //Test
+  console.log($scope.WorkOrderData);
+  console.log($scope.WorkOrderData.BookedResourcePools);
+  console.log($scope.WorkOrderData.BookedResources);
+
   $scope.events = [];
+  if($scope.WorkOrderData.BookedResources) {
+    var itemEvent = {};
+    var objTemp = {};
+    for (var i = 0; i < $scope.WorkOrderData.BookedResources.length; i++) {
+      objTemp = $scope.WorkOrderData.BookedResources[i];
+      itemEvent = {
+        "title": "",
+        "startsAt": new Date(objTemp.StartTime),
+        "endsAt": new Date(objTemp.EndTime),
+        "color": { // can also be calendarConfig.colorTypes.warning for shortcuts to the deprecated event types
+          "primary": '#e3bc08', // the primary event color (should be darker than secondary)
+          "secondary": '#fdf1ba' // the secondary event color (should be lighter than primary)
+        },
+        "draggable": false,
+        "resizable": false,
+        "incrementsBadgeTotal": true,
+      };
+      $scope.events.push(itemEvent);
+    }
+  }
+
+  console.log($scope.events);
+
 
   $scope.cellIsOpen = false;
 
@@ -99,7 +127,7 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
 
   //Gen CSS cho cell (day in month)
   $scope.cellModifier = function (cell) {
-    console.log("----cellModifier----------" + $scope.viewDate.getMonth() + " - " + $scope.viewDate.getDate());
+    // console.log("----cellModifier----------" + $scope.viewDate.getMonth() + " - " + $scope.viewDate.getDate());
     if (cell.date._d.getMonth() == $scope.viewDate.getMonth() && cell.date._d.getDate() == $scope.viewDate.getDate()) {
       cell.cssClass = 'cal-day-selected';
       return;

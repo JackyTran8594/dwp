@@ -42,6 +42,13 @@ public class PlanningClient {
     String DeptId = params.get("DeptId");
     String ShiftId = params.get("ShiftId");
 
+    if(DeptId == null || DeptId.trim().length() == 0 || "0".equalsIgnoreCase(DeptId)){
+      DeptId = "";
+    }
+    if(ShiftId == null || ShiftId.trim().length() == 0 || "0".equalsIgnoreCase(ShiftId)){
+      ShiftId = "";
+    }
+
     HttpHeaders headers = new HttpHeaders();
     headers.set("Token", token);
 

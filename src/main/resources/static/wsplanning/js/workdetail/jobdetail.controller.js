@@ -402,7 +402,6 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
       $scope.WorkOrder.WOJobs = $scope.jobTabList;
 
       var data = JSON.stringify($scope.WorkOrder)
-      console.log(data);
 
       WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
         console.log(res);
@@ -426,7 +425,6 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
       // save job - after save header
       $scope.WorkOrder.WOJobs = $scope.jobTabList;
       var data = JSON.stringify($scope.WorkOrder)
-      console.log(data);
       WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
         common.notifySuccess("Success!!!");
         $state.reload();

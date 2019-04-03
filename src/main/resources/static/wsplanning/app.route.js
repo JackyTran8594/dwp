@@ -182,7 +182,7 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
     })
 
     .state('app.main.newwo', {
-      url: 'workdetail/:type/:action/',
+      url: 'workdetail/newwo/:type/:action/',
       controller: "WorkDetailCtrl as $ctrl",
       templateUrl: '/wsplanning/templates/pages/workdetail/index.html',
       resolve: {
@@ -213,11 +213,14 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
           return WorkOrderService.detail($stateParams.id);
         },
         lstMonth: function (WorkOrderService, $stateParams) {
+          var EmployeeData = $("#EmployeeData").data("employee");
+          var startDate = new Date();
+          var endDate = moment(startDate).add(1, 'M');
           var params = {
-            "DayFrom": "2019.03.01",
-            "DayTo": "2019.04.01",
-            "DeptId": "201",
-            "ShiftId": "",
+            "DayFrom": formatDateToApi(moment(startDate).startOf('month').toDate()),
+            "DayTo": formatDateToApi(moment(endDate).startOf('month').toDate()),
+            "DeptId": EmployeeData.DeptId,
+            "ShiftId": EmployeeData.ShiftId,
           };
           return WorkOrderService.calendarMonth(params);
         }
@@ -225,7 +228,7 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
     })
 
     .state('app.main.newoffer', {
-      url: 'workdetail/:type/:action/',
+      url: 'workdetail/offer/:type/:action/',
       controller: "WorkDetailCtrl as $ctrl",
       templateUrl: '/wsplanning/templates/pages/workdetail/index.html',
       resolve: {      

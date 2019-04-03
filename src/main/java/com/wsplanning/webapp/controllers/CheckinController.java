@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.util.Map;
 
 @Controller
@@ -40,9 +41,9 @@ public class CheckinController extends BaseController {
       String base64 = "";
       if (type != null) {
         if ("1".equalsIgnoreCase(type)) {
-          base64 = Utils.encodeFileToBase64AtResource2("image\\template\\taixuong.png");
+          base64 = Utils.encodeFileToBase64AtResource2("image" + File.separator + "template" + File.separator + "taixuong.png");
         } else if ("2".equalsIgnoreCase(type)) {
-          base64 = Utils.encodeFileToBase64AtResource2("image\\template\\macbook.jpg");
+          base64 = Utils.encodeFileToBase64AtResource2("image" + File.separator + "template" + File.separator + "macbook.jpg");
         }
       }
       rtn.addProperty("base64", base64);

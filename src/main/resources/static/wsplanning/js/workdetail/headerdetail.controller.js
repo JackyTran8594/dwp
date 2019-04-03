@@ -120,7 +120,6 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
       $scope.WorkOrder = jobData.data;
 
       var data = JSON.stringify($scope.WorkOrder)
-      console.log(data);
 
       WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
         console.log(res);
