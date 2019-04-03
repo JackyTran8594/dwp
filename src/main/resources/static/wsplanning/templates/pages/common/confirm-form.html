@@ -1,17 +1,13 @@
-<div class="modal fade" id="modal-id">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" ng-click="$ctrl.cancel()" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">{{'ConfirmTitle' | translate}}</h4>
-            </div>
-            <div class="modal-body">
-                Stamp to Workorder {{target.WorkorderId}}, Job {{target.JobNo}}?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" ng-click="$ctrl.cancel()" data-dismiss="modal">{{'btnClose'|translate}}</button>
-                <button type="button" class="btn btn-primary" ng-click="$ctrl.save()">{{'btnConfirm'|translate}}</button>
-            </div>
-        </div>
-    </div>
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" ng-click="$ctrl.cancel()"
+        aria-hidden="true">&times;</button>
+    <h4 class="modal-title">{{'ConfirmTitle' | translate}}</h4>
+</div>
+<div class="modal-body">
+    Stamp to Workorder {{target.WorkOrderId}}, Job {{target.JobNo}}?
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="$ctrl.cancel()"
+        data-dismiss="modal">{{'btnCancel'|translate}}</button>
+    <button type="button" class="btn btn-primary" ng-click="$ctrl.save()">{{'btnSave'|translate}}</button>
 </div>

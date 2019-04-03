@@ -58,7 +58,7 @@ UserWebApp.controller('appCtrl', function ($scope, $rootScope, $locale, $uibModa
     $state.go('app.main.tasklist', { locale: $rootScope.lang });
   }
 
-  $scope.stamping = function () {
+  $scope.stampingMenu = function () {
     $state.go('app.main.stamping', { locale: $rootScope.lang });
   }
 

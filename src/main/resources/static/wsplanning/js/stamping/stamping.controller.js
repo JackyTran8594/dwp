@@ -1,7 +1,10 @@
-UserWebApp.controller('StampingCtrl', function ($scope, $rootScope, $local, WorkOrderService, HttpService, $translate, $location, $state, $filter, $uibModal, CommonServices, typeWO) {
+UserWebApp.controller('StampingCtrl', function ($scope, $rootScope, $locale, WorkOrderService, HttpService, $translate, $location, $state, $filter, $uibModal, CommonServices, typeWO) {
 
   $scope.typeWO = typeWO;
   $scope.stamping = {};
+  $scope.stampingCodes = [];
+
+  console.log($scope.stamping);
 
   loadData();
 
@@ -10,10 +13,14 @@ UserWebApp.controller('StampingCtrl', function ($scope, $rootScope, $local, Work
       console.log(res);
       res.data.unshift({ "Id": "", "Name": $translate.instant('pleaseSelect') });
       res.data = res.data.filter(x => { return x.Id !== "040" });
-      $scope.stamping = res.data;
+      $scope.stampingCodes = res.data;
     }, function (err) {
       console.log(err);
     })
+  }
+
+  $scope.onRefresh = function () {
+    $state.reload();
   }
 
 
@@ -34,6 +41,21 @@ UserWebApp.controller('StampingCtrl', function ($scope, $rootScope, $local, Work
     $state.go('app.main.booking', { 'type': typeWO, 'action': "booking" });
   }
 
+  $scope.save = function (stampingCode) {
+    var item = {
+      StampingCode: stampingCode
+    }
+    WorkOrderService.stamp(item).then(function (res) {
+      if (res.status === 200) {
+        common.notifySuccess("Success!!!");
+      } else {
+        common.notifyError("Error!!!");
+      }
+      $state.reload();
+    }, function (err) {
+      common.notifyError("Error!!!" + err.status);
+    })
+  };
 
 });
 
@@ -45,18 +67,17 @@ UserWebApp.controller('StampingModalCtrl', function ($scope, $rootScope, HttpSer
   var $ctrl = this;
   $scope.target = item;
   $ctrl.selected = item;
+  console.log(item)
+
 
   $ctrl.save = function () {
-
     WorkOrderService.stamp(item).then(function (res) {
-      console.log(res)
-
+      // console.log(res)
+      $uibModalInstance.close(res);
     }, function (err) {
-      console.log(err)
-      
+      // console.log(err)
+      $uibModalInstance.close(err);
     })
-
-    $uibModalInstance.close($ctrl.selected);
   };
 
   $ctrl.cancel = function () {

@@ -25,9 +25,6 @@
                         <div class="pull-right">
                             <div class="heading-elements">
                                 <ul class="icons-list">
-                                    <li><a class="btn btn-lg" data-popup="tooltip" data-placement="top" title="Stamping"
-                                            ng-click="addStamping()"><span class=" icon-barcode2"></span></a>
-                                    </li>
                                     <li><a class="btn btn-lg" data-popup="tooltip" data-placement="top" title="Add"
                                             ng-click="addJob()"><span class="icon-plus3"></span></a>
                                     </li>
@@ -50,8 +47,9 @@
                                         </h6>
                                         <div class="heading-elements">
                                             <ul class="icons-list">
-                                                <li ng-show="item.JobNo"><a class="btn btn-lg" data-popup="tooltip" data-placement="top"
-                                                        title="Stamping" ng-click="addStamping(item.JobNo)"><span
+                                                <li ng-show="item.JobNo"><a class="btn btn-lg" data-popup="tooltip"
+                                                        data-placement="top" title="Stamping"
+                                                        ng-click="addStamping(item.RowId)"><span
                                                             class=" icon-barcode2"></span></a>
                                                 </li>
                                                 <li><a class="btn btn-lg" ng-click="openServiceItem(7, $index)"><span
@@ -162,6 +160,11 @@
                                         </h6>
                                         <div class="heading-elements">
                                             <ul class="icons-list">
+                                                <li ng-show="item.JobNo"><a class="btn btn-lg" data-popup="tooltip"
+                                                        data-placement="top" title="Stamping"
+                                                        ng-click="addStamping(item.RowId)"><span
+                                                            class=" icon-barcode2"></span></a>
+                                                </li>
                                                 <li><a class="btn btn-lg" ng-click="openServiceItem(7, $index)"><span
                                                             data-popup="tooltip" data-placement="top" title="Labour"
                                                             class="icon-hammer-wrench"></span></a>

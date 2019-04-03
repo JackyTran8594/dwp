@@ -149,6 +149,11 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
       url: 'stamping',
       controller: "StampingCtrl as $ctrl",
       templateUrl: '/wsplanning/templates/pages/stamping/index.html',
+      resolve: {
+        typeWO: function ($stateParams) {
+          return "stamping";
+        }
+      }
     })
 
 

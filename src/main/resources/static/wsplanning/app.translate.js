@@ -13,6 +13,7 @@ var translationsEN = {
   offerTitle: "Offer Management",
   replacementVehicleTitle: " Replacement Vehicle Planning Management",
   newWOTitle: " New Workorder",
+  stampingTitle: "Stamping",
 
   //breadcrumb
   breadcrumbHome: "Home",
@@ -48,6 +49,7 @@ var translationsEN = {
   breadcrumbNewWO: "New Workorder",
   breadcrumbNewOffer: "New Offer",
   breadcrumbNewBooking: "New Booking",
+  breadcrumbNewStamp: "Stamping",
 
 
   //common
@@ -178,6 +180,7 @@ var translationsEN = {
   previous: "Previous",
   today: "Today",
   next: "Next",
+  ConfirmTitle: "Confirm",
   //
 
   // info user
@@ -328,7 +331,19 @@ var translationsVI = {
   workload: "Workload",
   previous: "Previous",
   today: "Today",
-  next: "Next"
+  next: "Next",
+  //
+
+  // info user
+  infoUser: "The User Information",
+  email: "Email",
+  phone: "Phone",
+  restype: "ResType",
+  shift: "Shift",
+  shortname: "Short Name",
+  site: "Site",
+  sman: "SmanId",
+  subsys: "SubSys"
 
 };
 

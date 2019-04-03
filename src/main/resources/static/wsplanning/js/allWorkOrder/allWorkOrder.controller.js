@@ -231,6 +231,10 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
     $state.go('app.main.booking', { 'type': typeWO, 'action': "booking" });
   }
 
+  $scope.onRefresh = function () {
+    $state.reload();
+  }
+
   $scope.isShow = false;
   $scope.toogleSearch = function () {
     $scope.isShow = !$scope.isShow;
