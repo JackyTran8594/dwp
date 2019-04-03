@@ -57,7 +57,7 @@ public class StampingClient {
     headers.set("Token", token);
     HttpEntity entity = new HttpEntity(headers);
     String url = String.format("%s", this.endpointUrl);
-    ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class, new HashMap<>());
+    ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class, new HashMap<>());
     return response.getBody();
   }
 
