@@ -25,7 +25,9 @@
                                 </select>
                             </div>
                             <div class="col-sm-2 text-center">
-                                <button type="button" class="btn btn-primary" ng-click="save(stamping)">{{'btnSave'|translate}}</button>
+                                <button type="button" class="btn btn-primary" ng-disabled="stamping == ''"
+                                    ng-click="save(stamping)"><i
+                                        class="icon-checkmark3"></i>{{'btnSave'|translate}}</button>
                             </div>
 
                         </div>

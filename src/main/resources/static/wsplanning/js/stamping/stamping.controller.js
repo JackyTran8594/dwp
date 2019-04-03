@@ -48,10 +48,26 @@ UserWebApp.controller('StampingCtrl', function ($scope, $rootScope, $locale, Wor
     WorkOrderService.stamp(item).then(function (res) {
       if (res.status === 200) {
         common.notifySuccess("Success!!!");
+
+        //Load Stamp
+        // $rootScope.$on('routestateChangeSuccess', function (event, data) {
+          $("body").addClass("sidebar-xs");
+          CommonServices.getStamping().then(function (data) {
+            if (data && data.StampText) {
+              $rootScope.stamping = data.StampText;
+            } else {
+              $rootScope.stamping = "";
+            }
+          });
+        // });
+
+        // reload state
+        $state.reload();
       } else {
         common.notifyError("Error!!!");
       }
-      $state.reload();
+
+    
     }, function (err) {
       common.notifyError("Error!!!" + err.status);
     })

@@ -171,9 +171,6 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
     this.isShow = !this.isShow;
   }
 
-
-
-
   // modal
   $ctrl.animationsEnabled = true;
 
@@ -214,9 +211,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
           var charactersObject = createItem();
           charactersObject.Name = selectedItem;
           charactersObject.ItemType = item;
-
           $scope.jobTabList[id].Items.push(charactersObject);
-
         }
 
       } else {
@@ -295,7 +290,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   };
 
 
-  $scope.addStamping = function (id) {
+  $scope.addStamping = function (item) {
     var modalInstance = $uibModal.open({
       animation: $ctrl.animationsEnabled,
       templateUrl: '/wsplanning/templates/pages/common/confirm-form.html',
@@ -306,21 +301,37 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
       resolve: {
         item: {
           WorkOrderId: $scope.WorkOrder.WorkOrderId,
-          RowId: id,
-          StampingCode: stampingCode.Id
+          RowId: item.RowId,
+          StampingCode: stampingCode.Id,
+          JobNo: item.JobNo
         }
       }
     });
 
     modalInstance.result.then(function (selectedItem) {
       console.log(selectedItem);
-      // $state.go('app.main.workdetail', { 'id': $scope.WorkOrder.WorkOrderId, 'type': $stateParams.type });
       if (selectedItem.status === 200) {
         common.notifySuccess("Success!!!");
+
+        //Load Stamp
+        // $rootScope.$on('routestateChangeSuccess', function (event, data) {
+          $("body").addClass("sidebar-xs");
+          CommonServices.getStamping().then(function (data) {
+            if (data && data.StampText) {
+              $rootScope.stamping = data.StampText;
+            } else {
+              $rootScope.stamping = "";
+            }
+          });
+        // });
+
+        //reload state
+        $state.reload();
+
       } else {
         common.notifyError("Error!!!");
       }
-      $state.reload();
+
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
     });
@@ -377,27 +388,6 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
       }
 
     }
-    // if (newValue && oldValue && newValue.length > oldValue.length) {
-    //   $scope.pristine = true;
-    //   $scope.jobTabList = newValue;
-    //   $scope.WorkOrder.WOJobs = $scope.jobTabList;
-    //   emitData($scope.pristine);
-
-    //   //if the form is modified => using $emit to send data
-    //   $scope.$on('inputModified.formChanged', function (event, modified, formCtrl) {
-    //     console.log(formCtrl.$name);
-    //     emitData(modified);
-    //     // $scope.$emit("jobData", {
-    //     //   data: $scope.WorkOrder,
-    //     //   modified: modified,
-    //     // }
-    //     // );
-    //   });
-    // } else {
-    //   $scope.pristine = false;
-    // }
-
-    // }
   });
 
 
@@ -423,8 +413,6 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
         common.notifyError("Error!!!", err.status);
       })
 
-
-
     } else {
       var postAction = "saveRows";
 
@@ -437,15 +425,10 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
 
       // save job - after save header
       $scope.WorkOrder.WOJobs = $scope.jobTabList;
-      // console.log($scope.WorkOrder);
-      // console.log($scope.WorkOrder.WOJobs);
       var data = JSON.stringify($scope.WorkOrder)
       console.log(data);
-      // var postAction = "saveRows";
       WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
-        console.log(res);
         common.notifySuccess("Success!!!");
-        // $state.go('app.main.workdetail', { 'id': res.data.WorkOrderId, 'type': $stateParams.type });
         $state.reload();
       }, function (err) {
         console.log(err);
