@@ -1,0 +1,47 @@
+<div ng-include="'../wsplanning/templates/pages/allWorkOrder/page-header.html'"></div>
+
+
+<!-- Page container -->
+<div class="page-container">
+
+    <!-- Page content -->
+    <div class="page-content">
+
+        <!-- Main content -->
+        <div class="content-wrapper">
+
+            <!-- Panel content -->
+            <div class="panel panel-flat" style="margin-bottom: 0px;">
+
+                <div class="panel-body">
+                    <div class="row">
+
+                        <div class="form-group">
+                            <label for="input" class="col-sm-2 control-label">Stamping Codes</label>
+                            <div class="col-sm-2">
+                                <select class="form-control" ng-init="stamping = '' " ng-model="stamping"
+                                    ng-options="item.Id as item.Name for item in stampingCodes">
+
+                                </select>
+                            </div>
+                            <div class="col-sm-2 text-center">
+                                <button type="button" class="btn btn-primary" ng-click="save(stamping)">{{'btnSave'|translate}}</button>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <!-- /panel content -->
+
+
+        </div>
+        <!-- /main content -->
+
+    </div>
+    <!-- /page content -->
+
+</div>
+<!-- /page container -->

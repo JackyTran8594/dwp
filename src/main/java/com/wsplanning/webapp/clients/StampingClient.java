@@ -1,5 +1,6 @@
 package com.wsplanning.webapp.clients;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -13,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 import java.nio.charset.Charset;
 import java.util.Base64;
 import java.util.HashMap;
+import java.util.Map;
 
 @Component
 public class StampingClient {
@@ -37,4 +39,27 @@ public class StampingClient {
     ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class, new HashMap<>());
     return response.getBody();
   }
+
+  public String confirmStamping(String token, Map<String, String> params) {
+    HttpHeaders headers = new HttpHeaders();
+    String WorkOrderId = params.get("WorkOrderId");
+    String RowId = params.get("RowId");
+    String StampingCode = params.get("StampingCode");
+    if (StringUtils.isNotBlank(WorkOrderId)) {
+      headers.set("WorkOrderId", WorkOrderId);
+    }
+    if (StringUtils.isNotBlank(RowId)) {
+      headers.set("RowId", RowId);
+    }
+    if (StringUtils.isNotBlank(StampingCode)) {
+      headers.set("StampingCode", StampingCode);
+    }
+    headers.set("Token", token);
+    HttpEntity entity = new HttpEntity(headers);
+    String url = String.format("%s", this.endpointUrl);
+    ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class, new HashMap<>());
+    return response.getBody();
+  }
+
+
 }

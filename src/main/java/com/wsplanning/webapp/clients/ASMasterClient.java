@@ -110,4 +110,10 @@ public class ASMasterClient {
     String url = String.format("%s?SiteId=%s&CustNo=%s&VehiId=%s", this.endpointUrl, SiteId, CustNo, VehicleId);
     return restTemplate.getForObject(url, String.class);
   }
+
+  public String getStampingCode(String param) {
+    String url = String.format("%s?command=getStampingCodes&param1=%s", this.endpointUrl, param);
+    return restTemplate.getForObject(url, String.class);
+  }
+ 
 }

@@ -3,6 +3,7 @@ package com.wsplanning.webapp.controllers;
 import com.google.gson.*;
 import com.wsplanning.webapp.clients.ASMasterClient;
 import com.wsplanning.webapp.clients.SearchServiceItemClient;
+import com.wsplanning.webapp.clients.StampingClient;
 import com.wsplanning.webapp.clients.WokOrderClient;
 
 import com.wsplanning.webapp.dto.WOCustomerDTO;
@@ -39,6 +40,9 @@ public class WOController extends BaseController {
 
   @Autowired
   protected WokOrderClient wokOrderClient;
+
+  @Autowired
+  protected StampingClient stampingClient;
 
   @Autowired
   protected ASMasterClient asMasterClient;
@@ -312,4 +316,15 @@ public class WOController extends BaseController {
     return "wo/index";
   }
 
+  @PostMapping("/wo/confirm")
+  public ResponseEntity confirm(@RequestBody Map<String, String> params)
+  {
+    try {
+      String rtn = stampingClient.confirmStamping(getToken(),params);
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception e) {
+      return parseException(e);
+      //TODO: handle exception
+    }
+  }
 }

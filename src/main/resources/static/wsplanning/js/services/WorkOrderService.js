@@ -79,6 +79,22 @@ UserWebApp.service('WorkOrderService', function ($http) {
     });
   }
 
+
+  WorkOrderService.getStamping = function () {
+    return $http({
+      method: 'GET',
+      url: '/site/stampingCode',
+    });
+  }
+
+  WorkOrderService.stamp = function (data) {
+    return $http({
+      method: 'POST',
+      url: '/wo/confirm',
+      data: data
+    });
+  }
+
   return WorkOrderService;
 });
 

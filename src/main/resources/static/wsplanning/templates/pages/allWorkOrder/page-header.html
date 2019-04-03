@@ -12,6 +12,7 @@
                     <span ng-switch-when="withTire" class="text-semibold">{{ 'withTireChangeTitle' | translate }}</span>
                     <span ng-switch-when="withBO" class="text-semibold">{{ 'withBOTitle' | translate }}</span>
                     <span ng-switch-when="postponedWO" class="text-semibold">{{ 'postponedWorkTitle' | translate }}</span>
+                    <span ng-switch-when="stamping" class="text-semibold">{{ 'stampingTitle' | translate }}</span>
                 </span>
             </h4>
 
@@ -27,6 +28,8 @@
                         <span ng-switch-when="withTire">{{ 'breadcrumbWithTire' | translate }}</span>
                         <span ng-switch-when="withBO">{{ 'breadcrumbWithBO' | translate }}</span>
                         <span ng-switch-when="postponedWO">{{ 'breadcrumbPostponedWork' | translate }}</span>
+                        <span ng-switch-when="stamping">{{ 'breadcrumbNewStamp' | translate }}</span>
+
                     </span>
                 </li>
             </ul>
@@ -46,7 +49,7 @@
                     <i class="icon-plus3 text-indigo-400"></i><span>{{ 'btnAddBook' | translate }}</span>
                 </a>
 
-                <button class="btn btn-link btn-float has-text text-size-small btnRefresh" ng-click="$ctrl.onRefresh()">
+                <button class="btn btn-link btn-float has-text text-size-small btnRefresh" ng-click="onRefresh()">
                     <i class="icon-sync text-indigo-400"></i><span>{{ 'btnRefresh' | translate }}</span>
                 </button>
             </div>
