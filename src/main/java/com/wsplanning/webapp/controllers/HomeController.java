@@ -16,6 +16,12 @@ public class HomeController {
         return "layouts/layout";
     }
 
+
+    @GetMapping("/test")
+    public String test(Model model) {
+        return "layouts/test";
+    }
+
     @GetMapping("/403")
     public String accessDenied() {
         return "errors/403";

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" ng-app="UserWebApp">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Digital Workshop Planner</title>
+
+    <!-- Global stylesheets -->
+    <link href="/assets/css/google-font/css.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
+    <!--<link href="/assets/css/bootstrap.css" rel="stylesheet" type="text/css">-->
+    <!--<link href="/assets/css/core.css" rel="stylesheet" type="text/css">-->
+    <!--<link href="/assets/css/components.css" rel="stylesheet" type="text/css">-->
+    <!--<link href="/assets/css/colors.css" rel="stylesheet" type="text/css">-->
+    <link href="/assets/js/core/libraries/angularjs/tree-grid.css" rel="stylesheet" type="text/css">
+    <link href="/assets/js/core/libraries/angularjs/ivh-treeview.css" rel="stylesheet" type="text/css">
+    <link href="/assets/js/core/libraries/angularjs/ivh-treeview-theme-basic.css" rel="stylesheet" type="text/css">
+
+    <link href="/assets/css/limitless/Bootstrap_3/bootstrap.css" rel="stylesheet" type="text/css">
+    <!--<link href="/assets/css/limitless/Bootstrap_3/bootstrap.min.css" rel="stylesheet" type="text/css">-->
+    <link href="/assets/css/limitless/Bootstrap_3/core.min.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/limitless/Bootstrap_3/components.min.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/limitless/Bootstrap_3/colors.min.css" rel="stylesheet" type="text/css">
+
+    <link href="/assets/js/core/libraries/angularjs/angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.min.css"
+          rel="stylesheet">
+    <!-- /global stylesheets -->
+
+    <!-- Theme stylesheets files -->
+    <link href="/wsplanning.css" rel="stylesheet" type="text/css">
+    <!-- /theme stylesheets files -->
+
+    <!--CSS Timeline-->
+    <link href="/assets/js/plugins/fullcalendar-4.0.1/packages/core/main.min.css" rel="stylesheet">
+    <link href="/assets/js/plugins/fullcalendar-4.0.1/packages/timeline/main.min.css" rel="stylesheet">
+    <link href="/assets/js/plugins/fullcalendar-4.0.1/packages/resource-timeline/main.min.css" rel="stylesheet">
+
+    <!-- Core JS files -->
+    <script type="text/javascript" src="/assets/js/plugins/loaders/pace.min.js"></script>
+    <script type="text/javascript" src="/assets/js/core/libraries/jquery.min.js"></script>
+    <script type="text/javascript" src="/assets/js/core/libraries/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/assets/js/core/libraries/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="/assets/js/plugins/loaders/blockui.min.js"></script>
+    <script type="text/javascript" src="/assets/js/plugins/ui/nicescroll.min.js"></script>
+    <script type="text/javascript" src="/assets/js/plugins/ui/drilldown.js"></script>
+    <!-- /core JS files -->
+
+
+    <!-- Theme JS files -->
+    <script type="text/javascript" src="/assets/js/plugins/forms/selects/bootstrap_multiselect.js"></script>
+    <script type="text/javascript" src="/assets/js/plugins/inputmask/jquery.inputmask.bundle.js"></script>
+    <script type="text/javascript" src="/assets/js/plugins/forms/validation/validate.min.js"></script>
+    <script type="text/javascript" src="/assets/js/core/libraries/websocket/sockjs.min.js"></script>
+    <script type="text/javascript" src="/assets/js/core/libraries/websocket/stomp.min.js"></script>
+    <script type="text/javascript" src="/assets/js/plugins/notifications/pnotify.min.js"></script>
+    <script type="text/javascript" src="/assets/js/plugins/forms/selects/select2-4.0.6.min.js"></script>
+    <script type="text/javascript" src="/assets/js/plugins/ui/moment/moment.min.js"></script>
+    <script type="text/javascript" src="/assets/js/plugins/ui/prism.min.js"></script>
+    <!--<script type="text/javascript" src="/assets/js/core/libraries/angularjs/hammerjs/hammer.js"></script>-->
+    <!-- /theme JS files -->
+
+
+    <!--JS Timeline-->
+    <script type="text/javascript" src="/assets/js/plugins/fullcalendar-4.0.1/packages/core/main.min.js"></script>
+    <!--<script type="text/javascript" src="/assets/js/plugins/fullcalendar-4.0.1/packages/moment/main.min.js"></script>-->
+    <script type="text/javascript"
+            src="/assets/js/plugins/fullcalendar-4.0.1/packages/interaction/main.min.js"></script>
+    <script type="text/javascript"
+            src="/assets/js/plugins/fullcalendar-4.0.1/packages/resource-common/main.min.js"></script>
+    <script type="text/javascript" src="/assets/js/plugins/fullcalendar-4.0.1/packages/timeline/main.min.js"></script>
+    <script type="text/javascript"
+            src="/assets/js/plugins/fullcalendar-4.0.1/packages/resource-timeline/main.min.js"></script>
+
+    <script type="text/javascript" src="/wsplanning/common.js"></script>
+
+</head>
+
+<body class="sidebar-xs" style="touch-action: manipulation;">
+<style type="text/css">
+    #sig-canvas {
+        border: 2px dotted #CCCCCC;
+        border-radius: 15px;
+        cursor: crosshair;
+    }
+</style>
+<!-- Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>E-Signature</h1>
+            <p>Sign in the canvas below and save your signature as an image!</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <canvas id="img-canvas" width="620" height="160">
+                Get a better browser, bro.
+            </canvas>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <button class="btn btn-primary" id="sig-submitBtn">Submit Signature</button>
+            <button class="btn btn-default" id="sig-clearBtn">Clear Signature</button>
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-md-12">
+            <textarea id="sig-dataUrl" class="form-control"
+                      rows="5">Data URL for your signature will go here!</textarea>
+        </div>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-md-12">
+            <img id="sig-image" src="" alt="Your signature will go here!"/>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="sign_canvas.js"></script>
+
+</body>
+
+</html>

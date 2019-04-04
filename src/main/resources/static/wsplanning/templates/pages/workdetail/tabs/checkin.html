@@ -12,11 +12,12 @@
 
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-xs-6">
+                        <div class="col-xs-6" id="checkinTemplate">
                             <div class="form-group">
                                 <label class="control-label col-xs-4">{{ 'checkinTemplate' | translate }}</label>
                                 <div class="col-xs-8">
-                                    <select class="form-control" ng-model="template" ng-change="changeTemplate()" convert-to-number>
+                                    <select class="form-control" ng-model="template" ng-change="changeTemplate()"
+                                            convert-to-number>
                                         <option value="1">Template 1</option>
                                         <option value="2">Template 2</option>
                                     </select>
@@ -25,20 +26,21 @@
                         </div>
 
                         <div class="col-xs-6">
-                            <canvas width="700" height="500" id="canvas" drawing base64="{{imgTemplate}}" style="width: 100%;height: auto;"></canvas>
+                            <signature-pad id="template-canvas" accept="acceptTemplate" clear="clear" height="250"
+                                           width="465"
+                                           dataurl="imgTemplate"></signature-pad>
                         </div>
-
                     </div>
 
-                    <div class="row" ng-show="base64Encode != ''">
-                        <img ng-src="{{base64Encode}}"/>
+                    <div class="row" ng-show="templateDraw">
+                        <img ng-src="{{ templateDraw.dataUrl }}">
                     </div>
 
 
                     <div class="row">
                         <div class="container"
                              ng-style="{'max-width': boundingBox.width + 'px', 'max-height': boundingBox.height + 'px'}">
-                            <signature-pad accept="accept" clear="clear" height="220" width="568"
+                            <signature-pad id="signature-canvas" accept="accept" clear="clear" height="220" width="568"
                                            dataurl="dataurl"></signature-pad>
 
                             <div class="buttons">
@@ -56,11 +58,16 @@
                             <img ng-src="{{ signature.dataUrl }}">
                         </div>
                     </div>
-
                 </div>
+
 
                 <div class="panel-footer">
                     <div class="pull-right">
+                        <button type="button" class="btn btn-icon btn-primary btnSubmit"
+                                ng-click="signature = accept();templateDraw = acceptTemplate()">
+                            <i class="icon-checkmark3"></i>{{ 'btnSave' | translate }} 223</span>
+                        </button>
+
                         <button type="button" class="btn btn-icon btn-primary btnSubmit" ng-click="onSubmitForm()">
                             <i class="icon-checkmark3"></i>{{ 'btnSave' | translate }}</span>
                         </button>
@@ -80,3 +87,11 @@
     </div>
     <!-- /page container -->
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+//    console.log($("#checkinTemplate").width());
+//    $("#template-canvas_ctn").width($("#checkinTemplate").width());
+//    console.log($("#template-canvas_ctn").width());
+  });
+</script>
