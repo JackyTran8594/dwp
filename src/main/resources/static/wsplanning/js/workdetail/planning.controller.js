@@ -358,4 +358,15 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
   function menuEdit($event) {
     console.log($event);
   }
+
+  $scope.onSubmitForm = function () {
+    console.log("-----savePlanning-------");
+  }
+
+  //Save from button header
+  $rootScope.$on('savePlanning', function (event, obj) {
+    $scope.onSubmitForm();
+  });
+
+
 });

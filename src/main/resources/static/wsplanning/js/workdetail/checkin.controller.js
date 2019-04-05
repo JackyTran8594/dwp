@@ -29,4 +29,10 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
   }
 
 
+  //Save from button header
+  $rootScope.$on('saveCheckin', function (event, obj) {
+    $scope.onSubmitForm();
+  });
+
+
 });

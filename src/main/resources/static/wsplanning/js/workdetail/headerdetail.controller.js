@@ -146,8 +146,12 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
       })
 
     }
-
-
   }
+
+  //Save from button header
+  $rootScope.$on('saveHeader', function (event, obj) {
+    $scope.onSubmitForm();
+  });
+
 
 });

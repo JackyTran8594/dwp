@@ -433,8 +433,12 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
         common.notifyError("Error!!!", err.status);
       });
     }
-
   }
+
+  //Save from button header
+  $rootScope.$on('saveJob', function (event, obj) {
+    $scope.onSubmitForm();
+  });
 
 
 

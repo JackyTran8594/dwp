@@ -23,6 +23,30 @@
                 <li ng-if="!isNew" class="active">{{workOrderNo}}</li>
             </ul>
         </div>
+
+
+        <div class="heading-elements">
+            <div class="heading-btn-group">
+                <button type="button" ng-show="tabActive == 'header'" ng-disabled="pristine == false && headerFrm.modified == false"
+                        id="btnSubmitFrm" class="btn btn-icon btn-primary btnSubmit" ng-click="saveForm(tabActive)">
+                    <i class="icon-checkmark3"></i>{{ 'btnSave' | translate }}</span>
+                </button>
+
+                <button type="button" ng-show="tabActive == 'job'"
+                        class="btn btn-icon btn-primary btnSubmit" ng-click="saveForm(tabActive)">
+                    <i class="icon-checkmark3"></i>{{ 'btnSave' | translate }}</span>
+                </button>
+
+                <button type="button" ng-show="tabActive == 'planning'" class="btn btn-icon btn-primary btnSubmit" ng-click="saveForm(tabActive)">
+                    <i class="icon-checkmark3"></i>{{ 'btnSave' | translate }}</span>
+                </button>
+
+                <button type="button" ng-show="tabActive == 'checkin'" class="btn btn-icon btn-primary btnSubmit" ng-click="saveForm(tabActive)">
+                    <i class="icon-checkmark3"></i>{{ 'btnSave' | translate }}</span>
+                </button>
+            </div>
+        </div>
+
     </div>
 </div>
 <!-- /page header -->

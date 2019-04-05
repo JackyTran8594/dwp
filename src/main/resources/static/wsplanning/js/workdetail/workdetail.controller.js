@@ -33,7 +33,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 
       $scope.lstDepartmentSearch = $scope.lstDepartment.slice();
       $scope.lstDepartmentSearch.shift();
-      $scope.lstDepartmentSearch.unshift({"Id":"", "Name": $translate.instant('all')});
+      $scope.lstDepartmentSearch.unshift({"Id": "", "Name": $translate.instant('all')});
     });
     CommonServices.getVisitReasons().then(function (data) {
       $scope.lstVisitReason = data;
@@ -61,7 +61,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 
       $scope.lstShiftSearch = $scope.lstShifts.slice();
       $scope.lstShiftSearch.shift();
-      $scope.lstShiftSearch.unshift({"Id":"", "Name": $translate.instant('all')});
+      $scope.lstShiftSearch.unshift({"Id": "", "Name": $translate.instant('all')});
     });
 
   }
@@ -102,7 +102,6 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
     }
 
   }
-
 
 
   // $scope.isNew = angular.equals($scope.WorkOrder, {});
@@ -188,11 +187,11 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
       $scope.jobObject.WarrantyInfo = selectedItem.WarrantyInfo
 
       if (selectedItem.PayerCustomer != null) {
-        $rootScope.$broadcast("choosePayerCustomer", { "item": selectedItem.PayerCustomer });
+        $rootScope.$broadcast("choosePayerCustomer", {"item": selectedItem.PayerCustomer});
         $scope.jobObject.CustNo = selectedItem.PayerCustomer.CustNo;
       }
       console.log($scope.jobObject.VehiId);
-      $rootScope.$broadcast("chooseVehicle", { "item": selectedItem });
+      $rootScope.$broadcast("chooseVehicle", {"item": selectedItem});
 
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
@@ -214,7 +213,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
       $scope.WOCustomer = selectedItem;
       $scope.jobObject.CustNo = selectedItem.CustNo
 
-      $rootScope.$broadcast("chooseCustomer", { "item": selectedItem });
+      $rootScope.$broadcast("chooseCustomer", {"item": selectedItem});
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
     });
@@ -241,11 +240,25 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
       console.log(selectedItem);
 
       $scope.WOContact = selectedItem;
-      $rootScope.$broadcast("chooseContact", { "item": selectedItem });
+      $rootScope.$broadcast("chooseContact", {"item": selectedItem});
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
     });
   };
+
+
+  //Submit tren header
+  $scope.saveForm = function (type) {
+    if (type == "header") {
+      $rootScope.$broadcast("saveHeader", { "item": {} });
+    } else if (type == "job") {
+      $rootScope.$broadcast("saveJob", { "item": {} });
+    } else if (type == "planning") {
+      $rootScope.$broadcast("savePlanning", { "item": {} });
+    } else if (type == "checkin") {
+      $rootScope.$broadcast("saveCheckin", { "item": {} });
+    }
+  }
 
 
 });
