@@ -621,15 +621,9 @@ table td {
     content: "\ede6";
 }
 
-/* .heading-elements-toggle {
-  cursor: pointer;
-  display: block;
-  line-height: 1;
-  position: absolute;
-  top: 50%;
-  right: 0;
-} */
-
+.breadcrumb > .active {
+  color: #371ace;
+}
 
 
 @media (min-width: 769px) {

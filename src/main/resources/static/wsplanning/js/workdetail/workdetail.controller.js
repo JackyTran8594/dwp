@@ -190,6 +190,11 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
         $rootScope.$broadcast("choosePayerCustomer", {"item": selectedItem.PayerCustomer});
         $scope.jobObject.CustNo = selectedItem.PayerCustomer.CustNo;
       }
+      
+      if (selectedItem.UserCustomer != null) {
+        $rootScope.$broadcast("chooseUserCustomer", {"item": selectedItem.UserCustomer});
+        // $scope.jobObject.CustNo = selectedItem.PayerCustomer.CustNo;
+      }
       console.log($scope.jobObject.VehiId);
       $rootScope.$broadcast("chooseVehicle", {"item": selectedItem});
 

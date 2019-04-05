@@ -18,33 +18,16 @@ UserWebApp.controller('ContractCtrl', function ($scope, $rootScope, HttpService,
   var $ctrl = this;
   $ctrl.animationsEnabled = true;
 
-  $scope.searchVehicle = function (item) {
-    console.log("----open--------");
-    var modalInstance = $uibModal.open({
-      animation: $ctrl.animationsEnabled,
-      templateUrl: '/wsplanning/templates/pages/workdetail/modal/search_vehicle.html',
-      controller: 'SearchVehicleModalCtrl',
-      controllerAs: '$ctrl',
-      size: "full",
-      resolve: {
-        item: function () {
-          return item;
-        }
-      }
-    });
-
-    modalInstance.result.then(function (selectedItem) {
-      $ctrl.selected = selectedItem;
-    }, function () {
-      console.log('Modal dismissed at: ' + new Date());
-    });
-  };
-
 
   $rootScope.$on('chooseContact', function (event, obj) {
     $scope.WOContact = obj.item;
     $scope.WorkOrder.WOContact = $scope.WOContact;
   });
 
+
+  $rootScope.$on('chooseUserCustomer', function (event, obj) {
+    $scope.WOContact = obj.item;
+    $scope.WorkOrder.WOContact = $scope.WOContact;
+  });
 
 });

@@ -301,6 +301,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
       resolve: {
         item: {
           WorkOrderId: $scope.WorkOrder.WorkOrderId,
+          workOrderNo:  $scope.WorkOrder.workOrderNo,
           RowId: item.RowId,
           StampingCode: stampingCode.Id,
           JobNo: item.JobNo
