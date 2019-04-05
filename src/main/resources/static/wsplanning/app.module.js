@@ -17,7 +17,8 @@ var UserWebApp = angular.module('UserWebApp', [
   'ngInputModified',
   'shContextMenu',
   'iosDblclick',
-  'bmSignaturePad'
+  'bmSignaturePad',
+  'webcam'
 ]);
 
 

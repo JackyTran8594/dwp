@@ -1,0 +1,57 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" ng-click="$ctrl.cancel()"
+        aria-hidden="true">&times;</button>
+    <h4 class="modal-title">{{'PhotoTitle' | translate}}</h4>
+</div>
+<div class="modal-body">
+    <div class="tableModal">
+        <div class="row">
+            <div class="col-md-9 col-sm-9">
+                <div class="col-md-3 col-sm-4 div-photo text-center" ng-repeat="photo in lstphoto">
+                    <img ng-src="{{photo}}" alt="" class="thumb photo" />
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3">
+                <div class="row">
+                    <button type="button" class="btn btn-default"
+                        ng-click="$ctrl.selectPhoto()">{{'btnPhoto'|translate}}</button>
+                </div>
+                <div class="row">
+                    <input type="file" id="photo-file" class="btn btn-default" multiple ng-files="getTheFiles($files)">
+                    <table>
+                        <tr ng-repeat="file in lstfiles">
+                            <td>{{$index+1}}</td>
+                            <td>{{file.name}}</td>
+                            <td>{{file.msg}}</td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="modal-footer">
+    <div class="pull-left">
+
+        <button type="button" class="btn btn-default">{{'btnCam'|translate}}</button>
+    </div>
+    <div class="pull-right">
+        <button type="button" class="btn btn-primary" ng-click="$ctrl.save()">{{'btnSave'|translate}}</button>
+        <button type="button" class="btn btn-default" ng-click="$ctrl.cancel()"
+            data-dismiss="modal">{{'btnCancel'|translate}}</button>
+    </div>
+
+</div>
+
+<!-- <script>
+    var canvas = document.getElementById('canvas');
+    var context = canvas.getContext('2d');
+    var video = document.getElementById('video');
+
+    // Trigger photo take
+    document.getElementById("snap").addEventListener("click", function () {
+        context.drawImage(video, 0, 0, 640, 480);
+    });
+</script> -->

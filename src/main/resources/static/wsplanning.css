@@ -457,11 +457,6 @@ table td {
   padding: 0; */
 }
 
-.tableIndex td { 
-  /* text-align: center; */
-  /* padding: 0 0 !important; */
-}
-
 
 /* .tableIndex table thead > tr > td {
   
@@ -625,6 +620,16 @@ table td {
   color: #371ace;
 }
 
+.photo {
+  display: inline-block;
+  height: 100px;
+  width: 100px
+}
+
+.div-photo {
+  padding:5px 5px;
+}
+
 
 @media (min-width: 769px) {
   .main-content {
@@ -763,7 +768,11 @@ table td {
      /* overflow-y: scroll; */
   }
 
-   
+  .tableModal {
+    overflow-x: hidden;
+    overflow-y:auto;
+  } 
+
   .tableIndex {
     height: 300px;
     overflow-x: scroll;

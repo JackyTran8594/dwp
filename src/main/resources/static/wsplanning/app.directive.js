@@ -15,7 +15,8 @@ UserWebApp.directive('onFinishRender', function ($timeout) {
   .directive('formatNumberDecimal', formatNumberDecimal)
   .directive('drawing', drawing2)
   .directive('signaturePad', signaturePad)
-  .directive('inputType', inputType);
+  .directive('inputType', inputType)
+  .directive('ngFiles', ngFiles);
 
 
 convertToNumberDirective.$inject = [];
@@ -43,13 +44,26 @@ function dlKeyCode() {
 
         if (keyCode == $attrs.code) {
           $scope.$apply(function () {
-            $scope.$eval($attrs.dlKeyCode, {$event: event});
+            $scope.$eval($attrs.dlKeyCode, { $event: event });
           });
 
         }
       });
     }
   };
+}
+
+
+function ngFiles($parse) {
+  return {
+    restrict: 'A',
+    link: function (scope, element, attrs) {
+      var onchange = $parse(attrs.ngFiles);
+      element.on('change', function (eve) {
+        onchange(scope, { $files: eve.target.files })
+      })
+    }
+  }
 }
 
 function inputType($compile) {
@@ -278,7 +292,7 @@ function drawing2() {
     link: function (scope, element, attrs) {
       // Setup canvas ..
       var canvas = document.getElementById('canvas'),
-      ctx = canvas.getContext('2d');
+        ctx = canvas.getContext('2d');
 
 
       // setup lines styles ..
@@ -287,7 +301,7 @@ function drawing2() {
 
       // some variables we'll need ..
       var drawing = false;
-      var mousePos = {x: 0, y: 0};
+      var mousePos = { x: 0, y: 0 };
       var lastPos = mousePos;
 
       // helper functions ..
@@ -534,7 +548,7 @@ function signaturePad($interval, $timeout, $window) {
           $scope.updateModel();
 
           // notify that drawing has ended
-          $scope.notifyDrawing({drawing: false});
+          $scope.notifyDrawing({ drawing: false });
         };
 
         $scope.updateModel = function () {
@@ -633,7 +647,7 @@ function signaturePad($interval, $timeout, $window) {
       function onTouchstart(event) {
         scope.$apply(function () {
           // notify that drawing has started
-          scope.notifyDrawing({drawing: true});
+          scope.notifyDrawing({ drawing: true });
         });
         event.preventDefault();
       }
@@ -644,7 +658,7 @@ function signaturePad($interval, $timeout, $window) {
           scope.updateModel();
 
           // notify that drawing has ended
-          scope.notifyDrawing({drawing: false});
+          scope.notifyDrawing({ drawing: false });
         });
         event.preventDefault();
       }

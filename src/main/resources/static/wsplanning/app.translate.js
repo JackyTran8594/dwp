@@ -181,6 +181,9 @@ var translationsEN = {
   today: "Today",
   next: "Next",
   ConfirmTitle: "Confirm",
+  PhotoTitle: "Photo Folder",
+  btnPhoto: "Photo",
+  btnCam: "Cam",
   //
 
   // info user

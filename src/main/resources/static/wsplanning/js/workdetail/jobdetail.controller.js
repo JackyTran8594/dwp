@@ -301,7 +301,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
       resolve: {
         item: {
           WorkOrderId: $scope.WorkOrder.WorkOrderId,
-          workOrderNo:  $scope.WorkOrder.workOrderNo,
+          WorkOrderNo: $scope.WorkOrder.WorkOrderNo,
           RowId: item.RowId,
           StampingCode: stampingCode.Id,
           JobNo: item.JobNo
@@ -316,14 +316,14 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
 
         //Load Stamp
         // $rootScope.$on('routestateChangeSuccess', function (event, data) {
-          $("body").addClass("sidebar-xs");
-          CommonServices.getStamping().then(function (data) {
-            if (data && data.StampText) {
-              $rootScope.stamping = data.StampText;
-            } else {
-              $rootScope.stamping = "";
-            }
-          });
+        $("body").addClass("sidebar-xs");
+        CommonServices.getStamping().then(function (data) {
+          if (data && data.StampText) {
+            $rootScope.stamping = data.StampText;
+          } else {
+            $rootScope.stamping = "";
+          }
+        });
         // });
 
         //reload state
@@ -332,6 +332,28 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
       } else {
         common.notifyError("Error!!!");
       }
+
+    }, function () {
+      console.log('Modal dismissed at: ' + new Date());
+    });
+  };
+
+
+  $scope.openImage = function (item) {
+    var modalInstance = $uibModal.open({
+      animation: $ctrl.animationsEnabled,
+      templateUrl: '/wsplanning/templates/pages/common/photo-form.html',
+      controller: 'PhotoModalCtrl',
+      backdrop: 'static',
+      controllerAs: '$ctrl',
+      size: "full",
+      resolve: {
+        item: item
+      }
+    });
+
+    modalInstance.result.then(function (selectedItem) {
+      console.log(selectedItem);
 
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
@@ -623,6 +645,63 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
       console.log(err);
     })
   }
+
+  $ctrl.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+})
+
+UserWebApp.controller('PhotoModalCtrl', function ($scope, $rootScope, WorkOrderService, HttpService, $translate, $location, $filter,
+  $uibModal, CommonServices, $stateParams, $state, item, $uibModalInstance) {
+
+  $scope.myChannel = {
+    // the fields below are all optional
+    videoHeight: 800,
+    videoWidth: 600,
+    video: null // Will reference the video element on success
+  };
+
+  var $ctrl = this;
+
+  console.log(item);
+
+
+  $scope.lstfiles = [];
+  $scope.lstphoto = [];
+  // $scope.progress = 
+  var formData = new FormData();
+  $scope.getTheFiles = function ($files) {
+    if($scope.lstphoto.length > 0) {
+      $scope.lstphoto = [];
+    }
+    $scope.lstfiles = $files;
+    // console.log($files);
+    angular.forEach($files, function (v, k) {
+      var file = v;
+      var reader = new FileReader();
+      reader.onload = $scope.photoLoaded;
+      reader.readAsDataURL(file)
+      formData.append("files", v)
+      // console.log(formData);
+    });
+
+
+    // check value in FormData
+    for (var value of formData.values()) {
+      console.log(value);
+    }
+  }
+
+  $scope.photoLoaded = function (evt) {
+    $scope.$apply(function () {
+      $scope.lstphoto.push(evt.target.result);
+      console.log($scope.lstphoto);
+    });
+  }
+
+  $ctrl.selectPhoto = function () {
+
+  };
 
   $ctrl.cancel = function () {
     $uibModalInstance.dismiss('cancel');
