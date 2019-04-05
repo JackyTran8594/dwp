@@ -236,6 +236,29 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
   $scope.toogleSearch = function () {
     $scope.isShow = !$scope.isShow;
   }
+  
+  //openCamera
+  $scope.openCamera = function () {
+    var modalInstance = $uibModal.open({
+      animation: $ctrl.animationsEnabled,
+      templateUrl: '/wsplanning/templates/pages/scan_barcode.html',
+      controller: 'ScanBarcodeModalCtrl',
+      controllerAs: '$ctrl',
+      size: "full",
+      resolve: {
+
+      }
+    });
+
+    modalInstance.result.then(function (value) {
+      if(value){
+        $scope.params.skey = value;
+        $scope.doSearch();
+      }
+    }, function () {
+      console.log('Modal dismissed at: ' + new Date());
+    });
+  }
 
 });
 

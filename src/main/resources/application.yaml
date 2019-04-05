@@ -1,7 +1,18 @@
 server:
-  port: 8081
+  #port: 8081
+  port: 8443
   session:
     timeout: 2592000 # Session timeout in seconds.
+  ssl:
+      key-store-type: PKCS12
+      # The path to the keystore containing the certificate
+      key-store: classpath:keystore.p12
+      # The password used to generate the certificate
+      key-store-password: leuyen2435
+#      key-store: /root/keystore.p12
+#      key-store-password: amaster123
+      # The alias mapped to the certificate
+      key-alias: tomcat
 spring:
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.session.SessionAutoConfiguration
@@ -20,3 +31,8 @@ spring:
       cache-seconds: -1
       encoding: UTF-8
 apiEndpointUrl: http://automaster.alliedsoft.hu:9092
+
+# Tell Spring Security (if used) to require requests over HTTPS
+security:
+  require-ssl: true
+
