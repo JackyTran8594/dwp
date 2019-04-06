@@ -1,0 +1,91 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" ng-click="$ctrl.cancel()"
+        aria-hidden="true">&times;</button>
+    <!-- <h4 class="modal-title">{{'PhotoTitle' | translate}}</h4> -->
+</div>
+<div class="modal-body">
+    <div class="">
+        <!-- <div id="video-container">
+            <video id="camera-stream" autoplay></video>
+            <img id="screenshot" src="">
+            <canvas style="display:none;"></canvas>
+        </div> -->
+        <div id="screenshot" style="text-align:center;">
+            <video class="videostream" autoplay=""></video>
+            <img id="screenshot-img">
+            <canvas style="display:none;"></canvas>
+            <!-- <p><button class="capture-button">Capture video</button></p> -->
+            <p><button id="screenshot-button" ng-click="takeScreenshot()">Take screenshot</button></p>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <div class="pull-right">
+        <button type="button" class="btn btn-primary" ng-click="$ctrl.save()">{{'btnSave'|translate}}</button>
+        <button type="button" class="btn btn-default" ng-click="$ctrl.cancel()"
+            data-dismiss="modal">{{'btnCancel'|translate}}</button>
+    </div>
+</div>
+
+
+<!-- <script type="text/javascript" src="/assets/js/core/libraries/jquery.min.js"></script> -->
+
+<script>
+
+    const captureVideoButton =
+        document.querySelector('#screenshot .capture-button');
+    const screenshotButton = document.querySelector('#screenshot-button');
+    const img = document.querySelector('#screenshot img');
+    const video = document.querySelector('#screenshot video');
+
+    const canvas = document.createElement('canvas');
+
+    const hdConstraints = {
+        video: { width: { min: 1280 }, height: { min: 720 } }
+    };
+
+    navigator.mediaDevices.getUserMedia(hdConstraints).
+        then((stream) => { video.srcObject = stream });
+
+    const vgaConstraints = {
+        video: { width: { exact: 640 }, height: { exact: 480 } }
+    };
+
+    navigator.mediaDevices.getUserMedia(vgaConstraints).
+        then((stream) => { video.srcObject = stream });
+
+    const constraints = {
+        video: true
+    }
+
+    //captureVideoButton.onclick = function () {
+    //  navigator.mediaDevices.getUserMedia(constraints).
+    //      then(handleSuccess).catch(handleError);
+    //};
+
+    screenshotButton.onclick = video.onclick = function () {
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        canvas.getContext('2d').drawImage(video, 0, 0);
+        // Other browsers will fall back to image/png
+        img.src = canvas.toDataURL('image/webp');
+        console.log(canvas);
+        console.log(img);
+    };
+
+    function handleSuccess(stream) {
+        //screenshotButton.disabled = false;
+        video.srcObject = stream;
+    }
+
+    function handleError(stream) {
+        video.srcObject = stream;
+    }
+</script>
+
+<!-- 
+<style>
+    #camera-stream {
+        width: 100%;
+    }
+</style> -->

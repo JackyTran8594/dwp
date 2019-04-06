@@ -665,13 +665,42 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $rootScope, WorkOrderS
 
   console.log(item);
 
+  $scope.isGrid = true;
+
+
+  $scope.getClass = function (param) {
+    if (param === 1) {
+      $scope.isGrid = false;
+    } else {
+      $scope.isGrid = true;
+    }
+  }
+
+  $scope.takeScreenshot = function () {
+    var modalInstance = $uibModal.open({
+      animation: $ctrl.animationsEnabled,
+      templateUrl: '/wsplanning/templates/pages/taking_screenshot.html',
+      controller: 'TakeScreenshotCtrl',
+      backdrop: 'static',
+      controllerAs: '$ctrl',
+      size: "lg",
+    });
+
+    modalInstance.result.then(function (selectedItem) {
+      console.log(selectedItem);
+
+    }, function () {
+      console.log('Modal dismissed at: ' + new Date());
+    });
+  };
+
 
   $scope.lstfiles = [];
   $scope.lstphoto = [];
   // $scope.progress = 
   var formData = new FormData();
   $scope.getTheFiles = function ($files) {
-    if($scope.lstphoto.length > 0) {
+    if ($scope.lstphoto.length > 0) {
       $scope.lstphoto = [];
     }
     $scope.lstfiles = $files;
@@ -702,6 +731,48 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $rootScope, WorkOrderS
   $ctrl.selectPhoto = function () {
 
   };
+
+  $ctrl.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+})
+
+
+UserWebApp.controller('TakeScreenshotCtrl', function ($scope, $rootScope, $translate, $location, $filter,
+  $uibModal, cameraService, $stateParams, $state, $uibModalInstance) {
+
+  var $ctrl = this;
+
+  $scope.photo = {}
+  $scope.lstphoto = []
+
+
+
+  $scope.takeScreenshot = function () {
+    var strImg = angular.element(document.querySelector('img'));
+    var dataUrl = strImg.context.currentSrc.split(',');
+    var byteString = atob(dataUrl[1]);
+    var arrayBuffer = new ArrayBuffer(byteString.length);
+    var uint8Array = new Uint8Array(arrayBuffer);
+    for (var i = 0; i < byteString.length; i++) {
+      uint8Array[i] = byteString.charCodeAt(i);
+    }
+
+    var blob = new Blob([uint8Array], { type: 'image/jpeg' });
+    var file = new File([blob], "image.jpg");
+    $scope.lstphoto.push(file);
+
+    console.log($scope.lstphoto);
+    console.log(strImg.context.currentSrc);
+  
+    // $scope.lstphoto.push(item);
+
+  }
+
+
+  $ctrl.save = function (params) {
+
+  }
 
   $ctrl.cancel = function () {
     $uibModalInstance.dismiss('cancel');

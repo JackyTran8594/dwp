@@ -622,12 +622,28 @@ table td {
 
 .photo {
   display: inline-block;
-  height: 100px;
-  width: 100px
+  height: 200px !important;
+  width: 200px !important;
 }
 
 .div-photo {
   padding:5px 5px;
+}
+
+.img-list a {
+  text-decoration: none;
+}
+
+.inner > div > img {
+  height: 100px !important;
+  width: 100px !important;
+}
+
+.list li {
+  border-bottom: 1px solid #cccccc;
+  display: block;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 

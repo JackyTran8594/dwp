@@ -16,7 +16,8 @@ UserWebApp.directive('onFinishRender', function ($timeout) {
   .directive('drawing', drawing2)
   .directive('signaturePad', signaturePad)
   .directive('inputType', inputType)
-  .directive('ngFiles', ngFiles);
+  .directive('ngFiles', ngFiles)
+  .directive('ngCamera', ngCamera);
 
 
 convertToNumberDirective.$inject = [];
@@ -62,6 +63,75 @@ function ngFiles($parse) {
       element.on('change', function (eve) {
         onchange(scope, { $files: eve.target.files })
       })
+    }
+  }
+}
+
+function ngCamera() {
+  return {
+    restrict: 'E',
+    link: function (scope, element, attrs) {
+      var videoSources = [];
+
+      MediaStreamTrack.getSources(function (mediaSources) {
+
+        for (var i = 0; i < mediaSources.length; i++) {
+          if (mediaSources[i].kind == 'video') {
+            videoSources.push(mediaSources[i].id);
+          }
+        }
+
+        if (videoSources.length > 1) { $scope.$emit('multipleVideoSources'); }
+
+        initCamera(0);
+
+      });
+
+      // Elements
+      var videoElement = element.find('video')[0];
+
+
+      // Stream
+      function streaming(stream) {
+        $scope.$apply(function () {
+          videoElement.src = stream;
+          videoElement.play();
+        });
+      }
+
+
+      // Check ready state
+      function checkReadyState() {
+        if (videoElement.readyState == 4) {
+          $interval.cancel(interval);
+          $scope.$emit('videoStreaming');
+        }
+      }
+      var interval = $interval(checkReadyState, 1000);
+
+      // Init
+      $scope.$on('init', function (event, stream) {
+        streaming(stream);
+      });
+
+      // Switch camera
+      $scope.$on('switchCamera', function (event, cameraIndex) {
+        initCamera(cameraIndex);
+      });
+
+      // Init via Service
+      function initCamera(cameraIndex) {
+        var constraints = {
+          audio: false,
+          video: {
+            optional: [{ sourceId: videoSources[cameraIndex] }]
+          }
+        };
+
+        camera.setup(constraints, camera.onSuccess, camera.onError);
+      }
+
+
     }
   }
 }

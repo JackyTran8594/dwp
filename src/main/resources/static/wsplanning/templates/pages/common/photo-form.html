@@ -7,14 +7,33 @@
     <div class="tableModal">
         <div class="row">
             <div class="col-md-9 col-sm-9">
-                <div class="col-md-3 col-sm-4 div-photo text-center" ng-repeat="photo in lstphoto">
-                    <img ng-src="{{photo}}" alt="" class="thumb photo" />
+                <div ng-show="isGrid" id="div-photo" class="col-md-3 col-sm-4 div-photo text-center thumb"
+                    ng-repeat="photo in lstphoto">
+                    <a data-toggle="modal"><img ng-src="{{photo}}" alt="" class="img-thumbnail photo"
+                            data-target="#image-gallery" /></a>
                 </div>
+                <ul ng-show="!isGrid" class="list image-list">
+                    <li ng-repeat="photo in lstphoto">
+                        <div class="">
+                            <a href="" class="inner">
+                                <div>
+                                    <img ng-src="{{photo}}" alt="" class="img-thumbnail" data-target="#image-gallery" />
+                                </div>
+                            </a>
+                        </div>
+                        <div class="">
+                            <ul>
+                                <li></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
             </div>
             <div class="col-md-3 col-sm-3">
                 <div class="row">
-                    <button type="button" class="btn btn-default"
-                        ng-click="$ctrl.selectPhoto()">{{'btnPhoto'|translate}}</button>
+                    <!-- <a type="button" class="btn btn-default" ng-click="$ctrl.selectPhoto()">{{'btnPhoto'|translate}}</a> -->
+                    <a type="button" class="btn btn-default" ng-click="getClass(1)"><i class="icon-list"></i></a>
+                    <a type="button" class="btn btn-default" ng-click="getClass(2)"><i class="icon-grid"></i></a>
                 </div>
                 <div class="row">
                     <input type="file" id="photo-file" class="btn btn-default" multiple ng-files="getTheFiles($files)">
@@ -31,11 +50,33 @@
         </div>
     </div>
 
+    <!-- <div class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="image-gallery-title"></h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img id="image-gallery-image" class="img-responsive col-md-12" src="">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary float-left" id="show-previous-image"><i class="fa fa-arrow-left"></i>
+                    </button>
+
+                    <button type="button" id="show-next-image" class="btn btn-secondary float-right"><i class="fa fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
 </div>
 <div class="modal-footer">
     <div class="pull-left">
 
-        <button type="button" class="btn btn-default">{{'btnCam'|translate}}</button>
+        <button type="button" class="btn btn-default" ng-click="takeScreenshot()">{{'btnCam'|translate}}</button>
     </div>
     <div class="pull-right">
         <button type="button" class="btn btn-primary" ng-click="$ctrl.save()">{{'btnSave'|translate}}</button>
