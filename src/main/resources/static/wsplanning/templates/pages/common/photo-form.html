@@ -8,24 +8,24 @@
         <div class="row">
             <div class="col-md-9 col-sm-9">
                 <div ng-show="isGrid" id="div-photo" class="col-md-3 col-sm-4 div-photo text-center thumb"
-                    ng-repeat="photo in lstphoto">
-                    <a data-toggle="modal"><img ng-src="{{photo}}" alt="" class="img-thumbnail photo"
-                            data-target="#image-gallery" /></a>
+                    ng-repeat="photo in lstphoto track by $index">
+                    <a ng-click="openPhoto($index)" data-toggle="modal"><img ng-src="{{photo}}" alt=""
+                            class="img-thumbnail photo" data-target="#image-gallery" /></a>
                 </div>
                 <ul ng-show="!isGrid" class="list image-list">
                     <li ng-repeat="photo in lstphoto">
                         <div class="">
-                            <a href="" class="inner">
+                            <a href="" class="inner" ng-click="openPhoto($index)">
                                 <div>
                                     <img ng-src="{{photo}}" alt="" class="img-thumbnail" data-target="#image-gallery" />
                                 </div>
                             </a>
                         </div>
-                        <div class="">
+                        <!-- <div class="">
                             <ul>
                                 <li></li>
                             </ul>
-                        </div>
+                        </div> -->
                     </li>
                 </ul>
             </div>

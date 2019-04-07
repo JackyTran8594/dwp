@@ -5,10 +5,9 @@ UserWebApp.service('WorkOrderService', function ($http) {
       method: 'POST',
       url: '/wo/detail',
       data: {
-        "WorkOrderId": WorkOrderId
-      },
-      headers: {
+        "WorkOrderId": WorkOrderId,
         "LoadRows": true,
+        "LoadAttachmentData": true
       }
     });
   }

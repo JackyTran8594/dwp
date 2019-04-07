@@ -602,12 +602,17 @@ function signaturePad($interval, $timeout, $window) {
       height: '@',
       width: '@',
       id: '@',
-      notifyDrawing: '&onDrawing',
+      notifyDrawing: '&onDrawing'
     },
     controller: [
       '$scope',
       function ($scope) {
         $scope.accept = function () {
+          // emit data for close modal
+          $scope.$emit("acceptPhoto", {
+            dataUrl: $scope.dataurl
+          });
+          //
           return {
             isEmpty: $scope.dataurl === EMPTY_IMAGE,
             dataUrl: $scope.dataurl
@@ -633,8 +638,30 @@ function signaturePad($interval, $timeout, $window) {
 
         $scope.clear = function () {
           $scope.signaturePad.clear();
-          $scope.dataurl = EMPTY_IMAGE;
+          // $scope.dataurl = EMPTY_IMAGE;
+          if ($scope.$parent.dataUrlOriginal) {
+            $scope.dataurl = $scope.$parent.dataUrlOriginal;
+          } else {
+            $scope.dataurl = EMPTY_IMAGE;
+          }
         };
+
+        $scope.clearOnlySign = function () {
+          $scope.signaturePad.clear();
+          $scope.dataurl = $scope.$parent.dataUrlOriginal;
+        };
+
+        $scope.acceptPhoto = function () {
+          $scope.$emit("acceptPhoto", {
+            dataUrl: $scope.dataurl
+          })
+          return {
+            dataUrl: $scope.dataurl
+          };
+        }
+
+
+
 
         $scope.$watch("dataurl", function (dataUrl) {
           if (!dataUrl || $scope.signaturePad.toDataURL() === dataUrl) {

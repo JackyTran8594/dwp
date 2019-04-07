@@ -683,11 +683,52 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $rootScope, WorkOrderS
       controller: 'TakeScreenshotCtrl',
       backdrop: 'static',
       controllerAs: '$ctrl',
-      size: "lg",
+      size: "full",
     });
 
     modalInstance.result.then(function (selectedItem) {
       console.log(selectedItem);
+      $scope.lstphoto = $scope.lstphoto.concat(selectedItem)
+      // angular.forEach(selectedItem, function (v, k) {
+      //   $scope.lstphoto.push(v);
+      // });
+      
+    }, function () {
+      console.log('Modal dismissed at: ' + new Date());
+    });
+  };
+
+
+  $scope.openPhoto = function (index) {
+    var modalInstance = $uibModal.open({
+      animation: $ctrl.animationsEnabled,
+      templateUrl: '/wsplanning/templates/pages/open_Photo.html',
+      controller: 'openPhotoCtrl',
+      backdrop: 'static',
+      controllerAs: '$ctrl',
+      size: "lg",
+      resolve: {
+        item: function () {
+          console.log(index);
+          return $scope.lstphoto[index];
+        }
+      }
+    });
+
+    modalInstance.result.then(function (selectedItem) {
+      console.log(selectedItem);
+
+      // var dataUrl = selectedItem.dataUrl.split(',');
+      // var byteString = atob(dataUrl[1]);
+      // var arrayBuffer = new ArrayBuffer(byteString.length);
+      // var uint8Array = new Uint8Array(arrayBuffer);
+      // for (var i = 0; i < byteString.length; i++) {
+      //   uint8Array[i] = byteString.charCodeAt(i);
+      // }
+  
+      // var blob = new Blob([uint8Array], { type: 'image/jpeg' });
+      // var file = new File([blob], "image.jpg");
+      $scope.lstphoto[index] = selectedItem.dataUrl;
 
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
@@ -745,34 +786,56 @@ UserWebApp.controller('TakeScreenshotCtrl', function ($scope, $rootScope, $trans
 
   $scope.photo = {}
   $scope.lstphoto = []
-
+  
 
 
   $scope.takeScreenshot = function () {
     var strImg = angular.element(document.querySelector('img'));
     var dataUrl = strImg.context.currentSrc.split(',');
-    var byteString = atob(dataUrl[1]);
-    var arrayBuffer = new ArrayBuffer(byteString.length);
-    var uint8Array = new Uint8Array(arrayBuffer);
-    for (var i = 0; i < byteString.length; i++) {
-      uint8Array[i] = byteString.charCodeAt(i);
-    }
+    // var byteString = atob(dataUrl[1]);
+    // var arrayBuffer = new ArrayBuffer(byteString.length);
+    // var uint8Array = new Uint8Array(arrayBuffer);
+    // for (var i = 0; i < byteString.length; i++) {
+    //   uint8Array[i] = byteString.charCodeAt(i);
+    // }
 
-    var blob = new Blob([uint8Array], { type: 'image/jpeg' });
-    var file = new File([blob], "image.jpg");
-    $scope.lstphoto.push(file);
+    // var blob = new Blob([uint8Array], { type: 'image/jpeg' });
+    // var file = new File([blob], "image.jpg");
+    // $scope.lstphoto.push(file);
 
+    $scope.lstphoto.push(strImg.context.currentSrc);
     console.log($scope.lstphoto);
-    console.log(strImg.context.currentSrc);
+
+  }
+
+
+  $ctrl.save = function () {
+    $uibModalInstance.close($scope.lstphoto);
+  }
+
+  $ctrl.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+})
+
+UserWebApp.controller('openPhotoCtrl', function ($scope, $rootScope, $translate, $location, $filter,
+  $uibModal, item, $uibModalInstance) {
+
+  var $ctrl = this;
+  console.log(item);
+
+  $scope.photo = item;
+
+  $scope.dataUrlOriginal = item;
   
-    // $scope.lstphoto.push(item);
-
+  $scope.save = function () {
+    console.log($scope.dataurl);
+    // $scope.accept(); 
   }
 
-
-  $ctrl.save = function (params) {
-
-  }
+  $scope.$on("acceptPhoto", function (evt, obj) {
+    $uibModalInstance.close(obj);
+  })
 
   $ctrl.cancel = function () {
     $uibModalInstance.dismiss('cancel');

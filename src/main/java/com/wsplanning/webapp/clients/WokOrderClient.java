@@ -176,11 +176,20 @@ public class WokOrderClient {
     return response.getBody();
   }
 
-  public String detail(String token, String siteId, Map<String, String> params, String LoadRows) {
+  public String detail(String token, String siteId, Map<String, String> params) {
     String workOrderId = params.get("WorkOrderId");
+    String LoadRows = params.get("LoadRows");
+    String LoadAttachmentData = params.get("LoadAttachmentData");
+
     HttpHeaders headers = new HttpHeaders();
     headers.set("Token", token);
-    headers.set("LoadRows", LoadRows);
+    if(StringUtils.isNotBlank(LoadRows)) {
+      headers.set("LoadRows", LoadRows);
+    }
+    if(StringUtils.isNotBlank(LoadAttachmentData)) {
+      headers.set("LoadAttachmentData", LoadAttachmentData);
+    }
+    
     HttpEntity entity = new HttpEntity(headers);
     String url = String.format("%s?SiteId=%s&WorkOrderId=%s", this.endpointUrl, siteId, workOrderId);
     ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class, new HashMap<>());

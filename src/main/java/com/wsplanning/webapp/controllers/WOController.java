@@ -157,9 +157,9 @@ public class WOController extends BaseController {
 
   @PostMapping("/wo/detail")
   @ResponseBody
-  public ResponseEntity detail(@RequestBody Map<String, String> params, @RequestHeader("LoadRows") String LoadRows) {
+  public ResponseEntity detail(@RequestBody Map<String, String> params) {
     try {
-      String rtn = wokOrderClient.detail(getToken(), getSiteId(), params, LoadRows);
+      String rtn = wokOrderClient.detail(getToken(), getSiteId(), params);
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);
