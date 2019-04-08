@@ -654,13 +654,6 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
 UserWebApp.controller('PhotoModalCtrl', function ($scope, $rootScope, WorkOrderService, HttpService, $translate, $location, $filter,
   $uibModal, CommonServices, $stateParams, $state, item, $uibModalInstance) {
 
-  $scope.myChannel = {
-    // the fields below are all optional
-    videoHeight: 800,
-    videoWidth: 600,
-    video: null // Will reference the video element on success
-  };
-
   var $ctrl = this;
 
   console.log(item);
@@ -676,6 +669,89 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $rootScope, WorkOrderS
     }
   }
 
+  function jobAttachments() {
+    var jobObj = {
+      AttachType: "",
+      AttachTypeDescription: "",
+      FileDescription: "",
+      FileId: "",
+      FileName: "",
+      ImageData: "",
+      dataUrl: ""
+    }
+    return jobObj
+  }
+
+  $scope.lstfiles = [];
+  $scope.lstphoto = [];
+
+  loadPhoto(item)
+
+  function loadPhoto(job) {
+    if (job.JobAttachments) {
+      angular.forEach(job.JobAttachments, function (v, k) {
+        var obj = jobAttachments();
+        obj.AttachType = v.AttachType;
+        obj.AttachTypeDescription = v.AttachTypeDescription;
+        obj.FileDescription = v.AttacFileDescriptionhType;
+        obj.FileId = v.FileId;
+        obj.FileName = v.FileName;
+        obj.ImageData = v.ImageData;
+        obj.dataUrl = v.ImageData;
+
+        $scope.lstphoto.push(obj)
+      })
+      // $scope.lstphoto = job.JobAttachments
+    }
+    console.log($scope.lstphoto);
+    return $scope.lstphoto;
+  }
+
+
+  var formData = new FormData();
+  $scope.getTheFiles = function ($files) {
+    if ($scope.lstphoto.length > 0) {
+      $scope.lstphoto = loadPhoto(item);
+      // $scope.lstphoto = [];
+    }
+    $scope.lstfiles = $files;
+    // console.log($files);
+    angular.forEach($files, function (v, k) {
+      var file = v;
+      var reader = new FileReader();
+      reader.onload = $scope.photoLoaded;
+      reader.readAsDataURL(file)
+      formData.append("files", v)
+      // console.log(formData);
+    });
+
+
+    // check value in FormData
+    for (var value of formData.values()) {
+      console.log(value);
+    }
+  }
+
+  $scope.photoLoaded = function (evt) {
+    $scope.$apply(function (e) {
+      var obj = jobAttachments();
+      var dataUrl = ""
+      obj.AttachType = "PIC";
+      obj.AttachTypeDescription = "";
+      obj.FileDescription = "";
+      obj.FileId = "",
+      // var lst = e.
+        // obj.FileName = file.name;
+
+      dataUrl = evt.target.result.split(',');
+      obj.ImageData = dataUrl[1];
+      obj.dataUrl = evt.target.result;
+      $scope.lstphoto.push(obj);
+      console.log($scope.lstphoto);
+    });
+  }
+
+
   $scope.takeScreenshot = function () {
     var modalInstance = $uibModal.open({
       animation: $ctrl.animationsEnabled,
@@ -688,11 +764,17 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $rootScope, WorkOrderS
 
     modalInstance.result.then(function (selectedItem) {
       console.log(selectedItem);
-      $scope.lstphoto = $scope.lstphoto.concat(selectedItem)
-      // angular.forEach(selectedItem, function (v, k) {
-      //   $scope.lstphoto.push(v);
-      // });
-      
+
+      // $scope.lstphoto = $scope.lstphoto.concat(selectedItem)
+      angular.forEach(selectedItem, function (v, k) {
+        var obj = jobAttachments();
+        obj.AttachType = "PIC";
+        obj.dataUrl = v;
+        var dataUrl = v.split(',');
+        obj.ImageData = dataUrl[1];
+        $scope.lstphoto.push(obj);
+      });
+
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
     });
@@ -725,7 +807,7 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $rootScope, WorkOrderS
       // for (var i = 0; i < byteString.length; i++) {
       //   uint8Array[i] = byteString.charCodeAt(i);
       // }
-  
+
       // var blob = new Blob([uint8Array], { type: 'image/jpeg' });
       // var file = new File([blob], "image.jpg");
       $scope.lstphoto[index] = selectedItem.dataUrl;
@@ -735,43 +817,6 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $rootScope, WorkOrderS
     });
   };
 
-
-  $scope.lstfiles = [];
-  $scope.lstphoto = [];
-  // $scope.progress = 
-  var formData = new FormData();
-  $scope.getTheFiles = function ($files) {
-    if ($scope.lstphoto.length > 0) {
-      $scope.lstphoto = [];
-    }
-    $scope.lstfiles = $files;
-    // console.log($files);
-    angular.forEach($files, function (v, k) {
-      var file = v;
-      var reader = new FileReader();
-      reader.onload = $scope.photoLoaded;
-      reader.readAsDataURL(file)
-      formData.append("files", v)
-      // console.log(formData);
-    });
-
-
-    // check value in FormData
-    for (var value of formData.values()) {
-      console.log(value);
-    }
-  }
-
-  $scope.photoLoaded = function (evt) {
-    $scope.$apply(function () {
-      $scope.lstphoto.push(evt.target.result);
-      console.log($scope.lstphoto);
-    });
-  }
-
-  $ctrl.selectPhoto = function () {
-
-  };
 
   $ctrl.cancel = function () {
     $uibModalInstance.dismiss('cancel');
@@ -786,8 +831,6 @@ UserWebApp.controller('TakeScreenshotCtrl', function ($scope, $rootScope, $trans
 
   $scope.photo = {}
   $scope.lstphoto = []
-  
-
 
   $scope.takeScreenshot = function () {
     var strImg = angular.element(document.querySelector('img'));
@@ -802,7 +845,6 @@ UserWebApp.controller('TakeScreenshotCtrl', function ($scope, $rootScope, $trans
     // var blob = new Blob([uint8Array], { type: 'image/jpeg' });
     // var file = new File([blob], "image.jpg");
     // $scope.lstphoto.push(file);
-
     $scope.lstphoto.push(strImg.context.currentSrc);
     console.log($scope.lstphoto);
 
@@ -827,7 +869,7 @@ UserWebApp.controller('openPhotoCtrl', function ($scope, $rootScope, $translate,
   $scope.photo = item;
 
   $scope.dataUrlOriginal = item;
-  
+
   $scope.save = function () {
     console.log($scope.dataurl);
     // $scope.accept(); 

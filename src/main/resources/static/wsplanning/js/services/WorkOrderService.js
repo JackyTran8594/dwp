@@ -7,6 +7,7 @@ UserWebApp.service('WorkOrderService', function ($http) {
       data: {
         "WorkOrderId": WorkOrderId,
         "LoadRows": true,
+        "LoadAttachment": true,
         "LoadAttachmentData": true
       }
     });
@@ -70,7 +71,7 @@ UserWebApp.service('WorkOrderService', function ($http) {
     });
   }
 
-  
+
   WorkOrderService.resources = function () {
     return $http({
       method: 'GET',

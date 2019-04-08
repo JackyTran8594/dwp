@@ -180,11 +180,15 @@ public class WokOrderClient {
     String workOrderId = params.get("WorkOrderId");
     String LoadRows = params.get("LoadRows");
     String LoadAttachmentData = params.get("LoadAttachmentData");
+    String LoadAttachment = params.get("LoadAttachment");
 
     HttpHeaders headers = new HttpHeaders();
     headers.set("Token", token);
     if(StringUtils.isNotBlank(LoadRows)) {
       headers.set("LoadRows", LoadRows);
+    }
+    if (StringUtils.isNotBlank(LoadAttachment) && "true".equalsIgnoreCase(LoadAttachment)) {
+      headers.set("LoadAttachment", "true");
     }
     if(StringUtils.isNotBlank(LoadAttachmentData)) {
       headers.set("LoadAttachmentData", LoadAttachmentData);

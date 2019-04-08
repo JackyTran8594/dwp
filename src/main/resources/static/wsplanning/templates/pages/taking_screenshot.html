@@ -41,22 +41,41 @@
     const canvas = document.createElement('canvas');
 
     const hdConstraints = {
-        video: { width: { min: 1280 }, height: { min: 720 } }
+        video: {
+            width: { min: 1280 },
+            height: { min: 720 },
+            facingMode: 'environment'
+        },
+        audio: false
     };
 
     navigator.mediaDevices.getUserMedia(hdConstraints).
-        then((stream) => { video.srcObject = stream });
+        then((stream) => { video.srcObject = stream }).catch(err => {
+            console.log(err);
+        });
 
     const vgaConstraints = {
-        video: { width: { exact: 640 }, height: { exact: 480 } }
+        video: {
+            width: { exact: 640 },
+            height: { exact: 480 },
+            facingMode: 'environment'
+        },
+        audio: false
     };
 
     navigator.mediaDevices.getUserMedia(vgaConstraints).
-        then((stream) => { video.srcObject = stream });
+        then((stream) => { video.srcObject = stream }).catch(err => {
+            console.log(err);
+        });
 
-    const constraints = {
-        video: true
+    const videoConstraints = {
+        facingMode: 'environment'
     }
+
+    //const constraints = {
+    //    video: videoConstraints,
+    //    audio: false
+    //}
 
     //captureVideoButton.onclick = function () {
     //  navigator.mediaDevices.getUserMedia(constraints).
@@ -78,14 +97,7 @@
         video.srcObject = stream;
     }
 
-    function handleError(stream) {
-        video.srcObject = stream;
-    }
+    //function handleError(stream) {
+    //    video.srcObject = stream;
+    //}
 </script>
-
-<!-- 
-<style>
-    #camera-stream {
-        width: 100%;
-    }
-</style> -->
