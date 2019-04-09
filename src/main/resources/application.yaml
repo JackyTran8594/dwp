@@ -5,12 +5,12 @@ server:
     timeout: 2592000 # Session timeout in seconds.
   ssl:
       key-store-type: PKCS12
-      # The path to the keystore containing the certificate
+#      # The path to the keystore containing the certificate
+#      # The password used to generate the certificate
       key-store: classpath:keystore.p12
-      # The password used to generate the certificate
-      key-store-password: leuyen2435
-#      key-store: /root/keystore.p12
 #      key-store-password: amaster123
+#      key-store: /root/tomcat-8.5.37/external-conf/keystore.p12
+      key-store-password: amaster123
       # The alias mapped to the certificate
       key-alias: tomcat
 spring:

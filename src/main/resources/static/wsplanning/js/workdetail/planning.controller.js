@@ -1,4 +1,4 @@
-UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrderService, HttpService, $translate, $location, $filter, $uibModal, CommonServices, $stateParams, $timeout) {
+UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrderService, HttpService, $translate, $location, $filter, $uibModal, CommonServices, $stateParams, $timeout, $state) {
   //JOB
   $scope.jobTabList = $scope.$parent.WOJobs;
 
@@ -77,7 +77,7 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
   console.log($scope.WorkOrderData.BookedResources);
 
   $scope.events = [];
-  if($scope.WorkOrderData.BookedResources) {
+  if ($scope.WorkOrderData.BookedResources) {
     var itemEvent = {};
     var objTemp = {};
     for (var i = 0; i < $scope.WorkOrderData.BookedResources.length; i++) {
@@ -301,44 +301,15 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
 
 
   //Right click
-  $scope.items = [
-    {
-      name: 'item 1',
-      data: 'the data !'
-    },
-    {
-      name: 'item 2',
-      data: 'the data !'
-    },
-    {
-      name: 'item 3',
-      data: 'the data !'
-    },
-    {
-      name: 'item 4',
-      data: 'the data !'
-    },
-  ]
-
   $scope.menuOptions =
     [
       {
-        label: 'Save',      // menu option label
-        onClick: menuSave   // on click handler
+        label: 'Add',      // menu option label
+        onClick: menuAdd   // on click handler
       },
       {
         label: 'Edit',
         onClick: menuEdit,
-        disabled: function (dataContext) {
-          return dataContext.name === "item 2";
-        }
-      },
-      {
-        label: 'Details',
-        onClick: menuEdit
-      },
-      {
-        divider: true       // will render a divider
       },
       {
         label: 'Remove',
@@ -347,8 +318,40 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
     ]
 
 
-  function menuSave($event) {
+  function menuAdd($event) {
     console.log($event);
+    var modalInstance = $uibModal.open({
+      animation: true,
+      templateUrl: '/wsplanning/templates/pages/workdetail/tabs/planning/modal/save_pool.html',
+      controller: 'SaveBookPoolModalCtrl',
+      controllerAs: '$ctrl',
+      size: "lg",
+      resolve: {
+        data: function () {
+          return $event.dataContext;
+        },
+        title: function () {
+          return $translate.instant('addBookPool');
+        }
+      }
+    });
+
+    modalInstance.result.then(function (value) {
+      console.log(value);
+      if(!$scope.WorkOrder.BookedResourcePools){
+        $scope.WorkOrder.BookedResourcePools = [];
+      }
+      $scope.WorkOrder.BookedResourcePools.push({
+        "RowId": 0,
+        "Duration": value.duration,
+        "WorkDay": value.WorkDay,
+        "DeptId": $scope.DeptId,
+        "ShiftId": $scope.ShiftId,
+      });
+    }, function () {
+      console.log('Modal dismissed at: ' + new Date());
+    });
+
   }
 
   function menuRemove($event) {
@@ -357,10 +360,44 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
 
   function menuEdit($event) {
     console.log($event);
+    var modalInstance = $uibModal.open({
+      animation: true,
+      templateUrl: '/wsplanning/templates/pages/workdetail/tabs/planning/modal/save_pool.html',
+      controller: 'SaveBookPoolModalCtrl',
+      controllerAs: '$ctrl',
+      size: "lg",
+      resolve: {
+        data: function () {
+          return $event.dataContext;
+        },
+        title: function () {
+          return $translate.instant('editBookPool');
+        }
+      }
+    });
+
+    modalInstance.result.then(function (value) {
+      console.log(value);
+    }, function () {
+      console.log('Modal dismissed at: ' + new Date());
+    });
   }
 
   $scope.onSubmitForm = function () {
     console.log("-----savePlanning-------");
+
+    var postAction = "saveResource";
+    var data = JSON.stringify($scope.WorkOrder)
+
+    WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
+      console.log(res);
+      common.notifySuccess("Success!!!");
+      $state.go('app.main.workdetail', {'id': res.data.WorkOrderId, 'type': $stateParams.type});
+    }, function (err) {
+      console.log(err);
+      common.notifyError("Error!!!", err.status);
+    });
+
   }
 
   //Save from button header

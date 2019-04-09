@@ -32,7 +32,7 @@ public class ConnectorConfig {
     Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
 //    Connector connector = new Connector("org.apache.coyote.http11.Http11AprProtocol");
     connector.setScheme("http");
-    connector.setPort(8080);
+    connector.setPort(8081);
     connector.setSecure(false);
     connector.setRedirectPort(8443);
     return connector;

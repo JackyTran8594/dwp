@@ -9,7 +9,7 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
     var calendarEl = document.getElementById('calendar');
 
     calendar = new FullCalendar.Calendar(calendarEl, {
-      plugins: ['dayGrid', 'timeGrid','interaction', 'resourceTimeline'],
+      plugins: ['dayGrid', 'timeGrid', 'interaction', 'resourceTimeline'],
       timeZone: 'UTC',
       defaultView: 'resourceTimelineDay',
       aspectRatio: 1.5,
@@ -37,9 +37,8 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
       },
       resourceOrder: 'title,-id',
       resourceRender: function (renderInfo) {
-        console.log(renderInfo);
         var info = renderInfo.resource._resource;
-        if(info.breakHours){
+        if (info.breakHours) {
           console.log(info);
         }
 
@@ -69,17 +68,80 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
       // resources: callResource(deptId),
       selectable: true,
       select: function (selectionInfo) {
-        console.log(selectionInfo);
-        var abc = prompt('Enter Title');
-        // var allDay = !start.hasTime && !end.hasTime;
-        var newEvent = new Object();
-        newEvent.title = abc;
-        newEvent.resourceId = selectionInfo.resource.id;
-        newEvent.start = moment(selectionInfo.start).format();
-        newEvent.end = moment(selectionInfo.end).format();
-        newEvent.allDay = false;
-        calendar.addEvent(newEvent);
-        // $('#calendar').fullCalendar('renderEvent', newEvent);
+        var modalInstance = $uibModal.open({
+          animation: true,
+          templateUrl: '/wsplanning/templates/pages/workdetail/tabs/planning/modal/save_resource.html',
+          controller: 'SaveBookPoolResourceCtrl',
+          controllerAs: '$ctrl',
+          size: "lg",
+          resolve: {
+            data: function () {
+              var start = dateFromStringWithTimeZone(selectionInfo.startStr);
+              var end = dateFromStringWithTimeZone(selectionInfo.endStr);
+              return {
+                "RowId": 0,
+                "StartTime": start,
+                "EndTime": end,
+                "Date": start,
+                "sStart": formatToTimeHHmm(start),
+                "sEnd": formatToTimeHHmm(end),
+                "Duration": 0,
+                "ResourceId": selectionInfo.resource.id,
+                "ResourceType": selectionInfo.resource._resource.extendedProps.ResType,
+              };
+            },
+            title: function () {
+              return $translate.instant('addBookResource');
+            }
+          }
+        });
+
+        modalInstance.result.then(function (value) {
+          if (value) {
+            //Add event (starttime and endtime add timezone
+            var timezone = 0 - new Date().getTimezoneOffset();
+            var newEvent = new Object();
+            newEvent.title = "test";
+            newEvent.resourceId = selectionInfo.resource.id;
+            newEvent.start = moment(value.StartTime).add(timezone, 'minutes').format();
+            newEvent.end = moment(value.EndTime).add(timezone, 'minutes').format();
+            newEvent.allDay = false;
+            console.log(newEvent);
+            calendar.addEvent(newEvent);
+
+            //Add to Workorder
+            var duration = moment.duration(moment(value.EndTime).diff(moment(value.StartTime)));
+            var hours = duration.asHours();
+
+            console.log("duration: " + hours);
+
+            if(!$scope.WorkOrder.BookedResources){
+              $scope.WorkOrder.BookedResources = [];
+            }
+
+            $scope.WorkOrder.BookedResources.push({
+              "RowId": 0,
+              "Duration": hours,
+              "StartTime": value.StartTime,
+              "EndTime": value.EndTime,
+              "ResourceId": value.ResourceId,
+              "ResourceType": value.ResourceType
+            });
+
+          }
+        }, function () {
+        });
+
+
+        // var abc = prompt('Enter Title');
+        // var newEvent = new Object();
+        // newEvent.title = abc;
+        // newEvent.resourceId = selectionInfo.resource.id;
+        // newEvent.start = moment(selectionInfo.start).format(); //"2019-04-09T18:00:00+07:00"
+        // newEvent.end = moment(selectionInfo.end).format();
+        // newEvent.allDay = false;
+        // console.log(newEvent);
+        // calendar.addEvent(newEvent);
       },
       events: {
         url: '/events2',

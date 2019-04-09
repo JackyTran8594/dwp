@@ -228,9 +228,8 @@ public class WokOrderClient {
       headers.set("PostAction", postAction);
       if (postAction == "saveHeader") {
         wodto.WOJobs = new ArrayList<>();
-        ;
-      }
-      if (postAction == "createNew") {
+      }else if (postAction == "saveResource") {
+      }else if (postAction == "createNew") {
 
       }
       // if(postAction == "saveRows") {

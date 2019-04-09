@@ -250,6 +250,10 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
       }
     });
 
+    modalInstance.rendered.then(function(){
+      $rootScope.$broadcast("modalOpen", {});
+    });
+
     modalInstance.result.then(function (value) {
       if(value){
         $scope.params.skey = value;

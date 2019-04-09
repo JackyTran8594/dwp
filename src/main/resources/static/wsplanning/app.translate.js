@@ -3,6 +3,7 @@ var translationsEN = {
   todayWorkTitle: "Today Work Management",
   allWorkTitle: "All Work Management",
   unscheduledWorkTitle: "Unscheduled Work Management",
+  callCenter: "Call Center",
   withSubcontractorTitle: "Workorders With Subcontractor Management",
   withMOTTitle: "Workorder with MOT Management",
   postponedWorkTitle: "Postponed Work Management",
@@ -199,9 +200,20 @@ var translationsEN = {
   subsys: "SubSys",
   checkin: "Check in",
   checkinTemplate: "Template",
-  sign: "Signature"
+  sign: "Signature",
+  activeCall: "Active Call",
+  recentCall: "Recent Call",
+  phoneNumber: "Phone number",
+  customerData: "Customer data",
+  vehicleData: "Vehicle data",
+  recentTrans: "Recent data",
 
-
+  addBookPool: "Add Book Pool",
+  editBookPool: "Edit Book Pool",
+  duration: "Duration",
+  startTimeBookPool: "Start time",
+  endTimeBookPool: "Start time",
+  addBookResource: "Add book resouce",
 };
 
 var translationsVI = {
@@ -353,7 +365,22 @@ var translationsVI = {
   subsys: "SubSys",
   checkin: "Check in",
   checkinTemplate: "Template",
-  sign: "Signature"
+  sign: "Signature",
+  callCenter: "Call Center",
+  activeCall: "Active Call",
+  recentCall: "Recent Call",
+
+  phoneNumber: "Phone number",
+  customerData: "Customer data",
+  vehicleData: "Vehicle data",
+  recentTrans: "Recent data",
+
+  addBookPool: "Add Book Pool",
+  editBookPool: "Edit Book Pool",
+  startTimeBookPool: "Start time",
+  endTimeBookPool: "Start time",
+  addBookResource: "Add book resouce",
+  duration: "Duration",
 
 };
 

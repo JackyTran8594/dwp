@@ -85,6 +85,7 @@ public class PlanningController extends BaseController {
           itemRtn.addProperty("title", itemObj.get("ShortName").getAsString());
           itemRtn.addProperty("deptId", itemObj.get("DeptId").getAsString());
           itemRtn.addProperty("shiftId", itemObj.get("ShiftId").getAsString());
+          itemRtn.addProperty("ResType", itemObj.get("ResType").getAsString());
 //            itemRtn.addProperty("eventColor", colors[i % colors.length]);
 
           businessHoursTmp = hsm.get(itemObj.get("SmanId").getAsString());
@@ -126,6 +127,7 @@ public class PlanningController extends BaseController {
           itemRtn.addProperty("title", itemObj.get("ShortName").getAsString());
           itemRtn.addProperty("deptId", itemObj.get("DeptId").getAsString());
           itemRtn.addProperty("shiftId", itemObj.get("ShiftId").getAsString());
+          itemRtn.addProperty("ResType", itemObj.get("ResType").getAsString());
 //            itemRtn.addProperty("eventColor", colors[i % colors.length]);
 
           businessHoursTmp = hsm.get(itemObj.get("SmanId").getAsString());

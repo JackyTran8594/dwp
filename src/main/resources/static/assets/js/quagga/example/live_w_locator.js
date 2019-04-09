@@ -2,12 +2,9 @@ $(function () {
   var isMobile = ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch;
 
   var width = 640, height = 480;
-  if (isMobile) {
+  if (isMobile && !iOS()) {
     width = 320;
     height = 240;
-  } else {
-    width = 640;
-    height = 480;
   }
 
   $("#input-stream_constraints").val("" + width + "x" + height);

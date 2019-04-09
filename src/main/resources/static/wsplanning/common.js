@@ -1,3 +1,7 @@
+var isMobile = ('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch;
+var isIos = iOS();
+
+
 $.validator.addMethod("notExisted", function (value, element) {
   var checkApi = $(element).attr('check-api');
   var existed = true;
@@ -417,6 +421,27 @@ $(function () {
 
 });
 
+function formatToTimeHHmm(date) {
+  var rtn = "";
+  var hour = date.getHours();
+  var min = date.getMinutes();
+
+  if (hour < 10) {
+    rtn += "0" + hour;
+  } else {
+    rtn += hour;
+  }
+  if (min < 10) {
+    rtn += ":0" + min;
+  } else {
+    rtn += ":" + min;
+  }
+
+  return rtn;
+}
+
+var timezone = new Date().getTimezoneOffset();
+
 function formatDateToString(date) {
   var rtn = date.getFullYear();
   var sdate = date.getDate();
@@ -471,6 +496,12 @@ function formatDateToApi(date) {
   return rtn;
 }
 
+function dateFromStringWithTimeZone(input) {
+  if(input.endsWith("Z")){
+    return new Date(input.substring(0,input.length - 1));
+  }
+  return new Date(input);
+}
 function formatDateToYYYYMMDD(date) {
   var rtn = date.getFullYear();
   var sdate = date.getDate();
@@ -532,7 +563,7 @@ Date.prototype.toJSON = function () {
   return rtn;
 }
 
-function scaleToFit(img,canvas,ctx){
+function scaleToFit(img, canvas, ctx) {
   // get the scale
   var scale = Math.min(canvas.width / img.width, canvas.height / img.height);
   // get the top left position of the image
@@ -586,5 +617,68 @@ function drawImageProp(ctx, img, x, y, w, h, offsetX, offsetY) {
   if (ch > ih) ch = ih;
 
   // fill image in dest. rectangle
-  ctx.drawImage(img, cx, cy, cw, ch,  x, y, w, h);
+  ctx.drawImage(img, cx, cy, cw, ch, x, y, w, h);
 }
+
+
+function iOS() {
+
+  var iDevices = [
+    'iPad Simulator',
+    'iPhone Simulator',
+    'iPod Simulator',
+    'iPad',
+    'iPhone',
+    'iPod'
+  ];
+
+  if (!!navigator.platform) {
+    while (iDevices.length) {
+      if (navigator.platform === iDevices.pop()) {
+        return true;
+      }
+    }
+  }
+
+  return false;
+}
+
+function iOSversion() {
+
+  if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+    if (!!window.indexedDB) {
+      return 'iOS 8 and up';
+    }
+    if (!!window.SpeechSynthesisUtterance) {
+      return 'iOS 7';
+    }
+    if (!!window.webkitAudioContext) {
+      return 'iOS 6';
+    }
+    if (!!window.matchMedia) {
+      return 'iOS 5';
+    }
+    if (!!window.history && 'pushState' in window.history) {
+      return 'iOS 4';
+    }
+    return 'iOS 3 or earlier';
+  }
+
+  return 'Not an iOS device';
+}
+
+var supportGetUserMedia = false;
+navigator.getMedia = ( navigator.getUserMedia || // use the proper vendor prefix
+  navigator.webkitGetUserMedia ||
+  navigator.mozGetUserMedia ||
+  navigator.msGetUserMedia);
+
+navigator.getMedia({video: true}, function () {
+  // webcam is available
+  console.log("----webcam is available-----");
+  supportGetUserMedia = true;
+}, function () {
+  // webcam is not available
+  console.log("----webcam is not available-----");
+  supportGetUserMedia = false;
+});

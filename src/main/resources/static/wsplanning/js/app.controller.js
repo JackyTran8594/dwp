@@ -1,4 +1,4 @@
-UserWebApp.controller('appCtrl', function ($scope, $rootScope, $locale, $uibModal ,HttpService, $translate, $location, $filter, $state, CommonServices, tmhDynamicLocale) {
+UserWebApp.controller('appCtrl', function ($scope, $rootScope, $locale, $uibModal, HttpService, $translate, $location, $filter, $state, CommonServices, tmhDynamicLocale) {
 
   CommonServices.loadData();
 
@@ -19,60 +19,65 @@ UserWebApp.controller('appCtrl', function ($scope, $rootScope, $locale, $uibModa
 
 
   $scope.workorders = function () {
-    $state.go('app.main.workorder', { locale: $rootScope.lang });
+    $state.go('app.main.workorder', {locale: $rootScope.lang});
   }
 
   $scope.unscheduledwork = function () {
-    $state.go('app.main.unscheduledwork', { locale: $rootScope.lang });
+    $state.go('app.main.unscheduledwork', {locale: $rootScope.lang});
   }
 
   $scope.todayWork = function () {
-    $state.go('app.main.todaywork', { locale: $rootScope.lang });
+    $state.go('app.main.todaywork', {locale: $rootScope.lang});
   }
 
   $scope.worksub = function () {
-    $state.go('app.main.worksub', { locale: $rootScope.lang });
+    $state.go('app.main.worksub', {locale: $rootScope.lang});
   }
 
   $scope.allwork = function () {
-    $state.go('app.main.allwork', { locale: $rootScope.lang });
+    $state.go('app.main.allwork', {locale: $rootScope.lang});
   }
 
   $scope.workmot = function () {
-    $state.go('app.main.workmot', { locale: $rootScope.lang });
+    $state.go('app.main.workmot', {locale: $rootScope.lang});
   }
 
   $scope.worktire = function () {
-    $state.go('app.main.worktire', { locale: $rootScope.lang });
+    $state.go('app.main.worktire', {locale: $rootScope.lang});
   }
 
   $scope.workbo = function () {
-    $state.go('app.main.workbo', { locale: $rootScope.lang });
+    $state.go('app.main.workbo', {locale: $rootScope.lang});
   }
 
   $scope.postponedwork = function () {
-    $state.go('app.main.postponedwork', { locale: $rootScope.lang });
+    $state.go('app.main.postponedwork', {locale: $rootScope.lang});
   }
 
   $scope.tasklist = function () {
-    $state.go('app.main.tasklist', { locale: $rootScope.lang });
+    $state.go('app.main.tasklist', {locale: $rootScope.lang});
   }
 
   $scope.stampingMenu = function () {
-    $state.go('app.main.stamping', { locale: $rootScope.lang });
+    $state.go('app.main.stamping', {locale: $rootScope.lang});
   }
 
 
   $scope.calendarview = function () {
-    $state.go('app.main.calendarview', { locale: $rootScope.lang });
+    $state.go('app.main.calendarview', {locale: $rootScope.lang});
   }
 
   $scope.offer = function () {
-    $state.go('app.main.offer', { locale: $rootScope.lang });
+    $state.go('app.main.offer', {locale: $rootScope.lang});
   }
 
   $scope.replacementvehicle = function () {
-    $state.go('app.main.calendarview', { locale: $rootScope.lang });
+    $state.go('app.main.calendarview', {locale: $rootScope.lang});
+
+  }
+
+  $scope.gotoCallCenter = function () {
+    $state.go('app.main.callcenter', {locale: $rootScope.lang});
   }
 
 
@@ -183,7 +188,7 @@ UserWebApp.controller('appCtrl', function ($scope, $rootScope, $locale, $uibModa
     });
   };
 
- 
+
   //
 
 
@@ -214,17 +219,17 @@ UserWebApp.controller('InfoUserModalCtrl', function ($scope, $rootScope, $uibMod
   $scope.lstServ = [];
 
   function loadCommon() {
-   
+
     CommonServices.getDepartments().then(function (data) {
       // console.log(data);
       $scope.lstDepartment = data;
     });
-  
+
     CommonServices.getServiceAdvisors().then(function (data) {
       // console.log(data);
       $scope.lstServ = data;
     });
-  
+
     CommonServices.getShifts().then(function (data) {
       // console.log(data);
 

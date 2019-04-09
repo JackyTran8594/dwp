@@ -25,8 +25,8 @@
     <link href="/assets/css/limitless/Bootstrap_3/colors.min.css" rel="stylesheet" type="text/css">
 
     <link
-        href="/assets/js/core/libraries/angularjs/angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.min.css"
-        rel="stylesheet">
+            href="/assets/js/core/libraries/angularjs/angular-bootstrap-calendar/dist/css/angular-bootstrap-calendar.min.css"
+            rel="stylesheet">
     <!-- /global stylesheets -->
 
     <!-- Theme stylesheets files -->
@@ -62,17 +62,21 @@
     <!--<script type="text/javascript" src="/assets/js/core/libraries/angularjs/hammerjs/hammer.js"></script>-->
     <!-- /theme JS files -->
 
+    <!--Barcode-->
+    <script src="//webrtc.github.io/adapter/adapter-latest.js" type="text/javascript"></script>
+    <script src="/assets/js/quagga/dist/quagga.js" type="text/javascript"></script>
+
 
     <!--JS Timeline-->
     <script type="text/javascript" src="/assets/js/plugins/fullcalendar-4.0.1/packages/core/main.min.js"></script>
     <!--<script type="text/javascript" src="/assets/js/plugins/fullcalendar-4.0.1/packages/moment/main.min.js"></script>-->
     <script type="text/javascript"
-        src="/assets/js/plugins/fullcalendar-4.0.1/packages/interaction/main.min.js"></script>
+            src="/assets/js/plugins/fullcalendar-4.0.1/packages/interaction/main.min.js"></script>
     <script type="text/javascript"
-        src="/assets/js/plugins/fullcalendar-4.0.1/packages/resource-common/main.min.js"></script>
+            src="/assets/js/plugins/fullcalendar-4.0.1/packages/resource-common/main.min.js"></script>
     <script type="text/javascript" src="/assets/js/plugins/fullcalendar-4.0.1/packages/timeline/main.min.js"></script>
     <script type="text/javascript"
-        src="/assets/js/plugins/fullcalendar-4.0.1/packages/resource-timeline/main.min.js"></script>
+            src="/assets/js/plugins/fullcalendar-4.0.1/packages/resource-timeline/main.min.js"></script>
 
     <!-- Angular JS files -->
     <script type="text/javascript" src="/assets/js/core/libraries/angularjs/angular.min.js"></script>
@@ -92,20 +96,20 @@
     <script type="text/javascript" src="/assets/js/core/libraries/angularjs/fancytree_all.min.js"></script>
     <script type="text/javascript" src="/assets/js/core/libraries/angularjs/fancytree_childcounter.js"></script>
     <script type="text/javascript"
-        src="/assets/js/core/libraries/angularjs/angular-bootstrap-calendar/dist/js/angular-bootstrap-calendar-tpls.min.js"></script>
+            src="/assets/js/core/libraries/angularjs/angular-bootstrap-calendar/dist/js/angular-bootstrap-calendar-tpls.min.js"></script>
     <script type="text/javascript"
-        src="/assets/js/core/libraries/angularjs/right-click-menu/sarsha.contextmenu.js"></script>
+            src="/assets/js/core/libraries/angularjs/right-click-menu/sarsha.contextmenu.js"></script>
     <script type="text/javascript" src="/assets/js/core/libraries/angularjs/ios-dblclick/ios-dblclick.js"></script>
     <!-- /angular JS files -->
 
     <!-- angular-dynamic-locale -->
     <script type="text/javascript"
-        src="/assets/js/core/libraries/angularjs/angular-locale/angular-dynamic-locale/tmhDynamicLocale.js"></script>
+            src="/assets/js/core/libraries/angularjs/angular-locale/angular-dynamic-locale/tmhDynamicLocale.js"></script>
     <!-- end -->
 
     <!-- angular-input-modified -->
     <script type="text/javascript"
-        src="/assets/js/core/libraries/angularjs/angular-input-modified/angular-input-modified.min.js"></script>
+            src="/assets/js/core/libraries/angularjs/angular-input-modified/angular-input-modified.min.js"></script>
     <!-- end -->
 
     <script type="text/javascript" src="/assets/js/multiselect/select.js"></script>
@@ -115,9 +119,9 @@
     <!--Add my JS signature pad -->
     <script src="/assets/js/core/libraries/angularjs/signature_pad/dist/signature_pad.js"></script>
     <script
-        src="/assets/js/core/libraries/angularjs/@blinkmobile/canvas-manipulation/dist/canvas-manipulation.js"></script>
+            src="/assets/js/core/libraries/angularjs/@blinkmobile/canvas-manipulation/dist/canvas-manipulation.js"></script>
     <script
-        src="/assets/js/core/libraries/angularjs/@blinkmobile/angular-signature-pad/dist/angular-signature-pad.js"></script>
+            src="/assets/js/core/libraries/angularjs/@blinkmobile/angular-signature-pad/dist/angular-signature-pad.js"></script>
     <!--<script src="/assets/js/core/libraries/angularjs/angular-signature/src/signature_pad.min.js"></script>-->
     <script src="/assets/js/core/libraries/angularjs/angular-signature/src/signature.js"></script>
 
@@ -128,7 +132,7 @@
     <!-- webcam directive -->
     <script src="/webcam.min.js"></script>
     <!--  -->
-    
+
     <!--<script type="text/javascript" src="/assets/js/core/app.js"></script>-->
     <script type="text/javascript" src="/assets/js/limitless/app.js"></script>
     <!--<script type="text/javascript" src="/assets/js/dashboard.js"></script>-->
@@ -172,56 +176,64 @@
     <script type="text/javascript" src="/wsplanning/js/workdetail/planning.controller.js"></script>
     <script type="text/javascript" src="/wsplanning/js/workdetail/planningdetail.controller.js"></script>
     <script type="text/javascript" src="/wsplanning/js/workdetail/checkin.controller.js"></script>
+    <script type="text/javascript" src="/wsplanning/js/workdetail/modal/saveBookPool.controller.js"></script>
+    <script type="text/javascript" src="/wsplanning/js/workdetail/modal/saveBookResource.controller.js"></script>
+
+    <!--Call center-->
+    <script type="text/javascript" src="/wsplanning/js/callcenter/CallCenterCtrl.js"></script>
+    <script type="text/javascript" src="/wsplanning/js/callcenter/ActiveCallCtrl.js"></script>
+    <script type="text/javascript" src="/wsplanning/js/callcenter/RecentCallCtrl.js"></script>
 </head>
 
 <body class="sidebar-xs" ng-controller="appCtrl" style="touch-action: manipulation;">
-    <div class="preloader" id="preloader1">
-        <hr />
-        <hr />
-        <hr />
-        <hr />
-    </div>
-    <div class="preloader" id="preloader2">
-        <hr />
-        <hr />
-        <hr />
-        <hr />
-    </div>
+<div class="preloader" id="preloader1">
+    <hr />
+    <hr />
+    <hr />
+    <hr />
+</div>
+<div class="preloader" id="preloader2">
+    <hr />
+    <hr />
+    <hr />
+    <hr />
+</div>
 
-    <div th:replace="layouts/fragments/navbar::navbar"></div>
+<div th:replace="layouts/fragments/navbar::navbar"></div>
 
-    <!-- Page container -->
-    <div class="page-container">
+<!-- Page container -->
+<div class="page-container">
 
-        <!-- Page content -->
-        <div class="page-content">
+    <!-- Page content -->
+    <div class="page-content">
 
-            <div th:replace="layouts/fragments/sitebar::sitebar"></div>
+        <div th:replace="layouts/fragments/sitebar::sitebar"></div>
 
 
-            <!-- Main content -->
-            <div class="content-wrapper">
+        <!-- Main content -->
+        <div class="content-wrapper">
 
-                <div ui-view></div>
-                <!--<div layout:fragment="content"></div>-->
-            </div>
-            <!-- /main content -->
-
+            <div ui-view></div>
+            <!--<div layout:fragment="content"></div>-->
         </div>
-        <!-- /page content -->
+        <!-- /main content -->
+
     </div>
-    <!-- /page container -->
+    <!-- /page content -->
+</div>
+<!-- /page container -->
 
-    <!-- Footer -->
-    <!--<div th:replace="layouts/fragments/footer::footer"></div>-->
-    <!-- /footer -->
+<!-- Footer -->
+<!--<div th:replace="layouts/fragments/footer::footer"></div>-->
+<!-- /footer -->
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            console.log("ready!");
-            $(".formValidate").validate(common.formValidate);
-        });
-    </script>
+<script type="text/javascript">
+  $(document).ready(function () {
+    console.log("ready!");
+    $(".formValidate").validate(common.formValidate);
+  });
+</script>
 </body>
 
 </html>
+

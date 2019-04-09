@@ -258,6 +258,15 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
       }
     })
 
+  //Callcenter
+    .state('app.main.callcenter', {
+      url: 'callcenter',
+      controller: "CallCenterCtrl as $ctrl",
+      templateUrl: '/wsplanning/templates/pages/callcenter/index.html',
+      resolve: {
+      }
+    })
+
   //$locationProvider.html5Mode(true);
 });
 
