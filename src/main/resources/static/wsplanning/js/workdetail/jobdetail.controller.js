@@ -684,6 +684,7 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $rootScope, WorkOrderS
 
   $scope.lstfiles = [];
   $scope.lstphoto = [];
+  $scope.lstAttachment = [];
 
   loadPhoto(item)
 
@@ -696,12 +697,11 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $rootScope, WorkOrderS
         obj.FileDescription = v.AttacFileDescriptionhType;
         obj.FileId = v.FileId;
         obj.FileName = v.FileName;
-        obj.ImageData = v.ImageData;
-        obj.dataUrl = v.ImageData;
-
-        $scope.lstphoto.push(obj)
+        obj.ImageData =  v.ImageData;
+        obj.dataUrl =  "data:image/webp;base64," + v.ImageData;
+        $scope.lstphoto.push(obj.dataUrl);
+        $scope.lstAttachment.push(obj)
       })
-      // $scope.lstphoto = job.JobAttachments
     }
     console.log($scope.lstphoto);
     return $scope.lstphoto;
@@ -710,16 +710,34 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $rootScope, WorkOrderS
 
   var formData = new FormData();
   $scope.getTheFiles = function ($files) {
-    if ($scope.lstphoto.length > 0) {
-      $scope.lstphoto = loadPhoto(item);
-      // $scope.lstphoto = [];
-    }
+    // if ($scope.lstphoto.length > 0) {
+    //   $scope.lstphoto = loadPhoto(item);
+    //   // $scope.lstphoto = [];
+    // }
     $scope.lstfiles = $files;
     // console.log($files);
     angular.forEach($files, function (v, k) {
       var file = v;
       var reader = new FileReader();
-      reader.onload = $scope.photoLoaded;
+      // reader.onload = $scope.photoLoaded;
+      reader.onload = function (e) {
+        $scope.$apply(function () {
+          var obj = jobAttachments();
+          var dataUrl = ""
+          obj.AttachType = "PIC";
+          obj.AttachTypeDescription = "";
+          obj.FileDescription = "";
+          obj.FileId = "",
+            // var lst = e.
+          obj.FileName = file.name;
+          dataUrl = e.target.result.split(',');
+          obj.ImageData = dataUrl[1];
+          obj.dataUrl = "data:image/webp;base64," + e.target.result;
+          $scope.lstphoto.push(obj.dataUrl);
+          $scope.lstAttachment.push(obj)
+          console.log($scope.lstphoto);
+        });
+      }
       reader.readAsDataURL(file)
       formData.append("files", v)
       // console.log(formData);
@@ -732,24 +750,24 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $rootScope, WorkOrderS
     }
   }
 
-  $scope.photoLoaded = function (evt) {
-    $scope.$apply(function (e) {
-      var obj = jobAttachments();
-      var dataUrl = ""
-      obj.AttachType = "PIC";
-      obj.AttachTypeDescription = "";
-      obj.FileDescription = "";
-      obj.FileId = "",
-      // var lst = e.
-        // obj.FileName = file.name;
+  // $scope.photoLoaded = function (evt) {
+  //   $scope.$apply(function (e) {
+  //     var obj = jobAttachments();
+  //     var dataUrl = ""
+  //     obj.AttachType = "PIC";
+  //     obj.AttachTypeDescription = "";
+  //     obj.FileDescription = "";
+  //     obj.FileId = "",
+  //       // var lst = e.
+  //       // obj.FileName = file.name;
 
-      dataUrl = evt.target.result.split(',');
-      obj.ImageData = dataUrl[1];
-      obj.dataUrl = evt.target.result;
-      $scope.lstphoto.push(obj);
-      console.log($scope.lstphoto);
-    });
-  }
+  //       dataUrl = evt.target.result.split(',');
+  //     obj.ImageData = dataUrl[1];
+  //     obj.dataUrl = evt.target.result;
+  //     $scope.lstphoto.push(obj);
+  //     console.log($scope.lstphoto);
+  //   });
+  // }
 
 
   $scope.takeScreenshot = function () {
