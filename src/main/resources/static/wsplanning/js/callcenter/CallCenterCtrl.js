@@ -1,4 +1,4 @@
-UserWebApp.controller('CallCenterCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $location, $state, $filter, $uibModal, CommonServices, typeWO) {
+UserWebApp.controller('CallCenterCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $location, $state, $filter, $uibModal, CommonServices) {
   $scope.code = "";
 
   $scope.toogleActiveCall = function () {

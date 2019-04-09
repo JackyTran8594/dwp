@@ -190,7 +190,7 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
     })
 
     .state('app.main.workdetail', {
-      url: 'workdetail/:type/:id/',
+      url: 'workdetail/:type/:id?tab',
       controller: "WorkDetailCtrl as $ctrl",
       templateUrl: '/wsplanning/templates/pages/workdetail/index.html',
       resolve: {

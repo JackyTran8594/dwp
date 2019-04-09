@@ -1,4 +1,4 @@
-UserWebApp.controller('ActiveCallCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $location, $state, $filter, $uibModal, CommonServices, typeWO) {
+UserWebApp.controller('ActiveCallCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $location, $state, $filter, $uibModal, CommonServices) {
   $scope.isShow = true;
 
 

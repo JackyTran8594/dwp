@@ -1,4 +1,5 @@
 UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpService, $translate, $location, $filter, $uibModal, CommonServices, $stateParams, $state, WorkOrder, lstMonth, WorkOrderService) {
+
   $scope.WorkOrderId = $stateParams.id;
   $scope.type = $stateParams.type;
   $scope.WOJobs = WorkOrder.data.WOJobs;
@@ -157,7 +158,12 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
     if (id == null) {
       return $scope.tabActive = "header";
     }
-    return $scope.tabActive = "job";
+
+    if($stateParams.tab){
+      $scope.tabActive = $stateParams.tab;
+    }else{
+      return $scope.tabActive = "job";
+    }
   }
 
 

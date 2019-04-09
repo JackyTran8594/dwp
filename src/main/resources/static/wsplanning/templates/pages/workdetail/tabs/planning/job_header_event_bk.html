@@ -135,21 +135,30 @@
     'cal-day-future': day.isFuture,
     'cal-day-selected': vm.selectedDate.getDate() == day.label
   }">
+        <small
+                class="cal-events-num badge badge-important pull-left"
+                ng-show="day.badgeTotal > 0 && (vm.calendarConfig.displayAllMonthEvents || day.inMonth)"
+                ng-bind="day.badgeTotal">
+        </small>
 
         <span
-                class="calendar-month"
+                class="pull-right"
                 data-cal-date
                 ng-click="vm.calendarCtrl.dateClicked(day.date)"
                 ng-bind="day.label">
         </span>
 
 
-        <div class="events-list center" ng-show="day.events.length > 0">
+        <div class="events-list" ng-show="day.events.length > 0">
             <a
+                    ng-repeat="event in day.events | orderBy:'startsAt' track by event.calendarEventId"
                     href="javascript:;"
                     class="pull-left event"
-                    ng-style="{backgroundColor: '#dedbcd'}"
-                    tooltip-append-to-body="true">
+                    ng-class="event.cssClass"
+                    ng-style="{backgroundColor: event.color.primary}"
+                    tooltip-append-to-body="true"
+                    uib-tooltip-html="vm.calendarEventTitle.monthViewTooltip(event) | calendarTrustAsHtml"
+                    auto-scroll="vm.draggableAutoScroll">
             </a>
         </div>
 

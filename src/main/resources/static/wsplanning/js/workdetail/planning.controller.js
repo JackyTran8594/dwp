@@ -338,7 +338,7 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
 
     modalInstance.result.then(function (value) {
       console.log(value);
-      if(!$scope.WorkOrder.BookedResourcePools){
+      if (!$scope.WorkOrder.BookedResourcePools) {
         $scope.WorkOrder.BookedResourcePools = [];
       }
       $scope.WorkOrder.BookedResourcePools.push({
@@ -392,7 +392,12 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
     WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
       console.log(res);
       common.notifySuccess("Success!!!");
-      $state.go('app.main.workdetail', {'id': res.data.WorkOrderId, 'type': $stateParams.type});
+
+      if($scope.WorkOrder && $scope.WorkOrder.WorkOrderId){
+        $state.go('app.main.workdetail', {'id': $scope.WorkOrder.WorkOrderId, 'type': $stateParams.type, 'tab': "planning"});
+      }else{
+        $state.go('app.main.workdetail', {'id': res.data.WorkOrderId, 'type': $stateParams.type, 'tab': "planning"});
+      }
     }, function (err) {
       console.log(err);
       common.notifyError("Error!!!", err.status);
