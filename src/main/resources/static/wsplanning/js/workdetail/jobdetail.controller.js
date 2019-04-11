@@ -114,12 +114,13 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
     }
   }
 
-  $scope.getCheckRow = function (mechanicId) {
-    if (mechanicId != null) {
-      return "icon-checked-rows";
-    } else {
-      return "icon-unchecked-rows";
-    }
+ 
+  // $scope.hasMechanicId = false;
+
+  $scope.getCheckRow = function (parentId, id, hasMechanicId) {
+      if (hasMechanicId == true) {
+        $scope.WorkOrder.Token.DMSUserId = $scope.WorkOrder.WOJobs[parentId].Items[id].MechanicId;
+      }
   }
 
 
@@ -200,6 +201,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
           var charactersObject = createItem();
           charactersObject.Name = selectedItem;
           charactersObject.ItemType = item;
+          charactersObject.MechanicId = "";
           $scope.jobTabList[id].Items = [];
           $scope.jobTabList[id].Items.push(charactersObject);
         }
@@ -211,6 +213,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
           var charactersObject = createItem();
           charactersObject.Name = selectedItem;
           charactersObject.ItemType = item;
+          charactersObject.MechanicId = "";
           $scope.jobTabList[id].Items.push(charactersObject);
         }
 
@@ -462,10 +465,6 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   $rootScope.$on('saveJob', function (event, obj) {
     $scope.onSubmitForm();
   });
-
-
-
-
 
 
 });

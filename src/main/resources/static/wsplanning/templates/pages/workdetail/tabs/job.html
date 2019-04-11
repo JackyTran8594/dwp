@@ -368,19 +368,22 @@
                                                                     </td>
                                                                     <td class="text-left">
                                                                         <span>{{obj.Name}}</span>
-
                                                                     </td>
-
                                                                     <td class="text-center" style="width: 5%">
                                                                         <span ng-hide="obj.ItemType === 8">
                                                                             {{obj.Quantity}}
                                                                         </span>
-
                                                                     </td>
                                                                     <td class="text-center" style="width: 5%">
-                                                                        <span ng-class="getCheckRow(item.MechanicId)"
+                                                                        <!-- <span ng-class="getCheckRow(item.MechanicId)"
                                                                             ng-hide="obj.ItemType !== 7 && obj.ItemType !== 8">
-                                                                        </span>
+                                                                        </span> -->
+                                                                        <input type="checkbox" ng-checked="checked"
+                                                                            ng-init = "(checked) ? (item.MechanicId != null): (!checked)"
+                                                                            ng-hide="obj.ItemType !== 7 && obj.ItemType !== 8"
+                                                                            ng-model="hasMechanicId"
+                                                                            ng-change="getCheckRow($parent.$index, $index, hasMechanicId)"
+                                                                            >
                                                                     </td>
                                                                     <td class="text-center" style="width: 10%">
                                                                         <span>

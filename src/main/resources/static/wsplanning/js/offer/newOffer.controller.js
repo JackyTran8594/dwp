@@ -213,6 +213,32 @@ UserWebApp.controller('VehicleModalCtrl', function ($scope, $rootScope, $locale,
     loadData($scope.skey)
   }
 
+  $scope.openCamera = function () {
+    var modalInstance = $uibModal.open({
+      animation: $ctrl.animationsEnabled,
+      templateUrl: '/wsplanning/templates/pages/scan_barcode.html',
+      controller: 'ScanBarcodeModalCtrl',
+      controllerAs: '$ctrl',
+      size: "full",
+      resolve: {
+
+      }
+    });
+
+    modalInstance.rendered.then(function(){
+      $rootScope.$broadcast("modalOpen", {});
+    });
+
+    modalInstance.result.then(function (value) {
+      if(value){
+        $scope.params.skey = value;
+        $scope.doSearch();
+      }
+    }, function () {
+      console.log('Modal dismissed at: ' + new Date());
+    });
+  }
+
   $scope.doPick = function (selectedItem) {
     $uibModalInstance.close(selectedItem);
   }
