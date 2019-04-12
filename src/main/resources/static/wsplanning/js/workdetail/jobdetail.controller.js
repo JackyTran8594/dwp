@@ -5,7 +5,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   $scope.jobParams = $scope.$parent.jobObject;
   $scope.actTypeJob = $scope.$parent.actionType;
   $scope.jobTabList = $scope.$parent.WOJobs;
-
+  var jobsList = []
 
 
   loadCommon();
@@ -64,6 +64,9 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
     return item;
   }
 
+  function saveData(initData) {
+    return initData;
+  }
 
 
 
@@ -119,11 +122,11 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
 
   $scope.getCheckRow = function (parentId, id, checked) {
     if (checked == false) {
-        $scope.WorkOrder.WOJobs[parentId].Items[id].MechanicId = null;
-        console.log("--done--");
+      $scope.jobTabList[parentId].Items[id].MechanicId = null;
+      console.log("--done--");
     } else {
-        $scope.WorkOrder.WOJobs[parentId].Items[id].MechanicId = $scope.WorkOrder.Token.SmanId;
-        console.log("--done--");
+      $scope.jobTabList[parentId].Items[id].MechanicId = $scope.WorkOrder.Token.EmployeeData.SmanId;
+      console.log("--done--");
     }
   }
 
@@ -147,7 +150,14 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   $scope.page = 1;
 
   $scope.removeItem = function (parentId, childrenId) {
-    $scope.jobTabList[parentId].Items.splice(childrenId, 1);
+    var rowId = $scope.jobTabList[parentId].Items[childrenId].RowId;
+    var itemNo = $scope.jobTabList[parentId].Items[childrenId].ItemNo;
+    if (rowId == 0 && itemNo == "") {
+      $scope.jobTabList[parentId].Items.splice(childrenId, 1);
+    } else {
+      $scope.jobTabList[parentId].Items[childrenId].RowId = $scope.jobTabList[parentId].Items[childrenId].RowId * (-1);
+    }
+
     console.log($scope.jobTabList[parentId].Items);
   }
 
@@ -210,7 +220,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
     });
 
     modalInstance.result.then(function (selectedItem) {
-
+      console.log(selectedItem);
       if (typeof (selectedItem) === "string") {
         if ($scope.jobTabList[id].Items == null) {
           var charactersObject = createItem();

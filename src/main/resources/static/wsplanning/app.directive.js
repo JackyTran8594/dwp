@@ -142,19 +142,19 @@ function checkboxDirective($compile) {
   return {
     restrict: 'EA',
     scope: {
-      mechanicid: '=',
+      hasMechanicId: '=',
       type: '=',
       ngModel: '='
     },
     replace: true,
     link: function (scope, element, attr, ctrl) {
-      var checked = '<input type="checkbox" ng-init="checked = true"  ng-model="checked" ng-change="getCheckRow($parent.$index, $index, checked)"/>'
-      var unchecked = '<input type="checkbox" ng-init="checked = false"  ng-model="checked" ng-change="getCheckRow($parent.$index, $index, checked)"/>'
-      var attributes = scope.$eval(attr.checkboxDirective);
+      var checked = '<input type="checkbox" ng-init="checked = true"  ng-model="checked" ng-change="$parent.getCheckRow($parent.$parent.$index, $parent.$index, checked)"/>'
+      var unchecked = '<input type="checkbox" ng-init="checked = false"  ng-model="checked" ng-change="$parent.getCheckRow($parent.$parent.$index, $parent.$index, checked)"/>'
+      // var attributes = scope.$eval(attr.checkboxDirective);
 
-      if (scope.type == "7" || scope.type == "8") {
-        if (scope.mechanicid !== undefined || scope.mechanicid !== "" || scope.mechanicid != null) {
-          var e = $compile(checked)(scope);
+      if ((scope.type == "7") || (scope.type == "8")) {
+        if (scope.hasMechanicId && scope.hasMechanicId.length > 0) {
+          var e = $compile(checked)(scope); 
           element.replaceWith(e);
         } else {
           var e = $compile(unchecked)(scope);

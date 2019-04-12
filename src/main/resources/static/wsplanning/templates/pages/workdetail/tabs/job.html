@@ -344,7 +344,8 @@
                                                             </thead>
                                                             <!--BODY-->
                                                             <tbody>
-                                                                <tr ng-repeat="obj in item.Items track by $index">
+                                                                <tr ng-repeat="obj in item.Items track by $index"
+                                                                  ng-show="obj.RowId >= 0">
                                                                     <td class="text-center" style="width: 5%">
                                                                         <span>{{$index+1}}</span>
                                                                     </td>
@@ -364,15 +365,9 @@
                                                                         </span>
                                                                     </td>
                                                                     <td class="text-center" style="width: 5%">
-                                                                        <!-- <span ng-class="getCheckRow(item.MechanicId)"
-                                                                            ng-hide="obj.ItemType !== 7 && obj.ItemType !== 8">
-                                                                        </span> -->
-                                                                        <!-- <input type="checkbox" ng-model="checked" 
-                                                                            ng-init="(obj.MechanicId !== null) ? checked = true : checked = false"                             
-                                                                            ng-hide="obj.ItemType !== 7 && obj.ItemType !== 8"
-                                                                            ng-change="getCheckRow($parent.$index, $index, checked)"> -->
                                                                         <span>{{obj.MechanicId}}</span>
-                                                                        <checkbox-directive mechanicid="obj.MechanicId"
+                                                                        <checkbox-directive
+                                                                            has-Mechanic-Id="obj.MechanicId"
                                                                             type="obj.ItemType">
                                                                         </checkbox-directive>
                                                                     </td>

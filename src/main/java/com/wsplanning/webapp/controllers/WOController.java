@@ -113,7 +113,7 @@ public class WOController extends BaseController {
             WOVehicle = itemObj.get("WOVehicle").getAsJsonObject();
             sb.append(WOVehicle.get("LicenseNo").getAsString()).append(", ").append(WOVehicle.get("Make").getAsString())
                 .append(" ").append(WOVehicle.get("Model").getAsString()).append(" ")
-                .append(WOVehicle.get("SubModel").getAsString()).append(" <br />");
+                .append(WOVehicle.get("SubModel").getAsString()).append(", ").append(WOVehicle.get("VIN").getAsString()).append(" <br />");
             if (WOVehicle.has("HolderCustomer") && !WOVehicle.get("HolderCustomer").isJsonNull()) {
               HolderCustomer = WOVehicle.get("HolderCustomer").getAsJsonObject();
             }
