@@ -63,6 +63,15 @@
         audio: false
     };
 
+    const tabletConstraints = {
+         video: {
+            width: { min: 640 },
+            height: { min: 480 },
+            facingMode: 'environment'
+        },
+        audio: false
+    }
+
     navigator.mediaDevices.getUserMedia(vgaConstraints).
         then((stream) => { video.srcObject = stream }).catch(err => {
             console.log(err);

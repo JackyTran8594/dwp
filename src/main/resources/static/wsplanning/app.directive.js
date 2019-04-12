@@ -17,10 +17,12 @@ UserWebApp.directive('onFinishRender', function ($timeout) {
   .directive('signaturePad', signaturePad)
   .directive('inputType', inputType)
   .directive('ngFiles', ngFiles)
-  .directive('ngCamera', ngCamera);
-
+  .directive('ngCamera', ngCamera)
+  .directive('checkboxDirective', checkboxDirective);
 
 convertToNumberDirective.$inject = [];
+
+
 
 function convertToNumberDirective() {
   return {
@@ -136,9 +138,39 @@ function ngCamera() {
   }
 }
 
+function checkboxDirective($compile) {
+  return {
+    restrict: 'EA',
+    scope: {
+      mechanicid: '=',
+      type: '=',
+      ngModel: '='
+    },
+    replace: true,
+    link: function (scope, element, attr, ctrl) {
+      var checked = '<input type="checkbox" ng-init="checked = true"  ng-model="checked" ng-change="getCheckRow($parent.$index, $index, checked)"/>'
+      var unchecked = '<input type="checkbox" ng-init="checked = false"  ng-model="checked" ng-change="getCheckRow($parent.$index, $index, checked)"/>'
+      var attributes = scope.$eval(attr.checkboxDirective);
+
+      if (scope.type == "7" || scope.type == "8") {
+        if (scope.mechanicid !== undefined || scope.mechanicid !== "" || scope.mechanicid != null) {
+          var e = $compile(checked)(scope);
+          element.replaceWith(e);
+        } else {
+          var e = $compile(unchecked)(scope);
+          element.replaceWith(e);
+        }
+      } else {
+        var e = $compile("")(scope);
+        element.replaceWith(e);
+      }
+    }
+  }
+}
+
 function inputType($compile) {
   return {
-    restrict: 'AE',
+    restrict: 'EA',
     scope: {
       type: '=',
       ngModel: '=',

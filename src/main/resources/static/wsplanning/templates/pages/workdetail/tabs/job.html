@@ -92,7 +92,6 @@
                                             <div class="row">
 
                                                 <div class="col-xs-1">
-
                                                     <div class="form-group">
                                                         <label class="control-label col-xs-8">Job No: </label>
                                                         <div class="col-xs-4">
@@ -100,20 +99,15 @@
                                                                 ng-model="item.JobNo" readonly>
                                                         </div>
                                                     </div>
-
-
                                                 </div>
                                                 <div class="col-xs-9">
-
                                                     <div class="form-group">
                                                         <label class="control-label col-xs-2">Job Title: </label>
                                                         <div class="col-xs-10">
                                                             <input type="text" class="form-control"
                                                                 ng-model="item.Note">
-
                                                         </div>
                                                     </div>
-
                                                 </div>
                                                 <div class="col-xs-2">
                                                     <div class="form-group">
@@ -122,10 +116,8 @@
                                                             <input type="text" class="form-control"
                                                                 ng-model="item.EstimatedTime" format-number-decimal>
                                                         </div>
-
                                                     </div>
                                                 </div>
-
                                             </div>
 
                                             <div class="row">
@@ -135,7 +127,6 @@
                                                         <div class="col-xs-10">
                                                             <input type="text" class="form-control"
                                                                 ng-model="item.Complaint">
-
                                                         </div>
                                                     </div>
                                                 </div>
@@ -304,13 +295,11 @@
 
                                                     <div class="form-group">
                                                         <label class="control-label  col-xs-4">Job Category:</label>
-
                                                         <div class="col-xs-8">
                                                             <select class="form-control" ng-model="item.JobCategory"
                                                                 ng-options="o.Id as o.Name for o in lstJobCats">
                                                             </select>
                                                         </div>
-
                                                     </div>
 
                                                 </div>
@@ -378,12 +367,14 @@
                                                                         <!-- <span ng-class="getCheckRow(item.MechanicId)"
                                                                             ng-hide="obj.ItemType !== 7 && obj.ItemType !== 8">
                                                                         </span> -->
-                                                                        <input type="checkbox" ng-checked="checked"
-                                                                            ng-init = "(checked) ? (item.MechanicId != null): (!checked)"
+                                                                        <!-- <input type="checkbox" ng-model="checked" 
+                                                                            ng-init="(obj.MechanicId !== null) ? checked = true : checked = false"                             
                                                                             ng-hide="obj.ItemType !== 7 && obj.ItemType !== 8"
-                                                                            ng-model="hasMechanicId"
-                                                                            ng-change="getCheckRow($parent.$index, $index, hasMechanicId)"
-                                                                            >
+                                                                            ng-change="getCheckRow($parent.$index, $index, checked)"> -->
+                                                                        <span>{{obj.MechanicId}}</span>
+                                                                        <checkbox-directive mechanicid="obj.MechanicId"
+                                                                            type="obj.ItemType">
+                                                                        </checkbox-directive>
                                                                     </td>
                                                                     <td class="text-center" style="width: 10%">
                                                                         <span>

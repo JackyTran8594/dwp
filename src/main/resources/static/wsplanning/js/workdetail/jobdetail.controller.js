@@ -114,14 +114,29 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
     }
   }
 
- 
+
   // $scope.hasMechanicId = false;
 
-  $scope.getCheckRow = function (parentId, id, hasMechanicId) {
-      if (hasMechanicId == true) {
-        $scope.WorkOrder.Token.DMSUserId = $scope.WorkOrder.WOJobs[parentId].Items[id].MechanicId;
-      }
+  $scope.getCheckRow = function (parentId, id, checked) {
+    if (checked == false) {
+        $scope.WorkOrder.WOJobs[parentId].Items[id].MechanicId = null;
+        console.log("--done--");
+    } else {
+        $scope.WorkOrder.WOJobs[parentId].Items[id].MechanicId = $scope.WorkOrder.Token.SmanId;
+        console.log("--done--");
+    }
   }
+
+  // $scope.checkedItem = function (mechanicId, isChecked) {
+  //   console.log(mechanicId)
+  //   if (mechanicId !== null) {
+  //     isChecked = true;
+  //     return isChecked;
+  //   } else {
+  //     isChecked = false;
+  //     return isChecked;
+  //   }
+  // }
 
 
 
@@ -696,8 +711,8 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $rootScope, WorkOrderS
         obj.FileDescription = v.AttacFileDescriptionhType;
         obj.FileId = v.FileId;
         obj.FileName = v.FileName;
-        obj.ImageData =  v.ImageData;
-        obj.dataUrl =  "data:image/webp;base64," + v.ImageData;
+        obj.ImageData = v.ImageData;
+        obj.dataUrl = "data:image/webp;base64," + v.ImageData;
         $scope.lstphoto.push(obj.dataUrl);
         $scope.lstAttachment.push(obj)
       })
@@ -728,7 +743,7 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $rootScope, WorkOrderS
           obj.FileDescription = "";
           obj.FileId = "",
             // var lst = e.
-          obj.FileName = file.name;
+            obj.FileName = file.name;
           dataUrl = e.target.result.split(',');
           obj.ImageData = dataUrl[1];
           obj.dataUrl = "data:image/webp;base64," + e.target.result;
