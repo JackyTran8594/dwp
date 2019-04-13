@@ -588,22 +588,6 @@ table td {
   content: "\ea36"
 }
 
-.tree-level span {
-
-}
-
-.tree-level .checkbox {
-  /* width: 12px;
-  height: 22px;
-  border-top: 2px solid transparent;
-  border-left: 2px solid transparent;
-  -webkit-backface-visibility: hidden;
-  -webkit-transform-origin: 100% 100%;
-  -moz-transform-origin: 100% 100%;
-  -ms-transform-origin: 100% 100%;
-  -o-transform-origin: 100% 100%;
-  transform-origin: 100% 100%;  */
-}
 
 .tree-end {
   cursor: pointer;
@@ -642,6 +626,7 @@ table td {
 
 .div-photo {
   padding:5px 5px;
+  /* margin: 5px 5px; */
 }
 
 .img-list a {
@@ -660,8 +645,16 @@ table td {
   padding-bottom: 5px;
 }
 
-video {
+/* video {
     height:     
+} */
+
+.outside-image {
+  
+}
+
+.icon-remove-photo {
+
 }
 
 @media (min-width: 769px) {
@@ -764,6 +757,11 @@ video {
     overflow-y: auto;
   }
 
+  .tableModal {
+    max-height: 600px;
+    overflow-y:scroll;
+    
+  }
   
   .main-content {
      max-height: 600px;
@@ -792,6 +790,12 @@ video {
      max-height: 600px;
      /* overflow-y: scroll; */
   }
+
+  .tableModal {
+    max-height: 450px;
+    overflow-y:scroll;
+    
+  }
 }
 
 
@@ -803,7 +807,7 @@ video {
 
   .tableModal {
     overflow-x: hidden;
-    overflow-y:auto;
+    overflow-y:auto;   
   } 
 
   .tableIndex {

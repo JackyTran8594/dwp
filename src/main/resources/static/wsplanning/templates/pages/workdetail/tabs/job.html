@@ -155,6 +155,10 @@
                                         </h6>
                                         <div class="heading-elements">
                                             <ul class="icons-list">
+                                                <li><a class="btn btn-lg" ng-click="openImage(item)"><span
+                                                            data-popup="tooltip" data-placement="top" title="Labour"
+                                                            class=" icon-images2"></span></a>
+                                                </li>
                                                 <li ng-show="item.JobNo"><a class="btn btn-lg" data-popup="tooltip"
                                                         data-placement="top" title="Stamping"
                                                         ng-click="addStamping(item.RowId)"><span
@@ -345,7 +349,7 @@
                                                             <!--BODY-->
                                                             <tbody>
                                                                 <tr ng-repeat="obj in item.Items track by $index"
-                                                                  ng-show="obj.RowId >= 0">
+                                                                    ng-show="obj.RowId >= 0">
                                                                     <td class="text-center" style="width: 5%">
                                                                         <span>{{$index+1}}</span>
                                                                     </td>

@@ -5,13 +5,17 @@
 </div>
 <div class="modal-body">
     <div class="row">
-        <!-- <img ng-src="{{photo}}" class="img-responsive" id="selectedPhoto"> -->
-        <!-- <canvas id="signature-pad" class="img-responsive"></canvas> -->
-        <signature-pad id="template-canvas" accept="accept" clear="clear" height="400" width="565"
-            class="img-responsive" dataurl="photo"></signature-pad>
-        <div class="result" ng-show="signature">
+        <!-- <div class="col-xs-9 col-md-9 col-sm-9"> -->
+            <signature-pad id="template-canvas" accept="accept" clear="clear" height="400" width="565"
+                class="img-responsive" dataurl="photo"></signature-pad>
+            <!-- <div class="result" ng-show="signature">
             <img ng-src="{{ signature.dataUrl }}">
-        </div>
+        </div> -->
+        <!-- </div> -->
+        <!-- <div class="col-xs-3 col-md-3 col-sm-3">
+
+        </div> -->
+
     </div>
 </div>
 <div class="modal-footer">

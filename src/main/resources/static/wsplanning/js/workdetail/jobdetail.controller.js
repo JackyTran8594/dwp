@@ -724,7 +724,7 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $rootScope, WorkOrderS
         obj.ImageData = v.ImageData;
         obj.dataUrl = "data:image/webp;base64," + v.ImageData;
         $scope.lstphoto.push(obj.dataUrl);
-        $scope.lstAttachment.push(obj)
+        $scope.lstAttachment.push(obj);
       })
     }
     console.log($scope.lstphoto);
@@ -752,11 +752,10 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $rootScope, WorkOrderS
           obj.AttachTypeDescription = "";
           obj.FileDescription = "";
           obj.FileId = "",
-            // var lst = e.
             obj.FileName = file.name;
           dataUrl = e.target.result.split(',');
           obj.ImageData = dataUrl[1];
-          obj.dataUrl = "data:image/webp;base64," + e.target.result;
+          obj.dataUrl = e.target.result;
           $scope.lstphoto.push(obj.dataUrl);
           $scope.lstAttachment.push(obj)
           console.log($scope.lstphoto);
@@ -774,24 +773,7 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $rootScope, WorkOrderS
     }
   }
 
-  // $scope.photoLoaded = function (evt) {
-  //   $scope.$apply(function (e) {
-  //     var obj = jobAttachments();
-  //     var dataUrl = ""
-  //     obj.AttachType = "PIC";
-  //     obj.AttachTypeDescription = "";
-  //     obj.FileDescription = "";
-  //     obj.FileId = "",
-  //       // var lst = e.
-  //       // obj.FileName = file.name;
 
-  //       dataUrl = evt.target.result.split(',');
-  //     obj.ImageData = dataUrl[1];
-  //     obj.dataUrl = evt.target.result;
-  //     $scope.lstphoto.push(obj);
-  //     console.log($scope.lstphoto);
-  //   });
-  // }
 
 
   $scope.takeScreenshot = function () {
@@ -814,7 +796,8 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $rootScope, WorkOrderS
         obj.dataUrl = v;
         var dataUrl = v.split(',');
         obj.ImageData = dataUrl[1];
-        $scope.lstphoto.push(obj);
+        $scope.lstAttachment.push(obj)
+        $scope.lstphoto.push(obj.dataUrl);
       });
 
     }, function () {
@@ -858,6 +841,14 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $rootScope, WorkOrderS
       console.log('Modal dismissed at: ' + new Date());
     });
   };
+
+  $ctrl.save = function () {
+    $uibModalInstance.close($scope.lstAttachment);
+  }
+
+  $scope.removePhoto = function (id) {
+    $scope.lstphoto.splice(id, 1);
+  }
 
 
   $ctrl.cancel = function () {

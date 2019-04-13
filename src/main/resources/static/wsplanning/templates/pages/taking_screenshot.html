@@ -1,18 +1,14 @@
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" ng-click="$ctrl.cancel()"
         aria-hidden="true">&times;</button>
-    <!-- <h4 class="modal-title">{{'PhotoTitle' | translate}}</h4> -->
+
 </div>
 <div class="modal-body">
     <div class="">
-        <!-- <div id="video-container">
-            <video id="camera-stream" autoplay></video>
-            <img id="screenshot" src="">
-            <canvas style="display:none;"></canvas>
-        </div> -->
+
         <div id="screenshot" style="text-align:center;">
             <video class="videostream" autoplay=""></video>
-            <img id="screenshot-img">
+            <img style="display:none;" id="screenshot-img">
             <canvas style="display:none;"></canvas>
             <!-- <p><button class="capture-button">Capture video</button></p> -->
             <p><button id="screenshot-button" ng-click="takeScreenshot()">Take screenshot</button></p>
@@ -64,13 +60,17 @@
     };
 
     const tabletConstraints = {
-         video: {
+        video: {
             width: { min: 640 },
             height: { min: 480 },
             facingMode: 'environment'
         },
         audio: false
     }
+
+    navigator.mediaDevices.getUserMedia(tabletConstraints).then((stream) => { video.srcObject = stream }).catch(err => {
+        console.log(err);
+    })
 
     navigator.mediaDevices.getUserMedia(vgaConstraints).
         then((stream) => { video.srcObject = stream }).catch(err => {

@@ -4,28 +4,27 @@
     <h4 class="modal-title">{{'PhotoTitle' | translate}}</h4>
 </div>
 <div class="modal-body">
-    <div class="tableModal">
+    <div class="">
         <div class="row">
-            <div class="col-md-9 col-sm-9">
-                <div ng-show="isGrid" id="div-photo" class="col-md-3 col-sm-4 div-photo text-center thumb"
+            <div class="col-md-9 col-sm-9 tableModal">
+                <div ng-show="isGrid" id="div-photo" class="col-md-3 col-sm-4 div-photo text-center thumb "
                     ng-repeat="photo in lstphoto track by $index">
                     <a ng-click="openPhoto($index)" data-toggle="modal"><img ng-src="{{photo}}" alt=""
                             class="img-thumbnail photo" data-target="#image-gallery" /></a>
+                    
+                    <button type="button" ng-click="removePhoto($index)" class="btn btn-primary btn-icon btn-rounded"><i class=" icon-cross2"></i></button>
                 </div>
-                <ul ng-show="!isGrid" class="list image-list">
+                <ul ng-show="!isGrid" class="list">
                     <li ng-repeat="photo in lstphoto">
-                        <div class="">
+                        <div class="outside-image">
                             <a href="" class="inner" ng-click="openPhoto($index)">
                                 <div>
                                     <img ng-src="{{photo}}" alt="" class="img-thumbnail" data-target="#image-gallery" />
                                 </div>
                             </a>
+                            <button style="left:23px;top:3px" type="button" ng-click="removePhoto($index)" class="btn btn-primary btn-icon btn-rounded"><i class=" icon-cross2"></i></button>
                         </div>
-                        <!-- <div class="">
-                            <ul>
-                                <li></li>
-                            </ul>
-                        </div> -->
+
                     </li>
                 </ul>
             </div>
@@ -36,7 +35,8 @@
                     <a type="button" class="btn btn-default" ng-click="getClass(2)"><i class="icon-grid"></i></a>
                 </div>
                 <div class="row">
-                    <input type="file" id="photo-file" class="btn btn-default" multiple ng-files="getTheFiles($files)">
+                    <input type="file" id="photo-file" class="btn btn-default" multiple ng-files="getTheFiles($files)"
+                        style="width:100%" />
                     <table>
                         <tr ng-repeat="file in lstfiles">
                             <td>{{$index+1}}</td>
@@ -49,28 +49,6 @@
             </div>
         </div>
     </div>
-
-    <!-- <div class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="image-gallery-title"></h4>
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <img id="image-gallery-image" class="img-responsive col-md-12" src="">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary float-left" id="show-previous-image"><i class="fa fa-arrow-left"></i>
-                    </button>
-
-                    <button type="button" id="show-next-image" class="btn btn-secondary float-right"><i class="fa fa-arrow-right"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div> -->
 
 </div>
 <div class="modal-footer">
@@ -85,14 +63,3 @@
     </div>
 
 </div>
-
-<!-- <script>
-    var canvas = document.getElementById('canvas');
-    var context = canvas.getContext('2d');
-    var video = document.getElementById('video');
-
-    // Trigger photo take
-    document.getElementById("snap").addEventListener("click", function () {
-        context.drawImage(video, 0, 0, 640, 480);
-    });
-</script> -->
