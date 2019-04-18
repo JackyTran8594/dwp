@@ -105,7 +105,7 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
   var jobData = {}
   $rootScope.$on("jobData", function (evt, obj) {
     jobData = obj;
-    console.log(obj);
+    // console.log(obj);
   });
 
 

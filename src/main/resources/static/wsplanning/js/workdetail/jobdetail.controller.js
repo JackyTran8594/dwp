@@ -220,7 +220,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
     });
 
     modalInstance.result.then(function (selectedItem) {
-      console.log(selectedItem);
+      // console.log(selectedItem);
       if (typeof (selectedItem) === "string") {
         if ($scope.jobTabList[id].Items == null) {
           var charactersObject = createItem();
@@ -278,7 +278,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
     });
 
     modalInstance.result.then(function (selectedItem) {
-      console.log(selectedItem);
+      // console.log(selectedItem);
 
       //add in new WO
       if ($scope.jobTabList === undefined) {
@@ -367,7 +367,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   };
 
 
-  $scope.openImage = function (item) {
+  $scope.openImage = function (item, id) {
     var modalInstance = $uibModal.open({
       animation: $ctrl.animationsEnabled,
       templateUrl: '/wsplanning/templates/pages/common/photo-form.html',
@@ -381,8 +381,9 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
     });
 
     modalInstance.result.then(function (selectedItem) {
-      console.log(selectedItem);
-
+      // console.log(selectedItem);
+      $scope.jobTabList[id].JobAttachments = selectedItem
+      // console.log( $scope.jobTabList[id]);
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
     });
@@ -408,9 +409,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   }
 
   $scope.$watch('jobTabList', function (newValue, oldValue) {
-    // if (!newValue) {
-    //   $scope.pristine = false;
-    // } else {
+    
     if ($scope.actTypeJob === "new") {
       $scope.pristine = true;
       $scope.jobTabList = newValue;
@@ -495,15 +494,14 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
 });
 
 
-UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrderService, HttpService, $translate, $location, $filter,
-  $uibModal, CommonServices, $stateParams, $state, item, $uibModalInstance, ivhTreeviewMgr) {
+UserWebApp.controller('JobNewModalCtrl', function ($scope, WorkOrderService, item, $uibModalInstance) {
 
 
   var $ctrl = this;
   $scope.recentSalesList = [];
   $scope.additionalData = [];
   $scope.historicalData = [];
-  console.log(item);
+  // console.log(item);
 
 
   $scope.isOpenDateInput = false;
@@ -535,8 +533,8 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
   };
   $scope.disabledButton = true;
   $scope.newJobObject = {};
-  console.log($scope.newJobObject);
-  console.log($scope.jobChecked);
+  // console.log($scope.newJobObject);
+  // console.log($scope.jobChecked);
 
   $scope.go = function () {
     $scope.page = $scope.pageGo;
@@ -570,14 +568,13 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
       itemType: 502,
       skey: jobType,
       vehiId: item.VehiId,
-      custNo: "",
+      custNo: item.CustNo,
       page: $scope.page,
       pageCount: $scope.limit
     }
 
     WorkOrderService.serviceItem(params).then(function (res) {
       $scope.recentSalesList = res.data;
-      console.log(res);
       $scope.pageGo = $scope.page;
       $scope.isShow = false;
       common.spinner(false);
@@ -587,11 +584,10 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
     });
 
     WorkOrderService.countServiceItem(params).then(function (res) {
-      // console.log(res)
       $scope.totalElements = res.data;
       $scope.isNoData = ($scope.totalElements <= 0);
       common.spinner(false);
-      console.log(res);
+      // console.log(res);
     }, function (err) {
       console.log(err);
       common.spinner(false);
@@ -612,30 +608,14 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
 
   $scope.jobTreeList = [];
 
-  // loadData(item);
-
-  // function loadData(params) {
-  //   common.spinner(true);
-  //   WorkOrderService.jobTab(params).then(function (res) {
-  //     $scope.jobTreeList = res.data;
-  //     console.log(res);
-  //     common.spinner(false);
-  //   }, function (error) {
-  //     console.log(error);
-  //     common.spinner(false);
-  //   })
-  // }
-
 
   $scope.collapseMenu = function (item) {
     item.selected = !item.selected;
-    console.log($scope.jobTreeList);
+    // console.log($scope.jobTreeList);
   }
 
 
-  // loadDataTree(item);
 
-  // using ivh-tree angular
   loadDataTree(item);
   function loadDataTree(params) {
     common.spinner(true);
@@ -649,22 +629,13 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
         objTree.selected = false;
         objTree.children = [];
         objTree.SubGroups = value.SubGroups;
-        // angular.forEach(items, function (item) {
-        //   var objSub = {};
-        //   objSub.id = item.Id;
-        //   objSub.label = item.Name;
-        //   objSub.jobType = item.JobType;
-        //   objSub.children = [];
-        //   objSub.AdditionalData = item.AdditionalData;
-        //   objTree.children.push(objSub);
-        // });
         $scope.jobTreeList.push(objTree);
       }
       );
 
-      console.log($scope.jobTreeList);
+      // console.log($scope.jobTreeList);
       common.spinner(false);
-      console.log(res);
+      // console.log(res);
     }, function (err) {
       console.log(err);
     })
@@ -675,12 +646,11 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
   };
 })
 
-UserWebApp.controller('PhotoModalCtrl', function ($scope, $rootScope, WorkOrderService, HttpService, $translate, $location, $filter,
-  $uibModal, CommonServices, $stateParams, $state, item, $uibModalInstance) {
+UserWebApp.controller('PhotoModalCtrl', function ($scope, $uibModal, item, $uibModalInstance) {
 
   var $ctrl = this;
 
-  console.log(item);
+  // console.log(item);
 
   $scope.isGrid = true;
 
@@ -727,7 +697,7 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $rootScope, WorkOrderS
         $scope.lstAttachment.push(obj);
       })
     }
-    console.log($scope.lstphoto);
+    // console.log($scope.lstphoto);
     return $scope.lstphoto;
   }
 
@@ -902,11 +872,6 @@ UserWebApp.controller('openPhotoCtrl', function ($scope, $rootScope, $translate,
   $scope.photo = item;
 
   $scope.dataUrlOriginal = item;
-
-  $scope.save = function () {
-    console.log($scope.dataurl);
-    // $scope.accept(); 
-  }
 
   $scope.$on("acceptPhoto", function (evt, obj) {
     $uibModalInstance.close(obj);
