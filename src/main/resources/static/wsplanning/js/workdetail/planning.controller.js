@@ -310,10 +310,6 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
       {
         label: 'Edit',
         onClick: menuEdit,
-      },
-      {
-        label: 'Remove',
-        onClick: menuRemove
       }
     ]
 
@@ -348,6 +344,9 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
         "DeptId": $scope.DeptId,
         "ShiftId": $scope.ShiftId,
       });
+
+
+      console.log($scope.WorkOrder.BookedResourcePools);
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
     });
@@ -362,13 +361,19 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
     console.log($event);
     var modalInstance = $uibModal.open({
       animation: true,
-      templateUrl: '/wsplanning/templates/pages/workdetail/tabs/planning/modal/save_pool.html',
-      controller: 'SaveBookPoolModalCtrl',
+      templateUrl: '/wsplanning/templates/pages/workdetail/tabs/planning/modal/list_pool.html',
+      controller: 'EditBookPoolModalCtrl',
       controllerAs: '$ctrl',
       size: "lg",
       resolve: {
         data: function () {
           return $event.dataContext;
+        },
+        listData: function(){
+          if(!$scope.WorkOrder.BookedResourcePools){
+            $scope.WorkOrder.BookedResourcePools = [];
+          }
+          return $scope.WorkOrder.BookedResourcePools;
         },
         title: function () {
           return $translate.instant('editBookPool');
@@ -376,8 +381,8 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
       }
     });
 
-    modalInstance.result.then(function (value) {
-      console.log(value);
+    modalInstance.result.then(function (listPool) {
+      $scope.WorkOrder.BookedResourcePools = listPool;
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
     });
@@ -387,9 +392,13 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
     console.log("-----savePlanning-------");
 
     var postAction = "saveResource";
-    var data = JSON.stringify($scope.WorkOrder)
 
+    console.log($scope.WorkOrder.BookedResources);
+    var data = JSON.stringify($scope.WorkOrder);
+
+    common.btnLoading($(".btnSubmit"), true);
     WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
+      common.btnLoading($(".btnSubmit"), );
       console.log(res);
       common.notifySuccess("Success!!!");
 
@@ -398,7 +407,8 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
       }else{
         $state.go('app.main.workdetail', {'id': res.data.WorkOrderId, 'type': $stateParams.type, 'tab': "planning"});
       }
-    }, function (err) {
+    }, function (err) {false
+      common.btnLoading($(".btnSubmit"), true);
       console.log(err);
       common.notifyError("Error!!!", err.status);
     });

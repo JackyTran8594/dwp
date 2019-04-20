@@ -121,12 +121,15 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
 
       var data = JSON.stringify($scope.WorkOrder)
 
+      common.btnLoading($(".btnSubmit"), true);
       WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
+        common.btnLoading($(".btnSubmit"), false);
         console.log(res);
         common.notifySuccess("Success!!!");
         $state.go('app.main.workdetail', { 'id': res.data.WorkOrderId , 'type': $stateParams.type });
         
       }, function (err) {
+        common.btnLoading($(".btnSubmit"), false);
         console.log(err);
         common.notifyError("Error!!!", err.status);
       });
@@ -136,11 +139,14 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
     } else {
       postAction = "saveHeader";
 
+      common.btnLoading($(".btnSubmit"), true);
       WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
+        common.btnLoading($(".btnSubmit"), false);
         common.notifySuccess("Success!!!");
         $state.go('app.main.workdetail', { 'id': res.data.WorkOrderId , 'type': $stateParams.type });
         
       }, function (err) {
+        common.btnLoading($(".btnSubmit"), false);
         console.log(err);
         common.notifyError("Error!!!", err.status);
       })

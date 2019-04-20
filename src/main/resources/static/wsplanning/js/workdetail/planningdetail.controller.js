@@ -101,7 +101,7 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
             //Add event (starttime and endtime add timezone
             var timezone = 0 - new Date().getTimezoneOffset();
             var newEvent = new Object();
-            newEvent.title = "test";
+            newEvent.title = "";
             newEvent.resourceId = selectionInfo.resource.id;
             newEvent.start = moment(value.StartTime).add(timezone, 'minutes').format();
             newEvent.end = moment(value.EndTime).add(timezone, 'minutes').format();
@@ -122,8 +122,10 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
             $scope.WorkOrder.BookedResources.push({
               "RowId": 0,
               "Duration": hours,
-              "StartTime": value.StartTime,
-              "EndTime": value.EndTime,
+              // "StartTime": value.StartTime,
+              // "EndTime": value.EndTime,
+                "StartTime": moment(value.StartTime).format("YYYY-MM-DDTHH:mm:ss.000"),
+                "EndTime": moment(value.EndTime).format("YYYY-MM-DDTHH:mm:ss.000"),
               "ResourceId": value.ResourceId,
               "ResourceType": value.ResourceType
             });
