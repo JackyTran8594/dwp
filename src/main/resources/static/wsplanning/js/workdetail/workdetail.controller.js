@@ -34,7 +34,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 
       $scope.lstDepartmentSearch = $scope.lstDepartment.slice();
       $scope.lstDepartmentSearch.shift();
-      $scope.lstDepartmentSearch.unshift({"Id": "", "Name": $translate.instant('all')});
+      $scope.lstDepartmentSearch.unshift({ "Id": "", "Name": $translate.instant('all') });
     });
     CommonServices.getVisitReasons().then(function (data) {
       $scope.lstVisitReason = data;
@@ -62,7 +62,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 
       $scope.lstShiftSearch = $scope.lstShifts.slice();
       $scope.lstShiftSearch.shift();
-      $scope.lstShiftSearch.unshift({"Id": "", "Name": $translate.instant('all')});
+      $scope.lstShiftSearch.unshift({ "Id": "", "Name": $translate.instant('all') });
     });
 
   }
@@ -104,6 +104,20 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 
   }
 
+  function tokenObject() {
+    var token = {
+      DMSUserId: "",
+      EmployeeData: {},
+      ErrorDesc: "",
+      Expired: "",
+      LangId: "",
+      ProfileId: "",
+      SiteId: "",
+      Token: "",
+    }
+    return token;
+  }
+
 
   // $scope.isNew = angular.equals($scope.WorkOrder, {});
   $scope.isNew = $stateParams.action;
@@ -112,6 +126,8 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
   if ($scope.isNew) {
     var EmployeeData = $("#EmployeeData").data("employee");
     $scope.WorkOrder.DeptId = EmployeeData.DeptId;
+    $scope.WorkOrder.Token = tokenObject();
+    $scope.WorkOrder.Token.EmployeeData = EmployeeData;
   }
   $scope.workOrderNo = WorkOrder.data.WorkOrderNo;
 
@@ -159,9 +175,9 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
       return $scope.tabActive = "header";
     }
 
-    if($stateParams.tab){
+    if ($stateParams.tab) {
       $scope.tabActive = $stateParams.tab;
-    }else{
+    } else {
       return $scope.tabActive = "job";
     }
   }
@@ -193,16 +209,16 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
       $scope.jobObject.WarrantyInfo = selectedItem.WarrantyInfo
 
       if (selectedItem.PayerCustomer != null) {
-        $rootScope.$broadcast("choosePayerCustomer", {"item": selectedItem.PayerCustomer});
+        $rootScope.$broadcast("choosePayerCustomer", { "item": selectedItem.PayerCustomer });
         $scope.jobObject.CustNo = selectedItem.PayerCustomer.CustNo;
       }
-      
+
       if (selectedItem.UserCustomer != null) {
-        $rootScope.$broadcast("chooseUserCustomer", {"item": selectedItem.UserCustomer});
+        $rootScope.$broadcast("chooseUserCustomer", { "item": selectedItem.UserCustomer });
         // $scope.jobObject.CustNo = selectedItem.PayerCustomer.CustNo;
       }
       console.log($scope.jobObject.VehiId);
-      $rootScope.$broadcast("chooseVehicle", {"item": selectedItem});
+      $rootScope.$broadcast("chooseVehicle", { "item": selectedItem });
 
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
@@ -224,7 +240,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
       $scope.WOCustomer = selectedItem;
       $scope.jobObject.CustNo = selectedItem.CustNo
 
-      $rootScope.$broadcast("chooseCustomer", {"item": selectedItem});
+      $rootScope.$broadcast("chooseCustomer", { "item": selectedItem });
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
     });
@@ -251,7 +267,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
       console.log(selectedItem);
 
       $scope.WOContact = selectedItem;
-      $rootScope.$broadcast("chooseContact", {"item": selectedItem});
+      $rootScope.$broadcast("chooseContact", { "item": selectedItem });
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
     });

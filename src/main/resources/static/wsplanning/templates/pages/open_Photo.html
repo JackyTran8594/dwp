@@ -5,23 +5,17 @@
 </div>
 <div class="modal-body">
     <div class="row">
-        <!-- <div class="col-xs-9 col-md-9 col-sm-9"> -->
-            <signature-pad id="template-canvas" accept="accept" clear="clear" height="400" width="565"
-                class="img-responsive" dataurl="photo"></signature-pad>
-            <!-- <div class="result" ng-show="signature">
-            <img ng-src="{{ signature.dataUrl }}">
-        </div> -->
-        <!-- </div> -->
-        <!-- <div class="col-xs-3 col-md-3 col-sm-3">
-
-        </div> -->
+     
+            <!-- <signature-pad id="template-canvas" accept="accept" clear="clear" height="400" width="565"
+                class="img-responsive" dataurl="photo"></signature-pad> -->
+            
+            <img ng-src="{{photo}}" class="img-responsive">
+    
 
     </div>
 </div>
 <div class="modal-footer">
     <div class="pull-right">
-        <button type="button" class="btn btn-primary" ng-click="accept()">{{'btnSave'|translate}}</button>
-        <button type="button" class="btn btn-primary" ng-click="clear()">{{'btnClear'|translate}}</button>
         <button type="button" class="btn btn-default" ng-click="$ctrl.cancel()"
             data-dismiss="modal">{{'btnCancel'|translate}}</button>
     </div>
