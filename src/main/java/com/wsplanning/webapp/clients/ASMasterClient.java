@@ -115,5 +115,7 @@ public class ASMasterClient {
     String url = String.format("%s?command=getStampingCodes&param1=%s", this.endpointUrl, param);
     return restTemplate.getForObject(url, String.class);
   }
+
+   
  
 }

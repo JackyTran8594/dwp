@@ -278,6 +278,19 @@ public class CommonController extends BaseController {
     }
   }
 
+  @GetMapping("/site/getMenu")
+  public ResponseEntity getMenu()
+  {
+    try {
+      String rtn = siteClient.getStampingCode(getSiteId());
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception e) {
+      return parseException(e);
+      //TODO: handle exception
+    }
+  }
+
+
 
 
 }
