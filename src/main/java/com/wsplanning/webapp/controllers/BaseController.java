@@ -21,9 +21,6 @@ public class BaseController {
   private Logger logger = LoggerFactory.getLogger(BaseController.class);
 
 
-  public static final String MECHANIC_PAGE = "mechanic/index";
-  public static final String MECHANIC_PAGE_FORM = "mechanic/form";
-
   public ResponseEntity parseException(Exception ex) {
     JsonObject response = new JsonObject();
     if (ex instanceof UnknownHttpStatusCodeException) {

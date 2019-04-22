@@ -1,11 +1,14 @@
 UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrderService, HttpService, $translate, $location, $filter, $uibModal, CommonServices, $stateParams, $timeout, $state) {
   //JOB
-  $scope.jobTabList = $scope.$parent.WOJobs;
+  //$scope.jobTabList = $scope.$parent.WOJobs;
+
+  $scope.jobTabList = $scope.WorkOrder.WOJobs;
 
   $scope.totalHours = 0;
 
   if ($scope.jobTabList) {
-    for (var i = 0; i < $scope.jobTabList.length; i++) {
+    var length = $scope.jobTabList.length;
+    for (var i = 0; i < length; i++) {
       $scope.totalHours += $scope.jobTabList[i].EstimatedTime;
     }
   }
@@ -23,6 +26,53 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
   $scope.lstPlanning = [];
   $scope.loadData = function () {
     getCalendarWeek($scope.viewDate);
+  }
+
+  $scope.WoResourcePoolDuration = [];
+  $scope.BookedResourcesDuration = [];
+
+  function calcDuration() {
+    $scope.WoResourcePoolDuration = [];
+    $scope.BookedResourcesDuration = [];
+
+    //Create WoResourcePool Duration
+    var length = 0;
+    if ($scope.WorkOrder.BookedResourcePools) {
+      length = $scope.WorkOrder.BookedResourcePools.length;
+    }
+
+    var key = "";
+    var value = 0;
+    if (length > 0) {
+      for (var i = 0; i < length; i++) {
+        key = "" + $scope.WorkOrder.BookedResourcePools[i].WorkDay;
+        value = $scope.WoResourcePoolDuration["" + key];
+        if (value) {
+          $scope.WoResourcePoolDuration["" + key] = value + $scope.WorkOrder.BookedResourcePools[i].Duration;
+        } else {
+          $scope.WoResourcePoolDuration["" + key] = $scope.WorkOrder.BookedResourcePools[i].Duration;
+        }
+      }
+    }
+
+    //Create BookedResources.Duration
+    var length = 0;
+    if ($scope.WorkOrder.BookedResources) {
+      length = $scope.WorkOrder.BookedResources.length;
+    }
+
+    if (length > 0) {
+      for (var i = 0; i < length; i++) {
+        key = "" + $scope.WorkOrder.BookedResources[i].StartTime;
+        key = key.substring(0, key.indexOf("T")) + "T00:00:00";
+        value = $scope.BookedResourcesDuration["" + key];
+        if (value) {
+          $scope.BookedResourcesDuration["" + key] = value + $scope.WorkOrder.BookedResources[i].Duration;
+        } else {
+          $scope.BookedResourcesDuration["" + key] = $scope.WorkOrder.BookedResources[i].Duration;
+        }
+      }
+    }
   }
 
   function getCalendarWeek(date) {
@@ -60,8 +110,30 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
         }
         startDate = moment(startDate).add('days', 1).toDate();
       }
-      console.log($scope.lstPlanning);
 
+      //Tinh duration
+      calcDuration();
+      var length = $scope.lstPlanning.length;
+      var key = "";
+      var value = 0;
+      for (var i = 0; i < length; i++) {
+        key = "" + $scope.lstPlanning[i]["WorkDay"];
+        value = $scope.WoResourcePoolDuration[key];
+        if (value) {
+          $scope.lstPlanning[i]["WoResourcePoolDuration"] = value;
+        } else {
+          $scope.lstPlanning[i]["WoResourcePoolDuration"] = 0;
+        }
+
+        value = $scope.BookedResourcesDuration[key];
+        if (value) {
+          $scope.lstPlanning[i]["BookedResourcesDuration"] = value;
+        } else {
+          $scope.lstPlanning[i]["BookedResourcesDuration"] = 0;
+        }
+      }
+
+      console.log($scope.lstPlanning);
 
       common.spinner(false);
     }, function error(response) {
@@ -369,8 +441,8 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
         data: function () {
           return $event.dataContext;
         },
-        listData: function(){
-          if(!$scope.WorkOrder.BookedResourcePools){
+        listData: function () {
+          if (!$scope.WorkOrder.BookedResourcePools) {
             $scope.WorkOrder.BookedResourcePools = [];
           }
           return $scope.WorkOrder.BookedResourcePools;
@@ -398,16 +470,21 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
 
     common.btnLoading($(".btnSubmit"), true);
     WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
-      common.btnLoading($(".btnSubmit"), );
+      common.btnLoading($(".btnSubmit"),);
       console.log(res);
       common.notifySuccess("Success!!!");
 
-      if($scope.WorkOrder && $scope.WorkOrder.WorkOrderId){
-        $state.go('app.main.workdetail', {'id': $scope.WorkOrder.WorkOrderId, 'type': $stateParams.type, 'tab': "planning"});
-      }else{
+      if ($scope.WorkOrder && $scope.WorkOrder.WorkOrderId) {
+        $state.go('app.main.workdetail', {
+          'id': $scope.WorkOrder.WorkOrderId,
+          'type': $stateParams.type,
+          'tab': "planning"
+        });
+      } else {
         $state.go('app.main.workdetail', {'id': res.data.WorkOrderId, 'type': $stateParams.type, 'tab': "planning"});
       }
-    }, function (err) {false
+    }, function (err) {
+      false
       common.btnLoading($(".btnSubmit"), true);
       console.log(err);
       common.notifyError("Error!!!", err.status);
