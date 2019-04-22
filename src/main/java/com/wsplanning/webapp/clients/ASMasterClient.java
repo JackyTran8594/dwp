@@ -1,5 +1,6 @@
 package com.wsplanning.webapp.clients;
 
+import org.apache.poi.hssf.record.PageBreakRecord.Break;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,9 @@ import org.springframework.util.ResourceUtils;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpSession;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 
 import java.io.File;
 import java.io.IOException;
@@ -122,30 +126,58 @@ public class ASMasterClient {
     return restTemplate.getForObject(url, String.class);
   }
 
-  public List<JSONObject> loadProperty() {
-    String path = "messages/config.properties";
-    InputStream input = getClass().getClassLoader().getResourceAsStream(path);
-    Properties prop = new Properties();
-    List<JSONObject> jsonObjects = new ArrayList<JSONObject>();
-    JSONObject jsonObject = new JSONObject();
+  
 
+  public JSONObject loadProperty() {
+    String path = "messages/config.properties";
+    String path_Menu = "messages/messages.properties";
+    InputStream input = getClass().getClassLoader().getResourceAsStream(path);
+    InputStream input_Menu = getClass().getClassLoader().getResourceAsStream(path_Menu);
+    Properties prop_Auth = new Properties();
+    Properties prop_Menu = new Properties();
+    JSONArray jsonArray = new JSONArray();
+    JSONArray jarray = new JSONArray();
+    // JSONArray properties = new JSONArray();
+    JSONObject obj = new JSONObject();
     if (input == null) {
       System.out.println("not found");
     } else {
       try {
-        prop.load(input);
-        prop.forEach((key, value) -> 
-          {
-            jsonObjects.add(jsonObject.put(key.toString(), value));
-          }
-        );
+        prop_Auth.load(input);
+        prop_Menu.load(input_Menu);
+
+        prop_Menu.forEach((k, v) -> {
+        String[] icoStrings = k.toString().split("\\.");
       
+        if(icoStrings[0].contains("icon")) {
+          JSONObject jmenu = new JSONObject();
+          jmenu.put("name", icoStrings[1]);
+          jmenu.put("class", v.toString());
+          jarray.put(jmenu);
+        }
+        });
+
+        prop_Auth.forEach((key, value) -> {
+          JSONObject jsonObject = new JSONObject();
+          String[] subStr = key.toString().split("\\.");
+
+          jsonObject.put("route", subStr[0] + "." + subStr[1] + "." + subStr[2]);
+          jsonObject.put("value", value.toString());
+          jsonObject.put("name", subStr[2]);
+          jsonObject.put("ordinalNumber", Integer.parseInt(subStr[3]));
+          
+          jsonArray.put(jsonObject);
+        });
+        
+        obj.put("auth", jsonArray);
+        obj.put("menu", jarray);
+
       } catch (IOException e) {
         // TODO Auto-generated catch block
         e.printStackTrace();
+        System.out.println(e);
       }
     }
-    return jsonObjects;
+    return obj;
   }
-
 }

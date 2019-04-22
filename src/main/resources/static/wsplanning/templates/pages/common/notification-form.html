@@ -1,0 +1,48 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="$ctrl.cancel()">
+        <span aria-hidden="true">&times;</span>
+        <span class="sr-only" ng-click="$ctrl.cancel()">Close</span>
+    </button>
+    <h4>{{title}}</h4>
+</div>
+
+<div class="modal-body">
+
+    <div>
+        <div class="well well-sm">
+
+
+            <div class="row">
+                <div class="form-group">
+                    <label class="control-label col-lg-2">{{'employee' | translate}}</label>
+                    <div class="col-lg-10">
+                        <select class="form-control" ng-model="target.employee"
+                            ng-options="item.Id as item.Name for item in employees" ng-readonly="target.ShiftId"
+                            disabled>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <label class="control-label col-lg-2">{{'message' | translate}}</label>
+                    <div class="col-lg-10">
+                        <area type="text" class="form-control" ng-model="target.text" readonly/>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+</div>
+
+<div class="modal-footer position-right">
+    <a class="btn btn-primary" ng-disabled="target.text.length > 0 && target.employee.length > 0" ng-click="$ctrl.send()">{{ 'btnSend' | translate }}</a>
+    <a class="btn btn-primary" ng-click="$ctrl.cancel()">{{ 'btnCancel' | translate }}</a>
+</div>

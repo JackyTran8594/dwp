@@ -367,6 +367,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   };
 
 
+
   $scope.openImage = function (item, id) {
     var modalInstance = $uibModal.open({
       animation: $ctrl.animationsEnabled,
@@ -378,6 +379,25 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
       resolve: {
         item: item
       }
+    });
+
+    modalInstance.result.then(function (selectedItem) {
+      // console.log(selectedItem);
+      $scope.jobTabList[id].JobAttachments = selectedItem
+      // console.log( $scope.jobTabList[id]);
+    }, function () {
+      console.log('Modal dismissed at: ' + new Date());
+    });
+  };
+
+  $scope.openNotify = function (item, id) {
+    var modalInstance = $uibModal.open({
+      animation: $ctrl.animationsEnabled,
+      templateUrl: '/wsplanning/templates/pages/common/photo-form.html',
+      controller: 'NotificationModalCtrl',
+      backdrop: 'static',
+      controllerAs: '$ctrl',
+      size: "sm",
     });
 
     modalInstance.result.then(function (selectedItem) {
@@ -409,7 +429,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   }
 
   $scope.$watch('jobTabList', function (newValue, oldValue) {
-    
+
     if ($scope.actTypeJob === "new") {
       $scope.pristine = true;
       $scope.jobTabList = newValue;
@@ -888,5 +908,34 @@ UserWebApp.controller('openPhotoCtrl', function ($scope, $rootScope, $translate,
 
   $ctrl.cancel = function () {
     $uibModalInstance.dismiss('cancel');
+  };
+})
+
+
+UserWebApp.controller('NotificationModalCtrl', function ($scope, $rootScope, $translate, $location, $filter,
+  $uibModal, item, $uibModalInstance, CommonServices) {
+
+  var $ctrl = this;
+  console.log(item);
+
+  $scope.employees = [];
+
+  function loadCombo() {
+    CommonServices.getServiceAdvisors().then(function (data) {
+      $scope.employees = data;
+    });
+  }
+
+  loadCombo();
+
+  $scope.target = {};
+
+  $ctrl.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+
+  $ctrl.send = function () {
+    
+    $uibModalInstance.close('cancel');
   };
 })

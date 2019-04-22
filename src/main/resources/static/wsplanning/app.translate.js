@@ -1,4 +1,21 @@
 var translationsEN = {
+  
+  unscheduledwork: "Unscheduled WorkOrders",
+  worksub:"Workorders with subcontractor",
+  todaywork:"Today workorders",
+  allwork:"All workorders",
+  workmot:"Workorders with MOT",
+  worktire:"Workorders with tires change",
+  workbo:"Workorders with BO parts",
+  postponedwork:"Postponed workorders",
+  tasklist:"Task list",
+  calendarview:"Calendar view",
+  stamping:"Stamping",
+  offer:"Offers",
+  replacementvehicle:"Replacement vehicle planning",
+  callcenter:"Call Center",
+
+
   workOrderTitle: "WorkOrder Management",
   todayWorkTitle: "Today Work Management",
   allWorkTitle: "All Work Management",
@@ -77,6 +94,7 @@ var translationsEN = {
   search: "Search",
   pleaseEnter: "Please enter here",
   btnClear: "Clear",
+  btnSend:"Send",
 
   //Confirm delete
   confirmDeleteWorkOder: "Are you want to delete this WorkOder?",
@@ -214,6 +232,10 @@ var translationsEN = {
   startTimeBookPool: "Start time",
   endTimeBookPool: "Start time",
   addBookResource: "Add book resouce",
+
+  //notification
+  employee: "Employee",
+  message: "Text Message"
 };
 
 var translationsVI = {

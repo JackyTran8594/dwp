@@ -22,7 +22,7 @@ var UserWebApp = angular.module('UserWebApp', [
 ]);
 
 
-UserWebApp.config(['calendarConfig', function(calendarConfig) {
+UserWebApp.config(['calendarConfig', function (calendarConfig) {
 
   // Change the month view template globally to a custom template
   // calendarConfig.templates.calendarMonthView = 'path/to/custom/template.html';
@@ -47,7 +47,7 @@ UserWebApp.config(['calendarConfig', function(calendarConfig) {
 
 }]);
 
-UserWebApp.run(['$rootScope', 'uiSelect2Config', '$translate', 'tmhDynamicLocale', '$cookies', function ($rootScope, uiSelect2Config, $translate, tmhDynamicLocale, $cookies) {
+UserWebApp.run(['$rootScope', 'uiSelect2Config', '$translate', 'tmhDynamicLocale', '$cookies', 'CommonServices','$window', function ($rootScope, uiSelect2Config, $translate, tmhDynamicLocale, $cookies, CommonServices, $window) {
 
 
   // vutt
@@ -63,6 +63,26 @@ UserWebApp.run(['$rootScope', 'uiSelect2Config', '$translate', 'tmhDynamicLocale
   });
   //
 
+  // $rootScope.lst_menu = [];
+
+  function loadAuth() {
+    CommonServices.getMenuAuth().then(function (res) {
+      var lst_auth = res.auth;
+      var lst_name = res.menu;
+      angular.forEach(lst_auth, function (v, k) {
+        angular.forEach(lst_name, function (value, key) {
+          if (v.name == value.name) {
+            v.icon = value.class;
+          }
+        })
+      })
+      localStorage.setItem('info_menu', JSON.stringify(lst_auth));
+      console.log($rootScope.lst_menu);
+    }, function (error) {
+      console.log(error);
+    })
+  }
+  loadAuth();
 
   $rootScope.$on('stateChangeStart', function (event, toState, toParams, fromState, fromParams, options) {
     console.log("root change stateChangeStart");
@@ -107,22 +127,13 @@ UserWebApp.run(['$rootScope', 'uiSelect2Config', '$translate', 'tmhDynamicLocale
     min: jQuery.validator.format($translate.instant('validatorMin')),
   });
 }])
-  .run(function ($rootScope, $location, $state, $stateParams, $transitions, $translate, HttpService, CommonServices) {
+  .run(function ($rootScope, $window, $location, $state, $stateParams, $transitions, $translate, HttpService) {
 
     // $transitions.onStart({}, function (trans) {
     //   console.log("statechange start " + trans._targetState._params.locale);
     // });
-    var menu_auth = [];
-    function loadAuth() {
-      CommonServices.getMenuAuth().then(function (res) {
-        menu_auth = res[0];
-        console.log(res);
-      }, function (error) {
-        console.log(error);
-      })
-    }
-    loadAuth();
-    
+
+
 
     $transitions.onSuccess({}, function (trans) {
       var newToState = trans.$to();
@@ -135,7 +146,7 @@ UserWebApp.run(['$rootScope', 'uiSelect2Config', '$translate', 'tmhDynamicLocale
         console.log("statechange onSuccess " + newLange);
 
         //Set Lang
-        HttpService.postData('/language', {"lang": newLange}).then(function (response) {
+        HttpService.postData('/language', { "lang": newLange }).then(function (response) {
           console.log(response);
           $translate.use(newLange);
 
@@ -150,10 +161,14 @@ UserWebApp.run(['$rootScope', 'uiSelect2Config', '$translate', 'tmhDynamicLocale
       }
 
 
+
+
+
+
       //Add load
       $rootScope.$broadcast('routestateChangeSuccess', {});
 
     });
 
   })
-;
+  ;

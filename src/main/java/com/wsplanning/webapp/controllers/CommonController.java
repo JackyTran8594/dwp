@@ -6,6 +6,7 @@ import com.wsplanning.webapp.clients.CustomerClient;
 import com.wsplanning.webapp.clients.EmployeesClient;
 import com.wsplanning.webapp.clients.StampingClient;
 import com.wsplanning.webapp.clients.VehiclesClient;
+import com.wsplanning.webapp.dto.NotificationDTO;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -265,6 +266,18 @@ public class CommonController extends BaseController {
     }
   }
 
+  // @PostMapping("/site/notification")
+  // public ResponseEntity notification(@RequestBody NotificationDTO params)
+  // {
+  //   try {
+  //     String rtn = employeesClient.customer(params);
+  //     return new ResponseEntity<>(rtn, HttpStatus.OK);
+  //   } catch (Exception e) {
+  //     return parseException(e);
+  //     //TODO: handle exception
+  //   }
+  // }
+
 
   @GetMapping("/site/stampingCode")
   public ResponseEntity stampingCode()
@@ -277,6 +290,18 @@ public class CommonController extends BaseController {
       //TODO: handle exception
     }
   }
+
+  // @GetMapping("/site/getEmployees")
+  // public ResponseEntity getEmployees()
+  // {
+  //   try {
+  //     String rtn = employeesClient.getEmployees(getSiteId());
+  //     return new ResponseEntity<>(rtn, HttpStatus.OK);
+  //   } catch (Exception e) {
+  //     return parseException(e);
+  //     //TODO: handle exception
+  //   }
+  // }
 
   @GetMapping("/site/getMenuAuth")
   public ResponseEntity getMenuAuth()
