@@ -6,14 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpSession;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 /**
  * Created by ThuyetLV
@@ -116,6 +122,30 @@ public class ASMasterClient {
     return restTemplate.getForObject(url, String.class);
   }
 
-   
- 
+  public List<JSONObject> loadProperty() {
+    String path = "messages/config.properties";
+    InputStream input = getClass().getClassLoader().getResourceAsStream(path);
+    Properties prop = new Properties();
+    List<JSONObject> jsonObjects = new ArrayList<JSONObject>();
+    JSONObject jsonObject = new JSONObject();
+
+    if (input == null) {
+      System.out.println("not found");
+    } else {
+      try {
+        prop.load(input);
+        prop.forEach((key, value) -> 
+          {
+            jsonObjects.add(jsonObject.put(key.toString(), value));
+          }
+        );
+      
+      } catch (IOException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+    }
+    return jsonObjects;
+  }
+
 }

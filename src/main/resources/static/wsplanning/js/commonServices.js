@@ -14,7 +14,21 @@ UserWebApp
     this.customers = [];
     this.vehicles = [];
     this.sites = [];
+    this.menuAuth = [];
 
+
+
+    // getMenuAuth
+    this.getMenuAuth = function () {
+      var d = $q.defer();
+      HttpService.getData('/site/getMenuAuth', {}).then(function (response) {    
+        this.menuAuth = response;
+        d.resolve(response);
+      }, function error(response) {
+        d.reject();
+      });
+      return d.promise;
+    };
 
     // getSite
     this.getSite = function () {

@@ -107,11 +107,22 @@ UserWebApp.run(['$rootScope', 'uiSelect2Config', '$translate', 'tmhDynamicLocale
     min: jQuery.validator.format($translate.instant('validatorMin')),
   });
 }])
-  .run(function ($rootScope, $location, $state, $stateParams, $transitions, $translate, HttpService) {
+  .run(function ($rootScope, $location, $state, $stateParams, $transitions, $translate, HttpService, CommonServices) {
 
     // $transitions.onStart({}, function (trans) {
     //   console.log("statechange start " + trans._targetState._params.locale);
     // });
+    var menu_auth = [];
+    function loadAuth() {
+      CommonServices.getMenuAuth().then(function (res) {
+        menu_auth = res[0];
+        console.log(res);
+      }, function (error) {
+        console.log(error);
+      })
+    }
+    loadAuth();
+    
 
     $transitions.onSuccess({}, function (trans) {
       var newToState = trans.$to();
