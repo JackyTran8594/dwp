@@ -32,14 +32,11 @@ public class NotificationClient {
   private RestTemplate restTemplate;
   private String endpointUrl;
 
-  private static HashMap<String, String> hsmSite;
-
   @Autowired
   public NotificationClient(RestTemplate restTemplate, @Value("${apiEndpointUrl}") String apiEndpointUrl) {
     this.restTemplate = restTemplate;
     this.restTemplate.getMessageConverters().add(0, new StringHttpMessageConverter(Charset.forName("UTF-8")));
     this.endpointUrl = apiEndpointUrl + "/api/Notification";
-    hsmSite = new HashMap<>();
   }
 
   public String getCount(Map<String, String> params) {
@@ -55,13 +52,13 @@ public class NotificationClient {
     return restTemplate.getForObject(url, String.class);
   }
 
-  public String postNotification(String token, String SiteId, NotificationDTO item) {
+  public String postNotification(String token, NotificationDTO item) {
     HttpHeaders headers = new HttpHeaders();
     headers.set("Token", token);
     HttpEntity<NotificationDTO> entity = new HttpEntity<NotificationDTO>(item, headers);
     String url = String.format("%s", this.endpointUrl);
     ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
-    return restTemplate.getForObject(url, String.class);
+    return response.getBody();
   }
 
   public String markNotification(Map<String, String> params, String token, NotificationDTO item) {
@@ -74,7 +71,7 @@ public class NotificationClient {
     HttpEntity<NotificationDTO> entity = new HttpEntity<NotificationDTO>(item, headers);
     String url = String.format("%s", this.endpointUrl);
     ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
-    return restTemplate.getForObject(url, String.class);
+    return response.getBody();
   }
 
 }

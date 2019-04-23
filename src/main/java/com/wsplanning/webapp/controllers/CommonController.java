@@ -10,6 +10,7 @@ import com.wsplanning.webapp.clients.VehiclesClient;
 import com.wsplanning.webapp.dto.NotificationDTO;
 
 
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -118,7 +119,7 @@ public class CommonController extends BaseController {
   @PostMapping("/language")
   @ResponseBody
   public ResponseEntity getWO(@RequestBody Map<String, String> params, HttpServletRequest request,
-      HttpServletResponse response) {
+                              HttpServletResponse response) {
     try {
       String lang = params.get("lang");
       Locale userLocale = Locale.forLanguageTag(lang);
@@ -219,6 +220,39 @@ public class CommonController extends BaseController {
     }
   }
 
+  @GetMapping("/site/getEmployees")
+  public ResponseEntity getEmployees() {
+    try {
+      String rtn = employeesClient.getMechanics(getSiteId());
+      if (rtn.trim().length() > 0) {
+        if (StringUtils.endsWith(rtn, "]")) {
+          rtn = StringUtils.removeEndIgnoreCase(rtn, "]");
+        }
+      }
+
+      String getServiceAdvisors = employeesClient.getServiceAdvisors(getSiteId());
+      if (getServiceAdvisors.trim().length() > 0) {
+        if (StringUtils.startsWith(getServiceAdvisors, "[")) {
+          getServiceAdvisors = StringUtils.removeStartIgnoreCase(getServiceAdvisors, "[");
+        }
+        if (StringUtils.endsWith(getServiceAdvisors, "]")) {
+          getServiceAdvisors = StringUtils.removeEndIgnoreCase(getServiceAdvisors, "]");
+        }
+      }
+
+      if (rtn.trim().length() > 0) {
+        rtn += "," + getServiceAdvisors + "]";
+      } else {
+        rtn += "[" + getServiceAdvisors + "]";
+      }
+
+
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception ex) {
+      return parseException(ex);
+    }
+  }
+
   @GetMapping("/site/getStamping")
   public ResponseEntity getStamping() {
     try {
@@ -251,7 +285,7 @@ public class CommonController extends BaseController {
 
   @GetMapping("/site/getCustomers")
   public ResponseEntity getCustomers(@RequestParam(name = "skey") String skey,
-      @RequestParam(name = "custNo") String custNo) {
+                                     @RequestParam(name = "custNo") String custNo) {
     try {
       String rtn = customerClient.getCustomers(skey, custNo);
       return new ResponseEntity<>(rtn, HttpStatus.OK);
@@ -307,7 +341,7 @@ public class CommonController extends BaseController {
   // }
 
   // notification
-  @GetMapping("/site/getNotification")
+  @PostMapping("/site/getNotification")
   public ResponseEntity getNotification(@RequestBody Map<String, String> params) {
     try {
       String rtn = notificationClient.getListNotification(params);
@@ -318,7 +352,7 @@ public class CommonController extends BaseController {
     }
   }
 
-  @GetMapping("/site/getCountNotification")
+  @PostMapping("/site/getCountNotification")
   public ResponseEntity getCountNotification(@RequestBody Map<String, String> params) {
     try {
       String rtn = notificationClient.getCount(params);
@@ -332,7 +366,8 @@ public class CommonController extends BaseController {
   @PostMapping("/site/postNotification")
   public ResponseEntity postNotification(@RequestBody NotificationDTO data) {
     try {
-      String rtn = notificationClient.postNotification(getToken(), getSiteId(), data);
+      data.SiteId = getSiteId();
+      String rtn = notificationClient.postNotification(getToken(), data);
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception e) {
       return parseException(e);

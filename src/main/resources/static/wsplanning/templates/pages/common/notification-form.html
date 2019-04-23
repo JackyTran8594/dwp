@@ -17,8 +17,8 @@
                     <label class="control-label col-lg-2">{{'employee' | translate}}</label>
                     <div class="col-lg-10">
                         <select class="form-control" ng-model="target.employee"
-                            ng-options="item.Id as item.Name for item in employees" ng-readonly="target.ShiftId"
-                            disabled>
+                                ng-options="item as item.Name for item in employees"
+                                ng-disabled="target.ShiftId" ng-change="$ctrl.changeEmployee()">
                         </select>
                     </div>
                 </div>
@@ -28,12 +28,11 @@
                 <div class="form-group">
                     <label class="control-label col-lg-2">{{'message' | translate}}</label>
                     <div class="col-lg-10">
-                        <area type="text" class="form-control" ng-model="target.text" readonly/>
+                        <textarea type="text" class="form-control" ng-model="target.text" ng-disabled="target.ShiftId"/>
                     </div>
                 </div>
 
             </div>
-
 
 
         </div>
@@ -43,6 +42,7 @@
 </div>
 
 <div class="modal-footer position-right">
-    <a class="btn btn-primary" ng-disabled="target.text.length > 0 && target.employee.length > 0" ng-click="$ctrl.send()">{{ 'btnSend' | translate }}</a>
+    <a class="btn btn-primary" ng-disabled="target.text.length > 0 && target.employee"
+       ng-click="$ctrl.send()">{{ 'btnSend' | translate }}</a>
     <a class="btn btn-primary" ng-click="$ctrl.cancel()">{{ 'btnCancel' | translate }}</a>
 </div>

@@ -69,7 +69,6 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   }
 
 
-
   function loadCommon() {
 
     CommonServices.getChargeCats().then(function (data) {
@@ -140,7 +139,6 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   //     return isChecked;
   //   }
   // }
-
 
 
   // paging
@@ -367,7 +365,6 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   };
 
 
-
   $scope.openImage = function (item, id) {
     var modalInstance = $uibModal.open({
       animation: $ctrl.animationsEnabled,
@@ -393,17 +390,36 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   $scope.openNotify = function (item, id) {
     var modalInstance = $uibModal.open({
       animation: $ctrl.animationsEnabled,
-      templateUrl: '/wsplanning/templates/pages/common/photo-form.html',
+      templateUrl: '/wsplanning/templates/pages/common/notification-form.html',
       controller: 'NotificationModalCtrl',
       backdrop: 'static',
       controllerAs: '$ctrl',
-      size: "sm",
+      size: "lg",
+      resolve: {
+        item: item
+      }
     });
 
     modalInstance.result.then(function (selectedItem) {
-      // console.log(selectedItem);
-      $scope.jobTabList[id].JobAttachments = selectedItem
-      // console.log( $scope.jobTabList[id]);
+
+      console.log(selectedItem);
+
+      //Save notify
+      common.spinner(true);
+
+      var params = {
+        "SmanId": selectedItem.employee.SmanId,
+        "SiteId": "SiteId",
+        "Note": "Hello " + selectedItem.employee.Name + ", this is a notification for you at: " + new Date().toString(),
+      };
+      HttpService.postData('/site/postNotification', params).then(function (response) {
+        console.log(response);
+        common.spinner(false);
+      }, function error(response) {
+        $scope.imgTemplate = "";
+        console.log(response);
+        common.spinner(false);
+      });
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
     });
@@ -422,9 +438,9 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
 
   function emitData(params) {
     $scope.$emit("jobData", {
-      data: $scope.WorkOrder,
-      modified: params,
-    }
+        data: $scope.WorkOrder,
+        modified: params,
+      }
     );
   }
 
@@ -461,7 +477,6 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   });
 
 
-
   $scope.onSubmitForm = function () {
 
     if ($scope.actTypeJob === "new") {
@@ -478,7 +493,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
         common.btnLoading($(".btnSubmit"), false);
         console.log(res);
         common.notifySuccess("Success!!!");
-        $state.go('app.main.workdetail', { 'id': res.data.WorkOrderId, 'type': $stateParams.type });
+        $state.go('app.main.workdetail', {'id': res.data.WorkOrderId, 'type': $stateParams.type});
       }, function (err) {
         common.btnLoading($(".btnSubmit"), false);
         console.log(err);
@@ -539,7 +554,6 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, WorkOrderService, ite
     e.stopPropagation();
     $scope.isOpenDateInput = true;
   };
-
 
 
   $scope.totalElements = 0;
@@ -644,22 +658,22 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, WorkOrderService, ite
   }
 
 
-
   loadDataTree(item);
+
   function loadDataTree(params) {
     common.spinner(true);
     WorkOrderService.jobTab(params).then(function (res) {
       var data = res.data;
       console.log(res.data);
       angular.forEach(data, function (value) {
-        var objTree = {};
-        objTree.id = value.Id;
-        objTree.label = value.Name;
-        objTree.selected = false;
-        objTree.children = [];
-        objTree.SubGroups = value.SubGroups;
-        $scope.jobTreeList.push(objTree);
-      }
+          var objTree = {};
+          objTree.id = value.Id;
+          objTree.label = value.Name;
+          objTree.selected = false;
+          objTree.children = [];
+          objTree.SubGroups = value.SubGroups;
+          $scope.jobTreeList.push(objTree);
+        }
       );
 
       // console.log($scope.jobTreeList);
@@ -773,8 +787,6 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $uibModal, item, $uibM
   }
 
 
-
-
   $scope.takeScreenshot = function () {
     var modalInstance = $uibModal.open({
       animation: $ctrl.animationsEnabled,
@@ -857,7 +869,7 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $uibModal, item, $uibM
 
 
 UserWebApp.controller('TakeScreenshotCtrl', function ($scope, $rootScope, $translate, $location, $filter,
-  $uibModal, cameraService, $stateParams, $state, $uibModalInstance) {
+                                                      $uibModal, cameraService, $stateParams, $state, $uibModalInstance) {
 
   var $ctrl = this;
 
@@ -893,7 +905,7 @@ UserWebApp.controller('TakeScreenshotCtrl', function ($scope, $rootScope, $trans
 })
 
 UserWebApp.controller('openPhotoCtrl', function ($scope, $rootScope, $translate, $location, $filter,
-  $uibModal, item, $uibModalInstance) {
+                                                 $uibModal, item, $uibModalInstance) {
 
   var $ctrl = this;
   console.log(item);
@@ -913,7 +925,7 @@ UserWebApp.controller('openPhotoCtrl', function ($scope, $rootScope, $translate,
 
 
 UserWebApp.controller('NotificationModalCtrl', function ($scope, $rootScope, $translate, $location, $filter,
-  $uibModal, item, $uibModalInstance, CommonServices) {
+                                                         $uibModal, item, $uibModalInstance, CommonServices) {
 
   var $ctrl = this;
   console.log(item);
@@ -921,21 +933,27 @@ UserWebApp.controller('NotificationModalCtrl', function ($scope, $rootScope, $tr
   $scope.employees = [];
 
   function loadCombo() {
-    CommonServices.getServiceAdvisors().then(function (data) {
+    CommonServices.getEmployees().then(function (data) {
       $scope.employees = data;
     });
   }
 
   loadCombo();
 
-  $scope.target = {};
+  $scope.target = {
+    "employee": {},
+    "text": "",
+  };
+
+  // $ctrl.changeEmployee = function () {
+  //   $scope.target.employees =
+  // }
 
   $ctrl.cancel = function () {
     $uibModalInstance.dismiss('cancel');
   };
 
   $ctrl.send = function () {
-    
-    $uibModalInstance.close('cancel');
+    $uibModalInstance.close($scope.target);
   };
 })

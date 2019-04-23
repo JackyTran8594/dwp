@@ -17,12 +17,28 @@ UserWebApp
     this.menuAuth = [];
     this.lstNotification = [];
     this.countNotification = "";
+    this.lstEmployees = "";
 
+    this.getEmployees = function () {
+      var d = $q.defer();
+      if (!this.lstEmployees || this.lstEmployees.length <= 0) {
+        HttpService.getData('/site/getEmployees', {}).then(function (response) {
+          response.unshift({ "Id": "", "Name": $translate.instant('pleaseSelect') });
+          this.lstEmployees = response;
+          d.resolve(response);
+        }, function error(response) {
+          d.reject();
+        });
+      } else {
+        d.resolve(this.lstEmployees);
+      }
+      return d.promise;
+    };
 
     // getNotification
     this.getNotification = function () {
       var d = $q.defer();
-      HttpService.getData('/site/getNotification', {}).then(function (response) {
+      HttpService.postData('/site/getNotification', {}).then(function (response) {
         this.lstNotification = response;
         d.resolve(response);
       }, function error(response) {
@@ -34,7 +50,7 @@ UserWebApp
      // getCountNotification
      this.getCountNotification = function () {
       var d = $q.defer();
-      HttpService.getData('/site/getCountNotification', {}).then(function (response) {    
+      HttpService.postData('/site/getCountNotification', {}).then(function (response) {
         this.countNotification = response;
         d.resolve(response);
       }, function error(response) {
