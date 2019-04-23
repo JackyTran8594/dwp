@@ -1,12 +1,14 @@
 package com.wsplanning.webapp.controllers;
 
-import com.google.common.net.HttpHeaders;
+
 import com.wsplanning.webapp.clients.ASMasterClient;
 import com.wsplanning.webapp.clients.CustomerClient;
 import com.wsplanning.webapp.clients.EmployeesClient;
+import com.wsplanning.webapp.clients.NotificationClient;
 import com.wsplanning.webapp.clients.StampingClient;
 import com.wsplanning.webapp.clients.VehiclesClient;
 import com.wsplanning.webapp.dto.NotificationDTO;
+
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -43,6 +45,9 @@ public class CommonController extends BaseController {
 
   @Autowired
   protected VehiclesClient vehiclesClient;
+
+  @Autowired
+  protected NotificationClient notificationClient;
 
   @Autowired
   protected HttpSession session;
@@ -245,7 +250,8 @@ public class CommonController extends BaseController {
   }
 
   @GetMapping("/site/getCustomers")
-  public ResponseEntity getCustomers(@RequestParam(name = "skey") String skey, @RequestParam(name = "custNo") String custNo) {
+  public ResponseEntity getCustomers(@RequestParam(name = "skey") String skey,
+      @RequestParam(name = "custNo") String custNo) {
     try {
       String rtn = customerClient.getCustomers(skey, custNo);
       return new ResponseEntity<>(rtn, HttpStatus.OK);
@@ -255,63 +261,105 @@ public class CommonController extends BaseController {
   }
 
   @PostMapping("/site/customer")
-  public ResponseEntity customer(@RequestBody Map<String, String> params)
-  {
+  public ResponseEntity customer(@RequestBody Map<String, String> params) {
     try {
       String rtn = customerClient.customer(params);
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception e) {
       return parseException(e);
-      //TODO: handle exception
+      // TODO: handle exception
     }
   }
 
   // @PostMapping("/site/notification")
   // public ResponseEntity notification(@RequestBody NotificationDTO params)
   // {
-  //   try {
-  //     String rtn = employeesClient.customer(params);
-  //     return new ResponseEntity<>(rtn, HttpStatus.OK);
-  //   } catch (Exception e) {
-  //     return parseException(e);
-  //     //TODO: handle exception
-  //   }
+  // try {
+  // String rtn = employeesClient.customer(params);
+  // return new ResponseEntity<>(rtn, HttpStatus.OK);
+  // } catch (Exception e) {
+  // return parseException(e);
+  // //TODO: handle exception
+  // }
   // }
 
-
   @GetMapping("/site/stampingCode")
-  public ResponseEntity stampingCode()
-  {
+  public ResponseEntity stampingCode() {
     try {
       String rtn = siteClient.getStampingCode(getSiteId());
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception e) {
       return parseException(e);
-      //TODO: handle exception
+      // TODO: handle exception
     }
   }
 
   // @GetMapping("/site/getEmployees")
   // public ResponseEntity getEmployees()
   // {
-  //   try {
-  //     String rtn = employeesClient.getEmployees(getSiteId());
-  //     return new ResponseEntity<>(rtn, HttpStatus.OK);
-  //   } catch (Exception e) {
-  //     return parseException(e);
-  //     //TODO: handle exception
-  //   }
+  // try {
+  // String rtn = employeesClient.getEmployees(getSiteId());
+  // return new ResponseEntity<>(rtn, HttpStatus.OK);
+  // } catch (Exception e) {
+  // return parseException(e);
+  // //TODO: handle exception
+  // }
   // }
 
+  // notification
+  @GetMapping("/site/getNotification")
+  public ResponseEntity getNotification(@RequestBody Map<String, String> params) {
+    try {
+      String rtn = notificationClient.getListNotification(params);
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception e) {
+      return parseException(e);
+      // TODO: handle exception
+    }
+  }
+
+  @GetMapping("/site/getCountNotification")
+  public ResponseEntity getCountNotification(@RequestBody Map<String, String> params) {
+    try {
+      String rtn = notificationClient.getCount(params);
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception e) {
+      return parseException(e);
+      // TODO: handle exception
+    }
+  }
+
+  @PostMapping("/site/postNotification")
+  public ResponseEntity postNotification(@RequestBody NotificationDTO data) {
+    try {
+      String rtn = notificationClient.postNotification(getToken(), getSiteId(), data);
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception e) {
+      return parseException(e);
+      // TODO: handle exception
+    }
+  }
+
+  @PostMapping("/site/markNotification")
+  public ResponseEntity markNotification(Map<String, String> params, @RequestBody NotificationDTO data) {
+    try {
+      String rtn = notificationClient.markNotification(params, getToken(), data);
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception e) {
+      return parseException(e);
+      // TODO: handle exception
+    }
+  }
+  // end
+
   @GetMapping("/site/getMenuAuth")
-  public ResponseEntity getMenuAuth()
-  {
+  public ResponseEntity getMenuAuth() {
     try {
       String rtn = siteClient.loadProperty().toString();
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception e) {
       return parseException(e);
-      //TODO: handle exception
+      // TODO: handle exception
     }
   }
 

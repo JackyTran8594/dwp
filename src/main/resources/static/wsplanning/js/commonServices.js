@@ -15,13 +15,39 @@ UserWebApp
     this.vehicles = [];
     this.sites = [];
     this.menuAuth = [];
+    this.lstNotification = [];
+    this.countNotification = "";
 
+
+    // getNotification
+    this.getNotification = function () {
+      var d = $q.defer();
+      HttpService.getData('/site/getNotification', {}).then(function (response) {
+        this.lstNotification = response;
+        d.resolve(response);
+      }, function error(response) {
+        d.reject();
+      });
+      return d.promise;
+    };
+
+     // getCountNotification
+     this.getCountNotification = function () {
+      var d = $q.defer();
+      HttpService.getData('/site/getCountNotification', {}).then(function (response) {    
+        this.countNotification = response;
+        d.resolve(response);
+      }, function error(response) {
+        d.reject();
+      });
+      return d.promise;
+    };
 
 
     // getMenuAuth
     this.getMenuAuth = function () {
       var d = $q.defer();
-      HttpService.getData('/site/getMenuAuth', {}).then(function (response) {    
+      HttpService.getData('/site/getMenuAuth', {}).then(function (response) {
         this.menuAuth = response;
         d.resolve(response);
       }, function error(response) {
@@ -34,7 +60,7 @@ UserWebApp
     this.getSite = function () {
       var d = $q.defer();
       HttpService.getData('/site/getAll', {}).then(function (response) {
-        response.unshift({"Id": "", "Name": $translate.instant('pleaseSelect')})
+        response.unshift({ "Id": "", "Name": $translate.instant('pleaseSelect') })
         this.sites = response;
         d.resolve(response);
       }, function error(response) {
@@ -61,7 +87,7 @@ UserWebApp
       var d = $q.defer();
       if (!this.jobTypes || this.jobTypes.length <= 0) {
         HttpService.getData('/site/getJobTypes', {}).then(function (response) {
-          response.unshift({"Id": "", "Name": $translate.instant('pleaseSelect')});
+          response.unshift({ "Id": "", "Name": $translate.instant('pleaseSelect') });
           this.jobTypes = response;
           d.resolve(response);
         }, function error(response) {
@@ -77,7 +103,7 @@ UserWebApp
       var d = $q.defer();
       if (!this.jobCats || this.jobCats.length <= 0) {
         HttpService.getData('/site/getJobCats', {}).then(function (response) {
-          response.unshift({"Id": "", "Name": $translate.instant('pleaseSelect')});
+          response.unshift({ "Id": "", "Name": $translate.instant('pleaseSelect') });
           this.jobCats = response;
           d.resolve(response);
         }, function error(response) {
@@ -93,7 +119,7 @@ UserWebApp
       var d = $q.defer();
       if (!this.lstPayer || this.lstPayer.length <= 0) {
         HttpService.getData('/site/getPayers', {}).then(function (response) {
-          response.unshift({"Id": "", "Name": $translate.instant('pleaseSelect')});
+          response.unshift({ "Id": "", "Name": $translate.instant('pleaseSelect') });
           this.lstPayer = response;
           d.resolve(response);
         }, function error(response) {
@@ -109,7 +135,7 @@ UserWebApp
       var d = $q.defer();
       if (!this.lstShifts || this.lstShifts.length <= 0) {
         HttpService.getData('/site/getShifts', {}).then(function (response) {
-          response.unshift({"Id": "", "Name": $translate.instant('pleaseSelect')});
+          response.unshift({ "Id": "", "Name": $translate.instant('pleaseSelect') });
           this.lstShifts = response;
           d.resolve(response);
         }, function error(response) {
@@ -126,7 +152,7 @@ UserWebApp
       if (!this.lstChargeCats || this.lstChargeCats.length <= 0) {
         HttpService.getData('/site/getChargeCats', {}).then(function (response) {
 
-          response.unshift({"Id": "", "Name": $translate.instant('pleaseSelect')});
+          response.unshift({ "Id": "", "Name": $translate.instant('pleaseSelect') });
           angular.forEach(response, function (item) {
             item.Id = parseInt(item.Id);
           })
@@ -148,7 +174,7 @@ UserWebApp
         console.log("-------getTransactionTypes https-----");
         var deferred = $q.defer();
         $http.get('/site/getTransactionTypes', {}).then(function successCallback(response) {
-          response.data.unshift({"Id": "", "Name": $translate.instant('pleaseSelect')});
+          response.data.unshift({ "Id": "", "Name": $translate.instant('pleaseSelect') });
           this.transactionTypes = response.data;
           console.log("-------getTransactionTypes http: " + this.transactionTypes.length);
           deferred.resolve(this.transactionTypes);
@@ -164,7 +190,7 @@ UserWebApp
       var d = $q.defer();
       if (!this.transactionTypes || this.transactionTypes.length <= 0) {
         HttpService.getData('/site/getTransactionTypes', {}).then(function (response) {
-          response.unshift({"Id": "", "Name": $translate.instant('pleaseSelect')});
+          response.unshift({ "Id": "", "Name": $translate.instant('pleaseSelect') });
           this.transactionTypes = response;
           d.resolve(response);
         }, function error(response) {
@@ -179,7 +205,7 @@ UserWebApp
       var d = $q.defer();
       if (!this.departments || this.departments.length <= 0) {
         HttpService.getData('/site/getDepartments', {}).then(function (response) {
-          response.unshift({"Id": "", "Name": $translate.instant('pleaseSelect')});
+          response.unshift({ "Id": "", "Name": $translate.instant('pleaseSelect') });
           this.departments = response;
           d.resolve(response);
         }, function error(response) {
@@ -194,7 +220,7 @@ UserWebApp
       var d = $q.defer();
       if (!this.visitReasons || this.visitReasons.length <= 0) {
         HttpService.getData('/site/getVisitReasons', {}).then(function (response) {
-          response.unshift({"Id": "", "Name": $translate.instant('pleaseSelect')});
+          response.unshift({ "Id": "", "Name": $translate.instant('pleaseSelect') });
           this.visitReasons = response;
           d.resolve(response);
         }, function error(response) {
@@ -209,7 +235,7 @@ UserWebApp
       var d = $q.defer();
       if (!this.serviceAdvisors || this.serviceAdvisors.length <= 0) {
         HttpService.getData('/site/getServiceAdvisors', {}).then(function (response) {
-          response.unshift({"Id": "", "Name": $translate.instant('pleaseSelect')});
+          response.unshift({ "Id": "", "Name": $translate.instant('pleaseSelect') });
           this.serviceAdvisors = response;
           d.resolve(response);
         }, function error(response) {
@@ -336,7 +362,16 @@ UserWebApp
         });
       }
 
+      if (!this.lstNotification || this.lstNotification.length <= 0) {
+        resolve = false;
+        this.getNotification().then(function (data) {
+          resolve = true;
+          this.getNotification = data;
+        });
+      }
 
+
+      
       if (resolve) {
         d.resolve("");
       }
@@ -346,4 +381,4 @@ UserWebApp
 
 
   })
-;
+  ;

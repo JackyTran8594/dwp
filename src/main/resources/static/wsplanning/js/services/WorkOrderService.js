@@ -95,6 +95,37 @@ UserWebApp.service('WorkOrderService', function ($http) {
     });
   }
 
+  WorkOrderService.postNotification = function (data) {
+    return $http({
+      method: 'POST',
+      url: '/site/postNotification',
+      data: data
+    });
+  }
+
+  WorkOrderService.markNotification = function (data) {
+    return $http({
+      method: 'POST',
+      url: '/site/markNotification',
+      data: data
+    });
+  }
+
+  WorkOrderService.getCountNotification = function () {
+    return $http({
+      method: 'GET',
+      url: '/site/getCountNotification',
+
+    });
+  }
+
+  WorkOrderService.getNotification = function () {
+    return $http({
+      method: 'GET',
+      url: '/site/getNotification'
+    });
+  }
+
   return WorkOrderService;
 });
 
