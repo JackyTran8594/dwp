@@ -62,21 +62,41 @@
                     </ul>
                 </li>
 
-                <li class="dropdown dropdown-user">
-                    <a class="dropdown-toggle" data-toggle="dropdown" >
-                        <i class=" icon-bell2"></i> 
-                        <!-- <i class=" icon-bell3"></i>  -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="icon-bubbles4"></i>
+                        <span class="visible-xs-inline-block position-right">Messages</span>
+                        <span class="badge bg-warning-400">{{count}}</span>
                     </a>
+                    
+                    <div class="dropdown-menu dropdown-content width-350">
+                        <ul class="media-list dropdown-content-body">
+                            <li class="media" ng-repeat="item in lstNotification track by $index">
+                                <!-- <div class="media-left">
+                                    <span class="badge bg-danger-400 media-badge">5</span>
+                                </div> -->
 
-                    <ul class="dropdown-menu dropdown-menu-right">
-                        <li>
-                            <div class="notification">
-							
-							</div>
-                        </li>
-                      
-                    </ul>
+                                <div class="media-body">
+                                    <div class="media-heading">
+                                        <span class="text-semibold">{{item.CreatedBy}}</span>
+                                        <!-- <span class="media-annotation pull-right"><i class="icon-cross2"></i></span> -->
+                                        <div  class="media-annotation pull-right"><input type="checkbox" ng-model="checked" ng-click="markRead(item, checked)"></div>
+                                    </div>
+
+                                    <span class="text-muted">{{item.Note}}</span>
+                                </div>
+                            </li>
+
+                          
+                        </ul>
+
+                        <div class="dropdown-content-footer">
+                            <a href="#" data-popup="tooltip" title="All messages"><i class="icon-menu display-block"></i></a>
+                        </div>
+                    </div>
                 </li>
+
+               
             </ul>
         </div>
     </div>

@@ -39,15 +39,15 @@ public class NotificationClient {
     this.endpointUrl = apiEndpointUrl + "/api/Notification";
   }
 
-  public String getCount(Map<String, String> params) {
-    String SmanId = params.get("SmanId");
+  public String getCount(String params) {
+    String SmanId = params;
     String GetCountOnly = "true";
     String url = String.format("%s?SmanId=%s&bGetCountOnly=%s", this.endpointUrl, SmanId, GetCountOnly);
     return restTemplate.getForObject(url, String.class);
   }
 
-  public String getListNotification(Map<String, String> params) {
-    String SmanId = params.get("SmanId");
+  public String getListNotification(String params) {
+    String SmanId = params;
     String url = String.format("%s?SmanId=%s", this.endpointUrl, SmanId);
     return restTemplate.getForObject(url, String.class);
   }
@@ -61,8 +61,8 @@ public class NotificationClient {
     return response.getBody();
   }
 
-  public String markNotification(Map<String, String> params, String token, NotificationDTO item) {
-    String postAction = params.get("PostAction");
+  public String markNotification(String token, NotificationDTO item) {
+    String postAction = "markNotify";
     HttpHeaders headers = new HttpHeaders();
     headers.set("Token", token);
     if (StringUtils.isNotBlank(postAction)) {

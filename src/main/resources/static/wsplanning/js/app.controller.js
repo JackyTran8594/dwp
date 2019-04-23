@@ -1,4 +1,4 @@
-UserWebApp.controller('appCtrl', function ($scope, $window, $rootScope, $locale, $uibModal, HttpService, $translate, $location, $filter, $state, CommonServices, tmhDynamicLocale) {
+UserWebApp.controller('appCtrl', function ($scope, $state, WorkOrderService, $rootScope, $uibModal, HttpService, CommonServices, tmhDynamicLocale) {
 
   CommonServices.loadData();
 
@@ -11,6 +11,9 @@ UserWebApp.controller('appCtrl', function ($scope, $window, $rootScope, $locale,
     }
   });
 
+  $scope.count = "";
+
+
 
   $rootScope.lang = $("#currentLang").attr('data-currentLang');
   $rootScope.currLang = $rootScope.lang;
@@ -18,7 +21,7 @@ UserWebApp.controller('appCtrl', function ($scope, $window, $rootScope, $locale,
   $rootScope.currName = "English";
 
   $scope.lstmenu = JSON.parse(localStorage.getItem('info_menu'));
-  
+
 
   $scope.getRouter = function (param) {
     $state.go(param, { locale: $rootScope.lang });
@@ -119,8 +122,60 @@ UserWebApp.controller('appCtrl', function ($scope, $window, $rootScope, $locale,
 
   loadData();
 
+  function loadNotification(SmanId) {
+    WorkOrderService.getCountNotification(SmanId).then(function (res) {
+      $scope.count = res.data;
+      // console.log($scope.count);
+    }, function (err) {
+      console.log(err);
+    });
+
+    WorkOrderService.getNotification(SmanId).then(function (res) {
+      $scope.lstNotification = res.data;
+      // console.log($scope.lstNotification);
+    }, function (err) {
+      console.log(err);
+    })
+  }
+
+  setTimeout(function () {
+    var EmployeeData = $("#EmployeeData").data("employee");
+    var SmanId = "";
+    if (EmployeeData) {
+      SmanId = EmployeeData.SmanId;
+    }
+    loadNotification(SmanId);
+    $scope.$digest();
+  }, 1000*60*5)
+
+  // $scope.checked =  false;
+
+  $scope.markRead = function (item, index) {
+    $scope.lstNotification.splice(index, 1);
+    WorkOrderService.markNotification(item).then(function (res) {
+      var EmployeeData = $("#EmployeeData").data("employee");
+      var SmanId = "";
+
+      if (EmployeeData) {
+        SmanId = EmployeeData.SmanId;
+      }
+      loadNotification(SmanId);
+      console.log(res);
+    }, function (err) {
+      console.log(err);
+    });
+  };
+
   function loadData() {
     common.spinner(true);
+    var EmployeeData = $("#EmployeeData").data("employee");
+    var SmanId = "";
+
+    if (EmployeeData) {
+      SmanId = EmployeeData.SmanId;
+    }
+
+    loadNotification(SmanId);
     HttpService.getData('/language/getAll', {}).then(function (response) {
       $scope.lstLang = [];
       angular.forEach(response, function (item) {
@@ -137,6 +192,7 @@ UserWebApp.controller('appCtrl', function ($scope, $window, $rootScope, $locale,
           item.class = "";
         }
         $scope.lstLang.push(item);
+        console.log(response);
       });
       common.spinner(false);
     }, function error(response) {
@@ -193,10 +249,6 @@ UserWebApp.controller('appCtrl', function ($scope, $window, $rootScope, $locale,
       console.log('Modal dismissed at: ' + new Date());
     });
   };
-
-
-  //
-
 
   //Load Stamp
   $rootScope.$on('routestateChangeSuccess', function (event, data) {

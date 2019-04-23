@@ -438,9 +438,9 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
 
   function emitData(params) {
     $scope.$emit("jobData", {
-        data: $scope.WorkOrder,
-        modified: params,
-      }
+      data: $scope.WorkOrder,
+      modified: params,
+    }
     );
   }
 
@@ -493,7 +493,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
         common.btnLoading($(".btnSubmit"), false);
         console.log(res);
         common.notifySuccess("Success!!!");
-        $state.go('app.main.workdetail', {'id': res.data.WorkOrderId, 'type': $stateParams.type});
+        $state.go('app.main.workdetail', { 'id': res.data.WorkOrderId, 'type': $stateParams.type });
       }, function (err) {
         common.btnLoading($(".btnSubmit"), false);
         console.log(err);
@@ -666,14 +666,14 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, WorkOrderService, ite
       var data = res.data;
       console.log(res.data);
       angular.forEach(data, function (value) {
-          var objTree = {};
-          objTree.id = value.Id;
-          objTree.label = value.Name;
-          objTree.selected = false;
-          objTree.children = [];
-          objTree.SubGroups = value.SubGroups;
-          $scope.jobTreeList.push(objTree);
-        }
+        var objTree = {};
+        objTree.id = value.Id;
+        objTree.label = value.Name;
+        objTree.selected = false;
+        objTree.children = [];
+        objTree.SubGroups = value.SubGroups;
+        $scope.jobTreeList.push(objTree);
+      }
       );
 
       // console.log($scope.jobTreeList);
@@ -740,23 +740,20 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $uibModal, item, $uibM
         $scope.lstAttachment.push(obj);
       })
     }
-    // console.log($scope.lstphoto);
+   
     return $scope.lstphoto;
   }
 
 
   var formData = new FormData();
   $scope.getTheFiles = function ($files) {
-    // if ($scope.lstphoto.length > 0) {
-    //   $scope.lstphoto = loadPhoto(item);
-    //   // $scope.lstphoto = [];
-    // }
+   
     $scope.lstfiles = $files;
-    // console.log($files);
+ 
     angular.forEach($files, function (v, k) {
       var file = v;
       var reader = new FileReader();
-      // reader.onload = $scope.photoLoaded;
+    
       reader.onload = function (e) {
         $scope.$apply(function () {
           var obj = jobAttachments();
@@ -776,7 +773,7 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $uibModal, item, $uibM
       }
       reader.readAsDataURL(file)
       formData.append("files", v)
-      // console.log(formData);
+      
     });
 
 
@@ -868,8 +865,7 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $uibModal, item, $uibM
 })
 
 
-UserWebApp.controller('TakeScreenshotCtrl', function ($scope, $rootScope, $translate, $location, $filter,
-                                                      $uibModal, cameraService, $stateParams, $state, $uibModalInstance) {
+UserWebApp.controller('TakeScreenshotCtrl', function ($scope, $uibModalInstance) {
 
   var $ctrl = this;
 
@@ -904,8 +900,7 @@ UserWebApp.controller('TakeScreenshotCtrl', function ($scope, $rootScope, $trans
   };
 })
 
-UserWebApp.controller('openPhotoCtrl', function ($scope, $rootScope, $translate, $location, $filter,
-                                                 $uibModal, item, $uibModalInstance) {
+UserWebApp.controller('openPhotoCtrl', function ($scope,item, $uibModalInstance) {
 
   var $ctrl = this;
   console.log(item);
@@ -925,7 +920,7 @@ UserWebApp.controller('openPhotoCtrl', function ($scope, $rootScope, $translate,
 
 
 UserWebApp.controller('NotificationModalCtrl', function ($scope, $rootScope, $translate, $location, $filter,
-                                                         $uibModal, item, $uibModalInstance, CommonServices) {
+  $uibModal, item, $uibModalInstance, CommonServices, WorkOrderService) {
 
   var $ctrl = this;
   console.log(item);

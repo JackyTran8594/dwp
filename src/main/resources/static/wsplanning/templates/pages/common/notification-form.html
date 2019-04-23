@@ -18,7 +18,7 @@
                     <div class="col-lg-10">
                         <select class="form-control" ng-model="target.employee"
                                 ng-options="item as item.Name for item in employees"
-                                ng-disabled="target.ShiftId" ng-change="$ctrl.changeEmployee()">
+                                ng-change="$ctrl.changeEmployee()">
                         </select>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
 </div>
 
 <div class="modal-footer position-right">
-    <a class="btn btn-primary" ng-disabled="target.text.length > 0 && target.employee"
+    <a class="btn btn-primary" ng-disabled="target.text.length == 0 && !target.employee"
        ng-click="$ctrl.send()">{{ 'btnSend' | translate }}</a>
     <a class="btn btn-primary" ng-click="$ctrl.cancel()">{{ 'btnCancel' | translate }}</a>
 </div>

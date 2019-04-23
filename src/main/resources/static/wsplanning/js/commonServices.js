@@ -35,31 +35,6 @@ UserWebApp
       return d.promise;
     };
 
-    // getNotification
-    this.getNotification = function () {
-      var d = $q.defer();
-      HttpService.postData('/site/getNotification', {}).then(function (response) {
-        this.lstNotification = response;
-        d.resolve(response);
-      }, function error(response) {
-        d.reject();
-      });
-      return d.promise;
-    };
-
-     // getCountNotification
-     this.getCountNotification = function () {
-      var d = $q.defer();
-      HttpService.postData('/site/getCountNotification', {}).then(function (response) {
-        this.countNotification = response;
-        d.resolve(response);
-      }, function error(response) {
-        d.reject();
-      });
-      return d.promise;
-    };
-
-
     // getMenuAuth
     this.getMenuAuth = function () {
       var d = $q.defer();
@@ -377,16 +352,6 @@ UserWebApp
           this.sites = data;
         });
       }
-
-      if (!this.lstNotification || this.lstNotification.length <= 0) {
-        resolve = false;
-        this.getNotification().then(function (data) {
-          resolve = true;
-          this.getNotification = data;
-        });
-      }
-
-
       
       if (resolve) {
         d.resolve("");

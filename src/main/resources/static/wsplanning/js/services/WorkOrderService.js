@@ -111,18 +111,19 @@ UserWebApp.service('WorkOrderService', function ($http) {
     });
   }
 
-  WorkOrderService.getCountNotification = function () {
+  WorkOrderService.getCountNotification = function (data) {
     return $http({
       method: 'GET',
       url: '/site/getCountNotification',
-
+      params: {smanid: data}
     });
   }
 
-  WorkOrderService.getNotification = function () {
+  WorkOrderService.getNotification = function (data) {
     return $http({
       method: 'GET',
-      url: '/site/getNotification'
+      url: '/site/getNotification',
+      params: {smanid: data}
     });
   }
 
