@@ -204,26 +204,9 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
         } else {
             var startDate = new Date(obj.date);
             var endDate = new Date(startDate.getTime() + 24 * 60 * 60 * 1000);
-            calendar.refetchResources();
-            calendar.refetchEvents();
+            // calendar.refetchResources();
+            // calendar.refetchEvents();
             calendar.gotoDate(endDate);
-            // calendar.defaultDate = startDate;
-
-            // calendar.getEventSources()[0].internalEventSource.fetchRange.start = startDate;
-            // calendar.getEventSources()[0].internalEventSource.fetchRange.end = endDate;
-
-            // calendar.getEventSources()[0].internalEventSource.fetchRange.end = new Date("2019-03-21T00:00:00");
-            // calendar.getEventSources()[0].internalEventSource.fetchRange.start = new Date("2019-03-20T00:00:00");
-
-            // calendar.removeAllEvents();
-            // // calendar.refetchEvents();
-            // if (obj.events) {
-            //   // calendar.refetchEvents();
-            //   // calendar.addEventSource(obj.events);
-            //   calendar.rerenderEvents();
-            //   console.log(obj.events);
-            // } else {
-            // }
         }
 
     });

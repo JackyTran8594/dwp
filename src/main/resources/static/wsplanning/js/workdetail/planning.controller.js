@@ -5,6 +5,39 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
     $scope.jobTabList = $scope.WorkOrder.WOJobs;
 
     $scope.totalHours = 0;
+    $scope.totalDurationPool = 0;
+    $scope.totalDurationBooking = 0;
+
+    calcTotalDuration();
+
+    function calcTotalDuration() {
+        $scope.totalDurationPool = 0;
+        $scope.totalDurationBooking = 0;
+
+        //Create WoResourcePool Duration
+        var length = 0;
+        if ($scope.WorkOrder.BookedResourcePools) {
+            length = $scope.WorkOrder.BookedResourcePools.length;
+        }
+
+        if (length > 0) {
+            for (var i = 0; i < length; i++) {
+                $scope.totalDurationPool += $scope.WorkOrder.BookedResourcePools[i].Duration;
+            }
+        }
+
+        //Create BookedResources.Duration
+        var length = 0;
+        if ($scope.WorkOrder.BookedResources) {
+            length = $scope.WorkOrder.BookedResources.length;
+        }
+
+        if (length > 0) {
+            for (var i = 0; i < length; i++) {
+                $scope.totalDurationBooking += $scope.WorkOrder.BookedResources[i].Duration;
+            }
+        }
+    }
 
     if ($scope.jobTabList) {
         var length = $scope.jobTabList.length;
@@ -149,6 +182,33 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
     console.log($scope.WorkOrderData.BookedResources);
 
     $scope.events = [];
+    if ($scope.WorkOrderData.BookedResourcePools) {
+        var itemEvent = {};
+        var objTemp = {};
+        var startTime = new Date();
+        var endTime = new Date();
+        for (var i = 0; i < $scope.WorkOrderData.BookedResourcePools.length; i++) {
+            objTemp = $scope.WorkOrderData.BookedResourcePools[i];
+            startTime = new Date(objTemp.WorkDay);
+            startTime.setHours(8);
+            endTime = new Date(objTemp.WorkDay);
+            endTime.setHours(12);
+            itemEvent = {
+                "title": "",
+                "startsAt": startTime,
+                "endsAt": endTime,
+                "color": { // can also be calendarConfig.colorTypes.warning for shortcuts to the deprecated event types
+                    "primary": '#e3bc08', // the primary event color (should be darker than secondary)
+                    "secondary": '#fdf1ba' // the secondary event color (should be lighter than primary)
+                },
+                "draggable": false,
+                "resizable": false,
+                "incrementsBadgeTotal": true,
+            };
+            $scope.events.push(itemEvent);
+        }
+    }
+
     if ($scope.WorkOrderData.BookedResources) {
         var itemEvent = {};
         var objTemp = {};
@@ -429,10 +489,6 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
 
     }
 
-    function menuRemove($event) {
-        console.log($event);
-    }
-
     function menuEdit($event) {
         console.log($event);
         var modalInstance = $uibModal.open({
@@ -446,6 +502,7 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
                     return $event.dataContext;
                 },
                 listData: function () {
+                    console.log($scope.WorkOrder.BookedResourcePools);
                     if (!$scope.WorkOrder.BookedResourcePools) {
                         $scope.WorkOrder.BookedResourcePools = [];
                     }
@@ -480,18 +537,14 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
 
             console.log($scope.WorkOrder);
             if ($scope.WorkOrder && $scope.WorkOrder.WorkOrderId) {
-                $state.reload();
-                $state.go('app.main.workdetail', {
-                    'id': $scope.WorkOrder.WorkOrderId,
-                    'type': $stateParams.type,
-                    'tab': "planning"
-                }, {reload: true});
+                location.reload();
             } else {
-                $state.go('app.main.workdetail', {
-                    'id': res.data.WorkOrderId,
-                    'type': $stateParams.type,
-                    'tab': "planning"
-                }, {reload: true});
+                // $state.go('app.main.workdetail', {
+                //     'locale': $rootScope.lang,
+                //     'id': res.data.WorkOrderId,
+                //     'type': $stateParams.type,
+                //     'tab': "planning"
+                // }, {reload: true});
             }
         }, function (err) {
             common.btnLoading($(".btnSubmit"), true);
@@ -503,6 +556,7 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
 
     //Save from button header
     $rootScope.$on('savePlanning', function (event, obj) {
+        console.log("-----on savePlanning: ");
         $scope.onSubmitForm();
     });
 

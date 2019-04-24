@@ -167,7 +167,7 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
     })
 
     .state('app.main.newwo', {
-      url: 'workdetail/newwo/:type/:action/',
+      url: 'workdetail/newwo/:type/:action/:tab',
       params: {
         tab: "header",
       },
@@ -193,7 +193,7 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
     })
 
     .state('app.main.workdetail', {
-      url: 'workdetail/:type/:id',
+      url: 'workdetail/:type/:id/:tab',
       params: {
         tab: null,
       },
