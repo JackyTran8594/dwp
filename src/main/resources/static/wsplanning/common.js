@@ -539,6 +539,18 @@ function formatDateToYYYYMMDD(date) {
   return rtn;
 }
 
+function dateToUTC2(date) {
+  if (date instanceof Date) {
+    var userTimezoneOffset = date.getTimezoneOffset() * 60000;
+    return new Date(date.getTime() + userTimezoneOffset);
+  } else if (typeof date === 'string' || date instanceof String) {
+    var newDate = new Date(date);
+    var userTimezoneOffset = newDate.getTimezoneOffset() * 60000;
+    return new Date(newDate.getTime() + userTimezoneOffset);
+  }
+
+  return null;
+}
 
 function dateToUTC(date) {
   if (date instanceof Date) {
