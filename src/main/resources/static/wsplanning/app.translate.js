@@ -232,6 +232,7 @@ var translationsEN = {
   startTimeBookPool: "Start time",
   endTimeBookPool: "Start time",
   addBookResource: "Add book resouce",
+  editBookResource: "Edit book resouce",
 
   //notification
   employee: "Employee",
@@ -407,6 +408,7 @@ var translationsVI = {
   startTimeBookPool: "Start time",
   endTimeBookPool: "Start time",
   addBookResource: "Add book resouce",
+  editBookResource: "Edit book resouce",
   duration: "Duration",
 
 };

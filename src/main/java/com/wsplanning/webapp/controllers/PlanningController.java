@@ -268,6 +268,8 @@ public class PlanningController extends BaseController {
 
               itemRtn = new JsonObject();
               itemRtn.addProperty("resourceId", WOResource.get("ResourceId").getAsString());
+              itemRtn.addProperty("RowId", WOResource.get("RowId").getAsString());
+              itemRtn.addProperty("Type", "Booking");
               if (!title.isEmpty()) {
                 itemRtn.addProperty("title", title);
               } else {
@@ -299,6 +301,7 @@ public class PlanningController extends BaseController {
 //          itemRtn.addProperty("start", itemObj.get("Start").getAsString().replaceAll("T00","T08"));
 //          itemRtn.addProperty("end", itemObj.get("End").getAsString().replaceAll("T00","T09"));
           if (itemObj.has("Type")) {
+            itemRtn.addProperty("Type", itemObj.get("Type").getAsString());
             if (itemObj.get("Type").getAsString().equalsIgnoreCase("P")) {
               itemRtn.addProperty("title", "P");
               itemRtn.addProperty("rendering", "background");
