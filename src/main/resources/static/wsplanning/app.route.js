@@ -168,6 +168,9 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
 
     .state('app.main.newwo', {
       url: 'workdetail/newwo/:type/:action/',
+      params: {
+        tab: "header",
+      },
       controller: "WorkDetailCtrl as $ctrl",
       templateUrl: '/wsplanning/templates/pages/workdetail/index.html',
       resolve: {
@@ -190,7 +193,10 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
     })
 
     .state('app.main.workdetail', {
-      url: 'workdetail/:type/:id?tab',
+      url: 'workdetail/:type/:id',
+      params: {
+        tab: null,
+      },
       controller: "WorkDetailCtrl as $ctrl",
       templateUrl: '/wsplanning/templates/pages/workdetail/index.html',
       resolve: {
