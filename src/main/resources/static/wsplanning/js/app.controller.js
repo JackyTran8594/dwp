@@ -132,7 +132,7 @@ UserWebApp.controller('appCtrl', function ($scope, $state, WorkOrderService, $ro
 
     WorkOrderService.getNotification(SmanId).then(function (res) {
       $scope.lstNotification = res.data;
-      // console.log($scope.lstNotification);
+      console.log($scope.lstNotification);
     }, function (err) {
       console.log(err);
     })

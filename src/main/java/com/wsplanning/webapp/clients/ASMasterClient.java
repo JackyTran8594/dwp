@@ -136,6 +136,7 @@ public class ASMasterClient {
         JSONArray jsonArray = new JSONArray();
         JSONArray jarray = new JSONArray();
         JSONArray arrayTab = new JSONArray();
+        JSONArray arrTime = new JSONArray();
         // JSONArray properties = new JSONArray();
         JSONObject obj = new JSONObject();
         if (input == null) {
@@ -170,6 +171,7 @@ public class ASMasterClient {
                     if (subStr[0].contains("tab")) {
                         objTab.put("name", subStr[1]);
                         objTab.put("value", value.toString());
+                        objTab.put("ordinalNumber", Integer.parseInt(subStr[2]));
                     }
                     if (subStr[0].contains("timeout")) {
                         objTimeout.put("name", subStr[0]);
@@ -178,12 +180,13 @@ public class ASMasterClient {
 
                     arrayTab.put(objTab);
                     jsonArray.put(jsonObject);
+                    arrTime.put(objTimeout);
                 });
 
                 obj.put("auth", jsonArray);
                 obj.put("menu", jarray);
                 obj.put("tab", arrayTab);
-                obj.put("timeout", objTimeout);
+                obj.put("timeout", arrTime);
 
             } catch (IOException e) {
                 // TODO Auto-generated catch block

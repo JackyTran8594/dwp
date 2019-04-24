@@ -14,6 +14,8 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
     $scope.WorkOrderData = WorkOrder.data;
     $scope.WorkOrder = WorkOrder.data;
 
+    console.log($scope.WorkOrder);
+
     loadCommon();
     $scope.lstTrans = [];
     $scope.lstDepartment = [];

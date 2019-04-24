@@ -28,7 +28,7 @@
                 <div class="form-group">
                     <label class="control-label col-lg-2">{{'message' | translate}}</label>
                     <div class="col-lg-10">
-                        <textarea type="text" class="form-control" ng-model="target.text" ng-disabled="target.ShiftId"/>
+                        <textarea type="text" class="form-control" ng-model="target.text" >
                     </div>
                 </div>
 
@@ -42,7 +42,7 @@
 </div>
 
 <div class="modal-footer position-right">
-    <a class="btn btn-primary" ng-disabled="target.text.length == 0 && !target.employee"
+    <a class="btn btn-primary"
        ng-click="$ctrl.send()">{{ 'btnSend' | translate }}</a>
     <a class="btn btn-primary" ng-click="$ctrl.cancel()">{{ 'btnCancel' | translate }}</a>
 </div>

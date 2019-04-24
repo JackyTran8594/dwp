@@ -367,7 +367,7 @@ public class CommonController extends BaseController {
   public ResponseEntity postNotification(@RequestBody NotificationDTO data) {
     try {
       data.SiteId = getSiteId();
-      String rtn = notificationClient.postNotification(getToken(), data);
+      String rtn = notificationClient.postNotification(getSiteId() ,getToken(), data);
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception e) {
       return parseException(e);
