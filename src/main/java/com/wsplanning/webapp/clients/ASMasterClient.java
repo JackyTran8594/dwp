@@ -161,19 +161,22 @@ public class ASMasterClient {
                 prop_Auth.forEach((key, value) -> {
                     JSONObject jsonObject = new JSONObject();
                     JSONObject objTab = new JSONObject();
-                    String[] subStr = key.toString().split("\\.");
-                    if (subStr[0].contains("app")) {
+                    String strKey = key.toString();
+                    if (strKey.contains("app.main")) {
+                        String[] subStr = strKey.split("\\.");
                         jsonObject.put("route", subStr[0] + "." + subStr[1] + "." + subStr[2]);
                         jsonObject.put("value", value.toString());
                         jsonObject.put("name", subStr[2]);
                         jsonObject.put("ordinalNumber", Integer.parseInt(subStr[3]));
                     }
-                    if (subStr[0].contains("tab")) {
+                    if (strKey.contains("tab.main")) {
+                        String[] subStr = strKey.split("\\.");
                         objTab.put("name", subStr[1]);
                         objTab.put("value", value.toString());
                         objTab.put("ordinalNumber", Integer.parseInt(subStr[2]));
                     }
-                    if (subStr[0].contains("timeout")) {
+                    if (strKey.contains("timeout.main")) {
+                        String[] subStr = strKey.split("\\.");
                         objTimeout.put("name", subStr[0]);
                         objTimeout.put("value", value.toString());
                     }

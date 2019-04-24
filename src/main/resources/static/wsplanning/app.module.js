@@ -67,6 +67,7 @@ UserWebApp.run(['$rootScope', 'uiSelect2Config', '$translate', 'tmhDynamicLocale
 
   function loadAuth() {
     CommonServices.getMenuAuth().then(function (res) {
+      console.log(res);
       var lst_auth = res.auth;
       var lst_name = res.menu;
       var lst_tab = res.tab;
