@@ -21,7 +21,7 @@ UserWebApp.controller('appCtrl', function ($scope, $state, WorkOrderService, $ro
   $rootScope.currName = "English";
 
   $scope.lstmenu = JSON.parse(localStorage.getItem('info_menu'));
-
+  var timeout = JSON.parse(localStorage.getItem('info_timeout'));
 
   $scope.getRouter = function (param) {
     $state.go(param, { locale: $rootScope.lang });
@@ -146,7 +146,7 @@ UserWebApp.controller('appCtrl', function ($scope, $state, WorkOrderService, $ro
     }
     loadNotification(SmanId);
     $scope.$digest();
-  }, 1000*60*5)
+  }, 1000*60*timeout)
 
   // $scope.checked =  false;
 

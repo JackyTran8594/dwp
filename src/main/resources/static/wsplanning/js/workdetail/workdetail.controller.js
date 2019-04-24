@@ -165,6 +165,9 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
   //   console.log($scope.WorkOrder.Mileage);
   // });
 
+  var lstab = JSON.parse(localStorage.getItem('info_tab'));
+  $scope.tabs = lstab;
+  
   $scope.tabActive = "header";
 
   loadTab($stateParams.id);

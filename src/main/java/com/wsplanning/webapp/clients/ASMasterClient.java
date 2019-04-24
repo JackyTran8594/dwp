@@ -126,8 +126,6 @@ public class ASMasterClient {
     return restTemplate.getForObject(url, String.class);
   }
 
-  
-
   public JSONObject loadProperty() {
     String path = "messages/config.properties";
     String path_Menu = "messages/messages.properties";
@@ -137,6 +135,7 @@ public class ASMasterClient {
     Properties prop_Menu = new Properties();
     JSONArray jsonArray = new JSONArray();
     JSONArray jarray = new JSONArray();
+    JSONArray arrayTab = new JSONArray();
     // JSONArray properties = new JSONArray();
     JSONObject obj = new JSONObject();
     if (input == null) {
@@ -147,30 +146,44 @@ public class ASMasterClient {
         prop_Menu.load(input_Menu);
 
         prop_Menu.forEach((k, v) -> {
-        String[] icoStrings = k.toString().split("\\.");
-      
-        if(icoStrings[0].contains("icon")) {
-          JSONObject jmenu = new JSONObject();
-          jmenu.put("name", icoStrings[1]);
-          jmenu.put("class", v.toString());
-          jarray.put(jmenu);
-        }
+          String[] icoStrings = k.toString().split("\\.");
+
+          if (icoStrings[0].contains("icon")) {
+            JSONObject jmenu = new JSONObject();
+            jmenu.put("name", icoStrings[1]);
+            jmenu.put("class", v.toString());
+            jarray.put(jmenu);
+          }
         });
 
         prop_Auth.forEach((key, value) -> {
           JSONObject jsonObject = new JSONObject();
+          JSONObject objTab = new JSONObject();
+		  JSONObject objTimeout = new JSONObject();
           String[] subStr = key.toString().split("\\.");
+          if (subStr[0].contains("app")) {
+            jsonObject.put("route", subStr[0] + "." + subStr[1] + "." + subStr[2]);
+            jsonObject.put("value", value.toString());
+            jsonObject.put("name", subStr[2]);
+            jsonObject.put("ordinalNumber", Integer.parseInt(subStr[3]));
+          }
+          if (subStr[0].contains("tab")) {
+            objTab.put("name", subStr[1]);
+            objTab.put("value", value.toString());
+          }
+		  if (subStr[0].contains("timeout")) {
+            objTimeout.put("name", subStr[0]);
+            objTimeout.put("value", value.toString());
+          }
 
-          jsonObject.put("route", subStr[0] + "." + subStr[1] + "." + subStr[2]);
-          jsonObject.put("value", value.toString());
-          jsonObject.put("name", subStr[2]);
-          jsonObject.put("ordinalNumber", Integer.parseInt(subStr[3]));
-          
+          arrayTab.put(objTab);
           jsonArray.put(jsonObject);
         });
-        
+
         obj.put("auth", jsonArray);
         obj.put("menu", jarray);
+        obj.put("tab", arrayTab);
+		obj.put("timeout", objTimeout);
 
       } catch (IOException e) {
         // TODO Auto-generated catch block
