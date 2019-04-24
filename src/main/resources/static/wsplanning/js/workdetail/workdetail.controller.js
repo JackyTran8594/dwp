@@ -1,5 +1,6 @@
 UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpService, $translate, $location, $filter, $uibModal, CommonServices, $stateParams, $state, WorkOrder, lstMonth, WorkOrderService) {
 
+    console.log("--------WorkDetailCtrl-----------");
     $scope.WorkOrderId = $stateParams.id;
     $scope.type = $stateParams.type;
     $scope.WOJobs = WorkOrder.data.WOJobs;
@@ -191,6 +192,28 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 
     $scope.changeTab = function (tabActive, abc) {
         $scope.tabActive = tabActive;
+
+        var params= {
+            locale: $stateParams.locale,
+            type: $stateParams.type,
+            id: $stateParams.id,
+            tab: $scope.tabActive
+        };
+
+        console.log(params);
+
+        $state.transitionTo($state.current, params, {
+            reload: false, inherit: false, notify: false, location: "replace"
+        });
+
+        // $state.go('app.main.workdetail', {
+        //     'locale': $rootScope.lang,
+        //     'id': $scope.WorkOrder.WorkOrderId,
+        //     'type': $stateParams.type,
+        //     'tab': scope.tabActive
+        // }, {reload: false});
+
+        // $state.go('app.main.workdetail', {parm1: 1}, {notify: false});
     }
 
 
@@ -282,6 +305,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 
     //Submit tren header
     $scope.saveForm = function (type) {
+        console.log("-----saveForm: " + type);
         if (type == "header") {
             $rootScope.$broadcast("saveHeader", { "item": {} });
         } else if (type == "job") {
