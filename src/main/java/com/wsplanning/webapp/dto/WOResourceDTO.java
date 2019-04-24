@@ -9,7 +9,7 @@ public class WOResourceDTO {
 
     public String ResourceId;
     public Integer ResourceType;
-    public Date StartTime;
+    public String StartTime;
 
 
 
