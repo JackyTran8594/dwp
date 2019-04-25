@@ -649,12 +649,9 @@ table td {
     height:     
 } */
 
-.outside-image {
-  
-}
-
-.icon-remove-photo {
-
+.breadcrumb.breadcrumb-caret > li{
+  font-weight: 700;
+  font-size: 19px;
 }
 
 @media (min-width: 769px) {

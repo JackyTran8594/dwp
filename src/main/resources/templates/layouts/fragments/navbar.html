@@ -78,9 +78,9 @@
 
                                 <div class="media-body">
                                     <div class="media-heading">
-                                        <span class="text-semibold">{{item.CreatedBy}}</span>
+                                        <span class="text-semibold">{{item.CreatedBy}}</span> 
                                         <!-- <span class="media-annotation pull-right"><i class="icon-cross2"></i></span> -->
-                                        <div  class="media-annotation pull-right"><input type="checkbox" ng-model="checked" ng-click="markRead(item, checked)"></div>
+                                        <div  class="media-annotation pull-right"> <a style="cursor: pointer" ng-click="markRead(item, $index)" data-popup="tooltip" title="Mark Read"><i class="icon-mail-read"></i></a></div>
                                     </div>
 
                                     <span class="text-muted">{{item.Note}}</span>

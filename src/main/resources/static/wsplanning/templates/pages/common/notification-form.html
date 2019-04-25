@@ -3,12 +3,11 @@
         <span aria-hidden="true">&times;</span>
         <span class="sr-only" ng-click="$ctrl.cancel()">Close</span>
     </button>
-    <h4>{{title}}</h4>
+    <h4>{{'notification' | translate}}</h4>
 </div>
 
 <div class="modal-body">
 
-    <div>
         <div class="well well-sm">
 
 
@@ -17,8 +16,7 @@
                     <label class="control-label col-lg-2">{{'employee' | translate}}</label>
                     <div class="col-lg-10">
                         <select class="form-control" ng-model="target.employee"
-                                ng-options="item as item.Name for item in employees"
-                                ng-change="$ctrl.changeEmployee()">
+                            ng-options="item.SmanId as item.Name for item in employees" ng-change="$ctrl.changeEmployee()">
                         </select>
                     </div>
                 </div>
@@ -28,7 +26,7 @@
                 <div class="form-group">
                     <label class="control-label col-lg-2">{{'message' | translate}}</label>
                     <div class="col-lg-10">
-                        <textarea type="text" class="form-control" ng-model="target.text" >
+                        <textarea type="text" class="form-control" ng-model="target.text"></textarea>
                     </div>
                 </div>
 
@@ -36,13 +34,10 @@
 
 
         </div>
-    </div>
-
 
 </div>
 
-<div class="modal-footer position-right">
-    <a class="btn btn-primary"
-       ng-click="$ctrl.send()">{{ 'btnSend' | translate }}</a>
-    <a class="btn btn-primary" ng-click="$ctrl.cancel()">{{ 'btnCancel' | translate }}</a>
+<div class="modal-footer">
+    <a class="btn btn-primary" ng-click="$ctrl.send(target)">{{ 'btnSend' | translate }}</a>
+    <a class="btn btn-default" ng-click="$ctrl.cancel()">{{ 'btnCancel' | translate }}</a>
 </div>

@@ -117,32 +117,17 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   }
 
 
-  // $scope.hasMechanicId = false;
-
   $scope.getCheckRow = function (parentId, id, checked) {
     if (checked == false) {
       $scope.jobTabList[parentId].Items[id].MechanicId = null;
       console.log("--done--");
     } else {
       $scope.jobTabList[parentId].Items[id].MechanicId = $scope.WorkOrder.Token.EmployeeData.SmanId;
+      console.log($scope.jobTabList[parentId].Items[id]);
       console.log("--done--");
     }
   }
 
-  // $scope.checkedItem = function (mechanicId, isChecked) {
-  //   console.log(mechanicId)
-  //   if (mechanicId !== null) {
-  //     isChecked = true;
-  //     return isChecked;
-  //   } else {
-  //     isChecked = false;
-  //     return isChecked;
-  //   }
-  // }
-
-
-  // paging
-  // $scope.totalElements = $scope.$parent.WOJobs.length;
 
   $scope.limit = 5;
   $scope.page = 1;
@@ -158,25 +143,6 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
 
     console.log($scope.jobTabList[parentId].Items);
   }
-
-  // pagingData($scope.page);
-
-  // function pagingData(currentPage) {
-  // var begin = (currentPage - 1) * $scope.limit;
-  // var end = begin + $scope.limit
-  // $scope.jobTabList = data.slice(begin, end);
-  // console.log($scope.jobTabList);
-  // }
-
-
-  // $scope.go = function () {
-  // $scope.page = $scope.pageGo;
-  // pagingData($scope.page);
-  // }
-
-  // $scope.changeLimit = function () {
-  // pagingData($scope.page);
-  // }
 
   //<editor-fold desc="Paging & Search Port">
   $scope.$watch("page", function (newValue, oldValue) {
@@ -387,6 +353,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
     });
   };
 
+
   $scope.openNotify = function (item) {
     var modalInstance = $uibModal.open({
       animation: $ctrl.animationsEnabled,
@@ -396,7 +363,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
       controllerAs: '$ctrl',
       size: "lg",
       resolve: {
-        data :{
+        data: {
           item: item,
           WorkOrderId: $scope.WorkOrder.WorkOrderId,
         }
@@ -516,7 +483,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   }
 
   //Save from button header
-  $rootScope.$on('saveJob', function (event, obj) {
+  $scope.$on('saveJob', function (event, obj) {
     $scope.onSubmitForm();
   });
 
@@ -905,8 +872,8 @@ UserWebApp.controller('openPhotoCtrl', function ($scope, item, $uibModalInstance
 })
 
 
-UserWebApp.controller('NotificationModalCtrl', function ($scope, $rootScope, $translate, $location, $filter,
-   data, $uibModalInstance, CommonServices, WorkOrderService) {
+UserWebApp.controller('NotificationModalCtrl', function ($scope, data,
+  $uibModalInstance, CommonServices, $rootScope, HttpService) {
 
   var $ctrl = this;
   console.log(data);
@@ -947,12 +914,12 @@ UserWebApp.controller('NotificationModalCtrl', function ($scope, $rootScope, $tr
 
   $ctrl.send = function (param) {
     var obj = object();
-   
+
     obj.Note = param.text;
-    obj.SmanId  = param.employee;
-    obj.WorkOrderId  = data.WorkOrderId;
-    obj.WorkOrderRowId  = data.item.RowId;
-   
+    obj.SmanId = param.employee;
+    obj.WorkOrderId = data.WorkOrderId;
+    obj.WorkOrderRowId = data.item.RowId;
+
     HttpService.postData('/site/postNotification', obj).then(function (response) {
       console.log(response);
       common.spinner(false);
@@ -960,6 +927,9 @@ UserWebApp.controller('NotificationModalCtrl', function ($scope, $rootScope, $tr
       console.log(response);
       common.spinner(false);
     });
+
+    $rootScope.$emit('message', { "item": "" })
+
     $uibModalInstance.close($scope.target);
   };
 

@@ -183,13 +183,13 @@ public class ASMasterClient {
 
                     arrayTab.put(objTab);
                     jsonArray.put(jsonObject);
-                    arrTime.put(objTimeout);
+                    // arrTime.put(objTimeout);
                 });
 
                 obj.put("auth", jsonArray);
                 obj.put("menu", jarray);
                 obj.put("tab", arrayTab);
-                obj.put("timeout", arrTime);
+                obj.put("timeout", objTimeout);
 
             } catch (IOException e) {
                 // TODO Auto-generated catch block

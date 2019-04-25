@@ -12,6 +12,8 @@ UserWebApp.controller('appCtrl', function ($scope, $state, WorkOrderService, $ro
   });
 
   $scope.count = "";
+  var EmployeeData = "";
+  var SmanId = "";
 
 
 
@@ -26,69 +28,6 @@ UserWebApp.controller('appCtrl', function ($scope, $state, WorkOrderService, $ro
   $scope.getRouter = function (param) {
     $state.go(param, { locale: $rootScope.lang });
   }
-
-  $scope.workorders = function () {
-    $state.go('app.main.workorder', { locale: $rootScope.lang });
-  }
-
-  $scope.unscheduledwork = function () {
-    $state.go('app.main.unscheduledwork', { locale: $rootScope.lang });
-  }
-
-  $scope.todayWork = function () {
-    $state.go('app.main.todaywork', { locale: $rootScope.lang });
-  }
-
-  $scope.worksub = function () {
-    $state.go('app.main.worksub', { locale: $rootScope.lang });
-  }
-
-  $scope.allwork = function () {
-    $state.go('app.main.allwork', { locale: $rootScope.lang });
-  }
-
-  $scope.workmot = function () {
-    $state.go('app.main.workmot', { locale: $rootScope.lang });
-  }
-
-  $scope.worktire = function () {
-    $state.go('app.main.worktire', { locale: $rootScope.lang });
-  }
-
-  $scope.workbo = function () {
-    $state.go('app.main.workbo', { locale: $rootScope.lang });
-  }
-
-  $scope.postponedwork = function () {
-    $state.go('app.main.postponedwork', { locale: $rootScope.lang });
-  }
-
-  $scope.tasklist = function () {
-    $state.go('app.main.tasklist', { locale: $rootScope.lang });
-  }
-
-  $scope.stampingMenu = function () {
-    $state.go('app.main.stamping', { locale: $rootScope.lang });
-  }
-
-
-  $scope.calendarview = function () {
-    $state.go('app.main.calendarview', { locale: $rootScope.lang });
-  }
-
-  $scope.offer = function () {
-    $state.go('app.main.offer', { locale: $rootScope.lang });
-  }
-
-  $scope.replacementvehicle = function () {
-    $state.go('app.main.calendarview', { locale: $rootScope.lang });
-
-  }
-
-  $scope.gotoCallCenter = function () {
-    $state.go('app.main.callcenter', { locale: $rootScope.lang });
-  }
-
 
   $scope.changeLang = function (lang) {
     //vutt
@@ -138,24 +77,21 @@ UserWebApp.controller('appCtrl', function ($scope, $state, WorkOrderService, $ro
     })
   }
 
+
+
   setTimeout(function () {
-    var EmployeeData = $("#EmployeeData").data("employee");
-    var SmanId = "";
     if (EmployeeData) {
       SmanId = EmployeeData.SmanId;
     }
     loadNotification(SmanId);
     $scope.$digest();
-  }, 1000*60*timeout)
+  }, 1000 * 60 * timeout)
 
   // $scope.checked =  false;
 
   $scope.markRead = function (item, index) {
-    $scope.lstNotification.splice(index, 1);
+    // $scope.lstNotification.splice(index, 1);
     WorkOrderService.markNotification(item).then(function (res) {
-      var EmployeeData = $("#EmployeeData").data("employee");
-      var SmanId = "";
-
       if (EmployeeData) {
         SmanId = EmployeeData.SmanId;
       }
@@ -168,9 +104,7 @@ UserWebApp.controller('appCtrl', function ($scope, $state, WorkOrderService, $ro
 
   function loadData() {
     common.spinner(true);
-    var EmployeeData = $("#EmployeeData").data("employee");
-    var SmanId = "";
-
+    EmployeeData = $("#EmployeeData").data("employee");
     if (EmployeeData) {
       SmanId = EmployeeData.SmanId;
     }
@@ -229,7 +163,7 @@ UserWebApp.controller('appCtrl', function ($scope, $state, WorkOrderService, $ro
   //info user
   var $ctrl = this;
   $ctrl.animationsEnabled = true;
-  var EmployeeData = $("#EmployeeData").data("employee");
+  // var EmployeeData = $("#EmployeeData").data("employee");
 
   $scope.openInfoUser = function (size, item) {
     var modalInstance = $uibModal.open({
@@ -261,6 +195,13 @@ UserWebApp.controller('appCtrl', function ($scope, $state, WorkOrderService, $ro
       }
     });
   });
+
+  $rootScope.$on('message', function (event, data) {   
+    if (EmployeeData) {
+      SmanId = EmployeeData.SmanId;
+    }
+    loadNotification(SmanId)
+  })
 
 
 });
