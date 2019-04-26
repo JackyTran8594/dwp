@@ -393,6 +393,7 @@ public class CommonController extends BaseController {
       String rtn = siteClient.loadProperty().toString();
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception e) {
+      System.out.println(e);
       return parseException(e);
       // TODO: handle exception
     }

@@ -1,5 +1,6 @@
 package com.wsplanning.webapp.clients;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.record.PageBreakRecord.Break;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -162,27 +163,32 @@ public class ASMasterClient {
                     JSONObject jsonObject = new JSONObject();
                     JSONObject objTab = new JSONObject();
                     String strKey = key.toString();
-                    if (strKey.contains("app.main")) {
+                    if (StringUtils.isNotBlank(strKey)) {
                         String[] subStr = strKey.split("\\.");
-                        jsonObject.put("route", subStr[0] + "." + subStr[1] + "." + subStr[2]);
-                        jsonObject.put("value", value.toString());
-                        jsonObject.put("name", subStr[2]);
-                        jsonObject.put("ordinalNumber", Integer.parseInt(subStr[3]));
-                    }
-                    if (strKey.contains("tab.main")) {
-                        String[] subStr = strKey.split("\\.");
-                        objTab.put("name", subStr[1]);
-                        objTab.put("value", value.toString());
-                        objTab.put("ordinalNumber", Integer.parseInt(subStr[2]));
-                    }
-                    if (strKey.contains("timeout.main")) {
-                        String[] subStr = strKey.split("\\.");
-                        objTimeout.put("name", subStr[0]);
-                        objTimeout.put("value", value.toString());
-                    }
+                        if (subStr[0].contains("app")) {
+                           
+                            jsonObject.put("route", subStr[0] + "." + subStr[1] + "." + subStr[2]);
+                            jsonObject.put("value", value.toString());
+                            jsonObject.put("name", subStr[2]);
+                            jsonObject.put("ordinalNumber", Integer.parseInt(subStr[3]));
+                            jsonArray.put(jsonObject);
+                        }
+                        if (subStr[0].contains("tab")) {
+                 
+                            objTab.put("name", subStr[2]);
+                            objTab.put("value", value.toString());
+                            objTab.put("ordinalNumber", Integer.parseInt(subStr[3]));
+                            arrayTab.put(objTab);
+                        }
+                        if (subStr[0].contains("timeout")) {
+                        
+                            objTimeout.put("name", subStr[0]);
+                            objTimeout.put("value", value.toString());
+                        }
 
-                    arrayTab.put(objTab);
-                    jsonArray.put(jsonObject);
+                        
+                      
+                    }
                     // arrTime.put(objTimeout);
                 });
 
