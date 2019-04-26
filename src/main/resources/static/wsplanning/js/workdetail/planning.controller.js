@@ -138,7 +138,7 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
                     $scope.lstPlanning.push({
                         "FreeCapacity": 0,
                         "FreeHour": 0,
-                        "WorkDay": formatDateToYYYYMMDD(startDate),
+                        "WorkDay": formatDateToYYYYMMDD000000(startDate),
                     });
                 }
                 startDate = moment(startDate).add('days', 1).toDate();

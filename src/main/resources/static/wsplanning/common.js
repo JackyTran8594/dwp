@@ -502,6 +502,24 @@ function dateFromStringWithTimeZone(input) {
   }
   return new Date(input);
 }
+
+function formatDateToYYYYMMDD000000(date) {
+  var rtn = date.getFullYear();
+  var sdate = date.getDate();
+  var month = date.getMonth() + 1;
+  if (month < 10) {
+    rtn += "-0" + month;
+  } else {
+    rtn += "-" + month;
+  }
+  if (sdate < 10) {
+    rtn += "-0" + sdate;
+  } else {
+    rtn += "-" + sdate;
+  }
+  rtn += "T00:00:00";
+  return rtn;
+}
 function formatDateToYYYYMMDD(date) {
   var rtn = date.getFullYear();
   var sdate = date.getDate();
