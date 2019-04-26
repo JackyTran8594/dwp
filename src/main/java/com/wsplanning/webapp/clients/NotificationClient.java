@@ -52,8 +52,9 @@ public class NotificationClient {
     return restTemplate.getForObject(url, String.class);
   }
 
-  public String postNotification(String token, NotificationDTO item) {
+  public String postNotification(String siteId,String token, NotificationDTO item) {
     HttpHeaders headers = new HttpHeaders();
+    item.SiteId = siteId;
     headers.set("Token", token);
     HttpEntity<NotificationDTO> entity = new HttpEntity<NotificationDTO>(item, headers);
     String url = String.format("%s", this.endpointUrl);

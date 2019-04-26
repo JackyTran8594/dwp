@@ -117,32 +117,17 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   }
 
 
-  // $scope.hasMechanicId = false;
-
   $scope.getCheckRow = function (parentId, id, checked) {
     if (checked == false) {
       $scope.jobTabList[parentId].Items[id].MechanicId = null;
       console.log("--done--");
     } else {
       $scope.jobTabList[parentId].Items[id].MechanicId = $scope.WorkOrder.Token.EmployeeData.SmanId;
+      console.log($scope.jobTabList[parentId].Items[id]);
       console.log("--done--");
     }
   }
 
-  // $scope.checkedItem = function (mechanicId, isChecked) {
-  //   console.log(mechanicId)
-  //   if (mechanicId !== null) {
-  //     isChecked = true;
-  //     return isChecked;
-  //   } else {
-  //     isChecked = false;
-  //     return isChecked;
-  //   }
-  // }
-
-
-  // paging
-  // $scope.totalElements = $scope.$parent.WOJobs.length;
 
   $scope.limit = 5;
   $scope.page = 1;
@@ -158,25 +143,6 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
 
     console.log($scope.jobTabList[parentId].Items);
   }
-
-  // pagingData($scope.page);
-
-  // function pagingData(currentPage) {
-  // var begin = (currentPage - 1) * $scope.limit;
-  // var end = begin + $scope.limit
-  // $scope.jobTabList = data.slice(begin, end);
-  // console.log($scope.jobTabList);
-  // }
-
-
-  // $scope.go = function () {
-  // $scope.page = $scope.pageGo;
-  // pagingData($scope.page);
-  // }
-
-  // $scope.changeLimit = function () {
-  // pagingData($scope.page);
-  // }
 
   //<editor-fold desc="Paging & Search Port">
   $scope.$watch("page", function (newValue, oldValue) {
@@ -387,7 +353,8 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
     });
   };
 
-  $scope.openNotify = function (item, id) {
+
+  $scope.openNotify = function (item) {
     var modalInstance = $uibModal.open({
       animation: $ctrl.animationsEnabled,
       templateUrl: '/wsplanning/templates/pages/common/notification-form.html',
@@ -396,30 +363,16 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
       controllerAs: '$ctrl',
       size: "lg",
       resolve: {
-        item: item
+        data: {
+          item: item,
+          WorkOrderId: $scope.WorkOrder.WorkOrderId,
+        }
       }
     });
 
     modalInstance.result.then(function (selectedItem) {
 
       console.log(selectedItem);
-
-      //Save notify
-      common.spinner(true);
-
-      var params = {
-        "SmanId": selectedItem.employee.SmanId,
-        "SiteId": "SiteId",
-        "Note": "Hello " + selectedItem.employee.Name + ", this is a notification for you at: " + new Date().toString(),
-      };
-      HttpService.postData('/site/postNotification', params).then(function (response) {
-        console.log(response);
-        common.spinner(false);
-      }, function error(response) {
-        $scope.imgTemplate = "";
-        console.log(response);
-        common.spinner(false);
-      });
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
     });
@@ -530,7 +483,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   }
 
   //Save from button header
-  $rootScope.$on('saveJob', function (event, obj) {
+  $scope.$on('saveJob', function (event, obj) {
     $scope.onSubmitForm();
   });
 
@@ -740,20 +693,20 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $uibModal, item, $uibM
         $scope.lstAttachment.push(obj);
       })
     }
-   
+
     return $scope.lstphoto;
   }
 
 
   var formData = new FormData();
   $scope.getTheFiles = function ($files) {
-   
+
     $scope.lstfiles = $files;
- 
+
     angular.forEach($files, function (v, k) {
       var file = v;
       var reader = new FileReader();
-    
+
       reader.onload = function (e) {
         $scope.$apply(function () {
           var obj = jobAttachments();
@@ -773,7 +726,7 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $uibModal, item, $uibM
       }
       reader.readAsDataURL(file)
       formData.append("files", v)
-      
+
     });
 
 
@@ -900,7 +853,7 @@ UserWebApp.controller('TakeScreenshotCtrl', function ($scope, $uibModalInstance)
   };
 })
 
-UserWebApp.controller('openPhotoCtrl', function ($scope,item, $uibModalInstance) {
+UserWebApp.controller('openPhotoCtrl', function ($scope, item, $uibModalInstance) {
 
   var $ctrl = this;
   console.log(item);
@@ -919,11 +872,11 @@ UserWebApp.controller('openPhotoCtrl', function ($scope,item, $uibModalInstance)
 })
 
 
-UserWebApp.controller('NotificationModalCtrl', function ($scope, $rootScope, $translate, $location, $filter,
-  $uibModal, item, $uibModalInstance, CommonServices, WorkOrderService) {
+UserWebApp.controller('NotificationModalCtrl', function ($scope, data,
+  $uibModalInstance, CommonServices, $rootScope, HttpService) {
 
   var $ctrl = this;
-  console.log(item);
+  console.log(data);
 
   $scope.employees = [];
 
@@ -935,20 +888,50 @@ UserWebApp.controller('NotificationModalCtrl', function ($scope, $rootScope, $tr
 
   loadCombo();
 
-  $scope.target = {
-    "employee": {},
-    "text": "",
-  };
+  $scope.target = {}
 
-  // $ctrl.changeEmployee = function () {
-  //   $scope.target.employees =
-  // }
+
+  function object() {
+    var notiObject = {
+      Id: "",
+      SmanId: "",
+      CreatedBy: "",
+      Note: "",
+      SiteId: "",
+      IsNotified: "",
+      Created: "",
+      NotifiedTime: "",
+      WorkOrderId: "",
+      WorkOrderRowId: ""
+    }
+    return notiObject;
+  }
+
 
   $ctrl.cancel = function () {
     $uibModalInstance.dismiss('cancel');
   };
 
-  $ctrl.send = function () {
+  $ctrl.send = function (param) {
+    var obj = object();
+
+    obj.Note = param.text;
+    obj.SmanId = param.employee;
+    obj.WorkOrderId = data.WorkOrderId;
+    obj.WorkOrderRowId = data.item.RowId;
+
+    HttpService.postData('/site/postNotification', obj).then(function (response) {
+      console.log(response);
+      common.spinner(false);
+    }, function error(response) {
+      console.log(response);
+      common.spinner(false);
+    });
+
+    $rootScope.$emit('message', { "item": "" })
+
     $uibModalInstance.close($scope.target);
   };
+
+
 })

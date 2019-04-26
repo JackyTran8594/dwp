@@ -237,7 +237,7 @@ var translationsEN = {
   //notification
   employee: "Employee",
   message: "Text Message",
-
+  notification: "Notification",
   //tab
   header: "Header",
   job: "Job",
