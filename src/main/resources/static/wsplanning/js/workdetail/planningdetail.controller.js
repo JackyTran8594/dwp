@@ -106,6 +106,7 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
                         newEvent.resourceId = selectionInfo.resource.id;
                         newEvent.start = moment(value.StartTime).add(timezone, 'minutes').format();
                         newEvent.end = moment(value.EndTime).add(timezone, 'minutes').format();
+                        newEvent.color = "orange";
                         newEvent.allDay = false;
                         console.log(newEvent);
                         calendar.addEvent(newEvent);
