@@ -272,11 +272,12 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
             WorkDay = $scope.lstMonth[i];
             date = new Date(WorkDay.WorkDay);
             if (date.getMonth() == cell.date._d.getMonth() && date.getDate() == cell.date._d.getDate()) {
-                if (WorkDay.FreeCapacity > 100) {
-                    cell.cssClass = 'booked';
-                } else if (WorkDay.FreeCapacity == 100) {
-                    cell.cssClass = 'free';
-                } else if (WorkDay.FreeCapacity >= 75) {
+                // if (WorkDay.FreeCapacity > 100) {
+                //     cell.cssClass = 'booked';
+                // } else if (WorkDay.FreeCapacity == 100) {
+                //     cell.cssClass = 'free';
+                // } else
+                    if (WorkDay.FreeCapacity >= 75) {
                     cell.cssClass = 'cap75';
                 } else if (WorkDay.FreeCapacity >= 50) {
                     cell.cssClass = 'cap50';

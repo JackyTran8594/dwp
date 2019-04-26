@@ -14,13 +14,19 @@ UserWebApp.controller('SaveBookPoolResourceCtrl', function ($scope, $rootScope, 
     var tmp = $ctrl.data.sStart.split(":");
     dateStart.setHours(parseInt(tmp[0]));
     dateStart.setMinutes(parseInt(tmp[1]));
-    $ctrl.data.StartTime = dateStart
+    $ctrl.data.StartTime = dateStart;
 
     tmp = $ctrl.data.sEnd.split(":");
     dateEnd.setHours(parseInt(tmp[0]));
     dateEnd.setMinutes(parseInt(tmp[1]));
     $ctrl.data.EndTime = dateEnd;
 
+    $uibModalInstance.close($ctrl.data);
+  };
+
+
+  $ctrl.delete = function () {
+    $ctrl.data.RowId = 0 - $ctrl.data.RowId;
     $uibModalInstance.close($ctrl.data);
   };
 

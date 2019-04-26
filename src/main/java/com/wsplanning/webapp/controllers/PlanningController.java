@@ -235,7 +235,7 @@ public class PlanningController extends BaseController {
   }
 
   @GetMapping("/events2")
-  public ResponseEntity events2(@RequestParam("start") String start, @RequestParam("DeptId") String DeptId, @RequestParam("ShiftId") String ShiftId) {
+  public ResponseEntity events2(@RequestParam("start") String start, @RequestParam("DeptId") String DeptId, @RequestParam("ShiftId") String ShiftId,@RequestParam("WorkOrderId") String WorkOrderId) {
     try {
       start = start.substring(0, start.indexOf("T")); ////2019-03-21T00:00:00Z
       JsonArray listRtn = new JsonArray();
@@ -253,6 +253,7 @@ public class PlanningController extends BaseController {
         JsonObject WOResource = null;
         JsonArray BookedResources = null;
         String title = "";
+        int id = 0;
         for (JsonElement item : listData) {
           WorkOrder = item.getAsJsonObject();
 
@@ -267,9 +268,15 @@ public class PlanningController extends BaseController {
               WOResource = resource.getAsJsonObject();
 
               itemRtn = new JsonObject();
+              itemRtn.addProperty("WorkOrderId", WorkOrder.get("WorkOrderId").getAsString());
               itemRtn.addProperty("resourceId", WOResource.get("ResourceId").getAsString());
               itemRtn.addProperty("RowId", WOResource.get("RowId").getAsString());
+              itemRtn.addProperty("id", id++);
               itemRtn.addProperty("Type", "Booking");
+              if(WorkOrderId.equalsIgnoreCase(WorkOrder.get("WorkOrderId").getAsString())){
+                itemRtn.addProperty("color", "orange");
+              }
+//              itemRtn.addProperty("color", "#1cdac6");
               if (!title.isEmpty()) {
                 itemRtn.addProperty("title", title);
               } else {

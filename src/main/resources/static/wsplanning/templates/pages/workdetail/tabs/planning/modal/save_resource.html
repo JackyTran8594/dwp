@@ -2,6 +2,17 @@
     <div class="panel panel-flat">
         <div class="panel-heading">
             <h5 class="panel-title"><span>{{$ctrl.title}}</span></h5>
+
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li>
+                        <button class="btn btn-link btn-float has-text text-size-small" ng-click="$ctrl.delete()">
+                            <i class="icon-bin text-indigo-400"></i><span></span>
+                        </button>
+
+                    </li>
+                </ul>
+            </div>
         </div>
 
         <div class="panel-body">

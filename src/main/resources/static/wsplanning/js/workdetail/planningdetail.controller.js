@@ -146,10 +146,19 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
                 dataType: "json",
                 extraParams: function () {
                     common.spinner(true);
-                    return {
-                        "DeptId": $scope.DeptId,
-                        "ShiftId": $scope.ShiftId,
-                    };
+                    if($scope.WorkOrder.WorkOrderId) {
+                        return {
+                            "DeptId": $scope.DeptId,
+                            "ShiftId": $scope.ShiftId,
+                            "WorkOrderId": $scope.WorkOrder.WorkOrderId,
+                        };
+                    }else{
+                        return {
+                            "DeptId": $scope.DeptId,
+                            "ShiftId": $scope.ShiftId,
+                            "WorkOrderId": 0,
+                        };
+                    }
                 },
                 success: function () {
                     common.spinner(false);
@@ -214,12 +223,19 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
 
     function evenClick(info) {
 
+        console.log(info);
         console.log(info.event);
-        //Remove type T,P
-        if (info.event._def.extendedProps.Type != 'Booking') {
-            return;
-
+        console.log(info.event.title);
+        console.log(info.event._instance.instanceId);
+        console.log(calendar.getEventById(info.event.id));
+        if ($scope.WorkOrder.WorkOrderId && $scope.WorkOrder.WorkOrderId > 0){
+            //Remove type T,P
+            if (info.event._def.extendedProps.Type != 'Booking'
+                || info.event._def.extendedProps.WorkOrderId != $scope.WorkOrder.WorkOrderId) {
+                return;
+            }
         }
+
 
         // change the border color just for fun
         info.el.style.borderColor = 'red';
@@ -227,11 +243,6 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
 
         var start = dateToUTC2(info.event.start);
         var end = dateToUTC2(info.event.end);
-
-        console.log(start);
-        console.log(end);
-        console.log(formatToTimeHHmm(start));
-        console.log(formatToTimeHHmm(end));
 
 
         var modalInstance = $uibModal.open({
@@ -242,9 +253,8 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
             size: "lg",
             resolve: {
                 data: function () {
-                    var start = dateToUTC(info.event.start);
-                    var end = dateToUTC(info.event.end);
                     return {
+                        "id": info.event.id,
                         "RowId": info.event._def.extendedProps.RowId,
                         "StartTime": start,
                         "EndTime": end,
@@ -253,7 +263,8 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
                         "sEnd": formatToTimeHHmm(end),
                         "Duration": 0,
                         "ResourceId": info.event._def.resourceIds[0],
-                        "ResourceType": "",
+                        "ResourceType": "0",
+                        "title": info.event.title,
                     };
                 },
                 title: function () {
@@ -264,37 +275,64 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
 
         modalInstance.result.then(function (value) {
             if (value) {
-                //Add event (starttime and endtime add timezone
-                var timezone = 0 - new Date().getTimezoneOffset();
-                var newEvent = new Object();
-                newEvent.title = "";
-                newEvent.resourceId = value.ResourceId;
-                newEvent.start = moment(value.StartTime).add(timezone, 'minutes').format();
-                newEvent.end = moment(value.EndTime).add(timezone, 'minutes').format();
-                newEvent.allDay = false;
-                console.log(newEvent);
-                calendar.addEvent(newEvent);
-
-                //Add to Workorder
-                var duration = moment.duration(moment(value.EndTime).diff(moment(value.StartTime)));
-                var hours = duration.asHours();
-
-                console.log("duration: " + hours);
-
                 if (!$scope.WorkOrder.BookedResources) {
                     $scope.WorkOrder.BookedResources = [];
                 }
 
-                $scope.WorkOrder.BookedResources.push({
-                    "RowId": 0,
-                    "Duration": hours,
-                    // "StartTime": value.StartTime,
-                    // "EndTime": value.EndTime,
-                    "StartTime": moment(value.StartTime).format("YYYY-MM-DDTHH:mm:ss.000"),
-                    "EndTime": moment(value.EndTime).format("YYYY-MM-DDTHH:mm:ss.000"),
-                    "ResourceId": value.ResourceId,
-                    "ResourceType": value.ResourceType
-                });
+                if(value.RowId){
+                    console.log($scope.WorkOrder.BookedResources);
+                    var length = $scope.WorkOrder.BookedResources.length;
+                    console.log(length);
+                    var item = {};
+                    for (var i = 0; i < length; i++) {
+                        item = $scope.WorkOrder.BookedResources[i];
+                        console.log(item);
+                        if(item && item.RowId == value.RowId){
+                            $scope.WorkOrder.BookedResources.splice(i, 1);
+                            break;
+                        }
+                    }
+                }
+
+                console.log($scope.WorkOrder.BookedResources);
+                if(value.RowId && value.RowId < 0){
+                    //Delete
+                    $scope.WorkOrder.BookedResources.push({
+                        "RowId": value.RowId,
+                        "Duration": 0,
+                        "StartTime": moment(value.StartTime).format("YYYY-MM-DDTHH:mm:ss.000"),
+                        "EndTime": moment(value.EndTime).format("YYYY-MM-DDTHH:mm:ss.000"),
+                        "ResourceId": value.ResourceId,
+                        "ResourceType": value.ResourceType
+                    });
+
+                    var eventCal = calendar.getEventById(value.id);
+                    eventCal.remove();
+                }else {
+
+                    var timezone = 0 - new Date().getTimezoneOffset();
+
+                    var eventCal = calendar.getEventById(value.id);
+                    eventCal.setStart(moment(value.StartTime).add(timezone, 'minutes').format(), false);
+                    eventCal.setEnd(moment(value.EndTime).add(timezone, 'minutes').format(), false);
+
+                    //Add to Workorder
+                    var duration = moment.duration(moment(value.EndTime).diff(moment(value.StartTime)));
+                    var hours = duration.asHours();
+
+                    console.log("duration: " + hours);
+
+
+
+                    $scope.WorkOrder.BookedResources.push({
+                        "RowId": value.RowId,
+                        "Duration": hours,
+                        "StartTime": moment(value.StartTime).format("YYYY-MM-DDTHH:mm:ss.000"),
+                        "EndTime": moment(value.EndTime).format("YYYY-MM-DDTHH:mm:ss.000"),
+                        "ResourceId": value.ResourceId,
+                        "ResourceType": value.ResourceType
+                    });
+                }
 
             }
         }, function () {
