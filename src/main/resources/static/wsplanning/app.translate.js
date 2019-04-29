@@ -230,7 +230,7 @@ var translationsEN = {
   editBookPool: "Edit Book Pool",
   duration: "Duration",
   startTimeBookPool: "Start time",
-  endTimeBookPool: "Start time",
+  endTimeBookPool: "End time",
   addBookResource: "Add book resouce",
   editBookResource: "Edit book resouce",
 
@@ -406,9 +406,9 @@ var translationsVI = {
   addBookPool: "Add Book Pool",
   editBookPool: "Edit Book Pool",
   startTimeBookPool: "Start time",
-  endTimeBookPool: "Start time",
-  addBookResource: "Add book resouce",
-  editBookResource: "Edit book resouce",
+  endTimeBookPool: "End time",
+  addBookResource: "Add book resource",
+  editBookResource: "Edit book resource",
   duration: "Duration",
 
 };
