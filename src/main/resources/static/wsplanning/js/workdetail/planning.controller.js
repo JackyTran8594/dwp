@@ -272,6 +272,8 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
             WorkDay = $scope.lstMonth[i];
             date = new Date(WorkDay.WorkDay);
             if (date.getMonth() == cell.date._d.getMonth() && date.getDate() == cell.date._d.getDate()) {
+                // console.log(date);
+                // console.log(WorkDay);
                 // if (WorkDay.FreeCapacity > 100) {
                 //     cell.cssClass = 'booked';
                 // } else if (WorkDay.FreeCapacity == 100) {

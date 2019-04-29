@@ -23,9 +23,9 @@
                     </div>
 
                     <div class="col-xs-2 text-center border" style="padding: 30px;">
-                        <h5>E: {{totalHours}}</h5>
-                        <h5>P: {{totalDurationPool}}</h5>
-                        <h5>B: {{totalDurationBooking}}</h5>
+                        <h5>E: {{(totalHours/ 60) | number:2}}</h5>
+                        <h5>P: {{(totalDurationPool/ 60) | number:2}}</h5>
+                        <h5>B: {{(totalDurationBooking/ 60) | number:2}}</h5>
                     </div>
                 </div>
 
