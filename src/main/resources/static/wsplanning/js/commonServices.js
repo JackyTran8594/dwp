@@ -18,6 +18,7 @@ UserWebApp
     this.lstNotification = [];
     this.countNotification = "";
     this.lstEmployees = "";
+   
 
     this.getEmployees = function () {
       var d = $q.defer();

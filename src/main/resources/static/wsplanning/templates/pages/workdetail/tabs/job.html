@@ -345,14 +345,11 @@
                                                                 <tr>
                                                                     <th class="text-center" style="width: 5%">No.</th>
                                                                     <th class="text-center" style="width: 5%"></th>
-                                                                    <th class="text-center" style="width: 10%">Code
-                                                                    </th>
+                                                                    <th class="text-center" style="width: 10%">Code</th>
                                                                     <th class="text-center">Name</th>
-                                                                    <th class="text-center" style="width: 5%">Quantity
-                                                                    </th>
-                                                                    <th class="text-center" style="width: 5%"></th>
-                                                                    <th class="text-center" style="width: 10%">Actions
-                                                                    </th>
+                                                                    <th class="text-center" style="width: 5%">Quantity</th>
+                                                                    <th class="text-center" style="width: 10%"><button type="button" class="btn btn-primary" ng-click="markAll($index)">{{'btnMark' | translate}}</button></th>
+                                                                    <th class="text-center" style="width: 10%">Actions</th>
                                                                 </tr>
                                                             </thead>
                                                             <!--BODY-->
@@ -377,8 +374,8 @@
                                                                             {{obj.Quantity}}
                                                                         </span>
                                                                     </td>
-                                                                    <td class="text-center" style="width: 5%">
-                                                                        <span>{{obj.MechanicId}}</span>
+                                                                    <td class="text-center" style="width: 10%">
+                                                                        <span ng-hide="obj.ItemType === 1">{{obj.MechanicId}}</span>
                                                                         <checkbox-directive
                                                                             has-Mechanic-Id="obj.MechanicId"
                                                                             type="obj.ItemType">

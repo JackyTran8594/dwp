@@ -127,6 +127,15 @@ public class ASMasterClient {
         return restTemplate.getForObject(url, String.class);
     }
 
+    public String getTextLine(Map<String, String> params, String SiteId) {
+        String CustNo = params.get("CustNo");
+        String VehiId = params.get("VehiId");
+        String GetText = params.get("GetText");
+        String url = String.format("%s?SiteId=%s&CustNo=%s&VehiId=%s&GetText=%s", this.endpointUrl, SiteId, CustNo,
+                VehiId, GetText);
+        return restTemplate.getForObject(url, String.class);
+    }
+
     public JSONObject loadProperty() {
         String path = "messages/config.properties";
         String path_Menu = "messages/messages.properties";
@@ -166,7 +175,7 @@ public class ASMasterClient {
                     if (StringUtils.isNotBlank(strKey)) {
                         String[] subStr = strKey.split("\\.");
                         if (subStr[0].contains("app")) {
-                           
+
                             jsonObject.put("route", subStr[0] + "." + subStr[1] + "." + subStr[2]);
                             jsonObject.put("value", value.toString());
                             jsonObject.put("name", subStr[2]);
@@ -174,20 +183,18 @@ public class ASMasterClient {
                             jsonArray.put(jsonObject);
                         }
                         if (subStr[0].contains("tab")) {
-                 
+
                             objTab.put("name", subStr[2]);
                             objTab.put("value", value.toString());
                             objTab.put("ordinalNumber", Integer.parseInt(subStr[3]));
                             arrayTab.put(objTab);
                         }
                         if (subStr[0].contains("timeout")) {
-                        
+
                             objTimeout.put("name", subStr[0]);
                             objTimeout.put("value", value.toString());
                         }
 
-                        
-                      
                     }
                     // arrTime.put(objTimeout);
                 });

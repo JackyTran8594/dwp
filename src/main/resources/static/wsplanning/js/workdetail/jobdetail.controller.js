@@ -128,7 +128,6 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
     }
   }
 
-
   $scope.limit = 5;
   $scope.page = 1;
 
@@ -142,6 +141,21 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
     }
 
     console.log($scope.jobTabList[parentId].Items);
+  }
+
+  $scope.markAll = function (jobId) {
+    var data = $scope.jobTabList[jobId].Items;
+    angular.forEach(data, function (v, k) {
+      v.checked = true;
+      $scope.getCheckRow(jobId, k, true);
+    });
+  }
+
+  $scope.changeValueCheckBox = function (mechanicId, checked) {
+    if(mechanicId) {
+      checked = true;
+      return checked;
+    }
   }
 
   //<editor-fold desc="Paging & Search Port">
@@ -698,7 +712,7 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $uibModal, item, $uibM
   }
 
 
-  var formData = new FormData();
+  // var formData = new FormData();
   $scope.getTheFiles = function ($files) {
 
     $scope.lstfiles = $files;
@@ -725,7 +739,7 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $uibModal, item, $uibM
         });
       }
       reader.readAsDataURL(file)
-      formData.append("files", v)
+      // formData.append("files", v)
 
     });
 

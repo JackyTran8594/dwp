@@ -11,18 +11,20 @@
                     ng-repeat="photo in lstphoto track by $index">
                     <a ng-click="openPhoto($index)" data-toggle="modal"><img ng-src="{{photo}}" alt=""
                             class="img-thumbnail photo" data-target="#image-gallery" /></a>
-                    
-                    <button type="button" ng-click="removePhoto($index)" class="btn btn-primary btn-icon btn-rounded"><i class=" icon-cross2"></i></button>
+
+                    <button type="button" ng-click="removePhoto($index)" class="btn btn-primary btn-icon btn-rounded"><i
+                            class=" icon-cross2"></i></button>
                 </div>
                 <ul ng-show="!isGrid" class="list">
-                    <li ng-repeat="photo in lstphoto">
+                    <li ng-repeat="photo in lstphoto track by $index">
                         <div class="outside-image">
                             <a href="" class="inner" ng-click="openPhoto($index)">
                                 <div>
                                     <img ng-src="{{photo}}" alt="" class="img-thumbnail" data-target="#image-gallery" />
                                 </div>
                             </a>
-                            <button style="left:23px;top:3px" type="button" ng-click="removePhoto($index)" class="btn btn-primary btn-icon btn-rounded"><i class=" icon-cross2"></i></button>
+                            <button style="left:23px;top:3px" type="button" ng-click="removePhoto($index)"
+                                class="btn btn-primary btn-icon btn-rounded"><i class=" icon-cross2"></i></button>
                         </div>
 
                     </li>
@@ -37,7 +39,7 @@
                     <input type="file" id="photo-file" class="btn btn-default" multiple ng-files="getTheFiles($files)"
                         style="width:100%" />
                     <table>
-                        <tr ng-repeat="file in lstfiles">
+                        <tr ng-repeat="file in lstfiles track by $index">
                             <td>{{$index+1}}</td>
                             <td>{{file.name}}</td>
                             <td>{{file.msg}}</td>
@@ -51,10 +53,12 @@
 
 </div>
 <div class="modal-footer">
+    <div class="pull-left">
+        <button type="button" class="btn btn-default" ng-click="takeScreenshot()">{{'btnCam'|translate}}</button>
+    </div>
     <div class="pull-right">
         <button type="button" class="btn btn-primary" ng-click="$ctrl.save()">{{'btnSave'|translate}}</button>
         <button type="button" class="btn btn-default" ng-click="$ctrl.cancel()"
             data-dismiss="modal">{{'btnCancel'|translate}}</button>
     </div>
-
 </div>

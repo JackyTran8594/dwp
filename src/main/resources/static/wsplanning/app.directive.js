@@ -148,18 +148,22 @@ function checkboxDirective($compile) {
     },
     replace: true,
     link: function (scope, element, attr, ctrl) {
-      var checked = '<input type="checkbox" ng-init="checked = true"  ng-model="checked" ng-change="$parent.getCheckRow($parent.$parent.$index, $parent.$index, checked)"/>'
-      var unchecked = '<input type="checkbox" ng-init="checked = false"  ng-model="checked" ng-change="$parent.getCheckRow($parent.$parent.$index, $parent.$index, checked)"/>'
+      var checked = '<input type="checkbox" ng-init="checked = false" ng-checked="$parent.obj.checked" ng-model="checked" ng-click="$parent.getCheckRow($parent.$parent.$index, $parent.$index, checked)"/>'
+      var unchecked = '<input type="checkbox" ng-init="checked = false" ng-checked="$parent.obj.checked" ng-model="$parent.obj.checked" ng-click="$parent.getCheckRow($parent.$parent.$index, $parent.$index, checked)"/>'
+      var pickingListNo = '<span>{{$parent.obj.PickingListNo}}</span>'
       // var attributes = scope.$eval(attr.checkboxDirective);
 
       if ((scope.type == "7") || (scope.type == "8")) {
         if (scope.hasMechanicId && scope.hasMechanicId.length > 0) {
-          var e = $compile(checked)(scope); 
+          var e = $compile(checked)(scope);
           element.replaceWith(e);
         } else {
           var e = $compile(unchecked)(scope);
           element.replaceWith(e);
         }
+      } else if ((scope.type == "1")) {
+        var e = $compile(pickingListNo)(scope);
+        element.replaceWith(e);
       } else {
         var e = $compile("")(scope);
         element.replaceWith(e);
@@ -180,7 +184,7 @@ function inputType($compile) {
 
       var html_text = '<input type="text" class="form-control" ng-model="$parent.item.Value" />';
       var html_number = '<input type="number" class="form-control" ng-model="$parent.item.Value" />';
-      var html_date = '<div class="input-group"><input type="text" class="form-control" datetime-picker="dd-MMMM-yyyy HH:mm:ss" date-format="dd-MMMM-yyyy HH:mm:ss" ng-model="$parent.item.Value" is-open="$parent.isOpenDateInput" /><span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="$parent.openDateInput($event, prop)"><i class="icon-calendar"></i></button></span></div>';
+      var html_date = '<div class="input-group"><input type="text" class="form-control" datetime-picker="dd-MMMM-yyyy" enable-time="" date-format="dd-MMMM-yyyy" ng-model="$parent.item.Value" is-open="$parent.isOpenDateInput" /><span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="$parent.openDateInput($event, prop)"><i class="icon-calendar"></i></button></span></div>';
 
 
       if (scope.type == "C") {

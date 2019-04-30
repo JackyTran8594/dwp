@@ -204,6 +204,7 @@ var translationsEN = {
   PhotoTitle: "Photo Folder",
   btnPhoto: "Photo",
   btnCam: "Cam",
+  btnMark: "All Done",
   //
 
   // info user

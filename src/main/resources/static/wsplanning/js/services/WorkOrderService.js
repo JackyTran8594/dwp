@@ -1,4 +1,4 @@
-UserWebApp.service('WorkOrderService', function ($http) {
+UserWebApp.service('WorkOrderService', function ($http, $q) {
   var WorkOrderService = {};
   WorkOrderService.detail = function (WorkOrderId) {
     return $http({
@@ -124,6 +124,14 @@ UserWebApp.service('WorkOrderService', function ($http) {
       method: 'GET',
       url: '/site/getNotification',
       params: {smanid: data}
+    });
+  }
+
+  WorkOrderService.getTextLine = function (data) {
+    return $http({
+      method: 'GET',
+      url: '/wo/getTextLine',
+      params: {dto: data}
     });
   }
 
