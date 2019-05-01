@@ -39,7 +39,7 @@
 
                 <!--BODY-->
                 <tbody>
-                <tr ng-repeat-start="(key, item) in lstData">
+                <tr ng-repeat-start="(key, item) in lstData" ng-dblclick="createTask(item)" ios-dblclick="createTask(item)">
                     <td rowspan="{{item.CallerVehicles.length}}">{{item.Event}}</td>
                     <td rowspan="{{item.CallerVehicles.length}}">{{item.Created}}</td>
                     <td rowspan="{{item.CallerVehicles.length}}">{{item.CallerId}}</td>
@@ -51,13 +51,23 @@
                     <td>{{item.CallerVehicles[0].Make}}</td>
                     <td>{{item.CallerVehicles[0].NextMOTDate}}</td>
                     <td>{{item.CallerVehicles[0].WarrantyInfo}}</td>
-                    <td>{{item.CallerVehicles[0].LicenseNo}}</td>
+                    <td>
+                        <button class="button btn-default" ng-click="createTask(item,item.CallerVehicles[0])" title="{{'createTask' | translate }}">
+                            <span ng-if="item.CallerVehicles[0].LicenseNo">{{item.CallerVehicles[0].LicenseNo}}</span>
+                            <span ng-if="!item.CallerVehicles[0].LicenseNo">....</span>
+                        </button>
+                    </td>
                 </tr>
                 <tr ng-repeat-end ng-repeat="vehicleItem in item.CallerVehicles.slice(1)">
                     <td>{{vehicleItem.Make}}</td>
                     <td>{{vehicleItem.NextMOTDate}}</td>
                     <td>{{vehicleItem.WarrantyInfo}}</td>
-                    <td>{{vehicleItem.LicenseNo}}</td>
+                    <td>
+                        <button class="button btn-default" ng-click="createTask(item,vehicleItem)" title="{{'createTask' | translate }}">
+                            <span ng-if="vehicleItem.LicenseNo">{{vehicleItem.LicenseNo}}</span>
+                            <span ng-if="!vehicleItem.LicenseNo">....</span>
+                        </button>
+                    </td>
                 </tr>
                 <tr ng-if="isNoData || !lstData || lstData.length <= 0" class="active">
                     <td colspan="20" class="text-center">{{ 'commonNoResult' | translate }}</td>

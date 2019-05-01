@@ -32,8 +32,13 @@ UserWebApp.controller('ActiveCallCtrl', function ($scope, $rootScope, $locale, H
     HttpService.postData('/phonecall/getdata', params).then(function (response) {
       $scope.lstData = [];
       angular.forEach(response, function (value) {
-        if (value.CallerVehicles && value.CallerVehicles.length <= 0) {
-          value.CallerVehicles = null;
+        if (value.CallerVehicles == null || value.CallerVehicles.length <= 0) {
+          value.CallerVehicles = [{
+            "Make": "",
+            "NextMOTDate": "",
+            "WarrantyInfo": "",
+            "LicenseNo": "",
+          }];
         }
         $scope.lstData.push(value);
       });
@@ -80,5 +85,29 @@ UserWebApp.controller('ActiveCallCtrl', function ($scope, $rootScope, $locale, H
     loadData(true);
   }
   //</editor-fold>
+
+  $scope.createTask = function (call,vehicle) {
+    var modalInstance = $uibModal.open({
+      animation: true,
+      templateUrl: '/wsplanning/templates/pages/common/task.html',
+      controller: 'CreateTaskCtrl',
+      controllerAs: '$ctrl',
+      size: "full",
+      resolve: {
+        call: function () {
+          return call;
+        },
+        vehicle: function () {
+          return vehicle;
+        }
+      }
+    });
+
+    modalInstance.result.then(function (value) {
+      console.log(value);
+    }, function () {
+      console.log('Modal dismissed at: ' + new Date());
+    });
+  }
 
 });

@@ -52,7 +52,10 @@
                     <td>{{item.CallerVehicles[0].NextMOTDate}}</td>
                     <td>{{item.CallerVehicles[0].WarrantyInfo}}</td>
                     <td>
-                        <button class="button btn-default" ng-click="createTask(item,item.CallerVehicles[0])" title="{{'createTask' | translate }}">{{item.CallerVehicles[0].LicenseNo}}</button>
+                        <button class="button btn-default" ng-click="createTask(item,item.CallerVehicles[0])" title="{{'createTask' | translate }}">
+                            <span ng-if="item.CallerVehicles[0].LicenseNo">{{item.CallerVehicles[0].LicenseNo}}</span>
+                            <span ng-if="!item.CallerVehicles[0].LicenseNo">....</span>
+                        </button>
                     </td>
                 </tr>
                 <tr ng-repeat-end ng-repeat="vehicleItem in item.CallerVehicles.slice(1)">
@@ -60,7 +63,10 @@
                     <td>{{vehicleItem.NextMOTDate}}</td>
                     <td>{{vehicleItem.WarrantyInfo}}</td>
                     <td>
-                        <button class="button btn-default" ng-click="createTask(item,vehicleItem)" title="{{'createTask' | translate }}">{{vehicleItem.LicenseNo}}</button>
+                        <button class="button btn-default" ng-click="createTask(item,vehicleItem)" title="{{'createTask' | translate }}">
+                            <span ng-if="vehicleItem.LicenseNo">{{vehicleItem.LicenseNo}}</span>
+                            <span ng-if="!vehicleItem.LicenseNo">....</span>
+                        </button>
                     </td>
                 </tr>
                 <tr ng-if="isNoData || !lstData || lstData.length <= 0" class="active">

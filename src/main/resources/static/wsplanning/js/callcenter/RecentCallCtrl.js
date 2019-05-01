@@ -35,7 +35,7 @@ UserWebApp.controller('RecentCallCtrl', function ($scope, $rootScope, $locale, H
                         "Make": "",
                         "NextMOTDate": "",
                         "WarrantyInfo": "",
-                        "LicenseNo": "....",
+                        "LicenseNo": "",
                     }];
                 }
                 $scope.lstData.push(value);
