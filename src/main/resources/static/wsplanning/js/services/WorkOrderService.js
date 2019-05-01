@@ -129,9 +129,9 @@ UserWebApp.service('WorkOrderService', function ($http, $q) {
 
   WorkOrderService.getTextLine = function (data) {
     return $http({
-      method: 'GET',
+      method: 'POST',
       url: '/wo/getTextLine',
-      params: {dto: data}
+      data: data
     });
   }
 

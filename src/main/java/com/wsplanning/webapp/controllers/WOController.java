@@ -206,9 +206,9 @@ public class WOController extends BaseController {
   }
 
 
-  @GetMapping("/wo/getTextLine")
+  @PostMapping("/wo/getTextLine")
   @ResponseBody
-  public ResponseEntity getTextLine(@RequestParam(name = "dto") Map<String, String> params) {
+  public ResponseEntity getTextLine(@RequestBody Map<String, String> params) {
     try {
       String rtn = asMasterClient.getTextLine(params, getSiteId());
       return new ResponseEntity<>(rtn, HttpStatus.OK);

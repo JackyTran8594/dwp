@@ -3,7 +3,7 @@
         <span aria-hidden="true">&times;</span>
         <span class="sr-only" ng-click="$ctrl.cancel()">Close</span>
     </button>
-    <h4 >{{title}}</h4>
+    <h4>{{title}}</h4>
 </div>
 
 <div class="modal-body">
@@ -13,8 +13,51 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <input type="text" class="form-control" ng-model="listItem"
+                    <input type="text" class="form-control" ng-model="strItem"
                         placeholder="{{ 'pleaseEnter' | translate }}">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="panel panel-flat">
+                    <div class="panel-body">
+                        <div class="well border-left-danger border-left-lg jobnew">
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="panel panel-flat">
+                                                <div class="panel-heading">
+                                                    <h5 class="panel-title" ng-hide="jobChecked.MainGroup == ''"><span
+                                                            style="color: red">{{jobChecked.MainGroup}}/{{jobChecked.SubGroup}}</span>
+                                                    </h5>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <div class="div-tree">
+                                                        <ul class="tree-level"
+                                                            ng-repeat="item in jobTreeList track by $index">
+                                                            <li>
+                                                                <a
+                                                                    ng-click="collapseMenu(item)"><span>{{item.label}}</span></a>
+                                                                <ul ng-show="item.selected == true" class=""
+                                                                    ng-repeat="sub in item.SubGroups as listSub">
+                                                                    <li class="">
+                                                                        <a ng-click="addTextLine(sub, item.label)">
+                                                                            <span>{{sub.Name}}</span></a>
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -46,20 +89,21 @@
                     <thead>
                         <tr>
                             <th class="text-center">Item No</th>
-                            <th class="text-center" >Name</th>
+                            <th class="text-center">Name</th>
                             <th class="text-center">Quantity</th>
-                        
+
                             <th class="text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-repeat="item in lstData track by $index">
                             <td class="text-center">{{item.ItemNo}}</td>
-                            <td class="text-left text-wrap" >{{item.Name}}</td>
-                           
-                            <td ><input type="number" class="form-control text-center" ng-model="item.Quantity"></td>
-                           
-                            <td class="text-center"><input type="checkbox" ng-click="isChecked(item, checked)" ng-model="checked" />
+                            <td class="text-left text-wrap">{{item.Name}}</td>
+
+                            <td><input type="number" class="form-control text-center" ng-model="item.Quantity"></td>
+
+                            <td class="text-center"><input type="checkbox" ng-click="isChecked(item, checked)"
+                                    ng-model="checked" />
                         </tr>
 
                     </tbody>
@@ -112,6 +156,7 @@
 </div>
 
 <div class="modal-footer position-right">
-    <a class="btn btn-primary" ng-disabled="listItem.length === 0" ng-click="$ctrl.save()">{{ 'btnSave' | translate }}</a>
+    <a class="btn btn-primary" ng-disabled="listItem.length === 0 || strItem"
+        ng-click="$ctrl.save()">{{ 'btnSave' | translate }}</a>
     <a class="btn btn-primary" ng-click="$ctrl.cancel()">{{ 'btnCancel' | translate }}</a>
 </div>

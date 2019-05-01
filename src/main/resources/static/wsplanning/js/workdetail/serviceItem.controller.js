@@ -4,6 +4,8 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
 
   var $ctrl = this;
 
+  $scope.jobTreeList = [];
+
   checkTitle(item.itemType);
 
   function checkTitle(itemType) {
@@ -52,7 +54,7 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
   $scope.hide = item.itemType;
 
   $scope.listItem = [];
-  // $scope.textRows = "";
+
 
   $ctrl.cancel = function () {
     $uibModalInstance.dismiss('cancel');
@@ -63,8 +65,6 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
     var index = 0;
     var lengthList = $scope.listItem.length;
     if ($scope.listItem.length > 0) {
-
-
       angular.forEach($scope.listItem, function (v, i) {
         if (item.ItemNo === v.ItemNo && checked === false) {
           $scope.listItem.splice(i, 1);
@@ -73,7 +73,7 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
           console.log(index);
         }
       })
-      
+
       if (index === lengthList) {
         $scope.listItem.push(item);
       }
@@ -175,10 +175,56 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
   }
   //</editor-fold>
 
-  // $scope.doPick = function (data) {
-  // $uibModalInstance.close(data);
-  // }
 
 
+  //tree menu for the text line
+  $scope.collapseMenu = function (item) {
+    item.selected = !item.selected;
+    // console.log($scope.jobTreeList);
+  }
+
+
+  $scope.jobChecked = {
+    MainGroup: '',
+    SubGroup: ''
+  };
+
+  loadDataTree(item);
+
+  function loadDataTree(params) {
+    common.spinner(true);
+    WorkOrderService.getTextLine(params).then(function (res) {
+      var data = res.data;
+      angular.forEach(data, function (value) {
+        var objTree = {};
+        objTree.id = value.Id;
+        objTree.label = value.Name;
+        objTree.selected = false;
+        objTree.children = [];
+        objTree.SubGroups = value.SubGroups;
+        $scope.jobTreeList.push(objTree);
+      }
+      );
+
+      // console.log($scope.jobTreeList);
+      common.spinner(false);
+      // console.log(res);
+    }, function (err) {
+      console.log(err);
+      common.spinner(false);
+    })
+  }
+
+  $scope.strItem = "";
+  // var lstTextLine = [];
+  $scope.addTextLine = function (sub, mainGroup) {
+    // var textLine = sub.Name;
+    $scope.jobChecked.SubGroup = sub.Name;
+    $scope.jobChecked.MainGroup = mainGroup;
+    $scope.strItem = $scope.strItem + " " + sub.Name;
+    console.log($scope.listItem);
+  }
+
+  //
 
 });

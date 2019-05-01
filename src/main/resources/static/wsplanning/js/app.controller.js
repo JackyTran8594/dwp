@@ -1,4 +1,4 @@
-UserWebApp.controller('appCtrl', function ($scope, $state, WorkOrderService, $rootScope, $uibModal, HttpService, CommonServices, tmhDynamicLocale) {
+UserWebApp.controller('appCtrl', function ($scope, $timeout, $state, WorkOrderService, $rootScope, $uibModal, HttpService, CommonServices, tmhDynamicLocale) {
 
   CommonServices.loadData();
 
@@ -64,28 +64,35 @@ UserWebApp.controller('appCtrl', function ($scope, $state, WorkOrderService, $ro
   function loadNotification(SmanId) {
     WorkOrderService.getCountNotification(SmanId).then(function (res) {
       $scope.count = res.data;
-      // console.log($scope.count);
+      console.log($scope.count);
     }, function (err) {
       console.log(err);
     });
 
     WorkOrderService.getNotification(SmanId).then(function (res) {
       $scope.lstNotification = res.data;
-      console.log($scope.lstNotification);
+      // console.log($scope.lstNotification);
     }, function (err) {
       console.log(err);
     })
   }
 
+  // loopTimeOut();
 
+  // function loopTimeOut() {
+  //   while(SmanId) {
+  //     $timeout(function () {
+  //       if (EmployeeData) {
+  //         SmanId = EmployeeData.SmanId;
+  //       }
+  //       loadNotification(SmanId);
+  //       $scope.$digest();
+  //       console.log("---timeout---")
+  //     }, 1000 * 6)
+  //   }
+  // }
 
-  setTimeout(function () {
-    if (EmployeeData) {
-      SmanId = EmployeeData.SmanId;
-    }
-    loadNotification(SmanId);
-    $scope.$digest();
-  }, 1000 * 60 * timeout)
+  
 
   // $scope.checked =  false;
 
@@ -196,7 +203,7 @@ UserWebApp.controller('appCtrl', function ($scope, $state, WorkOrderService, $ro
     });
   });
 
-  $rootScope.$on('message', function (event, data) {   
+  $rootScope.$on('message', function (event, data) {
     if (EmployeeData) {
       SmanId = EmployeeData.SmanId;
     }
