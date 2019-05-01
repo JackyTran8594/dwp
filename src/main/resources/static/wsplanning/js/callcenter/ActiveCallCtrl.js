@@ -25,10 +25,18 @@ UserWebApp.controller('ActiveCallCtrl', function ($scope, $rootScope, $locale, H
     var params = {
       "page": $scope.page,
       "limit": $scope.limit,
+      "SmanId": $scope.SmanId,
+      "CallType": "ActiveCall",
     };
 
-    HttpService.postData('/wo/getWO', params).then(function (response) {
-      $scope.lstData = response;
+    HttpService.postData('/phonecall/getdata', params).then(function (response) {
+      $scope.lstData = [];
+      angular.forEach(response, function (value) {
+        if (value.CallerVehicles && value.CallerVehicles.length <= 0) {
+          value.CallerVehicles = null;
+        }
+        $scope.lstData.push(value);
+      });
       $scope.pageGo = $scope.page;
       common.spinner(false);
     }, function error(response) {
@@ -37,7 +45,7 @@ UserWebApp.controller('ActiveCallCtrl', function ($scope, $rootScope, $locale, H
     });
 
     if (count) {
-      HttpService.postData('/wo/countWO', params).then(function (response) {
+      HttpService.postData('/phonecall/count', params).then(function (response) {
         $scope.totalElements = response;
         $scope.isNoData = ($scope.totalElements <= 0);
         common.spinner(false);

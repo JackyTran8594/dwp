@@ -1,0 +1,171 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()">
+        <span aria-hidden="true">&times;</span>
+        <span class="sr-only" ng-click="cancel()">Close</span>
+    </button>
+    <h4>{{'createTask' | translate}}</h4>
+</div>
+
+<div class="modal-body">
+
+    <div class="well well-sm">
+
+        <form class="form-horizontal formValidate" name="taskFrm" id="taskFrm">
+
+            <!--Row 1-->
+            <div class="row">
+
+                <!--Db-->
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">{{ 'db' | translate }}</label>
+                        <div class="col-xs-8">
+                            <select class="form-control" ng-model="data.Db"
+                                    ng-options="item.Id as item.Name for item in lstDepartment">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Site-->
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">{{ 'site' | translate }}</label>
+                        <div class="col-xs-8">
+                            <select class="form-control" ng-model="data.SiteId"
+                                    ng-options="item.Id as item.Name for item in lstVisitReason">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end row 1-->
+
+
+            <!--Row 2-->
+            <div class="row">
+
+                <!--subject-->
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">{{ 'subject' | translate }}</label>
+                        <div class="col-xs-8">
+                            <select class="form-control" ng-model="data.Subject"
+                                    ng-options="item.Id as item.Name for item in lstDepartment">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end row 2-->
+
+
+            <!--Row 3-->
+            <div class="row">
+
+                <!--CustomerName-->
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">{{ 'CustomerName' | translate }}</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" ng-model="data.CustomerName">
+                        </div>
+                    </div>
+                </div>
+
+                <!--CustomerPhone-->
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">{{ 'CustomerPhone' | translate }}</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" ng-model="data.CustomerPhone">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end row 3-->
+
+            <!--Row 4-->
+            <div class="row">
+
+                <!--SeriNo-->
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">{{ 'SeriNo' | translate }}</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" ng-model="data.VIN">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--end row 4-->
+
+
+            <!--Row 5-->
+            <div class="row">
+
+                <!--Employee-->
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">{{ 'Employee' | translate }}</label>
+                        <div class="col-xs-8">
+                            <select class="form-control" ng-model="data.Employee"
+                                    ng-options="item.Id as item.Name for item in lstDepartment">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!--TimeSchedule-->
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">{{ 'TimeSchedule' | translate }}</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" ng-model="data.TimeSchedule">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end row 5-->
+
+            <!--Row 6-->
+            <div class="row">
+
+                <!--IsClose-->
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">{{ 'IsClose' | translate }}</label>
+                        <div class="col-xs-8">
+                            <input type="checkbox" class="form-control" ng-checked="data.IsClose" ng-model="data.IsClose">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end row 6-->
+
+            <!--Row 7-->
+            <div class="row">
+
+                <!--Text-->
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">{{ 'Text' | translate }}</label>
+                        <div class="col-xs-8">
+                            <textarea class="form-control" ng-model="data.Text"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end row 7-->
+
+        </form>
+
+    </div>
+
+</div>
+
+<div class="modal-footer">
+    <a class="btn btn-primary" ng-click="ok()">{{ 'btnSave' | translate }}</a>
+    <a class="btn btn-default" ng-click="cancel()">{{ 'btnCancel' | translate }}</a>
+</div>
