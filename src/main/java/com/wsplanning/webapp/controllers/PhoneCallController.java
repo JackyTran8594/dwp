@@ -46,6 +46,9 @@ public class PhoneCallController extends BaseController {
     public ResponseEntity getdata(@RequestBody Map<String, String> params) {
         try {
             String SmanId = params.get("SmanId");
+            if(SmanId == null || StringUtils.isBlank(SmanId)){
+                SmanId = getSManId();
+            }
             String CallType = params.get("CallType");
             String rtn = phoneCallClient.getData(SmanId, CallType, null,params);
             return new ResponseEntity<>(rtn, HttpStatus.OK);
@@ -59,6 +62,9 @@ public class PhoneCallController extends BaseController {
     public ResponseEntity count(@RequestBody Map<String, String> params) {
         try {
             String SmanId = params.get("SmanId");
+            if(SmanId == null || StringUtils.isBlank(SmanId)){
+                SmanId = getSManId();
+            }
             String CallType = params.get("CallType");
             String rtn = phoneCallClient.getData(SmanId, CallType, "true",params);
             return new ResponseEntity<>(rtn, HttpStatus.OK);

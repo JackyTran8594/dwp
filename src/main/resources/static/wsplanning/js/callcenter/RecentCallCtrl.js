@@ -5,6 +5,10 @@ UserWebApp.controller('RecentCallCtrl', function ($scope, $rootScope, $locale, H
         $scope.isShow = !$scope.isShow;
     });
 
+    $rootScope.$on('reload', function () {
+        loadData(true);
+    });
+
 
     //Paging
     $scope.params = {};
@@ -84,7 +88,9 @@ UserWebApp.controller('RecentCallCtrl', function ($scope, $rootScope, $locale, H
     }
     //</editor-fold>
 
+
     $scope.createTask = function (call,vehicle) {
+        $rootScope.cancelReload = true;
         var modalInstance = $uibModal.open({
             animation: true,
             templateUrl: '/wsplanning/templates/pages/common/task.html',
@@ -103,8 +109,12 @@ UserWebApp.controller('RecentCallCtrl', function ($scope, $rootScope, $locale, H
 
         modalInstance.result.then(function (value) {
             console.log(value);
+            $rootScope.cancelReload = false;
+            $scope.reload();
         }, function () {
             console.log('Modal dismissed at: ' + new Date());
+            $rootScope.cancelReload = false;
+            $scope.reload();
         });
     }
 

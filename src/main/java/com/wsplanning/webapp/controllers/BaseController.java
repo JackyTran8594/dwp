@@ -73,6 +73,11 @@ public class BaseController {
     return token;
   }
 
+  public String getSManId() {
+    String rtn = (String) session.getAttribute(CustomAuthenticationProvider.SESSION_SMANID);
+    return rtn;
+  }
+
   public Map<String, String> addParamSiteId(Map<String, String> params) {
     params.put("SiteId", getSiteId());
     return params;

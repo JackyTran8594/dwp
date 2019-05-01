@@ -21,7 +21,7 @@
                         <label class="control-label col-xs-4">{{ 'db' | translate }}</label>
                         <div class="col-xs-8">
                             <select class="form-control" ng-model="data.Db"
-                                    ng-options="item.Id as item.Name for item in lstDepartment">
+                                    ng-options="item.Id as item.Name for item in lstCallCenterDb" ng-change="loadSite()">
                             </select>
                         </div>
                     </div>
@@ -33,7 +33,7 @@
                         <label class="control-label col-xs-4">{{ 'site' | translate }}</label>
                         <div class="col-xs-8">
                             <select class="form-control" ng-model="data.SiteId"
-                                    ng-options="item.Id as item.Name for item in lstVisitReason">
+                                    ng-options="item.Id as item.Name for item in lstCallCenterSite">
                             </select>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                         <label class="control-label col-xs-4">{{ 'subject' | translate }}</label>
                         <div class="col-xs-8">
                             <select class="form-control" ng-model="data.Subject"
-                                    ng-options="item.Id as item.Name for item in lstDepartment">
+                                    ng-options="item.Id as item.Name for item in lstCallCenterTaskType">
                             </select>
                         </div>
                     </div>
@@ -110,8 +110,8 @@
                     <div class="form-group">
                         <label class="control-label col-xs-4">{{ 'Employee' | translate }}</label>
                         <div class="col-xs-8">
-                            <select class="form-control" ng-model="data.Employee"
-                                    ng-options="item.Id as item.Name for item in lstDepartment">
+                            <select ui-select2 ng-model="data.Employee"
+                                    ng-options="item.SmanId as item.Name for item in lstEmployees">
                             </select>
                         </div>
                     </div>

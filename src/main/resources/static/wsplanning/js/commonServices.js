@@ -18,7 +18,38 @@ UserWebApp
     this.lstNotification = [];
     this.countNotification = "";
     this.lstEmployees = "";
-   
+
+    this.lstCallCenterDb = [];
+    this.lstCallCenterTaskType = [];
+
+    this.getCallCenterDB = function () {
+      var d = $q.defer();
+      if (!this.lstCallCenterDb || this.lstCallCenterDb.length <= 0) {
+        HttpService.getData('/site/getCallCenterDB', {}).then(function (response) {
+          this.lstCallCenterDb = response;
+          d.resolve(response);
+        }, function error(response) {
+          d.reject();
+        });
+      } else {
+        d.resolve(this.lstCallCenterDb);
+      }
+      return d.promise;
+    };
+    this.getCallCenterTaskType = function () {
+      var d = $q.defer();
+      if (!this.lstCallCenterTaskType || this.lstCallCenterTaskType.length <= 0) {
+        HttpService.getData('/site/getCallCenterTaskType', {}).then(function (response) {
+          this.lstCallCenterTaskType = response;
+          d.resolve(response);
+        }, function error(response) {
+          d.reject();
+        });
+      } else {
+        d.resolve(this.lstCallCenterTaskType);
+      }
+      return d.promise;
+    };
 
     this.getEmployees = function () {
       var d = $q.defer();

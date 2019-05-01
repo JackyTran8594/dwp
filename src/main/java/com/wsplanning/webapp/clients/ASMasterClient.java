@@ -212,4 +212,24 @@ public class ASMasterClient {
         }
         return obj;
     }
+
+
+    //http://automaster.alliedsoft.hu:9092/api/ASMaster?command=getCallCenterDB
+    public String getCallCenterDB() {
+        String url = String.format("%s?command=getCallCenterDB", this.endpointUrl);
+        return restTemplate.getForObject(url, String.class);
+    }
+
+    //http://automaster.alliedsoft.hu:9092/api/ASMaster?command=getCallCenterSites&param1=AMSOPRON
+    public String getCallCenterSites(String db) {
+        String url = String.format("%s?command=getCallCenterSites&param1=%s", this.endpointUrl,db);
+        return restTemplate.getForObject(url, String.class);
+    }
+
+    //http://automaster.alliedsoft.hu:9092/api/ASMaster?command=getCallCenterTaskType
+    public String getCallCenterTaskType() {
+        String url = String.format("%s?command=getCallCenterTaskType", this.endpointUrl);
+        return restTemplate.getForObject(url, String.class);
+    }
+
 }

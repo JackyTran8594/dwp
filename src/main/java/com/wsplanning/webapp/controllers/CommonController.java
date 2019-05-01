@@ -31,9 +31,9 @@ import java.util.Map;
 @Controller
 public class CommonController extends BaseController {
   private Logger logger = LoggerFactory.getLogger(CommonController.class);
-
+  
   @Autowired
-  protected ASMasterClient siteClient;
+  protected ASMasterClient asMasterClient;
 
   @Autowired
   protected StampingClient stampingClient;
@@ -62,7 +62,7 @@ public class CommonController extends BaseController {
   @GetMapping("/site/getAll")
   public ResponseEntity getAll() {
     try {
-      String rtn = siteClient.getSites();
+      String rtn = asMasterClient.getSites();
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);
@@ -72,7 +72,7 @@ public class CommonController extends BaseController {
   @GetMapping("/language/getAll")
   public ResponseEntity getLanguage() {
     try {
-      String getLanguages = siteClient.getLanguages();
+      String getLanguages = asMasterClient.getLanguages();
       JSONArray rtn = new JSONArray();
       JSONArray jsonArray = new JSONArray(getLanguages);
       JSONObject jsonObj = null;
@@ -133,7 +133,7 @@ public class CommonController extends BaseController {
   @GetMapping("/site/getTransactionTypes")
   public ResponseEntity getTransactionTypes() {
     try {
-      String rtn = siteClient.getTransactionTypes(getSiteId());
+      String rtn = asMasterClient.getTransactionTypes(getSiteId());
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);
@@ -143,7 +143,7 @@ public class CommonController extends BaseController {
   @GetMapping("/site/getDepartments")
   public ResponseEntity getDepartments() {
     try {
-      String rtn = siteClient.getDepartments(getSiteId());
+      String rtn = asMasterClient.getDepartments(getSiteId());
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);
@@ -153,7 +153,7 @@ public class CommonController extends BaseController {
   @GetMapping("/site/getJobTypes")
   public ResponseEntity getJobTypes() {
     try {
-      String rtn = siteClient.getJobTypes(getSiteId());
+      String rtn = asMasterClient.getJobTypes(getSiteId());
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);
@@ -163,7 +163,7 @@ public class CommonController extends BaseController {
   @GetMapping("/site/getJobCats")
   public ResponseEntity getJobCats() {
     try {
-      String rtn = siteClient.getJobCats(getSiteId());
+      String rtn = asMasterClient.getJobCats(getSiteId());
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);
@@ -173,7 +173,7 @@ public class CommonController extends BaseController {
   @GetMapping("/site/getPayers")
   public ResponseEntity getPayers() {
     try {
-      String rtn = siteClient.getPayers(getSiteId());
+      String rtn = asMasterClient.getPayers(getSiteId());
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);
@@ -183,7 +183,7 @@ public class CommonController extends BaseController {
   @GetMapping("/site/getShifts")
   public ResponseEntity getShifts() {
     try {
-      String rtn = siteClient.getShifts(getSiteId());
+      String rtn = asMasterClient.getShifts(getSiteId());
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);
@@ -193,7 +193,7 @@ public class CommonController extends BaseController {
   @GetMapping("/site/getVisitReasons")
   public ResponseEntity getVisitReasons() {
     try {
-      String rtn = siteClient.getVisitReasons(getSiteId());
+      String rtn = asMasterClient.getVisitReasons(getSiteId());
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);
@@ -266,7 +266,7 @@ public class CommonController extends BaseController {
   @GetMapping("/site/getChargeCats")
   public ResponseEntity getChargeCats() {
     try {
-      String rtn = siteClient.getChargeCats(getSiteId());
+      String rtn = asMasterClient.getChargeCats(getSiteId());
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);
@@ -320,7 +320,7 @@ public class CommonController extends BaseController {
   @GetMapping("/site/stampingCode")
   public ResponseEntity stampingCode() {
     try {
-      String rtn = siteClient.getStampingCode(getSiteId());
+      String rtn = asMasterClient.getStampingCode(getSiteId());
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception e) {
       return parseException(e);
@@ -390,7 +390,7 @@ public class CommonController extends BaseController {
   @GetMapping("/site/getMenuAuth")
   public ResponseEntity getMenuAuth() {
     try {
-      String rtn = siteClient.loadProperty().toString();
+      String rtn = asMasterClient.loadProperty().toString();
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception e) {
       System.out.println(e);
@@ -399,4 +399,36 @@ public class CommonController extends BaseController {
     }
   }
 
+  @GetMapping("/site/getCallCenterDB")
+  public ResponseEntity getCallCenterDB() {
+    try {
+      String rtn = asMasterClient.getCallCenterDB();
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception e) {
+      System.out.println(e);
+      return parseException(e);
+    }
+  }
+
+  @GetMapping("/site/getCallCenterSites/{db}")
+  public ResponseEntity getCallCenterSites(@PathVariable("db") String db) {
+    try {
+      String rtn = asMasterClient.getCallCenterSites(db);
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception e) {
+      System.out.println(e);
+      return parseException(e);
+    }
+  }
+
+  @GetMapping("/site/getCallCenterTaskType")
+  public ResponseEntity getCallCenterTaskType() {
+    try {
+      String rtn = asMasterClient.getCallCenterTaskType();
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception e) {
+      System.out.println(e);
+      return parseException(e);
+    }
+  }
 }
