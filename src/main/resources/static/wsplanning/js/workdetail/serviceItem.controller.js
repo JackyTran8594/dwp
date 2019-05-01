@@ -86,7 +86,7 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
 
   $ctrl.save = function () {
     if ($scope.hide === 8) {
-      $uibModalInstance.close($scope.listItem.toString());
+      $uibModalInstance.close($scope.strItem);
     } else {
       $uibModalInstance.close($scope.listItem);
     }
@@ -222,7 +222,7 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
     $scope.jobChecked.SubGroup = sub.Name;
     $scope.jobChecked.MainGroup = mainGroup;
     $scope.strItem = $scope.strItem + " " + sub.Name;
-    console.log($scope.listItem);
+    
   }
 
   //

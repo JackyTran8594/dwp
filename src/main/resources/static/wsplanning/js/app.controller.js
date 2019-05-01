@@ -1,4 +1,4 @@
-UserWebApp.controller('appCtrl', function ($scope, $timeout, $state, WorkOrderService, $rootScope, $uibModal, HttpService, CommonServices, tmhDynamicLocale) {
+UserWebApp.controller('appCtrl', function ($scope, $timeout, $interval, $state, WorkOrderService, $rootScope, $uibModal, HttpService, CommonServices, tmhDynamicLocale) {
 
   CommonServices.loadData();
 
@@ -77,22 +77,17 @@ UserWebApp.controller('appCtrl', function ($scope, $timeout, $state, WorkOrderSe
     })
   }
 
-  // loopTimeOut();
+  $interval(function () {
+    if (EmployeeData) {
+      SmanId = EmployeeData.SmanId;
+    }
+    loadNotification(SmanId);
+    console.log("---timeout---")
+    console.log(timeout);
 
-  // function loopTimeOut() {
-  //   while(SmanId) {
-  //     $timeout(function () {
-  //       if (EmployeeData) {
-  //         SmanId = EmployeeData.SmanId;
-  //       }
-  //       loadNotification(SmanId);
-  //       $scope.$digest();
-  //       console.log("---timeout---")
-  //     }, 1000 * 6)
-  //   }
-  // }
+  }, 1000 * 60 * timeout.value);
 
-  
+
 
   // $scope.checked =  false;
 

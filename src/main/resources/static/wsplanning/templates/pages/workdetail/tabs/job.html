@@ -13,7 +13,8 @@
                     <div class="row">
                         <div class="panel-title text-center">
                             <div class="pull-left">
-                                <h3><b>{{ 'WoJob' | translate }}</b></h3>
+                                <h3><b>{{ 'WoJob' | translate }}</b></h3><br />
+                                <h5 ng-show="jobParams.VHCLink"><b><a ng-click="openNewTab()">{{'VHCLink' | translate}}</a></b></h5>
                             </div>
 
                         </div>
@@ -48,8 +49,8 @@
                                         <div class="heading-elements">
                                             <ul class="icons-list">
                                                 <li><a class="btn btn-lg" ng-click="openNotify(item)"><span
-                                                            data-popup="tooltip" data-placement="top" title="Open Notify"
-                                                            class="icon-bubble-dots4"></span></a>
+                                                            data-popup="tooltip" data-placement="top"
+                                                            title="Open Notify" class="icon-bubble-dots4"></span></a>
                                                 </li>
                                                 <li><a class="btn btn-lg" ng-click="openImage(item, $index)"><span
                                                             data-popup="tooltip" data-placement="top" title="Open Image"
@@ -140,6 +141,27 @@
                                                         <div class="col-xs-8">
                                                             <select ng-model="item.JobType" class="form-control"
                                                                 ng-options="o.Id as o.Name for o in lstJobTypes"></select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-xs-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label col-xs-2">Diagnotisc:</label>
+                                                        <div class="col-xs-10">
+                                                            <input type="text" class="form-control"
+                                                                ng-model="item.Diagnotisc">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label col-xs-2">Solution:</label>
+                                                        <div class="col-xs-10">
+                                                            <input type="text" class="form-control"
+                                                                ng-model="item.Solution">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -273,6 +295,27 @@
                                             </div>
 
                                             <div class="row">
+                                                <div class="col-xs-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label col-xs-2">Diagnotisc:</label>
+                                                        <div class="col-xs-10">
+                                                            <input type="text" class="form-control"
+                                                                ng-model="item.Diagnotisc">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6">
+                                                    <div class="form-group">
+                                                        <label class="control-label col-xs-2">Solution:</label>
+                                                        <div class="col-xs-10">
+                                                            <input type="text" class="form-control"
+                                                                ng-model="item.Solution">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
                                                 <div class="col-xs-3">
 
                                                     <div class="form-group">
@@ -347,9 +390,14 @@
                                                                     <th class="text-center" style="width: 5%"></th>
                                                                     <th class="text-center" style="width: 10%">Code</th>
                                                                     <th class="text-center">Name</th>
-                                                                    <th class="text-center" style="width: 5%">Quantity</th>
-                                                                    <th class="text-center" style="width: 10%"><button type="button" class="btn btn-primary" ng-click="markAll($index)">{{'btnMark' | translate}}</button></th>
-                                                                    <th class="text-center" style="width: 10%">Actions</th>
+                                                                    <th class="text-center" style="width: 5%">Quantity
+                                                                    </th>
+                                                                    <th class="text-center" style="width: 10%"><button
+                                                                            type="button" class="btn btn-primary"
+                                                                            ng-click="markAll($index)">{{'btnMark' | translate}}</button>
+                                                                    </th>
+                                                                    <th class="text-center" style="width: 10%">Actions
+                                                                    </th>
                                                                 </tr>
                                                             </thead>
                                                             <!--BODY-->
@@ -375,7 +423,8 @@
                                                                         </span>
                                                                     </td>
                                                                     <td class="text-center" style="width: 10%">
-                                                                        <span ng-hide="obj.ItemType === 1">{{obj.MechanicId}}</span>
+                                                                        <span
+                                                                            ng-hide="obj.ItemType === 1">{{obj.MechanicId}}</span>
                                                                         <checkbox-directive
                                                                             has-Mechanic-Id="obj.MechanicId"
                                                                             type="obj.ItemType">

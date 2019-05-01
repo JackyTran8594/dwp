@@ -1,4 +1,4 @@
-UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderService, HttpService, $translate, $location, $filter, $uibModal, CommonServices, $stateParams, $state) {
+UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, $window, WorkOrderService, HttpService, $translate, $location, $filter, $uibModal, CommonServices, $stateParams, $state) {
 
   var $ctrl = this;
   var stampingCode = {};
@@ -152,7 +152,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   }
 
   $scope.changeValueCheckBox = function (mechanicId, checked) {
-    if(mechanicId) {
+    if (mechanicId) {
       checked = true;
       return checked;
     }
@@ -173,6 +173,12 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
   $scope.toggleJobRow = function (param) {
     console.log(param)
     this.isShow = !this.isShow;
+  }
+
+
+  $scope.openNewTab = function (params) {
+    $window.open($scope.jobParams.VHCLink);
+    // $window.open('https://www.google.com', '_blank');
   }
 
   // modal
@@ -486,7 +492,11 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, WorkOrderSe
       common.btnLoading($(".btnSubmit"), true);
       WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
         common.btnLoading($(".btnSubmit"), false);
-        common.notifySuccess("Success!!!");
+        if (res.data.Token.ErrorDesc) {
+          common.notifyWithMessage("Warning!!!", res.status, res.data.Token.ErrorDesc)
+        } else {
+          common.notifySuccess("Success!!!");
+        }
         $state.reload();
       }, function (err) {
         common.btnLoading($(".btnSubmit"), false);

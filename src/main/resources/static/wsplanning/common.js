@@ -39,7 +39,7 @@ var common = {
   },
   notifyWarning: function (_message) {
     PNotify.removeAll();
-    new PNotify({text: _message, icon: 'icon-warning22', addclass: 'bg-warning'});
+    new PNotify({ text: _message, icon: 'icon-warning22', addclass: 'bg-warning' });
   },
   notifySuccess: function (_message) {
     PNotify.removeAll();
@@ -54,6 +54,24 @@ var common = {
     new PNotify({
       text: '<i class="icon-checkmark3"></i> ' + _message,
       addclass: 'bg-success',
+      delay: 3000,
+      stack: PNotify.defaultStack
+    });
+  },
+  notifyWithMessage: function (_message, _status, info) {
+    PNotify.removeAll();
+    PNotify.defaultStack = {
+      dir1: 'down',
+      dir2: 'left',
+      firstpos1: 25,
+      firstpos2: 25,
+      spacing1: 36,
+      spacing2: 36,
+    }
+    new PNotify({
+      text:  _message,
+      title: info,
+      addclass: 'bg-warning',
       delay: 3000,
       stack: PNotify.defaultStack
     });
@@ -497,8 +515,8 @@ function formatDateToApi(date) {
 }
 
 function dateFromStringWithTimeZone(input) {
-  if(input.endsWith("Z")){
-    return new Date(input.substring(0,input.length - 1));
+  if (input.endsWith("Z")) {
+    return new Date(input.substring(0, input.length - 1));
   }
   return new Date(input);
 }
@@ -698,12 +716,12 @@ function iOSversion() {
 }
 
 var supportGetUserMedia = false;
-navigator.getMedia = ( navigator.getUserMedia || // use the proper vendor prefix
+navigator.getMedia = (navigator.getUserMedia || // use the proper vendor prefix
   navigator.webkitGetUserMedia ||
   navigator.mozGetUserMedia ||
   navigator.msGetUserMedia);
 
-navigator.getMedia({video: true}, function () {
+navigator.getMedia({ video: true }, function () {
   // webcam is available
   console.log("----webcam is available-----");
   supportGetUserMedia = true;

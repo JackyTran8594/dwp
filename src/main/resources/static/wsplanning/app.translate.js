@@ -205,6 +205,7 @@ var translationsEN = {
   btnPhoto: "Photo",
   btnCam: "Cam",
   btnMark: "All Done",
+  VHCLink: "VHC Link",
   //
 
   // info user

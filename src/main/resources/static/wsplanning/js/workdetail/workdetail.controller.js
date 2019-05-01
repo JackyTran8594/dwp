@@ -90,7 +90,8 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
                 SiteId: '',
                 CustNo: '',
                 VehiId: '',
-                WarrantyInfo: ''
+                WarrantyInfo: '',
+                VHCLink: ''
             }
             $scope.actionType = "new";
         } else {
@@ -99,6 +100,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
                 CustNo: (WorkOrder.data.WOCustomer && WorkOrder.data.WOCustomer.CustNo) ? WorkOrder.data.WOCustomer.CustNo : "",
                 VehiId: (WorkOrder.data.WOVehicle && WorkOrder.data.WOVehicle.VehiId) ? WorkOrder.data.WOVehicle.VehiId : "",
                 WarrantyInfo: (WorkOrder.data.WOVehicle && WorkOrder.data.WOVehicle.WarrantyInfo) ? WorkOrder.data.WOVehicle.WarrantyInfo : "",
+                VHCLink: (WorkOrder.data.WOVehicle && WorkOrder.data.WOVehicle.VHCLink) ? WorkOrder.data.WOVehicle.VHCLink : "",
             }
 
             $scope.actionType = "update";
@@ -195,7 +197,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
     $scope.changeTab = function (tabActive, abc) {
         $scope.tabActive = tabActive;
 
-        var params= {
+        var params = {
             locale: $stateParams.locale,
             type: $stateParams.type,
             id: $stateParams.id,

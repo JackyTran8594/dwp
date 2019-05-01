@@ -24,7 +24,7 @@
 			
 			  <li ng-class="{active: tabActive == item.name}" ng-repeat="item in tabs | orderBy : 'ordinalNumber' track by $index"
                 ng-click="changeTab(item.name, '')" ng-if="item.value == 'true'">
-                <a data-target="#{{item.name}}" data-toggle="item.name"><span>{{item.name | translate}}</span></a>
+                <a data-target="#item.name" data-toggle="item.name"><span>{{item.name | translate}}</span></a>
             </li>
         </ul>
 

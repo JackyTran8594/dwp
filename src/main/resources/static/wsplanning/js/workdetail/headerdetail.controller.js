@@ -125,7 +125,11 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
       WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
         common.btnLoading($(".btnSubmit"), false);
         console.log(res);
-        common.notifySuccess("Success!!!");
+        if (res.data.Token.ErrorDesc) {
+          common.notifyWithMessage("Warning!!!", res.status, res.data.Token.ErrorDesc)
+        } else {
+          common.notifySuccess("Success!!!");
+        }
         $state.go('app.main.workdetail', { 'id': res.data.WorkOrderId , 'type': $stateParams.type });
         
       }, function (err) {
@@ -142,7 +146,11 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
       common.btnLoading($(".btnSubmit"), true);
       WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
         common.btnLoading($(".btnSubmit"), false);
-        common.notifySuccess("Success!!!");
+        if (res.data.Token.ErrorDesc) {
+          common.notifyWithMessage("Warning!!!", res.status, res.data.Token.ErrorDesc)
+        } else {
+          common.notifySuccess("Success!!!");
+        }
         $state.go('app.main.workdetail', { 'id': res.data.WorkOrderId , 'type': $stateParams.type });
         
       }, function (err) {

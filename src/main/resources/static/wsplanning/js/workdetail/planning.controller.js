@@ -110,7 +110,7 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
 
     function getCalendarWeek(date) {
         common.spinner(true);
-        $rootScope.$broadcast("bookingClick", {"date": date, "DeptId": $scope.DeptId, "ShiftId": $scope.ShiftId});
+        $rootScope.$broadcast("bookingClick", { "date": date, "DeptId": $scope.DeptId, "ShiftId": $scope.ShiftId });
 
         var startDate = date;
         var endDate = moment(startDate).add('days', 7).toDate();
@@ -279,7 +279,7 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
                 // } else if (WorkDay.FreeCapacity == 100) {
                 //     cell.cssClass = 'free';
                 // } else
-                    if (WorkDay.FreeCapacity >= 75) {
+                if (WorkDay.FreeCapacity >= 75) {
                     cell.cssClass = 'cap75';
                 } else if (WorkDay.FreeCapacity >= 50) {
                     cell.cssClass = 'cap50';
@@ -536,8 +536,13 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
         WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
             common.btnLoading($(".btnSubmit"), false);
             console.log(res);
-            common.notifySuccess("Success!!!");
+            // common.notifySuccess("Success!!!");
 
+            if (res.data.Token.ErrorDesc) {
+                common.notifyWithMessage("Warning!!!", res.status, res.data.Token.ErrorDesc)
+            } else {
+                common.notifySuccess("Success!!!");
+            }
             console.log($scope.WorkOrder);
             if ($scope.WorkOrder && $scope.WorkOrder.WorkOrderId) {
                 location.reload();
