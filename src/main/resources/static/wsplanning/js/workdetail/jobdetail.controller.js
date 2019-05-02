@@ -146,8 +146,10 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, $window, Wo
   $scope.markAll = function (jobId) {
     var data = $scope.jobTabList[jobId].Items;
     angular.forEach(data, function (v, k) {
-      v.checked = true;
-      $scope.getCheckRow(jobId, k, true);
+      v.checked = true;     
+      if (v.MechanicId == "" || v.MechanicId == null || v.MechanicId == undefined) {
+        $scope.getCheckRow(jobId, k, true);
+      }
     });
   }
 

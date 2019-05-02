@@ -72,15 +72,15 @@
                     <div class="dropdown-menu dropdown-content width-350">
                         <ul class="media-list dropdown-content-body">
                             <li class="media" ng-repeat="item in lstNotification track by $index">
-                                <!-- <div class="media-left">
-                                    <span class="badge bg-danger-400 media-badge">5</span>
-                                </div> -->
+                                <div class="media-left">
+                                    <div> <a style="cursor: pointer" ng-click="markRead(item, $index)" data-popup="tooltip" title="Mark Read"><i class="icon-mail-read"></i></a></div>
+                                </div>
 
                                 <div class="media-body">
                                     <div class="media-heading">
                                         <span class="text-semibold">{{item.CreatedBy}}</span> 
-                                        <!-- <span class="media-annotation pull-right"><i class="icon-cross2"></i></span> -->
-                                        <div  class="media-annotation pull-right"> <a style="cursor: pointer" ng-click="markRead(item, $index)" data-popup="tooltip" title="Mark Read"><i class="icon-mail-read"></i></a></div>
+                                        <span class="media-annotation pull-right">{{item.Created | date:'dd-MMMM-yyyy HH:mm:ss'}}</span>
+                                        <!-- <div  class="media-annotation pull-right"> <a style="cursor: pointer" ng-click="markRead(item, $index)" data-popup="tooltip" title="Mark Read"><i class="icon-mail-read"></i></a></div> -->
                                     </div>
 
                                     <span class="text-muted">{{item.Note}}</span>

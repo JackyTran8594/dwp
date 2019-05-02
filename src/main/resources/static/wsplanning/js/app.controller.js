@@ -71,7 +71,7 @@ UserWebApp.controller('appCtrl', function ($scope, $timeout, $interval, $state, 
 
     WorkOrderService.getNotification(SmanId).then(function (res) {
       $scope.lstNotification = res.data;
-      // console.log($scope.lstNotification);
+      console.log($scope.lstNotification);
     }, function (err) {
       console.log(err);
     })

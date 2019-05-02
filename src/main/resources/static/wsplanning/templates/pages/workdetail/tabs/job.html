@@ -14,7 +14,8 @@
                         <div class="panel-title text-center">
                             <div class="pull-left">
                                 <h3><b>{{ 'WoJob' | translate }}</b></h3><br />
-                                <h5 ng-show="jobParams.VHCLink"><b><a ng-click="openNewTab()">{{'VHCLink' | translate}}</a></b></h5>
+                                <h5 ng-show="jobParams.VHCLink"><b><a
+                                            ng-click="openNewTab()">{{'VHCLink' | translate}}</a></b></h5>
                             </div>
 
                         </div>
@@ -53,7 +54,9 @@
                                                             title="Open Notify" class="icon-bubble-dots4"></span></a>
                                                 </li>
                                                 <li><a class="btn btn-lg" ng-click="openImage(item, $index)"><span
-                                                            data-popup="tooltip" data-placement="top" title="Open Image"
+                                                            data-popup="tooltip"
+                                                            ng-style="{'background-color': (item.JobAttachments.length > 0) ? 'red' :'white'}"
+                                                            data-placement="top" title="Open Image"
                                                             class=" icon-images2"></span></a>
                                                 </li>
                                                 <li ng-show="item.JobNo"><a class="btn btn-lg" data-popup="tooltip"
@@ -87,7 +90,6 @@
                                                         ng-class="{'rotate-180': isShow == true}" data-action="collapse"
                                                         data-popup="tooltip" title="Collapse"></a>
                                                 </li>
-
                                             </ul>
                                         </div>
                                     </div>
@@ -188,6 +190,7 @@
                                                 </li>
                                                 <li><a class="btn btn-lg" ng-click="openImage(item, $index)"><span
                                                             data-popup="tooltip" data-placement="top" title="Labour"
+                                                            ng-style="{'background-color': (item.JobAttachments.length > 0) ? 'red' :'white'}"
                                                             class=" icon-images2"></span></a>
                                                 </li>
                                                 <li ng-show="item.JobNo"><a class="btn btn-lg" data-popup="tooltip"
