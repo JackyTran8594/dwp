@@ -146,6 +146,19 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
       url: 'calendarview',
       controller: "CalendarViewCtrl as $ctrl",
       templateUrl: '/wsplanning/templates/pages/calendarView/index.html',
+      resolve: {
+        loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+          // you can lazy load files for an existing module
+          console.log("----$ocLazyLoad----");
+          return $ocLazyLoad.load(
+              [
+                '/wsplanning/js/callcenter/CallCenterCtrl.js',
+                '/wsplanning/js/callcenter/ActiveCallCtrl.js',
+                '/wsplanning/js/callcenter/RecentCallCtrl.js',
+                '/wsplanning/js/callcenter/CreateTaskCtrl.js',
+              ]);
+        }]
+      }
     })
 
     .state('app.main.offer', {
@@ -267,9 +280,19 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
   //Callcenter
     .state('app.main.callcenter', {
       url: 'callcenter',
-      controller: "CallCenterCtrl as $ctrl",
+      // views: {
+      //   "loadMyCtrl": {
+      //     controller: 'CallCenterCtrl',
+      //     templateUrl: '/wsplanning/templates/pages/callcenter/index.html'
+      //   }
+      // },
+      controller: "CallCenterCtrl",
       templateUrl: '/wsplanning/templates/pages/callcenter/index.html',
-      resolve: {
+      resolve: { // Any property in resolve should return a promise and is executed before the view is loaded
+        loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+          // you can lazy load files for an existing module
+          return $ocLazyLoad.load("callCenter");
+        }]
       }
     })
 

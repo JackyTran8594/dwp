@@ -1,4 +1,4 @@
-UserWebApp.controller('CallCenterCtrl', function ($scope, $rootScope, $timeout, HttpService, $translate, $location, $state, $filter, $uibModal, CommonServices) {
+angular.module('UserWebApp').controller('CallCenterCtrl', function ($scope, $rootScope, $state,$timeout, HttpService, $translate, $location, $state, $filter, $uibModal, CommonServices) {
     $scope.code = "";
 
     var EmployeeData = $("#EmployeeData").data("employee");
@@ -16,6 +16,11 @@ UserWebApp.controller('CallCenterCtrl', function ($scope, $rootScope, $timeout, 
 
     $rootScope.cancelReload = false;
     $scope.reload = function () {
+        console.log($state.current);
+        if($state.current.name != "app.main.callcenter"){
+            $rootScope.cancelReload = true;
+            return;
+        }
         if ($rootScope.cancelReload) {
             return;
         }

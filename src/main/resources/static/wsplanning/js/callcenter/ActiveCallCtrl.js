@@ -1,4 +1,4 @@
-UserWebApp.controller('ActiveCallCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $location, $state, $filter, $uibModal, CommonServices) {
+angular.module('UserWebApp').controller('ActiveCallCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $location, $state, $filter, $uibModal, CommonServices) {
   $scope.isShow = true;
 
   $rootScope.$on('toogleActiveCall', function () {

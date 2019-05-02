@@ -33,7 +33,7 @@
                         <label class="control-label col-xs-4">{{ 'site' | translate }}</label>
                         <div class="col-xs-8">
                             <select class="form-control" ng-model="data.SiteId"
-                                    ng-options="item.Id as item.Name for item in lstCallCenterSite">
+                                    ng-options="item.Id as item.Name for item in lstCallCenterSite" ng-change="getPhoneCallEmployee()">
                             </select>
                         </div>
                     </div>
@@ -122,10 +122,21 @@
                     <div class="form-group">
                         <label class="control-label col-xs-4">{{ 'TimeSchedule' | translate }}</label>
                         <div class="col-xs-8">
-                            <input type="text" class="form-control" ng-model="data.TimeSchedule">
+                            <div class="input-group">
+                                <input type="text" class="form-control" datetime-picker="dd-MMMM-yyyy HH:mm:ss"
+                                       date-format="dd-MMMM-yyyy HH:mm:ss" ng-model="data.TimeSchedule"
+                                       is-open="isOpenDate" />
+                                <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default"
+                                                    ng-click="openDate($event, prop)">
+                                                <i class="icon-calendar"></i>
+                                            </button>
+                                        </span>
+                            </div>
                         </div>
                     </div>
                 </div>
+
             </div>
             <!--end row 5-->
 
@@ -166,6 +177,6 @@
 </div>
 
 <div class="modal-footer">
-    <a class="btn btn-primary" ng-click="ok()">{{ 'btnSave' | translate }}</a>
+    <a class="btn btn-primary" id="btnSaveTask" ng-click="ok()">{{ 'btnSave' | translate }}</a>
     <a class="btn btn-default" ng-click="cancel()">{{ 'btnCancel' | translate }}</a>
 </div>

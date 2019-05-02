@@ -1,5 +1,7 @@
 package com.wsplanning.webapp.clients;
 
+import com.wsplanning.webapp.dto.PhoneCallTaskDTO;
+import com.wsplanning.webapp.dto.WODTO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,4 +61,11 @@ public class PhoneCallClient {
     return response.getBody();
   }
 
+  public String createtask(PhoneCallTaskDTO data) {
+    HttpHeaders headers = new HttpHeaders();
+    HttpEntity<PhoneCallTaskDTO> entity = new HttpEntity<PhoneCallTaskDTO>(data, headers);
+    String url = String.format("%s", this.endpointUrl);
+    ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
+    return response.getBody();
+  }
 }

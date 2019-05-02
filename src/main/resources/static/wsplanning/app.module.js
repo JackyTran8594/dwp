@@ -1,5 +1,6 @@
 var UserWebApp = angular.module('UserWebApp', [
   'ngSanitize',
+  'oc.lazyLoad',
   'tmh.dynamicLocale',
   'mwl.calendar',
   'ui.bootstrap',
@@ -20,6 +21,26 @@ var UserWebApp = angular.module('UserWebApp', [
   'bmSignaturePad',
   // 'webcam'
 ]);
+
+
+angular.module('UserWebApp').config(['$ocLazyLoadProvider', function($ocLazyLoadProvider) {
+  $ocLazyLoadProvider.config({
+    modules: [{
+      name: 'callCenter',
+      files:
+          [
+            '/wsplanning/js/callcenter/CreateTaskCtrl.js',
+            '/wsplanning/js/callcenter/ActiveCallCtrl.js',
+            '/wsplanning/js/callcenter/RecentCallCtrl.js',
+            '/wsplanning/js/callcenter/CallCenterCtrl.js',
+          ]
+    }]
+  });
+
+  $ocLazyLoadProvider.config({
+    debug: true
+  });
+}]);
 
 
 UserWebApp.config(['calendarConfig', function (calendarConfig) {

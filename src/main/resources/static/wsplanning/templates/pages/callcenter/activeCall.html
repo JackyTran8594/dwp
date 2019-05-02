@@ -17,13 +17,13 @@
             <table class="table table-striped table-hover">
                 <thead>
                 <tr class="d-flex">
-                    <th colspan="5" class="text-center col-xs-1">{{'call' | translate }}</th>
-                    <th colspan="3" class="text-center col-xs-1">{{'Customer' | translate }}</th>
-                    <th colspan="4" class="text-center col-xs-1">{{'Vehicle' | translate }}</th>
+                    <th colspan="5" class="text-center col-xs-6">{{'call' | translate }}</th>
+                    <th colspan="3" class="text-center col-xs-3">{{'Customer' | translate }}</th>
+                    <th colspan="3" class="text-center col-xs-3">{{'Vehicle' | translate }}</th>
                 </tr>
                 <tr class="d-flex">
                     <th class="text-center col-xs-1">{{'event' | translate }}</th>
-                    <th class="text-center col-xs-1">{{'Created' | translate }}</th>
+                    <th class="text-center col-xs-2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{'Created' | translate }}&nbsp;&nbsp;&nbsp;&nbsp;</th>
                     <th class="text-center col-xs-1">{{'CallerId' | translate }}</th>
                     <th class="text-center col-xs-1">{{'Trunk' | translate }}</th>
                     <th class="text-center col-xs-1">{{'db' | translate }}</th>
@@ -32,7 +32,6 @@
                     <th class="text-center col-xs-1">{{'PostalCode' | translate }}</th>
                     <th class="text-center col-xs-1">{{'Make' | translate }}</th>
                     <th class="text-center col-xs-1">{{'NextMOTDate' | translate }}</th>
-                    <th class="text-center col-xs-1">{{'WarrantyInfo' | translate }}</th>
                     <th class="text-center col-xs-1">{{'LicenseNo' | translate }}</th>
                 </tr>
                 </thead>
@@ -41,16 +40,18 @@
                 <tbody>
                 <tr ng-repeat-start="(key, item) in lstData" ng-dblclick="createTask(item)" ios-dblclick="createTask(item)">
                     <td rowspan="{{item.CallerVehicles.length}}">{{item.Event}}</td>
-                    <td rowspan="{{item.CallerVehicles.length}}">{{item.Created}}</td>
+                    <td rowspan="{{item.CallerVehicles.length}}" style="width: 120px;">
+                        {{item.Created.split("T")[0]}}
+                        {{item.Created.split("T")[1]}}
+                    </td>
                     <td rowspan="{{item.CallerVehicles.length}}">{{item.CallerId}}</td>
                     <td rowspan="{{item.CallerVehicles.length}}">{{item.Trunk}}</td>
                     <td rowspan="{{item.CallerVehicles.length}}">{{item.Db}}</td>
                     <td rowspan="{{item.CallerVehicles.length}}">{{item.CallerCustomer.CustomerName}}</td>
                     <td rowspan="{{item.CallerVehicles.length}}">{{item.CallerCustomer.Email}}</td>
                     <td rowspan="{{item.CallerVehicles.length}}">{{item.CallerCustomer.PostalCode}}</td>
-                    <td>{{item.CallerVehicles[0].Make}}</td>
-                    <td>{{item.CallerVehicles[0].NextMOTDate}}</td>
-                    <td>{{item.CallerVehicles[0].WarrantyInfo}}</td>
+                    <td>{{item.CallerVehicles[0].Make}} {{item.CallerVehicles[0].Model}} {{item.CallerVehicles[0].SubModel}}</td>
+                    <td>{{item.CallerVehicles[0].NextMOTDate.split("T")[0]}}</td>
                     <td>
                         <button class="button btn-default" ng-click="createTask(item,item.CallerVehicles[0])" title="{{'createTask' | translate }}">
                             <span ng-if="item.CallerVehicles[0].LicenseNo">{{item.CallerVehicles[0].LicenseNo}}</span>
@@ -59,9 +60,8 @@
                     </td>
                 </tr>
                 <tr ng-repeat-end ng-repeat="vehicleItem in item.CallerVehicles.slice(1)">
-                    <td>{{vehicleItem.Make}}</td>
-                    <td>{{vehicleItem.NextMOTDate}}</td>
-                    <td>{{vehicleItem.WarrantyInfo}}</td>
+                    <td>{{vehicleItem.Make}} {{vehicleItem.Model}} {{vehicleItem.SubModel}}</td>
+                    <td>{{vehicleItem.NextMOTDate.split("T")[0]}}</td>
                     <td>
                         <button class="button btn-default" ng-click="createTask(item,vehicleItem)" title="{{'createTask' | translate }}">
                             <span ng-if="vehicleItem.LicenseNo">{{vehicleItem.LicenseNo}}</span>
