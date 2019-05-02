@@ -12,8 +12,6 @@
                     <a ng-click="openPhoto($index)" data-toggle="modal"><img ng-src="{{photo}}" alt=""
                             class="img-thumbnail photo" data-target="#image-gallery" /></a>
 
-                    <button type="button" ng-click="removePhoto($index)" class="btn btn-primary btn-icon btn-rounded"><i
-                            class=" icon-cross2"></i></button>
                 </div>
                 <ul ng-show="!isGrid" class="list">
                     <li ng-repeat="photo in lstphoto track by $index">

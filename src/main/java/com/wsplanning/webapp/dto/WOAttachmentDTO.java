@@ -1,7 +1,7 @@
 package com.wsplanning.webapp.dto;
 
 public class WOAttachmentDTO {
-    public Integer Field;
+    public Integer FileId;
     public String FileName;
     public String FileDescription;
     public String AttachType;

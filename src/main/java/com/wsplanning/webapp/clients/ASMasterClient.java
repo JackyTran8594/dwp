@@ -128,8 +128,10 @@ public class ASMasterClient {
     }
 
     public String getTextLine(Map<String, String> params, String SiteId) {
-        String CustNo = params.get("custNo");
-        String VehiId = params.get("vehiId");
+        // String CustNo = params.get("custNo");
+        // String VehiId = params.get("vehiId");
+        String CustNo = "1";
+        String VehiId = "1";
         Boolean GetText = true;
         String url = String.format("%s?SiteId=%s&CustNo=%s&VehiId=%s&GetText=%b", this.endpointUrl, SiteId, CustNo,
                 VehiId, GetText);

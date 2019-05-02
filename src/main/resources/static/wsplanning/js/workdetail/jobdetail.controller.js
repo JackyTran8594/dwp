@@ -136,6 +136,9 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, $window, Wo
     var itemNo = $scope.jobTabList[parentId].Items[childrenId].ItemNo;
     if (rowId == 0 && itemNo == "") {
       $scope.jobTabList[parentId].Items.splice(childrenId, 1);
+    } else if (rowId == 0 && itemNo != "") {
+      $scope.jobTabList[parentId].Items.splice(childrenId, 1);
+
     } else {
       $scope.jobTabList[parentId].Items[childrenId].RowId = $scope.jobTabList[parentId].Items[childrenId].RowId * (-1);
     }
@@ -146,7 +149,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, $window, Wo
   $scope.markAll = function (jobId) {
     var data = $scope.jobTabList[jobId].Items;
     angular.forEach(data, function (v, k) {
-      v.checked = true;     
+      v.checked = true;
       if (v.MechanicId == "" || v.MechanicId == null || v.MechanicId == undefined) {
         $scope.getCheckRow(jobId, k, true);
       }
@@ -694,7 +697,7 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $uibModal, item, $uibM
       AttachType: "",
       AttachTypeDescription: "",
       FileDescription: "",
-      FileId: "",
+      FileId: 0,
       FileName: "",
       ImageData: "",
       dataUrl: ""
@@ -744,8 +747,8 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $uibModal, item, $uibM
           obj.AttachType = "PIC";
           obj.AttachTypeDescription = "";
           obj.FileDescription = "";
-          obj.FileId = "",
-            obj.FileName = file.name;
+
+          obj.FileName = file.name;
           dataUrl = e.target.result.split(',');
           obj.ImageData = dataUrl[1];
           obj.dataUrl = e.target.result;
@@ -912,7 +915,12 @@ UserWebApp.controller('NotificationModalCtrl', function ($scope, data,
 
   function loadCombo() {
     CommonServices.getEmployees().then(function (data) {
-      $scope.employees = data;
+      var uniqueArray = data.map(o => o['SmanId']).
+      map((o, i, final) => final.indexOf(o) === i && i).filter(o => data[o]).map(o => data[o]);
+      // $scope.employees = [];
+      $scope.employees = uniqueArray;
+      console.log(data);
+      console.log(uniqueArray);
     });
   }
 

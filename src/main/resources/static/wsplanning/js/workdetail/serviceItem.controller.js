@@ -221,8 +221,8 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
     // var textLine = sub.Name;
     $scope.jobChecked.SubGroup = sub.Name;
     $scope.jobChecked.MainGroup = mainGroup;
-    $scope.strItem = $scope.strItem + " " + sub.Name;
-    
+    $scope.strItem = $scope.strItem + " " + mainGroup + "/" + sub.Name;
+
   }
 
   //

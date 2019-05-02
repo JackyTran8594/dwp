@@ -150,7 +150,7 @@ function checkboxDirective($compile) {
     link: function (scope, element, attr, ctrl) {
       var checked = '<input type="checkbox" ng-init="$parent.obj.checked = true" ng-checked="$parent.obj.checked"  ng-click="$parent.getCheckRow($parent.$parent.$index, $parent.$index, checked)"/>'
       var unchecked = '<input type="checkbox" ng-init="$parent.obj.checked = false" ng-checked="$parent.obj.checked"  ng-click="$parent.getCheckRow($parent.$parent.$index, $parent.$index, checked)"/>'
-      var pickingListNo = '<span>{{$parent.obj.PickingListNo}}</span>'
+      var pickingListNo = '<span ng-show="$parent.obj.PickingListNo !== 0">{{$parent.obj.PickingListNo}}</span>'
       // var attributes = scope.$eval(attr.checkboxDirective);
 
       if ((scope.type == "7") || (scope.type == "8")) {
