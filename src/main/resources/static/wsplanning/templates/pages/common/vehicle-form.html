@@ -41,19 +41,15 @@
             <table class="table able-striped table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th class="text-center">License No</th>
-                        <th class="text-center">VIN</th>
-                        <!-- <th class="text-center">Make</th> -->
-                        <th class="text-center">Model</th>
-                        <!-- <th class="text-center">SubModel</th> -->
-                        <!-- <th class="text-center item-hidden">CustNo</th>
-                        <th class="text-center item-hidden ipad-pro">First Name</th>
-                        <th class="text-center item-hidden ipad-pro">Last Name</th> -->
-                        <th class="text-center">CustNo</th>
-                        <th class="text-center">Name</th>
-                        <!-- <th class="text-center">First Name</th>
-                        <th class="text-center">Last Name</th> -->
-                        <th class="text-center">Actions</th>
+                        <th class="text-center">{{'LicenseNo' | translate}}</th>
+                        <th class="text-center">{{'VIN' | translate}}</th>
+                        
+                        <th class="text-center">{{'Model' | translate}}</th>
+                       
+                        <th class="text-center">{{'CustNo' | translate}}</th>
+                        <th class="text-center">{{'Name' | translate}}</th>
+                        
+                        <th class="text-center">{{'Action' | translate}}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -61,16 +57,12 @@
                         <td>{{item.LicenseNo}}</td>
                         <td>{{item.VIN}}</td>
                         <td class="text-wrap">{{item.Make}}&nbsp;{{item.Model}} &nbsp;{{item.SubModel}}</td>
-                        <!-- <td>{{item.Model}}</td> -->
-                        <!-- <td>{{item.SubModel}}</td> -->
-                        <!-- <td class="item-hidden">{{item.PayerCustomer.CustNo}}</td>
-                        <td class="item-hidden ipad-pro">{{item.PayerCustomer.FName}}</td>
-                        <td class="item-hidden ipad-pro">{{item.PayerCustomer.LName}}</td> -->
+                       
                         <td class="">{{item.PayerCustomer.CustNo}}</td>
                         <td class="text-wrap">{{item.PayerCustomer.FName}}&nbsp;{{item.PayerCustomer.LName}}</td>
 
                         <td class="text-center">
-                            <button type="button" ng-click="doPick(item)" class="btn btn-primary"></i> Pick</button>
+                            <button type="button" ng-click="doPick(item)" class="btn btn-primary"></i> {{'Pick' | translate}}</button>
                         </td>
                     </tr>
 

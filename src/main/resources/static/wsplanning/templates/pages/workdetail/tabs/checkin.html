@@ -18,8 +18,8 @@
                                 <div class="col-xs-8">
                                     <select class="form-control" ng-model="template" ng-change="changeTemplate()"
                                             convert-to-number>
-                                        <option value="1">Template 1</option>
-                                        <option value="2">Template 2</option>
+                                        <option value="1">{{ 'Template_1' | translate }}</option>
+                                        <option value="2">{{ 'Template_2' | translate }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -44,8 +44,8 @@
                                            dataurl="dataurl"></signature-pad>
 
                             <div class="buttons">
-                                <button ng-click="clear()">Clear</button>
-                                <button ng-click="dataurl = signature.dataUrl" ng-disabled="!signature">Reset</button>
+                                <button ng-click="clear()">{{ 'btnClear' | translate }}</button>
+                                <button ng-click="dataurl = signature.dataUrl" ng-disabled="!signature">{{ 'Reset' | translate }}</button>
                                 <button ng-click="signature = accept()">{{ 'sign' | translate }}</button>
                             </div>
                             <div class="sizes">
