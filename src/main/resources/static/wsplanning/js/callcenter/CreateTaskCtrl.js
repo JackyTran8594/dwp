@@ -4,13 +4,15 @@ angular.module('UserWebApp').controller('CreateTaskCtrl', function ($scope, $roo
     $scope.call = call;
     $scope.vehicle = vehicle;
 
+    console.log(call);
+
     $scope.data = {
         "Db": call.Db,
         "SiteId": call.SiteId,
         "Subject": "",
         "CustomerName": (call.CallerCustomer) ? call.CallerCustomer.CustomerName : "",
         "CallId": call.CallId,
-        "CustomerPhone": call.CallId,
+        "CustomerPhone": call.CallerId,
         "VIN": (vehicle && vehicle.VIN) ? vehicle.VIN : "",
         "Employee": "",
         "TimeSchedule": "",
@@ -90,8 +92,9 @@ angular.module('UserWebApp').controller('CreateTaskCtrl', function ($scope, $roo
         };
         HttpService.postData('/phonecall/createtask/', param, $("#btnSaveTask")).then(function (response) {
             $uibModalInstance.close($scope.data);
+            common.notifySuccess($translate.instant('saveSuccessfully'));
         }, function error(response) {
-            common.notifyError("Error!!!", err.status);
+            common.notifyError($translate.instant('saveError'), err.status);
         });
 
 

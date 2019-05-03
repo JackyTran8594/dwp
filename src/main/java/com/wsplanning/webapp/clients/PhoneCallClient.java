@@ -61,8 +61,11 @@ public class PhoneCallClient {
     return response.getBody();
   }
 
-  public String createtask(PhoneCallTaskDTO data) {
+  public String createtask(String token,PhoneCallTaskDTO data) {
     HttpHeaders headers = new HttpHeaders();
+    if (StringUtils.isNotBlank(token)) {
+      headers.set("Token", token);
+    }
     HttpEntity<PhoneCallTaskDTO> entity = new HttpEntity<PhoneCallTaskDTO>(data, headers);
     String url = String.format("%s", this.endpointUrl);
     ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, entity, String.class);

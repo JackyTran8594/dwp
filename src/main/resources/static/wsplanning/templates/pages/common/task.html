@@ -50,7 +50,7 @@
                     <div class="form-group">
                         <label class="control-label col-xs-4">{{ 'subject' | translate }}</label>
                         <div class="col-xs-8">
-                            <select class="form-control" ng-model="data.Subject"
+                            <select class="form-control" ng-model="data.Subject" ng-required="true"
                                     ng-options="item.Id as item.Name for item in lstCallCenterTaskType">
                             </select>
                         </div>
@@ -110,7 +110,7 @@
                     <div class="form-group">
                         <label class="control-label col-xs-4">{{ 'Employee' | translate }}</label>
                         <div class="col-xs-8">
-                            <select ui-select2 ng-model="data.Employee"
+                            <select ui-select2 ng-model="data.Employee" ng-required="true"
                                     ng-options="item.SmanId as item.Name for item in lstEmployees">
                             </select>
                         </div>
@@ -125,7 +125,7 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" datetime-picker="dd-MMMM-yyyy HH:mm:ss"
                                        date-format="dd-MMMM-yyyy HH:mm:ss" ng-model="data.TimeSchedule"
-                                       is-open="isOpenDate" />
+                                       is-open="isOpenDate" ng-required="true"/>
                                 <span class="input-group-btn">
                                             <button type="button" class="btn btn-default"
                                                     ng-click="openDate($event, prop)">
@@ -177,6 +177,12 @@
 </div>
 
 <div class="modal-footer">
-    <a class="btn btn-primary" id="btnSaveTask" ng-click="ok()">{{ 'btnSave' | translate }}</a>
+    <a class="btn btn-primary" id="btnSaveTask" ng-click="ok()" ng-disabled="taskFrm.$invalid" >{{ 'btnSave' | translate }}</a>
     <a class="btn btn-default" ng-click="cancel()">{{ 'btnCancel' | translate }}</a>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#taskFrm").validate(common.formValidate);
+    });
+</script>
