@@ -64,14 +64,14 @@ UserWebApp.controller('appCtrl', function ($scope, $timeout, $interval, $state, 
   function loadNotification(SmanId) {
     WorkOrderService.getCountNotification(SmanId).then(function (res) {
       $scope.count = res.data;
-      console.log($scope.count);
+      // console.log($scope.count);
     }, function (err) {
       console.log(err);
     });
 
     WorkOrderService.getNotification(SmanId).then(function (res) {
       $scope.lstNotification = res.data;
-      console.log($scope.lstNotification);
+      // console.log($scope.lstNotification);
     }, function (err) {
       console.log(err);
     })
@@ -98,7 +98,7 @@ UserWebApp.controller('appCtrl', function ($scope, $timeout, $interval, $state, 
         SmanId = EmployeeData.SmanId;
       }
       loadNotification(SmanId);
-      console.log(res);
+      // console.log(res);
     }, function (err) {
       console.log(err);
     });

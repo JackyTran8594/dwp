@@ -127,11 +127,11 @@ UserWebApp.service('WorkOrderService', function ($http, $q) {
     });
   }
 
-  WorkOrderService.getTextLine = function (data) {
+  WorkOrderService.getTextLine = function () {
     return $http({
-      method: 'POST',
-      url: '/wo/getTextLine',
-      data: data
+      method: 'GET',
+      url: '/wo/getTextLine'
+      // data: data
     });
   }
 

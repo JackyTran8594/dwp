@@ -127,13 +127,12 @@ public class ASMasterClient {
         return restTemplate.getForObject(url, String.class);
     }
 
-    public String getTextLine(Map<String, String> params, String SiteId) {
-        // String CustNo = params.get("custNo");
-        // String VehiId = params.get("vehiId");
+    public String getTextLine() {      
         String CustNo = "1";
+        String SiteId = "102";
         String VehiId = "1";
-        Boolean GetText = true;
-        String url = String.format("%s?SiteId=%s&CustNo=%s&VehiId=%s&GetText=%b", this.endpointUrl, SiteId, CustNo,
+        String GetText = "true";
+        String url = String.format("%s?SiteId=%s&CustNo=%s&VehiId=%s&bGetText=%s", this.endpointUrl, SiteId, CustNo,
                 VehiId, GetText);
         return restTemplate.getForObject(url, String.class);
     }

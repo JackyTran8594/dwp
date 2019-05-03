@@ -4,7 +4,7 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
 
   var $ctrl = this;
 
-  $scope.jobTreeList = [];
+  $scope.textTreeList = [];
 
   checkTitle(item.itemType);
 
@@ -118,7 +118,7 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
     if (count) {
       WorkOrderService.serviceItem(params).then(function (response) {
         $scope.lstData = response.data;
-        console.log(response);
+        // console.log(response);
         $scope.pageGo = $scope.page;
         $scope.isShow = false;
         common.spinner(false);
@@ -129,7 +129,7 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
 
       WorkOrderService.countServiceItem(params).then(function (response) {
         $scope.totalElements = response.data;
-        console.log(response);
+        // console.log(response);
         $scope.isNoData = ($scope.totalElements <= 0);
         common.spinner(false);
       }, function error(response) {
@@ -139,7 +139,7 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
     } else {
       WorkOrderService.serviceItem(params).then(function (response) {
         $scope.lstData = response.data;
-        console.log(response);
+        // console.log(response);
         $scope.pageGo = $scope.page;
         $scope.isShow = false;
         common.spinner(false);
@@ -191,9 +191,10 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
 
   loadDataTree(item);
 
-  function loadDataTree(params) {
+  function loadDataTree() {
     common.spinner(true);
-    WorkOrderService.getTextLine(params).then(function (res) {
+    WorkOrderService.getTextLine().then(function (res) {
+      console.log(res);
       var data = res.data;
       angular.forEach(data, function (value) {
         var objTree = {};
@@ -202,7 +203,7 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
         objTree.selected = false;
         objTree.children = [];
         objTree.SubGroups = value.SubGroups;
-        $scope.jobTreeList.push(objTree);
+        $scope.textTreeList.push(objTree);
       }
       );
 

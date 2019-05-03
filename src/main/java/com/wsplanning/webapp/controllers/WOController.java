@@ -206,11 +206,11 @@ public class WOController extends BaseController {
   }
 
 
-  @PostMapping("/wo/getTextLine")
+  @GetMapping("/wo/getTextLine")
   @ResponseBody
-  public ResponseEntity getTextLine(@RequestBody Map<String, String> params) {
+  public ResponseEntity getTextLine() {
     try {
-      String rtn = asMasterClient.getTextLine(params, getSiteId());
+      String rtn = asMasterClient.getTextLine();
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);
