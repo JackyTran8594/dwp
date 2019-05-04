@@ -210,6 +210,7 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
 
         var startDate = new Date(obj.date);
         startDate.setHours(0,0,0,0);
+        // alert(startDate);
         if (calendar == null) {
             createCalendar(startDate, $scope.DeptId);
         } else {
