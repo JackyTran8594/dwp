@@ -205,14 +205,14 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
 
 
     $rootScope.$on('bookingClick', function (event, obj) {
-        console.log(obj);
         $scope.DeptId = obj.DeptId;
         $scope.ShiftId = obj.ShiftId;
 
+        var startDate = new Date(obj.date);
+        startDate.setHours(0,0,0,0);
         if (calendar == null) {
-            createCalendar(new Date(obj.date), $scope.DeptId);
+            createCalendar(startDate, $scope.DeptId);
         } else {
-            var startDate = new Date(obj.date);
             var endDate = new Date(startDate.getTime() + 24 * 60 * 60 * 1000);
             // calendar.refetchResources();
             // calendar.refetchEvents();

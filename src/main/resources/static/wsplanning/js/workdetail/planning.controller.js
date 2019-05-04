@@ -304,7 +304,7 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
     }
 
     $scope.detailBooking = function (item) {
-        // console.log(item);
+        console.log(item);
         // var preDate = moment(item.WorkDay).add('days', -1).toDate();
         // console.log(preDate);
         $rootScope.$broadcast("bookingClick", {
