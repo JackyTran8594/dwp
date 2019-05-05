@@ -46,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers("/assets/**", "/wsplanning/**", "/login",
             "/users/get-existed-email", "/users/forgot-password-with-email",
             "/changeForgotPassword", "/changeForgotPasswordConfirm",
-            "/change-password", "/change-password-with-token", "/site/getAll", "/language/getAll","/test").permitAll()
+            "/change-password", "/change-password-with-token", "/site/getAll", "/language/getAll","/site/getMenuAuth","/test").permitAll()
         .anyRequest().authenticated()
         .and()
         .formLogin()

@@ -84,31 +84,6 @@ UserWebApp.run(['$rootScope', 'uiSelect2Config', '$translate', 'tmhDynamicLocale
   });
   //
 
-  // $rootScope.lst_menu = [];
-
-  function loadAuth() {
-    CommonServices.getMenuAuth().then(function (res) {
-      // console.log(res);
-      var lst_auth = res.auth;
-      var lst_name = res.menu;
-      var lst_tab = res.tab;
-      var lst_timeout = res.timeout;
-      angular.forEach(lst_auth, function (v, k) {
-        angular.forEach(lst_name, function (value, key) {
-          if (v.name == value.name) {
-            v.icon = value.class;
-          }
-        })
-      })
-      localStorage.setItem('info_menu', JSON.stringify(lst_auth));
-      localStorage.setItem('info_tab', JSON.stringify(lst_tab));
-      localStorage.setItem('info_timeout', JSON.stringify(lst_timeout));
-    }, function (error) {
-      console.log(error);
-    })
-  }
-  loadAuth();
-
   $rootScope.$on('stateChangeStart', function (event, toState, toParams, fromState, fromParams, options) {
     console.log("root change stateChangeStart");
   });
@@ -184,11 +159,6 @@ UserWebApp.run(['$rootScope', 'uiSelect2Config', '$translate', 'tmhDynamicLocale
           common.spinner(false);
         });
       }
-
-
-
-
-
 
       //Add load
       $rootScope.$broadcast('routestateChangeSuccess', {});
