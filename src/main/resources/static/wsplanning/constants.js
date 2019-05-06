@@ -13,4 +13,5 @@ var constants = {
   COLOR_CRITICAL : '#f44336',
   COLOR_MAJOR : '#e6e903',
   COLOR_MINOR : '#00af35',
+  URL_IFRAME: "https://automaster.alliedsoft.hu:10106/default.aspx?siteid=",
 };
