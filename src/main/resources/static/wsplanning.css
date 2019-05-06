@@ -798,7 +798,7 @@ table td {
 }
 
 
-@media (min-width: 1200px) {
+@media (min-width: 1024px) {
   .main-content {
      max-height: 600px;
      /* overflow-y: scroll; */
@@ -810,9 +810,14 @@ table td {
   } 
 
   .tableIndex {
-    height: 300px;
+    max-height: 450px;
     overflow-x: scroll;
     overflow-y: auto;
+  }
+
+ 
+  .table[class*="ipadpro-responsive"] > tbody > tr > td {
+    padding: 12px 14px;
   }
 
 }

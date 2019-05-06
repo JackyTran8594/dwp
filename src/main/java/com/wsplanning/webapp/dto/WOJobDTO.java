@@ -20,8 +20,8 @@ public class WOJobDTO {
     public String Payer;
     public String MainGroupId;
     public String SubGroupId;
-	public String Diagnotisc ;
-    public String Solution;
+	public String DiagnosticInfo ;
+    public String SolutionInfo;
     public List<ServiceItemDTO> Items;
     public List<WOAttachmentDTO> JobAttachments;
     public List<DynamicDataDTO> AdditionalData;
