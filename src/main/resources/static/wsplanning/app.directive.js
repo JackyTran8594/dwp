@@ -184,7 +184,7 @@ function inputType($compile) {
 
       var html_text = '<input type="text" class="form-control" ng-model="$parent.item.Value" />';
       var html_number = '<input type="number" class="form-control" ng-model="$parent.item.Value" />';
-      var html_date = '<div class="input-group"><input type="text" class="form-control" datetime-picker="dd-MMMM-yyyy" enable-time="" date-format="dd-MMMM-yyyy" ng-model="$parent.item.Value" is-open="$parent.isOpenDateInput" /><span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="$parent.openDateInput($event, prop)"><i class="icon-calendar"></i></button></span></div>';
+      var html_date = '<div class="input-group"><input type="text" class="form-control" datetime-picker="dd-MMMM-yyyy" enable-time="false" date-format="dd-MMMM-yyyy" ng-model="$parent.item.Value" is-open="$parent.isOpenDateInput" /><span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="$parent.openDateInput($event, prop)"><i class="icon-calendar"></i></button></span></div>';
 
 
       if (scope.type == "C") {
