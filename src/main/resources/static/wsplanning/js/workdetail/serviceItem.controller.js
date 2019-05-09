@@ -189,7 +189,7 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
     SubGroup: ''
   };
 
-  loadDataTree(item);
+  loadDataTree();
 
   function loadDataTree() {
     common.spinner(true);

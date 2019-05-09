@@ -404,6 +404,31 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, $window, Wo
   };
 
 
+  $scope.openNotifyTeam = function (item) {
+    var modalInstance = $uibModal.open({
+      animation: $ctrl.animationsEnabled,
+      templateUrl: '/wsplanning/templates/pages/common/notification-team-form.html',
+      controller: 'NotificationTeamCtrl',
+      backdrop: 'static',
+      controllerAs: '$ctrl',
+      size: "lg",
+      resolve: {
+        data: {
+          item: item,
+          WorkOrderId: $scope.WorkOrder.WorkOrderId,
+        }
+      }
+    });
+
+    modalInstance.result.then(function (selectedItem) {
+
+      console.log(selectedItem);
+    }, function () {
+      console.log('Modal dismissed at: ' + new Date());
+    });
+  };
+
+
   var headerData = {};
   // get headerData
   $rootScope.$on("headerData", function (evt, obj) {
@@ -524,7 +549,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, $window, Wo
 });
 
 
-UserWebApp.controller('JobNewModalCtrl', function ($scope, WorkOrderService, item, $uibModalInstance) {
+UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrderService, item, $uibModalInstance) {
 
 
   var $ctrl = this;
@@ -534,11 +559,11 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, WorkOrderService, ite
   // console.log(item);
 
 
-  $scope.isOpenDateInput = false;
+  $ctrl.isOpenDateInput = false;
   $scope.openDateInput = function (e) {
     e.preventDefault();
     e.stopPropagation();
-    $scope.isOpenDateInput = true;
+    $ctrl.isOpenDateInput = true;
   };
 
 
@@ -916,11 +941,11 @@ UserWebApp.controller('NotificationModalCtrl', function ($scope, data,
   function loadCombo() {
     CommonServices.getEmployees().then(function (data) {
       var uniqueArray = data.map(o => o['SmanId']).
-      map((o, i, final) => final.indexOf(o) === i && i).filter(o => data[o]).map(o => data[o]);
+        map((o, i, final) => final.indexOf(o) === i && i).filter(o => data[o]).map(o => data[o]);
       // $scope.employees = [];
       $scope.employees = uniqueArray;
-      console.log(data);
-      console.log(uniqueArray);
+      // console.log(data);
+      // console.log(uniqueArray);
     });
   }
 
@@ -972,4 +997,114 @@ UserWebApp.controller('NotificationModalCtrl', function ($scope, data,
   };
 
 
+});
+
+UserWebApp.controller('NotificationTeamCtrl', function ($scope, data, WorkOrderService,
+  $uibModalInstance, CommonServices, $rootScope, HttpService) {
+
+  var $ctrl = this;
+  // console.log(data);
+
+  $scope.textTreeList = [];
+
+  $scope.target = {};
+
+  $scope.teams = [];
+
+  function object() {
+    var notiObject = {
+      Id: "",
+      SmanId: "",
+      CreatedBy: "",
+      Note: "",
+      SiteId: "",
+      IsNotified: "",
+      Created: "",
+      NotifiedTime: "",
+      WorkOrderId: "",
+      WorkOrderRowId: ""
+    }
+    return notiObject;
+  }
+
+  //tree menu for the text line
+  $scope.collapseMenu = function (item) {
+    item.selected = !item.selected;
+    // console.log($scope.jobTreeList);
+  }
+
+  $scope.jobChecked = {
+    MainGroup: '',
+    SubGroup: ''
+  };
+
+  function loadCombo() {
+    common.spinner(true);
+    CommonServices.getTeams().then(function (data) {
+      // var uniqueArray = data.map(o => o['SmanId']).
+      // map((o, i, final) => final.indexOf(o) === i && i).filter(o => data[o]).map(o => data[o]);
+      // $scope.employees = [];
+      $scope.teams = data;
+      // console.log(data);
+      // console.log(uniqueArray);
+    });
+
+    WorkOrderService.getTextLine().then(function (res) {
+      console.log(res);
+      var data = res.data;
+      angular.forEach(data, function (value) {
+        var objTree = {};
+        objTree.id = value.Id;
+        objTree.label = value.Name;
+        objTree.selected = false;
+        objTree.children = [];
+        objTree.SubGroups = value.SubGroups;
+        $scope.textTreeList.push(objTree);
+      }
+      );
+      common.spinner(false);
+    }, function (err) {
+      console.log(err);
+      common.spinner(false);
+    })
+  }
+
+  loadCombo();
+
+  $scope.strItem = "";
+
+  $scope.addTextLine = function (sub, mainGroup) {
+    // var textLine = sub.Name;
+    $scope.jobChecked.SubGroup = sub.Name;
+    $scope.jobChecked.MainGroup = mainGroup;
+    $scope.strItem = $scope.strItem + " " + mainGroup + "/" + sub.Name + "\n";
+  }
+
+  $ctrl.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
+
+  $ctrl.send = function (param, str) {
+    var obj = object();
+
+    obj.Note = str;
+    obj.SmanId = param.team;
+    obj.WorkOrderId = data.WorkOrderId;
+    obj.WorkOrderRowId = data.item.RowId;
+
+    HttpService.postData('/site/postNotification', obj).then(function (response) {
+      console.log(response);
+      common.spinner(false);
+    }, function error(response) {
+      console.log(response);
+      common.spinner(false);
+    });
+
+    $rootScope.$emit('message', { "item": "" })
+
+    $uibModalInstance.close($scope.target);
+  };
+
+
 })
+

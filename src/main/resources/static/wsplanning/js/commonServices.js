@@ -18,6 +18,7 @@ UserWebApp
     this.lstNotification = [];
     this.countNotification = "";
     this.lstEmployees = "";
+    this.lstTeams = [];
 
     this.lstCallCenterDb = [];
     this.lstCallCenterTaskType = [];
@@ -66,6 +67,22 @@ UserWebApp
       }
       return d.promise;
     };
+
+    this.getTeams = function () {
+        var d = $q.defer();
+        if (!this.lstTeams || this.lstTeams.length <= 0) {
+          HttpService.getData('/site/getTeams', {}).then(function (response) {
+            response.unshift({ "Id": "", "Name": $translate.instant('pleaseSelect') });
+            this.lstTeams = response;
+            d.resolve(response);
+          }, function error(response) {
+            d.reject();
+          });
+        } else {
+          d.resolve(this.lstTeams);
+        }
+        return d.promise;
+    }
 
     // getMenuAuth
     this.getMenuAuth = function () {

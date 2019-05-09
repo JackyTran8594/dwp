@@ -26,31 +26,5 @@ public class WOJobDTO {
     public List<WOAttachmentDTO> JobAttachments;
     public List<DynamicDataDTO> AdditionalData;
 
-
-    // public List<ServiceItemDTO> getItems() {
-    //     return this.Items;
-    // }
-
-    // public void setItems(List<ServiceItemDTO> Items) {
-    //     this.Items = Items;
-    // }
-
-    // public List<WOAttachmentDTO> getJobAttachments() {
-    //     return this.JobAttachments;
-    // }
-
-    // public void setJobAttachments(List<WOAttachmentDTO> JobAttachments) {
-    //     this.JobAttachments = JobAttachments;
-    // }
-
-    // public List<DynamicDataDTO> getAdditionalData() {
-    //     return this.AdditionalData;
-    // }
-
-    // public void setAdditionalData(List<DynamicDataDTO> AdditionalData) {
-    //     this.AdditionalData = AdditionalData;
-    // }
-   
-
 }
 

@@ -1,6 +1,5 @@
 package com.wsplanning.webapp.controllers;
 
-
 import com.wsplanning.webapp.clients.ASMasterClient;
 import com.wsplanning.webapp.clients.CustomerClient;
 import com.wsplanning.webapp.clients.EmployeesClient;
@@ -8,7 +7,6 @@ import com.wsplanning.webapp.clients.NotificationClient;
 import com.wsplanning.webapp.clients.StampingClient;
 import com.wsplanning.webapp.clients.VehiclesClient;
 import com.wsplanning.webapp.dto.NotificationDTO;
-
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
@@ -31,7 +29,7 @@ import java.util.Map;
 @Controller
 public class CommonController extends BaseController {
   private Logger logger = LoggerFactory.getLogger(CommonController.class);
-  
+
   @Autowired
   protected ASMasterClient asMasterClient;
 
@@ -119,7 +117,7 @@ public class CommonController extends BaseController {
   @PostMapping("/language")
   @ResponseBody
   public ResponseEntity getWO(@RequestBody Map<String, String> params, HttpServletRequest request,
-                              HttpServletResponse response) {
+      HttpServletResponse response) {
     try {
       String lang = params.get("lang");
       Locale userLocale = Locale.forLanguageTag(lang);
@@ -246,7 +244,6 @@ public class CommonController extends BaseController {
         rtn += "[" + getServiceAdvisors + "]";
       }
 
-
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception ex) {
       return parseException(ex);
@@ -285,7 +282,7 @@ public class CommonController extends BaseController {
 
   @GetMapping("/site/getCustomers")
   public ResponseEntity getCustomers(@RequestParam(name = "skey") String skey,
-                                     @RequestParam(name = "custNo") String custNo) {
+      @RequestParam(name = "custNo") String custNo) {
     try {
       String rtn = customerClient.getCustomers(skey, custNo);
       return new ResponseEntity<>(rtn, HttpStatus.OK);
@@ -328,17 +325,16 @@ public class CommonController extends BaseController {
     }
   }
 
-  // @GetMapping("/site/getEmployees")
-  // public ResponseEntity getEmployees()
-  // {
-  // try {
-  // String rtn = employeesClient.getEmployees(getSiteId());
-  // return new ResponseEntity<>(rtn, HttpStatus.OK);
-  // } catch (Exception e) {
-  // return parseException(e);
-  // //TODO: handle exception
-  // }
-  // }
+  @GetMapping("/site/getTeams")
+  public ResponseEntity getTeams() {
+    try {
+      String rtn = employeesClient.getTeams(getSiteId());
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception e) {
+      return parseException(e);
+      // TODO: handle exception
+    }
+  }
 
   // notification
   @GetMapping("/site/getNotification")
@@ -367,7 +363,7 @@ public class CommonController extends BaseController {
   public ResponseEntity postNotification(@RequestBody NotificationDTO data) {
     try {
       data.SiteId = getSiteId();
-      String rtn = notificationClient.postNotification(getSiteId() ,getToken(), data);
+      String rtn = notificationClient.postNotification(getSiteId(), getToken(), data);
       return new ResponseEntity<>(rtn, HttpStatus.OK);
     } catch (Exception e) {
       return parseException(e);

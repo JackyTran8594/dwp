@@ -63,7 +63,7 @@ UserWebApp
     };
   })
   .filter('dateLocal', function ($filter) {
-    return function (input,format) {
+    return function (input, format) {
       var dateToConvert = new Date(input);
       var convertedDateString = dateToConvert.toLocaleString();
       convertedDateString = convertedDateString.replace('at ', '');
@@ -93,4 +93,4 @@ UserWebApp
       return output;
     };
   })
-;
+  ;

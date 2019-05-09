@@ -21,7 +21,7 @@
                         </div>
                         <div class="text-center">
                             <h3 style="color:red"><b>{{jobParams.WarrantyInfo}}</b></h3>
-                         
+
                         </div>
 
                         <div class="pull-right">
@@ -49,6 +49,10 @@
                                         </h6>
                                         <div class="heading-elements">
                                             <ul class="icons-list">
+                                                <li><a class="btn btn-lg" ng-click="openNotifyTeam(item)"><span
+                                                            data-popup="tooltip" data-placement="top"
+                                                            title="Open Notify Team" class="icon-bubbles9"></span></a>
+                                                </li>
                                                 <li><a class="btn btn-lg" ng-click="openNotify(item)"><span
                                                             data-popup="tooltip" data-placement="top"
                                                             title="Open Notify" class="icon-bubble-dots4"></span></a>
@@ -100,7 +104,8 @@
 
                                                 <div class="col-xs-1">
                                                     <div class="form-group">
-                                                        <label class="control-label col-xs-8">{{'Job_No'| translate}}: </label>
+                                                        <label class="control-label col-xs-8">{{'Job_No'| translate}}:
+                                                        </label>
                                                         <div class="col-xs-4">
                                                             <input type="text" class="form-control"
                                                                 ng-model="item.JobNo" readonly>
@@ -109,7 +114,8 @@
                                                 </div>
                                                 <div class="col-xs-9">
                                                     <div class="form-group">
-                                                        <label class="control-label col-xs-2">{{'JobTitle'| translate}}: </label>
+                                                        <label class="control-label col-xs-2">{{'JobTitle'| translate}}:
+                                                        </label>
                                                         <div class="col-xs-10">
                                                             <input type="text" class="form-control"
                                                                 ng-model="item.Note">
@@ -118,7 +124,8 @@
                                                 </div>
                                                 <div class="col-xs-2">
                                                     <div class="form-group">
-                                                        <label class="control-label col-xs-8">{{'EstimatedTime' | translate}}:</label>
+                                                        <label
+                                                            class="control-label col-xs-8">{{'EstimatedTime' | translate}}:</label>
                                                         <div class="col-xs-4">
                                                             <input type="text" class="form-control"
                                                                 ng-model="item.EstimatedTime" format-number-decimal>
@@ -130,7 +137,8 @@
                                             <div class="row">
                                                 <div class="col-xs-8">
                                                     <div class="form-group">
-                                                        <label class="control-label col-xs-2">{{'Complaint' | translate}}:</label>
+                                                        <label
+                                                            class="control-label col-xs-2">{{'Complaint' | translate}}:</label>
                                                         <div class="col-xs-10">
                                                             <input type="text" class="form-control"
                                                                 ng-model="item.Complaint">
@@ -139,7 +147,8 @@
                                                 </div>
                                                 <div class="col-xs-4">
                                                     <div class="form-group">
-                                                        <label class="control-label col-xs-4">{{'JobType' | translate}}:</label>
+                                                        <label
+                                                            class="control-label col-xs-4">{{'JobType' | translate}}:</label>
                                                         <div class="col-xs-8">
                                                             <select ng-model="item.JobType" class="form-control"
                                                                 ng-options="o.Id as o.Name for o in lstJobTypes"></select>
@@ -151,7 +160,8 @@
                                             <div class="row">
                                                 <div class="col-xs-6">
                                                     <div class="form-group">
-                                                        <label class="control-label col-xs-2">{{'Diagnotisc' | translate}}:</label>
+                                                        <label
+                                                            class="control-label col-xs-2">{{'Diagnotisc' | translate}}:</label>
                                                         <div class="col-xs-10">
                                                             <input type="text" class="form-control"
                                                                 ng-model="item.DiagnosticInfo">
@@ -160,7 +170,8 @@
                                                 </div>
                                                 <div class="col-xs-6">
                                                     <div class="form-group">
-                                                        <label class="control-label col-xs-2">{{'Solution' | translate}}:</label>
+                                                        <label
+                                                            class="control-label col-xs-2">{{'Solution' | translate}}:</label>
                                                         <div class="col-xs-10">
                                                             <input type="text" class="form-control"
                                                                 ng-model="item.SolutionInfo">
@@ -183,8 +194,11 @@
                                         </h6>
                                         <div class="heading-elements">
                                             <ul class="icons-list">
-
-                                                 <li><a class="btn btn-lg" ng-click="openNotify(item)"><span
+                                                <li><a class="btn btn-lg" ng-click="openNotifyTeam(item)"><span
+                                                            data-popup="tooltip" data-placement="top"
+                                                            title="Open Notify Team" class="icon-bubbles9"></span></a>
+                                                </li>
+                                                <li><a class="btn btn-lg" ng-click="openNotify(item)"><span
                                                             data-popup="tooltip" data-placement="top"
                                                             title="Open Notify" class="icon-bubble-dots4"></span></a>
                                                 </li>
@@ -234,7 +248,8 @@
                                                 <div class="col-xs-1">
 
                                                     <div class="form-group">
-                                                        <label class="control-label col-xs-8">{{'Job_No' | translate}}: </label>
+                                                        <label class="control-label col-xs-8">{{'Job_No' | translate}}:
+                                                        </label>
                                                         <div class="col-xs-4">
                                                             <input type="text" class="form-control"
                                                                 ng-model="item.JobNo" readonly>
@@ -246,7 +261,9 @@
                                                 <div class="col-xs-9">
 
                                                     <div class="form-group">
-                                                        <label class="control-label col-xs-2">{{'JobTitle' | translate}}: </label>
+                                                        <label
+                                                            class="control-label col-xs-2">{{'JobTitle' | translate}}:
+                                                        </label>
                                                         <div class="col-xs-10">
                                                             <input type="text" class="form-control"
                                                                 ng-model="item.Note">
@@ -257,7 +274,8 @@
                                                 </div>
                                                 <div class="col-xs-2">
                                                     <div class="form-group">
-                                                        <label class="control-label col-xs-8">{{'EstimatedTime' | translate}}:</label>
+                                                        <label
+                                                            class="control-label col-xs-8">{{'EstimatedTime' | translate}}:</label>
                                                         <div class="col-xs-4">
                                                             <input type="text" class="form-control"
                                                                 ng-model="item.EstimatedTime" format-number-decimal>
@@ -271,7 +289,8 @@
                                             <div class="row">
                                                 <div class="col-xs-8">
                                                     <div class="form-group">
-                                                        <label class="control-label col-xs-2">{{'Complaint' | translate}}:</label>
+                                                        <label
+                                                            class="control-label col-xs-2">{{'Complaint' | translate}}:</label>
                                                         <div class="col-xs-10">
                                                             <input type="text" class="form-control"
                                                                 ng-model="item.Complaint">
@@ -282,7 +301,8 @@
                                                 </div>
                                                 <div class="col-xs-4">
                                                     <div class="form-group">
-                                                        <label class="control-label  col-xs-4">{{'JobType' | translate}}:</label>
+                                                        <label
+                                                            class="control-label  col-xs-4">{{'JobType' | translate}}:</label>
                                                         <div class="col-xs-8">
 
                                                             <select class="form-control" ng-model="item.JobType"
@@ -300,7 +320,8 @@
                                             <div class="row">
                                                 <div class="col-xs-6">
                                                     <div class="form-group">
-                                                        <label class="control-label col-xs-2">{{'Diagnotisc' | translate}}:</label>
+                                                        <label
+                                                            class="control-label col-xs-2">{{'Diagnotisc' | translate}}:</label>
                                                         <div class="col-xs-10">
                                                             <input type="text" class="form-control"
                                                                 ng-model="item.DiagnosticInfo">
@@ -309,7 +330,8 @@
                                                 </div>
                                                 <div class="col-xs-6">
                                                     <div class="form-group">
-                                                        <label class="control-label col-xs-2">{{'Solution' | translate}}:</label>
+                                                        <label
+                                                            class="control-label col-xs-2">{{'Solution' | translate}}:</label>
                                                         <div class="col-xs-10">
                                                             <input type="text" class="form-control"
                                                                 ng-model="item.SolutionInfo">
@@ -322,7 +344,8 @@
                                                 <div class="col-xs-3">
 
                                                     <div class="form-group">
-                                                        <label class="control-label col-xs-4">{{'ChargeCategory' | translate}}:</label>
+                                                        <label
+                                                            class="control-label col-xs-4">{{'ChargeCategory' | translate}}:</label>
 
                                                         <div class="col-xs-8">
                                                             <select class="form-control"
@@ -337,7 +360,8 @@
                                                 <div class="col-xs-3">
 
                                                     <div class="form-group">
-                                                        <label class="control-label col-xs-4">{{'department' | translate}}:</label>
+                                                        <label
+                                                            class="control-label col-xs-4">{{'department' | translate}}:</label>
                                                         <div class="col-xs-8">
 
 
@@ -353,7 +377,8 @@
                                                 <div class="col-xs-3">
 
                                                     <div class="form-group">
-                                                        <label class="control-label  col-xs-4">{{'JobCategory' | translate}}:</label>
+                                                        <label
+                                                            class="control-label  col-xs-4">{{'JobCategory' | translate}}:</label>
                                                         <div class="col-xs-8">
                                                             <select class="form-control" ng-model="item.JobCategory"
                                                                 ng-options="o.Id as o.Name for o in lstJobCats">
@@ -366,7 +391,8 @@
                                                 <div class="col-xs-3">
 
                                                     <div class="form-group">
-                                                        <label class="control-label col-xs-4">{{'Payer' | translate}}:</label>
+                                                        <label
+                                                            class="control-label col-xs-4">{{'Payer' | translate}}:</label>
                                                         <div class="col-xs-8">
 
                                                             <select class="form-control" ng-model="item.Payer"
@@ -389,17 +415,21 @@
                                                         <table class="table table-striped table-bordered table-hover">
                                                             <thead>
                                                                 <tr>
-                                                                    <th class="text-center" style="width: 5%">{{'No' | translate}}</th>
+                                                                    <th class="text-center" style="width: 5%">
+                                                                        {{'No' | translate}}</th>
                                                                     <th class="text-center" style="width: 5%"></th>
-                                                                    <th class="text-center" style="width: 10%">{{'Code' | translate}}</th>
+                                                                    <th class="text-center" style="width: 10%">
+                                                                        {{'Code' | translate}}</th>
                                                                     <th class="text-center">{{'Name' | translate}}</th>
-                                                                    <th class="text-center" style="width: 5%">{{'Quantity' | translate}}
+                                                                    <th class="text-center" style="width: 5%">
+                                                                        {{'Quantity' | translate}}
                                                                     </th>
                                                                     <th class="text-center" style="width: 10%"><button
                                                                             type="button" class="btn btn-primary"
                                                                             ng-click="markAll($index)">{{'btnMark' | translate}}</button>
                                                                     </th>
-                                                                    <th class="text-center" style="width: 10%">{{'Action' | translate}}
+                                                                    <th class="text-center" style="width: 10%">
+                                                                        {{'Action' | translate}}
                                                                     </th>
                                                                 </tr>
                                                             </thead>

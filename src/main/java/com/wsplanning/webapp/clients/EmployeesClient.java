@@ -56,8 +56,8 @@ public class EmployeesClient {
         return "200";
     }
 
-    public String getEmployees(String param, String siteId) {
-        String url = String.format("%s?command=%s&SiteId=%s", this.endpointUrl, param, siteId);
+    public String getTeams(String siteId) {
+        String url = String.format("%s?command=getTeams&SiteId=%s", this.endpointUrl, siteId);
         return restTemplate.getForObject(url, String.class);
     }
 

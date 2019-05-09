@@ -115,7 +115,7 @@ UserWebApp.service('WorkOrderService', function ($http, $q) {
     return $http({
       method: 'GET',
       url: '/site/getCountNotification',
-      params: {smanid: data}
+      params: { smanid: data }
     });
   }
 
@@ -123,7 +123,7 @@ UserWebApp.service('WorkOrderService', function ($http, $q) {
     return $http({
       method: 'GET',
       url: '/site/getNotification',
-      params: {smanid: data}
+      params: { smanid: data }
     });
   }
 
