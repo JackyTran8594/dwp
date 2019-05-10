@@ -36,6 +36,10 @@ function loadAuth() {
       var lst_name = responseData.menu;
       var lst_tab = responseData.tab;
       var lst_timeout = responseData.timeout;
+      var lst_common = responseData.common;
+      var lst_detail = responseData.detail;
+      var lst_icon_common = responseData.iconCommon;
+      var lst_icon_detail = responseData.iconDetail;
 
       lst_auth.forEach(function (element) {
         lst_name.forEach(function (item) {
@@ -43,10 +47,31 @@ function loadAuth() {
             element.icon = item.class;
           }
         })
-      })
+      });
+
+      
+      lst_common.forEach(function (element) {
+        lst_icon_common.forEach(function (item) {
+          if (element.name == item.name) {
+            element.icon = item.class;
+          }
+        })
+      });
+
+      
+      lst_detail.forEach(function (element) {
+        lst_icon_detail.forEach(function (item) {
+          if (element.name == item.name) {
+            element.icon = item.class;
+          }
+        })
+      });
+
       localStorage.setItem('info_menu', JSON.stringify(lst_auth));
       localStorage.setItem('info_tab', JSON.stringify(lst_tab));
       localStorage.setItem('info_timeout', JSON.stringify(lst_timeout));
+      localStorage.setItem('info_common', JSON.stringify(lst_common));
+      localStorage.setItem('info_detail', JSON.stringify(lst_detail));
 
     },
     error: function (responseData, textStatus, errorThrown) {

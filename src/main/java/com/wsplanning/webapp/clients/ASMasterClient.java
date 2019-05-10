@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -127,7 +128,7 @@ public class ASMasterClient {
         return restTemplate.getForObject(url, String.class);
     }
 
-    public String getTextLine() {      
+    public String getTextLine() {
         String CustNo = "1";
         String SiteId = "102";
         String VehiId = "1";
@@ -146,8 +147,12 @@ public class ASMasterClient {
         Properties prop_Menu = new Properties();
         JSONArray jsonArray = new JSONArray();
         JSONArray jarray = new JSONArray();
+        JSONArray arrIconBtnCommon = new JSONArray();
+        JSONArray arrIconBtnDetail = new JSONArray();
         JSONArray arrayTab = new JSONArray();
         JSONArray arrTime = new JSONArray();
+        JSONArray arrBtnCommon = new JSONArray();
+        JSONArray arrBtnDetail = new JSONArray();
         // JSONArray properties = new JSONArray();
         JSONObject obj = new JSONObject();
         if (input == null) {
@@ -166,9 +171,24 @@ public class ASMasterClient {
                         jmenu.put("class", v.toString());
                         jarray.put(jmenu);
                     }
+
+                    if (icoStrings[0].contains("iconBtn")) {
+                        JSONObject jmenu = new JSONObject();
+                        if (icoStrings[1].contains("common")) {
+                            jmenu.put("name", icoStrings[2]);
+                            jmenu.put("class", v.toString());
+                            arrIconBtnCommon.put(jmenu);
+                        } else {
+                            jmenu.put("name", icoStrings[2]);
+                            jmenu.put("class", v.toString());
+                            arrIconBtnDetail.put(jmenu);
+                        }
+                    }
+
                 });
 
                 JSONObject objTimeout = new JSONObject();
+               
                 prop_Auth.forEach((key, value) -> {
                     JSONObject jsonObject = new JSONObject();
                     JSONObject objTab = new JSONObject();
@@ -195,6 +215,21 @@ public class ASMasterClient {
                             objTimeout.put("name", subStr[0]);
                             objTimeout.put("value", value.toString());
                         }
+                        if (subStr[0].contains("common")) {
+                            JSONObject objBtn = new JSONObject();
+                            objBtn.put("text", subStr[1]);
+                            objBtn.put("name", subStr[2]);
+                            objBtn.put("ordinalNumber", Integer.parseInt(subStr[3]));
+                            objBtn.put("value", value.toString());
+                            arrBtnCommon.put(objBtn);
+                        }
+                        if (subStr[0].contains("detail")) {
+                            JSONObject objBtn = new JSONObject();
+                            objBtn.put("name", subStr[2]);
+                            objBtn.put("ordinalNumber", Integer.parseInt(subStr[3]));
+                            objBtn.put("value", value.toString());
+                            arrBtnDetail.put(objBtn);
+                        }
 
                     }
                     // arrTime.put(objTimeout);
@@ -204,6 +239,10 @@ public class ASMasterClient {
                 obj.put("menu", jarray);
                 obj.put("tab", arrayTab);
                 obj.put("timeout", objTimeout);
+                obj.put("common", arrBtnCommon);
+                obj.put("detail", arrBtnDetail);
+                obj.put("iconCommon", arrIconBtnCommon);
+                obj.put("iconDetail", arrIconBtnDetail);
 
             } catch (IOException e) {
                 // TODO Auto-generated catch block
@@ -214,20 +253,19 @@ public class ASMasterClient {
         return obj;
     }
 
-
-    //http://automaster.alliedsoft.hu:9092/api/ASMaster?command=getCallCenterDB
+    // http://automaster.alliedsoft.hu:9092/api/ASMaster?command=getCallCenterDB
     public String getCallCenterDB() {
         String url = String.format("%s?command=getCallCenterDB", this.endpointUrl);
         return restTemplate.getForObject(url, String.class);
     }
 
-    //http://automaster.alliedsoft.hu:9092/api/ASMaster?command=getCallCenterSites&param1=AMSOPRON
+    // http://automaster.alliedsoft.hu:9092/api/ASMaster?command=getCallCenterSites&param1=AMSOPRON
     public String getCallCenterSites(String db) {
-        String url = String.format("%s?command=getCallCenterSites&param1=%s", this.endpointUrl,db);
+        String url = String.format("%s?command=getCallCenterSites&param1=%s", this.endpointUrl, db);
         return restTemplate.getForObject(url, String.class);
     }
 
-    //http://automaster.alliedsoft.hu:9092/api/ASMaster?command=getCallCenterTaskType
+    // http://automaster.alliedsoft.hu:9092/api/ASMaster?command=getCallCenterTaskType
     public String getCallCenterTaskType() {
         String url = String.format("%s?command=getCallCenterTaskType", this.endpointUrl);
         return restTemplate.getForObject(url, String.class);

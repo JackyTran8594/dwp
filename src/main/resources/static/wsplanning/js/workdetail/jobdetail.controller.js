@@ -5,8 +5,8 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, $window, Wo
   $scope.jobParams = $scope.$parent.jobObject;
   $scope.actTypeJob = $scope.$parent.actionType;
   $scope.jobTabList = $scope.$parent.WOJobs;
-  var jobsList = []
-
+  var jobsList = [];
+  $scope.lstButtonDetail = JSON.parse(localStorage.getItem('info_detail'));
 
   loadCommon();
   $scope.lstDepartment = [];
@@ -180,6 +180,31 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, $window, Wo
     this.isShow = !this.isShow;
   }
 
+
+  $scope.openTypeModal = function (name, item, id) {
+    switch (name) {
+      case "notifyteam": $scope.openNotifyTeam(item);
+        break;
+      case "notify": $scope.openNotify(item);
+        break;
+      case "photo": $scope.openImage(item, id);
+        break;
+      case "stamping": $scope.addStamping(item);
+        break;
+      case "labour": $scope.openServiceItem(7, id);
+        break;
+      case "sparepart": $scope.openServiceItem(1, id);
+        break;
+      case "textrow": $scope.openServiceItem(8, id);
+        break;
+      case "subcontractor": $scope.openServiceItem(4, id);
+        break;
+      case "nonstockitem": $scope.openServiceItem(2, id);
+        break;
+      default:
+        break;
+    }
+  }
 
   $scope.openNewTab = function (params) {
     $window.open($scope.jobParams.VHCLink);

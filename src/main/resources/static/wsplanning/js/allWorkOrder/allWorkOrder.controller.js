@@ -5,13 +5,18 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
   $scope.lstData = [];
   $scope.lstSearch = [];
   $scope.totalElements = 0;
-
+  $scope.lstbtnCommon = JSON.parse(localStorage.getItem('info_common'));
   // $scope.params = {
   //   "department": "300",
   //   "trans": "W",
   //   "visitReason": "03",
   //   "serv": "",
   // };
+
+  $scope.buttonType = function (name) {
+    var string = "app.main." + name;
+    $state.go(string, { 'type': typeWO, 'action': name });
+  }
 
   $scope.params = {
     "department": "",
@@ -216,17 +221,17 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
     $state.go('app.main.workdetail', { 'id': item.WorkOrderId, 'type': typeWO });
   }
 
-  $scope.newWorkorder = function () {
-    $state.go('app.main.newwo', { 'type': typeWO, 'action': "wo" });
-  }
+  // $scope.newWorkorder = function () {
+  //   $state.go('app.main.newwo', { 'type': typeWO, 'action': "wo" });
+  // }
 
-  $scope.newOffer = function () {
-    $state.go('app.main.newoffer', { 'type': typeWO, 'action': "offer" });
-  }
+  // $scope.newOffer = function () {
+  //   $state.go('app.main.newoffer', { 'type': typeWO, 'action': "offer" });
+  // }
 
-  $scope.newBooking = function () {
-    $state.go('app.main.booking', { 'type': typeWO, 'action': "booking" });
-  }
+  // $scope.newBooking = function () {
+  //   $state.go('app.main.booking', { 'type': typeWO, 'action': "booking" });
+  // }
 
   $scope.onRefresh = function () {
     $state.reload();
@@ -236,7 +241,7 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
   $scope.toogleSearch = function () {
     $scope.isShow = !$scope.isShow;
   }
-  
+
   //openCamera
   $scope.openCamera = function () {
     var modalInstance = $uibModal.open({
@@ -250,12 +255,12 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
       }
     });
 
-    modalInstance.rendered.then(function(){
+    modalInstance.rendered.then(function () {
       $rootScope.$broadcast("modalOpen", {});
     });
 
     modalInstance.result.then(function (value) {
-      if(value){
+      if (value) {
         $scope.params.skey = value;
         $scope.doSearch();
       }

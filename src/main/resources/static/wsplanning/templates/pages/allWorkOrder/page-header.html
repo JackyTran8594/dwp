@@ -4,14 +4,17 @@
         <div class="page-title">
             <h4><a href="/" class="btn-link"><i class="icon-arrow-left52 position-left"></i></a>
                 <span ng-switch="typeWO">
-                    <span ng-switch-when="unScheduledWO" class="text-semibold">{{ 'unscheduledWorkTitle' | translate }}</span>
-                    <span ng-switch-when="withSubcontractor" class="text-semibold">{{ 'withSubcontractorTitle' | translate }}</span>
+                    <span ng-switch-when="unScheduledWO"
+                        class="text-semibold">{{ 'unscheduledWorkTitle' | translate }}</span>
+                    <span ng-switch-when="withSubcontractor"
+                        class="text-semibold">{{ 'withSubcontractorTitle' | translate }}</span>
                     <span ng-switch-when="todayWO" class="text-semibold">{{ 'todayWorkTitle' | translate }}</span>
                     <span ng-switch-when="allWO" class="text-semibold">{{ 'allWorkTitle' | translate }}</span>
                     <span ng-switch-when="withMOT" class="text-semibold">{{ 'withMOTTitle' | translate }}</span>
                     <span ng-switch-when="withTire" class="text-semibold">{{ 'withTireChangeTitle' | translate }}</span>
                     <span ng-switch-when="withBO" class="text-semibold">{{ 'withBOTitle' | translate }}</span>
-                    <span ng-switch-when="postponedWO" class="text-semibold">{{ 'postponedWorkTitle' | translate }}</span>
+                    <span ng-switch-when="postponedWO"
+                        class="text-semibold">{{ 'postponedWorkTitle' | translate }}</span>
                     <span ng-switch-when="stamping" class="text-semibold">{{ 'stampingTitle' | translate }}</span>
                 </span>
             </h4>
@@ -37,7 +40,7 @@
 
         <div class="heading-elements">
             <div class="heading-btn-group">
-                <a class="btn btn-link btn-float has-text text-size-small" ng-click="newWorkorder()">
+                <!-- <a class="btn btn-link btn-float has-text text-size-small" ng-click="newWorkorder()">
                     <i class="icon-plus3 text-indigo-400"></i><span>{{ 'btnAddWO' | translate }}</span>
                 </a>
 
@@ -47,6 +50,13 @@
 
                 <a class="btn btn-link btn-float has-text text-size-small" ng-click="newBooking()">
                     <i class="icon-plus3 text-indigo-400"></i><span>{{ 'btnAddBook' | translate }}</span>
+                </a> -->
+
+
+
+                <a ng-if="item.value == 'true'" ng-repeat="item in lstbtnCommon | orderBy:'ordinalNumber'"
+                    ng-click="buttonType(item.name)" class="btn btn-link btn-float has-text text-size-small">
+                    <i ng-class="item.icon"></i><span>{{ item.text | translate }}</span>
                 </a>
 
                 <button class="btn btn-link btn-float has-text text-size-small btnRefresh" ng-click="onRefresh()">
