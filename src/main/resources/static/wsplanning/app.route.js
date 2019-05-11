@@ -214,7 +214,15 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
       templateUrl: '/wsplanning/templates/pages/workdetail/index.html',
       resolve: {
         WorkOrder: function (WorkOrderService, $stateParams) {
-          return WorkOrderService.detail($stateParams.id);
+          common.spinnerFirstLoad(true);
+          console.log("---app.main.workdetail--");
+          return WorkOrderService.detail($stateParams.id).then(
+              function (response) {
+                console.log("---app.main.workdetail done--");
+                common.spinnerFirstLoad(false);
+                return response;
+              }
+          );
         },
         lstMonth: function (WorkOrderService, $stateParams) {
           var EmployeeData = $("#EmployeeData").data("employee");

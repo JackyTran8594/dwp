@@ -1,4 +1,4 @@
-UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $location, $state, $filter, $uibModal, CommonServices, typeWO) {
+UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale, HttpService, $translate, $timeout,$location, $state, $filter, $uibModal, CommonServices, typeWO) {
   $scope.typeWO = typeWO;
 
   $scope.lstAllData = [];
@@ -218,7 +218,14 @@ UserWebApp.controller('AllWorkOrdersCtrl', function ($scope, $rootScope, $locale
 
   //function viewDetail
   $scope.viewDetail = function (item) {
-    $state.go('app.main.workdetail', { 'id': item.WorkOrderId, 'type': typeWO });
+    $timeout(function() {
+      $state.go('app.main.workdetail', {
+        'locale': $rootScope.lang,
+        'id': item.WorkOrderId,
+        'type': typeWO,
+        'tab': 'job'
+      });
+    });
   }
 
   // $scope.newWorkorder = function () {
