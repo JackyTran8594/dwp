@@ -1,0 +1,84 @@
+<!--SEARCH-->
+<div class="panel panel-white" ng-controller="NotificatioRecentReadCtrl">
+    <div class="panel-heading" ng-click="toogleRead()">
+        <h6 class="panel-title">
+            <i class="icon-search4 position-left" ng-click="toogleRead()"></i>
+            <small>{{ 'recentNotification' | translate }}</small>
+        </h6>
+        <div class="heading-elements">
+            <ul class="icons-list">
+                <li ng-click="toogleRead()"><a ng-class="{'rotate-180': isShow == true}"></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel-body" ng-show="isShow">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center col-xs-1">{{'timestamp' | translate }}</th>
+                        <th class="text-center col-xs-1">{{'from' | translate }}</th>
+                        <th class="text-center col-xs-1">{{'workOrder' | translate }}</th>
+                        <th class="text-center col-xs-1">{{'message' | translate }}</th>
+                        <!-- <th class="text-center col-xs-1">{{'action' | translate }}</th> -->
+                    </tr>
+                </thead>
+
+                <!--BODY-->
+                <tbody>
+                    <tr ng-repeat="item in Read track by $index">
+                        <td class="text-center">{{item.Created}}</td>
+                        <td class="text-center">{{item.CreatedBy}}</td>
+                        <td class="text-center">{{item.WorkOrderId}}</td>
+                        <td class="text-center">{{item.Note}}</td>
+                        <!-- <td class="text-center" style="width: 10%">
+                            <span>
+                                <a class="btn btn-primary"
+                                    ng-click="openReplyNotification()">{{'btnReply' | translate}}</a>
+                            </span>
+                        </td> -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="panel-footer text-right" style="padding-right: 25px;">
+
+            <!-- Paging elements -->
+            <form class="form-inline formPaging formValidate">
+                <div class="form-group">
+                    {{totalElements | number}} <span class="text-lowercase">{{ 'item' | translate }}</span>
+                </div>
+                <div class="form-group" style="border-left: 1px solid #ddd">
+                    <ul class="pagination-flat pagination-rounded" uib-pagination total-items="totalElements"
+                        items-per-page="limit" max-size="2" ng-model="page" boundary-links="true"
+                        boundary-link-numbers="true" force-ellipses="true" rotate="true" previous-text="&lsaquo;"
+                        next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+                </div>
+                <div class="form-group">
+                    <input type="number" name="page" ng-model="pageGo" placeholder="{{ 'page' | translate }}"
+                        class="form-control validatePositiveInteger" min="1" max="{{(totalElements / limit) | ceil}}"
+                        style="width: 55px">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-default">{{ 'go' | translate }}</button>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" ng-model="limit" ng-change="changeLimit()" convert-to-number>
+                        <option value="1">1</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                    </select>
+                    <span>{{ 'limit' | translate }}</span>
+                </div>
+            </form>
+            <!-- /paging element -->
+
+        </div>
+    </div>
+</div>
+<!--SEARCH-->

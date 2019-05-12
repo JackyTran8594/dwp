@@ -38,6 +38,7 @@
 </div>
 
 <div class="modal-footer">
-    <a class="btn btn-primary" ng-click="$ctrl.send(target)">{{ 'btnSend' | translate }}</a>
+    <a class="btn btn-primary" ng-if="type !== 'notification'" ng-click="$ctrl.send(target)">{{ 'btnSend' | translate }}</a>
+    <a class="btn btn-primary" ng-if="type == 'notification'" ng-click="$ctrl.save()">{{ 'btnSave' | translate }}</a>
     <a class="btn btn-default" ng-click="$ctrl.cancel()">{{ 'btnCancel' | translate }}</a>
 </div>

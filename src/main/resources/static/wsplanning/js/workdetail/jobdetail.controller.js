@@ -958,8 +958,8 @@ UserWebApp.controller('openPhotoCtrl', function ($scope, item, $uibModalInstance
 UserWebApp.controller('NotificationModalCtrl', function ($scope, data,
   $uibModalInstance, CommonServices, $rootScope, HttpService) {
 
+    
   var $ctrl = this;
-  console.log(data);
 
   $scope.employees = [];
 
@@ -1022,6 +1022,12 @@ UserWebApp.controller('NotificationModalCtrl', function ($scope, data,
   };
 
 
+  //using for reply notification
+  $ctrl.save = function () {
+    $uibModalInstance.close($scope.target);
+  }
+
+
 });
 
 UserWebApp.controller('NotificationTeamCtrl', function ($scope, data, WorkOrderService,
@@ -1066,12 +1072,9 @@ UserWebApp.controller('NotificationTeamCtrl', function ($scope, data, WorkOrderS
   function loadCombo() {
     common.spinner(true);
     CommonServices.getTeams().then(function (data) {
-      // var uniqueArray = data.map(o => o['SmanId']).
-      // map((o, i, final) => final.indexOf(o) === i && i).filter(o => data[o]).map(o => data[o]);
-      // $scope.employees = [];
+      
       $scope.teams = data;
-      // console.log(data);
-      // console.log(uniqueArray);
+     
     });
 
     WorkOrderService.getTextLine().then(function (res) {

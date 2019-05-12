@@ -141,6 +141,18 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
       }
     })
 
+    .state('app.main.notification', {
+      url: 'notification',
+      controller: "NotificationCtrl as $ctrl",
+      templateUrl: '/wsplanning/templates/pages/notification/index.html',
+      resolve: {
+        typeWO: function ($stateParams) {
+          return "notification";
+        }
+      }
+    })
+
+
 
     .state('app.main.calendarview', {
       url: 'calendarview',

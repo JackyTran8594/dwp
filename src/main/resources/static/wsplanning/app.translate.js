@@ -1,19 +1,19 @@
 var translationsEN = {
 
   unscheduledwork: "Unscheduled WorkOrders",
-  worksub:"Workorders with subcontractor",
-  todaywork:"Today workorders",
-  allwork:"All workorders",
-  workmot:"Workorders with MOT",
-  worktire:"Workorders with tires change",
-  workbo:"Workorders with BO parts",
-  postponedwork:"Postponed workorders",
-  tasklist:"Task list",
-  calendarview:"Calendar view",
-  stamping:"Stamping",
-  offer:"Offers",
-  replacementvehicle:"Replacement vehicle planning",
-  callcenter:"Call Center",
+  worksub: "Workorders with subcontractor",
+  todaywork: "Today workorders",
+  allwork: "All workorders",
+  workmot: "Workorders with MOT",
+  worktire: "Workorders with tires change",
+  workbo: "Workorders with BO parts",
+  postponedwork: "Postponed workorders",
+  tasklist: "Task list",
+  calendarview: "Calendar view",
+  stamping: "Stamping",
+  offer: "Offers",
+  replacementvehicle: "Replacement vehicle planning",
+  callcenter: "Call Center",
 
 
   workOrderTitle: "WorkOrder Management",
@@ -32,6 +32,9 @@ var translationsEN = {
   replacementVehicleTitle: " Replacement Vehicle Planning Management",
   newWOTitle: " New Workorder",
   stampingTitle: "Stamping",
+  // new add - 12052019
+  notificationTitle: "Notification",
+  //
 
   //breadcrumb
   // breadcrumbHome: "H's ome",
@@ -69,7 +72,9 @@ var translationsEN = {
   breadcrumbNewOffer: "New Offer",
   breadcrumbNewBooking: "New Booking",
   breadcrumbNewStamp: "Stamping",
-
+  // new add - 12052019
+  breadcrumbNotification: "Notification",
+  //
 
   //common
   btnAdd: "Add",
@@ -95,7 +100,7 @@ var translationsEN = {
   search: "Search",
   pleaseEnter: "Please enter here",
   btnClear: "Clear",
-  btnSend:"Send",
+  btnSend: "Send",
 
   //Confirm delete
   confirmDeleteWorkOder: "Are you want to delete this WorkOder?",
@@ -271,7 +276,7 @@ var translationsEN = {
   Text: "Text",
   createTask: "Create new task",
 
-  
+
   //the additional text
   Name: "Name",
   StampToWorkorder: "Stamp To Workorder",
@@ -282,48 +287,56 @@ var translationsEN = {
   Action: "Action",
   Pick: "Pick",
 
-  ItemNo:"Item No",
-  Quantity:"Quantity",
+  ItemNo: "Item No",
+  Quantity: "Quantity",
 
-  LicenseNo:"License No",
-  VIN:"VIN",
-  Model:"Model",
-  StampingCode:"Stamping Codes",
-  NA:"N/A",
-  No:"No.",
-  CodeName:"Code - Name",
-  Code:"Code",
-  Job_No:"Job No",
-  EstimatedTime:"Estimated Time",
-  Complaint:"Complaint",
-  Diagnotisc:"Diagnotisc",
-  Solution:"Solution",
+  LicenseNo: "License No",
+  VIN: "VIN",
+  Model: "Model",
+  StampingCode: "Stamping Codes",
+  NA: "N/A",
+  No: "No.",
+  CodeName: "Code - Name",
+  Code: "Code",
+  Job_No: "Job No",
+  EstimatedTime: "Estimated Time",
+  Complaint: "Complaint",
+  Diagnotisc: "Diagnotisc",
+  Solution: "Solution",
   ChargeCategory: "Charge Category",
-  Template_1:"Template 1",
-  Template_2:"Template 2",
-  Reset:"Reset",
-  TakeScreenshot:"Take Screenshot"
+  Template_1: "Template 1",
+  Template_2: "Template 2",
+  Reset: "Reset",
+  TakeScreenshot: "Take Screenshot",
 
-  
+  //Notification-page
+  recentNotification: "Recent Notification",
+  unreadNotification: "UnRead Notification",
+  btnReply: "Reply",
+  timestamp: "Timestamp",
+  from: "From",
+  workOrder: "Workorder",
+  message: "Message",
+  action: "Action"
 };
 
 
 var translationsDE = {
 
   unscheduledwork: "Ungeplante Aufträge",
-  worksub:"Aufträge mit Subunternehmer",
-  todaywork:"Heutige Aufträge",
-  allwork:"Alle Aufträge",
-  workmot:"Aufträge mit MFK",
-  worktire:"Aufträge mit Reifenwechsel",
-  workbo:"Aufträge mit Rückstandsteilen",
-  postponedwork:"Aufgeschobene Aufträge",
-  tasklist:"Task-Liste",
-  calendarview:"Kalenderansicht",
-  stamping:"Stempelung",
-  offer:"Offerten",
-  replacementvehicle:"Ersatzfahrzeug Planung",
-  callcenter:"Anrufverwaltung",
+  worksub: "Aufträge mit Subunternehmer",
+  todaywork: "Heutige Aufträge",
+  allwork: "Alle Aufträge",
+  workmot: "Aufträge mit MFK",
+  worktire: "Aufträge mit Reifenwechsel",
+  workbo: "Aufträge mit Rückstandsteilen",
+  postponedwork: "Aufgeschobene Aufträge",
+  tasklist: "Task-Liste",
+  calendarview: "Kalenderansicht",
+  stamping: "Stempelung",
+  offer: "Offerten",
+  replacementvehicle: "Ersatzfahrzeug Planung",
+  callcenter: "Anrufverwaltung",
 
 
   workOrderTitle: "Funktion - Aufträge",
@@ -404,7 +417,7 @@ var translationsDE = {
   search: "Suchen",
   pleaseEnter: "Bitte hier eingeben",
   btnClear: "Löschen",
-  btnSend:"Senden",
+  btnSend: "Senden",
 
   //Confirm delete
   confirmDeleteWorkOder: "Möchten Sie diesen Auftrag löschen?",
@@ -565,40 +578,40 @@ var translationsDE = {
   db: "Db",
   CustomerName: "Kundenname",
   Email: "Email",
-    PostalCode: "PLZ",
-    Make: "Marke",
-    LicenseNo: "LizenzNo",
-    NextMOTDate: "Nächstes MFK Datum",
-    WarrantyInfo: "Garantie Info",
-    site: "Standort",
-    subject: "Betreff",
-    CustomerPhone: "Kunden Tel",
-    // SeriNo: "Serie No",
-    SeriNo: "VIN", 
-    Employee: "Mitarbeiter",
-    TimeSchedule: "Zeitplan",
-    IsClose: "Ist Geschlossen",
-    Text: "Text",
-    createTask: "Erstellen neuer Task",
+  PostalCode: "PLZ",
+  Make: "Marke",
+  LicenseNo: "LizenzNo",
+  NextMOTDate: "Nächstes MFK Datum",
+  WarrantyInfo: "Garantie Info",
+  site: "Standort",
+  subject: "Betreff",
+  CustomerPhone: "Kunden Tel",
+  // SeriNo: "Serie No",
+  SeriNo: "VIN",
+  Employee: "Mitarbeiter",
+  TimeSchedule: "Zeitplan",
+  IsClose: "Ist Geschlossen",
+  Text: "Text",
+  createTask: "Erstellen neuer Task",
 
 };
 
 var translationsFR = {
 
   unscheduledwork: "Ordres non planifiés",
-  worksub:"Ordres avec sous-traitants",
-  todaywork:"Ordres d'aujourd'hui",
-  allwork:"Toutes Ordres",
-  workmot:"Ordres avec bureau d'automobile",
-  worktire:"Ordres changement de pneus",
-  workbo:"Ordres commandes en suspens",
-  postponedwork:"Ordres reportées",
-  tasklist:"Liste de tâches",
-  calendarview:"Calendrier",
-  stamping:"Timbrage",
-  offer:"Devis",
-  replacementvehicle:"Planification véhicule courtoisie",
-  callcenter:"Gestion des appels",
+  worksub: "Ordres avec sous-traitants",
+  todaywork: "Ordres d'aujourd'hui",
+  allwork: "Toutes Ordres",
+  workmot: "Ordres avec bureau d'automobile",
+  worktire: "Ordres changement de pneus",
+  workbo: "Ordres commandes en suspens",
+  postponedwork: "Ordres reportées",
+  tasklist: "Liste de tâches",
+  calendarview: "Calendrier",
+  stamping: "Timbrage",
+  offer: "Devis",
+  replacementvehicle: "Planification véhicule courtoisie",
+  callcenter: "Gestion des appels",
 
 
   workOrderTitle: "Gestion des ordres",
@@ -679,7 +692,7 @@ var translationsFR = {
   search: "Recherche",
   pleaseEnter: "Veuillez entrer ici",
   btnClear: "Effacer",
-  btnSend:"Envoyer",
+  btnSend: "Envoyer",
 
   //Confirm delete
   confirmDeleteWorkOder: "Voulez-vous supprimer cet ordre?",
@@ -849,7 +862,7 @@ var translationsFR = {
   subject: "Sujet",
   CustomerPhone: "Tél. client",
   // SeriNo: "Série No",
-  SeriNo: "VIN", 
+  SeriNo: "VIN",
   Employee: "Employé",
   TimeSchedule: "Calendrier de travail",
   IsClose: "Est fermée",
@@ -860,19 +873,19 @@ var translationsFR = {
 var translationsIT = {
 
   unscheduledwork: "Odl non pianificati",
-  worksub:"Odl con i subappaltatori",
-  todaywork:"Odl di oggi",
-  allwork:"Tutti gli Odl",
-  workmot:"Odl con collaudo",
-  worktire:"Odl con cambio gomme",
-  workbo:"Odl con ordini pendenti",
-  postponedwork:"Odl posticipati",
-  tasklist:"Lista dei compiti",
-  calendarview:"Calendario",
-  stamping:"Timbratura",
-  offer:"Preventivi",
-  replacementvehicle:"Pianificazione veicoli cortesia",
-  callcenter:"Gestione telefonate",
+  worksub: "Odl con i subappaltatori",
+  todaywork: "Odl di oggi",
+  allwork: "Tutti gli Odl",
+  workmot: "Odl con collaudo",
+  worktire: "Odl con cambio gomme",
+  workbo: "Odl con ordini pendenti",
+  postponedwork: "Odl posticipati",
+  tasklist: "Lista dei compiti",
+  calendarview: "Calendario",
+  stamping: "Timbratura",
+  offer: "Preventivi",
+  replacementvehicle: "Pianificazione veicoli cortesia",
+  callcenter: "Gestione telefonate",
 
 
   workOrderTitle: "Gestione ordini di lavoro",
@@ -953,7 +966,7 @@ var translationsIT = {
   search: "Ricerca",
   pleaseEnter: "Inserisci qui",
   btnClear: "Sgombrare",
-  btnSend:"Inviare",
+  btnSend: "Inviare",
 
   //Confirm delete
   confirmDeleteWorkOder: "Vuoi cancellare questo Odl?",
@@ -1123,7 +1136,7 @@ var translationsIT = {
   subject: "Oggetto",
   CustomerPhone: "Telefono cliente",
   // SeriNo: "Seriale-No",
-  SeriNo: "VIN", 
+  SeriNo: "VIN",
   Employee: "Dipendente",
   TimeSchedule: "Orario lavoro",
   IsClose: "È chiuso",
@@ -1318,7 +1331,7 @@ var translationsVI = {
   subject: "Subject",
   CustomerPhone: "Customer Phone",
   // SeriNo: "SeriNo",
-  SeriNo: "VIN", 
+  SeriNo: "VIN",
   Employee: "Employee",
   TimeSchedule: "TimeSchedule",
   IsClose: "IsClose",
@@ -1329,19 +1342,19 @@ var translationsVI = {
 var translationsHU = {
 
   unscheduledwork: "Nem előjegyzett munkalapok",
-  worksub:"Munkalapok alvállalkozóval",
-  todaywork:"Mai nap munkalapok",
-  allwork:"Minden munkalap",
-  workmot:"Munkalapok műszaki vizsgával",
-  worktire:"Munkalapok gumi cserével",
-  workbo:"Munkalapok kiadatlan alkatrésszel",
-  postponedwork:"Átütemezett foglalások",
-  tasklist:"Feladat lista",
-  calendarview:"Naptár",
-  stamping:"Blokkolás",
-  offer:"Ajánlatok",
-  replacementvehicle:"Csere gépjárművek",
-  callcenter:"Telefon központ",
+  worksub: "Munkalapok alvállalkozóval",
+  todaywork: "Mai nap munkalapok",
+  allwork: "Minden munkalap",
+  workmot: "Munkalapok műszaki vizsgával",
+  worktire: "Munkalapok gumi cserével",
+  workbo: "Munkalapok kiadatlan alkatrésszel",
+  postponedwork: "Átütemezett foglalások",
+  tasklist: "Feladat lista",
+  calendarview: "Naptár",
+  stamping: "Blokkolás",
+  offer: "Ajánlatok",
+  replacementvehicle: "Csere gépjárművek",
+  callcenter: "Telefon központ",
 
 
   workOrderTitle: "DWP Management",
@@ -1422,7 +1435,7 @@ var translationsHU = {
   search: "Keresés",
   pleaseEnter: "Please enter here",
   btnClear: "Ürítés",
-  btnSend:"Küldés",
+  btnSend: "Küldés",
 
   //Confirm delete
   confirmDeleteWorkOder: "Munkalap törlése?",

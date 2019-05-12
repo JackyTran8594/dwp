@@ -127,6 +127,23 @@ UserWebApp.service('WorkOrderService', function ($http, $q) {
     });
   }
 
+  WorkOrderService.getNotificationType = function (data) {
+    return $http({
+      method: 'POST',
+      url: '/notification/getNotificationType',
+      data: data
+    });
+  }
+
+  WorkOrderService.getCountNotificationType = function (data) {
+    return $http({
+      method: 'POST',
+      url: '/notification/getCountNotificationType',
+      data: data
+    });
+  }
+
+
   WorkOrderService.getTextLine = function () {
     return $http({
       method: 'GET',

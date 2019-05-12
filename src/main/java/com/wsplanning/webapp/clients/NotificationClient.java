@@ -75,4 +75,19 @@ public class NotificationClient {
     return response.getBody();
   }
 
+  public String getCountNotificationType(Map<String, String> params) {
+    String notificationType = params.get("notificationType");
+    String smanId = params.get("smanId");
+    String url =  String.format("%s?SmanId=%s&bGetCountOnly=true&NotificationType=%s", this.endpointUrl, smanId, notificationType);
+    return restTemplate.getForObject(url, String.class);
+  }
+
+  public String getNotificationType(Map<String, String> params) {
+    String notificationType = params.get("notificationType");
+    String smanId = params.get("smanId");
+    String url =  String.format("%s?SmanId=%s&NotificationType=%s", this.endpointUrl, smanId, notificationType);
+    return restTemplate.getForObject(url, String.class);
+  }
+
+
 }

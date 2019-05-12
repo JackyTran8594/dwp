@@ -51,4 +51,24 @@ public class NotificationController extends BaseController {
     }
   }
 
+  @PostMapping("/notification/getCountNotificationType")
+  public ResponseEntity getCountNotificationType(@RequestBody Map<String, String> params) {
+    try {
+      String rtn = notificationClient.getCountNotificationType(params);
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception ex) {
+      return parseException(ex);
+    }
+  }
+
+  @PostMapping("/notification/getNotificationType")
+  public ResponseEntity getNotificationType(@RequestBody Map<String, String> params) {
+    try {
+      String rtn = notificationClient.getNotificationType(params);
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception ex) {
+      return parseException(ex);
+    }
+  }
+
 }
