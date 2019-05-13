@@ -259,11 +259,14 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
 
     //Gen CSS cho cell (day in month)
     $scope.cellModifier = function (cell) {
+        cell.id = "cell_" + cell.date._d.getDate() + "_" + cell.date._d.getMonth();
+        // console.log(cell);
+        // console.log($scope.lstMonth);
         // console.log("----cellModifier----------" + $scope.viewDate.getMonth() + " - " + $scope.viewDate.getDate());
-        if (cell.date._d.getMonth() == $scope.viewDate.getMonth() && cell.date._d.getDate() == $scope.viewDate.getDate()) {
-            cell.cssClass = 'cal-day-selected';
-            return;
-        }
+        // if (cell.date._d.getMonth() == $scope.viewDate.getMonth() && cell.date._d.getDate() == $scope.viewDate.getDate()) {
+        //     cell.cssClass = 'cal-day-selected';
+        //     return;
+        // }
 
         var length = $scope.lstMonth.length;
         var WorkDay = null;
@@ -369,11 +372,11 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
             if (preDate.getDate() <= 8) {
                 $timeout(function () {
                     $(".day_" + preDate.getDate()).first().click();
-                }, 100);
+                }, 10000);
             } else {
                 $timeout(function () {
                     $(".day_" + preDate.getDate()).last().click();
-                }, 100);
+                }, 10000);
             }
         }
     }
@@ -381,10 +384,51 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
     $scope.today = function () {
         $scope.viewDate = new Date();
         $scope.viewDate.setHours(0, 0, 0, 0);
-        getCalendarMonth();
+
+        common.spinner(true);
+        var endDate = moment($scope.viewDate).add(1, 'M');
+
+        var params = {
+            "DayFrom": formatDateToApi(moment($scope.viewDate).startOf('month').toDate()),
+            "DayTo": formatDateToApi(moment(endDate).startOf('month').toDate()),
+            "DeptId": $scope.DeptId,
+            "ShiftId": $scope.ShiftId,
+        };
+        $scope.lstMonth = [];
+        HttpService.postData('/planning', params).then(function (response) {
+            $scope.lstMonth = response;
+            common.spinner(false);
+
+            $timeout(function () {
+                $("#cell_" + $scope.viewDate.getDate() + "_" + $scope.viewDate.getMonth()).click();
+            }, 100);
+
+
+        }, function error(response) {
+            $scope.lstMonth = [];
+            console.log(response);
+            common.spinner(false);
+
+            $timeout(function () {
+                $("#cell_" + $scope.viewDate.getDate() + "_" + $scope.viewDate.getMonth()).click();
+            }, 100);
+
+        });
+
+
     }
 
     $scope.next = function () {
+        var tmpDate = moment($scope.viewDate).endOf('month').toDate();
+        tmpDate = moment(tmpDate).add('days', 1).toDate();
+
+        $timeout(function () {
+            getCalendarMonth2(tmpDate);
+        });
+
+        console.log("--------");
+
+
         // var oldMonth = $scope.viewDate.getMonth();
         var lastDateOfMonth = moment($scope.viewDate).endOf('month').toDate().getDate();
 
@@ -419,18 +463,84 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
         var preDate = moment($scope.viewDate).add('month', -1).toDate();
         preDate.setDate(1);
         $scope.viewDate = preDate;
-        $timeout(function () {
-            $(".day_1").first().click();
-        }, 100);
+
+
+        common.spinner(true);
+        var endDate = moment(preDate).add(1, 'M');
+
+        var params = {
+            "DayFrom": formatDateToApi(moment(preDate).startOf('month').toDate()),
+            "DayTo": formatDateToApi(moment(endDate).startOf('month').toDate()),
+            "DeptId": $scope.DeptId,
+            "ShiftId": $scope.ShiftId,
+        };
+        $scope.lstMonth = [];
+        HttpService.postData('/planning', params).then(function (response) {
+            $scope.lstMonth = response;
+            common.spinner(false);
+
+            $timeout(function () {
+                $("#cell_1_" + preDate.getMonth()).click();
+                // $(".day_1").first().click();
+            }, 100);
+
+
+        }, function error(response) {
+            $scope.lstMonth = [];
+            console.log(response);
+            common.spinner(false);
+
+            $timeout(function () {
+                $("#cell_1_" + preDate.getMonth()).click();
+                // $(".day_1").first().click();
+            }, 100);
+
+        });
+
+
     }
 
     $scope.nextMonth = function () {
         var nextDate = moment($scope.viewDate).add('month', 1).toDate();
         nextDate.setDate(1);
+
         $scope.viewDate = nextDate;
-        $timeout(function () {
-            $(".day_1").first().click();
-        }, 100);
+
+
+        common.spinner(true);
+        var endDate = moment(nextDate).add(1, 'M');
+
+        var params = {
+            "DayFrom": formatDateToApi(moment(nextDate).startOf('month').toDate()),
+            "DayTo": formatDateToApi(moment(endDate).startOf('month').toDate()),
+            "DeptId": $scope.DeptId,
+            "ShiftId": $scope.ShiftId,
+        };
+        $scope.lstMonth = [];
+        HttpService.postData('/planning', params).then(function (response) {
+            $scope.lstMonth = response;
+            common.spinner(false);
+
+            $timeout(function () {
+                $("#cell_1_" + nextDate.getMonth()).click();
+                // $(".day_1").first().click();
+            }, 100);
+
+
+        }, function error(response) {
+            $scope.lstMonth = [];
+            console.log(response);
+            common.spinner(false);
+
+            $timeout(function () {
+                $("#cell_1_" + nextDate.getMonth()).click();
+                // $(".day_1").first().click();
+            }, 100);
+
+        });
+
+
+
     }
 
 

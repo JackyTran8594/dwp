@@ -123,7 +123,7 @@
 
 <script id="customMonthCell.html" type="text/ng-template">
     <div
-            ng-click="vm.dayClicked(day, true, $event)"
+            ng-click="vm.dayClicked(day, true, $event)" id="{{day.id}}"
             class="cal-month-day {{ day.cssClass }} day_{{day.label}}"
             ng-class="{
     'cal-day-outmonth': !day.inMonth,
