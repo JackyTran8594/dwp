@@ -281,9 +281,9 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
                 // } else
                 if (WorkDay.FreeCapacity >= 75) {
                     cell.cssClass = 'cap75';
-                } else if (WorkDay.FreeCapacity >= 50) {
+                } else if (WorkDay.FreeCapacity > 25 && WorkDay.FreeCapacity < 75) {
                     cell.cssClass = 'cap50';
-                } else if (WorkDay.FreeCapacity >= 25) {
+                } else if (WorkDay.FreeCapacity <= 25) {
                     cell.cssClass = 'cap25';
                 }
                 // cell.label = '-' + cell.label + '-' + WorkDay.FreeCapacity + cell.cssClass;
