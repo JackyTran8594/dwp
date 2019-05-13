@@ -173,16 +173,16 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
       }
     })
 
-    // .state('app.main.offer', {
-    //   url: 'offer',
-    //   controller: "AllWorkOrdersCtrl as $ctrl",
-    //   templateUrl: '/wsplanning/templates/pages/allWorkOrder/index.html',
-    //   resolve: {
-    //     typeWO: function ($stateParams) {
-    //       return "offers";
-    //     }
-    //   }
-    // })
+    .state('app.main.offer', {
+      url: 'offer',
+      controller: "AllWorkOrdersCtrl as $ctrl",
+      templateUrl: '/wsplanning/templates/pages/allWorkOrder/index.html',
+      resolve: {
+        typeWO: function ($stateParams) {
+          return "offers";
+        }
+      }
+    })
 
 
     .state('app.main.replacementvehicle', {
@@ -251,7 +251,7 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
       }
     })
 
-    .state('app.main.offer', {
+    .state('app.main.newoffer', {
       url: 'workdetail/offer/:type/:action/',
       controller: "WorkDetailCtrl as $ctrl",
       templateUrl: '/wsplanning/templates/pages/workdetail/index.html',

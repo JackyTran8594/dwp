@@ -645,9 +645,10 @@ table td {
   padding-bottom: 5px;
 }
 
-/* video {
-    height:     
-} */
+.btn-notification-block {
+  display: inline-flexbox;
+  padding: 5px 5px;
+}
 
 .breadcrumb.breadcrumb-caret > li{
   font-weight: 700;

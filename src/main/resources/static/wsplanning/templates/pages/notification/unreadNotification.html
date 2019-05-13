@@ -31,12 +31,14 @@
                         <td class="text-center">{{item.Created}}</td>
                         <td class="text-center">{{item.CreatedBy}}</td>
                         <td class="text-center">{{item.WorkOrderId}}</td>
-                        <td class="text-center">{{item.Note}}</td>
-                        <td class="text-center" style="width: 10%">
-                            <span>
-                                <a class="btn btn-primary"
-                                    ng-click="openReplyNotification($index)">{{'btnReply' | translate}}</a>
-                            </span>
+                        <td class="">{{item.Note}}</td>
+                        <td class="text-center">
+                            <div class="btn-group">
+                                <button class="btn btn-primary" style="left: 18px; top: 0px;" type="button"
+                                    ng-click="openReplyNotification($index)">{{'btnReply' | translate}}</button>
+                                <button class="btn btn-primary" style="left: 100px; top: -41px;" type="button" ng-click="markRead(item, $index)" data-popup="tooltip"
+                                    title="Mark Read"><i class="icon-mail-read"></i></button>
+                            </div>
                         </td>
                     </tr>
                 </tbody>

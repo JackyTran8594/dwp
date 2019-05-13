@@ -8,37 +8,47 @@
 
 <div class="modal-body">
 
-        <div class="well well-sm">
+    <div class="well well-sm">
 
 
-            <div class="row">
-                <div class="form-group">
-                    <label class="control-label col-lg-2">{{'employee' | translate}}</label>
-                    <div class="col-lg-10">
-                        <select class="form-control" ng-model="target.employee"
-                            ng-options="item.SmanId as item.Name for item in employees" ng-change="$ctrl.changeEmployee()">
-                        </select>
-                    </div>
+        <div ng-if="type !== 'notification'" class="row">
+            <div class="form-group">
+                <label class="control-label col-lg-2">{{'employee' | translate}}</label>
+                <div class="col-lg-10">
+                    <select class="form-control" ng-model="target.employee"
+                        ng-options="item.SmanId as item.Name for item in employees" ng-change="$ctrl.changeEmployee()">
+                    </select>
                 </div>
             </div>
+        </div>
 
-            <div class="row">
-                <div class="form-group">
-                    <label class="control-label col-lg-2">{{'message' | translate}}</label>
-                    <div class="col-lg-10">
-                        <textarea type="text" class="form-control" ng-model="target.text"></textarea>
-                    </div>
+        <div ng-if="type === 'notification'" class="row">
+            <div class="form-group">
+                <label class="control-label col-lg-2">{{'employee' | translate}}</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" ng-model="target.employee" readonly/>
                 </div>
-
             </div>
+        </div>
 
+        <div class="row">
+            <div class="form-group">
+                <label class="control-label col-lg-2">{{'message' | translate}}</label>
+                <div class="col-lg-10">
+                    <textarea type="text" class="form-control" ng-model="target.text"></textarea>
+                </div>
+            </div>
 
         </div>
+
+
+    </div>
 
 </div>
 
 <div class="modal-footer">
-    <a class="btn btn-primary" ng-if="type !== 'notification'" ng-click="$ctrl.send(target)">{{ 'btnSend' | translate }}</a>
-    <a class="btn btn-primary" ng-if="type == 'notification'" ng-click="$ctrl.save()">{{ 'btnSave' | translate }}</a>
+    <a class="btn btn-primary" ng-if="type !== 'notification'"
+        ng-click="$ctrl.send(target)">{{ 'btnSend' | translate }}</a>
+    <a class="btn btn-primary" ng-if="type === 'notification'" ng-click="$ctrl.save()">{{ 'btnSave' | translate }}</a>
     <a class="btn btn-default" ng-click="$ctrl.cancel()">{{ 'btnCancel' | translate }}</a>
 </div>

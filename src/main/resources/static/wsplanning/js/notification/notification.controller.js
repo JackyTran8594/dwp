@@ -14,10 +14,7 @@ UserWebApp.controller('NotificationCtrl', function ($scope, $rootScope, $locale,
   };
 
 
-  var EmployeeData = $("#EmployeeData").data("employee");
-  if (EmployeeData) {
-    $scope.SmanId = EmployeeData.SmanId;
-  }
+  $scope.EmployeeData = $("#EmployeeData").data("employee");
 
   $scope.reload = function () {
     $state.reload();
@@ -33,7 +30,8 @@ UserWebApp.controller('NotificationUnReadCtrl', function ($scope, WorkOrderServi
   console.log(typeWO);
   $scope.CountUnRead = "";
   $scope.UnRead = [];
-  var SmanId = $scope.$parent.SmanId;
+  var EmployeeData = $scope.$parent.EmployeeData;
+  // console.log(EmployeeData);
 
   $scope.isShow = true;
 
@@ -103,7 +101,7 @@ UserWebApp.controller('NotificationUnReadCtrl', function ($scope, WorkOrderServi
   function loadData(count) {
     common.spinner(true);
     var dataUnRead = {
-      smanId: SmanId,
+      smanId: EmployeeData.SmanId,
       notificationType: "UnRead"
     }
     if (count) {
@@ -130,6 +128,18 @@ UserWebApp.controller('NotificationUnReadCtrl', function ($scope, WorkOrderServi
     });
   }
 
+  $scope.markRead = function (item, index) {
+    WorkOrderService.markNotification(item).then(function (res) {
+      if (EmployeeData) {
+        SmanId = EmployeeData.SmanId;
+      }
+      loadData(true);
+      $state.reload();
+    }, function (err) {
+      console.log(err);
+    });
+  };
+
   var $ctrl = this;
   $ctrl.animationsEnabled = true;
 
@@ -141,27 +151,30 @@ UserWebApp.controller('NotificationUnReadCtrl', function ($scope, WorkOrderServi
       backdrop: 'static',
       controllerAs: '$ctrl',
       size: "lg",
+      resolve: {
+        item: EmployeeData
+      }
     });
 
     modalInstance.result.then(function (selectedItem) {
       console.log(selectedItem);
       $scope.UnRead[id].Note = $scope.UnRead[id].Note + "\n" + selectedItem.text;
-      
-      // var obj = object();
-      // obj.Note = $scope.UnRead[id].Note;
-      // obj.SmanId = SmanId;
-      // obj.WorkOrderId = $scope.UnRead[id].WorkOrderId;
 
-      // HttpService.postData('/site/postNotification', obj).then(function (response) {
-      //   console.log(response);
-      //   common.spinner(false);
-      // }, function error(response) {
-      //   console.log(response);
-      //   common.spinner(false);
-      // });
+      var obj = object();
+      obj.Note = $scope.UnRead[id].Note;
+      obj.SmanId = selectedItem.smanId;
+      obj.WorkOrderId = $scope.UnRead[id].WorkOrderId;
 
-      // $rootScope.$emit('message', { "item": "" })
-      
+      HttpService.postData('/site/postNotification', obj).then(function (response) {
+        console.log(response);
+        common.spinner(false);
+      }, function error(response) {
+        console.log(response);
+        common.spinner(false);
+      });
+
+      $rootScope.$emit('message', { "item": "" })
+
     }, function () {
       console.log('Modal dismissed at: ' + new Date());
     });
@@ -174,7 +187,7 @@ UserWebApp.controller('NotificatioRecentReadCtrl', function ($scope, WorkOrderSe
   var typeWO = $scope.$parent.typeWO;
   $scope.CountRead = "";
   $scope.Read = [];
-  var SmanId = $scope.$parent.SmanId;
+  var EmployeeData = $scope.$parent.EmployeeData;
 
   $scope.isShow = true;
 
@@ -227,7 +240,7 @@ UserWebApp.controller('NotificatioRecentReadCtrl', function ($scope, WorkOrderSe
   function loadData(count) {
     common.spinner(true);
     var dataRead = {
-      smanId: SmanId,
+      smanId: EmployeeData.SmanId,
       notificationType: "Read"
     }
     if (count) {
@@ -255,24 +268,16 @@ UserWebApp.controller('NotificatioRecentReadCtrl', function ($scope, WorkOrderSe
 });
 
 UserWebApp.controller('ReplyNotificationCtrl', function ($scope,
-  $uibModalInstance, CommonServices, $rootScope, HttpService) {
+  $uibModalInstance, item, CommonServices, $rootScope, HttpService) {
 
   $scope.type = "notification";
   var $ctrl = this;
+  // console.log(item);
 
-  $scope.employees = [];
-
-  function loadCombo() {
-    CommonServices.getEmployees().then(function (data) {
-      var uniqueArray = data.map(o => o['SmanId']).
-        map((o, i, final) => final.indexOf(o) === i && i).filter(o => data[o]).map(o => data[o]);
-      $scope.employees = uniqueArray;
-    });
+  $scope.target = {
+    'employee': item.Name,
+    'smanId': item.SmanId
   }
-
-  loadCombo();
-
-  $scope.target = {}
 
   $ctrl.cancel = function () {
     $uibModalInstance.dismiss('cancel');
