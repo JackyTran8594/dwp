@@ -245,7 +245,9 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
         console.log("---timespanClicked: " + date + " " + $scope.viewDate.getMonth() + " - " + date.getMonth());
         if ($scope.viewDate.getMonth() != date.getMonth()) {
             $scope.viewDate = date;
-            getCalendarMonth();
+            console.log($scope.viewDate);
+            gotoDateMonth(date);
+            // getCalendarMonth();
         } else {
             $scope.viewDate = date;
             getCalendarWeek($scope.viewDate);
@@ -359,6 +361,38 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
         });
     }
 
+    function gotoDateMonth(goDate){
+        common.spinner(true);
+        var endDate = moment(goDate).add(1, 'M');
+
+        var params = {
+            "DayFrom": formatDateToApi(moment(goDate).startOf('month').toDate()),
+            "DayTo": formatDateToApi(moment(endDate).startOf('month').toDate()),
+            "DeptId": $scope.DeptId,
+            "ShiftId": $scope.ShiftId,
+        };
+        $scope.lstMonth = [];
+        HttpService.postData('/planning', params).then(function (response) {
+            $scope.lstMonth = response;
+            common.spinner(false);
+
+            $timeout(function () {
+                $("#cell_" + goDate.getDate() + "_" + goDate.getMonth()).click();
+            }, 100);
+
+
+        }, function error(response) {
+            $scope.lstMonth = [];
+            console.log(response);
+            common.spinner(false);
+
+            $timeout(function () {
+                $("#cell_" + goDate.getDate() + "_" + goDate.getMonth()).click();
+            }, 100);
+
+        });
+    }
+
     //Action
     $scope.previous = function () {
         if ($scope.viewDate.getDate() == 1) {
@@ -385,36 +419,7 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
         $scope.viewDate = new Date();
         $scope.viewDate.setHours(0, 0, 0, 0);
 
-        common.spinner(true);
-        var endDate = moment($scope.viewDate).add(1, 'M');
-
-        var params = {
-            "DayFrom": formatDateToApi(moment($scope.viewDate).startOf('month').toDate()),
-            "DayTo": formatDateToApi(moment(endDate).startOf('month').toDate()),
-            "DeptId": $scope.DeptId,
-            "ShiftId": $scope.ShiftId,
-        };
-        $scope.lstMonth = [];
-        HttpService.postData('/planning', params).then(function (response) {
-            $scope.lstMonth = response;
-            common.spinner(false);
-
-            $timeout(function () {
-                $("#cell_" + $scope.viewDate.getDate() + "_" + $scope.viewDate.getMonth()).click();
-            }, 100);
-
-
-        }, function error(response) {
-            $scope.lstMonth = [];
-            console.log(response);
-            common.spinner(false);
-
-            $timeout(function () {
-                $("#cell_" + $scope.viewDate.getDate() + "_" + $scope.viewDate.getMonth()).click();
-            }, 100);
-
-        });
-
+        gotoDateMonth($scope.viewDate);
 
     }
 
@@ -464,39 +469,7 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
         preDate.setDate(1);
         $scope.viewDate = preDate;
 
-
-        common.spinner(true);
-        var endDate = moment(preDate).add(1, 'M');
-
-        var params = {
-            "DayFrom": formatDateToApi(moment(preDate).startOf('month').toDate()),
-            "DayTo": formatDateToApi(moment(endDate).startOf('month').toDate()),
-            "DeptId": $scope.DeptId,
-            "ShiftId": $scope.ShiftId,
-        };
-        $scope.lstMonth = [];
-        HttpService.postData('/planning', params).then(function (response) {
-            $scope.lstMonth = response;
-            common.spinner(false);
-
-            $timeout(function () {
-                $("#cell_1_" + preDate.getMonth()).click();
-                // $(".day_1").first().click();
-            }, 100);
-
-
-        }, function error(response) {
-            $scope.lstMonth = [];
-            console.log(response);
-            common.spinner(false);
-
-            $timeout(function () {
-                $("#cell_1_" + preDate.getMonth()).click();
-                // $(".day_1").first().click();
-            }, 100);
-
-        });
-
+        gotoDateMonth($scope.viewDate);
 
     }
 
@@ -506,40 +479,7 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
 
         $scope.viewDate = nextDate;
 
-
-        common.spinner(true);
-        var endDate = moment(nextDate).add(1, 'M');
-
-        var params = {
-            "DayFrom": formatDateToApi(moment(nextDate).startOf('month').toDate()),
-            "DayTo": formatDateToApi(moment(endDate).startOf('month').toDate()),
-            "DeptId": $scope.DeptId,
-            "ShiftId": $scope.ShiftId,
-        };
-        $scope.lstMonth = [];
-        HttpService.postData('/planning', params).then(function (response) {
-            $scope.lstMonth = response;
-            common.spinner(false);
-
-            $timeout(function () {
-                $("#cell_1_" + nextDate.getMonth()).click();
-                // $(".day_1").first().click();
-            }, 100);
-
-
-        }, function error(response) {
-            $scope.lstMonth = [];
-            console.log(response);
-            common.spinner(false);
-
-            $timeout(function () {
-                $("#cell_1_" + nextDate.getMonth()).click();
-                // $(".day_1").first().click();
-            }, 100);
-
-        });
-
-
+        gotoDateMonth($scope.viewDate);
 
     }
 
