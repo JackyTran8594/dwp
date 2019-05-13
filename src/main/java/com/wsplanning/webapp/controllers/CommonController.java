@@ -427,4 +427,16 @@ public class CommonController extends BaseController {
       return parseException(e);
     }
   }
+
+  @PostMapping("/site/getTextPredict")
+  public ResponseEntity getTextPredict(@RequestBody Map<String, String>  params) {
+    try {
+      String rtn = asMasterClient.getTextPredict(params);
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception e) {
+      //TODO: handle exception
+      System.out.println(e);
+      return parseException(e);
+    }
+  }
 }

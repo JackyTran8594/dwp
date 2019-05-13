@@ -35,7 +35,7 @@ public class ASMasterClient {
 
     private RestTemplate restTemplate;
     private String endpointUrl;
-
+    private String url;
     private static HashMap<String, String> hsmSite;
 
     @Autowired
@@ -43,6 +43,7 @@ public class ASMasterClient {
         this.restTemplate = restTemplate;
         this.restTemplate.getMessageConverters().add(0, new StringHttpMessageConverter(Charset.forName("UTF-8")));
         this.endpointUrl = apiEndpointUrl + "/api/ASMaster";
+        this.url = apiEndpointUrl + "/api/";
         hsmSite = new HashMap<>();
     }
 
@@ -135,6 +136,14 @@ public class ASMasterClient {
         String GetText = "true";
         String url = String.format("%s?SiteId=%s&CustNo=%s&VehiId=%s&bGetText=%s", this.endpointUrl, SiteId, CustNo,
                 VehiId, GetText);
+        return restTemplate.getForObject(url, String.class);
+    }
+
+    public String getTextPredict(Map<String, String> params) {
+        String VIN = params.get("VIN");
+        String language = params.get("language");
+        String skey = params.get("skey");
+        String url = String.format("%sTextPredict?VIN=%s&langId=%s&skey=%s", this.url, VIN, language, skey);
         return restTemplate.getForObject(url, String.class);
     }
 
