@@ -23,7 +23,7 @@
                                         <option value="code_128" >Code 128</option>
                                         <option value="code_39">Code 39</option>
                                         <option value="code_39_vin">Code 39 VIN</option>
-                                        <option value="ean" selected="selected">EAN</option>
+                                        <option value="ean">EAN</option>
                                         <option value="ean_extended">EAN-extended</option>
                                         <option value="ean_8">EAN-8</option>
                                         <option value="upc">UPC</option>
@@ -33,6 +33,11 @@
                                         <option value="2of5">Standard 2 of 5</option>
                                         <option value="code_93">Code 93</option>
                                     </select>
+                                    <!-- <select name="decoder_readers"
+                                        ng-init="(item.value == barcode_default.value) ? (barcode = item) : (barcode = item)"
+                                        ng-model="barcode"
+                                        ng-options="item.name as item.text for item in lstCodes track by item.name"></select> -->
+                                       
                                 </label>
                                 <label style="display: none;">
                                     <span>Resolution (width)</span>
@@ -57,7 +62,7 @@
                                 </label>
                                 <label style="display: none;">
                                     <span>Half-Sample</span>
-                                    <input type="checkbox" checked="checked" name="locator_half-sample"/>
+                                    <input type="checkbox" checked="checked" name="locator_half-sample" />
                                 </label>
                                 <label style="display: none;">
                                     <span>Workers</span>
@@ -80,7 +85,7 @@
                                 </label>
                                 <label style="display: none">
                                     <span>Torch</span>
-                                    <input type="checkbox" name="settings_torch"/>
+                                    <input type="checkbox" name="settings_torch" />
                                 </label>
                             </fieldset>
                         </div>
@@ -102,7 +107,7 @@
 
 <div class="modal-footer position-right">
     <button type="button" ng-click="save()" ng-disabled="disabledButton == true"
-            class="btn btn-icon btn-primary btnSubmit">
+        class="btn btn-icon btn-primary btnSubmit">
         <i class="icon-checkmark3"></i>{{ 'btnSave' | translate }}</span>
     </button>
     <a class="btn btn-default" ng-click="cancel()">{{ 'btnCancel' | translate }}</a>

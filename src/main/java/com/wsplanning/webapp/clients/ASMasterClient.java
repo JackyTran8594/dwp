@@ -197,7 +197,8 @@ public class ASMasterClient {
                 });
 
                 JSONObject objTimeout = new JSONObject();
-               
+                JSONObject objBarcode = new JSONObject();
+
                 prop_Auth.forEach((key, value) -> {
                     JSONObject jsonObject = new JSONObject();
                     JSONObject objTab = new JSONObject();
@@ -239,6 +240,10 @@ public class ASMasterClient {
                             objBtn.put("value", value.toString());
                             arrBtnDetail.put(objBtn);
                         }
+                        if (subStr[0].contains("barcode")) {
+                            objBarcode.put("name", subStr[0]);
+                            objBarcode.put("value", value.toString());
+                        }
 
                     }
                     // arrTime.put(objTimeout);
@@ -252,6 +257,7 @@ public class ASMasterClient {
                 obj.put("detail", arrBtnDetail);
                 obj.put("iconCommon", arrIconBtnCommon);
                 obj.put("iconDetail", arrIconBtnDetail);
+                obj.put("barcode", objBarcode);
 
             } catch (IOException e) {
                 // TODO Auto-generated catch block

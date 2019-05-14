@@ -14,7 +14,7 @@
 
     <div class="panel-body" ng-show="isShow">
         <div class="table-responsive">
-            <table class="table table-striped table-hover">
+            <table class="table table-striped table-hover nowhitespace tableModal">
                 <thead>
                     <tr>
                         <th class="text-center col-xs-1">{{'timestamp' | translate }}</th>
@@ -28,7 +28,10 @@
                 <!--BODY-->
                 <tbody>
                     <tr ng-repeat="item in Read track by $index">
-                        <td class="text-center">{{item.Created}}</td>
+                        <td class="text-center" style="white-space: nowrap">
+                            {{item.Created | date:'dd-MMMM-yyyy'}}<br />
+                            {{item.Created | date:'HH:mm:ss'}}
+                        </td>
                         <td class="text-center">{{item.CreatedBy}}</td>
                         <td class="text-center">{{item.WorkOrderId}}</td>
                         <td class="text-center">{{item.Note}}</td>

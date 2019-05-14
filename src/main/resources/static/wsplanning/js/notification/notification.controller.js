@@ -143,7 +143,7 @@ UserWebApp.controller('NotificationUnReadCtrl', function ($scope, WorkOrderServi
   var $ctrl = this;
   $ctrl.animationsEnabled = true;
 
-  $scope.openReplyNotification = function (id) {
+  $scope.openReplyNotification = function (item, id) {
     var modalInstance = $uibModal.open({
       animation: $ctrl.animationsEnabled,
       templateUrl: '/wsplanning/templates/pages/common/notification-form.html',
@@ -152,7 +152,7 @@ UserWebApp.controller('NotificationUnReadCtrl', function ($scope, WorkOrderServi
       controllerAs: '$ctrl',
       size: "lg",
       resolve: {
-        item: EmployeeData
+        item: item
       }
     });
 
@@ -162,8 +162,9 @@ UserWebApp.controller('NotificationUnReadCtrl', function ($scope, WorkOrderServi
 
       var obj = object();
       obj.Note = $scope.UnRead[id].Note;
-      obj.SmanId = selectedItem.smanId;
+      obj.SmanId = item.SmanId;
       obj.WorkOrderId = $scope.UnRead[id].WorkOrderId;
+      obj.WorkOrderRowId = item.WorkOrderRowId;
 
       HttpService.postData('/site/postNotification', obj).then(function (response) {
         console.log(response);
@@ -275,7 +276,7 @@ UserWebApp.controller('ReplyNotificationCtrl', function ($scope,
   // console.log(item);
 
   $scope.target = {
-    'employee': item.Name,
+    'employee': item.CreatedBy,
     'smanId': item.SmanId
   }
 

@@ -14,7 +14,7 @@
 
     <div class="panel-body" ng-show="isShow">
         <div class="table-responsive">
-            <table class="table table-striped table-hover">
+            <table class="table table-striped table-hover nowhitespace tableModal">
                 <thead>
                     <tr>
                         <th class="text-center col-xs-1">{{'timestamp' | translate }}</th>
@@ -28,15 +28,18 @@
                 <!--BODY-->
                 <tbody>
                     <tr ng-repeat="item in UnRead track by $index">
-                        <td class="text-center">{{item.Created}}</td>
+                        <td style="white-space: nowrap" class="text-center">
+                            {{item.Created | date:'dd-MMMM-yyyy'}}<br/>
+                            {{item.Created | date:'HH:mm:ss'}}
+                        </td>
                         <td class="text-center">{{item.CreatedBy}}</td>
                         <td class="text-center">{{item.WorkOrderId}}</td>
                         <td class="">{{item.Note}}</td>
                         <td class="text-center">
                             <div class="btn-group">
-                                <button class="btn btn-primary" style="left: 18px; top: 0px;" type="button"
+                                <button class="btn btn-primary" id="btnReply" type="button"
                                     ng-click="openReplyNotification($index)">{{'btnReply' | translate}}</button>
-                                <button class="btn btn-primary" style="left: 100px; top: -41px;" type="button" ng-click="markRead(item, $index)" data-popup="tooltip"
+                                <button class="btn btn-primary" id="btnMarkRead" type="button" ng-click="markRead(item, $index)" data-popup="tooltip"
                                     title="Mark Read"><i class="icon-mail-read"></i></button>
                             </div>
                         </td>

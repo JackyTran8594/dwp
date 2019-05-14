@@ -655,6 +655,16 @@ table td {
   font-size: 19px;
 }
 
+#btnReply {
+  left: 18px; 
+  top: 0px;
+}
+
+#btnMarkRead {
+  left: 100px;
+  top: -41px;
+}
+
 @media (min-width: 769px) {
   .main-content {
      max-height: 600px;
@@ -761,6 +771,7 @@ table td {
     
   }
   
+  
   .main-content {
      max-height: 600px;
      /* overflow-y: scroll; */
@@ -781,6 +792,20 @@ table td {
   font-size: 19px;
 }
 
+#btnReply {
+  left: 18px; 
+  top: 0px;
+}
+
+#btnMarkRead {
+  left: 20px;
+  bottom: auto;
+  transition: none 0s ease 0s;
+  cursor: move;
+  position: relative;
+  top: -20px;
+}
+
 }
 
 @media (max-width: 1199px) {
@@ -794,6 +819,8 @@ table td {
     overflow-y:scroll;
     
   }
+
+  
 
   
 }
@@ -816,10 +843,13 @@ table td {
     overflow-y: auto;
   }
 
- 
+
   .table[class*="ipadpro-responsive"] > tbody > tr > td {
     padding: 12px 14px;
   }
+
+  
+  
 
 }
 
