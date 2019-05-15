@@ -244,9 +244,9 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
         cell.cssClass = 'cal-day-selected';
         console.log("---timespanClicked: " + date + " " + $scope.viewDate.getMonth() + " - " + date.getMonth());
         if ($scope.viewDate.getMonth() != date.getMonth()) {
+            gotoDateMonth(date);
             $scope.viewDate = date;
             console.log($scope.viewDate);
-            gotoDateMonth(date);
             // getCalendarMonth();
         } else {
             $scope.viewDate = date;
@@ -521,6 +521,10 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
             }
         });
 
+        modalInstance.rendered.then(function () {
+            $rootScope.$broadcast("addBookPool", {});
+        });
+
         modalInstance.result.then(function (value) {
             console.log(value);
             if (!$scope.WorkOrder.BookedResourcePools) {
@@ -565,6 +569,10 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
                     return $translate.instant('editBookPool');
                 }
             }
+        });
+
+        modalInstance.rendered.then(function () {
+            $rootScope.$broadcast("editBookPool", {});
         });
 
         modalInstance.result.then(function (listPool) {

@@ -24,6 +24,9 @@ UserWebApp.controller('SaveBookPoolResourceCtrl', function ($scope, $rootScope, 
     $uibModalInstance.close($ctrl.data);
   };
 
+  $rootScope.$on('addBookResource', function () {
+    $("#startTimeBookPool").focus();
+  });
 
   $ctrl.delete = function () {
     $ctrl.data.RowId = 0 - $ctrl.data.RowId;

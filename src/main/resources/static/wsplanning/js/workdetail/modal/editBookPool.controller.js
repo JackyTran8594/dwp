@@ -14,6 +14,9 @@ UserWebApp.controller('EditBookPoolModalCtrl', function ($scope, $rootScope, Htt
     item.RowId = 0 - parseInt(item.RowId);
   };
 
+  $rootScope.$on('editBookPool', function () {
+  });
+
   $ctrl.save = function () {
     $uibModalInstance.close($ctrl.lstData);
   };

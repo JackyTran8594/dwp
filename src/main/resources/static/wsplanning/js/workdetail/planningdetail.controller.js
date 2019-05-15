@@ -97,6 +97,10 @@ UserWebApp.controller('PlanningDetailCtrl', function ($scope, $rootScope, HttpSe
                     }
                 });
 
+                modalInstance.rendered.then(function () {
+                    $rootScope.$broadcast("addBookResource", {});
+                });
+
                 modalInstance.result.then(function (value) {
                     if (value) {
                         //Add event (starttime and endtime add timezone

@@ -1,14 +1,14 @@
 UserWebApp.service('WorkOrderService', function ($http, $q) {
   var WorkOrderService = {};
-  WorkOrderService.detail = function (WorkOrderId) {
+  WorkOrderService.detail = function (WorkOrderId,LoadRows,LoadAttachment,LoadAttachmentData) {
     return $http({
       method: 'POST',
       url: '/wo/detail',
       data: {
         "WorkOrderId": WorkOrderId,
-        "LoadRows": true,
-        "LoadAttachment": true,
-        "LoadAttachmentData": true
+        "LoadRows": LoadRows,
+        "LoadAttachment": LoadAttachment,
+        "LoadAttachmentData": LoadAttachmentData
       }
     });
   }

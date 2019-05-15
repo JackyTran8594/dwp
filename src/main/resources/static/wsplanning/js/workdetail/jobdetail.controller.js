@@ -489,7 +489,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, $window, Wo
         emitData(modified);
       });
     } else {
-      if (newValue.length > oldValue.length) {
+      if (newValue && oldValue && newValue.length > oldValue.length) {
         $scope.pristine = true;
         $scope.jobTabList = newValue;
         $scope.WorkOrder.WOJobs = $scope.jobTabList;

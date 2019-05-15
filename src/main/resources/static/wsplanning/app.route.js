@@ -227,8 +227,11 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
       resolve: {
         WorkOrder: function (WorkOrderService, $stateParams) {
           common.spinnerFirstLoad(true);
-          console.log("---app.main.workdetail--");
-          return WorkOrderService.detail($stateParams.id).then(
+          console.log("---app.main.workdetail: " + $stateParams.tab);
+          var LoadRows = true;
+          var LoadAttachment = $stateParams.tab == "job";
+          var LoadAttachmentData = $stateParams.tab == "job";
+          return WorkOrderService.detail($stateParams.id,LoadRows,LoadAttachment,LoadAttachmentData).then(
               function (response) {
                 console.log("---app.main.workdetail done--");
                 common.spinnerFirstLoad(false);

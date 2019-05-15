@@ -44,7 +44,7 @@
                         {{item.Created.split("T")[0]}}
                         {{item.Created.split("T")[1]}}
                     </td>
-                    <td rowspan="{{item.CallerVehicles.length}}">{{item.CallerId}}</td>
+                    <td rowspan="{{item.CallerVehicles.length}}"><a href="tel:{{item.CallerId}}">{{item.CallerId}}</a></td>
                     <td rowspan="{{item.CallerVehicles.length}}">
                         {{item.Trunk}}
                         {{item.AgentId}}
