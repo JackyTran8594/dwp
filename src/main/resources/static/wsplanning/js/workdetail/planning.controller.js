@@ -588,7 +588,7 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
             console.log(res);
             // common.notifySuccess("Success!!!");
 
-            if (res.data.Token.ErrorDesc) {
+            if (res.data.Token && res.data.Token.ErrorDesc) {
                 common.notifyWithMessage("Warning!!!", res.status, res.data.Token.ErrorDesc)
             } else {
                 common.notifySuccess("Success!!!");

@@ -234,7 +234,8 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, $window, Wo
     });
 
     modalInstance.result.then(function (selectedItem) {
-      // console.log(selectedItem);
+      console.log($scope.jobTabList);
+      console.log(id);
       if (typeof (selectedItem) === "string") {
         if ($scope.jobTabList[id].Items == null) {
           var charactersObject = createItem();
@@ -520,7 +521,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, $window, Wo
       WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
         common.btnLoading($(".btnSubmit"), false);
         console.log(res);
-        if (res.data.Token.ErrorDesc) {
+        if (res.data.Token && res.data.Token.ErrorDesc) {
           common.notifyWithMessage("Warning!!!", res.status, res.data.Token.ErrorDesc)
         } else {
           common.notifySuccess("Success!!!");
@@ -549,9 +550,11 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, $window, Wo
       $scope.WorkOrder.WOJobs = $scope.jobTabList;
       var data = JSON.stringify($scope.WorkOrder)
       common.btnLoading($(".btnSubmit"), true);
+      console.log($scope.WorkOrder);
+      // return;
       WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
         common.btnLoading($(".btnSubmit"), false);
-        if (res.data.Token.ErrorDesc) {
+        if (res.data.Token && res.data.Token.ErrorDesc) {
           common.notifyWithMessage("Warning!!!", res.status, res.data.Token.ErrorDesc)
         } else {
           common.notifySuccess("Success!!!");
