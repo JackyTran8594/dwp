@@ -242,6 +242,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, $window, Wo
           charactersObject.Name = selectedItem;
           charactersObject.ItemType = item;
           charactersObject.MechanicId = "";
+          charactersObject.RowId = 0;
           $scope.jobTabList[id].Items = [];
           $scope.jobTabList[id].Items.push(charactersObject);
         }
@@ -254,6 +255,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, $window, Wo
           charactersObject.Name = selectedItem;
           charactersObject.ItemType = item;
           charactersObject.MechanicId = "";
+          charactersObject.RowId = 0;
           $scope.jobTabList[id].Items.push(charactersObject);
         }
 
