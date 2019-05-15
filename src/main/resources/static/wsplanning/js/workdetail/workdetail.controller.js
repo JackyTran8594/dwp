@@ -75,7 +75,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 
     function checkWorkOrder(item) {
         if (item.action) {
-            if (item.action === "offer") {
+            if (item.action === "offer" || item.action === "newoffer" ) {
                 $scope.WorkOrder.IsTimeReservation = 2;
             } else if (item.action === "booking") {
                 $scope.WorkOrder.IsTimeReservation = 1;

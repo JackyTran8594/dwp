@@ -19,7 +19,7 @@
                             <fieldset class="reader-config-group">
                                 <label>
                                     <span>Barcode-Type</span>
-                                    <select name="decoder_readers">
+                                    <!-- <select name="decoder_readers">
                                         <option value="code_128" >Code 128</option>
                                         <option value="code_39">Code 39</option>
                                         <option value="code_39_vin">Code 39 VIN</option>
@@ -32,11 +32,10 @@
                                         <option value="i2of5">Interleaved 2 of 5</option>
                                         <option value="2of5">Standard 2 of 5</option>
                                         <option value="code_93">Code 93</option>
-                                    </select>
-                                    <!-- <select name="decoder_readers"
-                                        ng-init="(item.value == barcode_default.value) ? (barcode = item) : (barcode = item)"
+                                    </select> -->
+                                    <select name="decoder_readers"
                                         ng-model="barcode"
-                                        ng-options="item.name as item.text for item in lstCodes track by item.name"></select> -->
+                                        ng-options="item.name as item.text for item in lstCodes track by item.name"></select>
                                        
                                 </label>
                                 <label style="display: none;">

@@ -128,7 +128,7 @@ UserWebApp.controller('appCtrl', function ($scope, $timeout, $interval, $state, 
           item.class = "";
         }
         $scope.lstLang.push(item);
-        console.log(response);
+        // console.log(response);
       });
       common.spinner(false);
     }, function error(response) {
