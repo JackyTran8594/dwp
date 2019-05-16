@@ -1,0 +1,126 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="cancel()">
+        <span aria-hidden="true">&times;</span>
+        <span class="sr-only" ng-click="cancel()">Close</span>
+    </button>
+    <h4>{{'createTask' | translate}}</h4>
+</div>
+
+<div class="modal-body">
+
+    <div class="well well-sm">
+
+        <form class="form-horizontal formValidate" name="taskFrm" id="taskFrm">
+
+            <div ng-include="'/wsplanning/templates/pages/common/customer.html'"></div>
+
+            <!--Row 1-->
+            <div class="row">
+
+                <!--taskType-->
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">{{ 'taskType' | translate }}</label>
+                        <div class="col-xs-8">
+                            <select class="form-control" ng-model="data.TaskType" ng-required="true"
+                                    ng-options="item.Id as item.Name for item in lstTaskType">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Employee-->
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">{{ 'Employee' | translate }}</label>
+                        <div class="col-xs-8">
+                            <select ui-select2 ng-model="data.SmanId" ng-required="true"
+                                    ng-options="item.SmanId as item.Name for item in lstEmployees">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end row 1-->
+
+
+            <!--Row 2-->
+            <div class="row">
+                <!--TimeSchedule-->
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">{{ 'taskStarted2' | translate }}</label>
+                        <div class="col-xs-8">
+                            <div class="input-group">
+                                <input type="text" class="form-control" datetime-picker="dd-MMMM-yyyy HH:mm:ss"
+                                       date-format="dd-MMMM-yyyy HH:mm:ss" ng-model="data.Started"
+                                       is-open="isOpenDate" ng-required="true"/>
+                                <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default"
+                                                    ng-click="openDate($event, prop)">
+                                                <i class="icon-calendar"></i>
+                                            </button>
+                                        </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--Task seris-->
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">{{ 'taskSeries' | translate }}</label>
+                        <div class="col-xs-8">
+                            <select ui-select2 ng-model="data.TaskSeriesFlag" ng-required="true"
+                                    ng-options="item.Id as item.Name for item in lstTaskSeries">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--end row 2-->
+
+
+            <!--Row 3-->
+            <div class="row">
+
+                <!--taskHeader-->
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">{{ 'taskHeader' | translate }}</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" ng-model="data.Header" ng-required="true">
+                        </div>
+                    </div>
+                </div>
+
+                <!--taskBody-->
+                <div class="col-xs-6">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">{{ 'taskBody' | translate }}</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" ng-model="data.Body" ng-required="true">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end row 3-->
+
+        </form>
+
+    </div>
+
+</div>
+
+<div class="modal-footer">
+    <a class="btn btn-primary" id="btnSaveTask" ng-click="ok()" ng-disabled="taskFrm.$invalid" >{{ 'btnSave' | translate }}</a>
+    <a class="btn btn-default" ng-click="cancel()">{{ 'btnCancel' | translate }}</a>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#taskFrm").validate(common.formValidate);
+    });
+</script>

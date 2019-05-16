@@ -1,0 +1,62 @@
+<!-- Basic panel controls -->
+<div class="panel panel-white">
+    <span ng-show="!isShow">
+        <div class="panel-heading">
+            <h6 class="panel-title">
+                <a class="btn btn-link btn-float has-text text-size-small"
+                   ng-click="$ctrl.openSearchCustomer('full','')" style="float: left;">
+                    <i class="icon-user position-left myTitle"></i>
+                </a>
+                <small class="myTitle" style="margin-left: 0px;">
+                    {{$ctrl.TaskCustomer.CustNo}}, {{$ctrl.TaskCustomer.LName}}, {{$ctrl.TaskCustomer.FName}}, <a
+                        style="cursor: pointer;color: #371ace;" href="tel:{{$ctrl.TaskCustomer.Tel1}}">{{$ctrl.TaskCustomer.Tel1}}</a>, {{$ctrl.TaskCustomer.Email}}<br/>
+                    {{$ctrl.TaskCustomer.PostalCode}}, {{$ctrl.TaskCustomer.City}}, {{$ctrl.TaskCustomer.Address}}
+                </small>
+            </h6>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li ng-click="toogleShow()"><a ng-class="{'rotate-180': isShow == true}" data-action="collapse"
+                                                   data-popup="tooltip" title="Collapse"></a></li>
+                </ul>
+            </div>
+        </div>
+    </span>
+
+    <span ng-show="isShow">
+        <div class="panel-heading">
+            <h6 class="panel-title">
+                <a class="btn btn-link btn-float has-text text-size-small"
+                   ng-click="$ctrl.openSearchCustomer('full','')" style="float: left;">
+                    <i class="icon-user position-left myTitle"></i>
+                </a>
+                <small class="myTitle" style="margin-left: 0px;">
+                          {{$ctrl.TaskCustomer.CustNo}}, {{$ctrl.TaskCustomer.LName}}, {{$ctrl.TaskCustomer.FName}}, <a
+                        style="cursor: pointer;color: #371ace;" href="tel:{{$ctrl.TaskCustomer.Tel1}}">{{$ctrl.TaskCustomer.Tel1}}</a>, {{$ctrl.TaskCustomer.Email}}<br/>
+                    {{$ctrl.TaskCustomer.PostalCode}}, {{$ctrl.TaskCustomer.City}}, {{$ctrl.TaskCustomer.Address}}
+                </small>
+            </h6>
+            <div class="heading-elements">
+                <ul class="icons-list">
+                    <li ng-click="toogleShow()"><a ng-class="{'rotate-180': isShow == true}" data-action="collapse"
+                                                   data-popup="tooltip" title="Collapse"></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="panel-body">
+            <form class="form-horizontal formValidate" name="contractFrm">
+                <div ng-repeat="item in $ctrl.TaskCustomer.DynamicDataFields" class="col-xs-6">
+                    <div class="form-group">
+                        <label class="control-label col-xs-4">{{ item.Label }}</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" id="label_customer_{{$index}}" ng-model="item.Value"
+                                   ng-disabled="true">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </span>
+</div>
+<!-- /basic panel controls -->

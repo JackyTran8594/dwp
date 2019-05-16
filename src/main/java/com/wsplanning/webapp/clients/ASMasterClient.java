@@ -286,4 +286,16 @@ public class ASMasterClient {
         return restTemplate.getForObject(url, String.class);
     }
 
+    //http://automaster.alliedsoft.hu:9092/api/ASMaster?command=getTaskTypes&param1=102
+    public String getTaskTypes(String siteId) {
+        String url = String.format("%s?command=getTaskTypes&param1=%s", this.endpointUrl,siteId);
+        return restTemplate.getForObject(url, String.class);
+    }
+
+    //http://automaster.alliedsoft.hu:9092/api/ASMaster?command=getTaskSeries&param1=102
+    public String getTaskSeries(String siteId) {
+        String url = String.format("%s?command=getTaskSeries&param1=%s", this.endpointUrl,siteId);
+        return restTemplate.getForObject(url, String.class);
+    }
+
 }
