@@ -190,15 +190,29 @@ public class WokOrderClient {
     if (StringUtils.isNotBlank(LoadAttachment) && "true".equalsIgnoreCase(LoadAttachment)) {
       headers.set("LoadAttachment", "true");
     }
-    if(StringUtils.isNotBlank(LoadAttachmentData)) {
-      headers.set("LoadAttachmentData", LoadAttachmentData);
-    }
+    // if(StringUtils.isNotBlank(LoadAttachmentData)) {
+    //   headers.set("LoadAttachmentData", LoadAttachmentData);
+    // }
     
     HttpEntity entity = new HttpEntity(headers);
     String url = String.format("%s?SiteId=%s&WorkOrderId=%s", this.endpointUrl, siteId, workOrderId);
     ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class, new HashMap<>());
     return response.getBody();
   }
+
+  public String getPhoto(String token, String siteId, Map<String, String> params) {
+    String workOrderId = params.get("workOrderId");
+    String jobRowId = params.get("jobRowId");
+
+    HttpHeaders headers = new HttpHeaders();
+    headers.set("Token", token);
+    
+    HttpEntity entity = new HttpEntity(headers);
+    String url = String.format("%s?SiteId=%s&WorkOrderId=%s&JobRowId=%s", this.endpointUrl, siteId, workOrderId, jobRowId);
+    ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class, new HashMap<>());
+    return response.getBody();
+  }
+
 
   public String postWO2(String token, Map<String, String> params) {
     String postAction = params.get("postAction");

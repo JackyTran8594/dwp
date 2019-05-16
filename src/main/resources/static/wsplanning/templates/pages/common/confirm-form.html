@@ -4,7 +4,13 @@
     <h4 class="modal-title">{{'ConfirmTitle' | translate}}</h4>
 </div>
 <div class="modal-body">
-    {{'StampToWorkorder'| translate}} {{target.WorkOrderNo}}, {{'JobNo'| translate}} {{target.JobNo}}?
+    <div class="row" ng-if="$scope.target.StampingCode">
+        {{'StampToWorkorder'| translate}} {{target.WorkOrderNo}}, {{'JobNo'| translate}} {{target.JobNo}}?
+    </div>
+    <div class="row" ng-if="!$scope.target.StampingCode">
+        {{'DoYouSave'| translate}} ?
+    </div>
+
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-default" ng-click="$ctrl.cancel()"

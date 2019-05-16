@@ -166,6 +166,17 @@ public class WOController extends BaseController {
     }
   }
 
+  @PostMapping("/wo/getPhoto")
+  @ResponseBody
+  public ResponseEntity getPhoto(@RequestBody Map<String, String> params) {
+    try {
+      String rtn = wokOrderClient.getPhoto(getToken(), getSiteId(), params);
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception ex) {
+      return parseException(ex);
+    }
+  }
+
   @GetMapping("/wo/jobTab")
   @ResponseBody
   public ResponseEntity jobTab(@RequestParam("CustNo") String CustNo, @RequestParam("VehiId") String VehiId) {

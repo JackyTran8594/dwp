@@ -29,6 +29,14 @@ UserWebApp.service('WorkOrderService', function ($http, $q) {
     });
   }
 
+  WorkOrderService.getPhoto = function (data) {
+    return $http({
+      method: 'POST',
+      url: '/wo/getPhoto',
+      data: data
+    });
+  }
+
 
   WorkOrderService.countServiceItem = function (data) {
     return $http({

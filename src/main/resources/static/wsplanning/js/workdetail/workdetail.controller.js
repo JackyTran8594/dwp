@@ -76,7 +76,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 
     function checkWorkOrder(item) {
         if (item.action) {
-            if (item.action === "offer" || item.action === "newoffer" ) {
+            if (item.action === "offer" || item.action === "newoffer") {
                 $scope.WorkOrder.IsTimeReservation = 2;
             } else if (item.action === "booking") {
                 $scope.WorkOrder.IsTimeReservation = 1;
@@ -198,18 +198,18 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
     $rootScope.WorkOrderOrg = {};
     $scope.changeTab = function (tabActive, abc) {
 
-        console.log($rootScope.WorkOrderOrg);
-        console.log($scope.WorkOrder);
+        // console.log($rootScope.WorkOrderOrg);
+        // console.log($scope.WorkOrder);
 
-        console.log(JSON.stringify($rootScope.WorkOrderOrg));
-        console.log(JSON.stringify($scope.WorkOrder));
-        console.log("angular.equals($scope.WorkOrderOrg, $scope.WorkOrder: " + angular.equals($rootScope.WorkOrderOrg, $scope.WorkOrder));
-        if(angular.equals($rootScope.WorkOrderOrg, $scope.WorkOrder)){
+        // console.log(JSON.stringify($rootScope.WorkOrderOrg));
+        // console.log(JSON.stringify($scope.WorkOrder));
+        // console.log("angular.equals($scope.WorkOrderOrg, $scope.WorkOrder: " + angular.equals($rootScope.WorkOrderOrg, $scope.WorkOrder));
+        if (angular.equals($rootScope.WorkOrderOrg, $scope.WorkOrder)) {
             console.log("Khong thay doi");
-        }else{
-            console.log("--------thay doi");
-            alert("DDax thay doi ---> return");
-            return;
+        } else {
+            // console.log("--------thay doi");
+            // alert("DDax thay doi ---> return");
+            openConfirmSaveTab($scope.tabActive);
         }
         $scope.tabActive = tabActive;
 
@@ -235,6 +235,8 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
 
         // $state.go('app.main.workdetail', {parm1: 1}, {notify: false});
     }
+
+
 
 
     //Modal
@@ -322,6 +324,27 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
         });
     };
 
+    var openConfirmSaveTab = function (item) {
+        console.log("------contact-----");
+        var modalInstance = $uibModal.open({
+            animation: $ctrl.animationsEnabled,
+            templateUrl: '/wsplanning/templates/pages/common/confirm-form.html',
+            controller: 'ConfirmSaveTabCtrl',
+            controllerAs: '$ctrl',
+            size: 'sm',
+            backdrop: 'static',
+
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+            console.log(selectedItem);
+            if (selectedItem) {
+                $scope.saveForm(item);
+            }
+        }, function () {
+            console.log('Modal dismissed at: ' + new Date());
+        });
+    };
 
     //Submit tren header
     $scope.saveForm = function (type) {
@@ -338,9 +361,24 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
     }
 
 
-    $scope.afterRender = function(){
+    $scope.afterRender = function () {
         console.log("afterRender");
         $rootScope.WorkOrderOrg = angular.copy($scope.WorkOrder);
     }
 
 });
+
+UserWebApp.controller('ConfirmSaveTabCtrl', function ($scope, $uibModalInstance) {
+
+    var $ctrl = this;
+    // console.log(data);
+
+    $ctrl.save = function () {
+        $uibModalInstance.close(true);
+    }
+
+    $ctrl.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    }
+
+})

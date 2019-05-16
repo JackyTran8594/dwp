@@ -397,7 +397,11 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, $window, Wo
       controllerAs: '$ctrl',
       size: "full",
       resolve: {
-        item: item
+        data: {
+          item: item,
+          workOrderId: $scope.WorkOrder.WorkOrderId,
+          jobAttachments: $scope.jobTabList[id].JobAttachments
+        }
       }
     });
 
@@ -747,11 +751,11 @@ UserWebApp.controller('JobNewModalCtrl', function ($scope, $rootScope, WorkOrder
   };
 })
 
-UserWebApp.controller('PhotoModalCtrl', function ($scope, $uibModal, item, $uibModalInstance) {
+UserWebApp.controller('PhotoModalCtrl', function ($scope, $uibModal, data, $uibModalInstance, WorkOrderService) {
 
   var $ctrl = this;
 
-  // console.log(item);
+  console.log(data);
 
   $scope.isGrid = true;
 
@@ -781,25 +785,43 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $uibModal, item, $uibM
   $scope.lstphoto = [];
   $scope.lstAttachment = [];
 
-  loadPhoto(item)
+  loadPhoto(data)
 
-  function loadPhoto(job) {
-    if (job.JobAttachments) {
-      angular.forEach(job.JobAttachments, function (v, k) {
-        var obj = jobAttachments();
-        obj.AttachType = v.AttachType;
-        obj.AttachTypeDescription = v.AttachTypeDescription;
-        obj.FileDescription = v.AttacFileDescriptionhType;
-        obj.FileId = v.FileId;
-        obj.FileName = v.FileName;
-        obj.ImageData = v.ImageData;
-        obj.dataUrl = "data:image/webp;base64," + v.ImageData;
-        $scope.lstphoto.push(obj.dataUrl);
-        $scope.lstAttachment.push(obj);
+  function loadPhoto(data) {
+    if(data.jobAttachments[0].ImageData) {
+      common.spinner(true);
+      angular.forEach(data.jobAttachments, function (v, k) {
+        var dataUrl = "data:image/webp;base64," + v.ImageData;
+        $scope.lstphoto.push(dataUrl);
       })
+      
+      common.spinner(false)    
+    } else {
+     
+      var data = {
+        workOrderId: data.workOrderId,
+        jobRowId: data.item.RowId
+      }
+      WorkOrderService.getPhoto(data).then(function (res) {
+        // console.log(res);
+          angular.forEach(res.data, function (v, k) {
+          var obj = jobAttachments();
+          obj.AttachType = v.AttachType;
+          obj.AttachTypeDescription = v.AttachTypeDescription;
+          obj.FileDescription = v.AttacFileDescriptionhType;
+          obj.FileId = v.FileId;
+          obj.FileName = v.FileName;
+          obj.ImageData = v.ImageData;
+          obj.dataUrl = "data:image/webp;base64," + v.ImageData;
+          $scope.lstphoto.push(obj.dataUrl);
+          $scope.lstAttachment.push(obj);
+        })
+        common.spinner(false)
+      }, function (err) {
+        console.log(err);
+        common.spinner(false)
+      });
     }
-
-    return $scope.lstphoto;
   }
 
 
@@ -969,7 +991,9 @@ UserWebApp.controller('openPhotoCtrl', function ($scope, item, $uibModalInstance
 
   $scope.$on("acceptPhoto", function (evt, obj) {
     $uibModalInstance.close(obj);
-  })
+  });
+
+
 
   $ctrl.cancel = function () {
     $uibModalInstance.dismiss('cancel');

@@ -308,7 +308,7 @@ var translationsEN = {
   Template_2: "Template 2",
   Reset: "Reset",
   TakeScreenshot: "Take Screenshot",
-
+  DoYouSave:' Do you want to save changes',
   //Notification-page
   recentNotification: "Recent Notification",
   unreadNotification: "UnRead Notification",
