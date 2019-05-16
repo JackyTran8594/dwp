@@ -587,11 +587,10 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, $window, Wo
     $scope.onSubmitForm();
   });
 
-  $scope.$on('$viewContentLoaded', function(){
-    console.log("$viewContentLoaded");
-    //Here your view content is fully loaded !!
+  $scope.afterRender = function(){
+    console.log("afterRender");
     $rootScope.WorkOrderOrg = angular.copy($scope.WorkOrder);
-  });
+  }
 
 
 });

@@ -208,6 +208,8 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
             console.log("Khong thay doi");
         }else{
             console.log("--------thay doi");
+            alert("DDax thay doi ---> return");
+            return;
         }
         $scope.tabActive = tabActive;
 
@@ -340,10 +342,5 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
         console.log("afterRender");
         $rootScope.WorkOrderOrg = angular.copy($scope.WorkOrder);
     }
-    $scope.$on('$viewContentLoaded', function(){
-        //Here your view content is fully loaded !!
-        console.log("$viewContentLoaded");
-        $rootScope.WorkOrderOrg = angular.copy($scope.WorkOrder);
-    });
 
 });

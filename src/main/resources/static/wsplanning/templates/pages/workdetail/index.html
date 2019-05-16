@@ -1,6 +1,6 @@
 <div ng-include="'/wsplanning/templates/pages/workdetail/page-header.html'"></div>
 
-<div after-render="afterRender" class="panel panel-flat">
+<div  class="panel panel-flat">
     <div class="tabbable">
         <ul class="nav nav-tabs nav-tabs-solid deviceTabs">
             <!-- <li ng-class="{active: tabActive == 'header'}" -->
@@ -30,16 +30,16 @@
 
         <div class="tab-content">
             <div ng-class="{active: tabActive == 'header'}" class="tab-pane" id="tab-header">
-                <div ng-include="'/wsplanning/templates/pages/workdetail/tabs/header.html'"></div>
+                <div after-render="afterRender" ng-include="'/wsplanning/templates/pages/workdetail/tabs/header.html'"></div>
             </div>
             <div ng-class="{active: tabActive == 'job'}" class="tab-pane" id="tab-job">
-                <div ng-include="'/wsplanning/templates/pages/workdetail/tabs/job.html'"></div>
+                <div after-render="afterRender" ng-include="'/wsplanning/templates/pages/workdetail/tabs/job.html'"></div>
             </div>
             <div ng-class="{active: tabActive == 'planning'}" class="tab-pane" id="tab-planning">
-                <div ng-include="'/wsplanning/templates/pages/workdetail/tabs/planning.html'"></div>
+                <div after-render="afterRender" ng-include="'/wsplanning/templates/pages/workdetail/tabs/planning.html'"></div>
             </div>
             <div ng-class="{active: tabActive == 'checkin'}" class="tab-pane" id="tab-checkin">
-                <div ng-include="'/wsplanning/templates/pages/workdetail/tabs/checkin.html'"></div>
+                <div after-render="afterRender" ng-include="'/wsplanning/templates/pages/workdetail/tabs/checkin.html'"></div>
             </div>
         </div>
 

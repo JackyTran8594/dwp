@@ -167,10 +167,10 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
     $scope.onSubmitForm();
   });
 
-  $scope.$on('$viewContentLoaded', function(){
-    //Here your view content is fully loaded !!
+  $scope.afterRender = function(){
+    console.log("afterRender");
     $rootScope.WorkOrderOrg = angular.copy($scope.WorkOrder);
-  });
+  }
 
 
 });
