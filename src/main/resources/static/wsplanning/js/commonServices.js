@@ -23,6 +23,39 @@ UserWebApp
     this.lstCallCenterDb = [];
     this.lstCallCenterTaskType = [];
 
+    this.taskType = [];
+    this.taskSeries = [];
+
+    this.getTaskTypes = function () {
+      var d = $q.defer();
+      if (!this.taskType || this.taskType.length <= 0) {
+        HttpService.getData('/site/getTaskTypes', {}).then(function (response) {
+          this.taskType = response;
+          d.resolve(response);
+        }, function error(response) {
+          d.reject();
+        });
+      } else {
+        d.resolve(this.taskType);
+      }
+      return d.promise;
+    };
+
+    this.getTaskSeries = function () {
+      var d = $q.defer();
+      if (!this.taskSeries || this.taskSeries.length <= 0) {
+        HttpService.getData('/site/getTaskSeries', {}).then(function (response) {
+          this.taskSeries = response;
+          d.resolve(response);
+        }, function error(response) {
+          d.reject();
+        });
+      } else {
+        d.resolve(this.taskSeries);
+      }
+      return d.promise;
+    };
+
     this.getCallCenterDB = function () {
       var d = $q.defer();
       if (!this.lstCallCenterDb || this.lstCallCenterDb.length <= 0) {

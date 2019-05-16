@@ -1,0 +1,96 @@
+<!--SEARCH-->
+<div class="panel panel-white" ng-controller="OpenTaskCtrl">
+    <div class="panel-heading" ng-click="toogleRecentCall()">
+        <h6 class="panel-title">
+            <i class="icon-search4 position-left" ng-click="toogleOpenTask()"></i>
+            <small>{{ 'taskOpen' | translate }}</small>
+        </h6>
+        <div class="heading-elements">
+            <ul class="icons-list">
+                <li ng-click="toogleOpenTask()"><a ng-class="{'rotate-180': isShow == true}"></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel-body" ng-show="isShow">
+        <div class="table-responsive nowhitespace">
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr class="d-flex">
+                    <th class="text-center col-xs-1">{{'taskStarted' | translate }}</th>
+                    <th class="text-center col-xs-1">{{'taskHeader' | translate }}</th>
+                    <th class="text-center col-xs-1">{{'taskType' | translate }}</th>
+                    <th class="text-center col-xs-1">{{'taskCustomer' | translate }}</th>
+                    <th class="text-center col-xs-1">{{'taskPhone' | translate }}</th>
+                    <th class="text-center col-xs-1">{{'taskEmail' | translate }}</th>
+                    <th class="text-center col-xs-1">{{'taskWO' | translate }}</th>
+                    <th class="text-center col-xs-1">{{'taskBody' | translate }}</th>
+                    <th class="text-center col-xs-1">{{'action' | translate }}</th>
+                </tr>
+                </thead>
+
+                <!--BODY-->
+                <tbody>
+                <tr ng-repeat="item in lstData" ng-dblclick="createTask(item)" ios-dblclick="createTask(item)">
+                    <td>{{item.Started}}</td>
+                    <td>{{item.Header}}</td>
+                    <td>
+                        {{item.TaskType}}
+                        {{item.TaskTypeDescription}}
+                    </td>
+                    <td>{{item.TaskCustomer.FName}} {{item.TaskCustomer.LName}}</td>
+                    <td><a href="tel:{{item.TaskCustomer.Tel1}}">{{item.TaskCustomer.Tel1}}</a></td>
+                    <td>{{item.TaskCustomer.Email}}</td>
+                    <td>{{item.WorkOrderNo}}</td>
+                    <td>{{item.Body}}</td>
+                    <td>
+                        <button ng-click="markDone(item,'markDone')" title="{{'markDone' | translate }}" >{{'markDone' | translate }}</button>
+                        <button ng-show="item.TaskSeriesFlag > 0" ng-click="markSeriesDone(item,'markSeriesDone')" title="{{'markSeriesDone' | translate }}">{{'markSeriesDone' | translate }}</button>
+                    </td>
+                </tr>
+                <tr ng-if="isNoData || !lstData || lstData.length <= 0" class="active">
+                    <td colspan="20" class="text-center">{{ 'commonNoResult' | translate }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="panel-footer text-right" style="padding-right: 25px;">
+
+            <!-- Paging elements -->
+            <form class="form-inline formPaging formValidate">
+                <div class="form-group">
+                    {{totalElements | number}} <span class="text-lowercase">{{ 'item' | translate }}</span>
+                </div>
+                <div class="form-group" style="border-left: 1px solid #ddd">
+                    <ul class="pagination-flat pagination-rounded" uib-pagination total-items="totalElements"
+                        items-per-page="limit" max-size="2" ng-model="page" boundary-links="true"
+                        boundary-link-numbers="true" force-ellipses="true" rotate="true" previous-text="&lsaquo;"
+                        next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+                </div>
+                <div class="form-group">
+                    <input type="number" name="page" ng-model="pageGo" placeholder="{{ 'page' | translate }}"
+                           class="form-control validatePositiveInteger" min="1" max="{{(totalElements / limit) | ceil}}"
+                           style="width: 55px">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-default">{{ 'go' | translate }}</button>
+                </div>
+                <div class="form-group">
+                    <select class="form-control" ng-model="limit" ng-change="changeLimit()" convert-to-number>
+                        <option value="1">1</option>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="30">30</option>
+                    </select>
+                    <span>{{ 'limit' | translate }}</span>
+                </div>
+            </form>
+            <!-- /paging element -->
+
+        </div>
+    </div>
+</div>
+<!--SEARCH-->

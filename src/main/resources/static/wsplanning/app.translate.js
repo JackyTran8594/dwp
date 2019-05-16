@@ -317,7 +317,24 @@ var translationsEN = {
   from: "From",
   workOrder: "Workorder",
   message: "Message",
-  action: "Action"
+  action: "Action",
+
+  //TaskList
+  taskList: "Task List",
+  taskOpen: "Task Open",
+  taskClose: "Task Close",
+  taskStarted: "Schedule",
+  taskHeader: "Subject",
+  taskType: "Type",
+  taskCustomer: "Customer",
+  taskPhone: "Phone",
+  taskEmail: "Email",
+  taskWO: "Work order",
+  taskBody: "Body",
+  taskSeries: "Task Series",
+  taskStarted2: "Started",
+  markDone: "Mark Done",
+  markSeriesDone: "Mark Series Done",
 };
 
 

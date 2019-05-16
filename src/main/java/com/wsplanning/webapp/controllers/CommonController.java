@@ -439,4 +439,26 @@ public class CommonController extends BaseController {
       return parseException(e);
     }
   }
+
+  @GetMapping("/site/getTaskTypes")
+  public ResponseEntity getTaskTypes() {
+    try {
+      String rtn = asMasterClient.getTaskTypes(getSiteId());
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception e) {
+      System.out.println(e);
+      return parseException(e);
+    }
+  }
+
+  @GetMapping("/site/getTaskSeries")
+  public ResponseEntity getTaskSeries() {
+    try {
+      String rtn = asMasterClient.getTaskSeries(getSiteId());
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception e) {
+      System.out.println(e);
+      return parseException(e);
+    }
+  }
 }
