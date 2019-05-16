@@ -117,9 +117,9 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
       postAction = "createNew";
 
       //save job - after save header
-      $scope.WorkOrder = jobData.data;
+      //$scope.WorkOrder = jobData.data;
 
-      var data = JSON.stringify($scope.WorkOrder)
+      var data = JSON.stringify(jobData.data);
 
       common.btnLoading($(".btnSubmit"), true);
       WorkOrderService.postWorkOrder(data, postAction).then(function (res) {
@@ -165,6 +165,11 @@ UserWebApp.controller('HeaderDetailCtrl', function ($scope, $rootScope, WorkOrde
   //Save from button header
   $scope.$on('saveHeader', function (event, obj) {
     $scope.onSubmitForm();
+  });
+
+  $scope.$on('$viewContentLoaded', function(){
+    //Here your view content is fully loaded !!
+    $rootScope.WorkOrderOrg = angular.copy($scope.WorkOrder);
   });
 
 

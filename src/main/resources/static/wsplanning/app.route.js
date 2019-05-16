@@ -229,8 +229,8 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
           common.spinnerFirstLoad(true);
           console.log("---app.main.workdetail: " + $stateParams.tab);
           var LoadRows = true;
-          var LoadAttachment = $stateParams.tab == "job";
-          var LoadAttachmentData = $stateParams.tab == "job";
+          var LoadAttachment = !$stateParams.tab || $stateParams.tab == ""|| $stateParams.tab == "job";
+          var LoadAttachmentData = !$stateParams.tab || $stateParams.tab == ""|| $stateParams.tab == "job";
           return WorkOrderService.detail($stateParams.id,LoadRows,LoadAttachment,LoadAttachmentData).then(
               function (response) {
                 console.log("---app.main.workdetail done--");

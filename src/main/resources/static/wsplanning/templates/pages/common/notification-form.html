@@ -15,7 +15,7 @@
             <div class="form-group">
                 <label class="control-label col-lg-2">{{'employee' | translate}}</label>
                 <div class="col-lg-10">
-                    <select class="form-control" ng-model="target.employee"
+                    <select class="form-control firstFocus" ng-model="target.employee"
                         ng-options="item.SmanId as item.Name for item in employees" ng-change="$ctrl.changeEmployee()">
                     </select>
                 </div>
@@ -26,7 +26,7 @@
             <div class="form-group">
                 <label class="control-label col-lg-2">{{'employee' | translate}}</label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" ng-model="target.employee" readonly/>
+                    <input type="text" class="form-control firstFocus" ng-model="target.employee" readonly/>
                 </div>
             </div>
         </div>

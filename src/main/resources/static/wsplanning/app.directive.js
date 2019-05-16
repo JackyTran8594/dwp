@@ -18,7 +18,20 @@ UserWebApp.directive('onFinishRender', function ($timeout) {
   .directive('inputType', inputType)
   .directive('ngFiles', ngFiles)
   .directive('ngCamera', ngCamera)
-  .directive('checkboxDirective', checkboxDirective);
+    .directive('checkboxDirective', checkboxDirective)
+    .directive('afterRender',['$timeout',function ($timeout) {
+      var def = {
+        restrict: 'A',
+        terminal: false,
+        transclude: false,
+        link: function (scope,element,attrs) {
+          $timeout(scope.$eval(attrs.afterRender),0);
+        }
+      }
+      return def;
+
+        }]
+    );
 
 convertToNumberDirective.$inject = [];
 

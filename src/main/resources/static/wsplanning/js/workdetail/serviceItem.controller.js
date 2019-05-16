@@ -226,6 +226,14 @@ UserWebApp.controller('ServiceItemModalCtrl', function ($scope, $rootScope, Work
 
   }
 
-  //
+  //ThuyetLV
+  $rootScope.$on('openServiceItem_' + item.itemType, function () {
+    try{
+      $(".firstFocus").focus();
+    }catch (e) {
+      console.error(e);
+    }
+
+  });
 
 });

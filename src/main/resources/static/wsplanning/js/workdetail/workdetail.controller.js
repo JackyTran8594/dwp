@@ -15,6 +15,7 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
     $scope.WorkOrderData = WorkOrder.data;
     $scope.WorkOrder = WorkOrder.data;
 
+
     console.log($scope.WorkOrder);
 
     loadCommon();
@@ -194,7 +195,20 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
     }
 
 
+    $rootScope.WorkOrderOrg = {};
     $scope.changeTab = function (tabActive, abc) {
+
+        console.log($rootScope.WorkOrderOrg);
+        console.log($scope.WorkOrder);
+
+        console.log(JSON.stringify($rootScope.WorkOrderOrg));
+        console.log(JSON.stringify($scope.WorkOrder));
+        console.log("angular.equals($scope.WorkOrderOrg, $scope.WorkOrder: " + angular.equals($rootScope.WorkOrderOrg, $scope.WorkOrder));
+        if(angular.equals($rootScope.WorkOrderOrg, $scope.WorkOrder)){
+            console.log("Khong thay doi");
+        }else{
+            console.log("--------thay doi");
+        }
         $scope.tabActive = tabActive;
 
         var params = {
@@ -321,5 +335,15 @@ UserWebApp.controller('WorkDetailCtrl', function ($scope, $rootScope, HttpServic
         }
     }
 
+
+    $scope.afterRender = function(){
+        console.log("afterRender");
+        $rootScope.WorkOrderOrg = angular.copy($scope.WorkOrder);
+    }
+    $scope.$on('$viewContentLoaded', function(){
+        //Here your view content is fully loaded !!
+        console.log("$viewContentLoaded");
+        $rootScope.WorkOrderOrg = angular.copy($scope.WorkOrder);
+    });
 
 });

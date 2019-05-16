@@ -626,5 +626,11 @@ UserWebApp.controller('PlanningJobCtrl', function ($scope, $rootScope, WorkOrder
         $scope.onSubmitForm();
     });
 
+    $scope.$on('$viewContentLoaded', function(){
+        //Here your view content is fully loaded !!
+        console.log("$viewContentLoaded");
+        $rootScope.WorkOrderOrg = angular.copy($scope.WorkOrder);
+    });
+
 
 });

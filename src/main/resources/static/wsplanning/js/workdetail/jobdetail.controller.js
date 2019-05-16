@@ -233,6 +233,10 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, $window, Wo
       }
     });
 
+    modalInstance.rendered.then(function () {
+      $rootScope.$broadcast("openServiceItem_" + item, {});
+    });
+
     modalInstance.result.then(function (selectedItem) {
       console.log($scope.jobTabList);
       console.log(id);
@@ -423,6 +427,10 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, $window, Wo
       }
     });
 
+    modalInstance.rendered.then(function () {
+      $rootScope.$broadcast("openNotify", {});
+    });
+
     modalInstance.result.then(function (selectedItem) {
 
       console.log(selectedItem);
@@ -446,6 +454,10 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, $window, Wo
           WorkOrderId: $scope.WorkOrder.WorkOrderId,
         }
       }
+    });
+
+    modalInstance.rendered.then(function () {
+      $rootScope.$broadcast("openNotifyTeam", {});
     });
 
     modalInstance.result.then(function (selectedItem) {
@@ -573,6 +585,12 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, $window, Wo
   //Save from button header
   $scope.$on('saveJob', function (event, obj) {
     $scope.onSubmitForm();
+  });
+
+  $scope.$on('$viewContentLoaded', function(){
+    console.log("$viewContentLoaded");
+    //Here your view content is fully loaded !!
+    $rootScope.WorkOrderOrg = angular.copy($scope.WorkOrder);
   });
 
 
@@ -1032,6 +1050,15 @@ UserWebApp.controller('NotificationModalCtrl', function ($scope, data,
     $uibModalInstance.close($scope.target);
   }
 
+  //ThuyetLV
+  $rootScope.$on('openNotify', function () {
+    try{
+      $(".firstFocus").focus();
+    }catch (e) {
+      console.error(e);
+    }
+
+  });
 
 });
 
@@ -1138,6 +1165,16 @@ UserWebApp.controller('NotificationTeamCtrl', function ($scope, data, WorkOrderS
     $uibModalInstance.close($scope.target);
   };
 
+
+  //ThuyetLV
+  $rootScope.$on('openNotifyTeam', function () {
+    try{
+      $(".firstFocus").focus();
+    }catch (e) {
+      console.error(e);
+    }
+
+  });
 
 })
 
