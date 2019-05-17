@@ -37,6 +37,14 @@ UserWebApp.service('WorkOrderService', function ($http, $q) {
     });
   }
 
+  WorkOrderService.getTextPredict = function (data) {
+    return $http({
+      method: 'POST',
+      url: '/wo/getTextPredict',
+      data: data
+    });
+  }
+
 
   WorkOrderService.countServiceItem = function (data) {
     return $http({

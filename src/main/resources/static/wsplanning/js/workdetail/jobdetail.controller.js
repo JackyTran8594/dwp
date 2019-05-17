@@ -1,10 +1,11 @@
-UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, $window, WorkOrderService, HttpService, $translate, $location, $filter, $uibModal, CommonServices, $stateParams, $state) {
+UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, $window, WorkOrderService, $uibModal, CommonServices, $stateParams, $state) {
 
   var $ctrl = this;
   var stampingCode = {};
   $scope.jobParams = $scope.$parent.jobObject;
   $scope.actTypeJob = $scope.$parent.actionType;
   $scope.jobTabList = $scope.$parent.WOJobs;
+  $scope.lstTextPredict = [];
   var jobsList = [];
   $scope.lstButtonDetail = JSON.parse(localStorage.getItem('info_detail'));
 
@@ -161,6 +162,21 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, $window, Wo
       checked = true;
       return checked;
     }
+  }
+
+  $scope.getTextPredict = function (skey) {
+    var data = {
+      VIN: $scope.WorkOrder.WOVehicle.VIN,
+      languege: $stateParams.locale,
+      skey: skey
+    };
+    WorkOrderService.getTextPredict(data).then(function (res) {
+      console.log(res);
+      $scope.lstTextPredict = res.data;
+
+    }, function (err) {
+      console.log(err);
+    })
   }
 
   //<editor-fold desc="Paging & Search Port">
@@ -591,7 +607,7 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, $window, Wo
     $scope.onSubmitForm();
   });
 
-  $scope.afterRender = function(){
+  $scope.afterRender = function () {
     console.log("afterRender");
     $rootScope.WorkOrderOrg = angular.copy($scope.WorkOrder);
   }
@@ -788,23 +804,23 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $uibModal, data, $uibM
   loadPhoto(data)
 
   function loadPhoto(data) {
-    if(data.jobAttachments[0].ImageData) {
+    if (data.jobAttachments[0].ImageData) {
       common.spinner(true);
       angular.forEach(data.jobAttachments, function (v, k) {
         var dataUrl = "data:image/webp;base64," + v.ImageData;
         $scope.lstphoto.push(dataUrl);
       })
-      
-      common.spinner(false)    
+
+      common.spinner(false)
     } else {
-     
+
       var data = {
         workOrderId: data.workOrderId,
         jobRowId: data.item.RowId
       }
       WorkOrderService.getPhoto(data).then(function (res) {
         // console.log(res);
-          angular.forEach(res.data, function (v, k) {
+        angular.forEach(res.data, function (v, k) {
           var obj = jobAttachments();
           obj.AttachType = v.AttachType;
           obj.AttachTypeDescription = v.AttachTypeDescription;
@@ -1004,7 +1020,7 @@ UserWebApp.controller('openPhotoCtrl', function ($scope, item, $uibModalInstance
 UserWebApp.controller('NotificationModalCtrl', function ($scope, data,
   $uibModalInstance, CommonServices, $rootScope, HttpService) {
 
-    
+
   var $ctrl = this;
 
   $scope.employees = [];
@@ -1075,9 +1091,9 @@ UserWebApp.controller('NotificationModalCtrl', function ($scope, data,
 
   //ThuyetLV
   $rootScope.$on('openNotify', function () {
-    try{
+    try {
       $(".firstFocus").focus();
-    }catch (e) {
+    } catch (e) {
       console.error(e);
     }
 
@@ -1127,9 +1143,9 @@ UserWebApp.controller('NotificationTeamCtrl', function ($scope, data, WorkOrderS
   function loadCombo() {
     common.spinner(true);
     CommonServices.getTeams().then(function (data) {
-      
+
       $scope.teams = data;
-     
+
     });
 
     WorkOrderService.getTextLine().then(function (res) {
@@ -1191,9 +1207,9 @@ UserWebApp.controller('NotificationTeamCtrl', function ($scope, data, WorkOrderS
 
   //ThuyetLV
   $rootScope.$on('openNotifyTeam', function () {
-    try{
+    try {
       $(".firstFocus").focus();
-    }catch (e) {
+    } catch (e) {
       console.error(e);
     }
 
