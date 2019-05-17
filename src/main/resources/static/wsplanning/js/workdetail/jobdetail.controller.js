@@ -1,4 +1,4 @@
-UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, $window, WorkOrderService, $uibModal, CommonServices, $stateParams, $state) {
+UserWebApp.controller('JobDetailCtrl', function ($scope, AutoCompleteService, $rootScope, $window, WorkOrderService, $uibModal, CommonServices, $stateParams, $state) {
 
   var $ctrl = this;
   var stampingCode = {};
@@ -6,8 +6,11 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, $window, Wo
   $scope.actTypeJob = $scope.$parent.actionType;
   $scope.jobTabList = $scope.$parent.WOJobs;
   $scope.lstTextPredict = [];
+
   var jobsList = [];
   $scope.lstButtonDetail = JSON.parse(localStorage.getItem('info_detail'));
+
+
 
   loadCommon();
   $scope.lstDepartment = [];
@@ -164,20 +167,18 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, $rootScope, $window, Wo
     }
   }
 
-  $scope.getTextPredict = function (skey) {
-    var data = {
-      VIN: $scope.WorkOrder.WOVehicle.VIN,
-      languege: $stateParams.locale,
-      skey: skey
-    };
-    WorkOrderService.getTextPredict(data).then(function (res) {
-      console.log(res);
-      $scope.lstTextPredict = res.data;
-
-    }, function (err) {
-      console.log(err);
-    })
-  }
+  // $scope.getTextPredict = function (skey) {
+  //   var data = {
+  //     VIN: $scope.WorkOrder.WOVehicle.VIN,
+  //     languege: $stateParams.locale,
+  //     skey: skey
+  //   };
+  //   var lstText = AutoCompleteService.getTextPredict(data);
+  //   lstText.then(function (res) {
+  //     console.log(res);
+  //     $scope.lstTextPredict = res;
+  //   })
+  // }
 
   //<editor-fold desc="Paging & Search Port">
   $scope.$watch("page", function (newValue, oldValue) {

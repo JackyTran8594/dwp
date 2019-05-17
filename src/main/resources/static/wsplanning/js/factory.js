@@ -47,7 +47,7 @@ UserWebApp.factory('CommonFactory', function ($http, HttpService, $translate, $q
     if (!jobTypes || jobTypes.length <= 0) {
       var deferred = $q.defer();
       $http.get('/site/getJobTypes', {}).then(function successCallback(response) {
-        response.data.unshift({"Id": "", "Name": $translate.instant('pleaseSelect')});
+        response.data.unshift({ "Id": "", "Name": $translate.instant('pleaseSelect') });
         jobTypes = response.data;
         deferred.resolve(jobTypes);
       }, function errorCallback(response) {
@@ -62,7 +62,7 @@ UserWebApp.factory('CommonFactory', function ($http, HttpService, $translate, $q
     if (!jobCats || jobCats.length <= 0) {
       var deferred = $q.defer();
       $http.get('/site/getJobCats', {}).then(function successCallback(response) {
-        response.data.unshift({"Id": "", "Name": $translate.instant('pleaseSelect')});
+        response.data.unshift({ "Id": "", "Name": $translate.instant('pleaseSelect') });
         jobCats = response.data;
         deferred.resolve(jobCats);
       }, function errorCallback(response) {
@@ -77,7 +77,7 @@ UserWebApp.factory('CommonFactory', function ($http, HttpService, $translate, $q
     if (!lstPayer || lstPayer.length <= 0) {
       var deferred = $q.defer();
       $http.get('/site/getPayers', {}).then(function successCallback(response) {
-        response.data.unshift({"Id": "", "Name": $translate.instant('pleaseSelect')});
+        response.data.unshift({ "Id": "", "Name": $translate.instant('pleaseSelect') });
         lstPayer = response.data;
         deferred.resolve(lstPayer);
       }, function errorCallback(response) {
@@ -92,7 +92,7 @@ UserWebApp.factory('CommonFactory', function ($http, HttpService, $translate, $q
     if (!lstShifts || lstShifts.length <= 0) {
       var deferred = $q.defer();
       $http.get('/site/getShifts', {}).then(function successCallback(response) {
-        response.data.unshift({"Id": "", "Name": $translate.instant('pleaseSelect')});
+        response.data.unshift({ "Id": "", "Name": $translate.instant('pleaseSelect') });
         lstShifts = response.data;
         deferred.resolve(lstShifts);
       }, function errorCallback(response) {
@@ -107,7 +107,7 @@ UserWebApp.factory('CommonFactory', function ($http, HttpService, $translate, $q
     if (!lstChargeCats || lstChargeCats.length <= 0) {
       var deferred = $q.defer();
       $http.get('/site/getChargeCats', {}).then(function successCallback(response) {
-        response.data.unshift({"Id": "", "Name": $translate.instant('pleaseSelect')});
+        response.data.unshift({ "Id": "", "Name": $translate.instant('pleaseSelect') });
         lstChargeCats = response.data;
         deferred.resolve(lstChargeCats);
       }, function errorCallback(response) {
@@ -122,7 +122,7 @@ UserWebApp.factory('CommonFactory', function ($http, HttpService, $translate, $q
     if (!visitReasons || visitReasons.length <= 0) {
       var deferred = $q.defer();
       $http.get('/site/getVisitReasons', {}).then(function successCallback(response) {
-        response.data.unshift({"Id": "", "Name": $translate.instant('pleaseSelect')});
+        response.data.unshift({ "Id": "", "Name": $translate.instant('pleaseSelect') });
         visitReasons = response.data;
         deferred.resolve(visitReasons);
       }, function errorCallback(response) {
@@ -137,7 +137,7 @@ UserWebApp.factory('CommonFactory', function ($http, HttpService, $translate, $q
     if (!serviceAdvisors || serviceAdvisors.length <= 0) {
       var deferred = $q.defer();
       $http.get('/site/getServiceAdvisors', {}).then(function successCallback(response) {
-        response.data.unshift({"Id": "", "Name": $translate.instant('pleaseSelect')});
+        response.data.unshift({ "Id": "", "Name": $translate.instant('pleaseSelect') });
         serviceAdvisors = response.data;
         deferred.resolve(serviceAdvisors);
       }, function errorCallback(response) {
@@ -150,11 +150,11 @@ UserWebApp.factory('CommonFactory', function ($http, HttpService, $translate, $q
 
   function getTransactionTypes() {
     console.log("-------getTransactionTypes: " + transactionTypes.length);
-      var deferred = $q.defer();
+    var deferred = $q.defer();
     if (!transactionTypes || transactionTypes.length <= 0) {
       console.log("-------getTransactionTypes https-----");
       $http.get('/site/getTransactionTypes', {}).then(function successCallback(response) {
-        response.data.unshift({"Id": "", "Name": $translate.instant('pleaseSelect')});
+        response.data.unshift({ "Id": "", "Name": $translate.instant('pleaseSelect') });
         transactionTypes = response.data;
         console.log("-------getTransactionTypes http: " + transactionTypes.length);
         deferred.resolve(transactionTypes);
@@ -171,7 +171,7 @@ UserWebApp.factory('CommonFactory', function ($http, HttpService, $translate, $q
     var deferred = $q.defer();
     if (!departments || departments.length <= 0) {
       $http.get('/site/getDepartments', {}).then(function successCallback(response) {
-        response.data.unshift({"Id": "", "Name": $translate.instant('pleaseSelect')});
+        response.data.unshift({ "Id": "", "Name": $translate.instant('pleaseSelect') });
         departments = response.data;
         deferred.resolve(departments);
       }, function errorCallback(response) {
@@ -210,3 +210,31 @@ UserWebApp.factory('CommonFactory', function ($http, HttpService, $translate, $q
     getDepartments: getDepartments
   };
 });
+
+UserWebApp.factory('AutoCompleteService', ['$http', '$q', '$timeout', function ($http, $q, $timeout) {
+  var AutoComplete = new Object();
+
+  AutoComplete.getTextPredict = function (data) {
+    var textData = $q.defer();
+    var text = [];
+
+    getTextPredict(data);
+
+    function getTextPredict(data) {
+      $http.post('/site/getTextPredict', data).then(function (res) {
+        text = res.data;
+      }, function (err) {
+        console.log(err);
+      })
+    }
+
+    $timeout(function () {
+      textData.resolve(text)
+    }, 1000)
+
+    return textData.promise;
+
+  }
+
+  return AutoComplete;
+}])

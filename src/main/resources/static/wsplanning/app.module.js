@@ -10,16 +10,14 @@ var UserWebApp = angular.module('UserWebApp', [
     'pascalprecht.translate',
     'treeGrid',
     'ivh.treeview',
-    // 'ui.bootstrap.datetimepicker',
     'ui.select',
     'ui.router',
     'ngCookies',
-    // 'ivh.treeview',
     'ngInputModified',
     'shContextMenu',
     'iosDblclick',
     'bmSignaturePad',
-    // 'webcam'
+    'autocomplete'
 ]);
 
 
