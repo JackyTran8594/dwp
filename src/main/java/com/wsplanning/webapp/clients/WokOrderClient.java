@@ -203,9 +203,13 @@ public class WokOrderClient {
   public String getPhoto(String token, String siteId, Map<String, String> params) {
     String workOrderId = params.get("workOrderId");
     String jobRowId = params.get("jobRowId");
+    String LoadWOAttachmentData = params.get("LoadWOAttachmentData");
 
     HttpHeaders headers = new HttpHeaders();
     headers.set("Token", token);
+    if(StringUtils.isNotBlank(LoadWOAttachmentData)){
+      headers.set("LoadWOAttachmentData", LoadWOAttachmentData);
+    }
     
     HttpEntity entity = new HttpEntity(headers);
     String url = String.format("%s?SiteId=%s&WorkOrderId=%s&JobRowId=%s", this.endpointUrl, siteId, workOrderId, jobRowId);

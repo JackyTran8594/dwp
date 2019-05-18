@@ -714,25 +714,25 @@ function iOSversion() {
 
   return 'Not an iOS device';
 }
-
-var supportGetUserMedia = false;
-
-try {
-  navigator.getMedia = (navigator.getUserMedia || // use the proper vendor prefix
-      navigator.webkitGetUserMedia ||
-      navigator.mozGetUserMedia ||
-      navigator.msGetUserMedia);
-
-  navigator.getMedia({video: true}, function () {
-    // webcam is available
-    console.log("----webcam is available-----");
-    supportGetUserMedia = true;
-  }, function () {
-    // webcam is not available
-    console.log("----webcam is not available-----");
-    supportGetUserMedia = false;
-  });
-}catch (e) {
-  console.error(e);
-
-}
+//
+// var supportGetUserMedia = false;
+//
+// try {
+//   navigator.getMedia = (navigator.getUserMedia || // use the proper vendor prefix
+//       navigator.webkitGetUserMedia ||
+//       navigator.mozGetUserMedia ||
+//       navigator.msGetUserMedia);
+//
+//   navigator.getMedia({video: true}, function () {
+//     // webcam is available
+//     console.log("----webcam is available-----");
+//     supportGetUserMedia = true;
+//   }, function () {
+//     // webcam is not available
+//     console.log("----webcam is not available-----");
+//     supportGetUserMedia = false;
+//   });
+// }catch (e) {
+//   console.error(e);
+//
+// }

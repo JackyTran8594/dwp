@@ -288,13 +288,19 @@ public class ASMasterClient {
 
     //http://automaster.alliedsoft.hu:9092/api/ASMaster?command=getTaskTypes&param1=102
     public String getTaskTypes(String siteId) {
-        String url = String.format("%s?command=getTaskTypes&param1=%s", this.endpointUrl,siteId);
+        String url = String.format("%s?command=getTaskTypes&param1=%s", this.endpointUrl, siteId);
         return restTemplate.getForObject(url, String.class);
     }
 
     //http://automaster.alliedsoft.hu:9092/api/ASMaster?command=getTaskSeries&param1=102
     public String getTaskSeries(String siteId) {
-        String url = String.format("%s?command=getTaskSeries&param1=%s", this.endpointUrl,siteId);
+        String url = String.format("%s?command=getTaskSeries&param1=%s", this.endpointUrl, siteId);
+        return restTemplate.getForObject(url, String.class);
+    }
+
+    //http://automaster.alliedsoft.hu:9092/api/ASMaster?command=getVHCTemplates&param1=102&param2=3222
+    public String getVHCTemplates(String siteId, String vehiId) {
+        String url = String.format("%s?command=getVHCTemplates&param1=%s&param2=%s", this.endpointUrl, siteId, vehiId);
         return restTemplate.getForObject(url, String.class);
     }
 

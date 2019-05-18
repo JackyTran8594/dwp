@@ -668,9 +668,6 @@ signaturePad.$inject = ['$interval', '$timeout', '$window'];
 
 
 function signaturePad($interval, $timeout, $window) {
-  var signaturePad, element,
-    EMPTY_IMAGE = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAjgAAADcCAQAAADXNhPAAAACIklEQVR42u3UIQEAAAzDsM+/6UsYG0okFDQHMBIJAMMBDAfAcADDATAcwHAAwwEwHMBwAAwHMBzAcAAMBzAcAMMBDAcwHADDAQwHwHAAwwEMB8BwAMMBMBzAcADDATAcwHAADAcwHADDAQwHMBwAwwEMB8BwAMMBDAfAcADDATAcwHAAwwEwHMBwAAwHMBzAcAAMBzAcAMMBDAcwHADDAQwHwHAAwwEwHMBwAMMBMBzAcAAMBzAcwHAADAcwHADDAQwHMBwAwwEMB8BwAMMBDAfAcADDATAcwHAAwwEwHMBwAAwHMBzAcCQADAcwHADDAQwHwHAAwwEMB8BwAMMBMBzAcADDATAcwHAADAcwHMBwAAwHMBwAwwEMBzAcAMMBDAfAcADDAQwHwHAAwwEwHMBwAAwHMBzAcAAMBzAcAMMBDAcwHADDAQwHwHAAwwEMB8BwAMMBMBzAcADDATAcwHAADAcwHMBwAAwHMBwAwwEMB8BwAMMBDAfAcADDATAcwHAAwwEwHMBwAAwHMBzAcAAMBzAcAMMBDAcwHADDAQwHwHAAwwEMB8BwAMMBMBzAcADDkQAwHMBwAAwHMBwAwwEMBzAcAMMBDAfAcADDAQwHwHAAwwEwHMBwAMMBMBzAcAAMBzAcwHAADAcwHADDAQwHMBwAwwEMB8BwAMMBMBzAcADDATAcwHAADAcwHMBwAAwHMBwAwwEMBzAcAMMBDAegeayZAN3dLgwnAAAAAElFTkSuQmCC';
-
   return {
     restrict: 'EA',
     replace: true,
@@ -680,15 +677,20 @@ function signaturePad($interval, $timeout, $window) {
       clear: '=?',
       disabled: '=?',
       dataurl: '=?',
+      empty: '@',
       height: '@',
       width: '@',
+      color: '@',
       id: '@',
       notifyDrawing: '&onDrawing'
     },
     controller: [
       '$scope',
       function ($scope) {
+      var EMPTY_IMAGE = undefined;
         $scope.accept = function () {
+          $scope.updateColor();
+
           // emit data for close modal
           $scope.$emit("acceptPhoto", {
             dataUrl: $scope.dataurl
@@ -741,14 +743,18 @@ function signaturePad($interval, $timeout, $window) {
           };
         }
 
-
-
+        $scope.updateempty = function () {
+          EMPTY_IMAGE = "" + scope.empty;
+          console.log("--------EMPTY_IMAGE: ");
+          console.log(EMPTY_IMAGE);
+        }
 
         $scope.$watch("dataurl", function (dataUrl) {
           if (!dataUrl || $scope.signaturePad.toDataURL() === dataUrl) {
             return;
           }
 
+          EMPTY_IMAGE = dataUrl;
           $scope.setDataUrl(dataUrl);
         });
       }
@@ -765,7 +771,18 @@ function signaturePad($interval, $timeout, $window) {
       canvas.width = width;
       canvas.height = height;
 
-      scope.signaturePad = new SignaturePad(canvas);
+      if(scope.color){
+        scope.signaturePad = new SignaturePad(canvas,{penColor: scope.color});
+      }else{
+        scope.signaturePad = new SignaturePad(canvas);
+      }
+
+      scope.updateColor = function () {
+        if(scope.color) {
+          console.log("----scope.color: " + scope.color);
+          scope.signaturePad.updateColor(scope.color);
+        }
+      }
 
       scope.setDataUrl = function (dataUrl) {
         var ratio = Math.max(window.devicePixelRatio || 1, 1);
@@ -837,6 +854,8 @@ function signaturePad($interval, $timeout, $window) {
 
           // notify that drawing has ended
           scope.notifyDrawing({ drawing: false });
+
+
         });
         event.preventDefault();
       }
