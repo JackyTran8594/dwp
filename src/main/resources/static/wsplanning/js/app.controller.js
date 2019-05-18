@@ -26,6 +26,12 @@ UserWebApp.controller('appCtrl', function ($scope, $timeout, $interval, $state, 
   var timeout = JSON.parse(localStorage.getItem('info_timeout'));
 
   $scope.getRouter = function (param) {
+    //An menu sau khi click
+    console.log($("body" ).hasClass("sidebar-xs"));
+    console.log($("body" ).hasClass("sidebar-mobile-main"));
+    if($("body" ).hasClass("sidebar-mobile-main")){
+      $( ".toggleSitebar" ).trigger( "click" );
+    }
     $state.go(param, { locale: $rootScope.lang });
   }
 

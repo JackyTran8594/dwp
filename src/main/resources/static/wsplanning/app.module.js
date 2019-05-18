@@ -17,6 +17,7 @@ var UserWebApp = angular.module('UserWebApp', [
     'shContextMenu',
     'iosDblclick',
     'bmSignaturePad',
+    'colorpicker.module',
     'autocomplete'
 ]);
 
@@ -42,6 +43,12 @@ angular.module('UserWebApp').config(['$ocLazyLoadProvider', function ($ocLazyLoa
                         '/wsplanning/js/tasklist/CloseTaskCtrl.js',
                         '/wsplanning/js/tasklist/TaskListCtrl.js',
                     ]
+            },{
+                name: 'workorderDetail',
+                files:
+                    [
+                        '/assets/js/core/libraries/angularjs/angular-bootstrap-colorpicker/js/bootstrap-colorpicker-module.min.js',
+                    ]
             }]
     });
 
@@ -50,6 +57,9 @@ angular.module('UserWebApp').config(['$ocLazyLoadProvider', function ($ocLazyLoa
     });
 }]);
 
+UserWebApp.config(['$qProvider', function ($qProvider) {
+    $qProvider.errorOnUnhandledRejections(false);
+}]);
 
 UserWebApp.config(['calendarConfig', function (calendarConfig) {
 

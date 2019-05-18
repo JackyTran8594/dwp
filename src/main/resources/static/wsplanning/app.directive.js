@@ -650,6 +650,7 @@ function signaturePad($interval, $timeout, $window) {
       dataurl: '=?',
       height: '@',
       width: '@',
+      color: '@',
       id: '@',
       notifyDrawing: '&onDrawing'
     },
@@ -657,6 +658,8 @@ function signaturePad($interval, $timeout, $window) {
       '$scope',
       function ($scope) {
         $scope.accept = function () {
+          $scope.updateColor();
+
           // emit data for close modal
           $scope.$emit("acceptPhoto", {
             dataUrl: $scope.dataurl
@@ -709,9 +712,6 @@ function signaturePad($interval, $timeout, $window) {
           };
         }
 
-
-
-
         $scope.$watch("dataurl", function (dataUrl) {
           if (!dataUrl || $scope.signaturePad.toDataURL() === dataUrl) {
             return;
@@ -733,7 +733,17 @@ function signaturePad($interval, $timeout, $window) {
       canvas.width = width;
       canvas.height = height;
 
-      scope.signaturePad = new SignaturePad(canvas);
+      if(scope.color){
+        scope.signaturePad = new SignaturePad(canvas,{penColor: scope.color});
+      }else{
+        scope.signaturePad = new SignaturePad(canvas);
+      }
+
+
+      scope.updateColor = function () {
+        console.log("----scope.color: " + scope.color);
+        scope.signaturePad.updateColor(scope.color);
+      }
 
       scope.setDataUrl = function (dataUrl) {
         var ratio = Math.max(window.devicePixelRatio || 1, 1);
@@ -805,6 +815,8 @@ function signaturePad($interval, $timeout, $window) {
 
           // notify that drawing has ended
           scope.notifyDrawing({ drawing: false });
+
+
         });
         event.preventDefault();
       }

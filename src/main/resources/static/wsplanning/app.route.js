@@ -192,6 +192,9 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
             controller: "WorkDetailCtrl as $ctrl",
             templateUrl: '/wsplanning/templates/pages/workdetail/index.html',
             resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load("workorderDetail");
+                }],
                 WorkOrder: function (WorkOrderService, $stateParams) {
                     return {data: {}};
                 },
@@ -218,12 +221,15 @@ UserWebApp.config(function ($stateProvider, $urlRouterProvider, $locationProvide
             controller: "WorkDetailCtrl as $ctrl",
             templateUrl: '/wsplanning/templates/pages/workdetail/index.html',
             resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load("workorderDetail");
+                }],
                 WorkOrder: function (WorkOrderService, $stateParams) {
                     common.spinnerFirstLoad(true);
                     console.log("---app.main.workdetail: " + $stateParams.tab);
                     var LoadRows = true;
-                    var LoadAttachment = !$stateParams.tab || $stateParams.tab == "" || $stateParams.tab == "job";
-                    var LoadAttachmentData = !$stateParams.tab || $stateParams.tab == "" || $stateParams.tab == "job";
+                    var LoadAttachment = !$stateParams.tab || $stateParams.tab == "" || $stateParams.tab == "job" || $stateParams.tab == "checkin1";
+                    var LoadAttachmentData = !$stateParams.tab || $stateParams.tab == "" || $stateParams.tab == "job" || $stateParams.tab == "checkin1";
                     return WorkOrderService.detail($stateParams.id, LoadRows, LoadAttachment, LoadAttachmentData).then(
                         function (response) {
                             console.log("---app.main.workdetail done--");

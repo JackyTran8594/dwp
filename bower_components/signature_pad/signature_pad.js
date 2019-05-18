@@ -100,6 +100,25 @@ var SignaturePad = (function (document) {
 
         this._handleMouseEvents();
         this._handleTouchEvents();
+
+        // set all pixels of the image to this color
+        this.updateColor = function(color) {
+            this._ctx.save();
+            this._ctx.fillStyle = color;
+            this._ctx.globalCompositeOperation = 'source-in';
+            this._ctx.fillRect(0,0,canvas.width, canvas.height);
+            this._ctx.restore();
+        };
+    };
+
+    SignaturePad.prototype.updateColor = function (color) {
+        var ctx = this._ctx;
+        ctx.save();
+        ctx.fillStyle = color;
+        ctx.globalCompositeOperation = 'source-in';
+        ctx.fillRect(0,0,canvas.width, canvas.height);
+        ctx.restore();
+
     };
 
     SignaturePad.prototype.clear = function () {

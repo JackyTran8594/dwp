@@ -4,25 +4,28 @@
             <div class="col-xs-8" style="height: 100%;">
                 <!--ROW1-->
                 <div class="row row-eq-height" style="max-height: 100%;">
-                    <div class="col-xs-10 border"
+                    <div class="col-xs-8 col-md-10 border"
                          style="max-height: 37vh;overflow-y: scroll;">
                         <div ng-repeat="item in jobTabList">
                             <div>
                                 <div class="col-xs-10 pull-left">
                                     <h4>{{item.Note}}</h4>
+                                    <span>
+                                        <ul>
+                                            <li>{{item.Complaint}}</li>
+                                        </ul>
+                                    </span>
                                 </div>
                                 <div class="col-xs-2 pull-right">
                                     <h4>{{item.EstimatedTime}}</h4>
                                 </div>
                             </div>
                             <br/>
-                            <ul>
-                                <li>{{item.Complaint}}</li>
-                            </ul>
+
                         </div>
                     </div>
 
-                    <div class="col-xs-2 text-center border" style="padding: 30px;">
+                    <div class="col-xs-4 col-md-2 text-center border" style="padding: 30px;">
                         <h5>E: {{(totalHours) | number:2}}</h5>
                         <h5 style="color: red;">P: {{(totalDurationPool) | number:2}}</h5>
                         <h5 style="color: #0A4DB7;">B: {{(totalDurationBooking/ 60) | number:2}}</h5>
