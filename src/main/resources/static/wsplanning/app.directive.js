@@ -222,28 +222,14 @@ function autoComplete($compile) {
     restrict: 'E',
     scope: {
       ngModel: '=',
-      
+      string: '='
     },
     replace: true,
     link: function (scope, element, attr, ctrl) {
-
-      var html_text = '<input type="text" class="form-control" ng-model="$parent.item.Value" />';
-      var html_number = '<input type="number" class="form-control" ng-model="$parent.item.Value" />';
-      var html_date = '<div class="input-group"><input type="text" class="form-control" datetime-picker="dd-MMMM-yyyy" enable-time="false" date-format="dd-MMMM-yyyy" ng-model="$parent.item.Value" is-open="$parent.$ctrl.isOpenDateInput" /><span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="$parent.openDateInput($event, prop)"><i class="icon-calendar"></i></button></span></div>';
+      var html_input = '<input type="text" class="form-control"  ng-model="item.Complaint" ng-keyup="complete(item.Complaint)">'
+      var html_append = '<ul class="list-group" ng-hide="hideCombo"><li class="list-group-item list-group-item-success" ng-repeat="obj in filterText track by $index" ng-click="fillTextBox($index, obj)">{{obj}}</li></ul>'
 
 
-      if (scope.type == "C") {
-        var e = $compile(html_text)(scope);
-        element.replaceWith(e);
-      }
-      if (scope.type == "N") {
-        var e = $compile(html_number)(scope);
-        element.replaceWith(e);
-      }
-      if (scope.type == "D") {
-        var e = $compile(html_date)(scope);
-        element.replaceWith(e);
-      }
 
     }
   }
@@ -687,7 +673,7 @@ function signaturePad($interval, $timeout, $window) {
     controller: [
       '$scope',
       function ($scope) {
-      var EMPTY_IMAGE = undefined;
+        var EMPTY_IMAGE = undefined;
         $scope.accept = function () {
           $scope.updateColor();
 
@@ -771,14 +757,14 @@ function signaturePad($interval, $timeout, $window) {
       canvas.width = width;
       canvas.height = height;
 
-      if(scope.color){
-        scope.signaturePad = new SignaturePad(canvas,{penColor: scope.color});
-      }else{
+      if (scope.color) {
+        scope.signaturePad = new SignaturePad(canvas, { penColor: scope.color });
+      } else {
         scope.signaturePad = new SignaturePad(canvas);
       }
 
       scope.updateColor = function () {
-        if(scope.color) {
+        if (scope.color) {
           console.log("----scope.color: " + scope.color);
           scope.signaturePad.updateColor(scope.color);
         }
