@@ -807,7 +807,17 @@ UserWebApp.controller('TakeScreenshotCtrl', function ($scope, $uibModalInstance)
   };
 })
 
-UserWebApp.controller('openPhotoCtrl', function ($scope, item, $uibModalInstance) {
+UserWebApp.controller('openPhotoCtrl', function ($scope, item, $uibModalInstance,$timeout) {
+
+  $scope.colorPhoto = "rgb(255, 0, 0)";
+  $scope.$watch("colorPhoto", function (newValue, oldValue) {
+    if (newValue != oldValue) {
+      console.log(newValue);
+      $timeout(function() {
+        angular.element('#btnUpdateColorPhoto').triggerHandler('click');
+      });
+    }
+  });
 
   var $ctrl = this;
   console.log(item);
@@ -820,7 +830,15 @@ UserWebApp.controller('openPhotoCtrl', function ($scope, item, $uibModalInstance
     $uibModalInstance.close(obj);
   });
 
-
+  $ctrl.onSubmit = function () {
+    var photoCanvas  = $scope.accept();
+    console.log(photoCanvas);
+    if(!photoCanvas.isEmpty){
+      $uibModalInstance.close(photoCanvas.dataurl);
+    }else{
+      $uibModalInstance.close($scope.lstphoto);
+    }
+  }
 
   $ctrl.cancel = function () {
     $uibModalInstance.dismiss('cancel');

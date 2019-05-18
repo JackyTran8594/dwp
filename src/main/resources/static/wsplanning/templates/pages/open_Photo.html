@@ -5,17 +5,25 @@
 </div>
 <div class="modal-body">
     <div class="row">
-     
-            <!-- <signature-pad id="template-canvas" accept="accept" clear="clear" height="400" width="565"
-                class="img-responsive" dataurl="photo"></signature-pad> -->
-            
-            <img ng-src="{{photo}}" class="img-responsive">
-    
-
+        <div class="col-xs-10">
+            <signature-pad id="template-photo" accept="accept" clear="clear" height="400" width="565"
+                class="img-responsive" dataurl="photo" color="{{colorPhoto}}"></signature-pad>
+        </div>
+        <div class="col-xs-2">
+            <button colorpicker ng-model="colorPhoto" type="button" class="btn btn-default">
+                <i class="icon-eyedropper"></i>
+            </button>
+            <button id="btnUpdateColorPhoto" style="display: none;" ng-click="newPhoto = accept();return;"></button>
+        </div>
     </div>
 </div>
 <div class="modal-footer">
     <div class="pull-right">
+        <button type="button" class="btn btn-icon btn-primary btnSubmit"
+                ng-click="newPhoto = accept();onSubmit()">
+            <i class="icon-checkmark3"></i>{{ 'btnSave' | translate }}</span>
+        </button>
+
         <button type="button" class="btn btn-default" ng-click="$ctrl.cancel()"
             data-dismiss="modal">{{'btnCancel'|translate}}</button>
     </div>

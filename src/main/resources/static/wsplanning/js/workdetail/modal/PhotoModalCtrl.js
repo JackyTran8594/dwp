@@ -50,9 +50,9 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $uibModal, data, $uibM
                 jobRowId: RowId,
                 LoadWOAttachmentData: ""
             }
-            if(data.item) {
+            if (data.item) {
                 data.RowId = data.item.RowId;
-            }else{
+            } else {
                 data.LoadWOAttachmentData = "true";
             }
 
@@ -163,6 +163,11 @@ UserWebApp.controller('PhotoModalCtrl', function ($scope, $uibModal, data, $uibM
         modalInstance.result.then(function (selectedItem) {
             console.log(selectedItem);
             $scope.lstphoto[index] = selectedItem.dataUrl;
+            var attach = $scope.lstAttachment[index];
+            attach.dataUrl = selectedItem.dataUrl;
+            var dataUrl = selectedItem.dataUrl.split(',');
+            attach.ImageData = dataUrl[1];
+            $scope.lstAttachment[index] = attach;
 
         }, function () {
             console.log('Modal dismissed at: ' + new Date());

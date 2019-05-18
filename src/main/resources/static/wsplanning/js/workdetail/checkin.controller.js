@@ -21,8 +21,7 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
         "legalText": "",
     };
 
-    // $scope.color = "rgb(255, 0, 0)";
-    $scope.color = "#6AAB86";
+    $scope.color = "rgb(255, 0, 0)";
     //</editor-fold>
 
     $scope.$watch("color", function (newValue, oldValue) {
@@ -100,29 +99,37 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
     }
     //</editor-fold>
 
+
     //<editor-fold desc="onSubmitForm">
     function createListWOAttachment(){
         var list = [];
+        var i = 0;
         //template da danh dau
-        var templateMark = {};
-        templateMark.FileId = 0;
-        templateMark.FileName = $scope.templateName;
-        templateMark.ImageData = $scope.imgTemplate.replace("data:image/png;base64,","");
-        templateMark.dataUrl = $scope.imgTemplate;
-        templateMark.AttachType = "PIC";
-        templateMark.AttachTypeDescription = "";
-        templateMark.FileDescription = "";
-        list[0] = templateMark;
+        var template = $scope.acceptTemplate();
+        if(!template.isEmpty) {
+            var templateMark = {};
+            templateMark.FileId = 0;
+            templateMark.FileName = $scope.templateName;
+            templateMark.dataUrl = template.dataUrl;
+            templateMark.ImageData = template.dataUrl.replace("data:image/png;base64,", "");
+            templateMark.AttachType = "PIC";
+            templateMark.AttachTypeDescription = "";
+            templateMark.FileDescription = "";
+            list[i++] = templateMark;
+        }
 
-        var sign = {};
-        sign.FileId = 0;
-        sign.FileName = "Signature_of_customer.png";
-        sign.ImageData = $scope.dataurl.replace("data:image/png;base64,","");
-        sign.dataUrl = $scope.dataurl;
-        sign.AttachType = "PIC";
-        sign.AttachTypeDescription = "";
-        sign.FileDescription = "";
-        list[1] = sign;
+        var signCanvas  = $scope.accept();
+        if(!signCanvas.isEmpty) {
+            var sign = {};
+            sign.FileId = 0;
+            sign.FileName = "Signature_of_customer.png";
+            sign.dataUrl = signCanvas.dataUrl;
+            sign.ImageData = signCanvas.dataUrl.replace("data:image/png;base64,", "");
+            sign.AttachType = "PIC";
+            sign.AttachTypeDescription = "";
+            sign.FileDescription = "";
+            list[i++] = sign;
+        }
 
         if($scope.listImage && $scope.listImage.length > 0) {
             Array.prototype.push.apply(list, $scope.listImage);
@@ -133,8 +140,6 @@ UserWebApp.controller('CheckInCtrl', function ($scope, $rootScope, WorkOrderServ
 
     $scope.onSubmitForm = function () {
         var list = createListWOAttachment();
-
-        console.log(list);
 
         var postAction = "checkIn";
 
