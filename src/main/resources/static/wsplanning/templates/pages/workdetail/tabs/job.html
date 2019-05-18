@@ -113,11 +113,19 @@
                                                             class="control-label col-xs-2">{{'Complaint' | translate}}:</label>
                                                         <div class="col-xs-10">
                                                             <input type="text" class="form-control"
-                                                                ng-model="item.Complaint"  ng-change="getTextPredict(item.Complaint)"> 
-                                                            <!-- <auto-complete ng-model="item.Complaint"
-                                                                data="lstTextPredict"
-                                                                on-Type="getTextPredict(item.Complaint)"
-                                                                class="form-control"></auto-complete> -->
+                                                                ng-model="item.Complaint" ng-keyup="complete(item.Complaint)"> 
+                                                                <ul class="list-group" ng-hide="hideCombo">
+                                                                    <li class="list-group-item list-group-item-success" ng-repeat="obj in filterText track by $index" ng-click="fillTextBox($index, obj)">{{obj}}</li>
+                                                                </ul>
+                                                            <!-- <angucomplete-alt pause="300"
+                                                              
+                                                                remote-url="https://localhost:8443/site/getTextPredict2"
+                                                                remote-url-request-formatter="formatter"
+                                                                remote-url-data-field=""
+                                                                minlength="1"
+                                                                input-class="form-control form-control-small"
+                                                                match-class="highlight" /> -->
+
                                                         </div>
                                                     </div>
                                                 </div>

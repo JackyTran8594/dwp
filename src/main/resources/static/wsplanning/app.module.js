@@ -17,7 +17,7 @@ var UserWebApp = angular.module('UserWebApp', [
     'shContextMenu',
     'iosDblclick',
     'bmSignaturePad',
-    'autocomplete'
+    'angucomplete-alt'
 ]);
 
 

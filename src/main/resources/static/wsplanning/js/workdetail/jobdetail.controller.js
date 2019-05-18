@@ -167,18 +167,84 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, AutoCompleteService, $r
     }
   }
 
-  $scope.getTextPredict = function (skey) {
-    
+  $scope.localSearch = function(str, people) {
+    var matches = [];
+    people.forEach(function(person) {
+      var fullName = person.firstName + ' ' + person.surname;
+      if ((person.firstName.toLowerCase().indexOf(str.toString().toLowerCase()) >= 0) ||
+          (person.surname.toLowerCase().indexOf(str.toString().toLowerCase()) >= 0) ||
+          (fullName.toLowerCase().indexOf(str.toString().toLowerCase()) >= 0)) {
+        matches.push(person);
+      }
+    });
+    return matches;
+  }
+
+  // $scope.hideCombo = true;
+  $scope.filterText = [];
+
+  $scope.complete = function (string) {
+    if(string == ""){
+      $scope.filterText = [];
+    }
+    $scope.hideCombo = false;
+    // var data = getTextPredict(string);
+    var lstData = [];
+    var dto = {
+      VIN: $scope.WorkOrder.WOVehicle.VIN,
+      languege: $stateParams.locale,
+      skey: string
+    };
+
+    WorkOrderService.getTextPredict(dto).then(function (res) {
+      console.log(res)
+      // lstData = res.data;
+      angular.forEach(res.data, function (v) {
+        if (v.toLowerCase().indexOf(string.toLowerCase()) >= 0) {
+          $scope.filterText.push(v);
+        }
+      });
+
+      // $scope.filterText = JSON.parse(lstData);
+    }, function (err) {
+      console.log(err)
+    });
+    // return $scope.filterText;
+  }
+
+  $scope.formatter = function (str) {
+    var dto = {
+      VIN: $scope.WorkOrder.WOVehicle.VIN,
+      languege: $stateParams.locale,
+      skey: str
+    };
+    return dto;
+  }
+
+  $scope.fillTextBox = function (index, string) {
+    $scope.jobTabList[index].Complaint = string;
+    console.log($scope.jobTabList[index].Complaint);
+    $scope.hideCombo = true;
+  }
+
+
+  function getTextPredict(skey) {
+    var lstData = [];
     var data = {
       VIN: $scope.WorkOrder.WOVehicle.VIN,
       languege: $stateParams.locale,
       skey: skey
     };
-    var lstText = AutoCompleteService.getTextPredict(data);
-    lstText.then(function (res) {
-      console.log(res);
-      $scope.lstTextPredict = res;
-    })
+    AutoCompleteService.getTextPredict(data).then(function (res) {
+      // $scope.lstTextPredict = res;
+      lstData = res;
+      console.log(lstData);
+
+    }, function (err) {
+      console.log(err);
+    });
+
+    return lstData;
   }
 
   //<editor-fold desc="Paging & Search Port">

@@ -18,20 +18,20 @@ UserWebApp.directive('onFinishRender', function ($timeout) {
   .directive('inputType', inputType)
   .directive('ngFiles', ngFiles)
   .directive('ngCamera', ngCamera)
-    .directive('checkboxDirective', checkboxDirective)
-    .directive('afterRender',['$timeout',function ($timeout) {
-      var def = {
-        restrict: 'A',
-        terminal: false,
-        transclude: false,
-        link: function (scope,element,attrs) {
-          $timeout(scope.$eval(attrs.afterRender),0);
-        }
+  .directive('checkboxDirective', checkboxDirective)
+  .directive('afterRender', ['$timeout', function ($timeout) {
+    var def = {
+      restrict: 'A',
+      terminal: false,
+      transclude: false,
+      link: function (scope, element, attrs) {
+        $timeout(scope.$eval(attrs.afterRender), 0);
       }
-      return def;
+    }
+    return def;
 
-        }]
-    );
+  }]
+  );
 
 convertToNumberDirective.$inject = [];
 
@@ -191,6 +191,38 @@ function inputType($compile) {
     scope: {
       type: '=',
       ngModel: '=',
+    },
+    replace: true,
+    link: function (scope, element, attr, ctrl) {
+
+      var html_text = '<input type="text" class="form-control" ng-model="$parent.item.Value" />';
+      var html_number = '<input type="number" class="form-control" ng-model="$parent.item.Value" />';
+      var html_date = '<div class="input-group"><input type="text" class="form-control" datetime-picker="dd-MMMM-yyyy" enable-time="false" date-format="dd-MMMM-yyyy" ng-model="$parent.item.Value" is-open="$parent.$ctrl.isOpenDateInput" /><span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="$parent.openDateInput($event, prop)"><i class="icon-calendar"></i></button></span></div>';
+
+
+      if (scope.type == "C") {
+        var e = $compile(html_text)(scope);
+        element.replaceWith(e);
+      }
+      if (scope.type == "N") {
+        var e = $compile(html_number)(scope);
+        element.replaceWith(e);
+      }
+      if (scope.type == "D") {
+        var e = $compile(html_date)(scope);
+        element.replaceWith(e);
+      }
+
+    }
+  }
+}
+
+function autoComplete($compile) {
+  return {
+    restrict: 'E',
+    scope: {
+      ngModel: '=',
+      
     },
     replace: true,
     link: function (scope, element, attr, ctrl) {

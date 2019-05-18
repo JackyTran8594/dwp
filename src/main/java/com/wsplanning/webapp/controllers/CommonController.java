@@ -440,6 +440,18 @@ public class CommonController extends BaseController {
     }
   }
 
+  @GetMapping("/site/getTextPredict2")
+  public ResponseEntity getTextPredict2(@RequestParam Map<String, String>  params) {
+    try {
+      String rtn = asMasterClient.getTextPredict(params);
+      return new ResponseEntity<>(rtn, HttpStatus.OK);
+    } catch (Exception e) {
+      //TODO: handle exception
+      System.out.println(e);
+      return parseException(e);
+    }
+  }
+
   @GetMapping("/site/getTaskTypes")
   public ResponseEntity getTaskTypes() {
     try {
