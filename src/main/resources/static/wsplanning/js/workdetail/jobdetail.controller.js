@@ -167,18 +167,19 @@ UserWebApp.controller('JobDetailCtrl', function ($scope, AutoCompleteService, $r
     }
   }
 
-  // $scope.getTextPredict = function (skey) {
-  //   var data = {
-  //     VIN: $scope.WorkOrder.WOVehicle.VIN,
-  //     languege: $stateParams.locale,
-  //     skey: skey
-  //   };
-  //   var lstText = AutoCompleteService.getTextPredict(data);
-  //   lstText.then(function (res) {
-  //     console.log(res);
-  //     $scope.lstTextPredict = res;
-  //   })
-  // }
+  $scope.getTextPredict = function (skey) {
+    
+    var data = {
+      VIN: $scope.WorkOrder.WOVehicle.VIN,
+      languege: $stateParams.locale,
+      skey: skey
+    };
+    var lstText = AutoCompleteService.getTextPredict(data);
+    lstText.then(function (res) {
+      console.log(res);
+      $scope.lstTextPredict = res;
+    })
+  }
 
   //<editor-fold desc="Paging & Search Port">
   $scope.$watch("page", function (newValue, oldValue) {

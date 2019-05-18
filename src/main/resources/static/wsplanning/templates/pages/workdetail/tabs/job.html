@@ -112,8 +112,12 @@
                                                         <label
                                                             class="control-label col-xs-2">{{'Complaint' | translate}}:</label>
                                                         <div class="col-xs-10">
-                                                            <input type="text" class="form-control"
-                                                                ng-model="item.Complaint">
+                                                            <!-- <input type="text" class="form-control"
+                                                                ng-model="item.Complaint"> -->
+                                                            <auto-complete ng-model="item.Complaint"
+                                                                data="lstTextPredict"
+                                                                on-Type="getTextPredict(item.Complaint)"
+                                                                class="form-control"></auto-complete>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -239,9 +243,10 @@
                                                         <label
                                                             class="control-label col-xs-2">{{'Complaint' | translate}}:</label>
                                                         <div class="col-xs-10">
-                                                            <input type="text" class="form-control" ng-change="getTextPredict(item.Complaint)"
+                                                            <input type="text" class="form-control"
+                                                                ng-change="getTextPredict(item.Complaint)"
                                                                 ng-model="item.Complaint">
-                                                                <!-- <auto-complete ng-model="item.Complaint" data="lstTextPredict" on-Type="getTextPredict(item.Complaint)" class="form-control" ></auto-complete> -->
+                                                            <!-- <auto-complete ng-model="item.Complaint" data="lstTextPredict" on-Type="getTextPredict(item.Complaint)" class="form-control" ></auto-complete> -->
                                                         </div>
 
                                                     </div>
