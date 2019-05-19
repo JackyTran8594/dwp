@@ -321,6 +321,12 @@ var translationsEN = {
   message: "Message",
   action: "Action",
 
+  //workorder header-page
+  ContactFName: "First Name",
+  ContactLName: "Last Name",
+  ContactPhone: "Phone",
+  ContactEmail: "Email",
+
   //TaskList
   taskList: "Task List",
   taskOpen: "Task Open",

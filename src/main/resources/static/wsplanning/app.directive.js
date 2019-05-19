@@ -31,7 +31,7 @@ UserWebApp.directive('onFinishRender', function ($timeout) {
     return def;
 
   }]
-  );
+  ).directive('autoComplete', autoComplete);
 
 convertToNumberDirective.$inject = [];
 
@@ -218,20 +218,93 @@ function inputType($compile) {
 }
 
 function autoComplete($compile) {
+
+  var html_input = '<input type="text" id="autocomplete" class="form-control"  ng-model="complaint" ng-keyup="complete(complaint)">'
+  var html_append = '<ul class="list-group" id="autocomplete-dropdown" ng-hide="hideCombo"><li class="list-group-item list-group-item-success" ng-repeat="obj in filterText track by $index" ng-click="fillTextBox($index, obj)">{{obj}}</li></ul>'
+
+  var controller = ['$scope', 'WorkOrderService', function ($scope, WorkOrderService) {
+    $scope.complaint = $scope.$parent.jobTabList[$scope.index].Complaint;
+
+    $scope.filterText = [];
+    $scope.hideCombo = true;
+    $scope.complete = function (string) {
+      if (string !== "") {
+        $scope.hideCombo = false;
+
+      } else {
+        $scope.filterText = [];
+      }
+
+      // var data = getTextPredict(string);
+      var lstData = [];
+      var dto = {
+        VIN: $scope.$parent.WorkOrder.WOVehicle.VIN,
+        languege: $scope.$parent.stateParams.locale,
+        skey: string
+      };
+
+      WorkOrderService.getTextPredict(dto).then(function (res) {
+        console.log(res)
+        // lstData = res.data;
+        angular.forEach(res.data, function (v) {
+          if (v.toLowerCase().indexOf(string.toLowerCase()) >= 0) {
+            $scope.filterText.push(v);
+          }
+        });
+
+        // $scope.filterText = JSON.parse(lstData);
+      }, function (err) {
+        console.log(err)
+      });
+      // return $scope.filterText;
+    }
+
+
+    $scope.fillTextBox = function (string) {
+      $scope.$parent.jobTabList[$scope.index].Complaint = string;
+      $scope.complaint = $scope.$parent.jobTabList[$scope.index].Complaint;
+      console.log($scope.$parent.jobTabList[$scope.index].Complaint);
+      $scope.hideCombo = true;
+    }
+
+
+  }]
+
+
+
+
   return {
     restrict: 'E',
     scope: {
       ngModel: '=',
-      string: '='
+      string: '=',
+      index: '='
     },
+    controller: controller,
     replace: true,
     link: function (scope, element, attr, ctrl) {
-      var html_input = '<input type="text" class="form-control"  ng-model="item.Complaint" ng-keyup="complete(item.Complaint)">'
-      var html_append = '<ul class="list-group" ng-hide="hideCombo"><li class="list-group-item list-group-item-success" ng-repeat="obj in filterText track by $index" ng-click="fillTextBox($index, obj)">{{obj}}</li></ul>'
+      // var html_input = '<input type="text" class="form-control"  ng-model="$parent.item.Complaint" ng-keyup="$parent.complete($parent.item.Complaint)">'
+      // var html_append = '<ul class="list-group"><li class="list-group-item list-group-item-success" ng-repeat="obj in $parent.filterText track by $index" ng-click="$parent.fillTextBox($parent.$index, obj)">{{obj}}</li></ul>'
+
+      var html_input = '<input type="text" id="autocomplete" class="form-control"  ng-model="complaint" ng-keyup="complete(complaint)">'
+      var html_append = '<ul class="list-group tableIndex" id="autocomplete-dropdown" ng-hide="hideCombo"><li class="list-group-item list-group-item-success" ng-repeat="obj in filterText track by $index" ng-click="fillTextBox(obj)">{{obj}}</li></ul>'
 
 
-
-    }
+      scope.$watch('complaint', function (newValue, oldValue) {
+        if (newValue === oldValue) {
+          var e = $compile(html_input + html_append)(scope)
+          element.replaceWith(e);
+        } else {
+          if (scope.string == "") {
+            var e = $compile(html_input)(scope)
+            element.replaceWith(e);
+          } else {
+            var e = $compile(html_input + html_append)(scope)
+            element.replaceWith(e);
+          }
+        }
+      })
+    },
   }
 }
 

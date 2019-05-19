@@ -17,7 +17,6 @@ var UserWebApp = angular.module('UserWebApp', [
     'shContextMenu',
     'iosDblclick',
     'bmSignaturePad',
-    'angucomplete-alt',
     'colorpicker.module',
 ]);
 

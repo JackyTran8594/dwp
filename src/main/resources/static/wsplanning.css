@@ -665,6 +665,22 @@ table td {
   top: -41px;
 }
 
+#autocomplete-dropdown {
+  position:absolute;
+  z-index:1;
+  cursor: pointer;
+}
+
+.form-horizontal > input,
+.form-horizontal > label, 
+.form-horizontal > select  {
+  font-size: 16px !important;
+}
+
+.form-control {
+  font-size: 16px !important;
+}
+
 @media (min-width: 769px) {
   .main-content {
      max-height: 600px;
@@ -772,6 +788,23 @@ table td {
   }
   
   
+  #autocomplete-dropdown {
+    position:absolute;
+    z-index:1;
+    cursor: pointer;
+  }
+  
+  .form-horizontal > input,
+  .form-horizontal > label, 
+  .form-horizontal > select  {
+    font-size: 16px !important;
+  }
+  
+  .form-control {
+    font-size: 16px !important;
+  }
+  
+
   .main-content {
      max-height: 600px;
      /* overflow-y: scroll; */
@@ -848,6 +881,21 @@ table td {
     padding: 12px 14px;
   }
 
+  #autocomplete-dropdown {
+    position:absolute;
+    z-index:1;
+    cursor: pointer;
+  }
+  
+  .form-horizontal > input,
+  .form-horizontal > label, 
+  .form-horizontal > select  {
+    font-size: 16px !important;
+  }
+  
+  .form-control {
+    font-size: 16px !important;
+  }
   
   
 

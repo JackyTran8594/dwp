@@ -41,7 +41,7 @@
 
                     <form name="jobTabFrm">
                         <div class="table-responsive main-content">
-                            <div ng-repeat="item in jobTabList track by $index">
+                            <div ng-repeat="item in jobTabList track by $index" style="border-bottom: solid red; border-bottom-style:dotted; font-size: 15px !important">
                                 <span ng-show="!isShow">
                                     <div class="panel-heading">
                                         <h6 class="panel-title">
@@ -112,20 +112,12 @@
                                                         <label
                                                             class="control-label col-xs-2">{{'Complaint' | translate}}:</label>
                                                         <div class="col-xs-10">
-                                                            <input type="text" class="form-control"
-                                                                ng-model="item.Complaint" ng-keyup="complete(item.Complaint)"> 
+                                                            <!-- <input type="text" class="form-control"
+                                                                ng-model="item.Complaint" ng-keyup="complete(this, item.Complaint)"> 
                                                                 <ul class="list-group" ng-hide="hideCombo">
-                                                                    <li class="list-group-item list-group-item-success" ng-repeat="obj in filterText track by $index" ng-click="fillTextBox($index, obj)">{{obj}}</li>
-                                                                </ul>
-                                                            <!-- <angucomplete-alt pause="300"
-                                                              
-                                                                remote-url="https://localhost:8443/site/getTextPredict2"
-                                                                remote-url-request-formatter="formatter"
-                                                                remote-url-data-field=""
-                                                                minlength="1"
-                                                                input-class="form-control form-control-small"
-                                                                match-class="highlight" /> -->
-
+                                                                    <li class="list-group-item list-group-item-success" ng-repeat="obj in filterText track by $index" ng-click="fillTextBox($parent.$index, obj)">{{obj}}</li>
+                                                                </ul> -->
+                                                                <auto-complete string="item.Complaint" index="$index"></auto-complete>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -251,10 +243,10 @@
                                                         <label
                                                             class="control-label col-xs-2">{{'Complaint' | translate}}:</label>
                                                         <div class="col-xs-10">
-                                                            <input type="text" class="form-control"
+                                                            <!-- <input type="text" class="form-control"
                                                                 ng-change="getTextPredict(item.Complaint)"
-                                                                ng-model="item.Complaint">
-                                                            <!-- <auto-complete ng-model="item.Complaint" data="lstTextPredict" on-Type="getTextPredict(item.Complaint)" class="form-control" ></auto-complete> -->
+                                                                ng-model="item.Complaint"> -->
+                                                                <auto-complete string="item.Complaint" index="$index"></auto-complete>
                                                         </div>
 
                                                     </div>
