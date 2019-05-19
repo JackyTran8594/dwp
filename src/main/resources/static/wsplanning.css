@@ -736,6 +736,7 @@ table td {
 
   .heading-elements:not(.not-collapsible) {
     display: inline;
+    margin-top: -65px;
   }
 
   .panel-title {
